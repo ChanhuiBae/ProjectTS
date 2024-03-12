@@ -1,28 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rig;
-
+    private DynamicJoystick joystick;
+    [SerializeField]
+    private float speed;
     private void Awake()
     {
         if(!TryGetComponent<Rigidbody>(out rig))
         {
             Debug.Log("PlayerController - Awake - Rigidbody");
         }
+
+        if(!GameObject.Find("Dynamic Joystick").TryGetComponent<DynamicJoystick>(out joystick))
+        {
+            Debug.Log("PlayerController - Awake - Joystick");
+        }
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 movePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z));
-             transform.position = Vector3.Lerp(transform.position, new Vector3(movePos.x, transform.position.y, movePos.z), Time.deltaTime * 100f);
 
-        }
-
+        Vector3 direction = Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
+        transform.position += direction * speed * Time.fixedDeltaTime;
+        //rig.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
+        /*
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -34,6 +40,6 @@ public class PlayerController : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, new Vector3(touchPosition.x, transform.position.y, touchPosition.z), Time.deltaTime * 10f);
 
             }
-        }
+        }*/
     }
 }
