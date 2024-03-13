@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimationController anim;
     private Button dash;
     private bool isDash;
+    private bool isControll;
+
     private Vector3 direction;
 
     private void Awake()
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
             dash.onClick.AddListener(Dash);
             isDash = false;
         }
+        isControll = true;
     }
 
     private void NormalAttack()
@@ -62,7 +65,7 @@ public class PlayerController : MonoBehaviour
         isDash = true;
         anim.Dash();
         transform.LookAt(transform.position + direction);
-        rig.MovePosition(transform.position + transform.forward * dashDistance * Time.fixedDeltaTime);
+        transform.position += transform.forward * dashDistance * Time.deltaTime;
         isDash = false;
     }
 
@@ -71,9 +74,9 @@ public class PlayerController : MonoBehaviour
         direction = Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
         Vector3 look = Vector3.forward * normalAttack.Vertical + Vector3.right * normalAttack.Horizontal;
 
-        if (!isDash && look == Vector3.zero)
+        if (isControll && !isDash)
         {
-            transform.position += direction * speed * Time.fixedDeltaTime;
+            transform.position += direction * speed * Time.deltaTime;
         }
         if(Quaternion.Angle(transform.rotation, Quaternion.identity) > 90 || Quaternion.Angle(transform.rotation, Quaternion.identity) < -90)
         {
@@ -97,10 +100,16 @@ public class PlayerController : MonoBehaviour
             if (normalAttackFlag)
             {
                 anim.NormalAttack();
+                StartCoroutine(normalAttackDelay());
                 normalAttackFlag = false;
             }
         }
+    }
 
-        
+    private IEnumerator normalAttackDelay()
+    {
+        isControll = false;
+        yield return YieldInstructionCache.WaitForSeconds(1);
+        isControll = true;
     }
 }

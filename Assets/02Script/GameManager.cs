@@ -11,8 +11,14 @@ public class PlayerData
     public int uidCounter;
     public string userNickname;
     public float maxHP;
+    public int health;
+    public int patience;
+    public int Strength;
+    public int intuition;
+    public int adaptation;
     public float experience;
     public Inventory inventory;
+    //public Weapon weapon;
 }
 
 public enum SceneName
