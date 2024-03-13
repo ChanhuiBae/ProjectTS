@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rig;
     private VariableJoystick joystick;
-    private FixedJoystick normalAttack;
     [SerializeField]
     private float speed;
     private PlayerAnimationController anim;
-    private bool attackflag;
+    private Button normalAttack;
 
     private void Awake()
     {
@@ -24,46 +24,41 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("PlayerController - Awake - VariableJoystick");
         }
-        if (!GameObject.Find("NormalAttack").TryGetComponent<FixedJoystick>(out normalAttack))
-        {
-            Debug.Log("PlayerController - Awake - FixedJoystick");
-        }
         if (!TryGetComponent<PlayerAnimationController>(out anim))
         {
             Debug.Log("PlayerController - Awake - PlayerAnimationController");
         }
-        attackflag = false;
+
+        if(!GameObject.Find("NormalAttack").TryGetComponent<Button>(out normalAttack))
+        {
+            Debug.Log("PlayerController - Awake - Button");
+        }
+        else
+        {
+            normalAttack.onClick.AddListener(NormalAttack);
+        }
+    }
+
+    private void NormalAttack()
+    {
+        anim.NormalAttack();
     }
 
     private void Update()
     {
         Vector3 direction = Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
         transform.position += direction * speed * Time.fixedDeltaTime;
-        float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
-        if (angle > 90 || angle < -90)
+
+        if (direction != Vector3.zero)
         {
-            anim.SetX(-direction.x);
-            anim.SetY(-direction.z);
+            transform.LookAt(transform.position + direction);
+            anim.SetRun(true);
         }
         else
         {
-            anim.SetX(direction.x);
-            anim.SetY(direction.z);
+            anim.SetRun(false);
         }
- 
-        Vector3 look = Vector3.forward * normalAttack.Vertical + Vector3.right * normalAttack.Horizontal;
-        if (look != Vector3.zero)
-        {
-            transform.LookAt(transform.position + look);
-            attackflag = true;
-        }
-        else
-        {
-            if(attackflag)
-            {
-                anim.NormalAttack();
-                attackflag = false;
-            }
-        }
+
+        
     }
 }
