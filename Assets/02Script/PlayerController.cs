@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private float dashDistance;
     private PlayerAnimationController anim;
     private Button dash;
+    private bool isDash;
     private Vector3 direction;
 
     private void Awake()
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             dash.onClick.AddListener(Dash);
+            isDash = false;
         }
     }
 
@@ -57,35 +59,34 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
+        isDash = true;
         anim.Dash();
-        rig.MovePosition(transform.position + direction * dashDistance * Time.fixedDeltaTime);
+        transform.LookAt(transform.position + direction);
+        rig.MovePosition(transform.position + transform.forward * dashDistance * Time.fixedDeltaTime);
+        isDash = false;
     }
 
     private void Update()
     {
         direction = Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
-        transform.position += direction * speed * Time.fixedDeltaTime;
-        //if(Quaternion.Angle(transform.rotation, Quaternion.identity) > 90 || Quaternion.Angle(transform.rotation, Quaternion.identity) < -90)
-       // {
-            //anim.SetX(-direction.x);
-            //anim.SetY(-direction.z);
-       // }
-       // else
-      //  {
-           // anim.SetX(direction.x);
-            //anim.SetY(direction.z);
-       // }
+        Vector3 look = Vector3.forward * normalAttack.Vertical + Vector3.right * normalAttack.Horizontal;
 
-        if(direction != Vector3.zero)
+        if (!isDash && look == Vector3.zero)
         {
-            anim.SetRun(true);
+            transform.position += direction * speed * Time.fixedDeltaTime;
+        }
+        if(Quaternion.Angle(transform.rotation, Quaternion.identity) > 90 || Quaternion.Angle(transform.rotation, Quaternion.identity) < -90)
+        {
+            anim.SetX(-direction.x);
+            anim.SetY(-direction.z);
         }
         else
         {
-            anim.SetRun(false);
+            anim.SetX(direction.x);
+            anim.SetY(direction.z);
         }
-        Vector3 look = Vector3.forward * normalAttack.Vertical + Vector3.right * normalAttack.Horizontal;
 
+        
         if (look != Vector3.zero)
         {
             transform.LookAt(transform.position + look);
@@ -93,7 +94,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            transform.LookAt(transform.position + direction);
             if (normalAttackFlag)
             {
                 anim.NormalAttack();
