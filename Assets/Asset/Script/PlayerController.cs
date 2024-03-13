@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private float speed;
     private PlayerAnimationController anim;
     private Button normalAttack;
+    private Button dash;
 
     private void Awake()
     {
@@ -37,11 +38,26 @@ public class PlayerController : MonoBehaviour
         {
             normalAttack.onClick.AddListener(NormalAttack);
         }
+
+        if (!GameObject.Find("Dash").TryGetComponent<Button>(out dash))
+        {
+            Debug.Log("PlayerController - Awake - Button");
+        }
+        else
+        {
+            dash.onClick.AddListener(Dash);
+        }
     }
 
     private void NormalAttack()
     {
         anim.NormalAttack();
+    }
+
+    private void Dash()
+    {
+        anim.Dash(); 
+        transform.position += transform.forward * 500 * Time.fixedDeltaTime;
     }
 
     private void Update()

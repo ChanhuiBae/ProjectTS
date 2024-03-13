@@ -7,6 +7,7 @@ public class PlayerAnimationController : MonoBehaviour
     private Animator animator;
     private int H_NormalAttack = Animator.StringToHash("NormalAttack");
     private int H_Run = Animator.StringToHash("Run");
+    private int H_Dash = Animator.StringToHash("Dash");
 
     private void Awake()
     {
@@ -26,4 +27,8 @@ public class PlayerAnimationController : MonoBehaviour
         animator.SetTrigger(H_NormalAttack);
     }
 
+    public void Dash()
+    {
+        animator.SetTrigger(H_Dash);
+    }
 }
