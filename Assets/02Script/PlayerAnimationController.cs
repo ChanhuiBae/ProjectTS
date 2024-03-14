@@ -6,8 +6,6 @@ public class PlayerAnimationController : MonoBehaviour
 {
     private Animator animator;
     private int H_NormalAttack = Animator.StringToHash("NormalAttack");
-    private int H_X = Animator.StringToHash("X");
-    private int H_Y = Animator.StringToHash("Y");
     private int H_Run = Animator.StringToHash("Run");
     private int H_Dash = Animator.StringToHash("Dash");
 
@@ -19,14 +17,6 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    public void SetX(float value)
-    {
-        animator.SetFloat(H_X, value);
-    }
-    public void SetY(float value)
-    {
-        animator.SetFloat(H_Y, value);
-    }
     public void NormalAttack()
     {
         animator.SetTrigger(H_NormalAttack);

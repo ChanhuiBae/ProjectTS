@@ -4,20 +4,27 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum State
+{
+    Idel,
+    Attack,
+    Dash
+}
+
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rig;
-    private DynamicJoystick joystick;
+    private FloatingJoystick joystick;
     private FixedJoystick normalAttack;
-    private bool normalAttackFlag;
     [SerializeField]
     private float speed;
     [SerializeField]
     private float dashDistance;
     private PlayerAnimationController anim;
     private Button dash;
-    private bool isDash;
     private bool isControll;
+    private State state;
+    
 
     private Vector3 direction;
 
@@ -28,9 +35,9 @@ public class PlayerController : MonoBehaviour
             Debug.Log("PlayerController - Awake - Rigidbody");
         }
 
-        if(!GameObject.Find("Dynamic Joystick").TryGetComponent< DynamicJoystick > (out joystick))
+        if(!GameObject.Find("Floating Joystick").TryGetComponent< FloatingJoystick > (out joystick))
         {
-            Debug.Log("PlayerController - Awake - Dynamic Joystick");
+            Debug.Log("PlayerController - Awake - Floating Joystick");
         }
         if (!TryGetComponent<PlayerAnimationController>(out anim))
         {
@@ -41,7 +48,6 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("PlayerController - Awake - FixedJoystic");
         }
-        normalAttackFlag = false;
 
         if (!GameObject.Find("Dash").TryGetComponent<Button>(out dash))
         {
@@ -50,66 +56,85 @@ public class PlayerController : MonoBehaviour
         else
         {
             dash.onClick.AddListener(Dash);
-            isDash = false;
         }
         isControll = true;
+        state = State.Idel;
     }
 
-    private void NormalAttack()
+    private void ChangeState(State state)
     {
-        anim.NormalAttack();
-    }
-
-    private void Dash()
-    {
-        isDash = true;
-        anim.Dash();
-        transform.LookAt(transform.position + direction);
-        transform.position += transform.forward * dashDistance * Time.deltaTime;
-        isDash = false;
+        if(this.state == state)
+        {
+            return;
+        }
+        switch (this.state)
+        {
+            case State.Idel:
+                break;
+            case State.Attack: 
+                break;
+            case State.Dash: 
+                break;
+        }
+        this.state = state;
+        switch(this.state)
+        {
+            case State.Idel:
+                break;
+            case State.Attack:
+                anim.NormalAttack();
+                StartCoroutine(normalAttackDelay());
+                break;
+            case State.Dash:
+                anim.Dash();
+                transform.LookAt(transform.position + direction);
+                StartCoroutine(dashDelay());
+                break;
+        }
     }
 
     private void Update()
     {
-        direction = Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
-        Vector3 look = Vector3.forward * normalAttack.Vertical + Vector3.right * normalAttack.Horizontal;
+        if (isControll)
+        {
+            direction = Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
+            Vector3 look = Vector3.forward * normalAttack.Vertical + Vector3.right * normalAttack.Horizontal;
 
-        if (isControll && !isDash)
-        {
-            transform.position += direction * speed * Time.deltaTime;
-        }
-        if(Quaternion.Angle(transform.rotation, Quaternion.identity) > 90 || Quaternion.Angle(transform.rotation, Quaternion.identity) < -90)
-        {
-            anim.SetX(-direction.x);
-            anim.SetY(-direction.z);
-        }
-        else
-        {
-            anim.SetX(direction.x);
-            anim.SetY(direction.z);
-        }
-
-        
-        if (look != Vector3.zero)
-        {
-            transform.LookAt(transform.position + look);
-            normalAttackFlag = true;
-        }
-        else
-        {
-            if (normalAttackFlag)
+            if(direction != Vector3.zero)
             {
-                anim.NormalAttack();
-                StartCoroutine(normalAttackDelay());
-                normalAttackFlag = false;
+                transform.LookAt(transform.position + direction);
+                rig.MovePosition(transform.position + direction * speed * Time.deltaTime);
+                anim.SetRun(true);
+            }
+            else
+            {
+                anim.SetRun(false);
+            }
+
+            if (look != Vector3.zero)
+            {
+                transform.LookAt(transform.position + look);
+                ChangeState(State.Attack);
             }
         }
     }
 
     private IEnumerator normalAttackDelay()
     {
-        isControll = false;
-        yield return YieldInstructionCache.WaitForSeconds(1);
-        isControll = true;
+        yield return YieldInstructionCache.WaitForSeconds(0.8f);
+        ChangeState(State.Idel);
+    }
+
+    private void Dash()
+    {
+        ChangeState(State.Dash);
+    }
+
+    private IEnumerator dashDelay()
+    {
+        yield return YieldInstructionCache.WaitForSeconds(0.1f);
+        rig.MovePosition(transform.position + transform.forward * dashDistance * Time.deltaTime);
+        yield return YieldInstructionCache.WaitForSeconds(0.8f);
+        ChangeState(State.Idel);
     }
 }

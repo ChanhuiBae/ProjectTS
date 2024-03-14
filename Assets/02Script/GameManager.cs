@@ -11,6 +11,7 @@ public class PlayerData
     public int uidCounter;
     public string userNickname;
     public float maxHP;
+    public float ATK;
     public int health;
     public int patience;
     public int Strength;
@@ -36,10 +37,11 @@ public class GameManager : Singleton<GameManager>
     private FadeManager fadeManager;
     private MenuManager menuManager;
     private SoundManager soundManager;
-
+    
     public void Awake()
     {
         base.Awake();
+        Application.targetFrameRate = 60;
         // dataPath = Application.persistentDataPath + "/save";
 
         #region TableData
