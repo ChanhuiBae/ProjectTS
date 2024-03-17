@@ -8,7 +8,7 @@ public enum WeaponType
     Hamer,
     AR
 }
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, ITakeDamage
 {
     private WeaponType type;
 
@@ -22,4 +22,16 @@ public class Weapon : MonoBehaviour
         return type;
     }
 
+    public float TakeDamage()
+    {
+        return 5f;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.transform.root != this.transform.root)
+        {
+            
+        }
+    }
 }

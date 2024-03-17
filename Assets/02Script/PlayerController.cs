@@ -11,7 +11,7 @@ public enum State
     Roll
 }
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
     private Rigidbody rig;
     private FloatingJoystick joystick;
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float dashDistance;
     private PlayerAnimationController anim;
-    private Button dash;
+    private Button roll;
     private bool isControll;
     private State state;
     
@@ -51,13 +51,13 @@ public class PlayerController : MonoBehaviour
             Debug.Log("PlayerController - Awake - FixedJoystic");
         }
 
-        if (!GameObject.Find("Dash").TryGetComponent<Button>(out dash))
+        if (!GameObject.Find("Roll").TryGetComponent<Button>(out roll))
         {
             Debug.Log("PlayerController - Awake - Button");
         }
         else
         {
-            dash.onClick.AddListener(Roll);
+            roll.onClick.AddListener(Roll);
         }
         isControll = true;
         state = State.Idle;
@@ -177,5 +177,10 @@ public class PlayerController : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(0.2f);
         anim.TurnLeft(false);
         anim.TurnRight(false);
+    }
+
+    public void GetDamage(ITakeDamage hiter)
+    {
+        hiter.TakeDamage();
     }
 }
