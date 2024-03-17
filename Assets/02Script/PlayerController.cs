@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public enum State
 {
-    Idel,
+    Idle,
     Attack,
-    Dash
+    Roll
 }
 
 public class PlayerController : MonoBehaviour
@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     
 
     private Vector3 direction;
+    private Vector3 look;
+    private float lookAngle;
 
     private void Awake()
     {
@@ -55,10 +57,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            dash.onClick.AddListener(Dash);
+            dash.onClick.AddListener(Roll);
         }
         isControll = true;
-        state = State.Idel;
+        state = State.Idle;
     }
 
     private void ChangeState(State state)
@@ -69,26 +71,26 @@ public class PlayerController : MonoBehaviour
         }
         switch (this.state)
         {
-            case State.Idel:
+            case State.Idle:
                 break;
             case State.Attack: 
                 break;
-            case State.Dash: 
+            case State.Roll: 
                 break;
         }
         this.state = state;
         switch(this.state)
         {
-            case State.Idel:
+            case State.Idle:
+                anim.SowrdAttack(false);
                 break;
             case State.Attack:
-                anim.NormalAttack();
-                StartCoroutine(normalAttackDelay());
                 break;
-            case State.Dash:
-                anim.Dash();
+            case State.Roll:
+                anim.Roll(true);
                 transform.LookAt(transform.position + direction);
-                StartCoroutine(dashDelay());
+                anim.MoveDir(direction.x, direction.z);
+                StartCoroutine(RollDelay());
                 break;
         }
     }
@@ -98,43 +100,82 @@ public class PlayerController : MonoBehaviour
         if (isControll)
         {
             direction = Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
-            Vector3 look = Vector3.forward * normalAttack.Vertical + Vector3.right * normalAttack.Horizontal;
+            look = Vector3.forward * normalAttack.Vertical + Vector3.right * normalAttack.Horizontal;
 
-            if(direction != Vector3.zero)
+            if(direction != Vector3.zero && state != State.Roll)
             {
-                transform.LookAt(transform.position + direction);
                 rig.MovePosition(transform.position + direction * speed * Time.deltaTime);
-                anim.SetRun(true);
+                anim.MeleeMove(true);
+                float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
+                if (Mathf.Abs(angle) > 90)
+                {
+                    anim.MoveDir(-direction.x, -direction.z);
+                }
+                else
+                {
+                    anim.MoveDir(direction.x, direction.z);
+                }
             }
             else
             {
-                anim.SetRun(false);
+                anim.MeleeMove(false);
             }
 
             if (look != Vector3.zero)
             {
+                Quaternion current = transform.rotation;
                 transform.LookAt(transform.position + look);
-                ChangeState(State.Attack);
+                lookAngle = Quaternion.Angle(transform.rotation, current);
+                if(lookAngle > 0)
+                {
+                    anim.TurnLeft(true);
+                    StartCoroutine(TurnDelay());
+                }
+                else
+                {
+                    anim.TurnRight(true);
+                    StartCoroutine(TurnDelay());
+                }
+                if (Mathf.Abs(lookAngle) < 0.01f)
+                {
+                    anim.TurnLeft(false);
+                    anim.TurnRight(false);
+                    StartCoroutine(MeleeAttackDelay());
+                }
             }
         }
     }
 
-    private IEnumerator normalAttackDelay()
+    private IEnumerator MeleeAttackDelay()
     {
-        yield return YieldInstructionCache.WaitForSeconds(0.8f);
-        ChangeState(State.Idel);
+        while (look != Vector3.zero && lookAngle < 0.01f)
+        {
+            anim.SowrdAttack(true);
+            yield return YieldInstructionCache.WaitForSeconds(0.3f);
+        }
+        anim.TurnLeft(false);
+        anim.TurnRight(false);
+        anim.SowrdAttack(false);
     }
 
-    private void Dash()
+    private void Roll()
     {
-        ChangeState(State.Dash);
+        if(isControll && state != State.Roll)
+            ChangeState(State.Roll);
     }
 
-    private IEnumerator dashDelay()
+    private IEnumerator RollDelay()
     {
         yield return YieldInstructionCache.WaitForSeconds(0.1f);
         rig.MovePosition(transform.position + transform.forward * dashDistance * Time.deltaTime);
-        yield return YieldInstructionCache.WaitForSeconds(0.8f);
-        ChangeState(State.Idel);
+        anim.Roll(false);
+        ChangeState(State.Idle);
+    }
+
+    private IEnumerator TurnDelay()
+    {
+        yield return YieldInstructionCache.WaitForSeconds(0.2f);
+        anim.TurnLeft(false);
+        anim.TurnRight(false);
     }
 }
