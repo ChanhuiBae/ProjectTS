@@ -31,7 +31,10 @@ public class Weapon : MonoBehaviour, ITakeDamage
     {
         if(other.transform.root != this.transform.root)
         {
-            
+            if(other.TryGetComponent<IDamage>(out IDamage creture))
+            {
+                creture.GetDamage(this);
+            }
         }
     }
 }

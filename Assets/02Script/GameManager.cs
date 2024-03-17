@@ -9,7 +9,6 @@ using System.IO; // input output controll
 public class PlayerData
 {
     public int uidCounter;
-    public string userNickname;
     public float maxHP;
     public float ATK;
     public int health;
@@ -164,7 +163,6 @@ public class GameManager : Singleton<GameManager>
     #region updateUserData
     public void CreateUserData(string newNickName)
     {
-        pData.userNickname = newNickName;
         SaveData();
     }
 
@@ -200,12 +198,6 @@ public class GameManager : Singleton<GameManager>
         {
             return pData.uidCounter++;
         }
-    }
-
-
-    public string PlayerName
-    {
-        get => pData.userNickname;
     }
 
 
