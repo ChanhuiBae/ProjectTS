@@ -1,5 +1,7 @@
 using Redcode.Pools;
+using System.Collections;
 using UnityEngine;
+
 
 public class Creture : MonoBehaviour, IDamage, IPoolObject
 {
@@ -7,6 +9,9 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     [SerializeField]
     private string poolName;
     private PoolManager poolManager;
+    private float maxHP;
+    private float currentHP;
+    private CretureType type;
 
     public void Awake()
     {
@@ -20,16 +25,23 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         }
     }
 
-    public void Init(Vector3 SpawnPos)
+    public void Init(Vector3 SpawnPos, CretureType type)
     {
+        maxHP = 2;
+        currentHP = maxHP;
+        this.type = type;
         transform.position = SpawnPos;
-        ai.InitAI(CretureType.normal);
+        ai.InitAI(this.type);
     }
 
     public void GetDamage(ITakeDamage hiter)
     {
-        hiter.TakeDamage();
-        poolManager.TakeToPool<Creture>(poolName, this);
+        currentHP -= hiter.TakeDamage();
+        if (currentHP < 0)
+        {
+            ai.Die();
+            poolManager.TakeToPool<Creture>(poolName, this);
+        }
     }
 
     public void OnCreatedInPool()

@@ -24,11 +24,11 @@ public class PlayerController : MonoBehaviour, IDamage
     private Button roll;
     private bool isControll;
     private State state;
-    
-
+    private Weapon weapon;
+    private Image ultimateFill;
+    private float ultimateValue;
     private Vector3 direction;
     private Vector3 look;
-    private float lookAngle;
 
     private void Awake()
     {
@@ -59,6 +59,20 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             roll.onClick.AddListener(Roll);
         }
+        
+        if(!GameObject.Find("Weapon").TryGetComponent<Weapon>(out weapon))
+        {
+            Debug.Log("PlayerController - Awake - Weapon");
+        }
+        if(!GameObject.Find("UltimateFill").TryGetComponent<Image>(out ultimateFill))
+        {
+            Debug.Log("PlayerController - Awake - Image");
+        }
+        else
+        {
+            ultimateFill.fillAmount = 0;
+        }
+        ultimateValue = 0;
         isControll = true;
         state = State.Idle;
     }
@@ -99,7 +113,10 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (isControll)
         {
-            direction = Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
+            direction.x = Input.GetAxisRaw("Horizontal");
+            direction.z = Input.GetAxisRaw("Vertical");
+            direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
+            direction.Normalize();
             look = Vector3.forward * normalAttack.Vertical + Vector3.right * normalAttack.Horizontal;
 
             if(direction != Vector3.zero && state != State.Roll)
@@ -125,37 +142,21 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 Quaternion current = transform.rotation;
                 transform.LookAt(transform.position + look);
-                lookAngle = Quaternion.Angle(transform.rotation, current);
-                if(lookAngle > 0)
-                {
-                    anim.TurnLeft(true);
-                    StartCoroutine(TurnDelay());
-                }
-                else
-                {
-                    anim.TurnRight(true);
-                    StartCoroutine(TurnDelay());
-                }
-                if (Mathf.Abs(lookAngle) < 0.01f)
-                {
-                    anim.TurnLeft(false);
-                    anim.TurnRight(false);
-                    StartCoroutine(MeleeAttackDelay());
-                }
+                StartCoroutine(MeleeAttackDelay());
             }
         }
     }
 
     private IEnumerator MeleeAttackDelay()
     {
-        while (look != Vector3.zero && lookAngle < 0.01f)
+        while (look != Vector3.zero)
         {
             anim.SowrdAttack(true);
+            weapon.NormalAttack();
             yield return YieldInstructionCache.WaitForSeconds(0.3f);
         }
-        anim.TurnLeft(false);
-        anim.TurnRight(false);
         anim.SowrdAttack(false);
+        weapon.ResetDamage();
     }
 
     private void Roll()
@@ -172,15 +173,14 @@ public class PlayerController : MonoBehaviour, IDamage
         ChangeState(State.Idle);
     }
 
-    private IEnumerator TurnDelay()
-    {
-        yield return YieldInstructionCache.WaitForSeconds(0.2f);
-        anim.TurnLeft(false);
-        anim.TurnRight(false);
-    }
-
     public void GetDamage(ITakeDamage hiter)
     {
         hiter.TakeDamage();
+    }
+
+    public void ChargeUaltimateGage(float value)
+    {
+        ultimateValue += value;
+        ultimateFill.fillAmount = ultimateValue;
     }
 }

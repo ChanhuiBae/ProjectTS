@@ -16,10 +16,11 @@ public enum AI_State
 }
 public enum CretureType
 {
-    normal = 5,
-    agent = 8,
-    middleboss = 10,
-    mainboss = 12
+    Normal,
+    Noble,
+    Swarm_Boss,
+    Guvnor,
+    Elite
 }
 public class CretureAI : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class CretureAI : MonoBehaviour
     protected Creture creture;
     protected CharacterBase targetBase;
     protected GameObject attackTarget;
+    protected PlayerController target;
 
     protected Vector3 homePos;
     protected Vector3 movePos;
@@ -52,8 +54,13 @@ public class CretureAI : MonoBehaviour
         isInit = true;
         attackTarget = null;
         homePos = transform.position;
-        attackDistance = 5f;
-        ChangeAIState(AI_State.Roaming);
+        attackDistance = 3f;
+        attackTarget = GameObject.Find("Player");
+        if(attackTarget == null || !attackTarget.TryGetComponent<PlayerController>(out target))
+        {
+            Debug.Log("CretureAI - Init - PlayerController");
+        }
+        Spawn();
     }
     protected void ChangeAIState(AI_State newState)
     {
@@ -104,13 +111,13 @@ public class CretureAI : MonoBehaviour
 
     protected IEnumerator Roaming()
     {
-        navAgent.speed = (float)type;
+        navAgent.speed = 5f;
         yield return null;
         while (true)
         {
-            movePos.x = UnityEngine.Random.Range(-6f, 6f);
+            movePos.x = UnityEngine.Random.Range(-10f, 10f);
             movePos.y = transform.position.y;
-            movePos.z = UnityEngine.Random.Range(-6f, 6f);
+            movePos.z = UnityEngine.Random.Range(-10f, 10f);
             Vector3 target = homePos + movePos;
             SetMoveTarget(target);
             //IBase.Walk();
@@ -125,7 +132,7 @@ public class CretureAI : MonoBehaviour
 
     protected IEnumerator Chase()
     {
-        navAgent.speed = (float)type;
+        navAgent.speed = 5f;
         //IBase.Run();
         yield return null;
         while (attackTarget != null)
@@ -193,8 +200,24 @@ public class CretureAI : MonoBehaviour
     {
         StopAllCoroutines();
         currentState = AI_State.Die;
-        attackTarget = null;
-        StartCoroutine(AI_State.Idle.ToString());
+        switch (type)
+        {
+            case CretureType.Normal:
+                target.ChargeUaltimateGage(0.01f);
+                break;
+            case CretureType.Noble:
+                target.ChargeUaltimateGage(0.02f);
+                break;
+            case CretureType.Swarm_Boss:
+                target.ChargeUaltimateGage(0.5f);
+                break;
+            case CretureType.Guvnor:
+                target.ChargeUaltimateGage(1f);
+                break;
+            case CretureType.Elite:
+                target.ChargeUaltimateGage(0.3f);
+                break;
+        }
     }
 
     public void SetIdle()

@@ -10,14 +10,12 @@ public class PlayerAnimationController : MonoBehaviour
     private int H_MeleeMove = Animator.StringToHash("IsMeleeMove");
     private int H_SoldierMove = Animator.StringToHash("IsSoldierMove");
     private int H_Roll = Animator.StringToHash("IsRoll");
-    private int H_X = Animator.StringToHash("X");   
+    private int H_X = Animator.StringToHash("X");
     private int H_Y = Animator.StringToHash("Y");
-    private int H_TurnLeft = Animator.StringToHash("TurnLeft");
-    private int H_TurnRight = Animator.StringToHash("TurnRight");
 
     private void Awake()
     {
-        if(!TryGetComponent<Animator>(out animator))
+        if (!TryGetComponent<Animator>(out animator))
         {
             Debug.Log("PlayerAnimationController - Awake - Animator");
         }
@@ -54,15 +52,5 @@ public class PlayerAnimationController : MonoBehaviour
     public void Roll(bool value)
     {
         animator.SetBool(H_Roll, value);
-    }
-
-    public void TurnLeft(bool value)
-    {
-        animator.SetBool(H_TurnLeft, value);
-    }
-
-    public void TurnRight(bool value)
-    {
-        animator.SetBool(H_TurnRight, value);
     }
 }

@@ -1,18 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Button pause;
+    private bool isPause;
+
+    private void Awake()
     {
-        
+        if(!GameObject.Find("Pause").TryGetComponent<Button>(out pause))
+        {
+            Debug.Log("MenuManager - Awake - Button");
+        }
+        else
+        {
+            isPause = false;
+            pause.onClick.AddListener(Pause);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Pause()
     {
-        
+        isPause = !isPause;
+        if(isPause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+        }
     }
 }

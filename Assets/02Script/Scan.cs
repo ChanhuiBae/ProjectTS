@@ -12,7 +12,7 @@ public class Scan : MonoBehaviour
         else
         {
             col.isTrigger = true;
-            col.radius = 10f;
+            col.radius = 20f;
         }
     }
 

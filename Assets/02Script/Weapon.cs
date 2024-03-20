@@ -11,10 +11,12 @@ public enum WeaponType
 public class Weapon : MonoBehaviour, ITakeDamage
 {
     private WeaponType type;
+    private float damage;
 
     private void Awake()
     {
         type = WeaponType.Sorwd;
+        damage = 0;
     }
 
     public WeaponType GetType()
@@ -22,9 +24,19 @@ public class Weapon : MonoBehaviour, ITakeDamage
         return type;
     }
 
+    public void ResetDamage()
+    {
+        damage = 0;
+    }
+
+    public void NormalAttack()
+    {
+        damage = 5;
+    }
+
     public float TakeDamage()
     {
-        return 5f;
+        return damage;
     }
 
     private void OnTriggerEnter(Collider other)
