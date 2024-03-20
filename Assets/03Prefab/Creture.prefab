@@ -78,10 +78,10 @@ GameObject:
   - component: {fileID: 8516837742166297676}
   - component: {fileID: 7718017743850546932}
   - component: {fileID: 935712332201360022}
-  - component: {fileID: 5762432337702058930}
   - component: {fileID: 1162546125146636024}
   - component: {fileID: 5999251870198235030}
   - component: {fileID: 1929000506611709413}
+  - component: {fileID: 9027386709340009985}
   m_Layer: 0
   m_Name: Creture
   m_TagString: Untagged
@@ -168,29 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolName: NormalCreture
---- !u!136 &5762432337702058930
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4620981060732528443}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.44
-  m_Height: 4.67
-  m_Direction: 2
-  m_Center: {x: 0, y: 1.26, z: -1.44015}
 --- !u!195 &1162546125146636024
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -252,3 +229,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &9027386709340009985
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4620981060732528443}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1556, y: 5, z: 4.6219}
+  m_Center: {x: 0, y: 2.41, z: -1.44015}

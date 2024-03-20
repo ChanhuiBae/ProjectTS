@@ -40,6 +40,12 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         if (currentHP < 0)
         {
             ai.Die();
+            GameObject obj = poolManager.GetFromPool<HPItem>(1).gameObject;
+            HPItem hp = obj.GetComponent<HPItem>();
+            hp.Init(1f, transform.position);
+            obj = poolManager.GetFromPool<EXPItem>(2).gameObject;
+            EXPItem exp = obj.GetComponent<EXPItem>();
+            exp.Init(1f, transform.position);
             poolManager.TakeToPool<Creture>(poolName, this);
         }
     }

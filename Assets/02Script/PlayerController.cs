@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour, IDamage
     private Vector3 direction;
     private Vector3 look;
     private float currentHP;
+    private float maxHP;
+    private float currentEXP;
+    private float maxEXP;
 
     private void Awake()
     {
@@ -77,7 +80,10 @@ public class PlayerController : MonoBehaviour, IDamage
         ultimateValue = 0;
         isControll = true;
         isInvincibility = false;
-        currentHP = 10f; // todo : get MaxHP
+        maxHP = 10f; // todo : get MaxHP
+        currentHP = maxHP;
+        maxEXP = 10f; // todo : get MaxEXP;
+        currentEXP = 0;
         state = State.Idle;
     }
 
@@ -174,7 +180,20 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (!isInvincibility)
         {
-            currentHP -= hiter.TakeDamage();
+            ApplyHP(hiter.TakeDamage());
+        }
+    }
+
+    public void ApplyHP(float value)
+    {
+        currentHP -= value;
+        if(currentHP < 0)
+        {
+            currentHP = 0;
+        }
+        else if(currentHP > maxHP)
+        {
+            currentHP = maxHP;
         }
     }
 
@@ -199,9 +218,22 @@ public class PlayerController : MonoBehaviour, IDamage
         weapon.NormalAttack();
     }
 
-    public void AttackEnd()
+    public void AttackDamageZero()
     {
         weapon.ResetDamage();
+    }
+
+    public void AttackEnd()
+    {
         ChangeState(State.Idle);
+    }
+    public void GetEXP(float value)
+    {
+        currentEXP += value;
+        if(currentEXP > maxEXP)
+        {
+            currentEXP = 0;
+            // todo : Level Up
+        }
     }
 }
