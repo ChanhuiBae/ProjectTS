@@ -5,10 +5,8 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     private Animator animator;
-    private int H_SowrdAttack = Animator.StringToHash("SowrdAttack");
-    private int H_SoldierAttack = Animator.StringToHash("SoldierAttack");
-    private int H_MeleeMove = Animator.StringToHash("IsMeleeMove");
-    private int H_SoldierMove = Animator.StringToHash("IsSoldierMove");
+    private int H_Attack = Animator.StringToHash("Attack");
+    private int H_Move = Animator.StringToHash("IsMove");
     private int H_Roll = Animator.StringToHash("IsRoll");
     private int H_X = Animator.StringToHash("X");
     private int H_Y = Animator.StringToHash("Y");
@@ -21,14 +19,9 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    public void MeleeMove(bool value)
+    public void Move(bool value)
     {
-        animator.SetBool(H_MeleeMove, value);
-    }
-
-    public void SoldierMove(bool value)
-    {
-        animator.SetBool(H_SoldierMove, value);
+        animator.SetBool(H_Move, value);
     }
 
     public void MoveDir(float x, float y)
@@ -37,15 +30,15 @@ public class PlayerAnimationController : MonoBehaviour
         animator.SetFloat(H_Y, y);
     }
 
-    public void SowrdAttack(bool use)
+    public void Attack(bool use)
     {
         if (use)
         {
-            animator.SetTrigger(H_SowrdAttack);
+            animator.SetTrigger(H_Attack);
         }
         else
         {
-            animator.ResetTrigger(H_SowrdAttack);
+            animator.ResetTrigger(H_Attack);
         }
     }
 

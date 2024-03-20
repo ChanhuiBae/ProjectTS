@@ -23,12 +23,14 @@ public class PlayerController : MonoBehaviour, IDamage
     private PlayerAnimationController anim;
     private Button roll;
     private bool isControll;
+    private bool isInvincibility;
     private State state;
     private Weapon weapon;
     private Image ultimateFill;
     private float ultimateValue;
     private Vector3 direction;
     private Vector3 look;
+    private float currentHP;
 
     private void Awake()
     {
@@ -74,6 +76,8 @@ public class PlayerController : MonoBehaviour, IDamage
         }
         ultimateValue = 0;
         isControll = true;
+        isInvincibility = false;
+        currentHP = 10f; // todo : get MaxHP
         state = State.Idle;
     }
 
@@ -87,7 +91,8 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             case State.Idle:
                 break;
-            case State.Attack: 
+            case State.Attack:
+                anim.Attack(false);
                 break;
             case State.Roll: 
                 break;
@@ -96,9 +101,10 @@ public class PlayerController : MonoBehaviour, IDamage
         switch(this.state)
         {
             case State.Idle:
-                anim.SowrdAttack(false);
                 break;
             case State.Attack:
+                transform.LookAt(transform.position + look);
+                anim.Attack(true);
                 break;
             case State.Roll:
                 anim.Roll(true);
@@ -122,7 +128,7 @@ public class PlayerController : MonoBehaviour, IDamage
             if(direction != Vector3.zero && state != State.Roll)
             {
                 rig.MovePosition(transform.position + direction * speed * Time.deltaTime);
-                anim.MeleeMove(true);
+                anim.Move(true);
                 float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
                 if (Mathf.Abs(angle) > 90)
                 {
@@ -135,29 +141,20 @@ public class PlayerController : MonoBehaviour, IDamage
             }
             else
             {
-                anim.MeleeMove(false);
+                anim.Move(false);
             }
 
             if (look != Vector3.zero)
             {
-                Quaternion current = transform.rotation;
-                transform.LookAt(transform.position + look);
-                StartCoroutine(MeleeAttackDelay());
+                if(state != State.Attack)
+                {
+                    transform.LookAt(transform.position + look);
+                }
+                ChangeState(State.Attack);
             }
         }
     }
 
-    private IEnumerator MeleeAttackDelay()
-    {
-        while (look != Vector3.zero)
-        {
-            anim.SowrdAttack(true);
-            weapon.NormalAttack();
-            yield return YieldInstructionCache.WaitForSeconds(0.3f);
-        }
-        anim.SowrdAttack(false);
-        weapon.ResetDamage();
-    }
 
     private void Roll()
     {
@@ -175,12 +172,36 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void GetDamage(ITakeDamage hiter)
     {
-        hiter.TakeDamage();
+        if (!isInvincibility)
+        {
+            currentHP -= hiter.TakeDamage();
+        }
     }
 
     public void ChargeUaltimateGage(float value)
     {
         ultimateValue += value;
         ultimateFill.fillAmount = ultimateValue;
+    }
+
+    public void RollStart()
+    {
+        isInvincibility = true;
+    }
+
+    public void RollEnd()
+    {
+        isInvincibility = false;
+    }
+
+    public void AttackStart()
+    {
+        weapon.NormalAttack();
+    }
+
+    public void AttackEnd()
+    {
+        weapon.ResetDamage();
+        ChangeState(State.Idle);
     }
 }
