@@ -25,7 +25,8 @@ public class EXPItem : MonoBehaviour
     public void Init(float exp, Vector3 pos)
     {
         this.exp = exp;
-        transform.position = pos + Vector3.up;
+        transform.position = pos +new Vector3(Random.Range(-2f, 2f), 3f, Random.Range(-2f, 2f));
+        rig.useGravity = true;
     }
 
     private void OnTriggerEnter(Collider other)

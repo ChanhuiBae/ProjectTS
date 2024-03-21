@@ -26,15 +26,16 @@ public class HPItem : MonoBehaviour, IPoolObject
     public void Init(float hp, Vector3 pos)
     {
         this.hp = hp;
-        transform.position = pos + Vector3.up;
+        transform.position = pos + new Vector3(Random.Range(-2f, 2f), 3f, Random.Range(-2f, 2f));
+        rig.useGravity = true;
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.tag == "Ground")
         {
+            rig.useGravity = false;
             rig.velocity = Vector3.zero;
         }
         if(other.tag == "Player")

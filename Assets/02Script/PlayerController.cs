@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private float maxHP;
     private float currentEXP;
     private float maxEXP;
+    private Image expFill;
 
     private void Awake()
     {
@@ -76,6 +77,14 @@ public class PlayerController : MonoBehaviour, IDamage
         else
         {
             ultimateFill.fillAmount = 0;
+        }
+        if(!GameObject.Find("ExperienceFill").TryGetComponent<Image>(out expFill))
+        {
+            Debug.Log("PlayerController - Awake - Image");
+        }
+        else
+        {
+            expFill.fillAmount = 0;
         }
         ultimateValue = 0;
         isControll = true;
@@ -235,5 +244,6 @@ public class PlayerController : MonoBehaviour, IDamage
             currentEXP = 0;
             // todo : Level Up
         }
+        expFill.fillAmount = currentEXP / maxEXP;
     }
 }

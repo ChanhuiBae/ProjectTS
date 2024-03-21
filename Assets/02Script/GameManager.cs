@@ -9,16 +9,21 @@ using System.IO; // input output controll
 public class PlayerData
 {
     public int uidCounter;
-    public float maxHP;
-    public float ATK;
-    public int health;
-    public int patience;
+    public int Level;
+    public int Max_Weight;
+    public float Max_HP;
+    public int Critical_Chance;
+    public int Health;
+    public int Endurance;
     public int Strength;
-    public int intuition;
-    public int adaptation;
-    public float experience;
+    public int Dexterity;
+    public int Adaptation;
+    public int Available_Point;
+    public int Move_Speed;
+    public int Avoid_Distance;
+    public float Exp_Need;
     public Inventory inventory;
-    //public Weapon weapon;
+    public Weapon weapon;
 }
 
 public enum SceneName
@@ -41,7 +46,7 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         Application.targetFrameRate = 60;
-        // dataPath = Application.persistentDataPath + "/save";
+        dataPath = Application.persistentDataPath + "/save";
 
         #region TableData
        // table = Resources.Load<>("");
@@ -73,13 +78,13 @@ public class GameManager : Singleton<GameManager>
 
         if (menuManager == null)
         {
-            GameObject.Find("MainCanvas").TryGetComponent<MenuManager>(out menuManager);
+            GameObject.Find("Canvas").TryGetComponent<MenuManager>(out menuManager);
             //if (menuManager != null)
                // menuManager.InitMenuManager();
         }
         if (fadeManager == null)
         {
-            GameObject.Find("MainCanvas").TryGetComponent<FadeManager>(out fadeManager);
+            GameObject.Find("Canvas").TryGetComponent<FadeManager>(out fadeManager);
             if (fadeManager != null)
             {
                // fadeManager.Fade_InOut(true);
