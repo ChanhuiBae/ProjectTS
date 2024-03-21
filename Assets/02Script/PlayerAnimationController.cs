@@ -8,6 +8,7 @@ public class PlayerAnimationController : MonoBehaviour
     private int H_Attack = Animator.StringToHash("Attack");
     private int H_Move = Animator.StringToHash("IsMove");
     private int H_Roll = Animator.StringToHash("IsRoll");
+    private int H_Combat = Animator.StringToHash("IsCombat");
     private int H_X = Animator.StringToHash("X");
     private int H_Y = Animator.StringToHash("Y");
 
@@ -17,6 +18,11 @@ public class PlayerAnimationController : MonoBehaviour
         {
             Debug.Log("PlayerAnimationController - Awake - Animator");
         }
+    }
+
+    public void Combat(bool value)
+    {
+        animator.SetBool(H_Combat, value);
     }
 
     public void Move(bool value)
@@ -41,6 +47,8 @@ public class PlayerAnimationController : MonoBehaviour
             animator.ResetTrigger(H_Attack);
         }
     }
+
+    
 
     public void Roll(bool value)
     {

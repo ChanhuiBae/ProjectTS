@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public enum State
 {
     Idle,
+    Move,
     Attack,
     Roll
 }
@@ -15,14 +16,18 @@ public class PlayerController : MonoBehaviour, IDamage
 {
     private Rigidbody rig;
     private FloatingJoystick joystick;
-    private FixedJoystick normalAttack;
     [SerializeField]
-    private float speed;
-    [SerializeField]
-    private float dashDistance;
+    private int weaponType;
+    private Button sowrdAttack;
+    private FixedJoystick soldierAttack;
     private PlayerAnimationController anim;
     private Button roll;
-    private bool isControll;
+    private bool isControll = true;
+    public bool CONTROLL
+    {
+        set => isControll = value;
+        get => isControll;
+    }
     private bool isInvincibility;
     private State state;
     private Weapon weapon;
@@ -31,9 +36,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private Vector3 direction;
     private Vector3 look;
     private float currentHP;
-    private float maxHP;
     private float currentEXP;
-    private float maxEXP;
     private Image expFill;
 
     private void Awake()
@@ -42,19 +45,41 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             Debug.Log("PlayerController - Awake - Rigidbody");
         }
-
+        if(!GameObject.Find("SowrdAttack").TryGetComponent<Button>(out sowrdAttack))
+        {
+            Debug.Log("PlayerController - Awake - Button");
+        }
+        else
+        {
+            if(weaponType == 0)
+            {
+                sowrdAttack.onClick.AddListener(SowrdAttack);
+            }
+            else
+            {
+                sowrdAttack.gameObject.SetActive(false);
+            }
+        }
         if(!GameObject.Find("Floating Joystick").TryGetComponent< FloatingJoystick > (out joystick))
         {
             Debug.Log("PlayerController - Awake - Floating Joystick");
         }
+ 
         if (!TryGetComponent<PlayerAnimationController>(out anim))
         {
             Debug.Log("PlayerController - Awake - PlayerAnimationController");
         }
 
-        if(!GameObject.Find("NormalAttack").TryGetComponent<FixedJoystick>(out normalAttack))
+        if(!GameObject.Find("SoldierAttack").TryGetComponent<FixedJoystick>(out soldierAttack))
         {
             Debug.Log("PlayerController - Awake - FixedJoystic");
+        }
+        else
+        {
+            if(weaponType != 2)
+            {
+                soldierAttack.gameObject.SetActive(false);
+            }
         }
 
         if (!GameObject.Find("Roll").TryGetComponent<Button>(out roll))
@@ -74,26 +99,22 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             Debug.Log("PlayerController - Awake - Image");
         }
-        else
-        {
-            ultimateFill.fillAmount = 0;
-        }
         if(!GameObject.Find("ExperienceFill").TryGetComponent<Image>(out expFill))
         {
             Debug.Log("PlayerController - Awake - Image");
         }
-        else
-        {
-            expFill.fillAmount = 0;
-        }
+    }
+
+    public void Init()
+    {
         ultimateValue = 0;
-        isControll = true;
+        ultimateFill.fillAmount = 0;
         isInvincibility = false;
-        maxHP = 10f; // todo : get MaxHP
-        currentHP = maxHP;
-        maxEXP = 10f; // todo : get MaxEXP;
+        currentHP = GameManager.Inst.PlayerInfo.Max_HP;
         currentEXP = 0;
         state = State.Idle;
+        expFill.fillAmount = 0; 
+        isControll = true;
     }
 
     private void ChangeState(State state)
@@ -106,8 +127,12 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             case State.Idle:
                 break;
+            case State.Move:
+                anim.Move(false);
+                break;
             case State.Attack:
                 anim.Attack(false);
+                anim.Combat(false);
                 break;
             case State.Roll: 
                 break;
@@ -117,9 +142,14 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             case State.Idle:
                 break;
+            case State.Move:
+                anim.Move(true);
+                break;
             case State.Attack:
                 transform.LookAt(transform.position + look);
-                anim.Attack(true);
+                if(weaponType != 2)
+                    anim.Attack(true);
+                anim.Combat(true);
                 break;
             case State.Roll:
                 anim.Roll(true);
@@ -138,37 +168,55 @@ public class PlayerController : MonoBehaviour, IDamage
             direction.z = Input.GetAxisRaw("Vertical");
             direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
             direction.Normalize();
-            look = Vector3.forward * normalAttack.Vertical + Vector3.right * normalAttack.Horizontal;
+            if(weaponType == 2)
+            {
+                look = Vector3.forward * soldierAttack.Vertical + Vector3.right * soldierAttack.Horizontal;
+            }
 
             if(direction != Vector3.zero && state != State.Roll)
             {
-                rig.MovePosition(transform.position + direction * speed * Time.deltaTime);
-                anim.Move(true);
+                ChangeState(State.Move);
+                rig.MovePosition(transform.position + direction * GameManager.Inst.PlayerInfo.Move_Speed * Time.deltaTime);
                 float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
-                if (Mathf.Abs(angle) > 90)
+                if(state == State.Attack)
                 {
-                    anim.MoveDir(-direction.x, -direction.z);
+                    if (Mathf.Abs(angle) > 90)
+                    {
+                        anim.MoveDir(-direction.x, -direction.z);
+                    }
+                    else
+                    {
+                        anim.MoveDir(direction.x, direction.z);
+                    }
                 }
                 else
                 {
-                    anim.MoveDir(direction.x, direction.z);
+                    transform.LookAt(transform.position + direction);
                 }
             }
             else
             {
-                anim.Move(false);
+                ChangeState(State.Idle);
             }
 
-            if (look != Vector3.zero)
+            if (weaponType == 2 && look != Vector3.zero)
             {
                 if(state != State.Attack)
                 {
                     transform.LookAt(transform.position + look);
+                    
                 }
                 ChangeState(State.Attack);
             }
         }
     }
+
+    private void SowrdAttack()
+    {
+        ChangeState(State.Attack);
+    }
+
+
 
 
     private void Roll()
@@ -180,7 +228,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private IEnumerator RollDelay()
     {
         yield return YieldInstructionCache.WaitForSeconds(0.1f);
-        rig.MovePosition(transform.position + transform.forward * dashDistance * Time.deltaTime);
+        rig.MovePosition(transform.position + transform.forward * GameManager.Inst.PlayerInfo.Avoid_Distance * Time.deltaTime);
         anim.Roll(false);
         ChangeState(State.Idle);
     }
@@ -200,9 +248,9 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             currentHP = 0;
         }
-        else if(currentHP > maxHP)
+        else if(currentHP > GameManager.Inst.PlayerInfo.Max_HP)
         {
-            currentHP = maxHP;
+            currentHP = GameManager.Inst.PlayerInfo.Max_HP;
         }
     }
 
@@ -239,11 +287,16 @@ public class PlayerController : MonoBehaviour, IDamage
     public void GetEXP(float value)
     {
         currentEXP += value;
-        if(currentEXP > maxEXP)
+        if(currentEXP > GameManager.Inst.PlayerInfo.Exp_Need)
         {
             currentEXP = 0;
             // todo : Level Up
         }
-        expFill.fillAmount = currentEXP / maxEXP;
+        expFill.fillAmount = currentEXP / GameManager.Inst.PlayerInfo.Exp_Need;
+    }
+
+    public float GetCritical_Mag()
+    {
+        return 1f; // todo : Calculate value
     }
 }

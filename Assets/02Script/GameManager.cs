@@ -31,7 +31,6 @@ public enum SceneName
     PlayScene,
 }
 
-
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
@@ -41,7 +40,18 @@ public class GameManager : Singleton<GameManager>
     private FadeManager fadeManager;
     private MenuManager menuManager;
     private SoundManager soundManager;
-    
+
+    private TS table;
+    private Dictionary<int, TableEntity_Player_Stats> playerDataTable = new Dictionary<int, TableEntity_Player_Stats>();
+    //private Dictionary<int, TableEntity_Weapon> weaponDataTable = new Dictionary<int, TableEntity_Weapon>();
+    //private Dictionary<int, TableEntity_DropList> dropDataTable = new Dictionary<int, TableEntity_DropList>();
+    //private Dictionary<int, TableEntity_Monster> monsterData = new Dictionary<int, TableEntity_Monster>();
+    //public bool GetMonsterData(int itemID, out TableEntity_Monster moster)
+    // {
+    //     return monsterData.TryGetValue(itemID, out moster);
+    // }
+    //  private List<TableEntity_Tip> Tip = new List<TableEntity_Tip>();
+
     public void Awake()
     {
         base.Awake();
@@ -49,11 +59,23 @@ public class GameManager : Singleton<GameManager>
         dataPath = Application.persistentDataPath + "/save";
 
         #region TableData
-       // table = Resources.Load<>("");
-       // for (int i = 0; i < table.ItemData.Count; i++)
-       // {
-       //     itemDataTable.Add(table.ItemData[i].uid, table.ItemData[i]);
-       // }
+        table = Resources.Load<TS>("TS");
+        playerDataTable.Add(0, table.Player_Default_Stats[0]);
+        /*
+        for (int i = 0; i < table.WeaponData.Count; i++)
+        {
+            weaponDataTable.Add(table.WeaponData[i].uid, table.WeaponData[i]);
+            weaponItemID.Add(table.WeaponData[i].uid);
+        }
+        for (int i = 0; i < table.MonsterData.Count; i++)
+        {
+            monsterData.Add(table.MonsterData[i].uid, table.MonsterData[i]);
+        }
+        for (int i = 0; i < table.DropList.Count; i++)
+        {
+            dropDataTable.Add(table.DropList[i].uid, table.DropList[i]);
+        }
+        */
         #endregion
 
         pData = new PlayerData();
@@ -80,15 +102,15 @@ public class GameManager : Singleton<GameManager>
         {
             GameObject.Find("Canvas").TryGetComponent<MenuManager>(out menuManager);
             //if (menuManager != null)
-               // menuManager.InitMenuManager();
+            // menuManager.InitMenuManager();
         }
         if (fadeManager == null)
         {
             GameObject.Find("Canvas").TryGetComponent<FadeManager>(out fadeManager);
             if (fadeManager != null)
             {
-               // fadeManager.Fade_InOut(true);
-               // player.ISCONTROLLER = true;
+                // fadeManager.Fade_InOut(true);
+                // player.ISCONTROLLER = true;
             }
         }
         if (soundManager == null)
@@ -99,7 +121,6 @@ public class GameManager : Singleton<GameManager>
                 int activeScene = SceneManager.GetActiveScene().buildIndex;
             }
         }
-
     }
 
     #region UpdateGMInfo
@@ -112,23 +133,38 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-           // player.InitPlayerController();
+            player.Init();
             return true;
         }
     }
     #endregion
 
-    #region TableData
+    #region PlayerDataGetter
+    public PlayerData PlayerInfo
+    {
+        get => pData;
+    }
+    public Inventory INVENTORY
+    {
+        get
+        {
+            return pData.inventory;
+        }
+    }
 
-    //private Fairytale table;
-    //private Dictionary<int, TableEntity_Item> itemDataTable = new Dictionary<int, TableEntity_Item>();
-
-   // public bool GetItemData(int itemID, out TableEntity_Item data)
-   // {
-   //     return itemDataTable.TryGetValue(itemID, out data);
-   // }
-
+    public int PlayerUIDMaker
+    {
+        get
+        {
+            return pData.uidCounter++;
+        }
+    }
     #endregion
+
+    public void PlayerIsController(bool value)
+    {
+        player.CONTROLL = value;
+    }
 
     #region Save&Load
     private string dataPath;
@@ -166,52 +202,10 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region updateUserData
-    public void CreateUserData(string newNickName)
+    public void CreateUserData(int playerUid)
     {
         SaveData();
     }
-
-    #region Player Setter
-    public bool LootingItem(InventoryItemData newItem)
-    {
-        return false;
-    }
-
-    public void PlayerIsController(bool control)
-    {
-
-    }
-    #endregion
-    #endregion
-
-    #region PlayerDataGetter
-    public PlayerData PlayerInfo
-    {
-        get => pData;
-    }
-    public Inventory INVENTORY
-    {
-        get
-        {
-            return pData.inventory;
-        }
-    }
-
-    public int PlayerUIDMaker
-    {
-        get
-        {
-            return pData.uidCounter++;
-        }
-    }
-
-
-    public bool CheckItem(int itemID)
-    {
-
-        return false;
-    }
-
     #endregion
 
     #region LoadingLogic
@@ -226,8 +220,8 @@ public class GameManager : Singleton<GameManager>
         SaveData();
         nextScene = scene;
         if (SceneManager.GetActiveScene().buildIndex > 2)
-           // fadeManager.Fade_InOut(false);
-        SceneManager.LoadScene("LoadingScene");
+            // fadeManager.Fade_InOut(false);
+            SceneManager.LoadScene("LoadingScene");
     }
-    #endregion
+    #endregion 
 }
