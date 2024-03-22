@@ -94,6 +94,4 @@ public class Projectile : MonoBehaviour, IPoolObject, ITakeDamage
     {
         return damage;
     }
-
-    
 }

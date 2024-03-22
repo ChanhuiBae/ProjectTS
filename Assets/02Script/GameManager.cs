@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
-using UnityEditor.Networking.PlayerConnection; // input output controll
 
 [System.Serializable]
 public class PlayerData
@@ -81,7 +79,6 @@ public class GameManager : Singleton<GameManager>
 
         pData = new PlayerData();
         CreateUserData();
-        UpdatePlayer();
     }
 
     private void OnLevelWasLoaded(int level)

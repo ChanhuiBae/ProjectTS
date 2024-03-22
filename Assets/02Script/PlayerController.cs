@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour, IDamage
 {
     private Rigidbody rig;
     private FloatingJoystick joystick;
-    [SerializeField]
     private WeaponType type;
     private Button sowrdAttack;
     private Button hammerAttack;
@@ -86,6 +85,8 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             Debug.Log("PlayerController - Awake - Image");
         }
+        type = WeaponType.Gun;
+        Init();
     }
 
     public void Init()
