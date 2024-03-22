@@ -232,8 +232,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private IEnumerator RollDelay()
     {
-        yield return YieldInstructionCache.WaitForSeconds(0.1f);
-        rig.MovePosition(transform.position + transform.forward * GameManager.Inst.PlayerInfo.Avoid_Distance * Time.deltaTime);
+        yield return YieldInstructionCache.WaitForSeconds(0.2f);
+        rig.AddForce(transform.forward * GameManager.Inst.PlayerInfo.Avoid_Distance, ForceMode.Impulse);
         anim.Roll(false);
         ChangeState(State.Idle);
     }
