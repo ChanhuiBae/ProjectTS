@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour, IDamage
 {
     private Rigidbody rig;
     private FloatingJoystick joystick;
+    [SerializeField]
     private WeaponType type;
     private Button sowrdAttack;
     private FixedJoystick ARAttack;
@@ -84,7 +85,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Init()
     {
-        type = WeaponType.Sowrd;
         anim.Weapon((int)type);
         switch (type)
         {
@@ -146,7 +146,6 @@ public class PlayerController : MonoBehaviour, IDamage
                 anim.Attack(true);
                 break;
             case State.Attack_Gun:
-                transform.LookAt(transform.position + look);
                 anim.Combat(true);
                 break;
             case State.Roll:
@@ -191,6 +190,7 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 ChangeState(State.Attack_Gun);
                 float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
+                transform.LookAt(transform.position + look);
                 if (Mathf.Abs(angle) > 90)
                 {
                     anim.MoveDir(-direction.x, -direction.z);
