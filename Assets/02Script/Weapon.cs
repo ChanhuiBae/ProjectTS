@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum WeaponType
 {
-    Sorwd = 0,
+    Sowrd = 0,
     Hamer = 1,
-    AR = 2
+    Gun = 2
 }
 public class Weapon : MonoBehaviour, ITakeDamage
 {
@@ -61,6 +61,7 @@ public class Weapon : MonoBehaviour, ITakeDamage
         CalculateDamage(owner.GetCritical_Mag(), Creature_Physics_Cut, Creature_Fire_Cut, Creature_Water_Cut, Creature_Electric_Cut, Creature_Ice_Cut, Creature_Wind_Cut);
         return damage;
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

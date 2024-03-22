@@ -7,9 +7,8 @@ using UnityEngine.UI;
 public enum State
 {
     Idle,
-    Move,
     Attack_Soward,
-    Attack_AR,
+    Attack_Gun,
     Roll
 }
 
@@ -72,11 +71,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             roll.onClick.AddListener(Roll);
         }
-        
-        if(!GameObject.Find("Weapon").TryGetComponent<Weapon>(out weapon))
-        {
-            Debug.Log("PlayerController - Awake - Weapon");
-        }
+       
         if(!GameObject.Find("UltimateFill").TryGetComponent<Image>(out ultimateFill))
         {
             Debug.Log("PlayerController - Awake - Image");
@@ -89,16 +84,26 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Init()
     {
-        type = WeaponType.AR;
+        type = WeaponType.Sowrd;
         anim.Weapon((int)type);
         switch (type)
         {
-            case WeaponType.Sorwd:
+            case WeaponType.Sowrd:
                 sowrdAttack.onClick.AddListener(SowrdAttack);
                 ARAttack.gameObject.SetActive(false);
+                if (!GameObject.Find("Sowrd").TryGetComponent<Weapon>(out weapon))
+                {
+                    Debug.Log("PlayerController - Awake - Weapon");
+                }
+                GameObject.Find("Gun").SetActive(false);
                 break;
-            case WeaponType.AR:
+            case WeaponType.Gun:
                 sowrdAttack.gameObject.SetActive(false);
+                if (!GameObject.Find("Gun").TryGetComponent<Weapon>(out weapon))
+                {
+                    Debug.Log("PlayerController - Awake - Weapon");
+                }
+                GameObject.Find("Sowrd").SetActive(false);
                 break;
         }
         ultimateValue = 0;
@@ -121,13 +126,11 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             case State.Idle:
                 break;
-            case State.Move:
-                anim.Move(false);
-                break;
             case State.Attack_Soward:
+                isControll = true;
                 anim.Attack(false);
                 break;
-            case State.Attack_AR:
+            case State.Attack_Gun:
                 anim.Combat(false);
                 break;
             case State.Roll: 
@@ -138,13 +141,11 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             case State.Idle:
                 break;
-            case State.Move:
-                anim.Move(true);
-                break;
             case State.Attack_Soward:
+                isControll = false; 
                 anim.Attack(true);
                 break;
-            case State.Attack_AR:
+            case State.Attack_Gun:
                 transform.LookAt(transform.position + look);
                 anim.Combat(true);
                 break;
@@ -158,6 +159,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void Update()
     {
+        
         if (isControll)
         {
             direction.x = Input.GetAxisRaw("Horizontal");
@@ -167,26 +169,27 @@ public class PlayerController : MonoBehaviour, IDamage
 
             if(direction != Vector3.zero && state != State.Roll)
             {
-                ChangeState(State.Move);
+                anim.Move(true);
                 rig.MovePosition(transform.position + direction * GameManager.Inst.PlayerInfo.Move_Speed * Time.deltaTime);
             }
             else
             {
                 ChangeState(State.Idle);
+                anim.Move(false);
             }
 
-            if (state != State.Attack_AR)
+            if (state != State.Attack_Gun)
             {
                 transform.LookAt(transform.position + direction);
             }
             
-            if (type == WeaponType.AR)
+            if (type == WeaponType.Gun)
             {
                 look = Vector3.forward * ARAttack.Vertical + Vector3.right * ARAttack.Horizontal;
             }
             if (look != Vector3.zero)
             {
-                ChangeState(State.Attack_AR);
+                ChangeState(State.Attack_Gun);
                 float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
                 if (Mathf.Abs(angle) > 90)
                 {
@@ -206,7 +209,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void SowrdAttack()
     {
-        anim.Attack(true);
+        ChangeState(State.Attack_Soward);
     }
 
 
@@ -262,7 +265,6 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         isInvincibility = false;
     }
-
     public void AttackStart()
     {
         weapon.NormalAttack();
