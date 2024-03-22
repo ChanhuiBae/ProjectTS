@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 9027386709340009985}
   m_Layer: 0
   m_Name: Creture
-  m_TagString: Untagged
+  m_TagString: Creture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

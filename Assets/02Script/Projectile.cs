@@ -1,5 +1,6 @@
 using Redcode.Pools;
 using System.Collections;
+using System.Runtime.Remoting.Messaging;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,15 +8,21 @@ public class Projectile : MonoBehaviour, IPoolObject, ITakeDamage
 {
     private Rigidbody rig;
     private float damage;
+    private TrailRenderer trail;
     [SerializeField]
     private string poolName;
     private PoolManager pool;
+    private FixedJoystick dir;
     
     private void Awake()
     {
         if (!TryGetComponent<Rigidbody>(out rig))
         {
             Debug.Log("Projectile - Awake - Rigidbody");
+        }
+        if(!TryGetComponent<TrailRenderer>(out trail))
+        {
+            Debug.Log("Projectile - Awake - TrailRenderer");
         }
         GameObject pm = GameObject.Find("PoolManager");
         if (pm == null || !pm.TryGetComponent<PoolManager>(out pool))
@@ -25,19 +32,29 @@ public class Projectile : MonoBehaviour, IPoolObject, ITakeDamage
     }
     public void Init(float damage, Vector3 pos)
     {
+        this.damage = damage;
         transform.position = pos;
-        transform.rotation = Quaternion.identity;
+        trail.enabled = true;
         Attack();
     }
 
     public void Attack()
     {
-        //rig.velocity = transform.position + transform.forward * 100f;
+        rig.velocity = Vector3.zero;
+        rig.AddForce(transform.forward * 8f, ForceMode.Impulse);
         StartCoroutine(TimeOut());
     }
     private IEnumerator TimeOut()
     {
-        yield return YieldInstructionCache.WaitForSeconds(10f);
+        yield return YieldInstructionCache.WaitForSeconds(3f);
+        trail.enabled = false;
+        pool.TakeToPool<Projectile>(poolName, this);
+    }
+
+    private IEnumerator ReturnPool()
+    {
+        yield return YieldInstructionCache.WaitForSeconds(0.1f);
+        trail.enabled = false;
         pool.TakeToPool<Projectile>(poolName, this);
     }
 
@@ -53,11 +70,23 @@ public class Projectile : MonoBehaviour, IPoolObject, ITakeDamage
 
     private void OnTriggerEnter(Collider other)
     {
-        pool.TakeToPool<Projectile>(poolName, this);
+        if(other.tag == "Creture")
+        {
+            if (other.TryGetComponent<IDamage>(out IDamage creture))
+            {
+                creture.GetDamage(this);
+            }
+        }
+        if(other.tag == "Ground")
+        {
+            trail.enabled = false;
+            pool.TakeToPool<Projectile>(poolName, this);
+        }
     }
 
     public float TakeDamage()
     {
+        StartCoroutine(ReturnPool());
         return damage;
     }
 
@@ -65,4 +94,6 @@ public class Projectile : MonoBehaviour, IPoolObject, ITakeDamage
     {
         return damage;
     }
+
+    
 }

@@ -2,6 +2,7 @@ using Redcode.Pools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum WeaponType
 {
@@ -21,6 +22,14 @@ public class Weapon : MonoBehaviour, ITakeDamage
     private float Weapon_Wind;
     private PlayerController owner;
     private PoolManager pool;
+
+    private void Awake()
+    {
+        if(!GameObject.Find("Player").TryGetComponent<PlayerController>(out owner))
+        {
+            Debug.Log("Weapon - Awake - PlayerController");
+        }   
+    }
 
     public void Init(WeaponType type)
     {
@@ -52,6 +61,7 @@ public class Weapon : MonoBehaviour, ITakeDamage
         {
             damage = 5;
             GameObject obj = pool.GetFromPool<Projectile>(3).gameObject;
+            obj.transform.rotation = transform.rotation;
             Projectile projectile = obj.GetComponent<Projectile>();
             projectile.Init(damage, transform.GetChild(0).transform.position);
         }

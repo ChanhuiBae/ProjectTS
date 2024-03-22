@@ -140,6 +140,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 anim.Attack(false);
                 break;
             case State.Attack_Gun:
+                StopAllCoroutines();
                 anim.Combat(false);
                 break;
             case State.Roll: 
@@ -213,7 +214,7 @@ public class PlayerController : MonoBehaviour, IDamage
             }
             else
             {
-                anim.Combat(false);
+                ChangeState(State.Idle);
             }
         }
     }
