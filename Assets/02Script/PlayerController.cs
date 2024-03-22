@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField]
     private WeaponType type;
     private Button sowrdAttack;
-    private FixedJoystick ARAttack;
+    private Button hammerAttack;
+    private FixedJoystick gunAttack;
     private PlayerAnimationController anim;
     private Button roll;
     private bool isControll = true;
@@ -45,11 +46,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             Debug.Log("PlayerController - Awake - Rigidbody");
         }
-        if(!GameObject.Find("SowrdAttack").TryGetComponent<Button>(out sowrdAttack))
-        {
-            Debug.Log("PlayerController - Awake - Button");
-        }
-        if(!GameObject.Find("Floating Joystick").TryGetComponent< FloatingJoystick > (out joystick))
+        if (!GameObject.Find("Floating Joystick").TryGetComponent< FloatingJoystick > (out joystick))
         {
             Debug.Log("PlayerController - Awake - Floating Joystick");
         }
@@ -59,7 +56,15 @@ public class PlayerController : MonoBehaviour, IDamage
             Debug.Log("PlayerController - Awake - PlayerAnimationController");
         }
 
-        if(!GameObject.Find("ARAttack").TryGetComponent<FixedJoystick>(out ARAttack))
+        if (!GameObject.Find("SowrdAttack").TryGetComponent<Button>(out sowrdAttack))
+        {
+            Debug.Log("PlayerController - Awake - Button");
+        }
+        if (!GameObject.Find("HammerAttack").TryGetComponent<Button>(out hammerAttack))
+        {
+            Debug.Log("PlayerController - Awake - Button");
+        }
+        if (!GameObject.Find("GunAttack").TryGetComponent<FixedJoystick>(out gunAttack))
         {
             Debug.Log("PlayerController - Awake - FixedJoystic");
         }
@@ -90,20 +95,24 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             case WeaponType.Sowrd:
                 sowrdAttack.onClick.AddListener(SowrdAttack);
-                ARAttack.gameObject.SetActive(false);
                 if (!GameObject.Find("Sowrd").TryGetComponent<Weapon>(out weapon))
                 {
                     Debug.Log("PlayerController - Awake - Weapon");
                 }
+                hammerAttack.gameObject.SetActive(false);
+                //GameObject.Find("Hammer").SetActive(false);
+                gunAttack.gameObject.SetActive(false);
                 GameObject.Find("Gun").SetActive(false);
                 break;
             case WeaponType.Gun:
                 sowrdAttack.gameObject.SetActive(false);
+                GameObject.Find("Sowrd").SetActive(false);
+                hammerAttack.gameObject.SetActive(false);
+                //GameObject.Find("Hammer").SetActive(false);
                 if (!GameObject.Find("Gun").TryGetComponent<Weapon>(out weapon))
                 {
                     Debug.Log("PlayerController - Awake - Weapon");
                 }
-                GameObject.Find("Sowrd").SetActive(false);
                 break;
         }
         ultimateValue = 0;
@@ -142,8 +151,8 @@ public class PlayerController : MonoBehaviour, IDamage
             case State.Idle:
                 break;
             case State.Attack_Soward:
-                isControll = false; 
                 anim.Attack(true);
+                isControll = false;
                 break;
             case State.Attack_Gun:
                 anim.Combat(true);
@@ -184,7 +193,7 @@ public class PlayerController : MonoBehaviour, IDamage
             
             if (type == WeaponType.Gun)
             {
-                look = Vector3.forward * ARAttack.Vertical + Vector3.right * ARAttack.Horizontal;
+                look = Vector3.forward * gunAttack.Vertical + Vector3.right * gunAttack.Horizontal;
             }
             if (look != Vector3.zero)
             {
