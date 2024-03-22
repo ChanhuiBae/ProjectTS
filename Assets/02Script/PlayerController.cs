@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 }
                 break;
         }
+        weapon.Init(type);
         ultimateValue = 0;
         ultimateFill.fillAmount = 0;
         isInvincibility = false;
@@ -136,7 +137,6 @@ public class PlayerController : MonoBehaviour, IDamage
             case State.Idle:
                 break;
             case State.Attack_Soward:
-                isControll = true;
                 anim.Attack(false);
                 break;
             case State.Attack_Gun:
@@ -149,15 +149,17 @@ public class PlayerController : MonoBehaviour, IDamage
         switch(this.state)
         {
             case State.Idle:
+                anim.Move(false);
                 break;
             case State.Attack_Soward:
                 anim.Attack(true);
-                isControll = false;
                 break;
             case State.Attack_Gun:
                 anim.Combat(true);
+                StartCoroutine(GunAttack());
                 break;
             case State.Roll:
+                weapon.ResetDamage();
                 anim.Roll(true);
                 transform.LookAt(transform.position + direction);
                 StartCoroutine(RollDelay());
@@ -175,16 +177,16 @@ public class PlayerController : MonoBehaviour, IDamage
             direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
             direction.Normalize();
 
-            if(direction != Vector3.zero && state != State.Roll)
+            if(direction == Vector3.zero)
+            {
+                anim.Move(false);
+            }
+            else if(direction != Vector3.zero && state != State.Roll && state != State.Attack_Soward)
             {
                 anim.Move(true);
                 rig.MovePosition(transform.position + direction * GameManager.Inst.PlayerInfo.Move_Speed * Time.deltaTime);
             }
-            else
-            {
-                ChangeState(State.Idle);
-                anim.Move(false);
-            }
+
 
             if (state != State.Attack_Gun)
             {
@@ -221,7 +223,15 @@ public class PlayerController : MonoBehaviour, IDamage
         ChangeState(State.Attack_Soward);
     }
 
-
+    private IEnumerator GunAttack()
+    {
+        yield return null;
+        while (state == State.Attack_Gun)
+        {
+            weapon.NormalAttack();
+            yield return YieldInstructionCache.WaitForSeconds(2f);
+        }
+    }
 
 
     private void Roll()

@@ -1,3 +1,4 @@
+using Redcode.Pools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,11 +20,18 @@ public class Weapon : MonoBehaviour, ITakeDamage
     private float Weapon_Ice;
     private float Weapon_Wind;
     private PlayerController owner;
-
+    private PoolManager pool;
 
     public void Init(WeaponType type)
     {
         this.type = type;
+        if(this.type == WeaponType.Gun)
+        {
+            if (!GameObject.Find("PoolManager").TryGetComponent<PoolManager>(out pool))
+            {
+                Debug.Log("Weapon - Init - PoolManager");
+            }
+        }
         damage = 0;
     }
 
@@ -39,7 +47,18 @@ public class Weapon : MonoBehaviour, ITakeDamage
 
     public void NormalAttack()
     {
-        damage = 5f;
+        // todo : calculateDamage
+        if(type == WeaponType.Gun)
+        {
+            damage = 5;
+            GameObject obj = pool.GetFromPool<Projectile>(3).gameObject;
+            Projectile projectile = obj.GetComponent<Projectile>();
+            projectile.Init(damage, transform.GetChild(0).transform.position);
+        }
+        else
+        {
+            damage = 5f;
+        }
     }
 
     public void CalculateDamage(float Critical_Mag, float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
