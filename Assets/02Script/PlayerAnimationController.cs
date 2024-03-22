@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     private Animator animator;
+    private int H_Weapon = Animator.StringToHash("Weapon");
     private int H_Attack = Animator.StringToHash("Attack");
     private int H_Move = Animator.StringToHash("IsMove");
     private int H_Roll = Animator.StringToHash("IsRoll");
@@ -18,6 +19,11 @@ public class PlayerAnimationController : MonoBehaviour
         {
             Debug.Log("PlayerAnimationController - Awake - Animator");
         }
+    }
+
+    public void Weapon(int weapon)
+    {
+        animator.SetInteger(H_Weapon, weapon);
     }
 
     public void Combat(bool value)

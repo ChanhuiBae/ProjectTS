@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.IO; // input output controll
+using System.IO;
+using UnityEditor.Networking.PlayerConnection; // input output controll
 
 [System.Serializable]
 public class PlayerData
@@ -79,6 +80,8 @@ public class GameManager : Singleton<GameManager>
         #endregion
 
         pData = new PlayerData();
+        CreateUserData();
+        UpdatePlayer();
     }
 
     private void OnLevelWasLoaded(int level)
@@ -160,8 +163,27 @@ public class GameManager : Singleton<GameManager>
         }
     }
     #endregion
+    public void CreateUserData()
+    {
+        pData.uidCounter = 0;
+        playerDataTable.TryGetValue(0, out TableEntity_Player_Stats info);
+        pData.Level = info.Level;
+        pData.Max_Weight = info.Max_Weight;
+        pData.Max_HP = info.Max_Hp;
+        pData.Critical_Chance = info.Critical_Chance;
+        pData.Health = info.Health;
+        pData.Endurance = info.Endurance;
+        pData.Strength = info.Strength;
+        pData.Dexterity = info.Dexterity;
+        pData.Adaptation = info.Adaptation;
+        pData.Available_Point = info.Available_Point;
+        pData.Move_Speed = info.Move_Speed;
+        pData.Avoid_Distance = info.Avoid_Distance;
+        pData.Exp_Need = info.Exp_Need;
+        SaveData();
+    }
 
-    public void PlayerIsController(bool value)
+        public void PlayerIsController(bool value)
     {
         player.CONTROLL = value;
     }

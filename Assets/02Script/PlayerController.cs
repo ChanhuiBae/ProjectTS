@@ -8,7 +8,8 @@ public enum State
 {
     Idle,
     Move,
-    Attack,
+    Attack_Soward,
+    Attack_AR,
     Roll
 }
 
@@ -16,10 +17,9 @@ public class PlayerController : MonoBehaviour, IDamage
 {
     private Rigidbody rig;
     private FloatingJoystick joystick;
-    [SerializeField]
-    private int weaponType;
+    private WeaponType type;
     private Button sowrdAttack;
-    private FixedJoystick soldierAttack;
+    private FixedJoystick ARAttack;
     private PlayerAnimationController anim;
     private Button roll;
     private bool isControll = true;
@@ -49,17 +49,6 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             Debug.Log("PlayerController - Awake - Button");
         }
-        else
-        {
-            if(weaponType == 0)
-            {
-                sowrdAttack.onClick.AddListener(SowrdAttack);
-            }
-            else
-            {
-                sowrdAttack.gameObject.SetActive(false);
-            }
-        }
         if(!GameObject.Find("Floating Joystick").TryGetComponent< FloatingJoystick > (out joystick))
         {
             Debug.Log("PlayerController - Awake - Floating Joystick");
@@ -70,16 +59,9 @@ public class PlayerController : MonoBehaviour, IDamage
             Debug.Log("PlayerController - Awake - PlayerAnimationController");
         }
 
-        if(!GameObject.Find("SoldierAttack").TryGetComponent<FixedJoystick>(out soldierAttack))
+        if(!GameObject.Find("ARAttack").TryGetComponent<FixedJoystick>(out ARAttack))
         {
             Debug.Log("PlayerController - Awake - FixedJoystic");
-        }
-        else
-        {
-            if(weaponType != 2)
-            {
-                soldierAttack.gameObject.SetActive(false);
-            }
         }
 
         if (!GameObject.Find("Roll").TryGetComponent<Button>(out roll))
@@ -107,6 +89,18 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Init()
     {
+        type = WeaponType.AR;
+        anim.Weapon((int)type);
+        switch (type)
+        {
+            case WeaponType.Sorwd:
+                sowrdAttack.onClick.AddListener(SowrdAttack);
+                ARAttack.gameObject.SetActive(false);
+                break;
+            case WeaponType.AR:
+                sowrdAttack.gameObject.SetActive(false);
+                break;
+        }
         ultimateValue = 0;
         ultimateFill.fillAmount = 0;
         isInvincibility = false;
@@ -130,8 +124,10 @@ public class PlayerController : MonoBehaviour, IDamage
             case State.Move:
                 anim.Move(false);
                 break;
-            case State.Attack:
+            case State.Attack_Soward:
                 anim.Attack(false);
+                break;
+            case State.Attack_AR:
                 anim.Combat(false);
                 break;
             case State.Roll: 
@@ -145,16 +141,16 @@ public class PlayerController : MonoBehaviour, IDamage
             case State.Move:
                 anim.Move(true);
                 break;
-            case State.Attack:
+            case State.Attack_Soward:
+                anim.Attack(true);
+                break;
+            case State.Attack_AR:
                 transform.LookAt(transform.position + look);
-                if(weaponType != 2)
-                    anim.Attack(true);
                 anim.Combat(true);
                 break;
             case State.Roll:
                 anim.Roll(true);
                 transform.LookAt(transform.position + direction);
-                anim.MoveDir(direction.x, direction.z);
                 StartCoroutine(RollDelay());
                 break;
         }
@@ -168,52 +164,49 @@ public class PlayerController : MonoBehaviour, IDamage
             direction.z = Input.GetAxisRaw("Vertical");
             direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
             direction.Normalize();
-            if(weaponType == 2)
-            {
-                look = Vector3.forward * soldierAttack.Vertical + Vector3.right * soldierAttack.Horizontal;
-            }
 
             if(direction != Vector3.zero && state != State.Roll)
             {
                 ChangeState(State.Move);
                 rig.MovePosition(transform.position + direction * GameManager.Inst.PlayerInfo.Move_Speed * Time.deltaTime);
-                float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
-                if(state == State.Attack)
-                {
-                    if (Mathf.Abs(angle) > 90)
-                    {
-                        anim.MoveDir(-direction.x, -direction.z);
-                    }
-                    else
-                    {
-                        anim.MoveDir(direction.x, direction.z);
-                    }
-                }
-                else
-                {
-                    transform.LookAt(transform.position + direction);
-                }
             }
             else
             {
                 ChangeState(State.Idle);
             }
 
-            if (weaponType == 2 && look != Vector3.zero)
+            if (state != State.Attack_AR)
             {
-                if(state != State.Attack)
+                transform.LookAt(transform.position + direction);
+            }
+            
+            if (type == WeaponType.AR)
+            {
+                look = Vector3.forward * ARAttack.Vertical + Vector3.right * ARAttack.Horizontal;
+            }
+            if (look != Vector3.zero)
+            {
+                ChangeState(State.Attack_AR);
+                float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
+                if (Mathf.Abs(angle) > 90)
                 {
-                    transform.LookAt(transform.position + look);
-                    
+                    anim.MoveDir(-direction.x, -direction.z);
                 }
-                ChangeState(State.Attack);
+                else
+                {
+                    anim.MoveDir(direction.x, direction.z);
+                }
+            }
+            else
+            {
+                anim.Combat(false);
             }
         }
     }
 
     private void SowrdAttack()
     {
-        ChangeState(State.Attack);
+        anim.Attack(true);
     }
 
 
