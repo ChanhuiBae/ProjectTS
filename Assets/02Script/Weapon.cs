@@ -1,8 +1,6 @@
 using Redcode.Pools;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public enum WeaponType
 {
@@ -13,6 +11,11 @@ public enum WeaponType
 public class Weapon : MonoBehaviour, ITakeDamage
 {
     private WeaponType type;
+    private float attackTime;
+    public float AttackTime
+    {
+        set => attackTime = value;
+    }
     private float damage;
     private float Weapon_Physics;
     private float Weapon_Fire;
@@ -31,7 +34,7 @@ public class Weapon : MonoBehaviour, ITakeDamage
         }   
     }
 
-    public void Init(WeaponType type)
+    public void Init(WeaponType type, float attackTime)
     {
         this.type = type;
         if(this.type == WeaponType.Gun)
@@ -42,6 +45,7 @@ public class Weapon : MonoBehaviour, ITakeDamage
             }
         }
         damage = 0;
+        this.attackTime = attackTime;
     }
 
     public WeaponType GetType()
@@ -56,7 +60,7 @@ public class Weapon : MonoBehaviour, ITakeDamage
 
     private IEnumerator DamageZero()
     {
-        yield return YieldInstructionCache.WaitForSeconds(1f);
+        yield return YieldInstructionCache.WaitForSeconds(attackTime);
         damage = 0;
     }
 

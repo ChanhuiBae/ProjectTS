@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +16,12 @@ public class PlayerController : MonoBehaviour, IDamage
     private FloatingJoystick joystick;
     [SerializeField]
     private WeaponType type;
+    [SerializeField]
+    private float attackTime;
+    [SerializeField]
+    private float moveSpeed;
+    [SerializeField]
+    private float rollSpeed;
     private Button sowrdAttack;
     private Button hammerAttack;
     private FixedJoystick gunAttack;
@@ -116,7 +120,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 }
                 break;
         }
-        weapon.Init(type);
+        weapon.Init(type, attackTime);
         ultimateValue = 0;
         ultimateFill.fillAmount = 0;
         isInvincibility = false;
@@ -170,40 +174,33 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void Update()
     {
-        
         if (isControll)
         {
-            direction.x = Input.GetAxisRaw("Horizontal");
-            direction.z = Input.GetAxisRaw("Vertical");
-            direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
-            direction.Normalize();
+            if (state == State.Idle)
+            {
+                direction.x = Input.GetAxisRaw("Horizontal");
+                direction.z = Input.GetAxisRaw("Vertical");
+                direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
+                direction.Normalize();
+            }
 
-            if(direction == Vector3.zero)
+            if (direction == Vector3.zero)
             {
                 anim.Move(false);
-                roll.interactable = false;
             }
-            else if(direction != Vector3.zero && state != State.Roll && state != State.Attack_Soward)
+            else if (direction != Vector3.zero && state != State.Roll && state != State.Attack_Soward)
             {
                 anim.Move(true);
-                roll.interactable = true;
-                rig.MovePosition(transform.position + direction * GameManager.Inst.PlayerInfo.Move_Speed * Time.deltaTime);
+                rig.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
             }
 
-
-            if (state != State.Attack_Gun)
-            {
-                transform.LookAt(transform.position + direction);
-            }
-            
-            if (type == WeaponType.Gun)
+            if (type == WeaponType.Gun && state != State.Roll)
             {
                 look = Vector3.forward * gunAttack.Vertical + Vector3.right * gunAttack.Horizontal;
                 if (look != Vector3.zero)
                 {
                     ChangeState(State.Attack_Gun);
                     float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
-                    transform.LookAt(transform.position + look);
                     if (Mathf.Abs(angle) > 90)
                     {
                         anim.MoveDir(-direction.x, -direction.z);
@@ -217,6 +214,14 @@ public class PlayerController : MonoBehaviour, IDamage
                 {
                     ChangeState(State.Idle);
                 }
+            }
+            if (state != State.Attack_Gun)
+            {
+                transform.LookAt(transform.position + direction);
+            }
+            else if (type == WeaponType.Gun)
+            {
+                transform.LookAt(transform.position + look);
             }
         }
     }
@@ -240,21 +245,16 @@ public class PlayerController : MonoBehaviour, IDamage
     private void Roll()
     {
         ChangeState(State.Roll);
-        roll.interactable = false;
     }
 
     private IEnumerator RollDelay()
     {
-        yield return null;
-        yield return null;
-        anim.Roll(false);
-
         for(int i = 0; i < 40; i++)
         {
-            rig.MovePosition(transform.position + direction * 15f * Time.deltaTime);
+            rig.MovePosition(transform.position + transform.forward * rollSpeed * Time.deltaTime);
             yield return null;
         }
-        roll.interactable = true; 
+
         isInvincibility = false;
         ChangeState(State.Idle);
     }

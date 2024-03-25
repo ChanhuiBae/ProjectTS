@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
@@ -56,8 +54,15 @@ public class PlayerAnimationController : MonoBehaviour
 
     
 
-    public void Roll(bool value)
+    public void Roll(bool use)
     {
-        animator.SetBool(H_Roll, value);
+        if (use)
+        {
+            animator.SetTrigger(H_Roll);
+        }
+        else
+        {
+            animator.ResetTrigger(H_Roll);
+        }
     }
 }
