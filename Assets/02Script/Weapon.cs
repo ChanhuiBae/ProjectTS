@@ -48,26 +48,37 @@ public class Weapon : MonoBehaviour, ITakeDamage
     {
         return type;
     }
-
+    
     public void ResetDamage()
     {
         damage = 0;
     }
 
+    private IEnumerator DamageZero()
+    {
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        damage = 0;
+    }
+
     public void NormalAttack()
     {
-        // todo : calculateDamage
-        if(type == WeaponType.Gun)
+        if(damage == 0)
         {
-            damage = 5;
-            GameObject obj = pool.GetFromPool<Projectile>(0).gameObject;
-            obj.transform.rotation = transform.rotation;
-            Projectile projectile = obj.GetComponent<Projectile>();
-            projectile.Init(damage, transform.GetChild(0).transform.position);
-        }
-        else
-        {
-            damage = 5f;
+            if (type == WeaponType.Gun)
+            {
+                // todo : calculateDamage
+                damage = 5;
+                GameObject obj = pool.GetFromPool<Projectile>(0).gameObject;
+                obj.transform.rotation = transform.rotation;
+                Projectile projectile = obj.GetComponent<Projectile>();
+                projectile.Init(damage, transform.GetChild(0).transform.position);
+            }
+            else
+            {
+                // todo : calculateDamage
+                damage = 5f;
+            }
+            StartCoroutine(DamageZero());
         }
     }
 

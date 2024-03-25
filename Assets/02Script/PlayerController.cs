@@ -136,6 +136,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 case State.Idle:
                     break;
                 case State.Attack_Soward:
+                    anim.Attack(false);
                     break;
                 case State.Attack_Gun:
                     StopAllCoroutines();
@@ -198,24 +199,24 @@ public class PlayerController : MonoBehaviour, IDamage
             if (type == WeaponType.Gun)
             {
                 look = Vector3.forward * gunAttack.Vertical + Vector3.right * gunAttack.Horizontal;
-            }
-            if (look != Vector3.zero)
-            {
-                ChangeState(State.Attack_Gun);
-                float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
-                transform.LookAt(transform.position + look);
-                if (Mathf.Abs(angle) > 90)
+                if (look != Vector3.zero)
                 {
-                    anim.MoveDir(-direction.x, -direction.z);
+                    ChangeState(State.Attack_Gun);
+                    float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
+                    transform.LookAt(transform.position + look);
+                    if (Mathf.Abs(angle) > 90)
+                    {
+                        anim.MoveDir(-direction.x, -direction.z);
+                    }
+                    else
+                    {
+                        anim.MoveDir(direction.x, direction.z);
+                    }
                 }
                 else
                 {
-                    anim.MoveDir(direction.x, direction.z);
+                    ChangeState(State.Idle);
                 }
-            }
-            else
-            {
-                ChangeState(State.Idle);
             }
         }
     }
@@ -247,10 +248,15 @@ public class PlayerController : MonoBehaviour, IDamage
         yield return null;
         yield return null;
         anim.Roll(false);
-        rig.AddForce(transform.forward * 20000 * Time.deltaTime, ForceMode.Acceleration);
 
-        yield return YieldInstructionCache.WaitForSeconds(0.2f);
-        roll.interactable = true;
+        for(int i = 0; i < 40; i++)
+        {
+            rig.MovePosition(transform.position + direction * 15f * Time.deltaTime);
+            yield return null;
+        }
+        roll.interactable = true; 
+        isInvincibility = false;
+        ChangeState(State.Idle);
     }
 
     public void GetDamage(ITakeDamage hiter)
@@ -284,22 +290,10 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         isInvincibility = true;
     }
-
-    public void RollEnd()
-    {
-        isInvincibility = false;
-        ChangeState(State.Idle);
-    }
     public void AttackStart()
     {
         weapon.NormalAttack();
     }
-
-    public void AttackDamageZero()
-    {
-        weapon.ResetDamage();
-    }
-
     public void AttackEnd()
     {
         ChangeState(State.Idle);
