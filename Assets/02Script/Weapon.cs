@@ -60,7 +60,7 @@ public class Weapon : MonoBehaviour, ITakeDamage
         if(type == WeaponType.Gun)
         {
             damage = 5;
-            GameObject obj = pool.GetFromPool<Projectile>(3).gameObject;
+            GameObject obj = pool.GetFromPool<Projectile>(0).gameObject;
             obj.transform.rotation = transform.rotation;
             Projectile projectile = obj.GetComponent<Projectile>();
             projectile.Init(damage, transform.GetChild(0).transform.position);

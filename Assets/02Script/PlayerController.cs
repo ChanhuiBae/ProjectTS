@@ -129,43 +129,43 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void ChangeState(State state)
     {
-        if(this.state == state)
+        if(this.state != state)
         {
-            return;
-        }
-        switch (this.state)
-        {
-            case State.Idle:
-                break;
-            case State.Attack_Soward:
-                anim.Attack(false);
-                break;
-            case State.Attack_Gun:
-                StopAllCoroutines();
-                anim.Combat(false);
-                break;
-            case State.Roll: 
-                break;
-        }
-        this.state = state;
-        switch(this.state)
-        {
-            case State.Idle:
-                anim.Move(false);
-                break;
-            case State.Attack_Soward:
-                anim.Attack(true);
-                break;
-            case State.Attack_Gun:
-                anim.Combat(true);
-                StartCoroutine(GunAttack());
-                break;
-            case State.Roll:
-                weapon.ResetDamage();
-                anim.Roll(true);
-                transform.LookAt(transform.position + direction);
-                StartCoroutine(RollDelay());
-                break;
+
+            switch (this.state)
+            {
+                case State.Idle:
+                    break;
+                case State.Attack_Soward:
+                    anim.Attack(false);
+                    break;
+                case State.Attack_Gun:
+                    StopAllCoroutines();
+                    anim.Combat(false);
+                    break;
+                case State.Roll:
+                    break;
+            }
+            this.state = state;
+            switch (this.state)
+            {
+                case State.Idle:
+                    anim.Move(false);
+                    break;
+                case State.Attack_Soward:
+                    anim.Attack(true);
+                    break;
+                case State.Attack_Gun:
+                    anim.Combat(true);
+                    StartCoroutine(GunAttack());
+                    break;
+                case State.Roll:
+                    weapon.ResetDamage();
+                    anim.Roll(true);
+                    transform.LookAt(transform.position + direction);
+                    StartCoroutine(RollDelay());
+                    break;
+            }
         }
     }
 
@@ -182,10 +182,12 @@ public class PlayerController : MonoBehaviour, IDamage
             if(direction == Vector3.zero)
             {
                 anim.Move(false);
+                roll.interactable = false;
             }
             else if(direction != Vector3.zero && state != State.Roll && state != State.Attack_Soward)
             {
                 anim.Move(true);
+                roll.interactable = true;
                 rig.MovePosition(transform.position + direction * GameManager.Inst.PlayerInfo.Move_Speed * Time.deltaTime);
             }
 
@@ -238,16 +240,19 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void Roll()
     {
-        if(isControll && state != State.Roll)
-            ChangeState(State.Roll);
+        ChangeState(State.Roll);
+        roll.interactable = false;
     }
 
     private IEnumerator RollDelay()
     {
-        yield return YieldInstructionCache.WaitForSeconds(0.2f);
-        rig.AddForce(transform.forward * GameManager.Inst.PlayerInfo.Avoid_Distance, ForceMode.Impulse);
+        yield return null;
+        yield return null;
         anim.Roll(false);
-        ChangeState(State.Idle);
+        rig.AddForce(transform.forward * 20000 * Time.deltaTime, ForceMode.Acceleration);
+
+        yield return YieldInstructionCache.WaitForSeconds(0.2f);
+        roll.interactable = true;
     }
 
     public void GetDamage(ITakeDamage hiter)
@@ -285,6 +290,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public void RollEnd()
     {
         isInvincibility = false;
+        ChangeState(State.Idle);
     }
     public void AttackStart()
     {

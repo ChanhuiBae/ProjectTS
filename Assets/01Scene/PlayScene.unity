@@ -186,7 +186,7 @@ MonoBehaviour:
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
-  m_FillClockwise: 0
+  m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -1959,6 +1959,7 @@ Transform:
   - {fileID: 1009300801}
   - {fileID: 286043488}
   - {fileID: 210889450}
+  - {fileID: 1346467040}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &744160634
@@ -1986,12 +1987,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pools:
-  - _name: NormalCreture
-    _component: {fileID: 935712332201360022, guid: 2290f21c7f4225b47b739eb8af593a77,
+  - _name: Bullet
+    _component: {fileID: 2079523107158705201, guid: 7c1b4da6d8077c249babd0c0d7ff9c8b,
       type: 3}
     _count: 30
-    _container: {fileID: 523812617}
-    _nonLazy: 0
+    _container: {fileID: 210889450}
+    _nonLazy: 1
   - _name: HPItem
     _component: {fileID: 624840879039442878, guid: bad41f608446cc2428c81a6eeb9ff888,
       type: 3}
@@ -2004,12 +2005,18 @@ MonoBehaviour:
     _count: 30
     _container: {fileID: 286043488}
     _nonLazy: 0
-  - _name: Bullet
-    _component: {fileID: 2079523107158705201, guid: 7c1b4da6d8077c249babd0c0d7ff9c8b,
+  - _name: NormalCreture
+    _component: {fileID: 935712332201360022, guid: 2290f21c7f4225b47b739eb8af593a77,
       type: 3}
     _count: 30
-    _container: {fileID: 210889450}
-    _nonLazy: 1
+    _container: {fileID: 523812617}
+    _nonLazy: 0
+  - _name: NobleCreture
+    _component: {fileID: 3746003526297542573, guid: 33c3df74438046644ab4f4f78d42cfb0,
+      type: 3}
+    _count: 30
+    _container: {fileID: 1346467040}
+    _nonLazy: 0
 --- !u!1 &788481370
 GameObject:
   m_ObjectHideFlags: 0
@@ -2539,6 +2546,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262281705}
   m_CullTransparentMesh: 1
+--- !u!1 &1346467039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1346467040}
+  m_Layer: 0
+  m_Name: NobleCreture
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1346467040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346467039}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 744160633}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1351376882
 GameObject:
   m_ObjectHideFlags: 0
