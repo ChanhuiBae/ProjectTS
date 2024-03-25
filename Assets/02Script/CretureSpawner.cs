@@ -25,7 +25,7 @@ public class CretureSpawner : MonoBehaviour
             yield return YieldInstructionCache.WaitForSeconds(2f);
             obj = pool.GetFromPool<Creture>(4).gameObject;
             creture = obj.GetComponent<Creture>();
-            creture.Init(new Vector3(Random.Range(-30f, 30f), 0f, Random.Range(-30f, 30f)), CretureType.Normal);
+            creture.Init(new Vector3(Random.Range(-30f, 30f), 0f, Random.Range(-30f, 30f)), CretureType.Noble);
             yield return YieldInstructionCache.WaitForSeconds(2f);
         }
     }
