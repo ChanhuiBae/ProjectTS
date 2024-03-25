@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour, IDamage
 {
     private Rigidbody rig;
     private FloatingJoystick joystick;
+    [SerializeField]
     private WeaponType type;
     private Button sowrdAttack;
     private Button hammerAttack;
@@ -85,7 +86,6 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             Debug.Log("PlayerController - Awake - Image");
         }
-        type = WeaponType.Gun;
         Init();
     }
 
@@ -131,13 +131,11 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if(this.state != state)
         {
-
             switch (this.state)
             {
                 case State.Idle:
                     break;
                 case State.Attack_Soward:
-                    anim.Attack(false);
                     break;
                 case State.Attack_Gun:
                     StopAllCoroutines();
