@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (isControll)
         {
-            if (state == State.Idle)
+            if (state == State.Idle || state == State.Roll || state == State.Attack_Gun)
             {
                 direction.x = Input.GetAxisRaw("Horizontal");
                 direction.z = Input.GetAxisRaw("Vertical");
@@ -249,9 +249,19 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private IEnumerator RollDelay()
     {
-        for(int i = 0; i < 40; i++)
+        yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
+        for (float i = 0; i < 3; i += 0.1f)
         {
             rig.MovePosition(transform.position + transform.forward * rollSpeed * Time.deltaTime);
+            yield return null;
+        }
+        for (float i = 1; i>0.0f; i-=0.2f)
+        {
+            rig.MovePosition(transform.position + transform.forward * rollSpeed * i * Time.deltaTime);
             yield return null;
         }
 
