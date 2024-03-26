@@ -27,23 +27,33 @@ public class HPItem : MonoBehaviour, IPoolObject
     {
         this.hp = hp;
         transform.position = pos + new Vector3(Random.Range(-2f, 2f), 3f, Random.Range(-2f, 2f));
-        rig.useGravity = true;
+        LeanTween.move(gameObject, new Vector3(transform.position.x, 1.5f, transform.position.z), 1f).setEase(LeanTweenType.easeOutBounce);
     }
-
+    private IEnumerator Absorb(GameObject target)
+    {
+        Vector3 goal = Vector3.zero;
+        while (transform.position != goal)
+        {
+            goal = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
+            LeanTween.move(gameObject, goal, 0.1f);
+            yield return YieldInstructionCache.WaitForSeconds(0.1f);
+        }
+        poolManager.TakeToPool<HPItem>(name, this);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Ground")
         {
-            rig.useGravity = false;
             rig.velocity = Vector3.zero;
+            rig.useGravity = false;
         }
         if(other.tag == "Player")
         {
             if (other.transform.root.TryGetComponent<PlayerController>(out PlayerController player))
             {
                 player.ApplyHP(-hp);
-                poolManager.TakeToPool<HPItem>(name, this);
+                StartCoroutine(Absorb(other.gameObject));
             }
         }
     }

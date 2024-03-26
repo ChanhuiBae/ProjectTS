@@ -28,7 +28,6 @@ public class CretureAI : MonoBehaviour
     protected AI_State currentState;
     protected CretureType type;
     protected Creture creture;
-    protected CharacterBase targetBase;
     protected GameObject attackTarget;
     protected PlayerController target;
 
@@ -92,7 +91,7 @@ public class CretureAI : MonoBehaviour
             attackTarget = newTarget;
             try
             {
-                attackTarget.TryGetComponent<CharacterBase>(out targetBase);
+                attackTarget.TryGetComponent<PlayerController>(out target);
             }
             catch (NullReferenceException e)
             {

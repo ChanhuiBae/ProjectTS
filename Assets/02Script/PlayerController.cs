@@ -249,22 +249,13 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private IEnumerator RollDelay()
     {
+        
         yield return null;
         yield return null;
         yield return null;
         yield return null;
         yield return null;
-        for (float i = 0; i < 3; i += 0.1f)
-        {
-            rig.MovePosition(transform.position + transform.forward * rollSpeed * Time.deltaTime);
-            yield return null;
-        }
-        for (float i = 1; i>0.0f; i-=0.2f)
-        {
-            rig.MovePosition(transform.position + transform.forward * rollSpeed * i * Time.deltaTime);
-            yield return null;
-        }
-
+        LeanTween.move(gameObject, transform.position + transform.forward * rollSpeed, 0.4f).setEase(LeanTweenType.easeOutSine);
         isInvincibility = false;
         ChangeState(State.Idle);
     }
