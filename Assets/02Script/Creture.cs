@@ -40,6 +40,24 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         if (currentHP < 0)
         {
             ai.Die();
+            switch (type)
+            {
+                case CretureType.Normal:
+                    GameManager.Inst.ChargeUaltimate(1);
+                    break;
+                case CretureType.Noble:
+                    GameManager.Inst.ChargeUaltimate(2);
+                    break;
+                case CretureType.Swarm_Boss:
+                    GameManager.Inst.ChargeUaltimate(50);
+                    break;
+                case CretureType.Guvnor:
+                    GameManager.Inst.ChargeUaltimate(100);
+                    break;
+                case CretureType.Elite:
+                    GameManager.Inst.ChargeUaltimate(30);
+                    break;
+            }
             GameObject obj = poolManager.GetFromPool<HPItem>(1).gameObject;
             HPItem hp = obj.GetComponent<HPItem>();
             hp.Init(1f, transform.position);

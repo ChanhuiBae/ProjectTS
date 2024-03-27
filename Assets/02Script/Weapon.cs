@@ -117,4 +117,15 @@ public class Weapon : MonoBehaviour, ITakeDamage
             }
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.transform.root != this.transform.root)
+        {
+            if (other.TryGetComponent<IDamage>(out IDamage creture))
+            {
+                creture.GetDamage(this);
+            }
+        }
+    }
 }

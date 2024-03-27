@@ -35,8 +35,8 @@ public class HPItem : MonoBehaviour, IPoolObject
         while (transform.position != goal)
         {
             goal = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
-            LeanTween.move(gameObject, goal, 0.1f);
-            yield return YieldInstructionCache.WaitForSeconds(0.1f);
+            LeanTween.move(gameObject, goal, 0.3f);
+            yield return YieldInstructionCache.WaitForSeconds(0.3f);
         }
         poolManager.TakeToPool<HPItem>(name, this);
     }
@@ -46,9 +46,8 @@ public class HPItem : MonoBehaviour, IPoolObject
         if (other.tag == "Ground")
         {
             rig.velocity = Vector3.zero;
-            rig.useGravity = false;
         }
-        if(other.tag == "Player")
+        if(other.tag == "Player" && rig.velocity == Vector3.zero)
         {
             if (other.transform.root.TryGetComponent<PlayerController>(out PlayerController player))
             {

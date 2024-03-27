@@ -40,6 +40,6 @@ public class FadeManager : MonoBehaviour
         else
             fadeImg.raycastTarget = true;
 
-       // GameManager.Inst.PlayerIsController(true);
+        GameManager.Inst.PlayerIsController(true);
     }
 }

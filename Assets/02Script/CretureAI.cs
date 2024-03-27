@@ -198,24 +198,6 @@ public class CretureAI : MonoBehaviour
     {
         StopAllCoroutines();
         currentState = AI_State.Die;
-        switch (type)
-        {
-            case CretureType.Normal:
-                target.ChargeUaltimateGage(0.01f);
-                break;
-            case CretureType.Noble:
-                target.ChargeUaltimateGage(0.02f);
-                break;
-            case CretureType.Swarm_Boss:
-                target.ChargeUaltimateGage(0.5f);
-                break;
-            case CretureType.Guvnor:
-                target.ChargeUaltimateGage(1f);
-                break;
-            case CretureType.Elite:
-                target.ChargeUaltimateGage(0.3f);
-                break;
-        }
     }
 
     public void SetIdle()

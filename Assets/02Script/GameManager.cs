@@ -18,15 +18,16 @@ public class PlayerData
     public int Dexterity;
     public int Adaptation;
     public int Available_Point;
-    public int Move_Speed;
-    public int Avoid_Distance;
     public float Exp_Need;
+    public int UltimateValue;
     public Inventory inventory;
     public Weapon weapon;
 }
 
 public enum SceneName
 {
+    StartScene,
+    LoadingScene,
     PlayScene,
 }
 
@@ -83,50 +84,52 @@ public class GameManager : Singleton<GameManager>
 
     private void OnLevelWasLoaded(int level)
     {
-        StartCoroutine(InitGameManager());
+        StartCoroutine(InitGameManager(level));
     }
 
-    private IEnumerator InitGameManager()
+    private IEnumerator InitGameManager(int level)
     {
         LoadData();
         yield return YieldInstructionCache.WaitForSeconds(0.05f);
-        bool end = false;
-
-        while (!end)
+        
+        if(level > 1)
         {
-            end = UpdatePlayer();
-            yield return YieldInstructionCache.WaitForSeconds(0.05f);
-        }
-
-        if (menuManager == null)
-        {
-            GameObject.Find("Canvas").TryGetComponent<MenuManager>(out menuManager);
-            //if (menuManager != null)
-            // menuManager.InitMenuManager();
-        }
-        if (fadeManager == null)
-        {
-            GameObject.Find("Canvas").TryGetComponent<FadeManager>(out fadeManager);
-            if (fadeManager != null)
+            bool end = false;
+            while (!end)
             {
-                // fadeManager.Fade_InOut(true);
-                // player.ISCONTROLLER = true;
+                end = UpdatePlayer();
+                yield return YieldInstructionCache.WaitForSeconds(0.05f);
+            }
+            if (menuManager == null)
+            {
+                GameObject.Find("Canvas").TryGetComponent<MenuManager>(out menuManager);
+
+            }
+            if (fadeManager == null)
+            {
+                GameObject.Find("Canvas").TryGetComponent<FadeManager>(out fadeManager);
+                if (fadeManager != null)
+                {
+                    fadeManager.Fade_InOut(true);
+                }
             }
         }
+      
         if (soundManager == null)
         {
-            GameObject.Find("SoundManager").TryGetComponent<SoundManager>(out soundManager);
-            if (soundManager != null)
-            {
-                int activeScene = SceneManager.GetActiveScene().buildIndex;
-            }
+            //GameObject.Find("SoundManager").TryGetComponent<SoundManager>(out soundManager);
+            //if (soundManager != null)
+            //{
+            //    int activeScene = SceneManager.GetActiveScene().buildIndex;
+            //}
         }
     }
 
     #region UpdateGMInfo
     public bool UpdatePlayer()
     {
-        if (!GameObject.Find("Player").TryGetComponent<PlayerController>(out player))
+        GameObject obj = GameObject.Find("Player");
+        if (obj != null && !obj.TryGetComponent<PlayerController>(out player))
         {
             Debug.Log("GameManger - UpdateGMInfo - PlayerController");
             return false;
@@ -174,15 +177,20 @@ public class GameManager : Singleton<GameManager>
         pData.Dexterity = info.Dexterity;
         pData.Adaptation = info.Adaptation;
         pData.Available_Point = info.Available_Point;
-        pData.Move_Speed = info.Move_Speed;
-        pData.Avoid_Distance = info.Avoid_Distance;
+        pData.UltimateValue = 0;
         pData.Exp_Need = info.Exp_Need;
         SaveData();
     }
 
-        public void PlayerIsController(bool value)
+    public void PlayerIsController(bool value)
     {
         player.CONTROLL = value;
+    }
+
+    public void ChargeUaltimate(int value)
+    {
+        pData.UltimateValue += value;
+        menuManager.SetUaltimate(pData.UltimateValue);
     }
 
     #region Save&Load
@@ -238,9 +246,9 @@ public class GameManager : Singleton<GameManager>
     {
         SaveData();
         nextScene = scene;
-        if (SceneManager.GetActiveScene().buildIndex > 2)
+        //if (SceneManager.GetActiveScene().buildIndex > 2)
             // fadeManager.Fade_InOut(false);
-            SceneManager.LoadScene("LoadingScene");
+        SceneManager.LoadScene("LoadingScene");
     }
     #endregion 
 }

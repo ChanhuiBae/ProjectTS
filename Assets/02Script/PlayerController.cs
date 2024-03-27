@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,13 +37,15 @@ public class PlayerController : MonoBehaviour, IDamage
     private bool isInvincibility;
     private State state;
     private Weapon weapon;
-    private Image ultimateFill;
-    private float ultimateValue;
-    private Vector3 direction;
-    private Vector3 look;
+
     private float currentHP;
     private float currentEXP;
     private Image expFill;
+
+    private Vector3 direction;
+    private Vector3 look;
+
+
 
     private void Awake()
     {
@@ -82,15 +85,11 @@ public class PlayerController : MonoBehaviour, IDamage
             roll.onClick.AddListener(Roll);
         }
        
-        if(!GameObject.Find("UltimateFill").TryGetComponent<Image>(out ultimateFill))
-        {
-            Debug.Log("PlayerController - Awake - Image");
-        }
+        
         if(!GameObject.Find("ExperienceFill").TryGetComponent<Image>(out expFill))
         {
             Debug.Log("PlayerController - Awake - Image");
         }
-        Init();
     }
 
     public void Init()
@@ -121,8 +120,6 @@ public class PlayerController : MonoBehaviour, IDamage
                 break;
         }
         weapon.Init(type, attackTime);
-        ultimateValue = 0;
-        ultimateFill.fillAmount = 0;
         isInvincibility = false;
         currentHP = GameManager.Inst.PlayerInfo.Max_HP;
         currentEXP = 0;
@@ -279,12 +276,6 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             currentHP = GameManager.Inst.PlayerInfo.Max_HP;
         }
-    }
-
-    public void ChargeUaltimateGage(float value)
-    {
-        ultimateValue += value;
-        ultimateFill.fillAmount = ultimateValue;
     }
 
     public void RollStart()

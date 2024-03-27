@@ -1,36 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    private Button pause;
-    private bool isPause;
+    private Image ultimateFill;
+    private TextMeshProUGUI ultimateText;
 
     private void Awake()
     {
-        if(!GameObject.Find("Pause").TryGetComponent<Button>(out pause))
+        if (!GameObject.Find("UltimateFill").TryGetComponent<Image>(out ultimateFill))
         {
-            Debug.Log("MenuManager - Awake - Button");
+            Debug.Log("PlayerController - Awake - Image");
         }
-        else
+        if (!GameObject.Find("UltimateValue").TryGetComponent<TextMeshProUGUI>(out ultimateText))
         {
-            isPause = false;
-            pause.onClick.AddListener(Pause);
+            Debug.Log("PlayerController - Awake - TextMeshProUGUI");
         }
+        ultimateFill.fillAmount = 0;
+        ultimateText.text = "0%";
     }
 
-    private void Pause()
+    public void SetUaltimate(int value)
     {
-        isPause = !isPause;
-        if(isPause)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1.0f;
-        }
+        ultimateFill.fillAmount = value / 100;
+        ultimateText.text = value.ToString() + "%";
     }
 }
