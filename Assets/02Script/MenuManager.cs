@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
 {
     private Image ultimateFill;
     private TextMeshProUGUI ultimateText;
+    private TextMeshProUGUI killCount;
 
     private void Awake()
     {
@@ -19,13 +20,22 @@ public class MenuManager : MonoBehaviour
         {
             Debug.Log("PlayerController - Awake - TextMeshProUGUI");
         }
+        if (!GameObject.Find("KillCount").TryGetComponent<TextMeshProUGUI>(out killCount))
+        {
+            Debug.Log("PlayerController - Awake - TextMeshProUGUI");
+        }
         ultimateFill.fillAmount = 0;
         ultimateText.text = "0%";
     }
 
     public void SetUaltimate(int value)
     {
-        ultimateFill.fillAmount = value / 100;
+        ultimateFill.fillAmount = (float)value / 100f;
         ultimateText.text = value.ToString() + "%";
+    }
+
+    public void SetKillCount(int value)
+    {
+        killCount.text = value.ToString();
     }
 }

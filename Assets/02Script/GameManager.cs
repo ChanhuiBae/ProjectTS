@@ -19,7 +19,6 @@ public class PlayerData
     public int Adaptation;
     public int Available_Point;
     public float Exp_Need;
-    public int UltimateValue;
     public Inventory inventory;
     public Weapon weapon;
 }
@@ -51,6 +50,9 @@ public class GameManager : Singleton<GameManager>
     //     return monsterData.TryGetValue(itemID, out moster);
     // }
     //  private List<TableEntity_Tip> Tip = new List<TableEntity_Tip>();
+
+    private int ultimateValue;
+    private int killCount;
 
     public void Awake()
     {
@@ -137,6 +139,8 @@ public class GameManager : Singleton<GameManager>
         else
         {
             player.Init();
+            ultimateValue = 0;
+            killCount = 0;
             return true;
         }
     }
@@ -163,6 +167,8 @@ public class GameManager : Singleton<GameManager>
         }
     }
     #endregion
+
+    #region Setter
     public void CreateUserData()
     {
         pData.uidCounter = 0;
@@ -177,7 +183,6 @@ public class GameManager : Singleton<GameManager>
         pData.Dexterity = info.Dexterity;
         pData.Adaptation = info.Adaptation;
         pData.Available_Point = info.Available_Point;
-        pData.UltimateValue = 0;
         pData.Exp_Need = info.Exp_Need;
         SaveData();
     }
@@ -189,9 +194,17 @@ public class GameManager : Singleton<GameManager>
 
     public void ChargeUaltimate(int value)
     {
-        pData.UltimateValue += value;
-        menuManager.SetUaltimate(pData.UltimateValue);
+        ultimateValue += value;
+        menuManager.SetUaltimate(ultimateValue);
     }
+
+    public void AddKillCount()
+    {
+        killCount++;
+        menuManager.SetKillCount(killCount);
+    }
+
+    #endregion
 
     #region Save&Load
     private string dataPath;

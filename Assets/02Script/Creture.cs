@@ -58,6 +58,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
                     GameManager.Inst.ChargeUaltimate(30);
                     break;
             }
+            GameManager.Inst.AddKillCount();
             GameObject obj = poolManager.GetFromPool<HPItem>(1).gameObject;
             HPItem hp = obj.GetComponent<HPItem>();
             hp.Init(1f, transform.position);
