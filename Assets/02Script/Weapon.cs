@@ -5,7 +5,7 @@ using UnityEngine;
 public enum WeaponType
 {
     Sowrd = 0,
-    Hamer = 1,
+    Hammer = 1,
     Gun = 2
 }
 public class Weapon : MonoBehaviour, ITakeDamage

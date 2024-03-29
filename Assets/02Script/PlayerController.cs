@@ -7,6 +7,7 @@ public enum State
 {
     Idle,
     Attack_Soward,
+    Attack_Hammer,
     Attack_Gun,
     Roll
 }
@@ -23,8 +24,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private float moveSpeed;
     [SerializeField]
     private float rollSpeed;
-    private Button sowrdAttack;
-    private Button hammerAttack;
+    private Button meleeAttack;
     private FixedJoystick gunAttack;
     private PlayerAnimationController anim;
     private Button roll;
@@ -63,11 +63,7 @@ public class PlayerController : MonoBehaviour, IDamage
             Debug.Log("PlayerController - Awake - PlayerAnimationController");
         }
 
-        if (!GameObject.Find("SowrdAttack").TryGetComponent<Button>(out sowrdAttack))
-        {
-            Debug.Log("PlayerController - Awake - Button");
-        }
-        if (!GameObject.Find("HammerAttack").TryGetComponent<Button>(out hammerAttack))
+        if (!GameObject.Find("MeleeAttack").TryGetComponent<Button>(out meleeAttack))
         {
             Debug.Log("PlayerController - Awake - Button");
         }
@@ -98,21 +94,37 @@ public class PlayerController : MonoBehaviour, IDamage
         switch (type)
         {
             case WeaponType.Sowrd:
-                sowrdAttack.onClick.AddListener(SowrdAttack);
+                meleeAttack.onClick.AddListener(SowrdAttack);
                 if (!GameObject.Find("Sowrd").TryGetComponent<Weapon>(out weapon))
                 {
                     Debug.Log("PlayerController - Awake - Weapon");
                 }
-                hammerAttack.gameObject.SetActive(false);
-                //GameObject.Find("Hammer").SetActive(false);
+                GameObject.Find("Hammer").SetActive(false);
+                gunAttack.gameObject.SetActive(false);
+                GameObject.Find("Gun").SetActive(false);
+                break;
+            case WeaponType.Hammer:
+                Sprite hammerImage = Resources.Load<Sprite>("Image/Hammer");
+                if(!meleeAttack.gameObject.TryGetComponent<Image>(out Image image))
+                {
+                    Debug.Log("PlayerController - Init - Resources Sprite");
+                }
+                else
+                {
+                    image.sprite = hammerImage;
+                }
+                meleeAttack.onClick.AddListener(HammerAttack);
+                if (!GameObject.Find("Hammer").TryGetComponent<Weapon>(out weapon))
+                {
+                    Debug.Log("PlayerController - Awake - Weapon");
+                }
+                GameObject.Find("Sowrd").SetActive(false);
                 gunAttack.gameObject.SetActive(false);
                 GameObject.Find("Gun").SetActive(false);
                 break;
             case WeaponType.Gun:
-                sowrdAttack.gameObject.SetActive(false);
+                meleeAttack.gameObject.SetActive(false);
                 GameObject.Find("Sowrd").SetActive(false);
-                hammerAttack.gameObject.SetActive(false);
-                //GameObject.Find("Hammer").SetActive(false);
                 if (!GameObject.Find("Gun").TryGetComponent<Weapon>(out weapon))
                 {
                     Debug.Log("PlayerController - Awake - Weapon");
@@ -139,6 +151,9 @@ public class PlayerController : MonoBehaviour, IDamage
                 case State.Attack_Soward:
                     anim.Attack(false);
                     break;
+                case State.Attack_Hammer:
+                    anim.Attack(false); 
+                    break;
                 case State.Attack_Gun:
                     StopAllCoroutines();
                     anim.Combat(false);
@@ -153,6 +168,9 @@ public class PlayerController : MonoBehaviour, IDamage
                     anim.Move(false);
                     break;
                 case State.Attack_Soward:
+                    anim.Attack(true);
+                    break;
+                case State.Attack_Hammer:
                     anim.Attack(true);
                     break;
                 case State.Attack_Gun:
@@ -185,7 +203,7 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 anim.Move(false);
             }
-            else if (direction != Vector3.zero && state != State.Roll && state != State.Attack_Soward)
+            else if (direction != Vector3.zero && state != State.Roll && state != State.Attack_Soward && state != State.Attack_Hammer)
             {
                 anim.Move(true);
                 rig.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
@@ -226,6 +244,11 @@ public class PlayerController : MonoBehaviour, IDamage
     private void SowrdAttack()
     {
         ChangeState(State.Attack_Soward);
+    }
+
+    private void HammerAttack()
+    {
+        ChangeState(State.Attack_Hammer);
     }
 
     private IEnumerator GunAttack()
