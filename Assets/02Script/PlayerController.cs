@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public enum State
 {
     Idle,
+    MoveForward,
     Attack_Soward,
     Attack_Hammer,
     Attack_Gun,
@@ -78,7 +79,7 @@ public class PlayerController : MonoBehaviour, IDamage
         }
         else
         {
-            roll.onClick.AddListener(Roll);
+            roll.onClick.AddListener(ChangeRoll);
         }
        
         
@@ -125,6 +126,7 @@ public class PlayerController : MonoBehaviour, IDamage
             case WeaponType.Gun:
                 meleeAttack.gameObject.SetActive(false);
                 GameObject.Find("Sowrd").SetActive(false);
+                GameObject.Find("Hammer").SetActive(false);
                 if (!GameObject.Find("Gun").TryGetComponent<Weapon>(out weapon))
                 {
                     Debug.Log("PlayerController - Awake - Weapon");
@@ -138,34 +140,22 @@ public class PlayerController : MonoBehaviour, IDamage
         state = State.Idle;
         expFill.fillAmount = 0; 
         isControll = true;
+        StartCoroutine(Idle());
     }
 
     private void ChangeState(State state)
     {
         if(this.state != state)
         {
-            switch (this.state)
-            {
-                case State.Idle:
-                    break;
-                case State.Attack_Soward:
-                    anim.Attack(false);
-                    break;
-                case State.Attack_Hammer:
-                    anim.Attack(false); 
-                    break;
-                case State.Attack_Gun:
-                    StopAllCoroutines();
-                    anim.Combat(false);
-                    break;
-                case State.Roll:
-                    break;
-            }
             this.state = state;
+            StopAllCoroutines();
             switch (this.state)
             {
                 case State.Idle:
-                    anim.Move(false);
+                    StartCoroutine(Idle());
+                    break;
+                case State.MoveForward:
+                    StartCoroutine(MoveForward()); 
                     break;
                 case State.Attack_Soward:
                     anim.Attack(true);
@@ -174,72 +164,131 @@ public class PlayerController : MonoBehaviour, IDamage
                     anim.Attack(true);
                     break;
                 case State.Attack_Gun:
-                    anim.Combat(true);
-                    StartCoroutine(GunAttack());
+                    StartCoroutine(Attack_Gun());
                     break;
                 case State.Roll:
-                    anim.Roll(true);
-                    weapon.ResetDamage();
-                    transform.LookAt(transform.position + direction);
-                    StartCoroutine(RollDelay());
+                    StartCoroutine(Roll());
                     break;
             }
         }
     }
 
-    private void Update()
+    private void GetDirection()
     {
-        if (isControll)
+        direction.x = Input.GetAxisRaw("Horizontal");
+        direction.z = Input.GetAxisRaw("Vertical");
+        direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
+        direction.Normalize();
+    }
+
+    private void GetLook()
+    {
+        look = Vector3.forward * gunAttack.Vertical + Vector3.right * gunAttack.Horizontal;
+    }
+
+    private void Move()
+    {
+        rig.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
+    }
+
+    private IEnumerator Idle()
+    {
+        anim.Move(false);
+        while (true)
         {
-            if (state == State.Idle || state == State.Roll || state == State.Attack_Gun)
+            if(weapon.GetType() == WeaponType.Gun)
             {
-                direction.x = Input.GetAxisRaw("Horizontal");
-                direction.z = Input.GetAxisRaw("Vertical");
-                direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
-                direction.Normalize();
+                GetLook();
+                if(look != Vector3.zero)
+                {
+                    ChangeState(State.Attack_Gun);
+                }
             }
+            GetDirection();
+            if (direction != Vector3.zero)
+            {
+                ChangeState(State.MoveForward);
+            }
+            yield return null;
+        }
+    }
 
-            if (direction == Vector3.zero)
+    private IEnumerator MoveForward()
+    {
+        anim.Move(true);
+        while (true)
+        {
+            if (weapon.GetType() == WeaponType.Gun)
             {
-                anim.Move(false);
-            }
-            else if (direction != Vector3.zero && state != State.Roll && state != State.Attack_Soward && state != State.Attack_Hammer)
-            {
-                anim.Move(true);
-                rig.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
-            }
-
-            if (type == WeaponType.Gun && state != State.Roll)
-            {
-                look = Vector3.forward * gunAttack.Vertical + Vector3.right * gunAttack.Horizontal;
+                GetLook();
                 if (look != Vector3.zero)
                 {
                     ChangeState(State.Attack_Gun);
-                    float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
-                    if (Mathf.Abs(angle) > 90)
-                    {
-                        anim.MoveDir(-direction.x, -direction.z);
-                    }
-                    else
-                    {
-                        anim.MoveDir(direction.x, direction.z);
-                    }
+                    break;
+                }
+            }
+            GetDirection();
+            if(direction != Vector3.zero)
+            {
+                Move();
+                transform.LookAt(transform.position + direction);
+            }
+            else
+            {
+                ChangeState(State.Idle);
+            }
+            yield return null;
+        }
+    }
+
+    private IEnumerator Attack_Gun()
+    {
+        anim.Move(true);
+        anim.Combat(true);
+        int count = 0;
+        while (true)
+        {
+            GetLook();
+            transform.LookAt(transform.position + look);
+            if (look == Vector3.zero)
+            {
+                anim.Combat(false);
+                ChangeState(State.MoveForward);
+                break;
+            }
+            else
+            {
+                float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
+                if (Mathf.Abs(angle) > 90)
+                {
+                    anim.MoveDir(-direction.x, -direction.z);
                 }
                 else
                 {
-                    ChangeState(State.Idle);
+                    anim.MoveDir(direction.x, direction.z);
                 }
             }
-            if (state != State.Attack_Gun)
+            GetDirection();
+            if (direction != Vector3.zero)
             {
-                transform.LookAt(transform.position + direction);
+                anim.Move(true);
+                Move();
             }
-            else if (type == WeaponType.Gun)
+            else
             {
-                transform.LookAt(transform.position + look);
+                anim.Move(false);
             }
+
+            if (count == 20)
+            {
+                weapon.NormalAttack();
+                count = 0;
+            }
+            count++;
+            yield return null;
         }
     }
+
 
     private void SowrdAttack()
     {
@@ -251,36 +300,32 @@ public class PlayerController : MonoBehaviour, IDamage
         ChangeState(State.Attack_Hammer);
     }
 
-    private IEnumerator GunAttack()
-    {
-        yield return null;
-        while (state == State.Attack_Gun)
-        {
-            weapon.NormalAttack();
-            yield return YieldInstructionCache.WaitForSeconds(2f);
-        }
-    }
 
-
-    private void Roll()
+    private void ChangeRoll()
     {
         ChangeState(State.Roll);
     }
 
-    private IEnumerator RollDelay()
+    private IEnumerator Roll()
     {
-        yield return null;
-        yield return null;
-        yield return null;
-        yield return null;
-        yield return null;
-        LeanTween.move(gameObject, transform.position + transform.forward * rollSpeed, 0.4f).setEase(LeanTweenType.easeOutSine);
-        for(int i = 0; i < 30; i++)
+        anim.Roll(true);
+        weapon.ResetDamage();
+        anim.Move(false);
+        anim.Attack(false);
+        GetDirection();
+        transform.LookAt(transform.position + direction);
+        isInvincibility = true;
+        for(int i = 0; i < 45; i++)
         {
             yield return null;
         }
         isInvincibility = false;
         ChangeState(State.Idle);
+    }
+
+    public void RollMove()
+    {
+        LeanTween.move(gameObject, transform.position + transform.forward * rollSpeed, 0.4f).setEase(LeanTweenType.easeOutSine);
     }
 
     public void GetDamage(ITakeDamage hiter)
@@ -304,10 +349,6 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    public void RollStart()
-    {
-        isInvincibility = true;
-    }
     public void AttackStart()
     {
         weapon.NormalAttack();
