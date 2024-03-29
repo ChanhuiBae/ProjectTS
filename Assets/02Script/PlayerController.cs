@@ -160,8 +160,8 @@ public class PlayerController : MonoBehaviour, IDamage
                     StartCoroutine(GunAttack());
                     break;
                 case State.Roll:
-                    weapon.ResetDamage();
                     anim.Roll(true);
+                    weapon.ResetDamage();
                     transform.LookAt(transform.position + direction);
                     StartCoroutine(RollDelay());
                     break;
@@ -246,13 +246,16 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private IEnumerator RollDelay()
     {
-        
         yield return null;
         yield return null;
         yield return null;
         yield return null;
         yield return null;
         LeanTween.move(gameObject, transform.position + transform.forward * rollSpeed, 0.4f).setEase(LeanTweenType.easeOutSine);
+        for(int i = 0; i < 30; i++)
+        {
+            yield return null;
+        }
         isInvincibility = false;
         ChangeState(State.Idle);
     }
