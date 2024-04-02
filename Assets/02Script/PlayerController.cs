@@ -9,6 +9,7 @@ public enum State
     MoveForward,
     Attack_Soward,
     Attack_Hammer,
+    Dragon_Hammer,
     Attack_Gun,
     Roll
 }
@@ -82,7 +83,6 @@ public class PlayerController : MonoBehaviour, IDamage
             roll.onClick.AddListener(ChangeRoll);
         }
        
-        
         if(!GameObject.Find("ExperienceFill").TryGetComponent<Image>(out expFill))
         {
             Debug.Log("PlayerController - Awake - Image");
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour, IDamage
         StartCoroutine(Idle());
     }
 
-    private void ChangeState(State state)
+    public void ChangeState(State state)
     {
         if(this.state != state)
         {
@@ -162,6 +162,9 @@ public class PlayerController : MonoBehaviour, IDamage
                     break;
                 case State.Attack_Hammer:
                     anim.Attack(true);
+                    break;
+                case State.Dragon_Hammer:
+                    anim.Skill_Hammer2(true);
                     break;
                 case State.Attack_Gun:
                     StartCoroutine(Attack_Gun());
@@ -189,6 +192,11 @@ public class PlayerController : MonoBehaviour, IDamage
     private void Move()
     {
         rig.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
+    }
+
+    public void SetIdle()
+    {
+        ChangeState(State.Idle);
     }
 
     private IEnumerator Idle()
@@ -239,6 +247,11 @@ public class PlayerController : MonoBehaviour, IDamage
             }
             yield return null;
         }
+    }
+
+    public void ResetDamage()
+    {
+        weapon.ResetDamage();
     }
 
     private IEnumerator Attack_Gun()
@@ -310,8 +323,6 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         anim.Roll(true);
         weapon.ResetDamage();
-        anim.Move(false);
-        anim.Attack(false);
         GetDirection();
         transform.LookAt(transform.position + direction);
         isInvincibility = true;
@@ -336,6 +347,11 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
+    public void Knockback()
+    {
+        rig.AddForce(Vector3.up, ForceMode.Impulse);
+    }
+
     public void ApplyHP(float value)
     {
         currentHP -= value;
@@ -349,14 +365,17 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    public void AttackStart()
+    public void NormalAttack()
     {
         weapon.NormalAttack();
     }
-    public void AttackEnd()
+
+    public void Dragon_Hammer_Attack()
     {
-        ChangeState(State.Idle);
+        weapon.Dragon_Hammer_Attack();
     }
+
+
     public void GetEXP(float value)
     {
         currentEXP += value;
@@ -371,5 +390,10 @@ public class PlayerController : MonoBehaviour, IDamage
     public float GetCritical_Mag()
     {
         return 1f; // todo : Calculate value
+    }
+
+    public void Pulled(Vector3 center)
+    {
+        // todo: move to center
     }
 }

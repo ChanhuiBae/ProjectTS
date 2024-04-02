@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,8 @@ public enum AI_State
     Attack,
     Defense,
     Evasion,
+    Knockback,
+    pulled,
     Die
 }
 public enum CretureType
@@ -26,6 +29,10 @@ public class CretureAI : MonoBehaviour
 
     protected NavMeshAgent navAgent;
     protected AI_State currentState;
+    public AI_State State
+    {
+        get => currentState;
+    }
     protected CretureType type;
     protected Creture creture;
     protected GameObject attackTarget;
@@ -54,10 +61,11 @@ public class CretureAI : MonoBehaviour
         homePos = transform.position;
         attackDistance = 3f;
         attackTarget = GameObject.Find("Player");
-        if(attackTarget == null || !attackTarget.TryGetComponent<PlayerController>(out target))
+        if (attackTarget == null || !attackTarget.TryGetComponent<PlayerController>(out target))
         {
             Debug.Log("CretureAI - Init - PlayerController");
         }
+        navAgent.enabled = true;
         Spawn();
     }
     protected void ChangeAIState(AI_State newState)
@@ -206,6 +214,28 @@ public class CretureAI : MonoBehaviour
         attackTarget = null;
         StartCoroutine(AI_State.Idle.ToString());
     }
+    public void InitKnockback(bool use)
+    {
+        if (use)
+        {
+            StopAllCoroutines();
+            ChangeAIState(AI_State.Knockback);
+            navAgent.enabled = false;
+        }
+        else
+        {
+            navAgent.enabled = true;
+            ChangeAIState(AI_State.Chase);
+        }
+
+    }
+
+    private IEnumerator Knockback()
+    {
+        currentState = AI_State.Idle;
+        yield return YieldInstructionCache.WaitForSeconds(0.2f);
+        currentState = AI_State.Knockback;
+    }
 
     public void TakeDebuff(float time)
     {
@@ -221,5 +251,4 @@ public class CretureAI : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(time);
         StartCoroutine(currentState.ToString());
     }
-
 }

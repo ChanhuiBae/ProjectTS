@@ -1,5 +1,6 @@
 using Redcode.Pools;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum WeaponType
@@ -16,15 +17,18 @@ public class Weapon : MonoBehaviour, ITakeDamage
     {
         set => attackTime = value;
     }
-    private float damage;
-    private float Weapon_Physics;
-    private float Weapon_Fire;
-    private float Weapon_Water;
-    private float Weapon_Electric;
-    private float Weapon_Ice;
-    private float Weapon_Wind;
-    private PlayerController owner;
-    private PoolManager pool;
+    protected float damage;
+    protected float Weapon_Physics;
+    protected float Weapon_Fire;
+    protected float Weapon_Water;
+    protected float Weapon_Electric;
+    protected float Weapon_Ice;
+    protected float Weapon_Wind;
+    protected PlayerController owner;
+    protected PoolManager pool;
+    protected List<Effect> effects;
+
+    private bool isKnockback;
 
     private void Awake()
     {
@@ -32,6 +36,16 @@ public class Weapon : MonoBehaviour, ITakeDamage
         {
             Debug.Log("Weapon - Awake - PlayerController");
         }   
+        effects = new List<Effect>();
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            if(transform.GetChild(i).TryGetComponent<Effect>(out Effect effect))
+            {
+                effects.Add(effect);
+                effects[i].Init(EffectType.Skill);
+            }
+        }
+        isKnockback = false;
     }
 
     public void Init(WeaponType type, float attackTime)
@@ -56,6 +70,7 @@ public class Weapon : MonoBehaviour, ITakeDamage
     public void ResetDamage()
     {
         damage = 0;
+        isKnockback = false;
     }
 
     private IEnumerator DamageZero()
@@ -64,9 +79,18 @@ public class Weapon : MonoBehaviour, ITakeDamage
         damage = 0;
     }
 
+    public void CalculateDamage(float Critical_Mag, float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
+    {
+        damage = Weapon_Physics * (1 - Creature_Physics_Cut) * Critical_Mag
+            + (Weapon_Fire * (1 - Creature_Fire_Cut)) + (Weapon_Water * (1 - Creature_Water_Cut)) 
+            + (Weapon_Electric * (1 - Creature_Electric_Cut)) + (Weapon_Ice * (1 - Creature_Ice_Cut)) 
+            + (Weapon_Wind * (1 - Creature_Wind_Cut));
+
+    }
+
     public void NormalAttack()
     {
-        if(damage == 0)
+        if (damage == 0)
         {
             if (type == WeaponType.Gun)
             {
@@ -85,14 +109,23 @@ public class Weapon : MonoBehaviour, ITakeDamage
             StartCoroutine(DamageZero());
         }
     }
-
-    public void CalculateDamage(float Critical_Mag, float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
+    public void Dragon_Hammer_Attack()
     {
-        damage = Weapon_Physics * (1 - Creature_Physics_Cut) * Critical_Mag
-            + (Weapon_Fire * (1 - Creature_Fire_Cut)) + (Weapon_Water * (1 - Creature_Water_Cut)) 
-            + (Weapon_Electric * (1 - Creature_Electric_Cut)) + (Weapon_Ice * (1 - Creature_Ice_Cut)) 
-            + (Weapon_Wind * (1 - Creature_Wind_Cut));
+        if (damage == 0)
+        {
+            damage = 1f; // Weapon_Physics * (2.0 + 0.15 * level)
+            isKnockback = true;
+            StartCoroutine(Buster());
+        }
+    }
 
+    private IEnumerator Buster()
+    {
+        effects[0].OnEffect();
+        effects[1].OnEffect();
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        effects[0].OffEffect();
+        effects[1].OffEffect();
     }
 
     public float TakeDamage()
@@ -113,17 +146,9 @@ public class Weapon : MonoBehaviour, ITakeDamage
         {
             if(other.TryGetComponent<IDamage>(out IDamage creture))
             {
-                creture.GetDamage(this);
-            }
-        }
-    }
+                if(isKnockback)
+                    creture.Knockback();
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.transform.root != this.transform.root)
-        {
-            if (other.TryGetComponent<IDamage>(out IDamage creture))
-            {
                 creture.GetDamage(this);
             }
         }

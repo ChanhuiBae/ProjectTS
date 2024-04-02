@@ -1,10 +1,12 @@
 using Redcode.Pools;
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 
 public class Creture : MonoBehaviour, IDamage, IPoolObject
 {
+    private Rigidbody rig;
     private CretureAI ai;
     [SerializeField]
     private string poolName;
@@ -15,7 +17,11 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Awake()
     {
-        if(!TryGetComponent<CretureAI>(out ai))
+        if (!TryGetComponent(out rig))
+        {
+            Debug.Log("Creture - Awake - Rigidbody");
+        }
+        if (!TryGetComponent<CretureAI>(out ai))
         {
             Debug.Log("Creture - Awake - AI");
         }
@@ -27,7 +33,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Init(Vector3 SpawnPos, CretureType type)
     {
-        maxHP = 2;
+        maxHP = 4;
         currentHP = maxHP;
         this.type = type;
         transform.position = SpawnPos;
@@ -69,6 +75,14 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         }
     }
 
+    public void Knockback()
+    {
+        ai.InitKnockback(true);
+        rig.freezeRotation = true;
+        rig.velocity = Vector3.up * 10f + transform.position;
+    }
+
+
     public void OnCreatedInPool()
     {
         //throw new System.NotImplementedException();
@@ -77,5 +91,18 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     public void OnGettingFromPool()
     {
         //throw new System.NotImplementedException();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Ground" && ai.State == AI_State.Knockback)
+        {
+            rig.freezeRotation = false;
+            ai.InitKnockback(false);
+        }
+    }
+
+    public void Pulled(Vector3 center)
+    {
+        // todo: move to center
     }
 }

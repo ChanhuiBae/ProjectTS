@@ -448,14 +448,21 @@ ModelImporter:
       curves: []
       events:
       - time: 0.13289022
-        functionName: AttackStart
+        functionName: NormalAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.98847926
+        functionName: ResetDamage
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 1
-        functionName: AttackEnd
+        functionName: SetIdle
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

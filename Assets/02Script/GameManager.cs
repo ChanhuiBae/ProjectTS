@@ -21,6 +21,9 @@ public class PlayerData
     public float Exp_Need;
     public Inventory inventory;
     public Weapon weapon;
+    public State skill1;
+    public State skill2;
+    public State skill3;
 }
 
 public enum SceneName
@@ -97,11 +100,6 @@ public class GameManager : Singleton<GameManager>
         if(level > 1)
         {
             bool end = false;
-            while (!end)
-            {
-                end = UpdatePlayer();
-                yield return YieldInstructionCache.WaitForSeconds(0.05f);
-            }
             if (menuManager == null)
             {
                 GameObject.Find("Canvas").TryGetComponent<MenuManager>(out menuManager);
@@ -114,6 +112,11 @@ public class GameManager : Singleton<GameManager>
                 {
                     fadeManager.Fade_InOut(true);
                 }
+            }
+            while (!end)
+            {
+                end = UpdatePlayer();
+                yield return YieldInstructionCache.WaitForSeconds(0.05f);
             }
         }
       
@@ -139,6 +142,7 @@ public class GameManager : Singleton<GameManager>
         else
         {
             player.Init();
+            menuManager.InitSkills(pData.skill1, 0, pData.skill2, 5f, pData.skill3, 0);
             ultimateValue = 0;
             killCount = 0;
             return true;
@@ -184,6 +188,9 @@ public class GameManager : Singleton<GameManager>
         pData.Adaptation = info.Adaptation;
         pData.Available_Point = info.Available_Point;
         pData.Exp_Need = info.Exp_Need;
+        pData.skill1 = State.Idle;
+        pData.skill2 = State.Dragon_Hammer;
+        pData.skill3 = State.Idle;
         SaveData();
     }
 

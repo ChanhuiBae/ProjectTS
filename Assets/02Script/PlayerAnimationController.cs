@@ -10,6 +10,7 @@ public class PlayerAnimationController : MonoBehaviour
     private int H_Combat = Animator.StringToHash("IsCombat");
     private int H_X = Animator.StringToHash("X");
     private int H_Y = Animator.StringToHash("Y");
+    private int H_Dragon_Hammer = Animator.StringToHash("Dragon_Hammer");
 
     private void Awake()
     {
@@ -52,17 +53,31 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    
-
     public void Roll(bool use)
     {
         if (use)
         {
             animator.SetTrigger(H_Roll);
+            Move(false);
+            Attack(false);
+            Skill_Hammer2(false);
         }
         else
         {
             animator.ResetTrigger(H_Roll);
         }
+    }
+
+    public void Skill_Hammer2(bool use)
+    {
+        if (use)
+        {
+            animator.SetTrigger(H_Dragon_Hammer);
+        }
+        else
+        {
+            animator.ResetTrigger(H_Dragon_Hammer);
+        }
+
     }
 }
