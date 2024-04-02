@@ -45,8 +45,8 @@ public class GameManager : Singleton<GameManager>
 
     private TS table;
     private Dictionary<int, TableEntity_Player_Stats> playerDataTable = new Dictionary<int, TableEntity_Player_Stats>();
+    private Dictionary<int, TableEntity_Skill_List> skillListTable = new Dictionary<int, TableEntity_Skill_List>();
     //private Dictionary<int, TableEntity_Weapon> weaponDataTable = new Dictionary<int, TableEntity_Weapon>();
-    //private Dictionary<int, TableEntity_DropList> dropDataTable = new Dictionary<int, TableEntity_DropList>();
     //private Dictionary<int, TableEntity_Monster> monsterData = new Dictionary<int, TableEntity_Monster>();
     //public bool GetMonsterData(int itemID, out TableEntity_Monster moster)
     // {
@@ -65,7 +65,11 @@ public class GameManager : Singleton<GameManager>
 
         #region TableData
         table = Resources.Load<TS>("TS");
-        playerDataTable.Add(0, table.Player_Default_Stats[0]);
+        playerDataTable.Add(0, table.Player_Stats[0]);
+        for(int i = 0; i < table.Skill_List.Count; i++)
+        {
+            skillListTable.Add(table.Skill_List[i].ID, table.Skill_List[i]);
+        }
         /*
         for (int i = 0; i < table.WeaponData.Count; i++)
         {
@@ -180,7 +184,6 @@ public class GameManager : Singleton<GameManager>
         pData.Level = info.Level;
         pData.Max_Weight = info.Max_Weight;
         pData.Max_HP = info.Max_Hp;
-        pData.Critical_Chance = info.Critical_Chance;
         pData.Health = info.Health;
         pData.Endurance = info.Endurance;
         pData.Strength = info.Strength;

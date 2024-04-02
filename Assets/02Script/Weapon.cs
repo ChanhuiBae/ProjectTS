@@ -21,12 +21,41 @@ public class Weapon : MonoBehaviour
     {
         set => attackTime = value;
     }
+    private float attack_Speed;
+    private float stagger_Time;
+    public float StaggerTime
+    {
+        get => stagger_Time;
+    }
+    private float cretical_Chance;
+
     private float critical_Mag;
     public float CriticalMag()
     {
-        critical_Mag = Random.Range(0f, 1f);
-        return critical_Mag;
+        IsCritical();
+        if(isCritical)
+        {
+            return critical_Mag;
+        }
+        else
+        {
+            return 1f;
+        }
     }
+    private bool isCritical;
+    private void IsCritical()
+    {
+        float value = Random.Range(0f, 100f);
+        if(value <= cretical_Chance)
+        {
+            isCritical = true;
+        }
+        else
+        {
+            isCritical = false;
+        }
+    }
+
     private float weapon_Physics;
     public float Physics
     {
