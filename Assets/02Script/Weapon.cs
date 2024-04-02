@@ -9,85 +9,75 @@ public enum WeaponType
     Hammer = 1,
     Gun = 2
 }
-public class Weapon : MonoBehaviour, ITakeDamage
+public class Weapon : MonoBehaviour
 {
     private WeaponType type;
+    public WeaponType Type
+    {
+        get => type;
+    }
     private float attackTime;
     public float AttackTime
     {
         set => attackTime = value;
     }
-    protected float damage;
-    protected float Weapon_Physics;
-    protected float Weapon_Fire;
-    protected float Weapon_Water;
-    protected float Weapon_Electric;
-    protected float Weapon_Ice;
-    protected float Weapon_Wind;
-    protected PlayerController owner;
-    protected PoolManager pool;
-    protected List<Effect> effects;
-
-    private bool isKnockback;
+    private float critical_Mag;
+    public float CriticalMag()
+    {
+        critical_Mag = Random.Range(0f, 1f);
+        return critical_Mag;
+    }
+    private float weapon_Physics;
+    public float Physics
+    {
+        get => weapon_Physics;
+    }
+    private float weapon_Fire;
+    public float Fire
+    {
+        get => weapon_Fire;
+    }
+    private float weapon_Water;
+    public float Water
+    {
+        get => weapon_Water;
+    }
+    private float weapon_Electric;
+    public float Electric
+    {
+        get => weapon_Electric;
+    }
+    private float weapon_Ice;
+    public float Ice
+    {
+        get => weapon_Ice;
+    }
+    private float weapon_Wind;
+    public float Wind
+    {
+        get => weapon_Wind;
+    }
+    private BoxCollider col;
+    private Skill skillManager;
 
     private void Awake()
     {
-        if(!GameObject.Find("Player").TryGetComponent<PlayerController>(out owner))
+        if(!TryGetComponent<BoxCollider>(out col))
         {
-            Debug.Log("Weapon - Awake - PlayerController");
-        }   
-        effects = new List<Effect>();
-        for(int i = 0; i < transform.childCount; i++)
-        {
-            if(transform.GetChild(i).TryGetComponent<Effect>(out Effect effect))
-            {
-                effects.Add(effect);
-                effects[i].Init(EffectType.Skill);
-            }
+            Debug.Log("Weapon - Awake - BoxCollider");
         }
-        isKnockback = false;
+        if (!GameObject.Find("SkillManager").TryGetComponent<Skill>(out skillManager))
+        {
+            Debug.Log("AttackArea - Init - SkillManager");
+        }
     }
 
-    public void Init(WeaponType type, float attackTime)
+    public void Init(WeaponType type)
     {
         this.type = type;
-        if(this.type == WeaponType.Gun)
-        {
-            if (!GameObject.Find("PoolManager").TryGetComponent<PoolManager>(out pool))
-            {
-                Debug.Log("Weapon - Init - PoolManager");
-            }
-        }
-        damage = 0;
-        this.attackTime = attackTime;
+        
     }
-
-    public WeaponType GetType()
-    {
-        return type;
-    }
-    
-    public void ResetDamage()
-    {
-        damage = 0;
-        isKnockback = false;
-    }
-
-    private IEnumerator DamageZero()
-    {
-        yield return YieldInstructionCache.WaitForSeconds(attackTime);
-        damage = 0;
-    }
-
-    public void CalculateDamage(float Critical_Mag, float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
-    {
-        damage = Weapon_Physics * (1 - Creature_Physics_Cut) * Critical_Mag
-            + (Weapon_Fire * (1 - Creature_Fire_Cut)) + (Weapon_Water * (1 - Creature_Water_Cut)) 
-            + (Weapon_Electric * (1 - Creature_Electric_Cut)) + (Weapon_Ice * (1 - Creature_Ice_Cut)) 
-            + (Weapon_Wind * (1 - Creature_Wind_Cut));
-
-    }
-
+    /*
     public void NormalAttack()
     {
         if (damage == 0)
@@ -127,30 +117,13 @@ public class Weapon : MonoBehaviour, ITakeDamage
         effects[0].OffEffect();
         effects[1].OffEffect();
     }
-
-    public float TakeDamage()
-    {
-        return damage;
-    }
-
-    public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
-    {
-        CalculateDamage(owner.GetCritical_Mag(), Creature_Physics_Cut, Creature_Fire_Cut, Creature_Water_Cut, Creature_Electric_Cut, Creature_Ice_Cut, Creature_Wind_Cut);
-        return damage;
-    }
-
+    */
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.root != this.transform.root)
+        if(other.tag == "Creture")
         {
-            if(other.TryGetComponent<IDamage>(out IDamage creture))
-            {
-                if(isKnockback)
-                    creture.Knockback();
-
-                creture.GetDamage(this);
-            }
+            skillManager.TakeDamageOther(other);
         }
     }
 }

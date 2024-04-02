@@ -47,11 +47,15 @@ public class PlayerController : MonoBehaviour, IDamage
     private Vector3 direction;
     private Vector3 look;
 
-
+    private Skill skillManager;
 
     private void Awake()
     {
-        if(!TryGetComponent<Rigidbody>(out rig))
+        if (!GameObject.Find("SkillManager").TryGetComponent<Skill>(out skillManager))
+        {
+            Debug.Log("AttackArea - Init - SkillManager");
+        }
+        if (!TryGetComponent<Rigidbody>(out rig))
         {
             Debug.Log("PlayerController - Awake - Rigidbody");
         }
@@ -133,7 +137,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 }
                 break;
         }
-        weapon.Init(type, attackTime);
+        weapon.Init(type);
         isInvincibility = false;
         currentHP = GameManager.Inst.PlayerInfo.Max_HP;
         currentEXP = 0;
@@ -204,7 +208,7 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.Move(false);
         while (true)
         {
-            if(weapon.GetType() == WeaponType.Gun)
+            if(weapon.Type == WeaponType.Gun)
             {
                 GetLook();
                 if(look != Vector3.zero)
@@ -226,7 +230,7 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.Move(true);
         while (true)
         {
-            if (weapon.GetType() == WeaponType.Gun)
+            if (weapon.Type == WeaponType.Gun)
             {
                 GetLook();
                 if (look != Vector3.zero)
@@ -251,7 +255,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void ResetDamage()
     {
-        weapon.ResetDamage();
+        skillManager.ResetDamage();
     }
 
     private IEnumerator Attack_Gun()
@@ -294,7 +298,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
             if (count == 20)
             {
-                weapon.NormalAttack();
+              //  weapon.NormalAttack();
                 count = 0;
             }
             count++;
@@ -322,7 +326,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private IEnumerator Roll()
     {
         anim.Roll(true);
-        weapon.ResetDamage();
+        skillManager.ResetDamage();
         GetDirection();
         transform.LookAt(transform.position + direction);
         isInvincibility = true;
@@ -367,12 +371,12 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void NormalAttack()
     {
-        weapon.NormalAttack();
+       // weapon.NormalAttack();
     }
 
     public void Dragon_Hammer_Attack()
     {
-        weapon.Dragon_Hammer_Attack();
+       // weapon.Dragon_Hammer_Attack();
     }
 
 

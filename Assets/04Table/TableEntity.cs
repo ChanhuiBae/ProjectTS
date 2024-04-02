@@ -17,3 +17,12 @@ public class TableEntity_Player_Stats
     public int Avoid_Invincible_Frame;
     public float Exp_Need;
 }
+
+[System.Serializable]
+public class TableEntity_Skill_List
+{
+    public int Weapon_ID;
+    public string Name;
+    public int Skill_ID;
+    public string Skill_Category;
+}

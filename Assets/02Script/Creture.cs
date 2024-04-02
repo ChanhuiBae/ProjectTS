@@ -14,6 +14,36 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private float maxHP;
     private float currentHP;
     private CretureType type;
+    private float Creature_Physics_Cut;
+    public float PhysicsCut
+    {
+        get => Creature_Physics_Cut;
+    }
+    private float Creature_Fire_Cut;
+    public float FireCut
+    {
+        get => Creature_Fire_Cut;
+    }
+    private float Creature_Water_Cut;
+    public float WaterCut
+    {
+        get => Creature_Water_Cut;
+    }
+    private float Creature_Electric_Cut;
+    public float ElectricCut
+    {
+        get=> Creature_Electric_Cut;
+    }
+    private float Creature_Ice_Cut;
+    public float IceCut
+    {
+        get => Creature_Ice_Cut;
+    }
+    private float Creature_Wind_Cut;
+    public float WindCut
+    {
+        get => Creature_Electric_Cut;
+    }
 
     public void Awake()
     {
@@ -65,10 +95,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
                     break;
             }
             GameManager.Inst.AddKillCount();
-            GameObject obj = poolManager.GetFromPool<HPItem>(1).gameObject;
+            GameObject obj = poolManager.GetFromPool<HPItem>(0).gameObject;
             HPItem hp = obj.GetComponent<HPItem>();
             hp.Init(1f, transform.position);
-            obj = poolManager.GetFromPool<EXPItem>(2).gameObject;
+            obj = poolManager.GetFromPool<EXPItem>(1).gameObject;
             EXPItem exp = obj.GetComponent<EXPItem>();
             exp.Init(1f, transform.position);
             poolManager.TakeToPool<Creture>(poolName, this);

@@ -3,52 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class AttackArea : MonoBehaviour, ITakeDamage
+public class AttackArea : MonoBehaviour
 {
-    private BoxCollider boxCol;
     private SphereCollider sphereCol;
-    private float damage;
+    private Skill skillManager;
 
-    public void Init()
+    public void Awake()
     {
  
+        if(!GameObject.Find("SkillManager").TryGetComponent<Skill>(out skillManager))
+        {
+            Debug.Log("AttackArea - Init - SkillManager");
+        }
         if(!TryGetComponent<SphereCollider>(out sphereCol))
         {
             Debug.Log("AttackArea - Init - SphereCollider");
         }
-        else
-        {
-            sphereCol.enabled = false;
-        }
-
-        damage = 0;
-       
+        gameObject.SetActive(false);
     }
 
-    public void Attack(float calculateDamage)
+    public void Attack()
     {
-        damage = calculateDamage;
-        sphereCol.enabled = true;
+        gameObject.SetActive(true);
 
     }
 
     public void Reset()
     {
-        damage = 0;
-        sphereCol.enabled = false;
+        gameObject.SetActive(false);
     }
 
-    public float TakeDamage()
-    {
-        return damage;
-    }
-
-    public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
-    {
-        return damage;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "Creture")
+        {
+            skillManager.TakeDamageOther(other);
+        }
     }
 }
