@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour, IDamage
     private Rigidbody rig;
     private FloatingJoystick joystick;
     [SerializeField]
-    private WeaponType type;
-    [SerializeField]
     private float attackTime;
     [SerializeField]
     private float moveSpeed;
@@ -95,8 +93,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Init()
     {
-        anim.Weapon((int)type);
-        switch (type)
+        anim.Weapon((int)GameManager.Inst.PlayerInfo.weaponType);
+        switch (GameManager.Inst.PlayerInfo.weaponType)
         {
             case WeaponType.Sowrd:
                 meleeAttack.onClick.AddListener(SowrdAttack);
@@ -137,7 +135,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 }
                 break;
         }
-        weapon.Init(type);
+        weapon.Init(GameManager.Inst.PlayerInfo.weaponType);
         isInvincibility = false;
         currentHP = GameManager.Inst.PlayerInfo.Max_HP;
         currentEXP = 0;

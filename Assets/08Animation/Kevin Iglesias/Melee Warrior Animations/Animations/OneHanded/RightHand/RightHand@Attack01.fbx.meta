@@ -454,8 +454,8 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.98847926
-        functionName: ResetDamage
+      - time: 0.99349177
+        functionName: SetIdle
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

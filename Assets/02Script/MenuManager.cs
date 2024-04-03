@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    private GameObject timeBackgroun;
+    private TextMeshProUGUI countdown;
+    private int time;
     private Image ultimateFill;
     private TextMeshProUGUI ultimateText;
     private TextMeshProUGUI killCount;
@@ -15,6 +18,12 @@ public class MenuManager : MonoBehaviour
 
     private void Awake()
     {
+        timeBackgroun = GameObject.Find("TimeBackground");
+        if (!GameObject.Find("Time").TryGetComponent<TextMeshProUGUI>(out countdown))
+        {
+            Debug.Log("SpawnMananger - Awake - TextMeshProUGUI");
+        }
+        time = 1200;
         if (!GameObject.Find("UltimateFill").TryGetComponent<Image>(out ultimateFill))
         {
             Debug.Log("MenuManager - Awake - Image");
@@ -41,6 +50,19 @@ public class MenuManager : MonoBehaviour
         }
         ultimateFill.fillAmount = 0;
         ultimateText.text = "0%";
+        StartCoroutine(Timer());
+    }
+
+    private IEnumerator Timer()
+    {
+        while (time > 0)
+        {
+            yield return YieldInstructionCache.WaitForSeconds(1f);
+            time--;
+            countdown.text = (time / 60).ToString() + ":" + (time % 60).ToString();
+        }
+        countdown.gameObject.SetActive(false);
+        timeBackgroun.SetActive(false);
     }
 
     public void InitSkills(State skill1, float cooltime1, State skill2, float cooltime2, State skill3, float cooltime3)

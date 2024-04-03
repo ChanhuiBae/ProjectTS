@@ -7,8 +7,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private PoolManager pool;
-    private TextMeshProUGUI countdown;
-    private int time;
+    private GameObject player;
 
     private void Awake()
     {
@@ -16,36 +15,28 @@ public class SpawnManager : MonoBehaviour
         {
             Debug.Log("SpawnManager - Awake - poolManager");
         }
-        if(!GameObject.Find("Time").TryGetComponent<TextMeshProUGUI>(out countdown))
+        player = GameObject.Find("Player");
+        if (player == null)
         {
-            Debug.Log("SpawnMananger - Awake - TextMeshProUGUI");
+            Debug.Log("SpawnManager - Awake - GameObject");
         }
-        time = 1200;
+        
         StartCoroutine(Spawn());
-        StartCoroutine(Timer());
-    }
 
-    private IEnumerator Timer()
-    {
-        while(time > 0)
-        {
-            yield return YieldInstructionCache.WaitForSeconds(1f);
-            time--;
-            countdown.text = (time / 60).ToString() + ":" + (time % 60).ToString();
-        }
     }
 
     private IEnumerator Spawn()
     {
+        yield return YieldInstructionCache.WaitForSeconds(2f);
         for (int i = 0; i < 30; i++)
         {
             GameObject obj = pool.GetFromPool<Creture>(2).gameObject;
             Creture creture = obj.GetComponent<Creture>();
-            creture.Init(new Vector3(Random.Range(-30f, 30f), 0f, Random.Range(-30f, 30f)), CretureType.Normal);
+            creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x , 0f, Random.Range(-10f, 10f) + player.transform.position.z), CretureType.Normal);
             yield return YieldInstructionCache.WaitForSeconds(2f);
             obj = pool.GetFromPool<Creture>(3).gameObject;
             creture = obj.GetComponent<Creture>();
-            creture.Init(new Vector3(Random.Range(-30f, 30f), 0f, Random.Range(-30f, 30f)), CretureType.Noble);
+            creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x, 0f, Random.Range(-10f, 10f) + player.transform.position.z), CretureType.Noble);
             yield return YieldInstructionCache.WaitForSeconds(2f);
         }
     }
