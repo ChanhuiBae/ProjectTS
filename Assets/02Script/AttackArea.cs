@@ -22,15 +22,16 @@ public class AttackArea : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Attack()
-    {
-        gameObject.SetActive(true);
-
-    }
-
-    public void Reset()
+    public void ActiveFalse()
     {
         gameObject.SetActive(false);
+    }
+
+    public void Attack(Vector3 center, float radius)
+    {
+        gameObject.SetActive(true);
+        sphereCol.center = center;
+        sphereCol.radius = radius;
     }
 
 

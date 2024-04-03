@@ -4,8 +4,7 @@ using UnityEngine;
 
 public interface IDamage
 {
-    public void GetDamage(ITakeDamage hiter);
+    public void CalculateDamage(ITakeDamage hiter);
     public void Knockback();
-
     public void Pulled(Vector3 center);
 }

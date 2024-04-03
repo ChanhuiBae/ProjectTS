@@ -97,14 +97,14 @@ public class Weapon : MonoBehaviour
         }
         if (!GameObject.Find("SkillManager").TryGetComponent<Skill>(out skillManager))
         {
-            Debug.Log("AttackArea - Init - SkillManager");
+            Debug.Log("Weapon - Awake - SkillManager");
         }
     }
 
     public void Init(WeaponType type)
     {
         this.type = type;
-        
+        skillManager.WeaponInit(this);
     }
     /*
     public void NormalAttack()

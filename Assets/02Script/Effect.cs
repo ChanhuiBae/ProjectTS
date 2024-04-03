@@ -1,30 +1,40 @@
+using Redcode.Pools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EffectType
+public class Effect : MonoBehaviour, IPoolObject
 {
-    Skill,
-    Hit
-}
+    [SerializeField]
+    private string poolName;
+    private Skill skillManager;
 
-public class Effect : MonoBehaviour
-{
-    private EffectType type;
-
-    public void Init(EffectType type)
+    private void Awake()
     {
-        this.type = type;
-        gameObject.SetActive(false);
+        if(!GameObject.Find("SkillManager").TryGetComponent<Skill>(out skillManager))
+        {
+            Debug.Log("Effect - Awake - SkillManager");
+        }
+    }
+    public void Init(Vector3 pos, int lifeFrame)
+    {
+        transform.position = pos;
+        StartCoroutine(ReturnPool(lifeFrame));
     }
 
-    public void OnEffect()
+    private IEnumerator ReturnPool(int lifeFrame)
     {
-        gameObject.SetActive(true);
+        yield return YieldInstructionCache.WaitForSeconds(lifeFrame * 0.017f);
+        skillManager.TakeEffect(poolName, this);
     }
 
-    public void OffEffect()
+    public void OnCreatedInPool()
     {
-        gameObject.SetActive(false);
+        //throw new System.NotImplementedException();
+    }
+
+    public void OnGettingFromPool()
+    {
+        //throw new System.NotImplementedException();
     }
 }

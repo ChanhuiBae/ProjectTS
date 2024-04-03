@@ -9,8 +9,8 @@ public class Projectile : MonoBehaviour, IPoolObject, ITakeDamage
     private TrailRenderer trail;
     [SerializeField]
     private string poolName;
-    private PoolManager pool;
     private FixedJoystick dir;
+    private Skill skillManager;
     
     private void Awake()
     {
@@ -22,15 +22,14 @@ public class Projectile : MonoBehaviour, IPoolObject, ITakeDamage
         {
             Debug.Log("Projectile - Awake - TrailRenderer");
         }
-        GameObject pm = GameObject.Find("PoolManager");
-        if (pm == null || !pm.TryGetComponent<PoolManager>(out pool))
+        if (!GameObject.Find("SkillManager").TryGetComponent<Skill>(out skillManager))
         {
-            Debug.Log("Projectile - Awake - ProjectilePool");
+            Debug.Log("Projectile - Awake - SkillManager");
         }
+
     }
-    public void Init(float damage, Vector3 pos)
+    public void Init(Vector3 pos)
     {
-        this.damage = damage;
         transform.position = pos;
         trail.enabled = true;
         Attack();
@@ -46,14 +45,14 @@ public class Projectile : MonoBehaviour, IPoolObject, ITakeDamage
     {
         yield return YieldInstructionCache.WaitForSeconds(3f);
         trail.enabled = false;
-        pool.TakeToPool<Projectile>(poolName, this);
+        skillManager.TakeProjectile(name, this);
     }
 
     private IEnumerator ReturnPool()
     {
         yield return YieldInstructionCache.WaitForSeconds(0.1f);
         trail.enabled = false;
-        pool.TakeToPool<Projectile>(poolName, this);
+        skillManager.TakeProjectile(name, this);
     }
 
     public void OnCreatedInPool()
@@ -72,13 +71,13 @@ public class Projectile : MonoBehaviour, IPoolObject, ITakeDamage
         {
             if (other.TryGetComponent<IDamage>(out IDamage creture))
             {
-                creture.GetDamage(this);
+                creture.CalculateDamage(this);
             }
         }
         if(other.tag == "Ground")
         {
             trail.enabled = false;
-            pool.TakeToPool<Projectile>(poolName, this);
+            skillManager.TakeProjectile(name, this);
         }
     }
 

@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (!GameObject.Find("SkillManager").TryGetComponent<Skill>(out skillManager))
         {
-            Debug.Log("AttackArea - Init - SkillManager");
+            Debug.Log("PlayerController - Awake - SkillManager");
         }
         if (!TryGetComponent<Rigidbody>(out rig))
         {
@@ -253,11 +253,6 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    public void ResetDamage()
-    {
-        skillManager.ResetDamage();
-    }
-
     private IEnumerator Attack_Gun()
     {
         anim.Move(true);
@@ -326,7 +321,6 @@ public class PlayerController : MonoBehaviour, IDamage
     private IEnumerator Roll()
     {
         anim.Roll(true);
-        skillManager.ResetDamage();
         GetDirection();
         transform.LookAt(transform.position + direction);
         isInvincibility = true;
@@ -343,13 +337,6 @@ public class PlayerController : MonoBehaviour, IDamage
         LeanTween.move(gameObject, transform.position + transform.forward * rollSpeed, 0.4f).setEase(LeanTweenType.easeOutSine);
     }
 
-    public void GetDamage(ITakeDamage hiter)
-    {
-        if (!isInvincibility)
-        {
-            ApplyHP(hiter.TakeDamage());
-        }
-    }
 
     public void Knockback()
     {
@@ -399,5 +386,13 @@ public class PlayerController : MonoBehaviour, IDamage
     public void Pulled(Vector3 center)
     {
         // todo: move to center
+    }
+
+    public void CalculateDamage(ITakeDamage hiter)
+    {
+        if (!isInvincibility)
+        {
+           // ApplyHP(hiter.TakeDamage(Physics_Cut, Fire_Cut, Water_Cut, Electric_Cut, Ice_Cut, Wind_Cut));
+        }
     }
 }

@@ -14,36 +14,12 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private float maxHP;
     private float currentHP;
     private CretureType type;
-    private float Creature_Physics_Cut;
-    public float PhysicsCut
-    {
-        get => Creature_Physics_Cut;
-    }
-    private float Creature_Fire_Cut;
-    public float FireCut
-    {
-        get => Creature_Fire_Cut;
-    }
-    private float Creature_Water_Cut;
-    public float WaterCut
-    {
-        get => Creature_Water_Cut;
-    }
-    private float Creature_Electric_Cut;
-    public float ElectricCut
-    {
-        get=> Creature_Electric_Cut;
-    }
-    private float Creature_Ice_Cut;
-    public float IceCut
-    {
-        get => Creature_Ice_Cut;
-    }
-    private float Creature_Wind_Cut;
-    public float WindCut
-    {
-        get => Creature_Electric_Cut;
-    }
+    private float physicsCut;
+    private float fireCut;
+    private float waterCut;
+    private float electricCut;
+    private float iceCut;
+    private float windCut;
 
     public void Awake()
     {
@@ -70,9 +46,9 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         ai.InitAI(this.type);
     }
 
-    public void GetDamage(ITakeDamage hiter)
+    public void CalculateDamage(ITakeDamage hiter)
     {
-        currentHP -= hiter.TakeDamage();
+        currentHP -= hiter.TakeDamage(physicsCut, fireCut,waterCut,electricCut,iceCut,windCut);
         if (currentHP < 0)
         {
             ai.Die();
