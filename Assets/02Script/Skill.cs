@@ -79,5 +79,50 @@ public class Skill : MonoBehaviour, ITakeDamage
         effectManager.TakeToPool<Effect>(name, effect);
     }
 
+    /*
+    public void NormalAttack()
+    {
+        if (damage == 0)
+        {
+            if (type == WeaponType.Gun)
+            {
+                // todo : calculateDamage
+                damage = 5;
+                GameObject obj = pool.GetFromPool<Projectile>(0).gameObject;
+                obj.transform.rotation = transform.rotation;
+                Projectile projectile = obj.GetComponent<Projectile>();
+                projectile.Init(damage, transform.GetChild(0).transform.position);
+            }
+            else
+            {
+                // todo : calculateDamage
+                damage = 5f;
+            }
+            StartCoroutine(DamageZero());
+        }
+    }
+    */
+    /*
+    public void Dragon_Hammer_Attack()
+    {
+        if (damage == 0)
+        {
+            damage = 1f; // Weapon_Physics * (2.0 + 0.15 * skill.level)
+            isKnockback = true;
+            StartCoroutine(Buster());
+        }
+    }
+    */
+    /*
+    private IEnumerator Buster()
+    {
+        effects[0].OnEffect();
+        effects[1].OnEffect();
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        effects[0].OffEffect();
+        effects[1].OffEffect();
+    }
+    */
+
 
 }
