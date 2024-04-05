@@ -9,8 +9,8 @@ public enum State
     MoveForward,
     Attack_Soward,
     Attack_Hammer,
-    Dragon_Hammer,
     Attack_Gun,
+    Attack_Skill,
     Roll
 }
 
@@ -166,11 +166,11 @@ public class PlayerController : MonoBehaviour, IDamage
                 case State.Attack_Soward:
                     break;
                 case State.Attack_Hammer:
-                    anim.Attack(attackCount, true);
+                    anim.Attack(true);
                     attackCount++;
                     break;
-                case State.Dragon_Hammer:
-                    anim.Dragon_Hammer(true);
+                case State.Attack_Skill:
+                    roll.enabled = false;
                     break;
                 case State.Attack_Gun:
                     StartCoroutine(Attack_Gun());
@@ -180,6 +180,11 @@ public class PlayerController : MonoBehaviour, IDamage
                     break;
             }
         }
+    }
+
+    public void UseSkill(int skill_id)
+    {
+        anim.Skill(skill_id);
     }
 
     private void GetDirection()
@@ -202,6 +207,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void SetIdle()
     {
+        roll.enabled = true;
+        anim.Skill(0);
         ChangeState(State.Idle);
     }
 
@@ -330,7 +337,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private IEnumerator Roll()
     {
-        anim.Roll(true);
+        anim.Roll();
         GetDirection();
         transform.LookAt(transform.position + direction);
         isInvincibility = true;

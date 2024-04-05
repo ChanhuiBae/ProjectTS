@@ -65,11 +65,20 @@ public class MenuManager : MonoBehaviour
         timeBackgroun.SetActive(false);
     }
 
-    public void InitSkills(State skill1, float cooltime1, State skill2, float cooltime2, State skill3, float cooltime3)
+    public void InitSkill(int num, int skill)
     {
-        //this.skill1.Init(skill1, cooltime1);
-        this.skill2.Init(skill2, cooltime2);
-        //this.skill3.Init(skill3, cooltime3);
+        switch(num)
+        { 
+            case 1:
+                skill1.Init(skill);
+                break;
+            case 2:
+                skill2.Init(skill);
+                break;
+            case 3:
+                skill3.Init(skill);
+                break;
+        }
     }
 
     public void SetUaltimate(int value)

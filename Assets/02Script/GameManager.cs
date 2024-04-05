@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using TMPro;
 
 [System.Serializable]
 public class PlayerData
@@ -20,10 +21,10 @@ public class PlayerData
     public int Available_Point;
     public float Exp_Need;
     public Inventory inventory;
-    public Weapon weapon;
-    public State skill1;
-    public State skill2;
-    public State skill3;
+    public int WeaponID;
+    public int skill1_ID;
+    public int skill2_ID;
+    public int skill3_ID;
 }
 
 public enum SceneName
@@ -46,12 +47,27 @@ public class GameManager : Singleton<GameManager>
     private TS table;
     private Dictionary<int, TableEntity_Player_Stats> playerDataTable = new Dictionary<int, TableEntity_Player_Stats>();
     private Dictionary<int, TableEntity_Skill_List> skillListTable = new Dictionary<int, TableEntity_Skill_List>();
-    //private Dictionary<int, TableEntity_Weapon> weaponDataTable = new Dictionary<int, TableEntity_Weapon>();
-    //private Dictionary<int, TableEntity_Monster> monsterData = new Dictionary<int, TableEntity_Monster>();
-    //public bool GetMonsterData(int itemID, out TableEntity_Monster moster)
-    // {
-    //     return monsterData.TryGetValue(itemID, out moster);
-    // }
+    public bool GetSkillList(int skillID, out TableEntity_Skill_List data)
+    {
+        return skillListTable.TryGetValue(skillID, out data);
+    }
+    private Dictionary<int, TableEntity_Skill> skillDataTable = new Dictionary<int, TableEntity_Skill>();
+    public bool GetSkillData(int ID, out TableEntity_Skill data)
+    {
+        return skillDataTable.TryGetValue(ID, out data);
+    }
+    private Dictionary<int, TableEntity_Skill_Hit_Frame> skillHitFrame = new Dictionary<int, TableEntity_Skill_Hit_Frame>();
+    public bool GetSkillHitFrame(int skillID, TableEntity_Skill_Hit_Frame data)
+    {
+        return skillHitFrame.TryGetValue(skillID, out data);
+    }
+    private Dictionary<int, TableEntity_Weapon> weaponDataTable = new Dictionary<int, TableEntity_Weapon>();
+    private Dictionary<int, TableEntity_Creature> creatureDataTable = new Dictionary<int, TableEntity_Creature>();
+    public bool GetCreatureData(int key, out TableEntity_Creature data)
+    {
+        return creatureDataTable.TryGetValue(key, out data);
+    }
+
     //  private List<TableEntity_Tip> Tip = new List<TableEntity_Tip>();
 
     private int ultimateValue;
@@ -70,21 +86,22 @@ public class GameManager : Singleton<GameManager>
         {
             skillListTable.Add(table.Skill_List[i].ID, table.Skill_List[i]);
         }
-        /*
-        for (int i = 0; i < table.WeaponData.Count; i++)
+        for(int i = 0; i < table.Skill_Info_List.Count; i++)
         {
-            weaponDataTable.Add(table.WeaponData[i].uid, table.WeaponData[i]);
-            weaponItemID.Add(table.WeaponData[i].uid);
+            skillDataTable.Add(table.Skill_Info_List[i].ID, table.Skill_Info_List[i]);
         }
-        for (int i = 0; i < table.MonsterData.Count; i++)
+        for (int i = 0; i < table.Skill_Hit_Frame.Count; i++)
         {
-            monsterData.Add(table.MonsterData[i].uid, table.MonsterData[i]);
+            skillHitFrame.Add(table.Skill_Hit_Frame[i].Skill_ID, table.Skill_Hit_Frame[i]);
         }
-        for (int i = 0; i < table.DropList.Count; i++)
+        for (int i = 0; i < table.Weapon_List.Count; i++)
         {
-            dropDataTable.Add(table.DropList[i].uid, table.DropList[i]);
+            weaponDataTable.Add(table.Weapon_List[i].ID, table.Weapon_List[i]);
         }
-        */
+        for (int i = 0; i < table.Creature_List.Count; i++)
+        {
+            creatureDataTable.Add(table.Creature_List[i].ID, table.Creature_List[i]);
+        }
         #endregion
 
         pData = new PlayerData();
@@ -146,7 +163,9 @@ public class GameManager : Singleton<GameManager>
         else
         {
             player.Init();
-            menuManager.InitSkills(pData.skill1, 0, pData.skill2, 5f, pData.skill3, 0);
+            menuManager.InitSkill(1, 0);
+            menuManager.InitSkill(2, 202);
+            menuManager.InitSkill(3, 0);
             ultimateValue = 0;
             killCount = 0;
             return true;
@@ -191,9 +210,10 @@ public class GameManager : Singleton<GameManager>
         pData.Adaptation = info.Adaptation;
         pData.Available_Point = info.Available_Point;
         pData.Exp_Need = info.Exp_Need;
-        pData.skill1 = State.Idle;
-        pData.skill2 = State.Dragon_Hammer;
-        pData.skill3 = State.Idle;
+        pData.WeaponID = 1;
+        pData.skill1_ID = 201;
+        pData.skill2_ID = 202;
+        pData.skill3_ID = 203;
         SaveData();
     }
 

@@ -67,7 +67,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.8627451
+      - time: 0.87595266
         functionName: SetIdle
         data: 
         objectReferenceParameter: {instanceID: 0}

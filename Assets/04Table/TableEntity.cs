@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+
 [System.Serializable]
 public class TableEntity_Player_Stats
 {
@@ -20,15 +22,20 @@ public class TableEntity_Player_Stats
 [System.Serializable]
 public class TableEntity_Skill_List
 {
-    public int Weapon_ID;
-    public string Name;
     public int ID;
-    public string Category;
+    public string Weapon_ID;
+    public int Category_ID;
+    public int Skill_Level_Max;
+    public int Charge_Max;
+    public int Hit_Max;
+    public string Skill_Name;
 }
 
 [System.Serializable]
 public class TableEntity_Weapon
 {
+    public int ID;
+    public int Type;
     public int Physics;
     public int Fire;
     public int Water;
@@ -38,12 +45,12 @@ public class TableEntity_Weapon
     public float Critical_Chance;
     public float Critical_Mag;
     public float Attack_Speed;
-    public float Stagger_Time;
 }
 
 [System.Serializable]
 public class TableEntity_Armor
 {
+    public int ID;
     public int Weight;
     public int Physics_Def;
     public int Physics_Cut;
@@ -59,14 +66,16 @@ public class TableEntity_Skill
 {
     public int ID;
     public string Type;
+    public int Skill_Level;
     public int Charge_Level;
     public float Damage_A;
     public float Damage_B;
+    public int Stagger_Time;
     public float Stun_Time;
     public float Airbone_Time;
     public int Knockback_Distance;
-    public int Level;
     public float Cool_Time;
+    public float Need_Damage;
     public float Invincible_Time;
     public int Buff_A;
     public int Buff_B;
@@ -74,8 +83,20 @@ public class TableEntity_Skill
 }
 
 [System.Serializable]
+public class TableEntity_Skill_Hit_Frame
+{
+    public int Skill_ID;
+    public int Hit_01;
+    public int Hit_02;
+    public int Hit_03;
+    public int Hit_04;
+    public int Hit_05;
+}
+
+[System.Serializable]
 public class TableEntity_Creature
 {
+    public int ID;
     public int Physics;
     public int Fire;
     public int Water;
@@ -88,6 +109,7 @@ public class TableEntity_Creature
     public float Electric_Cut;
     public float Ice_Cut;
     public float Wind_Cut;
+    public float HP;
     public float Move_Speed;
     public float Attack_Speed;
     public float Groggy_HP;

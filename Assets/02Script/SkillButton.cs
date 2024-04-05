@@ -11,7 +11,7 @@ public class SkillButton : MonoBehaviour
     private Image icon;
     private float maxTime;
     private float currentTime;
-    private State thisState;
+    private int ID;
 
     private void Awake()
     {
@@ -37,16 +37,30 @@ public class SkillButton : MonoBehaviour
         }
     }
 
-    public void Init(State state, float coolTime)
+    public void Init(int id)
     {
-        thisState = state;
-        icon.sprite = Resources.Load<Sprite>("Image/Hammer"); // State name
-        button.onClick.AddListener(AttackSkill);
-        button.enabled = false;
-        maxTime = coolTime;
-        currentTime = 0;
-        coolTimeImage.fillAmount = 0;
-        StartCoroutine(CoolTime());
+        ID = id;
+        if(ID == 0)
+        {
+            icon.sprite = Resources.Load<Sprite>("Image/NoneSkill");
+            coolTimeImage.fillAmount = 0;
+            button.enabled = false;
+        }
+        else
+        {
+            icon.sprite = Resources.Load<Sprite>("Image/Hammer");
+            button.onClick.AddListener(AttackSkill);
+            button.enabled = false;
+            TableEntity_Skill_List skill;
+            GameManager.Inst.GetSkillList(ID,out skill);
+            string key = skill.ID + skill.Weapon_ID + skill.Category_ID + "101";
+            TableEntity_Skill info;
+            GameManager.Inst.GetSkillData(int.Parse(key), out info);
+            maxTime = info.Cool_Time;
+            currentTime = 0;
+            coolTimeImage.fillAmount = 0;
+            StartCoroutine(CoolTime());
+        }
     }
 
     private IEnumerator CoolTime()
@@ -63,7 +77,8 @@ public class SkillButton : MonoBehaviour
     private void AttackSkill()
     {
         currentTime = 0;
-        player.ChangeState(thisState);
+        player.ChangeState(State.Attack_Skill);
+        player.UseSkill(ID);
         StartCoroutine (CoolTime());
         button.enabled = false;
     }
