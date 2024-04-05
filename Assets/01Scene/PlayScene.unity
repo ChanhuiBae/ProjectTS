@@ -2695,13 +2695,13 @@ MonoBehaviour:
   - _name: SmallHit
     _component: {fileID: 2055418749921293632, guid: 6ede8882ec78d1246aec3150327bc782,
       type: 3}
-    _count: 0
+    _count: 20
     _container: {fileID: 2069964759}
     _nonLazy: 0
   - _name: BigHit
     _component: {fileID: 1735279535405296703, guid: b885b8969c47391448ee53b5fff206c8,
       type: 3}
-    _count: 0
+    _count: 20
     _container: {fileID: 856343357}
     _nonLazy: 0
 --- !u!1 &1262281705

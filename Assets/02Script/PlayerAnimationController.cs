@@ -4,13 +4,18 @@ public class PlayerAnimationController : MonoBehaviour
 {
     private Animator animator;
     private int H_Weapon = Animator.StringToHash("Weapon");
-    private int H_Attack = Animator.StringToHash("Attack");
+    private int H_Attack1 = Animator.StringToHash("Attack1");
+    private int H_Attack2 = Animator.StringToHash("Attack2");
     private int H_Move = Animator.StringToHash("IsMove");
     private int H_Roll = Animator.StringToHash("IsRoll");
     private int H_Combat = Animator.StringToHash("IsCombat");
     private int H_X = Animator.StringToHash("X");
     private int H_Y = Animator.StringToHash("Y");
+    private int H_Gordian_Wheel = Animator.StringToHash("Gordian_Wheel");
     private int H_Dragon_Hammer = Animator.StringToHash("Dragon_Hammer");
+    private int H_Attraction_Field = Animator.StringToHash("Attraction_Field");
+    private int H_Samsara = Animator.StringToHash("Samsara");
+    private int H_Naraka = Animator.StringToHash("Naraka");
 
     private void Awake()
     {
@@ -41,16 +46,24 @@ public class PlayerAnimationController : MonoBehaviour
         animator.SetFloat(H_Y, y);
     }
 
-    public void Attack(bool use)
+    public void Attack(int count, bool use)
     {
-        if (use)
+        if (!use)
         {
-            animator.SetTrigger(H_Attack);
+            animator.ResetTrigger(H_Attack1);
+            animator.ResetTrigger(H_Attack2);
         }
-        else
+        switch (count)
         {
-            animator.ResetTrigger(H_Attack);
+            case 0:
+                animator.SetTrigger(H_Attack1);
+                break;
+            case 1:
+                animator.SetTrigger(H_Attack2);
+                break;
+
         }
+
     }
 
     public void Roll(bool use)
@@ -59,8 +72,8 @@ public class PlayerAnimationController : MonoBehaviour
         {
             animator.SetTrigger(H_Roll);
             Move(false);
-            Attack(false);
-            Skill_Hammer2(false);
+            Attack(0,false);
+
         }
         else
         {
@@ -68,7 +81,20 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    public void Skill_Hammer2(bool use)
+    public void Gordian_Wheel(bool use)
+    {
+        if (use)
+        {
+            animator.SetTrigger(H_Gordian_Wheel);
+        }
+        else
+        {
+            animator.ResetTrigger(H_Gordian_Wheel);
+        }
+    }
+
+
+    public void Dragon_Hammer(bool use)
     {
         if (use)
         {
@@ -80,4 +106,34 @@ public class PlayerAnimationController : MonoBehaviour
         }
 
     }
+
+    public void Attaction_Field(bool use)
+    {
+        if (use)
+        {
+            animator.SetTrigger(H_Attraction_Field);
+        }
+        else
+        {
+            animator.ResetTrigger(H_Attraction_Field);
+        }
+    }
+
+    public void Samsara(bool use)
+    {
+        if (use)
+        {
+            animator.SetTrigger(H_Samsara);
+        }
+        else
+        {
+            animator.ResetTrigger(H_Samsara);
+        }
+    }
+
+    public void Naraka(bool use)
+    {
+        animator.SetBool(H_Naraka, use);
+    }
+
 }

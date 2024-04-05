@@ -20,7 +20,7 @@ public class PlayerData
     public int Available_Point;
     public float Exp_Need;
     public Inventory inventory;
-    public WeaponType weaponType;
+    public Weapon weapon;
     public State skill1;
     public State skill2;
     public State skill3;
@@ -37,8 +37,6 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
     private PlayerData pData;
-    [SerializeField]
-    private WeaponType weapontype;
 
     private PlayerController player;
     private FadeManager fadeManager;
@@ -193,7 +191,6 @@ public class GameManager : Singleton<GameManager>
         pData.Adaptation = info.Adaptation;
         pData.Available_Point = info.Available_Point;
         pData.Exp_Need = info.Exp_Need;
-        pData.weaponType = this.weapontype;
         pData.skill1 = State.Idle;
         pData.skill2 = State.Dragon_Hammer;
         pData.skill3 = State.Idle;

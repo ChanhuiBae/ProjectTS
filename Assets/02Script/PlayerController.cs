@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour, IDamage
     private Rigidbody rig;
     private FloatingJoystick joystick;
     [SerializeField]
+    private WeaponType type;
+    [SerializeField]
     private float attackTime;
     [SerializeField]
     private float moveSpeed;
@@ -37,6 +39,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private bool isInvincibility;
     private State state;
     private Weapon weapon;
+    private int attackCount;
 
     private float currentHP;
     private float currentEXP;
@@ -93,8 +96,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Init()
     {
-        anim.Weapon((int)GameManager.Inst.PlayerInfo.weaponType);
-        switch (GameManager.Inst.PlayerInfo.weaponType)
+        anim.Weapon((int)type);
+        switch (type)
         {
             case WeaponType.Sowrd:
                 meleeAttack.onClick.AddListener(SowrdAttack);
@@ -135,7 +138,8 @@ public class PlayerController : MonoBehaviour, IDamage
                 }
                 break;
         }
-        weapon.Init(GameManager.Inst.PlayerInfo.weaponType);
+        weapon.Init(type);
+        attackCount = 0;
         isInvincibility = false;
         currentHP = GameManager.Inst.PlayerInfo.Max_HP;
         currentEXP = 0;
@@ -160,13 +164,13 @@ public class PlayerController : MonoBehaviour, IDamage
                     StartCoroutine(MoveForward()); 
                     break;
                 case State.Attack_Soward:
-                    anim.Attack(true);
                     break;
                 case State.Attack_Hammer:
-                    anim.Attack(true);
+                    anim.Attack(attackCount, true);
+                    attackCount++;
                     break;
                 case State.Dragon_Hammer:
-                    anim.Skill_Hammer2(true);
+                    anim.Dragon_Hammer(true);
                     break;
                 case State.Attack_Gun:
                     StartCoroutine(Attack_Gun());
@@ -308,8 +312,16 @@ public class PlayerController : MonoBehaviour, IDamage
     private void HammerAttack()
     {
         ChangeState(State.Attack_Hammer);
+        StartCoroutine(ResetCount());
     }
 
+    private IEnumerator ResetCount()
+    {
+        if(attackCount >= 2)
+            attackCount = 0;
+        yield return YieldInstructionCache.WaitForSeconds(0.8f);
+        attackCount = 0;
+    }
 
     private void ChangeRoll()
     {

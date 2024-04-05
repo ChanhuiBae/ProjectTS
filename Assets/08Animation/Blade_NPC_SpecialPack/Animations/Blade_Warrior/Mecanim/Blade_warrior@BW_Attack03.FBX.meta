@@ -1,268 +1,730 @@
 fileFormatVersion: 2
 guid: 42ab404c7f4a09341a856b3ab0c18ef9
-timeCreated: 1483966942
-licenseType: Store
 ModelImporter:
-  serializedVersion: 19
-  fileIDToRecycleName:
-    100000: Blade_male
-    100002: Blade_male Footsteps
-    100004: Blade_male Head
-    100006: Blade_male HeadNub
-    100008: Blade_male L Calf
-    100010: Blade_male L Clavicle
-    100012: Blade_male L Finger0
-    100014: Blade_male L Finger01
-    100016: Blade_male L Finger0Nub
-    100018: Blade_male L Finger1
-    100020: Blade_male L Finger11
-    100022: Blade_male L Finger1Nub
-    100024: Blade_male L Finger2
-    100026: Blade_male L Finger21
-    100028: Blade_male L Finger2Nub
-    100030: Blade_male L Foot
-    100032: Blade_male L Forearm
-    100034: Blade_male L Hand
-    100036: Blade_male L Thigh
-    100038: Blade_male L Toe0
-    100040: Blade_male L Toe0Nub
-    100042: Blade_male L UpperArm
-    100044: Blade_male Neck
-    100046: Blade_male Pelvis
-    100048: Blade_male Ponytail1
-    100050: Blade_male Ponytail11
-    100052: Blade_male Ponytail12
-    100054: Blade_male Ponytail1Nub
-    100056: Blade_male Prop1
-    100058: Blade_male R Calf
-    100060: Blade_male R Clavicle
-    100062: Blade_male R Finger0
-    100064: Blade_male R Finger01
-    100066: Blade_male R Finger0Nub
-    100068: Blade_male R Finger1
-    100070: Blade_male R Finger11
-    100072: Blade_male R Finger1Nub
-    100074: Blade_male R Finger2
-    100076: Blade_male R Finger21
-    100078: Blade_male R Finger2Nub
-    100080: Blade_male R Foot
-    100082: Blade_male R Forearm
-    100084: Blade_male R Hand
-    100086: Blade_male R Thigh
-    100088: Blade_male R Toe0
-    100090: Blade_male R Toe0Nub
-    100092: Blade_male R UpperArm
-    100094: Blade_male Spine
-    100096: Blade_male Spine1
-    100098: Blade_male Spine2
-    100100: Blade_Male_Weapon
-    100102: //RootNode
-    100104: body_band
-    100106: boots
-    100108: BW_Weapon
-    100110: BW_Weapon_Ctl
-    100112: center_Point001
-    100114: Glove
-    100116: Hair
-    100118: Hair_bandf
-    100120: Head
-    100122: Head_Point006
-    100124: Knee_Point002
-    100126: L_B_scult01
-    100128: L_B_scult02
-    100130: L_B_scult03
-    100132: L_B_scult_end
-    100134: L_F_scult01
-    100136: L_F_scult0102
-    100138: L_F_scult03
-    100140: L_F_scult_end
-    100142: L_foot01_Point002
-    100144: L_foot_Point001
-    100146: M_scult01
-    100148: M_scult01_end
-    100150: M_scult02
-    100152: M_scult03
-    100154: neck_Point005
-    100156: Object006
-    100158: Object007
-    100160: Object009
-    100162: pants
-    100164: R_B_scult01
-    100166: R_B_scult02
-    100168: R_B_scult03
-    100170: R_B_scult_end
-    100172: R_F_scult01
-    100174: R_F_scult02
-    100176: R_F_scult03
-    100178: R_F_scult_end
-    100180: R_foot_Point002
-    100182: R_hand_Point002
-    100184: shirts
-    100186: Shoulder
-    100188: spine01_Point003
-    100190: spine01_Point004
-    100192: spine_Point002
-    100194: uper_cloth
-    100196: Weapon_Point001
-    400000: Blade_male
-    400002: Blade_male Footsteps
-    400004: Blade_male Head
-    400006: Blade_male HeadNub
-    400008: Blade_male L Calf
-    400010: Blade_male L Clavicle
-    400012: Blade_male L Finger0
-    400014: Blade_male L Finger01
-    400016: Blade_male L Finger0Nub
-    400018: Blade_male L Finger1
-    400020: Blade_male L Finger11
-    400022: Blade_male L Finger1Nub
-    400024: Blade_male L Finger2
-    400026: Blade_male L Finger21
-    400028: Blade_male L Finger2Nub
-    400030: Blade_male L Foot
-    400032: Blade_male L Forearm
-    400034: Blade_male L Hand
-    400036: Blade_male L Thigh
-    400038: Blade_male L Toe0
-    400040: Blade_male L Toe0Nub
-    400042: Blade_male L UpperArm
-    400044: Blade_male Neck
-    400046: Blade_male Pelvis
-    400048: Blade_male Ponytail1
-    400050: Blade_male Ponytail11
-    400052: Blade_male Ponytail12
-    400054: Blade_male Ponytail1Nub
-    400056: Blade_male Prop1
-    400058: Blade_male R Calf
-    400060: Blade_male R Clavicle
-    400062: Blade_male R Finger0
-    400064: Blade_male R Finger01
-    400066: Blade_male R Finger0Nub
-    400068: Blade_male R Finger1
-    400070: Blade_male R Finger11
-    400072: Blade_male R Finger1Nub
-    400074: Blade_male R Finger2
-    400076: Blade_male R Finger21
-    400078: Blade_male R Finger2Nub
-    400080: Blade_male R Foot
-    400082: Blade_male R Forearm
-    400084: Blade_male R Hand
-    400086: Blade_male R Thigh
-    400088: Blade_male R Toe0
-    400090: Blade_male R Toe0Nub
-    400092: Blade_male R UpperArm
-    400094: Blade_male Spine
-    400096: Blade_male Spine1
-    400098: Blade_male Spine2
-    400100: Blade_Male_Weapon
-    400102: //RootNode
-    400104: body_band
-    400106: boots
-    400108: BW_Weapon
-    400110: BW_Weapon_Ctl
-    400112: center_Point001
-    400114: Glove
-    400116: Hair
-    400118: Hair_bandf
-    400120: Head
-    400122: Head_Point006
-    400124: Knee_Point002
-    400126: L_B_scult01
-    400128: L_B_scult02
-    400130: L_B_scult03
-    400132: L_B_scult_end
-    400134: L_F_scult01
-    400136: L_F_scult0102
-    400138: L_F_scult03
-    400140: L_F_scult_end
-    400142: L_foot01_Point002
-    400144: L_foot_Point001
-    400146: M_scult01
-    400148: M_scult01_end
-    400150: M_scult02
-    400152: M_scult03
-    400154: neck_Point005
-    400156: Object006
-    400158: Object007
-    400160: Object009
-    400162: pants
-    400164: R_B_scult01
-    400166: R_B_scult02
-    400168: R_B_scult03
-    400170: R_B_scult_end
-    400172: R_F_scult01
-    400174: R_F_scult02
-    400176: R_F_scult03
-    400178: R_F_scult_end
-    400180: R_foot_Point002
-    400182: R_hand_Point002
-    400184: shirts
-    400186: Shoulder
-    400188: spine01_Point003
-    400190: spine01_Point004
-    400192: spine_Point002
-    400194: uper_cloth
-    400196: Weapon_Point001
-    4300000: Head
-    4300002: Glove
-    4300004: boots
-    4300006: Hair
-    4300008: shirts
-    4300010: uper_cloth
-    4300012: Object006
-    4300014: body_band
-    4300016: pants
-    4300018: Shoulder
-    4300020: Hair_bandf
-    4300022: Object007
-    4300024: Object009
-    4300026: BW_Weapon
-    7400000: BW_Attack03
-    9500000: //RootNode
-    13700000: body_band
-    13700002: boots
-    13700004: BW_Weapon
-    13700006: Glove
-    13700008: Hair
-    13700010: Hair_bandf
-    13700012: Head
-    13700014: Object006
-    13700016: Object007
-    13700018: Object009
-    13700020: pants
-    13700022: shirts
-    13700024: Shoulder
-    13700026: uper_cloth
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Blade_male
+  - first:
+      1: 100002
+    second: Blade_male Footsteps
+  - first:
+      1: 100004
+    second: Blade_male Head
+  - first:
+      1: 100006
+    second: Blade_male HeadNub
+  - first:
+      1: 100008
+    second: Blade_male L Calf
+  - first:
+      1: 100010
+    second: Blade_male L Clavicle
+  - first:
+      1: 100012
+    second: Blade_male L Finger0
+  - first:
+      1: 100014
+    second: Blade_male L Finger01
+  - first:
+      1: 100016
+    second: Blade_male L Finger0Nub
+  - first:
+      1: 100018
+    second: Blade_male L Finger1
+  - first:
+      1: 100020
+    second: Blade_male L Finger11
+  - first:
+      1: 100022
+    second: Blade_male L Finger1Nub
+  - first:
+      1: 100024
+    second: Blade_male L Finger2
+  - first:
+      1: 100026
+    second: Blade_male L Finger21
+  - first:
+      1: 100028
+    second: Blade_male L Finger2Nub
+  - first:
+      1: 100030
+    second: Blade_male L Foot
+  - first:
+      1: 100032
+    second: Blade_male L Forearm
+  - first:
+      1: 100034
+    second: Blade_male L Hand
+  - first:
+      1: 100036
+    second: Blade_male L Thigh
+  - first:
+      1: 100038
+    second: Blade_male L Toe0
+  - first:
+      1: 100040
+    second: Blade_male L Toe0Nub
+  - first:
+      1: 100042
+    second: Blade_male L UpperArm
+  - first:
+      1: 100044
+    second: Blade_male Neck
+  - first:
+      1: 100046
+    second: Blade_male Pelvis
+  - first:
+      1: 100048
+    second: Blade_male Ponytail1
+  - first:
+      1: 100050
+    second: Blade_male Ponytail11
+  - first:
+      1: 100052
+    second: Blade_male Ponytail12
+  - first:
+      1: 100054
+    second: Blade_male Ponytail1Nub
+  - first:
+      1: 100056
+    second: Blade_male Prop1
+  - first:
+      1: 100058
+    second: Blade_male R Calf
+  - first:
+      1: 100060
+    second: Blade_male R Clavicle
+  - first:
+      1: 100062
+    second: Blade_male R Finger0
+  - first:
+      1: 100064
+    second: Blade_male R Finger01
+  - first:
+      1: 100066
+    second: Blade_male R Finger0Nub
+  - first:
+      1: 100068
+    second: Blade_male R Finger1
+  - first:
+      1: 100070
+    second: Blade_male R Finger11
+  - first:
+      1: 100072
+    second: Blade_male R Finger1Nub
+  - first:
+      1: 100074
+    second: Blade_male R Finger2
+  - first:
+      1: 100076
+    second: Blade_male R Finger21
+  - first:
+      1: 100078
+    second: Blade_male R Finger2Nub
+  - first:
+      1: 100080
+    second: Blade_male R Foot
+  - first:
+      1: 100082
+    second: Blade_male R Forearm
+  - first:
+      1: 100084
+    second: Blade_male R Hand
+  - first:
+      1: 100086
+    second: Blade_male R Thigh
+  - first:
+      1: 100088
+    second: Blade_male R Toe0
+  - first:
+      1: 100090
+    second: Blade_male R Toe0Nub
+  - first:
+      1: 100092
+    second: Blade_male R UpperArm
+  - first:
+      1: 100094
+    second: Blade_male Spine
+  - first:
+      1: 100096
+    second: Blade_male Spine1
+  - first:
+      1: 100098
+    second: Blade_male Spine2
+  - first:
+      1: 100100
+    second: Blade_Male_Weapon
+  - first:
+      1: 100102
+    second: //RootNode
+  - first:
+      1: 100104
+    second: body_band
+  - first:
+      1: 100106
+    second: boots
+  - first:
+      1: 100108
+    second: BW_Weapon
+  - first:
+      1: 100110
+    second: BW_Weapon_Ctl
+  - first:
+      1: 100112
+    second: center_Point001
+  - first:
+      1: 100114
+    second: Glove
+  - first:
+      1: 100116
+    second: Hair
+  - first:
+      1: 100118
+    second: Hair_bandf
+  - first:
+      1: 100120
+    second: Head
+  - first:
+      1: 100122
+    second: Head_Point006
+  - first:
+      1: 100124
+    second: Knee_Point002
+  - first:
+      1: 100126
+    second: L_B_scult01
+  - first:
+      1: 100128
+    second: L_B_scult02
+  - first:
+      1: 100130
+    second: L_B_scult03
+  - first:
+      1: 100132
+    second: L_B_scult_end
+  - first:
+      1: 100134
+    second: L_F_scult01
+  - first:
+      1: 100136
+    second: L_F_scult0102
+  - first:
+      1: 100138
+    second: L_F_scult03
+  - first:
+      1: 100140
+    second: L_F_scult_end
+  - first:
+      1: 100142
+    second: L_foot01_Point002
+  - first:
+      1: 100144
+    second: L_foot_Point001
+  - first:
+      1: 100146
+    second: M_scult01
+  - first:
+      1: 100148
+    second: M_scult01_end
+  - first:
+      1: 100150
+    second: M_scult02
+  - first:
+      1: 100152
+    second: M_scult03
+  - first:
+      1: 100154
+    second: neck_Point005
+  - first:
+      1: 100156
+    second: Object006
+  - first:
+      1: 100158
+    second: Object007
+  - first:
+      1: 100160
+    second: Object009
+  - first:
+      1: 100162
+    second: pants
+  - first:
+      1: 100164
+    second: R_B_scult01
+  - first:
+      1: 100166
+    second: R_B_scult02
+  - first:
+      1: 100168
+    second: R_B_scult03
+  - first:
+      1: 100170
+    second: R_B_scult_end
+  - first:
+      1: 100172
+    second: R_F_scult01
+  - first:
+      1: 100174
+    second: R_F_scult02
+  - first:
+      1: 100176
+    second: R_F_scult03
+  - first:
+      1: 100178
+    second: R_F_scult_end
+  - first:
+      1: 100180
+    second: R_foot_Point002
+  - first:
+      1: 100182
+    second: R_hand_Point002
+  - first:
+      1: 100184
+    second: shirts
+  - first:
+      1: 100186
+    second: Shoulder
+  - first:
+      1: 100188
+    second: spine01_Point003
+  - first:
+      1: 100190
+    second: spine01_Point004
+  - first:
+      1: 100192
+    second: spine_Point002
+  - first:
+      1: 100194
+    second: uper_cloth
+  - first:
+      1: 100196
+    second: Weapon_Point001
+  - first:
+      4: 400000
+    second: Blade_male
+  - first:
+      4: 400002
+    second: Blade_male Footsteps
+  - first:
+      4: 400004
+    second: Blade_male Head
+  - first:
+      4: 400006
+    second: Blade_male HeadNub
+  - first:
+      4: 400008
+    second: Blade_male L Calf
+  - first:
+      4: 400010
+    second: Blade_male L Clavicle
+  - first:
+      4: 400012
+    second: Blade_male L Finger0
+  - first:
+      4: 400014
+    second: Blade_male L Finger01
+  - first:
+      4: 400016
+    second: Blade_male L Finger0Nub
+  - first:
+      4: 400018
+    second: Blade_male L Finger1
+  - first:
+      4: 400020
+    second: Blade_male L Finger11
+  - first:
+      4: 400022
+    second: Blade_male L Finger1Nub
+  - first:
+      4: 400024
+    second: Blade_male L Finger2
+  - first:
+      4: 400026
+    second: Blade_male L Finger21
+  - first:
+      4: 400028
+    second: Blade_male L Finger2Nub
+  - first:
+      4: 400030
+    second: Blade_male L Foot
+  - first:
+      4: 400032
+    second: Blade_male L Forearm
+  - first:
+      4: 400034
+    second: Blade_male L Hand
+  - first:
+      4: 400036
+    second: Blade_male L Thigh
+  - first:
+      4: 400038
+    second: Blade_male L Toe0
+  - first:
+      4: 400040
+    second: Blade_male L Toe0Nub
+  - first:
+      4: 400042
+    second: Blade_male L UpperArm
+  - first:
+      4: 400044
+    second: Blade_male Neck
+  - first:
+      4: 400046
+    second: Blade_male Pelvis
+  - first:
+      4: 400048
+    second: Blade_male Ponytail1
+  - first:
+      4: 400050
+    second: Blade_male Ponytail11
+  - first:
+      4: 400052
+    second: Blade_male Ponytail12
+  - first:
+      4: 400054
+    second: Blade_male Ponytail1Nub
+  - first:
+      4: 400056
+    second: Blade_male Prop1
+  - first:
+      4: 400058
+    second: Blade_male R Calf
+  - first:
+      4: 400060
+    second: Blade_male R Clavicle
+  - first:
+      4: 400062
+    second: Blade_male R Finger0
+  - first:
+      4: 400064
+    second: Blade_male R Finger01
+  - first:
+      4: 400066
+    second: Blade_male R Finger0Nub
+  - first:
+      4: 400068
+    second: Blade_male R Finger1
+  - first:
+      4: 400070
+    second: Blade_male R Finger11
+  - first:
+      4: 400072
+    second: Blade_male R Finger1Nub
+  - first:
+      4: 400074
+    second: Blade_male R Finger2
+  - first:
+      4: 400076
+    second: Blade_male R Finger21
+  - first:
+      4: 400078
+    second: Blade_male R Finger2Nub
+  - first:
+      4: 400080
+    second: Blade_male R Foot
+  - first:
+      4: 400082
+    second: Blade_male R Forearm
+  - first:
+      4: 400084
+    second: Blade_male R Hand
+  - first:
+      4: 400086
+    second: Blade_male R Thigh
+  - first:
+      4: 400088
+    second: Blade_male R Toe0
+  - first:
+      4: 400090
+    second: Blade_male R Toe0Nub
+  - first:
+      4: 400092
+    second: Blade_male R UpperArm
+  - first:
+      4: 400094
+    second: Blade_male Spine
+  - first:
+      4: 400096
+    second: Blade_male Spine1
+  - first:
+      4: 400098
+    second: Blade_male Spine2
+  - first:
+      4: 400100
+    second: Blade_Male_Weapon
+  - first:
+      4: 400102
+    second: //RootNode
+  - first:
+      4: 400104
+    second: body_band
+  - first:
+      4: 400106
+    second: boots
+  - first:
+      4: 400108
+    second: BW_Weapon
+  - first:
+      4: 400110
+    second: BW_Weapon_Ctl
+  - first:
+      4: 400112
+    second: center_Point001
+  - first:
+      4: 400114
+    second: Glove
+  - first:
+      4: 400116
+    second: Hair
+  - first:
+      4: 400118
+    second: Hair_bandf
+  - first:
+      4: 400120
+    second: Head
+  - first:
+      4: 400122
+    second: Head_Point006
+  - first:
+      4: 400124
+    second: Knee_Point002
+  - first:
+      4: 400126
+    second: L_B_scult01
+  - first:
+      4: 400128
+    second: L_B_scult02
+  - first:
+      4: 400130
+    second: L_B_scult03
+  - first:
+      4: 400132
+    second: L_B_scult_end
+  - first:
+      4: 400134
+    second: L_F_scult01
+  - first:
+      4: 400136
+    second: L_F_scult0102
+  - first:
+      4: 400138
+    second: L_F_scult03
+  - first:
+      4: 400140
+    second: L_F_scult_end
+  - first:
+      4: 400142
+    second: L_foot01_Point002
+  - first:
+      4: 400144
+    second: L_foot_Point001
+  - first:
+      4: 400146
+    second: M_scult01
+  - first:
+      4: 400148
+    second: M_scult01_end
+  - first:
+      4: 400150
+    second: M_scult02
+  - first:
+      4: 400152
+    second: M_scult03
+  - first:
+      4: 400154
+    second: neck_Point005
+  - first:
+      4: 400156
+    second: Object006
+  - first:
+      4: 400158
+    second: Object007
+  - first:
+      4: 400160
+    second: Object009
+  - first:
+      4: 400162
+    second: pants
+  - first:
+      4: 400164
+    second: R_B_scult01
+  - first:
+      4: 400166
+    second: R_B_scult02
+  - first:
+      4: 400168
+    second: R_B_scult03
+  - first:
+      4: 400170
+    second: R_B_scult_end
+  - first:
+      4: 400172
+    second: R_F_scult01
+  - first:
+      4: 400174
+    second: R_F_scult02
+  - first:
+      4: 400176
+    second: R_F_scult03
+  - first:
+      4: 400178
+    second: R_F_scult_end
+  - first:
+      4: 400180
+    second: R_foot_Point002
+  - first:
+      4: 400182
+    second: R_hand_Point002
+  - first:
+      4: 400184
+    second: shirts
+  - first:
+      4: 400186
+    second: Shoulder
+  - first:
+      4: 400188
+    second: spine01_Point003
+  - first:
+      4: 400190
+    second: spine01_Point004
+  - first:
+      4: 400192
+    second: spine_Point002
+  - first:
+      4: 400194
+    second: uper_cloth
+  - first:
+      4: 400196
+    second: Weapon_Point001
+  - first:
+      43: 4300000
+    second: Head
+  - first:
+      43: 4300002
+    second: Glove
+  - first:
+      43: 4300004
+    second: boots
+  - first:
+      43: 4300006
+    second: Hair
+  - first:
+      43: 4300008
+    second: shirts
+  - first:
+      43: 4300010
+    second: uper_cloth
+  - first:
+      43: 4300012
+    second: Object006
+  - first:
+      43: 4300014
+    second: body_band
+  - first:
+      43: 4300016
+    second: pants
+  - first:
+      43: 4300018
+    second: Shoulder
+  - first:
+      43: 4300020
+    second: Hair_bandf
+  - first:
+      43: 4300022
+    second: Object007
+  - first:
+      43: 4300024
+    second: Object009
+  - first:
+      43: 4300026
+    second: BW_Weapon
+  - first:
+      74: 7400000
+    second: BW_Attack03
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: body_band
+  - first:
+      137: 13700002
+    second: boots
+  - first:
+      137: 13700004
+    second: BW_Weapon
+  - first:
+      137: 13700006
+    second: Glove
+  - first:
+      137: 13700008
+    second: Hair
+  - first:
+      137: 13700010
+    second: Hair_bandf
+  - first:
+      137: 13700012
+    second: Head
+  - first:
+      137: 13700014
+    second: Object006
+  - first:
+      137: 13700016
+    second: Object007
+  - first:
+      137: 13700018
+    second: Object009
+  - first:
+      137: 13700020
+    second: pants
+  - first:
+      137: 13700022
+    second: shirts
+  - first:
+      137: 13700024
+    second: Shoulder
+  - first:
+      137: 13700026
+    second: uper_cloth
+  externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
+      copied configuration does not match position in animation file:\n\t'Blade_male
+      L Thigh' : position error = 16.657034 mm\n\t'Blade_male R Thigh' : position
+      error = 40.543671 mm\n"
     animationImportErrors: 
-    animationImportWarnings: "\nDefault bone length found in this file is different
-      form the one found in the source avatar:\n\t'Blade_male L Thigh' : position
-      error = 16.657034 mm\n\t'Blade_male R Thigh' : position error = 40.543671 mm\n\nClip
-      'Take 001' has import animation warnings that might lower retargeting quality:\n\t'Blade_male
-      Spine2' is inbetween humanoid transforms and has rotation animation that will
-      be discarded.\n\t'Blade_male L Thigh' has translation animation that will be
-      discarded.\n\t'Blade_male R Thigh' has translation animation that will be discarded.\n"
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\n\t'Blade_male Spine2' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: BW_Attack03
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 50
       wrapMode: 0
@@ -283,7 +745,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 1
+        functionName: SetIdle
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
@@ -341,15 +810,16 @@ ModelImporter:
           Spine2/Blade_male Neck/Blade_male Head/Blade_male Ponytail1
         weight: 1
       - path: Blade_male/Blade_male Pelvis/Blade_male Spine/Blade_male Spine1/Blade_male
-          Spine2/Blade_male Neck/Blade_male Head/Blade_male Ponytail1/Blade_male Ponytail11
+          Spine2/Blade_male Neck/Blade_male Head/Blade_male Ponytail1/Blade_male
+          Ponytail11
         weight: 1
       - path: Blade_male/Blade_male Pelvis/Blade_male Spine/Blade_male Spine1/Blade_male
-          Spine2/Blade_male Neck/Blade_male Head/Blade_male Ponytail1/Blade_male Ponytail11/Blade_male
-          Ponytail12
+          Spine2/Blade_male Neck/Blade_male Head/Blade_male Ponytail1/Blade_male
+          Ponytail11/Blade_male Ponytail12
         weight: 1
       - path: Blade_male/Blade_male Pelvis/Blade_male Spine/Blade_male Spine1/Blade_male
-          Spine2/Blade_male Neck/Blade_male Head/Blade_male Ponytail1/Blade_male Ponytail11/Blade_male
-          Ponytail12/Blade_male Ponytail1Nub
+          Spine2/Blade_male Neck/Blade_male Head/Blade_male Ponytail1/Blade_male
+          Ponytail11/Blade_male Ponytail12/Blade_male Ponytail1Nub
         weight: 1
       - path: Blade_male/Blade_male Pelvis/Blade_male Spine/Blade_male Spine1/Blade_male
           Spine2/Blade_male Neck/Blade_male L Clavicle
@@ -568,25 +1038,49 @@ ModelImporter:
     globalScale: 0.01
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 4
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 1
   humanDescription:
+    serializedVersion: 3
     human:
     - boneName: Blade_male Pelvis
       humanName: Hips
@@ -854,440 +1348,440 @@ ModelImporter:
         modified: 0
     skeleton:
     - name: Blade_warrior(Clone)
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0.000011338589, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Blade_male
+      parentName: 
       position: {x: -0, y: 1.0788032, z: -0.0427382}
       rotation: {x: -0.50000036, y: 0.49999967, z: 0.49999967, w: 0.50000036}
       scale: {x: 0.99999994, y: 0.99999994, z: 1}
-      transformModified: 1
     - name: Blade_male Footsteps
+      parentName: 
       position: {x: -0, y: 0, z: -1.0739325}
       rotation: {x: 0, y: -0, z: -0.7071063, w: 0.70710725}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Blade_male Prop1
+      parentName: 
       position: {x: 0.22181301, y: -0.18840644, z: 0.62515396}
       rotation: {x: -0.63628054, y: 0.7452513, z: 0.1083466, w: 0.16735779}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
-      transformModified: 1
     - name: Blade_male Pelvis
+      parentName: 
       position: {x: 0, y: 0, z: 0.042929888}
       rotation: {x: 0.5, y: -0.5, z: -0.5, w: -0.5}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: L_F_scult01
+      parentName: 
       position: {x: -0.0761956, y: -0.026532229, z: 0.19097318}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000007, y: 1.0000005, z: 1.0000004}
-      transformModified: 1
     - name: L_F_scult0102
+      parentName: 
       position: {x: -0.15285072, y: -0.000000036906012, z: 0.000000005471231}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.99999976, y: 1.0000002, z: 0.9999998}
-      transformModified: 1
     - name: L_F_scult03
+      parentName: 
       position: {x: -0.3610615, y: -0.00000004991888, z: 0.000000025431458}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000005, y: 1.0000002, z: 1}
-      transformModified: 1
     - name: L_F_scult_end
+      parentName: 
       position: {x: -0.45033392, y: -0.00000009656152, z: 0.000000059440353}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: L_B_scult01
+      parentName: 
       position: {x: -0.070726566, y: -0.1540785, z: 0.09805275}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000002, y: 1.0000004, z: 1.0000002}
-      transformModified: 1
     - name: L_B_scult02
+      parentName: 
       position: {x: -0.13415441, y: -0.000000005541154, z: 0.000000004468061}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000002, y: 1.0000008, z: 0.9999997}
-      transformModified: 1
     - name: L_B_scult03
+      parentName: 
       position: {x: -0.33382294, y: -0.0000000446871, z: -0.000000015107988}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000006, y: 1.0000002, z: 1.0000002}
-      transformModified: 1
     - name: L_B_scult_end
+      parentName: 
       position: {x: -0.35806388, y: -0.00000013049728, z: 0.0000001490634}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: R_B_scult01
+      parentName: 
       position: {x: -0.07072689, y: -0.15407906, z: -0.10167644}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000004, y: 1.0000006, z: 1}
-      transformModified: 1
     - name: R_B_scult02
+      parentName: 
       position: {x: -0.13344787, y: 0.0000000026109568, z: 0.000000018864139}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.99999964, y: 0.9999996, z: 0.99999976}
-      transformModified: 1
     - name: R_B_scult03
+      parentName: 
       position: {x: -0.33382335, y: -0.000000050176865, z: -0.00000005240135}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000005, y: 1.0000005, z: 1.0000004}
-      transformModified: 1
     - name: R_B_scult_end
+      parentName: 
       position: {x: -0.35806313, y: -0.00000014420547, z: -0.0000000074433637}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: R_F_scult01
+      parentName: 
       position: {x: -0.07619695, y: -0.026533356, z: -0.1900478}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000002, y: 1.0000004, z: 1}
-      transformModified: 1
     - name: R_F_scult02
+      parentName: 
       position: {x: -0.1528514, y: -0.000000004048734, z: 0.000000001187102}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.99999994, y: 1.0000001, z: 1.0000002}
-      transformModified: 1
     - name: R_F_scult03
+      parentName: 
       position: {x: -0.36106184, y: -0.000000039786418, z: 0.000000013845597}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000007, y: 1.0000006, z: 0.9999998}
-      transformModified: 1
     - name: R_F_scult_end
+      parentName: 
       position: {x: -0.45033413, y: -0.00000010073385, z: 0.00000005057421}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Blade_male Spine
+      parentName: 
       position: {x: -0.11316582, y: -0.000094819065, z: 0.00000015839191}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000006, y: 1.0000007, z: 1.0000007}
-      transformModified: 1
     - name: Blade_male Spine1
+      parentName: 
       position: {x: -0.11913025, y: -0.000113496775, z: 0.000014138222}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.9999998, y: 1, z: 0.99999976}
-      transformModified: 1
     - name: Blade_male Spine2
+      parentName: 
       position: {x: -0.144328, y: -0.00011126518, z: 0.000010287761}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.000002, y: 1.0000014, z: 1.0000017}
-      transformModified: 1
     - name: Blade_male Neck
+      parentName: 
       position: {x: -0.17384353, y: -0.03422369, z: -0.000000038146972}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000001, y: 1.0000008, z: 1.0000008}
-      transformModified: 1
     - name: Blade_male L Clavicle
+      parentName: 
       position: {x: 0.011225739, y: 0.007822685, z: 0.033503234}
       rotation: {x: 0.7071068, y: -0.000000030908623, z: -0.7071068, w: 0.000000030908623}
       scale: {x: 0.9999994, y: 1.0000011, z: 1.0000008}
-      transformModified: 1
     - name: Blade_male L UpperArm
+      parentName: 
       position: {x: -0.12444055, y: -0.000000057220458, z: 0.00000015258789}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000005, y: 1.0000017, z: 1.0000005}
-      transformModified: 1
     - name: Blade_male L Forearm
+      parentName: 
       position: {x: -0.26093605, y: -0.000000076293944, z: -0.000000076293944}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000027, y: 1.0000019, z: 1.0000026}
-      transformModified: 1
     - name: Blade_male L Hand
+      parentName: 
       position: {x: -0.27130523, y: 0.000000076293944, z: 0}
       rotation: {x: 0.7071068, y: 0, z: 0, w: -0.7071068}
       scale: {x: 1.0000002, y: 1.0000004, z: 0.9999996}
-      transformModified: 1
     - name: Blade_male L Finger1
+      parentName: 
       position: {x: -0.10285682, y: -0.008587036, z: -0.04344963}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.9999992, y: 0.9999997, z: 1.0000002}
-      transformModified: 1
     - name: Blade_male L Finger11
+      parentName: 
       position: {x: -0.07117988, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000001, y: 0.9999999, z: 0.99999964}
-      transformModified: 1
     - name: Blade_male L Finger1Nub
+      parentName: 
       position: {x: -0.052227326, y: 0.000000019073486, z: -0.000000076293944}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000001, y: 1, z: 1}
-      transformModified: 1
     - name: Blade_male L Finger2
+      parentName: 
       position: {x: -0.09922638, y: -0.0039777374, z: 0.0076174927}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.99999946, y: 0.99999917, z: 0.9999993}
-      transformModified: 1
     - name: Blade_male L Finger21
+      parentName: 
       position: {x: -0.07266266, y: -0.000000019073486, z: 0.000000076293944}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000002, y: 1.0000006, z: 1.0000005}
-      transformModified: 1
     - name: Blade_male L Finger2Nub
+      parentName: 
       position: {x: -0.049291, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
-      transformModified: 1
     - name: Blade_male L Finger0
+      parentName: 
       position: {x: -0.042095527, y: 0.0122776795, z: -0.060194395}
       rotation: {x: 0, y: 0.3826835, z: 0, w: -0.9238795}
       scale: {x: 0.9999993, y: 0.9999998, z: 0.9999996}
-      transformModified: 1
     - name: Blade_male L Finger01
+      parentName: 
       position: {x: -0.06341159, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.9999997, y: 1.0000005, z: 1.0000002}
-      transformModified: 1
     - name: Blade_male L Finger0Nub
+      parentName: 
       position: {x: -0.05740795, y: 0, z: 0.000000076293944}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Blade_male R Clavicle
+      parentName: 
       position: {x: 0.011225433, y: 0.007822876, z: -0.033503313}
       rotation: {x: 0.7071068, y: -0.000000030908623, z: 0.7071068, w: -0.000000030908623}
       scale: {x: 1.0000014, y: 1.0000013, z: 1.0000011}
-      transformModified: 1
     - name: Blade_male R UpperArm
+      parentName: 
       position: {x: -0.12444061, y: 0, z: 0.00000015258789}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.9999999, y: 0.9999999, z: 1.0000001}
-      transformModified: 1
     - name: Blade_male R Forearm
+      parentName: 
       position: {x: -0.2609361, y: 0, z: -0.000000038146972}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000018, y: 1.0000013, z: 1.0000017}
-      transformModified: 1
     - name: Blade_male R Hand
+      parentName: 
       position: {x: -0.27130538, y: 0, z: 0}
       rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 1.0000006, y: 1.0000005, z: 1}
-      transformModified: 1
     - name: BW_Weapon_Ctl
+      parentName: 
       position: {x: 0.6360667, y: -0.12127447, z: 0.09351794}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 3.326163, y: 3.3261633, z: 3.3261628}
-      transformModified: 1
     - name: Blade_Male_Weapon
+      parentName: 
       position: {x: -0.000000114440915, y: 0.000000038146972, z: 0.00000015258789}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.3006472, y: 0.3006472, z: 0.30064726}
-      transformModified: 1
     - name: Blade_male R Finger1
+      parentName: 
       position: {x: -0.10285682, y: -0.00858696, z: 0.043449555}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000007, y: 1.0000007, z: 1.0000001}
-      transformModified: 1
     - name: Blade_male R Finger11
+      parentName: 
       position: {x: -0.07117981, y: 0, z: 0.000000009536743}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000006, y: 1.0000006, z: 1}
-      transformModified: 1
     - name: Blade_male R Finger1Nub
+      parentName: 
       position: {x: -0.052227363, y: -0.000000076293944, z: -0.000000028610229}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: -1, y: -1, z: -1.0000001}
-      transformModified: 1
     - name: Blade_male R Finger2
+      parentName: 
       position: {x: -0.09922638, y: -0.003977661, z: -0.007617626}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000004, y: 1.0000001, z: 1.0000001}
-      transformModified: 1
     - name: Blade_male R Finger21
+      parentName: 
       position: {x: -0.072662584, y: 0, z: -0.000000019073486}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.9999999, y: 0.9999999, z: 0.99999976}
-      transformModified: 1
     - name: Blade_male R Finger2Nub
+      parentName: 
       position: {x: -0.049291, y: 0, z: -0.000000009536743}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: -1, y: -1, z: -1}
-      transformModified: 1
     - name: Blade_male R Finger0
+      parentName: 
       position: {x: -0.04209549, y: 0.0122776795, z: 0.06019434}
       rotation: {x: 0, y: 0.38268346, z: 0, w: 0.9238795}
       scale: {x: 1.0000011, y: 1.000001, z: 1.0000008}
-      transformModified: 1
     - name: Blade_male R Finger01
+      parentName: 
       position: {x: -0.063411556, y: 0.000000038146972, z: -0.000000009536743}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000001, y: 0.9999997, z: 0.9999999}
-      transformModified: 1
     - name: Blade_male R Finger0Nub
+      parentName: 
       position: {x: -0.057407912, y: -0.000000038146972, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: -1, y: -1, z: -1.0000001}
-      transformModified: 1
     - name: Blade_male Head
+      parentName: 
       position: {x: -0.06220993, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000012, y: 1.000001, z: 1.0000015}
-      transformModified: 1
     - name: Blade_male HeadNub
+      parentName: 
       position: {x: -0.27116135, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 0.99999994}
-      transformModified: 1
     - name: Blade_male Ponytail1
+      parentName: 
       position: {x: -0.15468475, y: -0.10966942, z: 0.017452834}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000005, y: 1.0000002, z: 1.0000001}
-      transformModified: 1
     - name: Blade_male Ponytail11
+      parentName: 
       position: {x: -0.15521294, y: -0.00009857178, z: 0.0000000023841857}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000001, y: 1.0000001, z: 1.0000002}
-      transformModified: 1
     - name: Blade_male Ponytail12
+      parentName: 
       position: {x: -0.124447934, y: -0.00017242432, z: 0.000011339187}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 0.9999998, z: 1.0000001}
-      transformModified: 1
     - name: Blade_male Ponytail1Nub
+      parentName: 
       position: {x: -0.21686889, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.99999994, y: 0.99999994, z: 1}
-      transformModified: 1
     - name: Blade_male L Thigh
+      parentName: 
       position: {x: 0.107333146, y: 0.00018000125, z: 0.12135237}
       rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
       scale: {x: 1.0000004, y: 1.0000013, z: 1.000001}
-      transformModified: 1
     - name: Blade_male L Calf
+      parentName: 
       position: {x: -0.4121602, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000006, y: 1.0000002, z: 1.000001}
-      transformModified: 1
     - name: Blade_male L Foot
+      parentName: 
       position: {x: -0.49014622, y: 0, z: -0.000000019073486}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000002, y: 1.0000007, z: 1.0000002}
-      transformModified: 1
     - name: Blade_male L Toe0
+      parentName: 
       position: {x: -0.18688567, y: 0.14747514, z: 0}
       rotation: {x: 0, y: 0, z: 0.7071068, w: -0.7071068}
       scale: {x: 1.0000008, y: 1, z: 1.0000006}
-      transformModified: 1
     - name: Blade_male L Toe0Nub
+      parentName: 
       position: {x: -0.13314597, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: -1, y: -1, z: -1}
-      transformModified: 1
     - name: Blade_male R Thigh
+      parentName: 
       position: {x: 0.1187249, y: 0.00018970967, z: -0.1102324}
       rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
       scale: {x: 1.0000013, y: 1.0000014, z: 1.0000017}
-      transformModified: 1
     - name: Blade_male R Calf
+      parentName: 
       position: {x: -0.41216034, y: -0.0000000023841857, z: 0.000000019073486}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000006, y: 1.0000002, z: 1}
-      transformModified: 1
     - name: Blade_male R Foot
+      parentName: 
       position: {x: -0.49014613, y: -0.000000019073486, z: -0.000000019073486}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000005, y: 1.0000005, z: 1.0000004}
-      transformModified: 1
     - name: Blade_male R Toe0
+      parentName: 
       position: {x: -0.18688567, y: 0.14747511, z: -0.000000019073486}
       rotation: {x: 0, y: 0, z: 0.7071068, w: -0.7071068}
       scale: {x: 1.0000012, y: 1.0000001, z: 1.0000012}
-      transformModified: 1
     - name: Blade_male R Toe0Nub
+      parentName: 
       position: {x: -0.13314597, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.99999994, y: 1, z: 0.99999994}
-      transformModified: 1
     - name: M_scult01
+      parentName: 
       position: {x: -0.068532094, y: 0.1081838, z: -0.00000020503997}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000007, y: 1.0000002, z: 1.0000001}
-      transformModified: 1
     - name: M_scult02
+      parentName: 
       position: {x: -0.27469185, y: -7.105427e-17, z: -0.00000001190663}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.99999976, y: 0.9999999, z: 0.9999999}
-      transformModified: 1
     - name: M_scult03
+      parentName: 
       position: {x: -0.2736257, y: -3.8118147e-17, z: -8.677361e-11}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000002, y: 1.0000004, z: 1}
-      transformModified: 1
     - name: M_scult01_end
+      parentName: 
       position: {x: -0.29708576, y: -0.000000009536743, z: 0.000000038146972}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: body_band
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: boots
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: BW_Weapon
+      parentName: 
       position: {x: 0.45375648, y: 0.9958603, z: -0.08994703}
       rotation: {x: 0.49990934, y: -0.49991024, z: 0.50009066, w: 0.50008976}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Glove
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Hair
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Hair_bandf
+      parentName: 
       position: {x: -0.017892981, y: 1.842365, z: -0.20960215}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Head
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Object006
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Object007
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Object009
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Object010
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: pants
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Shoulder
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: uper_cloth
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -1295,12 +1789,20 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 0.01
     rootMotionBoneName: 
     hasTranslationDoF: 1
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: d7906716a888ee3438995e875e4205ce,
     type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 2
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
