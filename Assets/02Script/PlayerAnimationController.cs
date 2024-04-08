@@ -67,4 +67,15 @@ public class PlayerAnimationController : MonoBehaviour
         animator.SetInteger(H_Skill, id);
     }
 
+    public void PlayAnim(bool use)
+    {
+        if (use)
+        {
+            animator.enabled = true;
+        }
+        else
+        {
+            animator.enabled = false;
+        }
+    }
 }

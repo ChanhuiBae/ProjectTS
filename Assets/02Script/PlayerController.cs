@@ -399,6 +399,20 @@ public class PlayerController : MonoBehaviour, IDamage
         return 1f; // todo : Calculate value
     }
 
+    public void StopAnimator()
+    {
+        if (skillManager.IsCharge)
+        {
+            anim.PlayAnim(false);
+        }
+    }
+
+    public void StartAnimator()
+    {
+        anim.PlayAnim(true);
+    }
+
+
     public void CalculateDamage(ITakeDamage hiter)
     {
         if (!isInvincibility)

@@ -4,6 +4,14 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
+public enum CrowdControl
+{
+    Stun,
+    Knockback,
+    Airborne,
+    Pulled
+}
+
 public class SkillManager : MonoBehaviour, ITakeDamage
 {
     private PlayerController player;
@@ -17,6 +25,13 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private PoolManager effectManager;
     private PoolManager projectileManager;
     private int useSkill;
+    private bool isCharge;
+    public bool IsCharge
+    {
+        get => isCharge;
+        set => isCharge = value;
+    }
+    
 
     private void Awake()
     {
@@ -59,6 +74,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             Debug.Log("SkillManager - Awake - Skill3");
         }
         useSkill = -1;
+        isCharge = false;
     }
 
     public void WeaponInit(Weapon weapon)
@@ -96,13 +112,34 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             case 1:
                 skill1.StartSkill();
                 break;
-            case 2: 
+            case 2:
                 skill2.StartSkill();
-                 break;
+                break;
             case 3:
                 skill3.StartSkill();
                 break;
         }
+    }
+
+    private void StopCharge()
+    {
+        switch (useSkill)
+        {
+            case 1:
+                skill1.StopCharge();
+                break;
+            case 2:
+                skill2.StopCharge();
+                break;
+            case 3:
+                skill3.StopCharge();
+                break;
+        }
+    }
+
+    public void StartAnimator()
+    {
+        player.StartAnimator();
     }
 
     public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
@@ -137,7 +174,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 creatureDamage.CalculateDamage(this);
                 //creatureDamage.Stun(2);
                 //creatureDamage.Airborne(1);
-                //creatureDamage.Knockback(10);
+                //creatureDamage.Knockback(5);
             }
         }
     }
@@ -151,52 +188,4 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     {
         effectManager.TakeToPool<Effect>(name, effect);
     }
-
-    /*
-    public void NormalAttack()
-    {
-        if (damage == 0)
-        {
-            if (type == WeaponType.Gun)
-            {
-                // todo : calculateDamage
-                damage = 5;
-                GameObject obj = pool.GetFromPool<Projectile>(0).gameObject;
-                obj.transform.rotation = transform.rotation;
-                Projectile projectile = obj.GetComponent<Projectile>();
-                projectile.Init(damage, transform.GetChild(0).transform.position);
-            }
-            else
-            {
-                // todo : calculateDamage
-                damage = 5f;
-            }
-            StartCoroutine(DamageZero());
-        }
-    }
-    */
-    /*
-    public void Dragon_Hammer_Attack()
-    {
-        if (damage == 0)
-        {
-            damage = 1f; // Weapon_Physics * (2.0 + 0.15 * skill.level)
-            isKnockback = true;
-            StartCoroutine(Buster());
-        }
-    }
-    */
-    /*
-    private IEnumerator Buster()
-    {
-        effects[0].OnEffect();
-        effects[1].OnEffect();
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        effects[0].OffEffect();
-        effects[1].OffEffect();
-    }
-    */
-
-
-
 }

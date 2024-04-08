@@ -11,13 +11,26 @@ public class Skill : MonoBehaviour
     private int max_level;
     private int current_charge;
     private int max_charge;
+    public int ChargeMax
+    {
+        get => max_charge;
+    }
     private int current_hit;
     private int max_hit;
     private int currentInfoID;
     private TableEntity_Skill currentInfo;
     private TableEntity_Skill_Hit_Frame hitInfo;
     private bool IsActive;
-    
+    private int chargeCount;
+    private SkillManager skillManager;
+
+    private void Awake()
+    {
+        if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
+        {
+            Debug.Log("Skill - Awake - SkillManager");
+        }
+    }
 
     public void init(int id, string weapon_type, int category, int max_level, int max_charge, int max_hit)
     {
@@ -60,8 +73,9 @@ public class Skill : MonoBehaviour
         current_hit = 0;
     }
 
-    public void CargeUp()
+    public void ChargeUp()
     {
+        Debug.Log("charge");
         current_charge++;
         currentInfoID = GetKey();
         GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
@@ -84,13 +98,34 @@ public class Skill : MonoBehaviour
     public void StartSkill()
     {
         SetIdle();
+        if(max_charge > 0)
+            StartCoroutine(CountUp());
+        else
+            StartCoroutine(CountHit());
+    }
+
+    private IEnumerator CountUp()
+    {
+        for (int i = 0; i < max_charge; i++)
+        {
+            for (chargeCount = 0; chargeCount < 60; chargeCount++)
+            {
+                yield return null;
+            }
+            ChargeUp();
+        }
+        skillManager.StartAnimator();
+        StartCoroutine(CountHit());
+    }
+    public void StopCharge()
+    {
+        StopAllCoroutines();
+        skillManager.StartAnimator();
         StartCoroutine(CountHit());
     }
 
     private IEnumerator CountHit()
     {
-        Debug.Log("id" + ID);
-        Debug.Log(hitInfo.Hit_01);
         for(int i = 0; i < hitInfo.Hit_01;  i++)
         {
             yield return null;

@@ -1,11 +1,12 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SkillButton : MonoBehaviour
 {
     private PlayerController player;
-    private Button button;
     private Image coolTimeImage;
     private Image icon;
     private float maxTime;
@@ -13,6 +14,10 @@ public class SkillButton : MonoBehaviour
     private int skill_ID;
     private SkillManager skillManager;
     private int buttonNum;
+    private EventTrigger trigger;
+    private EventTrigger.Entry down;
+    private EventTrigger.Entry up;
+ 
 
     private void Awake()
     {
@@ -23,10 +28,6 @@ public class SkillButton : MonoBehaviour
             {
                 Debug.Log("SkillButton - Awake - PlayerController");
             }
-        }
-        if(!TryGetComponent<Button>(out button))
-        {
-            Debug.Log("SkillButton - Awake - Button");
         }
         if(!transform.GetChild(0).TryGetComponent<Image>(out coolTimeImage))
         {
@@ -40,6 +41,30 @@ public class SkillButton : MonoBehaviour
         {
             Debug.Log("SkillButton - Awake - SkillManager");
         }
+        if(!TryGetComponent<EventTrigger>(out trigger))
+        {
+            Debug.Log("SkillButton - Awake -  EventTrigger");
+        }
+        down = new EventTrigger.Entry();
+        up = new EventTrigger.Entry();
+        down.eventID = EventTriggerType.PointerDown;
+        up.eventID = EventTriggerType.PointerUp;
+        down.callback.AddListener((data)  => { OnPointerDown((PointerEventData)data); });
+        trigger.triggers.Add(down);
+        up.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
+        trigger.triggers.Add(up);
+    }
+
+    void OnPointerDown(PointerEventData eventData)
+    {
+        skillManager.IsCharge = true;
+        AttackSkill();
+    }
+
+    void OnPointerUp(PointerEventData eventData)
+    {
+        Debug.Log("up");
+        skillManager.IsCharge = false;
     }
 
     public void Init(int buttonNum, int id)
@@ -50,13 +75,12 @@ public class SkillButton : MonoBehaviour
         {
             icon.sprite = Resources.Load<Sprite>("Image/NoneSkill");
             coolTimeImage.fillAmount = 0;
-            button.enabled = false;
+            trigger.enabled = false;
         }
         else
         {
             icon.sprite = Resources.Load<Sprite>("Image/Hammer");
-            button.onClick.AddListener(AttackSkill);
-            button.enabled = false;
+            trigger.enabled = false;
             TableEntity_Skill_List skill;
             GameManager.Inst.GetSkillList(skill_ID,out skill);
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + "101";
@@ -77,7 +101,7 @@ public class SkillButton : MonoBehaviour
             currentTime += 0.1f;
             coolTimeImage.fillAmount = currentTime / maxTime;
         }
-        button.enabled = true;
+        trigger.enabled = true;
     }
 
     private void AttackSkill()
@@ -87,6 +111,6 @@ public class SkillButton : MonoBehaviour
         player.UseSkill(skill_ID);
         skillManager.UseSkill(buttonNum);
         StartCoroutine (CoolTime());
-        button.enabled = false;
+        trigger.enabled = false;
     }
 }
