@@ -5,6 +5,9 @@ using UnityEngine;
 public interface IDamage
 {
     public void CalculateDamage(ITakeDamage hiter);
-    public void Knockback();
+
+    public void Stun(int time);
+    public void Airborne(int time);
+    public void Knockback(int distance);
     public void Pulled(Vector3 center);
 }

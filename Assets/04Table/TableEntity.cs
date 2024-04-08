@@ -10,6 +10,7 @@ public class TableEntity_Player_Stats
     public int Endurance;
     public int Strength;
     public int Dexterity;
+    public int Instinct;
     public int Adaptation;
     public int Available_Point;
     public int Move_Speed;
@@ -36,6 +37,11 @@ public class TableEntity_Weapon
 {
     public int ID;
     public int Type;
+    public int Weight;
+    public string Physics_Type;
+    public bool Is_Slash;
+    public bool Is_Strike;
+    public bool Is_Explosion;
     public int Physics;
     public int Fire;
     public int Water;
@@ -97,6 +103,9 @@ public class TableEntity_Skill_Hit_Frame
 public class TableEntity_Creature
 {
     public int ID;
+    public string Name;
+    public int Category_ID;
+    public string Category;
     public int Physics;
     public int Fire;
     public int Water;
@@ -109,8 +118,8 @@ public class TableEntity_Creature
     public float Electric_Cut;
     public float Ice_Cut;
     public float Wind_Cut;
-    public float HP;
+    public float Max_HP;
     public float Move_Speed;
     public float Attack_Speed;
-    public float Groggy_HP;
+    public int Pattern_01;
 }

@@ -22,6 +22,7 @@ public class PlayerData
     public float Exp_Need;
     public Inventory inventory;
     public int WeaponID;
+    public int basic_ID;
     public int skill1_ID;
     public int skill2_ID;
     public int skill3_ID;
@@ -43,6 +44,7 @@ public class GameManager : Singleton<GameManager>
     private FadeManager fadeManager;
     private MenuManager menuManager;
     private SoundManager soundManager;
+    private SkillManager skillManager;
 
     private TS table;
     private Dictionary<int, TableEntity_Player_Stats> playerDataTable = new Dictionary<int, TableEntity_Player_Stats>();
@@ -57,11 +59,30 @@ public class GameManager : Singleton<GameManager>
         return skillDataTable.TryGetValue(ID, out data);
     }
     private Dictionary<int, TableEntity_Skill_Hit_Frame> skillHitFrame = new Dictionary<int, TableEntity_Skill_Hit_Frame>();
-    public bool GetSkillHitFrame(int skillID, TableEntity_Skill_Hit_Frame data)
+    public bool GetSkillHitFrame(int skillID, out TableEntity_Skill_Hit_Frame data)
     {
         return skillHitFrame.TryGetValue(skillID, out data);
     }
     private Dictionary<int, TableEntity_Weapon> weaponDataTable = new Dictionary<int, TableEntity_Weapon>();
+    public bool GetWeapon(int weaponID, out TableEntity_Weapon data)
+    {
+        return weaponDataTable.TryGetValue(weaponID, out data);
+    }
+    public WeaponType GetWeaponType(int weaponID)
+    {
+        TableEntity_Weapon weapon;
+        weaponDataTable.TryGetValue(weaponID, out weapon);
+        switch(weapon.Type)
+        {
+            case 1:
+                return WeaponType.Sowrd;
+            case 2:
+                return WeaponType.Hammer;
+            case 3:
+                return WeaponType.Gun;
+        }
+        return WeaponType.None;
+    }
     private Dictionary<int, TableEntity_Creature> creatureDataTable = new Dictionary<int, TableEntity_Creature>();
     public bool GetCreatureData(int key, out TableEntity_Creature data)
     {
@@ -134,6 +155,11 @@ public class GameManager : Singleton<GameManager>
                     fadeManager.Fade_InOut(true);
                 }
             }
+            if (skillManager == null)
+            {
+                GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager);
+
+            }
             while (!end)
             {
                 end = UpdatePlayer();
@@ -162,10 +188,37 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            player.Init();
-            menuManager.InitSkill(1, 0);
-            menuManager.InitSkill(2, 202);
-            menuManager.InitSkill(3, 0);
+            player.Init(GetWeaponType(pData.WeaponID));
+            menuManager.InitSkill(1, pData.skill1_ID);
+            menuManager.InitSkill(2, pData.skill2_ID);
+            menuManager.InitSkill(3, pData.skill3_ID);
+            if (pData.basic_ID != 0)
+            {
+                TableEntity_Skill_List skill;
+                GameManager.Inst.GetSkillList(pData.basic_ID, out skill);
+                skillManager.SetSkill(0, pData.basic_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+            }
+            if (pData.skill1_ID != 0)
+            {
+                TableEntity_Skill_List skill1;
+                GameManager.Inst.GetSkillList(pData.skill1_ID, out skill1);
+                skillManager.SetSkill(1, pData.skill1_ID, skill1.Weapon_ID, skill1.Category_ID, skill1.Skill_Level_Max, skill1.Charge_Max, skill1.Hit_Max);
+            
+            }
+            if (pData.skill2_ID != 0)
+            {
+                TableEntity_Skill_List skill2;
+                GameManager.Inst.GetSkillList(pData.skill2_ID, out skill2);
+                skillManager.SetSkill(2, pData.skill2_ID, skill2.Weapon_ID, skill2.Category_ID, skill2.Skill_Level_Max, skill2.Charge_Max, skill2.Hit_Max);
+        
+            }
+            if (pData.skill3_ID != 0)
+            {
+                TableEntity_Skill_List skill3;
+                GameManager.Inst.GetSkillList(pData.skill3_ID, out skill3);
+                skillManager.SetSkill(3,  pData.skill3_ID, skill3.Weapon_ID, skill3.Category_ID, skill3.Skill_Level_Max, skill3.Charge_Max, skill3.Hit_Max);
+            
+            }
             ultimateValue = 0;
             killCount = 0;
             return true;
@@ -210,7 +263,8 @@ public class GameManager : Singleton<GameManager>
         pData.Adaptation = info.Adaptation;
         pData.Available_Point = info.Available_Point;
         pData.Exp_Need = info.Exp_Need;
-        pData.WeaponID = 1;
+        pData.WeaponID = 2000;
+        pData.basic_ID = 200;
         pData.skill1_ID = 201;
         pData.skill2_ID = 202;
         pData.skill3_ID = 203;

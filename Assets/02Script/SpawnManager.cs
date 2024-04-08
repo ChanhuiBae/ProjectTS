@@ -32,11 +32,11 @@ public class SpawnManager : MonoBehaviour
         {
             GameObject obj = pool.GetFromPool<Creture>(2).gameObject;
             Creture creture = obj.GetComponent<Creture>();
-            creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x , 0f, Random.Range(-10f, 10f) + player.transform.position.z), CretureType.Normal);
+            creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x , 0f, Random.Range(-10f, 10f) + player.transform.position.z), 1000, CretureType.Normal);
             yield return YieldInstructionCache.WaitForSeconds(2f);
             obj = pool.GetFromPool<Creture>(3).gameObject;
             creture = obj.GetComponent<Creture>();
-            creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x, 0f, Random.Range(-10f, 10f) + player.transform.position.z), CretureType.Noble);
+            creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x, 0f, Random.Range(-10f, 10f) + player.transform.position.z), 2000,CretureType.Noble);
             yield return YieldInstructionCache.WaitForSeconds(2f);
         }
     }

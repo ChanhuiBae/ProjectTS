@@ -12,8 +12,7 @@ public enum AI_State
     Attack,
     Defense,
     Evasion,
-    Knockback,
-    pulled,
+    Stop,
     Die
 }
 public enum CretureType
@@ -49,7 +48,7 @@ public class CretureAI : MonoBehaviour
     protected bool isInit;
 
     // MosterBase 초기화 시 호출
-    public void InitAI(CretureType type)
+    public void InitAI(CretureType type, float speed)
     {
         if (!TryGetComponent<NavMeshAgent>(out navAgent))
             Debug.Log("CretureAI - Init - NavMeshAgent");
@@ -65,6 +64,7 @@ public class CretureAI : MonoBehaviour
         {
             Debug.Log("CretureAI - Init - PlayerController");
         }
+        navAgent.speed = speed;
         navAgent.enabled = true;
         Spawn();
     }
@@ -214,41 +214,26 @@ public class CretureAI : MonoBehaviour
         attackTarget = null;
         StartCoroutine(AI_State.Idle.ToString());
     }
-    public void InitKnockback(bool use)
+    public void StopAI(float time)
     {
-        if (use)
+        StopAllCoroutines();
+        currentState = AI_State.Stop;
+        navAgent.enabled = false;
+        if(gameObject.activeSelf)
         {
-            StopAllCoroutines();
-            ChangeAIState(AI_State.Knockback);
-            navAgent.enabled = false;
-        }
-        else
-        {
-            navAgent.enabled = true;
-            ChangeAIState(AI_State.Chase);
-        }
-
-    }
-
-    private IEnumerator Knockback()
-    {
-        currentState = AI_State.Idle;
-        yield return YieldInstructionCache.WaitForSeconds(0.2f);
-        currentState = AI_State.Knockback;
-    }
-
-    public void TakeDebuff(float time)
-    {
-        if (currentState != AI_State.Die)
-        {
-            StopAllCoroutines();
-            StartCoroutine(StopAction(time));
+            StartCoroutine(Stop(time));
         }
     }
 
-    protected IEnumerator StopAction(float time)
+    private IEnumerator Stop(float time)
     {
         yield return YieldInstructionCache.WaitForSeconds(time);
-        StartCoroutine(currentState.ToString());
+        RestartAI();
+    }
+
+    public void RestartAI()
+    {
+        navAgent.enabled = true;
+        ChangeAIState(AI_State.Chase);
     }
 }

@@ -6,12 +6,12 @@ using UnityEngine;
 public class AttackArea : MonoBehaviour
 {
     private SphereCollider sphereCol;
-    private Skill skillManager;
+    private SkillManager skillManager;
 
     public void Awake()
     {
  
-        if(!GameObject.Find("SkillManager").TryGetComponent<Skill>(out skillManager))
+        if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("AttackArea - Init - SkillManager");
         }

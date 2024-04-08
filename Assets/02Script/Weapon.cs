@@ -5,12 +5,20 @@ using UnityEngine;
 
 public enum WeaponType
 {
-    Sowrd = 0,
-    Hammer = 1,
-    Gun = 2
+    None = 0,
+    Sowrd = 1,
+    Hammer = 2,
+    Gun = 3
+}
+public enum Physics_Type
+{
+    Slash,
+    Strike,
+    Thrust
 }
 public class Weapon : MonoBehaviour
 {
+    private int id;
     private WeaponType type;
     public WeaponType Type
     {
@@ -21,7 +29,12 @@ public class Weapon : MonoBehaviour
     {
         set => attackTime = value;
     }
+    private float weight;
+    public Physics_Type physicsType;
     private float attack_Speed;
+    public bool IsSlash;
+    public bool IsStrike;
+    public bool IsExplosion;
     private float stagger_Time;
     public float StaggerTime
     {
@@ -61,33 +74,33 @@ public class Weapon : MonoBehaviour
     {
         get => weapon_Physics;
     }
-    private float weapon_Fire;
+    private float fire;
     public float Fire
     {
-        get => weapon_Fire;
+        get => fire;
     }
-    private float weapon_Water;
+    private float water;
     public float Water
     {
-        get => weapon_Water;
+        get => water;
     }
-    private float weapon_Electric;
+    private float electric;
     public float Electric
     {
-        get => weapon_Electric;
+        get => electric;
     }
-    private float weapon_Ice;
+    private float ice;
     public float Ice
     {
-        get => weapon_Ice;
+        get => ice;
     }
-    private float weapon_Wind;
+    private float wind;
     public float Wind
     {
-        get => weapon_Wind;
+        get => wind;
     }
     private BoxCollider col;
-    private Skill skillManager;
+    private SkillManager skillManager;
 
     private void Awake()
     {
@@ -95,7 +108,7 @@ public class Weapon : MonoBehaviour
         {
             Debug.Log("Weapon - Awake - BoxCollider");
         }
-        if (!GameObject.Find("SkillManager").TryGetComponent<Skill>(out skillManager))
+        if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("Weapon - Awake - SkillManager");
         }
@@ -103,13 +116,41 @@ public class Weapon : MonoBehaviour
 
     public void Init(WeaponType type)
     {
+        id = GameManager.Inst.PlayerInfo.WeaponID;
         this.type = type;
+        TableEntity_Weapon data;
+        GameManager.Inst.GetWeapon(id, out data);
+        weight = data.Weight;
+        switch (data.Physics_Type)
+        {
+            case "Slash":
+                physicsType = Physics_Type.Slash;
+                break;
+            case "Strike":
+                physicsType = Physics_Type.Strike;
+                break;
+            case "Thrust":
+                physicsType = Physics_Type.Thrust;
+                break;
+        }
+        IsSlash = data.Is_Slash;
+        IsStrike = data.Is_Strike;
+        IsExplosion = data.Is_Explosion;
+        weapon_Physics = data.Physics;
+        fire = data.Fire;
+        water = data.Water;
+        electric = data.Electric;
+        ice = data.Ice;
+        wind = data.Wind;
+        cretical_Chance = data.Critical_Chance;
+        critical_Mag = data.Critical_Mag;
+        attack_Speed = data.Attack_Speed;
         skillManager.WeaponInit(this);
     }
     
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Creture")
+        if (other.tag == "Creature")
         {
             skillManager.TakeDamageOther(other);
         }

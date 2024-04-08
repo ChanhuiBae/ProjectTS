@@ -1,6 +1,7 @@
 using Redcode.Pools;
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 
@@ -11,15 +12,23 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     [SerializeField]
     private string poolName;
     private PoolManager poolManager;
+    private int ID;
     private float maxHP;
     private float currentHP;
     private CretureType type;
+    private int physics;
+    private int fire;
+    private int water;
+    private int electric;
+    private int ice;
+    private int wind;
     private float physicsCut;
     private float fireCut;
     private float waterCut;
     private float electricCut;
     private float iceCut;
     private float windCut;
+    private float attackSpeed;
 
     public void Awake()
     {
@@ -37,13 +46,29 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         }
     }
 
-    public void Init(Vector3 SpawnPos, CretureType type)
+    public void Init(Vector3 SpawnPos, int ID, CretureType type)
     {
-        maxHP = 4;
-        currentHP = maxHP;
-        this.type = type;
         transform.position = SpawnPos;
-        ai.InitAI(this.type);
+        this.ID = ID;
+        this.type = type;
+        TableEntity_Creature creature;
+        GameManager.Inst.GetCreatureData(this.ID, out creature);
+        maxHP = creature.Max_HP;
+        currentHP = maxHP;
+        physics = creature.Physics;
+        fire = creature.Fire;
+        water = creature.Water;
+        electric = creature.Electric;
+        ice = creature.Ice;
+        wind = creature.Wind;
+        physicsCut = creature.Physics_Cut;
+        fireCut = creature.Fire_Cut;
+        waterCut = creature.Water_Cut;
+        electricCut = creature.Electric_Cut;
+        iceCut = creature.Ice_Cut;
+        windCut = creature.Wind_Cut;
+        attackSpeed = creature.Attack_Speed;
+        ai.InitAI(this.type, creature.Move_Speed);
     }
 
     public void CalculateDamage(ITakeDamage hiter)
@@ -81,13 +106,6 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         }
     }
 
-    public void Knockback()
-    {
-        ai.InitKnockback(true);
-        rig.freezeRotation = true;
-        rig.velocity = Vector3.up * 10f + transform.position;
-    }
-
 
     public void OnCreatedInPool()
     {
@@ -98,17 +116,50 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         //throw new System.NotImplementedException();
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Ground" && ai.State == AI_State.Knockback)
-        {
-            rig.freezeRotation = false;
-            ai.InitKnockback(false);
-        }
-    }
 
     public void Pulled(Vector3 center)
     {
         // todo: move to center
+    }
+
+    public void Stun(int time)
+    {
+        ai.StopAI(time);
+        if (gameObject.activeSelf)
+            StartCoroutine(StunEffect(time));
+    }
+
+    private IEnumerator StunEffect(int time)
+    {
+        for (float i = 0.1f; i < time; i += 0.1f)
+        {
+            LeanTween.move(gameObject, transform.position - transform.forward * 0.1f, 0.1f);
+            yield return YieldInstructionCache.WaitForSeconds(0.1f);
+            LeanTween.move(gameObject, transform.position + transform.forward * 0.1f, 0.1f);
+            yield return YieldInstructionCache.WaitForSeconds(0.1f);
+        }
+    }
+
+    public void Airborne(int time)
+    {
+        ai.StopAI(time);
+        if(gameObject.activeSelf)
+        {
+            StartCoroutine(MoveAirborne(time));
+        }
+    }
+
+    private IEnumerator MoveAirborne(float time)
+    {
+        Vector3 pos = transform.position;
+        LeanTween.move(gameObject, pos + (Vector3.up * 3f), time / 2).setEase(LeanTweenType.easeOutCubic);
+        yield return YieldInstructionCache.WaitForSeconds(time/2);
+        LeanTween.move(gameObject, pos, time / 2).setEase(LeanTweenType.easeInSine);
+    }
+
+    public void Knockback(int distance)
+    {
+        ai.StopAI(distance * 0.01f);
+        LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance, distance * 0.01f).setEase(LeanTweenType.easeOutQuart);
     }
 }

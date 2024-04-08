@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Creture
   - AttackArea
   - Weapon
+  - Creature
   layers:
   - Default
   - TransparentFX

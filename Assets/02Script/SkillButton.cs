@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +10,9 @@ public class SkillButton : MonoBehaviour
     private Image icon;
     private float maxTime;
     private float currentTime;
-    private int ID;
+    private int skill_ID;
+    private SkillManager skillManager;
+    private int buttonNum;
 
     private void Awake()
     {
@@ -35,12 +36,17 @@ public class SkillButton : MonoBehaviour
         {
             Debug.Log("SkillButton - Awake - Image");
         }
+        if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
+        {
+            Debug.Log("SkillButton - Awake - SkillManager");
+        }
     }
 
-    public void Init(int id)
+    public void Init(int buttonNum, int id)
     {
-        ID = id;
-        if(ID == 0)
+        this.buttonNum = buttonNum;
+        skill_ID = id;
+        if(skill_ID == 0)
         {
             icon.sprite = Resources.Load<Sprite>("Image/NoneSkill");
             coolTimeImage.fillAmount = 0;
@@ -52,7 +58,7 @@ public class SkillButton : MonoBehaviour
             button.onClick.AddListener(AttackSkill);
             button.enabled = false;
             TableEntity_Skill_List skill;
-            GameManager.Inst.GetSkillList(ID,out skill);
+            GameManager.Inst.GetSkillList(skill_ID,out skill);
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + "101";
             TableEntity_Skill info;
             GameManager.Inst.GetSkillData(int.Parse(key), out info);
@@ -78,7 +84,8 @@ public class SkillButton : MonoBehaviour
     {
         currentTime = 0;
         player.ChangeState(State.Attack_Skill);
-        player.UseSkill(ID);
+        player.UseSkill(skill_ID);
+        skillManager.UseSkill(buttonNum);
         StartCoroutine (CoolTime());
         button.enabled = false;
     }

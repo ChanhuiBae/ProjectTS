@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 9027386709340009985}
   m_Layer: 0
   m_Name: NormalCreature
-  m_TagString: Creture
+  m_TagString: Creature
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed69101cf3c8364458eb2072c33feeaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolName: NormalCreature
+  poolName: 1000
 --- !u!195 &1162546125146636024
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -224,7 +224,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 10

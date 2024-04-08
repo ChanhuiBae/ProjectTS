@@ -7,11 +7,11 @@ public class Effect : MonoBehaviour, IPoolObject
 {
     [SerializeField]
     private string poolName;
-    private Skill skillManager;
+    private SkillManager skillManager;
 
     private void Awake()
     {
-        if(!GameObject.Find("SkillManager").TryGetComponent<Skill>(out skillManager))
+        if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("Effect - Awake - SkillManager");
         }

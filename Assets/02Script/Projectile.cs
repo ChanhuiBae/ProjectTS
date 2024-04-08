@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour, IPoolObject, ITakeDamage
     [SerializeField]
     private string poolName;
     private FixedJoystick dir;
-    private Skill skillManager;
+    private SkillManager skillManager;
     
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour, IPoolObject, ITakeDamage
         {
             Debug.Log("Projectile - Awake - TrailRenderer");
         }
-        if (!GameObject.Find("SkillManager").TryGetComponent<Skill>(out skillManager))
+        if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("Projectile - Awake - SkillManager");
         }

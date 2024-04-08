@@ -1,128 +1,148 @@
-using Redcode.Pools;
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-
-public class Skill : MonoBehaviour, ITakeDamage
+public class Skill : MonoBehaviour
 {
-    private PlayerController player;
-    private PlayerAnimationController anim;
-    private Weapon weapon;
-    private AttackArea attackArea;
-    private float current_skill_ID;
-    private PoolManager effectManager;
-    private PoolManager projectileManager;
+    private int ID;
+    private string weapon_type;
+    private int category;
+    private int current_level;
+    private int max_level;
+    private int current_charge;
+    private int max_charge;
+    private int current_hit;
+    private int max_hit;
+    private int currentInfoID;
+    private TableEntity_Skill currentInfo;
+    private TableEntity_Skill_Hit_Frame hitInfo;
+    private bool IsActive;
+    
 
-    private void Awake()
+    public void init(int id, string weapon_type, int category, int max_level, int max_charge, int max_hit)
     {
-        GameObject obj = GameObject.Find("Player");
-        if (!obj.TryGetComponent<PlayerController>(out player))
-        {
-            Debug.Log("Skill - Awake - PlayerController");
-        }
-        if (!obj.TryGetComponent<PlayerAnimationController>(out anim))
-        {
-            Debug.Log("Skill - Awake - PlayerAnimationController");
-        }
-        if(!obj.transform.Find("AttackArea").TryGetComponent<AttackArea>(out attackArea))
-        {
-            Debug.Log("Skill - Awake - AttackArea");
-        }
-        if (!GameObject.Find("EffectManager").TryGetComponent<PoolManager>(out effectManager))
-        {
-            Debug.Log("Skill - Awake - PoolManager");
-        }
-        if (!GameObject.Find("ProjectileManager").TryGetComponent<PoolManager>(out projectileManager))
-        {
-            Debug.Log("Skill - Awake - PoolManager");
-        }
+        this.ID = id;
+        this.weapon_type = weapon_type;
+        this.category = category;
+        this.max_level = max_level;
+        current_level = 1;
+        this.max_charge = max_charge;
+        current_hit = 0;
+        this.max_hit = max_hit;
+        current_hit = 1;
+        currentInfoID = GetKey();
+        GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
+        GameManager.Inst.GetSkillHitFrame(id, out hitInfo);
     }
 
-    public void WeaponInit(Weapon weapon)
+    public int GetKey()
     {
-        this.weapon = weapon;
+        string key = ID + weapon_type + category + current_level + current_charge + current_hit;
+        return int.Parse(key);
     }
 
-    public void SetSkill(float value)
+    public int GetLevel()
     {
-        current_skill_ID = value;
-        //to getSkill name & start corutine
+        return current_level;
     }
 
-
-    public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
-    {
-        return weapon.Physics * (1 - Creature_Physics_Cut) * weapon.CriticalMag()
-            + (weapon.Fire * (1 - Creature_Fire_Cut)) + (weapon.Water * (1 - Creature_Water_Cut))
-            + (weapon.Electric * (1 - Creature_Electric_Cut)) + (weapon.Ice * (1 - Creature_Ice_Cut))
-            + (weapon.Wind * (1 - Creature_Wind_Cut));
-
-    }
-
-    public void TakeDamageOther(Collider other) 
+    public void LevelUp()
     { 
-        if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
+        current_level++;
+        currentInfoID = GetKey();
+        GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
+    }
+
+    public void SetIdle()
+    {
+        IsActive = false;
+        current_charge = 0;
+        current_hit = 0;
+    }
+
+    public void CargeUp()
+    {
+        current_charge++;
+        currentInfoID = GetKey();
+        GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
+    }
+
+    public void HitUp() 
+    {
+        IsActive = false;
+        current_hit++;
+        if(current_hit > max_hit) 
         {
-             creatureDamage.CalculateDamage(this);
+            current_hit = 0;
         }
+        currentInfoID = GetKey();
+        GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
+        if(currentInfo != null)
+            IsActive = true;
     }
 
-    public void TakeProjectile(string name, Projectile projectile)
+    public void StartSkill()
     {
-        projectileManager.TakeToPool<Projectile>(name, projectile);
+        SetIdle();
+        StartCoroutine(CountHit());
     }
 
-    public void TakeEffect(string name, Effect effect)
+    private IEnumerator CountHit()
     {
-        effectManager.TakeToPool<Effect>(name, effect);
-    }
-
-    /*
-    public void NormalAttack()
-    {
-        if (damage == 0)
+        Debug.Log("id" + ID);
+        Debug.Log(hitInfo.Hit_01);
+        for(int i = 0; i < hitInfo.Hit_01;  i++)
         {
-            if (type == WeaponType.Gun)
+            yield return null;
+        }
+        HitUp();
+        if (hitInfo.Hit_02 != 0)
+        {
+            for (int i = 0; i < hitInfo.Hit_02; i++)
             {
-                // todo : calculateDamage
-                damage = 5;
-                GameObject obj = pool.GetFromPool<Projectile>(0).gameObject;
-                obj.transform.rotation = transform.rotation;
-                Projectile projectile = obj.GetComponent<Projectile>();
-                projectile.Init(damage, transform.GetChild(0).transform.position);
+                yield return null;
             }
-            else
-            {
-                // todo : calculateDamage
-                damage = 5f;
-            }
-            StartCoroutine(DamageZero());
+            HitUp();
         }
-    }
-    */
-    /*
-    public void Dragon_Hammer_Attack()
-    {
-        if (damage == 0)
+        if (hitInfo.Hit_03 != 0)
         {
-            damage = 1f; // Weapon_Physics * (2.0 + 0.15 * skill.level)
-            isKnockback = true;
-            StartCoroutine(Buster());
+            for (int i = 0; i < hitInfo.Hit_03; i++)
+            {
+                yield return null;
+            }
+            HitUp();
+        }
+        if (hitInfo.Hit_04 != 0)
+        {
+            for (int i = 0; i < hitInfo.Hit_04; i++)
+            {
+                yield return null;
+            }
+            HitUp();
+        }
+        if (hitInfo.Hit_05 != 0)
+        {
+            for (int i = 0; i < hitInfo.Hit_05; i++)
+            {
+                yield return null;
+            }
+            HitUp();
         }
     }
-    */
-    /*
-    private IEnumerator Buster()
-    {
-        effects[0].OnEffect();
-        effects[1].OnEffect();
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        effects[0].OffEffect();
-        effects[1].OffEffect();
-    }
-    */
 
+
+    public float GetDamageA()
+    {
+        if(IsActive)
+            return currentInfo.Damage_A;
+        return 0;
+    }
+
+    public float GetDamageB()
+    {
+        if (IsActive)
+            return currentInfo.Damage_B;
+        return 0;
+    }
 
 }

@@ -70,13 +70,13 @@ public class MenuManager : MonoBehaviour
         switch(num)
         { 
             case 1:
-                skill1.Init(skill);
+                skill1.Init(1,skill);
                 break;
             case 2:
-                skill2.Init(skill);
+                skill2.Init(2,skill);
                 break;
             case 3:
-                skill3.Init(skill);
+                skill3.Init(3,skill);
                 break;
         }
     }

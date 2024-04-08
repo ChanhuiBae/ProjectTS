@@ -11,14 +11,17 @@ public enum State
     Attack_Hammer,
     Attack_Gun,
     Attack_Skill,
-    Roll
+    Roll,
+    Stun,
+    Airborne,
+    Knockback,
+    Pulled
 }
 
 public class PlayerController : MonoBehaviour, IDamage
 {
     private Rigidbody rig;
     private FloatingJoystick joystick;
-    [SerializeField]
     private WeaponType type;
     [SerializeField]
     private float attackTime;
@@ -48,11 +51,11 @@ public class PlayerController : MonoBehaviour, IDamage
     private Vector3 direction;
     private Vector3 look;
 
-    private Skill skillManager;
+    private SkillManager skillManager;
 
     private void Awake()
     {
-        if (!GameObject.Find("SkillManager").TryGetComponent<Skill>(out skillManager))
+        if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("PlayerController - Awake - SkillManager");
         }
@@ -94,7 +97,7 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    public void Init()
+    public void Init(WeaponType type)
     {
         anim.Weapon((int)type);
         switch (type)
@@ -158,6 +161,7 @@ public class PlayerController : MonoBehaviour, IDamage
             switch (this.state)
             {
                 case State.Idle:
+                    skillManager.UseSkill(-1);
                     StartCoroutine(Idle());
                     break;
                 case State.MoveForward:
@@ -166,6 +170,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 case State.Attack_Soward:
                     break;
                 case State.Attack_Hammer:
+                    skillManager.UseSkill(0);
                     anim.Attack(true);
                     attackCount++;
                     break;
@@ -354,12 +359,6 @@ public class PlayerController : MonoBehaviour, IDamage
         LeanTween.move(gameObject, transform.position + transform.forward * rollSpeed, 0.4f).setEase(LeanTweenType.easeOutSine);
     }
 
-
-    public void Knockback()
-    {
-        rig.AddForce(Vector3.up, ForceMode.Impulse);
-    }
-
     public void ApplyHP(float value)
     {
         currentHP -= value;
@@ -400,16 +399,38 @@ public class PlayerController : MonoBehaviour, IDamage
         return 1f; // todo : Calculate value
     }
 
-    public void Pulled(Vector3 center)
-    {
-        // todo: move to center
-    }
-
     public void CalculateDamage(ITakeDamage hiter)
     {
         if (!isInvincibility)
         {
            // ApplyHP(hiter.TakeDamage(Physics_Cut, Fire_Cut, Water_Cut, Electric_Cut, Ice_Cut, Wind_Cut));
         }
+    }
+
+    public void Stun(int time)
+    {
+        StartCoroutine(StunControl(time));
+    }
+
+    private IEnumerator StunControl(int time)
+    {
+        isControll = false;
+        yield return YieldInstructionCache.WaitForSeconds(time);
+        isControll = true;
+        
+    }
+
+    public void Airborne(int time)
+    {
+        
+    }
+
+    public void Knockback(int distance)
+    {
+        
+    }
+    public void Pulled(Vector3 center)
+    {
+        // todo: move to center
     }
 }
