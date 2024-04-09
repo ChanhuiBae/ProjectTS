@@ -65,18 +65,18 @@ public class MenuManager : MonoBehaviour
         timeBackgroun.SetActive(false);
     }
 
-    public void InitSkill(int num, int skill)
+    public void InitSkill(int num, int skill, string name)
     {
         switch(num)
         { 
             case 1:
-                skill1.Init(1,skill);
+                skill1.Init(1,skill, name);
                 break;
             case 2:
-                skill2.Init(2,skill);
+                skill2.Init(2,skill, name);
                 break;
             case 3:
-                skill3.Init(3,skill);
+                skill3.Init(3,skill, name);
                 break;
         }
     }

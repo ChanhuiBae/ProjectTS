@@ -30,6 +30,7 @@ public class TableEntity_Skill_List
     public int Charge_Max;
     public int Hit_Max;
     public string Skill_Name;
+    public string Skill_Name_Eng;
 }
 
 [System.Serializable]

@@ -189,9 +189,6 @@ public class GameManager : Singleton<GameManager>
         else
         {
             player.Init(GetWeaponType(pData.WeaponID));
-            menuManager.InitSkill(1, pData.skill1_ID);
-            menuManager.InitSkill(2, pData.skill2_ID);
-            menuManager.InitSkill(3, pData.skill3_ID);
             if (pData.basic_ID != 0)
             {
                 TableEntity_Skill_List skill;
@@ -202,6 +199,7 @@ public class GameManager : Singleton<GameManager>
             {
                 TableEntity_Skill_List skill1;
                 GameManager.Inst.GetSkillList(pData.skill1_ID, out skill1);
+                menuManager.InitSkill(1, pData.skill1_ID, skill1.Skill_Name_Eng);
                 skillManager.SetSkill(1, pData.skill1_ID, skill1.Weapon_ID, skill1.Category_ID, skill1.Skill_Level_Max, skill1.Charge_Max, skill1.Hit_Max);
             
             }
@@ -209,6 +207,7 @@ public class GameManager : Singleton<GameManager>
             {
                 TableEntity_Skill_List skill2;
                 GameManager.Inst.GetSkillList(pData.skill2_ID, out skill2);
+                menuManager.InitSkill(2, pData.skill2_ID, skill2.Skill_Name_Eng);
                 skillManager.SetSkill(2, pData.skill2_ID, skill2.Weapon_ID, skill2.Category_ID, skill2.Skill_Level_Max, skill2.Charge_Max, skill2.Hit_Max);
         
             }
@@ -216,6 +215,7 @@ public class GameManager : Singleton<GameManager>
             {
                 TableEntity_Skill_List skill3;
                 GameManager.Inst.GetSkillList(pData.skill3_ID, out skill3);
+                menuManager.InitSkill(3, pData.skill3_ID, skill3.Skill_Name_Eng);
                 skillManager.SetSkill(3,  pData.skill3_ID, skill3.Weapon_ID, skill3.Category_ID, skill3.Skill_Level_Max, skill3.Charge_Max, skill3.Hit_Max);
             
             }

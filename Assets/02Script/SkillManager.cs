@@ -6,6 +6,7 @@ using UnityEngine;
 
 public enum CrowdControl
 {
+    None,
     Stun,
     Knockback,
     Airborne,
@@ -26,13 +27,13 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private PoolManager projectileManager;
     private int useSkill;
     private bool isCharge;
+    private CrowdControl crowdControl;
     public bool IsCharge
     {
         get => isCharge;
         set => isCharge = value;
     }
     
-
     private void Awake()
     {
         GameObject obj = GameObject.Find("Player");
@@ -75,6 +76,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         }
         useSkill = -1;
         isCharge = false;
+        crowdControl = CrowdControl.None;
     }
 
     public void WeaponInit(Weapon weapon)
@@ -121,7 +123,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         }
     }
 
-    private void StopCharge()
+    public void StopCharge()
     {
         switch (useSkill)
         {
@@ -140,6 +142,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     public void StartAnimator()
     {
         player.StartAnimator();
+    }
+
+    public void SetCrowdControl(CrowdControl type)
+    {
+        crowdControl = type;
     }
 
     public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
@@ -161,7 +168,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 skillPhysics = skill3.GetDamageA() + (skill3.GetDamageB() * skill3.GetLevel());
                 break;
         }
-        Debug.Log(weaponPhysics * skillPhysics);
+        //Debug.Log(weaponPhysics * skillPhysics);
         return weaponPhysics * skillPhysics;
     }
 
@@ -172,9 +179,21 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
             {
                 creatureDamage.CalculateDamage(this);
-                //creatureDamage.Stun(2);
-                //creatureDamage.Airborne(1);
-                //creatureDamage.Knockback(5);
+                switch (crowdControl)
+                {
+                    case CrowdControl.Stun:
+                        creatureDamage.Stun(2);
+                        break;
+                    case CrowdControl.Airborne:
+                        creatureDamage.Airborne(1);
+                        break;
+                    case CrowdControl.Knockback:
+                        creatureDamage.Knockback(5);
+                        break;
+                    case CrowdControl.Pulled:
+                        creatureDamage.Pulled(player.transform.position);
+                        break;
+                }
             }
         }
     }

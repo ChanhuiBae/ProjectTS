@@ -63,11 +63,12 @@ public class SkillButton : MonoBehaviour
 
     void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("up");
         skillManager.IsCharge = false;
+        skillManager.StopCharge();
+        trigger.enabled = false;
     }
 
-    public void Init(int buttonNum, int id)
+    public void Init(int buttonNum, int id, string name)
     {
         this.buttonNum = buttonNum;
         skill_ID = id;
@@ -79,7 +80,7 @@ public class SkillButton : MonoBehaviour
         }
         else
         {
-            icon.sprite = Resources.Load<Sprite>("Image/Hammer");
+            icon.sprite = Resources.Load<Sprite>("Image/"+ name);
             trigger.enabled = false;
             TableEntity_Skill_List skill;
             GameManager.Inst.GetSkillList(skill_ID,out skill);
@@ -111,6 +112,5 @@ public class SkillButton : MonoBehaviour
         player.UseSkill(skill_ID);
         skillManager.UseSkill(buttonNum);
         StartCoroutine (CoolTime());
-        trigger.enabled = false;
     }
 }

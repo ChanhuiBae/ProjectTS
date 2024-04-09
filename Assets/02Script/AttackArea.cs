@@ -19,21 +19,20 @@ public class AttackArea : MonoBehaviour
         {
             Debug.Log("AttackArea - Init - SphereCollider");
         }
-        gameObject.SetActive(false);
-    }
-
-    public void ActiveFalse()
-    {
-        gameObject.SetActive(false);
+        sphereCol.enabled = false;
     }
 
     public void Attack(Vector3 center, float radius)
     {
-        gameObject.SetActive(true);
+        sphereCol.enabled = true;
         sphereCol.center = center;
         sphereCol.radius = radius;
     }
 
+    public void StopAttack()
+    {
+        sphereCol.enabled = false;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private Vector3 look;
 
     private SkillManager skillManager;
+    private AttackArea attackArea;
 
     private void Awake()
     {
@@ -94,6 +95,10 @@ public class PlayerController : MonoBehaviour, IDamage
         if(!GameObject.Find("ExperienceFill").TryGetComponent<Image>(out expFill))
         {
             Debug.Log("PlayerController - Awake - Image");
+        }
+        if (!transform.Find("AttackArea").TryGetComponent<AttackArea>(out attackArea))
+        {
+            Debug.Log("SkillManager - Awake - AttackArea");
         }
     }
 
@@ -214,6 +219,8 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         roll.enabled = true;
         anim.Skill(0);
+        attackArea.StopAttack();
+        skillManager.SetCrowdControl(CrowdControl.None);
         ChangeState(State.Idle);
     }
 
@@ -372,17 +379,6 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    public void NormalAttack()
-    {
-       // weapon.NormalAttack();
-    }
-
-    public void Dragon_Hammer_Attack()
-    {
-       // weapon.Dragon_Hammer_Attack();
-    }
-
-
     public void GetEXP(float value)
     {
         currentEXP += value;
@@ -392,11 +388,6 @@ public class PlayerController : MonoBehaviour, IDamage
             // todo : Level Up
         }
         expFill.fillAmount = currentEXP / GameManager.Inst.PlayerInfo.Exp_Need;
-    }
-
-    public float GetCritical_Mag()
-    {
-        return 1f; // todo : Calculate value
     }
 
     public void StopAnimator()
@@ -412,6 +403,20 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.PlayAnim(true);
     }
 
+    public void SetAttackArea(float radius)
+    {
+        attackArea.Attack(transform.position, radius);
+    }
+
+    public void Pull()
+    {
+        skillManager.SetCrowdControl(CrowdControl.Pulled);
+    }
+
+    public void CrowdControlNone()
+    {
+        skillManager.SetCrowdControl(CrowdControl.None);
+    }
 
     public void CalculateDamage(ITakeDamage hiter)
     {

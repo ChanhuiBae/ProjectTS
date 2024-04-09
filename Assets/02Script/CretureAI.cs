@@ -58,7 +58,7 @@ public class CretureAI : MonoBehaviour
         isInit = true;
         attackTarget = null;
         homePos = transform.position;
-        attackDistance = 3f;
+        attackDistance = 10f;
         attackTarget = GameObject.Find("Player");
         if (attackTarget == null || !attackTarget.TryGetComponent<PlayerController>(out target))
         {

@@ -119,7 +119,9 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Pulled(Vector3 center)
     {
-        // todo: move to center
+        Debug.Log("pulled");
+        ai.StopAI(1f);
+        LeanTween.move(gameObject, center, 1f).setEase(LeanTweenType.easeInElastic);
     }
 
     public void Stun(int time)
