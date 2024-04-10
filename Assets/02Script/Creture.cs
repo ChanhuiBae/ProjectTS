@@ -11,7 +11,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private CretureAI ai;
     [SerializeField]
     private string poolName;
-    private PoolManager poolManager;
+    private SpawnManager spawnManager;
     private int ID;
     private float maxHP;
     private float currentHP;
@@ -40,9 +40,9 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         {
             Debug.Log("Creture - Awake - AI");
         }
-        if (!GameObject.Find("PoolManager").TryGetComponent<PoolManager>(out poolManager))
+        if (!GameObject.Find("PoolManager").TryGetComponent<SpawnManager>(out spawnManager))
         {
-            Debug.Log("Creture - Awake - PoolManager");
+            Debug.Log("Creture - Awake - SpawnManager");
         }
     }
 
@@ -73,7 +73,16 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void CalculateDamage(ITakeDamage hiter)
     {
-        currentHP -= hiter.TakeDamage(physicsCut, fireCut,waterCut,electricCut,iceCut,windCut);
+        float damage = hiter.TakeDamage(physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
+        currentHP -= damage;
+        if(damage < 200)
+        {
+            spawnManager.SpawnEffect(0, transform.position + Vector3.up, 1);
+        }
+        else
+        {
+            spawnManager.SpawnEffect(1, transform.position + Vector3.up, 1);
+        }
         if (currentHP < 0)
         {
             ai.Die();
@@ -96,13 +105,9 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
                     break;
             }
             GameManager.Inst.AddKillCount();
-            GameObject obj = poolManager.GetFromPool<HPItem>(0).gameObject;
-            HPItem hp = obj.GetComponent<HPItem>();
-            hp.Init(1f, transform.position);
-            obj = poolManager.GetFromPool<EXPItem>(1).gameObject;
-            EXPItem exp = obj.GetComponent<EXPItem>();
-            exp.Init(1f, transform.position);
-            poolManager.TakeToPool<Creture>(poolName, this);
+            spawnManager.SpawnHPItem(transform.position);
+            spawnManager.SpawnEXPItem(transform.position);  
+            spawnManager.ReturnCreature(poolName, this);
         }
     }
 
@@ -133,6 +138,8 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     private IEnumerator StunEffect(int time)
     {
+        if (currentHP > 0)
+            spawnManager.SpawnEffect(2, transform.position, time*2);
         for (float i = 0.1f; i < time; i += 0.1f)
         {
             LeanTween.move(gameObject, transform.position - transform.forward * 0.1f, 0.1f);

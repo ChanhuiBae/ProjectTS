@@ -168,7 +168,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 skillPhysics = skill3.GetDamageA() + (skill3.GetDamageB() * skill3.GetLevel());
                 break;
         }
-        //Debug.Log(weaponPhysics * skillPhysics);
+        Debug.Log(weaponPhysics * skillPhysics);
         return weaponPhysics * skillPhysics;
     }
 
@@ -182,7 +182,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 switch (crowdControl)
                 {
                     case CrowdControl.Stun:
-                        creatureDamage.Stun(2);
+                        creatureDamage.Stun(1);
                         break;
                     case CrowdControl.Airborne:
                         creatureDamage.Airborne(1);

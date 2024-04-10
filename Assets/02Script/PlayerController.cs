@@ -177,6 +177,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 case State.Attack_Hammer:
                     skillManager.UseSkill(0);
                     anim.Attack(true);
+                    skillManager.SetCrowdControl(CrowdControl.Stun);
                     attackCount++;
                     break;
                 case State.Attack_Skill:

@@ -22,9 +22,9 @@ public class Effect : MonoBehaviour, IPoolObject
         StartCoroutine(ReturnPool(lifeFrame));
     }
 
-    private IEnumerator ReturnPool(int lifeFrame)
+    private IEnumerator ReturnPool(int lifeTime)
     {
-        yield return YieldInstructionCache.WaitForSeconds(lifeFrame * 0.017f);
+        yield return YieldInstructionCache.WaitForSeconds(lifeTime);
         skillManager.TakeEffect(poolName, this);
     }
 
