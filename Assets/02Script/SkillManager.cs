@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public enum CrowdControl
 {
@@ -24,6 +25,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private Skill skill2;
     private Skill skill3;
     private PoolManager effectManager;
+    private Effect chargeEffect;
     private PoolManager projectileManager;
     private int useSkill;
     private bool isCharge;
@@ -147,6 +149,30 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     public void SetCrowdControl(CrowdControl type)
     {
         crowdControl = type;
+    }
+    public void SpawnEffect(int num, Vector3 pos, float lifeFrame)
+    {
+        GameObject obj = effectManager.GetFromPool<Effect>(num).gameObject;
+        Effect effect = obj.GetComponent<Effect>();
+        effect.Init(pos, lifeFrame);
+    }
+
+    public void SetChargeEffect(int num)
+    {
+        switch(num){
+            case 0:
+                GameObject obj = effectManager.GetFromPool<Effect>(num).gameObject;
+                chargeEffect = obj.GetComponent<Effect>();
+                chargeEffect.Init(player.transform.position, 1f);
+                chargeEffect.SetScale(1f);
+                break;
+            case 1:
+                obj = effectManager.GetFromPool<Effect>(num).gameObject;
+                chargeEffect = obj.GetComponent<Effect>();
+                chargeEffect.Init(player.transform.position, 1f);
+                chargeEffect.SetScale(2f);
+                break;
+        }
     }
 
     public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)

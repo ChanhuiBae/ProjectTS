@@ -108,6 +108,7 @@ public class Skill : MonoBehaviour
     {
         for (int i = 0; i < max_charge; i++)
         {
+            skillManager.SetChargeEffect(i);
             for (chargeCount = 0; chargeCount < 60; chargeCount++)
             {
                 yield return null;

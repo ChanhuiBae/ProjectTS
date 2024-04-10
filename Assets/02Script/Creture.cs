@@ -126,7 +126,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         Debug.Log("pulled");
         ai.StopAI(1f);
-        LeanTween.move(gameObject, center, 1f).setEase(LeanTweenType.easeInElastic);
+        LeanTween.move(gameObject, center, 0.1f).setEase(LeanTweenType.easeInElastic);
     }
 
     public void Stun(int time)

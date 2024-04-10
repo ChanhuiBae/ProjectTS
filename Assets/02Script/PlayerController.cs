@@ -412,6 +412,12 @@ public class PlayerController : MonoBehaviour, IDamage
     public void Pull()
     {
         skillManager.SetCrowdControl(CrowdControl.Pulled);
+        skillManager.SpawnEffect(5, transform.position, 1.5f);
+    }
+
+    public void AttackField()
+    {
+        skillManager.SpawnEffect(6, transform.position, 1);
     }
 
     public void CrowdControlNone()

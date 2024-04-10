@@ -16,15 +16,25 @@ public class Effect : MonoBehaviour, IPoolObject
             Debug.Log("Effect - Awake - SkillManager");
         }
     }
-    public void Init(Vector3 pos, int lifeFrame)
+    public void Init(Vector3 pos, float lifeFrame)
     {
         transform.position = pos;
         StartCoroutine(ReturnPool(lifeFrame));
     }
 
-    private IEnumerator ReturnPool(int lifeTime)
+    public void SetScale(float size)
+    {
+        transform.LeanScale(Vector3.one * size,0);
+    }
+
+    private IEnumerator ReturnPool(float lifeTime)
     {
         yield return YieldInstructionCache.WaitForSeconds(lifeTime);
+        skillManager.TakeEffect(poolName, this);
+    }
+
+    public void ReturenEffect()
+    {
         skillManager.TakeEffect(poolName, this);
     }
 

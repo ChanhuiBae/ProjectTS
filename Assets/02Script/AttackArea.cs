@@ -34,11 +34,12 @@ public class AttackArea : MonoBehaviour
         sphereCol.enabled = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Creture")
         {
             skillManager.TakeDamageOther(other);
         }
+
     }
 }
