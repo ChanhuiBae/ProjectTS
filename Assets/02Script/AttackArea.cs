@@ -7,6 +7,8 @@ public class AttackArea : MonoBehaviour
 {
     private SphereCollider sphereCol;
     private SkillManager skillManager;
+    private List<Collider> targets;
+    private bool IsListUp;
 
     public void Awake()
     {
@@ -20,6 +22,8 @@ public class AttackArea : MonoBehaviour
             Debug.Log("AttackArea - Init - SphereCollider");
         }
         sphereCol.enabled = false;
+        targets = new List<Collider>();
+        IsListUp = false;
     }
 
     public void Attack(Vector3 center, float radius)
@@ -34,12 +38,33 @@ public class AttackArea : MonoBehaviour
         sphereCol.enabled = false;
     }
 
+
+    public void AttackInAngle(float angle)
+    {
+        
+        for (int i = 0; i < targets.Count; i++)
+        {
+            float inside = Vector2.Angle(new Vector2(transform.forward.x, transform.forward.z), new Vector2(targets[i].transform.position.x, targets[i].transform.position.z));
+            if(Mathf.Abs(inside) < angle/2) 
+            {
+                skillManager.TakeDamageOther("AttackArea", targets[i]);
+            }
+        }
+        targets.Clear();
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Creture")
+        if (other.tag == "Creature")
         {
-            skillManager.TakeDamageOther(other);
+            if(IsListUp)
+            {
+                targets.Add(other);
+            }
+            else
+            {
+                skillManager.TakeDamageOther("AttackArea", other);
+            }
         }
-
     }
 }

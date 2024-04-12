@@ -4,8 +4,8 @@ public class PlayerAnimationController : MonoBehaviour
 {
     private Animator animator;
     private int H_Weapon = Animator.StringToHash("Weapon");
-    private int H_Attack1 = Animator.StringToHash("Attack1");
-    private int H_Attack2 = Animator.StringToHash("Attack2");
+    private int H_Attack = Animator.StringToHash("Attack");
+    private int H_Combo = Animator.StringToHash("IsCombo");
     private int H_Move = Animator.StringToHash("IsMove");
     private int H_Roll = Animator.StringToHash("IsRoll");
     private int H_Combat = Animator.StringToHash("IsCombat");
@@ -46,13 +46,27 @@ public class PlayerAnimationController : MonoBehaviour
     {
         if (use)
         {
-            animator.SetTrigger(H_Attack1);
+            animator.SetTrigger(H_Attack);
         }
         else
         {
-            animator.ResetTrigger(H_Attack1);
+            animator.ResetTrigger(H_Attack);
         }
 
+    }
+
+    public void IsCombo(bool use)
+    {
+        animator.SetBool(H_Combo, use);
+    }
+    public bool GetCombo()
+    {
+        return animator.GetBool(H_Combo);
+    }
+
+    public bool IsHammerAttack1()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName("HammerAttack1");
     }
 
     public void Roll()

@@ -30,11 +30,11 @@ public class Weapon : MonoBehaviour
         set => attackTime = value;
     }
     private float weight;
-    public Physics_Type physicsType;
+    private Physics_Type physicsType;
     private float attack_Speed;
-    public bool IsSlash;
-    public bool IsStrike;
-    public bool IsExplosion;
+    private bool IsSlash;
+    private bool IsStrike;
+    private bool IsExplosion;
     private float stagger_Time;
     public float StaggerTime
     {
@@ -101,6 +101,7 @@ public class Weapon : MonoBehaviour
     }
     private BoxCollider col;
     private SkillManager skillManager;
+    private TrailRenderer trail;
 
     private void Awake()
     {
@@ -111,6 +112,15 @@ public class Weapon : MonoBehaviour
         if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("Weapon - Awake - SkillManager");
+        }
+
+        if (!transform.GetChild(0).TryGetComponent<TrailRenderer>(out trail))
+        {
+            Debug.Log("Weapon - Awake - TrailRenderer");
+        }
+        else
+        {
+            trail.enabled = false;
         }
     }
 
@@ -147,12 +157,21 @@ public class Weapon : MonoBehaviour
         attack_Speed = data.Attack_Speed;
         skillManager.WeaponInit(this);
     }
-    
+    public void OnTrail()
+    {
+        trail.enabled = true;
+    }
+
+    public void OffTrail()
+    {
+        trail.enabled = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Creature")
         {
-            skillManager.TakeDamageOther(other);
+            skillManager.TakeDamageOther(name,other);
         }
     }
 }

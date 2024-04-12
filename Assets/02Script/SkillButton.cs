@@ -81,16 +81,16 @@ public class SkillButton : MonoBehaviour
         else
         {
             icon.sprite = Resources.Load<Sprite>("Image/"+ name);
-            trigger.enabled = false;
+            trigger.enabled = true;
             TableEntity_Skill_List skill;
             GameManager.Inst.GetSkillList(skill_ID,out skill);
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + "101";
             TableEntity_Skill info;
             GameManager.Inst.GetSkillData(int.Parse(key), out info);
             maxTime = info.Cool_Time;
-            currentTime = 0;
-            coolTimeImage.fillAmount = 0;
-            StartCoroutine(CoolTime());
+            currentTime = maxTime;
+            coolTimeImage.fillAmount = 1;
+            //StartCoroutine(CoolTime());
         }
     }
 

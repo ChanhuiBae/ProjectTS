@@ -1,8 +1,6 @@
 using Redcode.Pools;
 using System.Collections;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 
 public class Creture : MonoBehaviour, IDamage, IPoolObject
@@ -75,11 +73,12 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         float damage = hiter.TakeDamage(physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
         currentHP -= damage;
-        if(damage < 200)
+        Debug.Log(damage);
+        if (damage < 200 && damage > 0)
         {
             spawnManager.SpawnEffect(0, transform.position + Vector3.up, 1);
         }
-        else
+        else if(damage > 200)
         {
             spawnManager.SpawnEffect(1, transform.position + Vector3.up, 1);
         }
@@ -124,7 +123,6 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Pulled(Vector3 center)
     {
-        Debug.Log("pulled");
         ai.StopAI(1f);
         LeanTween.move(gameObject, center, 0.1f).setEase(LeanTweenType.easeInElastic);
     }

@@ -1,9 +1,5 @@
 using Redcode.Pools;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public enum CrowdControl
 {
@@ -157,24 +153,6 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         effect.Init(pos, lifeFrame);
     }
 
-    public void SetChargeEffect(int num)
-    {
-        switch(num){
-            case 0:
-                GameObject obj = effectManager.GetFromPool<Effect>(num).gameObject;
-                chargeEffect = obj.GetComponent<Effect>();
-                chargeEffect.Init(player.transform.position, 1f);
-                chargeEffect.SetScale(1f);
-                break;
-            case 1:
-                obj = effectManager.GetFromPool<Effect>(num).gameObject;
-                chargeEffect = obj.GetComponent<Effect>();
-                chargeEffect.Init(player.transform.position, 1f);
-                chargeEffect.SetScale(2f);
-                break;
-        }
-    }
-
     public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
     {
         float weaponPhysics = weapon.Physics * (1 - Creature_Physics_Cut) * weapon.CriticalMag()
@@ -194,16 +172,16 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 skillPhysics = skill3.GetDamageA() + (skill3.GetDamageB() * skill3.GetLevel());
                 break;
         }
-        Debug.Log(weaponPhysics * skillPhysics);
         return weaponPhysics * skillPhysics;
     }
 
-    public void TakeDamageOther(Collider other)
+    public void TakeDamageOther(string name, Collider other)
     {
         if (useSkill > -1)
         {
             if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
             {
+                Debug.Log(name);
                 creatureDamage.CalculateDamage(this);
                 switch (crowdControl)
                 {
@@ -217,6 +195,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                         creatureDamage.Knockback(5);
                         break;
                     case CrowdControl.Pulled:
+                        Debug.Log(name + " pull");
                         creatureDamage.Pulled(player.transform.position);
                         break;
                 }

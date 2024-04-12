@@ -35,6 +35,7 @@ public class Effect : MonoBehaviour, IPoolObject
 
     public void ReturenEffect()
     {
+        StopAllCoroutines();
         skillManager.TakeEffect(poolName, this);
     }
 

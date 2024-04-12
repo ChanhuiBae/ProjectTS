@@ -23,7 +23,7 @@ public class MenuManager : MonoBehaviour
         {
             Debug.Log("SpawnMananger - Awake - TextMeshProUGUI");
         }
-        time = 1200;
+        time = 900;
         if (!GameObject.Find("UltimateFill").TryGetComponent<Image>(out ultimateFill))
         {
             Debug.Log("MenuManager - Awake - Image");

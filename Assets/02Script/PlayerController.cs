@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour, IDamage
     private SkillManager skillManager;
     private AttackArea attackArea;
 
+    
+
     private void Awake()
     {
         if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
@@ -331,18 +333,19 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void HammerAttack()
     {
+        if (!anim.GetCombo() && anim.IsHammerAttack1())
+        {
+            anim.IsCombo(true);
+        }
         ChangeState(State.Attack_Hammer);
-        StartCoroutine(ResetCount());
     }
 
-    private IEnumerator ResetCount()
+    private IEnumerator ComboCount()
     {
-        if(attackCount >= 2)
-            attackCount = 0;
-        yield return YieldInstructionCache.WaitForSeconds(0.8f);
-        attackCount = 0;
+        yield return null;
+        //anim.IsCombo(false);
     }
-
+ 
     private void ChangeRoll()
     {
         ChangeState(State.Roll);
@@ -406,13 +409,18 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void SetAttackArea(float radius)
     {
-        attackArea.Attack(transform.position, radius);
+        attackArea.Attack(Vector3.zero, radius);
     }
 
     public void Pull()
     {
         skillManager.SetCrowdControl(CrowdControl.Pulled);
         skillManager.SpawnEffect(5, transform.position, 1.5f);
+    }
+
+    public void Airborne()
+    {
+        skillManager.SetCrowdControl(CrowdControl.Airborne);
     }
 
     public void AttackField()
