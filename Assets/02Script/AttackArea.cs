@@ -53,7 +53,7 @@ public class AttackArea : MonoBehaviour
         targets.Clear();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Creature")
         {

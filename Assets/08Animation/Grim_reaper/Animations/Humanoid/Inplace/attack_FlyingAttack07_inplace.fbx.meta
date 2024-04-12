@@ -60,15 +60,22 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 1
-        functionName: SetIdle
+      - time: 0.11103476
+        functionName: StopAnimator
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.08237234
-        functionName: StopAnimator
+      - time: 0.12738852
+        functionName: ChargeEffect
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0.5
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.19108279
+        functionName: ChargeEffect
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -76,6 +83,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.8012044
         functionName: PowerWave
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 1
+        functionName: SetIdle
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

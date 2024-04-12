@@ -142,15 +142,19 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         player.StartAnimator();
     }
 
+    public void ChargeEffect(float amount)
+    {
+        player.ChargeEffect(amount);
+    }
+
     public void SetCrowdControl(CrowdControl type)
     {
         crowdControl = type;
     }
-    public void SpawnEffect(int num, Vector3 pos, float lifeFrame)
+    public Effect SpawnEffect(int num)
     {
         GameObject obj = effectManager.GetFromPool<Effect>(num).gameObject;
-        Effect effect = obj.GetComponent<Effect>();
-        effect.Init(pos, lifeFrame);
+        return obj.GetComponent<Effect>();
     }
 
     public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)

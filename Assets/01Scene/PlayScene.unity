@@ -2114,9 +2114,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 523812617}
   - {fileID: 1009300801}
   - {fileID: 286043488}
+  - {fileID: 523812617}
   - {fileID: 1346467040}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2136,13 +2136,13 @@ MonoBehaviour:
   - _name: HPItem
     _component: {fileID: 624840879039442878, guid: bad41f608446cc2428c81a6eeb9ff888,
       type: 3}
-    _count: 30
+    _count: 100
     _container: {fileID: 1009300801}
     _nonLazy: 0
   - _name: EXPItem
     _component: {fileID: 6383081258629183178, guid: 84930debdb08d1b48b06236e4e97fd5d,
       type: 3}
-    _count: 30
+    _count: 100
     _container: {fileID: 286043488}
     _nonLazy: 0
   - _name: 1000

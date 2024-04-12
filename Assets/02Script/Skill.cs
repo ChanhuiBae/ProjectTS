@@ -75,8 +75,8 @@ public class Skill : MonoBehaviour
 
     public void ChargeUp()
     {
-        Debug.Log("charge");
         current_charge++;
+        skillManager.ChargeEffect(current_charge);
         currentInfoID = GetKey();
         GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
     }

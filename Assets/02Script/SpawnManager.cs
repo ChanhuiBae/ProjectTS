@@ -64,10 +64,9 @@ public class SpawnManager : MonoBehaviour
         pool.TakeToPool<Creture>(name, creture);
     }
 
-    public void SpawnEffect(int num, Vector3 pos, int lifeFrame)
+    public Effect SpawnEffect(int num)
     {
         GameObject obj = effects.GetFromPool<Effect>(num).gameObject;
-        Effect effect = obj.GetComponent<Effect>();
-        effect.Init(pos, lifeFrame);
+        return obj.GetComponent<Effect>();
     }
 }

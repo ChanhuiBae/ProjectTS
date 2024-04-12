@@ -1,6 +1,7 @@
 using Redcode.Pools;
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 
 public class Creture : MonoBehaviour, IDamage, IPoolObject
@@ -27,6 +28,9 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private float iceCut;
     private float windCut;
     private float attackSpeed;
+    private bool IsDie;
+    private Effect stun;
+    private Effect effect;
 
     public void Awake()
     {
@@ -41,6 +45,14 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         if (!GameObject.Find("PoolManager").TryGetComponent<SpawnManager>(out spawnManager))
         {
             Debug.Log("Creture - Awake - SpawnManager");
+        }
+        if(!transform.Find("Stun").gameObject.TryGetComponent<Effect>(out stun))
+        {
+            Debug.Log("Creature - Awake - Effect");
+        }
+        else
+        {
+            stun.gameObject.SetActive(false);
         }
     }
 
@@ -67,46 +79,54 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         windCut = creature.Wind_Cut;
         attackSpeed = creature.Attack_Speed;
         ai.InitAI(this.type, creature.Move_Speed);
+        IsDie = false;
+        stun.gameObject.SetActive(false);
     }
 
     public void CalculateDamage(ITakeDamage hiter)
     {
-        float damage = hiter.TakeDamage(physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
-        currentHP -= damage;
-        Debug.Log(damage);
-        if (damage < 200 && damage > 0)
+        if(!IsDie)
         {
-            spawnManager.SpawnEffect(0, transform.position + Vector3.up, 1);
-        }
-        else if(damage > 200)
-        {
-            spawnManager.SpawnEffect(1, transform.position + Vector3.up, 1);
-        }
-        if (currentHP < 0)
-        {
-            ai.Die();
-            switch (type)
+            float damage = hiter.TakeDamage(physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
+            currentHP -= damage;
+            Debug.Log("Damage: " + damage);
+            if (currentHP < 0)
             {
-                case CretureType.Normal:
-                    GameManager.Inst.ChargeUaltimate(1);
-                    break;
-                case CretureType.Noble:
-                    GameManager.Inst.ChargeUaltimate(2);
-                    break;
-                case CretureType.Swarm_Boss:
-                    GameManager.Inst.ChargeUaltimate(50);
-                    break;
-                case CretureType.Guvnor:
-                    GameManager.Inst.ChargeUaltimate(100);
-                    break;
-                case CretureType.Elite:
-                    GameManager.Inst.ChargeUaltimate(30);
-                    break;
+                IsDie = true;
+                ai.Die();
+                switch (type)
+                {
+                    case CretureType.Normal:
+                        GameManager.Inst.ChargeUaltimate(1);
+                        break;
+                    case CretureType.Noble:
+                        GameManager.Inst.ChargeUaltimate(2);
+                        break;
+                    case CretureType.Swarm_Boss:
+                        GameManager.Inst.ChargeUaltimate(50);
+                        break;
+                    case CretureType.Guvnor:
+                        GameManager.Inst.ChargeUaltimate(100);
+                        break;
+                    case CretureType.Elite:
+                        GameManager.Inst.ChargeUaltimate(30);
+                        break;
+                }
+                GameManager.Inst.AddKillCount();
+                spawnManager.SpawnHPItem(transform.position);
+                spawnManager.SpawnEXPItem(transform.position);
+                spawnManager.ReturnCreature(poolName, this);
             }
-            GameManager.Inst.AddKillCount();
-            spawnManager.SpawnHPItem(transform.position);
-            spawnManager.SpawnEXPItem(transform.position);  
-            spawnManager.ReturnCreature(poolName, this);
+            if (damage < 200 && damage > 0)
+            {
+                effect = spawnManager.SpawnEffect(0);
+                effect.Init(transform.position + Vector3.up, 1);
+            }
+            else if (damage > 200)
+            {
+                effect = spawnManager.SpawnEffect(1);
+                effect.Init(transform.position + Vector3.up, 1);
+            }
         }
     }
 
@@ -130,14 +150,13 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     public void Stun(int time)
     {
         ai.StopAI(time);
-        if (gameObject.activeSelf)
+        if (gameObject.activeSelf && !IsDie)
             StartCoroutine(StunEffect(time));
     }
 
     private IEnumerator StunEffect(int time)
     {
-        if (currentHP > 0)
-            spawnManager.SpawnEffect(2, transform.position, time*2);
+        stun.gameObject.SetActive(true);
         for (float i = 0.1f; i < time; i += 0.1f)
         {
             LeanTween.move(gameObject, transform.position - transform.forward * 0.1f, 0.1f);
@@ -145,6 +164,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             LeanTween.move(gameObject, transform.position + transform.forward * 0.1f, 0.1f);
             yield return YieldInstructionCache.WaitForSeconds(0.1f);
         }
+        stun.gameObject.SetActive(false);
     }
 
     public void Airborne(int time)

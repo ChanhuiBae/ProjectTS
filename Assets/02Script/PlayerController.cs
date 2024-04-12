@@ -54,7 +54,8 @@ public class PlayerController : MonoBehaviour, IDamage
     private SkillManager skillManager;
     private AttackArea attackArea;
 
-    
+    private GameObject charge;
+    private Effect effect;
 
     private void Awake()
     {
@@ -102,6 +103,11 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             Debug.Log("SkillManager - Awake - AttackArea");
         }
+        charge = transform.Find("Charge").gameObject;
+        if(charge == null)
+        {
+            Debug.Log("PlayerController - Awake - Effect");
+        }
     }
 
     public void Init(WeaponType type)
@@ -148,6 +154,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 }
                 break;
         }
+        charge.SetActive(false);
         weapon.Init(type);
         attackCount = 0;
         isInvincibility = false;
@@ -407,6 +414,26 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.PlayAnim(true);
     }
 
+    public void ChargeEffect(float amount)
+    {
+        Debug.Log(amount);
+        if (amount == 0)
+        {
+            charge.SetActive(false);
+        }
+        else
+        {
+            charge.SetActive(true);
+            ParticleSystem ps1 = GetComponent<ParticleSystem>();
+            ps1.Play(true);
+
+        }
+    }
+
+    public void PowerWave()
+    {
+    }
+
     public void SetAttackArea(float radius)
     {
         attackArea.Attack(Vector3.zero, radius);
@@ -415,7 +442,9 @@ public class PlayerController : MonoBehaviour, IDamage
     public void Pull()
     {
         skillManager.SetCrowdControl(CrowdControl.Pulled);
-        skillManager.SpawnEffect(5, transform.position, 1.5f);
+        effect = skillManager.SpawnEffect(5);
+        effect.Init(transform.position, 1.5f);
+        
     }
 
     public void Airborne()
@@ -425,7 +454,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void AttackField()
     {
-        skillManager.SpawnEffect(6, transform.position, 1);
+        effect = skillManager.SpawnEffect(6);
+        effect.Init(transform.position, 1f);
     }
 
     public void CrowdControlNone()
