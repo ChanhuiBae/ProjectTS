@@ -445,8 +445,16 @@ public class PlayerController : MonoBehaviour, IDamage
         effect.Init(transform.position, 1);
     }
 
+    public void Slash()
+    {
+        effect = skillManager.SpawnEffect(3);
+        effect.Init(transform.position, 1);
+    }
+
     public void PowerWave()
     {
+        effect = skillManager.SpawnEffect(7);
+        effect.Init(transform.position + Vector3.up, 1);
     }
 
     public void SetAttackArea(float radius)
