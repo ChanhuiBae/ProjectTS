@@ -1153,20 +1153,20 @@ MonoBehaviour:
   Skill_Hit_Frame:
   - Skill_ID: 100
     Hit_01: 6
-    Hit_02: 48
+    Hit_02: 42
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
   - Skill_ID: 200
     Hit_01: 11
-    Hit_02: 71
+    Hit_02: 60
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
   - Skill_ID: 201
-    Hit_01: 16
-    Hit_02: 29
-    Hit_03: 33
+    Hit_01: 1
+    Hit_02: 13
+    Hit_03: 4
     Hit_04: 0
     Hit_05: 0
   - Skill_ID: 202
@@ -1177,8 +1177,8 @@ MonoBehaviour:
     Hit_05: 0
   - Skill_ID: 203
     Hit_01: 7
-    Hit_02: 15
-    Hit_03: 16
+    Hit_02: 8
+    Hit_03: 1
     Hit_04: 0
     Hit_05: 0
   - Skill_ID: 231
@@ -1189,7 +1189,7 @@ MonoBehaviour:
     Hit_05: 0
   - Skill_ID: 232
     Hit_01: 6
-    Hit_02: 15
+    Hit_02: 9
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0

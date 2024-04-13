@@ -2849,8 +2849,8 @@ MonoBehaviour:
     _count: 20
     _container: {fileID: 891671819}
     _nonLazy: 0
-  - _name: Charge
-    _component: {fileID: -5989120084536156151, guid: ae0bc616f1eff6d4ebf8d868ad14bf1d,
+  - _name: Aura
+    _component: {fileID: 4849411052423977127, guid: 846e37c70ae810f409052c2be92e3600,
       type: 3}
     _count: 20
     _container: {fileID: 1797178591}
@@ -3889,7 +3889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1797178591}
   m_Layer: 0
-  m_Name: Charge
+  m_Name: Aura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

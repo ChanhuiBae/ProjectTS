@@ -185,7 +185,6 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         {
             if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
             {
-                Debug.Log(name);
                 creatureDamage.CalculateDamage(this);
                 switch (crowdControl)
                 {

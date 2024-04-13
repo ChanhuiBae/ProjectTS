@@ -184,13 +184,15 @@ public class PlayerController : MonoBehaviour, IDamage
                 case State.Attack_Soward:
                     break;
                 case State.Attack_Hammer:
-                    skillManager.UseSkill(0);
+                    skillManager.UseSkill(0); 
+                    weapon.OnTrail();
                     anim.Attack(true);
                     skillManager.SetCrowdControl(CrowdControl.Stun);
                     attackCount++;
                     break;
                 case State.Attack_Skill:
                     roll.enabled = false;
+                    weapon.OnTrail();
                     break;
                 case State.Attack_Gun:
                     StartCoroutine(Attack_Gun());
@@ -200,6 +202,11 @@ public class PlayerController : MonoBehaviour, IDamage
                     break;
             }
         }
+    }
+
+    public State CurrentState()
+    {
+        return state;
     }
 
     public void UseSkill(int skill_id)
@@ -229,8 +236,10 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         roll.enabled = true;
         anim.Skill(0);
+        anim.IsCombo(false);
         attackArea.StopAttack();
         skillManager.SetCrowdControl(CrowdControl.None);
+        weapon.OffTrail();
         ChangeState(State.Idle);
     }
 
@@ -424,8 +433,8 @@ public class PlayerController : MonoBehaviour, IDamage
         else
         {
             charge.SetActive(true);
-            ParticleSystem ps1 = GetComponent<ParticleSystem>();
-            ps1.Play(true);
+            //ParticleSystem ps1 = GetComponent<ParticleSystem>();
+            //ps1.Play(true);
 
         }
     }

@@ -17,6 +17,7 @@ public class SkillButton : MonoBehaviour
     private EventTrigger trigger;
     private EventTrigger.Entry down;
     private EventTrigger.Entry up;
+    private bool UseSkill;
  
 
     private void Awake()
@@ -57,22 +58,30 @@ public class SkillButton : MonoBehaviour
 
     void OnPointerDown(PointerEventData eventData)
     {
-        skillManager.IsCharge = true;
-        AttackSkill();
+        if(player.CurrentState() != State.Attack_Skill)
+        {
+            skillManager.IsCharge = true;
+            UseSkill = true;
+            AttackSkill();
+        }
     }
 
     void OnPointerUp(PointerEventData eventData)
     {
-        skillManager.IsCharge = false;
-        skillManager.StopCharge();
-        trigger.enabled = false;
+        if (UseSkill)
+        {
+            skillManager.IsCharge = false;
+            skillManager.StopCharge();
+            trigger.enabled = false;
+        }
     }
 
     public void Init(int buttonNum, int id, string name)
     {
         this.buttonNum = buttonNum;
         skill_ID = id;
-        if(skill_ID == 0)
+        UseSkill = false;
+        if (skill_ID == 0)
         {
             icon.sprite = Resources.Load<Sprite>("Image/NoneSkill");
             coolTimeImage.fillAmount = 0;
@@ -96,12 +105,13 @@ public class SkillButton : MonoBehaviour
 
     private IEnumerator CoolTime()
     {
-        while(currentTime < maxTime)
+        while (currentTime < maxTime)
         {
             yield return YieldInstructionCache.WaitForSeconds(0.1f);
             currentTime += 0.1f;
             coolTimeImage.fillAmount = currentTime / maxTime;
         }
+        UseSkill = false;
         trigger.enabled = true;
     }
 
