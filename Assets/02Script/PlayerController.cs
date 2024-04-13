@@ -439,6 +439,12 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
+    public void Aura()
+    {
+        effect = skillManager.SpawnEffect(4);
+        effect.Init(transform.position, 1);
+    }
+
     public void PowerWave()
     {
     }
