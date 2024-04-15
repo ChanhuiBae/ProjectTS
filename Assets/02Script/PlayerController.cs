@@ -54,7 +54,8 @@ public class PlayerController : MonoBehaviour, IDamage
     private SkillManager skillManager;
     private AttackArea attackArea;
 
-    private GameObject charge;
+    private ParticleSystem charge;
+    private ParticleSystem chargeLight;
     private Effect effect;
 
     private void Awake()
@@ -103,10 +104,21 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             Debug.Log("SkillManager - Awake - AttackArea");
         }
-        charge = transform.Find("Charge").gameObject;
-        if(charge == null)
+        if(!transform.Find("Charge").TryGetComponent<ParticleSystem>(out charge))
         {
-            Debug.Log("PlayerController - Awake - Effect");
+            Debug.Log("PlayerController - Awake - ParticleSystem");
+        }
+        else
+        {
+            charge.Stop();
+        }
+        if (!transform.Find("ChargeLight").TryGetComponent<ParticleSystem>(out chargeLight))
+        {
+            Debug.Log("PlayerController - Awake - ParticleSystem");
+        }
+        else
+        {
+            chargeLight.Stop();
         }
     }
 
@@ -154,7 +166,6 @@ public class PlayerController : MonoBehaviour, IDamage
                 }
                 break;
         }
-        charge.SetActive(false);
         weapon.Init(type);
         attackCount = 0;
         isInvincibility = false;
@@ -423,30 +434,37 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.PlayAnim(true);
     }
 
-    public void ChargeEffect(float amount)
+    public void ChargeEffect()
     {
-        Debug.Log(amount);
-        if (amount == 0)
-        {
-            charge.SetActive(false);
-        }
-        else
-        {
-            charge.SetActive(true);
-            //ParticleSystem ps1 = GetComponent<ParticleSystem>();
-            //ps1.Play(true);
+        charge.Play(true);
+    }
 
-        }
+    public void StopCharge()
+    {
+        charge.Stop();
+    }
+
+    public void ChargeUp()
+    {
+        StartCoroutine(ChargeUpEffect());
+    }
+
+    private IEnumerator ChargeUpEffect()
+    {
+        chargeLight.Play();
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
+        chargeLight.Stop();
     }
 
     public void Aura()
     {
         effect = skillManager.SpawnEffect(4);
-        effect.Init(transform.position, 1);
+        effect.Init(transform.position + transform.forward *1.5f, 1);
     }
 
     public void Slash()
     {
+        StopCharge();   
         effect = skillManager.SpawnEffect(3);
         effect.Init(transform.position, 1);
     }
@@ -455,6 +473,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         effect = skillManager.SpawnEffect(7);
         effect.Init(transform.position + Vector3.up, 1);
+        effect.SetRotation(transform.rotation);
     }
 
     public void SetAttackArea(float radius)

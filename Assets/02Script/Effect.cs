@@ -27,6 +27,11 @@ public class Effect : MonoBehaviour, IPoolObject
         transform.LeanScale(Vector3.one * size,0);
     }
 
+    public void SetRotation(Quaternion rotation)
+    {
+        transform.rotation = rotation;
+    }
+
     private IEnumerator ReturnPool(float lifeTime)
     {
         yield return YieldInstructionCache.WaitForSeconds(lifeTime);

@@ -142,9 +142,9 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         player.StartAnimator();
     }
 
-    public void ChargeEffect(float amount)
+    public void ChargeUp()
     {
-        player.ChargeEffect(amount);
+        player.ChargeUp();
     }
 
     public void SetCrowdControl(CrowdControl type)
