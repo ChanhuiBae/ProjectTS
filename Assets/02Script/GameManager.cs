@@ -26,6 +26,7 @@ public class PlayerData
     public int skill1_ID;
     public int skill2_ID;
     public int skill3_ID;
+    public int ultimate_ID;
 }
 
 public enum SceneName
@@ -219,7 +220,7 @@ public class GameManager : Singleton<GameManager>
                 skillManager.SetSkill(3,  pData.skill3_ID, skill3.Weapon_ID, skill3.Category_ID, skill3.Skill_Level_Max, skill3.Charge_Max, skill3.Hit_Max);
             
             }
-            ultimateValue = 0;
+            ultimateValue = 100;
             killCount = 0;
             return true;
         }
@@ -268,6 +269,7 @@ public class GameManager : Singleton<GameManager>
         pData.skill1_ID = 201;
         pData.skill2_ID = 202;
         pData.skill3_ID = 203;
+        pData.ultimate_ID = 231;
         SaveData();
     }
 
@@ -279,6 +281,10 @@ public class GameManager : Singleton<GameManager>
     public void ChargeUaltimate(int value)
     {
         ultimateValue += value;
+        if(ultimateValue > 100)
+        {
+            ultimateValue = 100;
+        }
         menuManager.SetUaltimate(ultimateValue);
     }
 

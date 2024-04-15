@@ -1,13 +1,14 @@
 using System.Collections;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SkillButton : MonoBehaviour
+public class UltimateButton : MonoBehaviour
 {
     private PlayerController player;
-    private Image coolTimeImage;
+    private Image ultimateFill;
+    private TextMeshProUGUI ultimateText;
     private Image icon;
     private float maxTime;
     private float currentTime;
@@ -17,48 +18,63 @@ public class SkillButton : MonoBehaviour
     private EventTrigger trigger;
     private EventTrigger.Entry down;
     private EventTrigger.Entry up;
+    private EventTrigger.Entry dragStart;
+    private EventTrigger.Entry dragEnd;
     private bool UseSkill;
- 
+
 
     private void Awake()
     {
         GameObject obj = GameObject.Find("Player");
         if (obj != null)
         {
-            if(!obj.TryGetComponent<PlayerController>(out player))
+            if (!obj.TryGetComponent<PlayerController>(out player))
             {
                 Debug.Log("SkillButton - Awake - PlayerController");
             }
         }
-        if(!transform.GetChild(0).TryGetComponent<Image>(out coolTimeImage))
+        if (!transform.GetChild(0).TryGetComponent<Image>(out ultimateFill))
+        {
+            Debug.Log("MenuManager - Awake - Image");
+        }
+        if (!transform.GetChild(1).TryGetComponent<TextMeshProUGUI>(out ultimateText))
+        {
+            Debug.Log("MenuManager - Awake - TextMeshProUGUI");
+        }
+        if (!transform.GetChild(2).TryGetComponent<Image>(out icon))
         {
             Debug.Log("SkillButton - Awake - Image");
         }
-        if(!transform.GetChild(1).TryGetComponent<Image>(out icon))
-        {
-            Debug.Log("SkillButton - Awake - Image");
-        }
-        if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
+        if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("SkillButton - Awake - SkillManager");
         }
-        if(!TryGetComponent<EventTrigger>(out trigger))
+        if (!TryGetComponent<EventTrigger>(out trigger))
         {
             Debug.Log("SkillButton - Awake -  EventTrigger");
         }
+        ultimateFill.fillAmount = 1;
+        ultimateText.text = "100%";
+
         down = new EventTrigger.Entry();
         up = new EventTrigger.Entry();
         down.eventID = EventTriggerType.PointerDown;
         up.eventID = EventTriggerType.PointerUp;
-        down.callback.AddListener((data)  => { OnPointerDown((PointerEventData)data); });
+        down.callback.AddListener((data) => { OnPointerDown((PointerEventData)data); });
         trigger.triggers.Add(down);
         up.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
         trigger.triggers.Add(up);
     }
 
+    public void SetUaltimate(int value)
+    {
+        ultimateFill.fillAmount = (float)value / 100f;
+        ultimateText.text = value.ToString() + "%";
+    }
+
     void OnPointerDown(PointerEventData eventData)
     {
-        if(player.CurrentState() != State.Attack_Skill)
+        if (player.CurrentState() != State.Attack_Skill)
         {
             skillManager.IsCharge = true;
             UseSkill = true;
@@ -75,42 +91,25 @@ public class SkillButton : MonoBehaviour
         }
     }
 
-    public void Init(int buttonNum, int id, string name)
+    public void Init(int id, string name)
     {
-        this.buttonNum = buttonNum;
         skill_ID = id;
         UseSkill = false;
         if (skill_ID == 0)
         {
             icon.sprite = Resources.Load<Sprite>("Image/NoneSkill");
-            coolTimeImage.fillAmount = 0;
             trigger.enabled = false;
         }
         else
         {
-            icon.sprite = Resources.Load<Sprite>("Image/"+ name);
+            icon.sprite = Resources.Load<Sprite>("Image/" + name);
             trigger.enabled = true;
             TableEntity_Skill_List skill;
-            GameManager.Inst.GetSkillList(skill_ID,out skill);
+            GameManager.Inst.GetSkillList(skill_ID, out skill);
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + "101";
             TableEntity_Skill info;
             GameManager.Inst.GetSkillData(int.Parse(key), out info);
-            maxTime = info.Cool_Time;
-            currentTime = maxTime;
-            coolTimeImage.fillAmount = 1;
         }
-    }
-
-    private IEnumerator CoolTime()
-    {
-        while (currentTime < maxTime)
-        {
-            yield return YieldInstructionCache.WaitForSeconds(0.1f);
-            currentTime += 0.1f;
-            coolTimeImage.fillAmount = currentTime / maxTime;
-        }
-        UseSkill = false;
-        trigger.enabled = true;
     }
 
     private void AttackSkill()
@@ -119,6 +118,5 @@ public class SkillButton : MonoBehaviour
         player.ChangeState(State.Attack_Skill);
         player.UseSkill(skill_ID);
         skillManager.UseSkill(buttonNum);
-        StartCoroutine (CoolTime());
     }
 }

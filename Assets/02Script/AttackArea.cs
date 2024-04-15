@@ -8,6 +8,7 @@ public class AttackArea : MonoBehaviour
     private SphereCollider sphereCol;
     private SkillManager skillManager;
     private List<Collider> targets;
+    private ParticleSystem view;
     private bool IsListUp;
 
     public void Awake()
@@ -21,8 +22,14 @@ public class AttackArea : MonoBehaviour
         {
             Debug.Log("AttackArea - Init - SphereCollider");
         }
+        if (!transform.GetChild(0).TryGetComponent<ParticleSystem>(out view))
+        {
+            Debug.Log("AttackArea - Init - ParticleSystem");
+        }
+
         sphereCol.enabled = false;
         targets = new List<Collider>();
+        view.Stop();
         IsListUp = false;
     }
 
@@ -39,18 +46,31 @@ public class AttackArea : MonoBehaviour
     }
 
 
-    public void AttackInAngle(float angle)
+    public void AttackInAngle()
     {
-        
+        sphereCol.enabled = true;
+        sphereCol.center = Vector3.zero;
+        sphereCol.radius = 10;
         for (int i = 0; i < targets.Count; i++)
         {
             float inside = Vector2.Angle(new Vector2(transform.forward.x, transform.forward.z), new Vector2(targets[i].transform.position.x, targets[i].transform.position.z));
-            if(Mathf.Abs(inside) < angle/2) 
+            if(Mathf.Abs(inside) < 15) 
             {
                 skillManager.TakeDamageOther("AttackArea", targets[i]);
             }
         }
         targets.Clear();
+    }
+
+    public void StartView()
+    {
+        view.startSize = sphereCol.radius * 2;
+        view.Play();
+    }
+
+    public void StopView()
+    {
+        view.Stop();
     }
 
     private void OnTriggerEnter(Collider other)

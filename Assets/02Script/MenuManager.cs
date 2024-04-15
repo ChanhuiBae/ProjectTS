@@ -9,12 +9,11 @@ public class MenuManager : MonoBehaviour
     private GameObject timeBackgroun;
     private TextMeshProUGUI countdown;
     private int time;
-    private Image ultimateFill;
-    private TextMeshProUGUI ultimateText;
     private TextMeshProUGUI killCount;
     private SkillButton skill1;
     private SkillButton skill2;
     private SkillButton skill3;
+    private UltimateButton ultimate;
 
     private void Awake()
     {
@@ -24,14 +23,7 @@ public class MenuManager : MonoBehaviour
             Debug.Log("SpawnMananger - Awake - TextMeshProUGUI");
         }
         time = 900;
-        if (!GameObject.Find("UltimateFill").TryGetComponent<Image>(out ultimateFill))
-        {
-            Debug.Log("MenuManager - Awake - Image");
-        }
-        if (!GameObject.Find("UltimateValue").TryGetComponent<TextMeshProUGUI>(out ultimateText))
-        {
-            Debug.Log("MenuManager - Awake - TextMeshProUGUI");
-        }
+        
         if (!GameObject.Find("KillCount").TryGetComponent<TextMeshProUGUI>(out killCount))
         {
             Debug.Log("MenuManager - Awake - TextMeshProUGUI");
@@ -48,8 +40,10 @@ public class MenuManager : MonoBehaviour
         {
             Debug.Log("MenuManager - Awake - SkillButton");
         }
-        ultimateFill.fillAmount = 0;
-        ultimateText.text = "0%";
+        if (!GameObject.Find("Ultimate").TryGetComponent<UltimateButton>(out ultimate))
+        {
+            Debug.Log("MenuManager - Awake - UltimateButton");
+        }
         StartCoroutine(Timer());
     }
 
@@ -78,13 +72,15 @@ public class MenuManager : MonoBehaviour
             case 3:
                 skill3.Init(3,skill, name);
                 break;
+            case 4:
+                ultimate.Init(skill, name);
+                break;
         }
     }
 
     public void SetUaltimate(int value)
     {
-        ultimateFill.fillAmount = (float)value / 100f;
-        ultimateText.text = value.ToString() + "%";
+        ultimate.SetUaltimate(value);
     }
 
     public void SetKillCount(int value)
