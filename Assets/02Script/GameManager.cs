@@ -26,7 +26,8 @@ public class PlayerData
     public int skill1_ID;
     public int skill2_ID;
     public int skill3_ID;
-    public int ultimate_ID;
+    public int ultimate1_ID;
+    public int ultimate2_ID;
 }
 
 public enum SceneName
@@ -220,6 +221,21 @@ public class GameManager : Singleton<GameManager>
                 skillManager.SetSkill(3,  pData.skill3_ID, skill3.Weapon_ID, skill3.Category_ID, skill3.Skill_Level_Max, skill3.Charge_Max, skill3.Hit_Max);
             
             }
+            if(pData.ultimate1_ID != 0)
+            {
+                TableEntity_Skill_List ultimate1;
+                GameManager.Inst.GetSkillList(pData.ultimate1_ID, out ultimate1);
+                menuManager.InitSkill(4, pData.ultimate1_ID, ultimate1.Skill_Name_Eng);
+                skillManager.SetSkill(4, pData.ultimate1_ID, ultimate1.Weapon_ID, ultimate1.Category_ID, ultimate1.Skill_Level_Max, ultimate1.Charge_Max, ultimate1.Hit_Max);
+
+            }
+            if(pData.ultimate2_ID != 0)
+            {
+                TableEntity_Skill_List ultimate2;
+                GameManager.Inst.GetSkillList(pData.ultimate2_ID, out ultimate2);
+                menuManager.InitSkill(5, pData.ultimate2_ID, ultimate2.Skill_Name_Eng);
+                skillManager.SetSkill(5, pData.ultimate2_ID, ultimate2.Weapon_ID, ultimate2.Category_ID, ultimate2.Skill_Level_Max, ultimate2.Charge_Max, ultimate2.Hit_Max);
+            }
             ultimateValue = 100;
             killCount = 0;
             return true;
@@ -269,7 +285,8 @@ public class GameManager : Singleton<GameManager>
         pData.skill1_ID = 201;
         pData.skill2_ID = 202;
         pData.skill3_ID = 203;
-        pData.ultimate_ID = 231;
+        pData.ultimate1_ID = 231;
+        pData.ultimate2_ID = 232;
         SaveData();
     }
 

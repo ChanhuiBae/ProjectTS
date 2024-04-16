@@ -50,7 +50,7 @@ public class AttackArea : MonoBehaviour
     {
         sphereCol.enabled = true;
         sphereCol.center = Vector3.zero;
-        sphereCol.radius = 10;
+        sphereCol.radius = 35;
         for (int i = 0; i < targets.Count; i++)
         {
             float inside = Vector2.Angle(new Vector2(transform.forward.x, transform.forward.z), new Vector2(targets[i].transform.position.x, targets[i].transform.position.z));

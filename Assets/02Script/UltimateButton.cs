@@ -30,28 +30,28 @@ public class UltimateButton : MonoBehaviour
         {
             if (!obj.TryGetComponent<PlayerController>(out player))
             {
-                Debug.Log("SkillButton - Awake - PlayerController");
+                Debug.Log("UltimateButton - Awake - PlayerController");
             }
         }
         if (!transform.GetChild(0).TryGetComponent<Image>(out ultimateFill))
         {
-            Debug.Log("MenuManager - Awake - Image");
+            Debug.Log("UltimateManager - Awake - Image");
         }
         if (!transform.GetChild(1).TryGetComponent<TextMeshProUGUI>(out ultimateText))
         {
-            Debug.Log("MenuManager - Awake - TextMeshProUGUI");
+            Debug.Log("UltimateManager - Awake - TextMeshProUGUI");
         }
         if (!transform.GetChild(2).TryGetComponent<Image>(out icon))
         {
-            Debug.Log("SkillButton - Awake - Image");
+            Debug.Log("UltimateButton - Awake - Image");
         }
         if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
-            Debug.Log("SkillButton - Awake - SkillManager");
+            Debug.Log("UltimateButton - Awake - SkillManager");
         }
         if (!TryGetComponent<EventTrigger>(out trigger))
         {
-            Debug.Log("SkillButton - Awake -  EventTrigger");
+            Debug.Log("UltimateButton - Awake -  EventTrigger");
         }
         ultimateFill.fillAmount = 1;
         ultimateText.text = "100%";
@@ -76,8 +76,8 @@ public class UltimateButton : MonoBehaviour
     {
         if (player.CurrentState() != State.Attack_Skill)
         {
-            skillManager.IsCharge = true;
             UseSkill = true;
+            skillManager.IsCharge = true;
             AttackSkill();
         }
     }
@@ -87,12 +87,12 @@ public class UltimateButton : MonoBehaviour
         if (UseSkill)
         {
             skillManager.IsCharge = false;
-            trigger.enabled = false;
         }
     }
 
-    public void Init(int id, string name)
+    public void Init(int buttonNum, int id, string name)
     {
+        this.buttonNum = buttonNum;
         skill_ID = id;
         UseSkill = false;
         if (skill_ID == 0)

@@ -20,6 +20,8 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private Skill skill1;
     private Skill skill2;
     private Skill skill3;
+    private Skill ultimate1;
+    private Skill ultimate2;
     private PoolManager effectManager;
     private Effect chargeEffect;
     private PoolManager projectileManager;
@@ -72,6 +74,10 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         {
             Debug.Log("SkillManager - Awake - Skill3");
         }
+        if (!transform.Find("Ultimate1").TryGetComponent<Skill>(out ultimate1))
+        {
+            Debug.Log("SkillManager - Awake - Ultimate1");
+        }
         useSkill = -1;
         isCharge = false;
         crowdControl = CrowdControl.None;
@@ -92,11 +98,17 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             case 1:
                 this.skill1.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
                 break;
-            case 2: 
-                this.skill2.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);    
+            case 2:
+                this.skill2.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
                 break;
             case 3:
                 this.skill3.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
+                break;
+            case 4:
+                this.ultimate1.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
+                break;
+            case 5:
+                //this.ultimate2.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
                 break;
         }
     }
@@ -117,6 +129,12 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 break;
             case 3:
                 skill3.StartSkill();
+                break;
+            case 4:
+                ultimate1.StartSkill();
+                break;
+            case 5:
+                ultimate2.StartSkill();
                 break;
         }
     }
