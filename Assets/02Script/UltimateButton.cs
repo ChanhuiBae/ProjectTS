@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UltimateButton : MonoBehaviour
 {
     private PlayerController player;
+    private SkillJoystick ultimate2;
     private Image ultimateFill;
     private TextMeshProUGUI ultimateText;
     private Image icon;
@@ -33,6 +34,10 @@ public class UltimateButton : MonoBehaviour
                 Debug.Log("UltimateButton - Awake - PlayerController");
             }
         }
+        if(!GameObject.Find("Ultimate2").TryGetComponent<SkillJoystick>(out ultimate2))
+        {
+            Debug.Log("UltimateButton - Awake - SkillJoystick");
+        }
         if (!transform.GetChild(0).TryGetComponent<Image>(out ultimateFill))
         {
             Debug.Log("UltimateManager - Awake - Image");
@@ -53,9 +58,7 @@ public class UltimateButton : MonoBehaviour
         {
             Debug.Log("UltimateButton - Awake -  EventTrigger");
         }
-        ultimateFill.fillAmount = 1;
-        ultimateText.text = "100%";
-
+        SetUaltimate(100);
         down = new EventTrigger.Entry();
         up = new EventTrigger.Entry();
         down.eventID = EventTriggerType.PointerDown;
@@ -76,9 +79,12 @@ public class UltimateButton : MonoBehaviour
     {
         if (player.CurrentState() != State.Attack_Skill)
         {
-            UseSkill = true;
-            skillManager.IsCharge = true;
-            AttackSkill();
+            if(ultimateFill.fillAmount >= 1)
+            {
+                UseSkill = true;
+                skillManager.IsCharge = true;
+                AttackSkill();
+            }
         }
     }
 
@@ -87,6 +93,10 @@ public class UltimateButton : MonoBehaviour
         if (UseSkill)
         {
             skillManager.IsCharge = false;
+            GameManager.Inst.ResetUltimate();
+            transform.SetSiblingIndex(5);
+            UseSkill = false;
+            StartCoroutine(CheckEnd());
         }
     }
 
@@ -118,5 +128,23 @@ public class UltimateButton : MonoBehaviour
         player.ChangeState(State.Attack_Skill);
         player.UseSkill(skill_ID);
         skillManager.UseSkill(buttonNum);
+    }
+
+    private IEnumerator CheckEnd()
+    {
+        bool IsUse = false;
+        for (int i = 0; i < 70; i++)
+        {
+            yield return null;
+            if (ultimate2.GetUseSkill())
+            {
+                IsUse = true;
+                break;
+            }
+        }
+        if (!IsUse)
+        {
+            transform.SetSiblingIndex(6);
+        }
     }
 }

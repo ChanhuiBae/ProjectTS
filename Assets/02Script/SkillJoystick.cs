@@ -26,7 +26,10 @@ public class SkillJoystick : MonoBehaviour
                 Debug.Log("SkillJoystick - Awake - PlayerController");
             }
         }
-
+        if (!transform.GetChild(0).TryGetComponent<Image>(out icon))
+        {
+            Debug.Log("SkillButton - Awake - Image");
+        }
         if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("SkillJoystick - Awake - SkillManager");
@@ -42,6 +45,7 @@ public class SkillJoystick : MonoBehaviour
     {
         this.buttonNum = buttonNum;
         skill_ID = id;
+        direction = Vector3.zero;
         UseSkill = false;
         if (skill_ID == 0)
         {
@@ -58,31 +62,11 @@ public class SkillJoystick : MonoBehaviour
             maxTime = info.Cool_Time;
             currentTime = maxTime;
         }
-        icon.enabled = false;
-        joystick.enabled = false;
     }
 
-    private IEnumerator CoolTime()
-    {
-        while (currentTime < maxTime)
-        {
-            yield return YieldInstructionCache.WaitForSeconds(0.1f);
-            currentTime += 0.1f;
-        }
-        icon.enabled = false;
-        joystick.enabled = false;
-    }
-
-    public void UseJoystick()
-    {
-        icon.enabled = true;
-        joystick.enabled = true;
-        currentTime = 0;
-        StartCoroutine(CoolTime());
-    }
     private void GetDirection()
     {
-        direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
+        direction = Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
         direction.Normalize();
     }
 
@@ -91,5 +75,42 @@ public class SkillJoystick : MonoBehaviour
         player.ChangeState(State.Attack_Skill);
         player.UseSkill(skill_ID);
         skillManager.UseSkill(buttonNum);
+    }
+
+    public bool GetUseSkill()
+    {
+        return UseSkill;
+    }
+
+    private void Update()
+    {
+        if (skill_ID != 0)
+        {
+            if (UseSkill)
+            {
+                GetDirection();
+                if (direction == Vector3.zero)
+                {
+                    UseSkill = false;
+                    transform.SetSiblingIndex(5);
+                    skillManager.StopAttackArea();
+                    AttackSkill();
+                }
+                else
+                {
+                    skillManager.StopAttackArea();
+                    skillManager.MoveAttackArea(direction * 2, 2);
+                    skillManager.ShowAttackArea();
+                }
+            }
+            else
+            {
+                GetDirection();
+                if (direction != Vector3.zero)
+                {
+                    UseSkill = true;
+                }
+            }
+        }
     }
 }

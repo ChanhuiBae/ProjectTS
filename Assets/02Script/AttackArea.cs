@@ -45,7 +45,6 @@ public class AttackArea : MonoBehaviour
         sphereCol.enabled = false;
     }
 
-
     public void AttackInAngle()
     {
         sphereCol.enabled = true;
@@ -61,23 +60,34 @@ public class AttackArea : MonoBehaviour
         }
         targets.Clear();
     }
-
+    public void Move(Vector3 center, float radius)
+    {
+        sphereCol.center = center;
+        sphereCol.radius = radius;
+    }
     public void StartView()
     {
+        view.transform.position = transform.root.position + sphereCol.center;
         view.startSize = sphereCol.radius * 2;
         view.Play();
     }
 
     public void StopView()
     {
-        view.Stop();
+        view.Clear();
+    }
+
+    public Vector3 GetCenter()
+    {
+        return sphereCol.center;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.tag == "Creature")
         {
-            if(IsListUp)
+            if (IsListUp)
             {
                 targets.Add(other);
             }

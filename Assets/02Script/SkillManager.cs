@@ -33,7 +33,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         get => isCharge;
         set => isCharge = value;
     }
-    
+
     private void Awake()
     {
         GameObject obj = GameObject.Find("Player");
@@ -58,7 +58,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             Debug.Log("SkillManager - Awake - PoolManager");
         }
 
-        if(!transform.Find("Basic").TryGetComponent<Skill>(out basic))
+        if (!transform.Find("Basic").TryGetComponent<Skill>(out basic))
         {
             Debug.Log("SkillManager - Awake - SkillBasic");
         }
@@ -77,6 +77,10 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         if (!transform.Find("Ultimate1").TryGetComponent<Skill>(out ultimate1))
         {
             Debug.Log("SkillManager - Awake - Ultimate1");
+        }
+        if (!transform.Find("Ultimate2").TryGetComponent<Skill>(out ultimate2))
+        {
+            Debug.Log("SkillManager - Awake - Ultimate2");
         }
         useSkill = -1;
         isCharge = false;
@@ -108,7 +112,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 this.ultimate1.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
                 break;
             case 5:
-                //this.ultimate2.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
+                this.ultimate2.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
                 break;
         }
     }
@@ -175,6 +179,28 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         return obj.GetComponent<Effect>();
     }
 
+    public void SetAttackArea(Vector3 center, float radius)
+    {
+        attackArea.Attack(center, radius);
+    }
+
+    public void MoveAttackArea(Vector3 center, float radius)
+    {
+        attackArea.Move(center, radius);
+    }
+
+    public void ShowAttackArea()
+    {
+        attackArea.StartView();
+    }
+
+    public void StopAttackArea()
+    {
+        attackArea.StopAttack();
+        attackArea.StopView();
+    }
+
+
     public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
     {
         float weaponPhysics = weapon.Physics * (1 - Creature_Physics_Cut) * weapon.CriticalMag()
@@ -192,6 +218,12 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 break;
             case 3:
                 skillPhysics = skill3.GetDamageA() + (skill3.GetDamageB() * skill3.GetLevel());
+                break;
+            case 4:
+                skillPhysics = ultimate1.GetDamageA() + ultimate1.GetDamageB() + ultimate1.GetLevel();
+                break;
+            case 5:
+                skillPhysics += ultimate2.GetDamageA() + ultimate2.GetDamageB() + ultimate2.GetLevel();
                 break;
         }
         return weaponPhysics * skillPhysics;

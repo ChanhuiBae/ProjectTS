@@ -209,7 +209,6 @@ public class PlayerController : MonoBehaviour, IDamage
                     StartCoroutine(Attack_Gun());
                     break;
                 case State.Roll:
-                    
                     break;
             }
         }
@@ -423,6 +422,11 @@ public class PlayerController : MonoBehaviour, IDamage
         expFill.fillAmount = currentEXP / GameManager.Inst.PlayerInfo.Exp_Need;
     }
 
+    public void LookAttackArea()
+    {
+        transform.LookAt(attackArea.GetCenter() + transform.position); 
+    }
+
     public void StopAnimator()
     {
         if (skillManager.IsCharge)
@@ -457,6 +461,11 @@ public class PlayerController : MonoBehaviour, IDamage
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
         chargeLight.Stop();
     }
+    
+    public void SetAttackArea(float radius)
+    {
+        attackArea.Attack(Vector3.zero, radius);
+    }
 
     public void Aura()
     {
@@ -477,11 +486,6 @@ public class PlayerController : MonoBehaviour, IDamage
         effect.Init(transform.position + Vector3.up, 1);
         effect.SetRotation(transform.rotation);
         attackArea.AttackInAngle();
-    }
-
-    public void SetAttackArea(float radius)
-    {
-        attackArea.Attack(Vector3.zero, radius);
     }
 
     public void Pull()

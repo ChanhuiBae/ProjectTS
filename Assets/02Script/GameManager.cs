@@ -295,6 +295,11 @@ public class GameManager : Singleton<GameManager>
         player.CONTROLL = value;
     }
 
+    public void ResetUltimate()
+    {
+        ultimateValue = 0;
+        menuManager.SetUaltimate(ultimateValue);
+    }
     public void ChargeUaltimate(int value)
     {
         ultimateValue += value;
