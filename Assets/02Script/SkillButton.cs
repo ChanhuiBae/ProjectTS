@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,6 +10,8 @@ public class SkillButton : MonoBehaviour
     private PlayerController player;
     private Image coolTimeImage;
     private Image icon;
+    private Image block;
+    private TextMeshProUGUI time;
     private float maxTime;
     private float currentTime;
     private int skill_ID;
@@ -38,7 +41,15 @@ public class SkillButton : MonoBehaviour
         {
             Debug.Log("SkillButton - Awake - Image");
         }
-        if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
+        if (!transform.GetChild(2).TryGetComponent<Image>(out block))
+        {
+            Debug.Log("SkillButton - Awake - Image");
+        }
+        if (!transform.GetChild(3).TryGetComponent<TextMeshProUGUI>(out time))
+        {
+            Debug.Log("SkillButton - Awake - TextMeshProUGUI");
+        }
+        if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("SkillButton - Awake - SkillManager");
         }
@@ -98,19 +109,29 @@ public class SkillButton : MonoBehaviour
             maxTime = info.Cool_Time;
             currentTime = maxTime;
             coolTimeImage.fillAmount = 1;
+            StartCoroutine(CoolTime());
         }
     }
 
     private IEnumerator CoolTime()
     {
+        coolTimeImage.enabled = true;
+        block.enabled = true;
+        time.enabled = true;
+        icon.transform.SetSiblingIndex(0);
         while (currentTime < maxTime)
         {
             yield return YieldInstructionCache.WaitForSeconds(0.1f);
             currentTime += 0.1f;
             coolTimeImage.fillAmount = currentTime / maxTime;
+            time.text = ((int)(maxTime - currentTime)).ToString();
         }
         UseSkill = false;
         trigger.enabled = true;
+        block.enabled = false;
+        time.enabled = false;
+        icon.transform.SetSiblingIndex(1);
+        coolTimeImage.enabled = false;
     }
 
     private void AttackSkill()

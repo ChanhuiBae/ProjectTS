@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour
     private void Awake()
     {
         timeBackgroun = GameObject.Find("TimeBackground");
-        if (!GameObject.Find("Time").TryGetComponent<TextMeshProUGUI>(out countdown))
+        if (!GameObject.Find("GameTime").TryGetComponent<TextMeshProUGUI>(out countdown))
         {
             Debug.Log("SpawnMananger - Awake - TextMeshProUGUI");
         }
