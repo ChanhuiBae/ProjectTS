@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour, IDamage
                     StartCoroutine(Attack_Gun());
                     break;
                 case State.Roll:
-                    StartCoroutine(Roll());
+                    
                     break;
             }
         }
@@ -241,6 +241,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private void Move()
     {
         rig.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
+
     }
 
     public void SetIdle()
@@ -376,11 +377,12 @@ public class PlayerController : MonoBehaviour, IDamage
     private void ChangeRoll()
     {
         ChangeState(State.Roll);
+        anim.Roll();
+        StartCoroutine(Roll());
     }
 
     private IEnumerator Roll()
     {
-        anim.Roll();
         GetDirection();
         transform.LookAt(transform.position + direction);
         isInvincibility = true;
