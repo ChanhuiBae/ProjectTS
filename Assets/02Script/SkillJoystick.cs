@@ -91,15 +91,22 @@ public class SkillJoystick : MonoBehaviour
                 GetDirection();
                 if (direction == Vector3.zero)
                 {
-                    UseSkill = false;
-                    transform.SetSiblingIndex(5);
-                    skillManager.StopAttackArea();
-                    AttackSkill();
+                    if(player.GetCurrentState() == State.Attack_Skill)
+                    {
+                        UseSkill = false;
+                        transform.SetSiblingIndex(5);
+                        skillManager.StopAttackArea();
+                        AttackSkill();
+                    }
+                    else
+                    {
+                        skillManager.StopAttackArea();
+                    }
                 }
                 else
                 {
                     skillManager.StopAttackArea();
-                    skillManager.MoveAttackArea(direction * 2, 2);
+                    skillManager.MoveAttackArea(direction * 3, 2);
                     skillManager.ShowAttackArea();
                 }
             }

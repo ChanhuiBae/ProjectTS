@@ -214,7 +214,8 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    public State CurrentState()
+
+    public State GetCurrentState()
     {
         return state;
     }

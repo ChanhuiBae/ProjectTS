@@ -77,7 +77,7 @@ public class UltimateButton : MonoBehaviour
 
     void OnPointerDown(PointerEventData eventData)
     {
-        if (player.CurrentState() != State.Attack_Skill)
+        if (player.GetCurrentState() != State.Attack_Skill)
         {
             if(ultimateFill.fillAmount >= 1)
             {

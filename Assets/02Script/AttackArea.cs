@@ -53,7 +53,7 @@ public class AttackArea : MonoBehaviour
         for (int i = 0; i < targets.Count; i++)
         {
             float inside = Vector2.Angle(new Vector2(transform.forward.x, transform.forward.z), new Vector2(targets[i].transform.position.x, targets[i].transform.position.z));
-            if(Mathf.Abs(inside) < 15) 
+            if(Mathf.Abs(inside) < 20) 
             {
                 skillManager.TakeDamageOther("AttackArea", targets[i]);
             }

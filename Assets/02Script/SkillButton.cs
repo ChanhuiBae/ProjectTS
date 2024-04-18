@@ -69,7 +69,7 @@ public class SkillButton : MonoBehaviour
 
     void OnPointerDown(PointerEventData eventData)
     {
-        if(player.CurrentState() != State.Attack_Skill)
+        if(player.GetCurrentState() != State.Attack_Skill)
         {
             skillManager.IsCharge = true;
             UseSkill = true;
@@ -83,6 +83,7 @@ public class SkillButton : MonoBehaviour
         {
             skillManager.IsCharge = false;
             trigger.enabled = false;
+            StartCoroutine(CoolTime());
         }
     }
 
@@ -140,6 +141,5 @@ public class SkillButton : MonoBehaviour
         player.ChangeState(State.Attack_Skill);
         player.UseSkill(skill_ID);
         skillManager.UseSkill(buttonNum);
-        StartCoroutine (CoolTime());
     }
 }

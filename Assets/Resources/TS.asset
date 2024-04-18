@@ -1164,9 +1164,9 @@ MonoBehaviour:
     Hit_04: 0
     Hit_05: 0
   - Skill_ID: 201
-    Hit_01: 1
-    Hit_02: 13
-    Hit_03: 4
+    Hit_01: 7
+    Hit_02: 21
+    Hit_03: 15
     Hit_04: 0
     Hit_05: 0
   - Skill_ID: 202
@@ -1176,9 +1176,9 @@ MonoBehaviour:
     Hit_04: 0
     Hit_05: 0
   - Skill_ID: 203
-    Hit_01: 7
-    Hit_02: 8
-    Hit_03: 1
+    Hit_01: 3
+    Hit_02: 11
+    Hit_03: 5
     Hit_04: 0
     Hit_05: 0
   - Skill_ID: 231
