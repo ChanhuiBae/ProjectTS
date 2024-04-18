@@ -9,6 +9,7 @@ public class AttackArea : MonoBehaviour
     private SkillManager skillManager;
     private List<Collider> targets;
     private ParticleSystem view;
+    private ParticleSystem full;
     private bool IsListUp;
 
     public void Awake()
@@ -26,10 +27,15 @@ public class AttackArea : MonoBehaviour
         {
             Debug.Log("AttackArea - Init - ParticleSystem");
         }
+        if (!GameObject.Find("FullAttackAreaView").TryGetComponent<ParticleSystem>(out full))
+        {
+            Debug.Log("AttackArea - Init - ParticleSystem");
+        }
 
         sphereCol.enabled = false;
         targets = new List<Collider>();
         view.Stop();
+        full.Stop();
         IsListUp = false;
     }
 
@@ -67,6 +73,7 @@ public class AttackArea : MonoBehaviour
     }
     public void StartView()
     {
+        full.Play();
         view.transform.position = transform.root.position + sphereCol.center;
         view.startSize = sphereCol.radius * 2;
         view.Play();
@@ -75,6 +82,7 @@ public class AttackArea : MonoBehaviour
     public void StopView()
     {
         view.Clear();
+        full.Clear();
     }
 
     public Vector3 GetCenter()

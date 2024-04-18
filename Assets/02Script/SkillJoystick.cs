@@ -106,7 +106,7 @@ public class SkillJoystick : MonoBehaviour
                 else
                 {
                     skillManager.StopAttackArea();
-                    skillManager.MoveAttackArea(direction * 3, 2);
+                    skillManager.MoveAttackArea(direction * 4.5f, 2);
                     skillManager.ShowAttackArea();
                 }
             }

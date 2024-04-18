@@ -126,7 +126,7 @@ public class Skill : MonoBehaviour
 
     private IEnumerator CountHit()
     {
-        for(int i = 0; i < hitInfo.Hit_01;  i++)
+        for(int i = 0; i < hitInfo.Hit_01; i++)
         {
             yield return null;
         }

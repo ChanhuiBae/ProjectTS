@@ -49,7 +49,6 @@ public class SpawnManager : MonoBehaviour
         GameObject obj = pool.GetFromPool<HPItem>(0).gameObject;
         HPItem hp = obj.GetComponent<HPItem>();
         hp.Init(1f, pos);
-
     }
 
     public void SpawnEXPItem(Vector3 pos)

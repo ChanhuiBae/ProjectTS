@@ -82,6 +82,7 @@ public class SkillButton : MonoBehaviour
         if (UseSkill)
         {
             skillManager.IsCharge = false;
+            skillManager.StopCharge();
             trigger.enabled = false;
             StartCoroutine(CoolTime());
         }
