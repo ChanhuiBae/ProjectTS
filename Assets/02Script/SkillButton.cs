@@ -33,21 +33,24 @@ public class SkillButton : MonoBehaviour
                 Debug.Log("SkillButton - Awake - PlayerController");
             }
         }
-        if(!transform.GetChild(0).TryGetComponent<Image>(out coolTimeImage))
+        if(transform.childCount != 0)
         {
-            Debug.Log("SkillButton - Awake - Image");
-        }
-        if(!transform.GetChild(1).TryGetComponent<Image>(out icon))
-        {
-            Debug.Log("SkillButton - Awake - Image");
-        }
-        if (!transform.GetChild(2).TryGetComponent<Image>(out block))
-        {
-            Debug.Log("SkillButton - Awake - Image");
-        }
-        if (!transform.GetChild(3).TryGetComponent<TextMeshProUGUI>(out time))
-        {
-            Debug.Log("SkillButton - Awake - TextMeshProUGUI");
+            if (!transform.GetChild(0).TryGetComponent<Image>(out coolTimeImage))
+            {
+                Debug.Log("SkillButton - Awake - Image");
+            }
+            if (!transform.GetChild(1).TryGetComponent<Image>(out icon))
+            {
+                Debug.Log("SkillButton - Awake - Image");
+            }
+            if (!transform.GetChild(2).TryGetComponent<Image>(out block))
+            {
+                Debug.Log("SkillButton - Awake - Image");
+            }
+            if (!transform.GetChild(3).TryGetComponent<TextMeshProUGUI>(out time))
+            {
+                Debug.Log("SkillButton - Awake - TextMeshProUGUI");
+            }
         }
         if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
@@ -69,11 +72,18 @@ public class SkillButton : MonoBehaviour
 
     void OnPointerDown(PointerEventData eventData)
     {
-        if(player.GetCurrentState() != State.Attack_Skill)
+        if(transform.childCount == 0)
         {
-            skillManager.IsCharge = true;
-            UseSkill = true;
-            AttackSkill();
+            BasicAttack();
+        }
+        else
+        {
+            if (player.GetCurrentState() != State.Attack_Skill)
+            {
+                skillManager.IsCharge = true;
+                UseSkill = true;
+                AttackSkill();
+            }
         }
     }
 
@@ -101,17 +111,20 @@ public class SkillButton : MonoBehaviour
         }
         else
         {
-            icon.sprite = Resources.Load<Sprite>("Image/"+ name);
             trigger.enabled = true;
             TableEntity_Skill_List skill;
             GameManager.Inst.GetSkillList(skill_ID,out skill);
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + "101";
             TableEntity_Skill info;
             GameManager.Inst.GetSkillData(int.Parse(key), out info);
-            maxTime = info.Cool_Time;
-            currentTime = maxTime;
-            coolTimeImage.fillAmount = 1;
-            StartCoroutine(CoolTime());
+            if (transform.childCount != 0)
+            {
+                icon.sprite = Resources.Load<Sprite>("Image/" + name);
+                maxTime = info.Cool_Time;
+                currentTime = maxTime;
+                coolTimeImage.fillAmount = 1;
+                StartCoroutine(CoolTime());
+            }
         }
     }
 
@@ -136,6 +149,17 @@ public class SkillButton : MonoBehaviour
         coolTimeImage.enabled = false;
     }
 
+    private void BasicAttack()
+    {
+        if(skill_ID < 200)
+        {
+            player.SwordAttack();
+        }
+        else
+        {
+            player.HammerAttack();
+        }
+    }
     private void AttackSkill()
     {
         currentTime = 0;

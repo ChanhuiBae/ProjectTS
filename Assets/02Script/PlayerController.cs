@@ -7,7 +7,7 @@ public enum State
 {
     Idle,
     MoveForward,
-    Attack_Soward,
+    Attack_Sword,
     Attack_Hammer,
     Attack_Gun,
     Attack_Skill,
@@ -29,8 +29,6 @@ public class PlayerController : MonoBehaviour, IDamage
     private float moveSpeed;
     [SerializeField]
     private float rollSpeed;
-    private Button meleeAttack;
-    private FixedJoystick gunAttack;
     private PlayerAnimationController anim;
     private Button roll;
     private bool isControll = true;
@@ -52,6 +50,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private Vector3 look;
 
     private SkillManager skillManager;
+    private MenuManager menuManager;
     private AttackArea attackArea;
 
     private ParticleSystem charge;
@@ -78,15 +77,6 @@ public class PlayerController : MonoBehaviour, IDamage
             Debug.Log("PlayerController - Awake - PlayerAnimationController");
         }
 
-        if (!GameObject.Find("MeleeAttack").TryGetComponent<Button>(out meleeAttack))
-        {
-            Debug.Log("PlayerController - Awake - Button");
-        }
-        if (!GameObject.Find("GunAttack").TryGetComponent<FixedJoystick>(out gunAttack))
-        {
-            Debug.Log("PlayerController - Awake - FixedJoystic");
-        }
-
         if (!GameObject.Find("Roll").TryGetComponent<Button>(out roll))
         {
             Debug.Log("PlayerController - Awake - Button");
@@ -95,14 +85,17 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             roll.onClick.AddListener(ChangeRoll);
         }
-       
-        if(!GameObject.Find("ExperienceFill").TryGetComponent<Image>(out expFill))
+        if(!GameObject.Find("Canvas").TryGetComponent<MenuManager>(out menuManager))
+        {
+            Debug.Log("PlayerController - Awake - MenumManager");
+        }
+        if (!GameObject.Find("ExperienceFill").TryGetComponent<Image>(out expFill))
         {
             Debug.Log("PlayerController - Awake - Image");
         }
         if (!transform.Find("AttackArea").TryGetComponent<AttackArea>(out attackArea))
         {
-            Debug.Log("SkillManager - Awake - AttackArea");
+            Debug.Log("PlayerController - Awake - AttackArea");
         }
         if(!transform.Find("Charge").TryGetComponent<ParticleSystem>(out charge))
         {
@@ -128,36 +121,22 @@ public class PlayerController : MonoBehaviour, IDamage
         switch (type)
         {
             case WeaponType.Sowrd:
-                meleeAttack.onClick.AddListener(SowrdAttack);
                 if (!GameObject.Find("Sowrd").TryGetComponent<Weapon>(out weapon))
                 {
                     Debug.Log("PlayerController - Awake - Weapon");
                 }
                 GameObject.Find("Hammer").SetActive(false);
-                gunAttack.gameObject.SetActive(false);
                 GameObject.Find("Gun").SetActive(false);
                 break;
             case WeaponType.Hammer:
-                Sprite hammerImage = Resources.Load<Sprite>("Image/Hammer");
-                if(!meleeAttack.gameObject.TryGetComponent<Image>(out Image image))
-                {
-                    Debug.Log("PlayerController - Init - Resources Sprite");
-                }
-                else
-                {
-                    image.sprite = hammerImage;
-                }
-                meleeAttack.onClick.AddListener(HammerAttack);
                 if (!GameObject.Find("Hammer").TryGetComponent<Weapon>(out weapon))
                 {
                     Debug.Log("PlayerController - Awake - Weapon");
                 }
                 GameObject.Find("Sowrd").SetActive(false);
-                gunAttack.gameObject.SetActive(false);
                 GameObject.Find("Gun").SetActive(false);
                 break;
             case WeaponType.Gun:
-                meleeAttack.gameObject.SetActive(false);
                 GameObject.Find("Sowrd").SetActive(false);
                 GameObject.Find("Hammer").SetActive(false);
                 if (!GameObject.Find("Gun").TryGetComponent<Weapon>(out weapon))
@@ -192,7 +171,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 case State.MoveForward:
                     StartCoroutine(MoveForward()); 
                     break;
-                case State.Attack_Soward:
+                case State.Attack_Sword:
                     break;
                 case State.Attack_Hammer:
                     skillManager.UseSkill(0); 
@@ -233,10 +212,6 @@ public class PlayerController : MonoBehaviour, IDamage
         direction.Normalize();
     }
 
-    private void GetLook()
-    {
-        look = Vector3.forward * gunAttack.Vertical + Vector3.right * gunAttack.Horizontal;
-    }
 
     private void Move()
     {
@@ -262,8 +237,8 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             if(weapon.Type == WeaponType.Gun)
             {
-                GetLook();
-                if(look != Vector3.zero)
+                look = menuManager.GetLook();
+                if (look != Vector3.zero)
                 {
                     ChangeState(State.Attack_Gun);
                 }
@@ -284,7 +259,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             if (weapon.Type == WeaponType.Gun)
             {
-                GetLook();
+                look = menuManager.GetLook();
                 if (look != Vector3.zero)
                 {
                     ChangeState(State.Attack_Gun);
@@ -312,7 +287,7 @@ public class PlayerController : MonoBehaviour, IDamage
         int count = 0;
         while (true)
         {
-            GetLook();
+            look = menuManager.GetLook();
             transform.LookAt(transform.position + look);
             if (look == Vector3.zero)
             {
@@ -354,12 +329,12 @@ public class PlayerController : MonoBehaviour, IDamage
     }
 
 
-    private void SowrdAttack()
+    public void SwordAttack()
     {
-        ChangeState(State.Attack_Soward);
+        ChangeState(State.Attack_Sword);
     }
 
-    private void HammerAttack()
+    public void HammerAttack()
     {
         if (!anim.GetCombo() && anim.IsHammerAttack1())
         {
@@ -368,12 +343,6 @@ public class PlayerController : MonoBehaviour, IDamage
         ChangeState(State.Attack_Hammer);
     }
 
-    private IEnumerator ComboCount()
-    {
-        yield return null;
-        //anim.IsCombo(false);
-    }
- 
     private void ChangeRoll()
     {
         ChangeState(State.Roll);

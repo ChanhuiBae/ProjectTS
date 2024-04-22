@@ -10,6 +10,8 @@ public class MenuManager : MonoBehaviour
     private TextMeshProUGUI countdown;
     private int time;
     private TextMeshProUGUI killCount;
+    private SkillButton basic;
+    private FixedJoystick gunAttack;
     private SkillButton skill1;
     private SkillButton skill2;
     private SkillButton skill3;
@@ -29,7 +31,15 @@ public class MenuManager : MonoBehaviour
         {
             Debug.Log("MenuManager - Awake - TextMeshProUGUI");
         }
-        if(!GameObject.Find("Skill1").TryGetComponent<SkillButton>(out skill1))
+        if (!GameObject.Find("MeleeAttack").TryGetComponent<SkillButton>(out basic))
+        {
+            Debug.Log("PlayerController - Awake - Button");
+        }
+        if (!GameObject.Find("GunAttack").TryGetComponent<FixedJoystick>(out gunAttack))
+        {
+            Debug.Log("PlayerController - Awake - FixedJoystic");
+        }
+        if (!GameObject.Find("Skill1").TryGetComponent<SkillButton>(out skill1))
         {
             Debug.Log("MenuManager - Awake - SkillButton");
         }
@@ -63,11 +73,39 @@ public class MenuManager : MonoBehaviour
         countdown.gameObject.SetActive(false);
         timeBackgroun.SetActive(false);
     }
+    public void InitBasic(WeaponType type)
+    {
+        switch (type)
+        {
+            case WeaponType.Sowrd:
+                gunAttack.gameObject.SetActive(false);
+                break;
+            case WeaponType.Hammer:
+                Sprite hammerImage = Resources.Load<Sprite>("Image/Hammer");
+                if (!basic.gameObject.TryGetComponent<Image>(out Image image))
+                {
+                    Debug.Log("PlayerController - Init - Resources Sprite");
+                }
+                else
+                {
+                    image.sprite = hammerImage;
+                }
+                gunAttack.gameObject.SetActive(false);
+                break;
+            case WeaponType.Gun:
+                basic.gameObject.SetActive(false);
+                break;
+        }
 
-    public void InitSkill(int num, int skill, string name)
+    }
+
+    public void InitSkillButton(int num, int skill, string name)
     {
         switch(num)
         { 
+            case 0:
+                basic.Init(0, skill, name); 
+                break;
             case 1:
                 skill1.Init(1,skill, name);
                 break;
@@ -94,5 +132,10 @@ public class MenuManager : MonoBehaviour
     public void SetKillCount(int value)
     {
         killCount.text = value.ToString();
+    }
+
+    public Vector3 GetLook()
+    {
+        return Vector3.forward * gunAttack.Vertical + Vector3.right * gunAttack.Horizontal;
     }
 }
