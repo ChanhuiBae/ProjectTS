@@ -216,7 +216,6 @@ public class PlayerController : MonoBehaviour, IDamage
     private void Move()
     {
         rig.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
-
     }
 
     public void SetIdle()
@@ -284,6 +283,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         anim.Move(true);
         anim.Combat(true);
+        skillManager.SetCrowdControl(CrowdControl.Stun);
         int count = 0;
         while (true)
         {
@@ -320,7 +320,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
             if (count == 20)
             {
-              //  weapon.NormalAttack();
+                skillManager.SpawnBasicProjectile(weapon.transform.GetChild(1).transform.position);
+                skillManager.UseSkill(0);
                 count = 0;
             }
             count++;
@@ -341,6 +342,11 @@ public class PlayerController : MonoBehaviour, IDamage
             anim.IsCombo(true);
         }
         ChangeState(State.Attack_Hammer);
+    }
+
+    private void GunAttack()
+    {
+        ChangeState(State.Attack_Gun);
     }
 
     private void ChangeRoll()

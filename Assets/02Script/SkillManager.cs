@@ -200,6 +200,16 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         attackArea.StopView();
     }
 
+    public void SpawnBasicProjectile(Vector3 pos)
+    {
+        GameObject obj = projectileManager.GetFromPool<Projectile>(0).gameObject;
+        Projectile projectile = obj.GetComponent<Projectile>();
+        projectile.Init(pos);
+        projectile.Attack(player.transform.rotation);
+    }
+
+
+
 
     public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
     {
@@ -210,6 +220,9 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         float skillPhysics = basic.GetDamageA() + (basic.GetDamageB() * basic.GetLevel()); ;
         switch (useSkill)
         {
+            case 0:
+                skillPhysics = basic.GetDamageA() + (basic.GetDamageB() * basic.GetLevel()); 
+                break;
             case 1:
                 skillPhysics = skill1.GetDamageA() + (skill1.GetDamageB() * skill1.GetLevel());
                 break;
@@ -248,7 +261,6 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                         creatureDamage.Knockback(5);
                         break;
                     case CrowdControl.Pulled:
-                        Debug.Log(name + " pull");
                         creatureDamage.Pulled(player.transform.position);
                         break;
                 }

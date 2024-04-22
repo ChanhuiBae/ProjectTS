@@ -6872,7 +6872,7 @@ MonoBehaviour:
   - _name: Bullet
     _component: {fileID: 2079523107158705201, guid: 7c1b4da6d8077c249babd0c0d7ff9c8b,
       type: 3}
-    _count: 30
+    _count: 100
     _container: {fileID: 210889450}
     _nonLazy: 0
 --- !u!4 &564313840
