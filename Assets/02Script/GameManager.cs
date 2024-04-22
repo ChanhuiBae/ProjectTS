@@ -205,13 +205,21 @@ public class GameManager : Singleton<GameManager>
                 skillManager.SetSkill(1, pData.skill1_ID, skill1.Weapon_ID, skill1.Category_ID, skill1.Skill_Level_Max, skill1.Charge_Max, skill1.Hit_Max);
             
             }
+            else
+            {
+                menuManager.InitSkill(1, pData.skill1_ID, "None");
+            }
             if (pData.skill2_ID != 0)
             {
                 TableEntity_Skill_List skill2;
                 GameManager.Inst.GetSkillList(pData.skill2_ID, out skill2);
                 menuManager.InitSkill(2, pData.skill2_ID, skill2.Skill_Name_Eng);
                 skillManager.SetSkill(2, pData.skill2_ID, skill2.Weapon_ID, skill2.Category_ID, skill2.Skill_Level_Max, skill2.Charge_Max, skill2.Hit_Max);
-        
+
+            }
+            else
+            {
+                menuManager.InitSkill(2, pData.skill2_ID, "None");
             }
             if (pData.skill3_ID != 0)
             {
@@ -219,9 +227,13 @@ public class GameManager : Singleton<GameManager>
                 GameManager.Inst.GetSkillList(pData.skill3_ID, out skill3);
                 menuManager.InitSkill(3, pData.skill3_ID, skill3.Skill_Name_Eng);
                 skillManager.SetSkill(3,  pData.skill3_ID, skill3.Weapon_ID, skill3.Category_ID, skill3.Skill_Level_Max, skill3.Charge_Max, skill3.Hit_Max);
-            
+
             }
-            if(pData.ultimate1_ID != 0)
+            else
+            {
+                menuManager.InitSkill(3, pData.skill3_ID, "None");
+            }
+            if (pData.ultimate1_ID != 0)
             {
                 TableEntity_Skill_List ultimate1;
                 GameManager.Inst.GetSkillList(pData.ultimate1_ID, out ultimate1);
@@ -229,12 +241,20 @@ public class GameManager : Singleton<GameManager>
                 skillManager.SetSkill(4, pData.ultimate1_ID, ultimate1.Weapon_ID, ultimate1.Category_ID, ultimate1.Skill_Level_Max, ultimate1.Charge_Max, ultimate1.Hit_Max);
 
             }
-            if(pData.ultimate2_ID != 0)
+            else
+            {
+                menuManager.InitSkill(4, pData.ultimate1_ID, "None");
+            }
+            if (pData.ultimate2_ID != 0)
             {
                 TableEntity_Skill_List ultimate2;
                 GameManager.Inst.GetSkillList(pData.ultimate2_ID, out ultimate2);
                 menuManager.InitSkill(5, pData.ultimate2_ID, ultimate2.Skill_Name_Eng);
                 skillManager.SetSkill(5, pData.ultimate2_ID, ultimate2.Weapon_ID, ultimate2.Category_ID, ultimate2.Skill_Level_Max, ultimate2.Charge_Max, ultimate2.Hit_Max);
+            }
+            else
+            {
+                menuManager.InitSkill(5, pData.ultimate2_ID, "None");
             }
             ultimateValue = 100;
             killCount = 0;
@@ -280,13 +300,13 @@ public class GameManager : Singleton<GameManager>
         pData.Adaptation = info.Adaptation;
         pData.Available_Point = info.Available_Point;
         pData.Exp_Need = info.Exp_Need;
-        pData.WeaponID = 2000;
-        pData.basic_ID = 200;
-        pData.skill1_ID = 201;
-        pData.skill2_ID = 202;
-        pData.skill3_ID = 203;
-        pData.ultimate1_ID = 231;
-        pData.ultimate2_ID = 232;
+        pData.WeaponID = 3000;
+        pData.basic_ID = 300;
+        pData.skill1_ID = 0;
+        pData.skill2_ID = 0;
+        pData.skill3_ID = 0;
+        pData.ultimate1_ID = 0;
+        pData.ultimate2_ID = 0;
         SaveData();
     }
 

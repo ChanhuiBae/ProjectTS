@@ -93,6 +93,30 @@ MonoBehaviour:
     Hit_Max: 1
     Skill_Name: "\uD50C\uB77C\uC988\uB9C8 \uB77C\uC774\uD50C \uC77C\uBC18 \uACF5\uACA9"
     Skill_Name_Eng: PR_Basic
+  - ID: 301
+    Weapon_ID: 03
+    Category_ID: 2
+    Skill_Level_Max: 5
+    Charge_Max: 0
+    Hit_Max: 1
+    Skill_Name: PG - 15
+    Skill_Name_Eng: PG_15
+  - ID: 302
+    Weapon_ID: 03
+    Category_ID: 2
+    Skill_Level_Max: 5
+    Charge_Max: 0
+    Hit_Max: 1
+    Skill_Name: "\uCCA0\uAC11 \uC0AC\uACA9"
+    Skill_Name_Eng: APHE_Shoot
+  - ID: 303
+    Weapon_ID: 03
+    Category_ID: 2
+    Skill_Level_Max: 5
+    Charge_Max: 0
+    Hit_Max: 1
+    Skill_Name: "\uD540 \uD3EC\uC778\uD2B8 \uB2E4\uC6B4"
+    Skill_Name_Eng: Pin_Point_Down
   Skill_Info_List:
   - ID: 200021101
     Type: NULL
@@ -1194,6 +1218,24 @@ MonoBehaviour:
     Hit_04: 0
     Hit_05: 0
   - Skill_ID: 300
+    Hit_01: 1
+    Hit_02: 0
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0
+  - Skill_ID: 301
+    Hit_01: 1
+    Hit_02: 0
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0
+  - Skill_ID: 302
+    Hit_01: 1
+    Hit_02: 0
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0
+  - Skill_ID: 303
     Hit_01: 1
     Hit_02: 0
     Hit_03: 0
