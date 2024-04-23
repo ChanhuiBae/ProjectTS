@@ -41,6 +41,7 @@ public class AttackArea : MonoBehaviour
 
     public void Attack(Vector3 center, float radius)
     {
+        sphereCol.enabled = false;
         sphereCol.enabled = true;
         sphereCol.center = center;
         sphereCol.radius = radius;

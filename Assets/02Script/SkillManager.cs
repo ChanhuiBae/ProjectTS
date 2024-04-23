@@ -217,12 +217,9 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             + (weapon.Fire * (1 - Creature_Fire_Cut)) + (weapon.Water * (1 - Creature_Water_Cut))
             + (weapon.Electric * (1 - Creature_Electric_Cut)) + (weapon.Ice * (1 - Creature_Ice_Cut))
             + (weapon.Wind * (1 - Creature_Wind_Cut));
-        float skillPhysics = basic.GetDamageA() + (basic.GetDamageB() * basic.GetLevel()); ;
+        float skillPhysics = basic.GetDamageA() + (basic.GetDamageB() * basic.GetLevel());
         switch (useSkill)
         {
-            case 0:
-                skillPhysics = basic.GetDamageA() + (basic.GetDamageB() * basic.GetLevel()); 
-                break;
             case 1:
                 skillPhysics = skill1.GetDamageA() + (skill1.GetDamageB() * skill1.GetLevel());
                 break;
@@ -236,7 +233,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 skillPhysics = ultimate1.GetDamageA() + ultimate1.GetDamageB() + ultimate1.GetLevel();
                 break;
             case 5:
-                skillPhysics += ultimate2.GetDamageA() + ultimate2.GetDamageB() + ultimate2.GetLevel();
+                skillPhysics = ultimate2.GetDamageA() + ultimate2.GetDamageB() + ultimate2.GetLevel();
                 break;
         }
         return weaponPhysics * skillPhysics;

@@ -85,10 +85,6 @@ public class Skill : MonoBehaviour
     {
         IsActive = false;
         current_hit++;
-        if(current_hit > max_hit) 
-        {
-            current_hit = 0;
-        }
         currentInfoID = GetKey();
         GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
         if(currentInfo != null)

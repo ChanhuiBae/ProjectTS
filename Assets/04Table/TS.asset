@@ -1174,6 +1174,182 @@ MonoBehaviour:
     Buff_A: 0
     Buff_B: 0
     Buff_C: 0
+  - ID: 300031101
+    Type: NULL
+    Skill_Level: 1
+    Charge_Level: 0
+    Damage_A: 0
+    Damage_B: 1
+    Stagger_Time: 1
+    Stun_Time: 0
+    Airbone_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 0
+    Need_Damage: 0
+    Invincible_Time: 0
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 301032101
+    Type: Move, Invincible, CC
+    Skill_Level: 1
+    Charge_Level: 0
+    Damage_A: 1.4
+    Damage_B: 0.1
+    Stagger_Time: 0
+    Stun_Time: 0.5
+    Airbone_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 10
+    Need_Damage: 0
+    Invincible_Time: 0.5
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 301032201
+    Type: Move, Invincible, CC
+    Skill_Level: 2
+    Charge_Level: 0
+    Damage_A: 1.4
+    Damage_B: 0.1
+    Stagger_Time: 0
+    Stun_Time: 0.75
+    Airbone_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 8
+    Need_Damage: 0
+    Invincible_Time: 0.5
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 301032301
+    Type: Move, Invincible, CC
+    Skill_Level: 3
+    Charge_Level: 0
+    Damage_A: 1.4
+    Damage_B: 0.1
+    Stagger_Time: 0
+    Stun_Time: 1
+    Airbone_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 7
+    Need_Damage: 0
+    Invincible_Time: 0.5
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 301032401
+    Type: Move, Invincible, CC
+    Skill_Level: 4
+    Charge_Level: 0
+    Damage_A: 1.4
+    Damage_B: 0.1
+    Stagger_Time: 0
+    Stun_Time: 1.25
+    Airbone_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 6
+    Need_Damage: 0
+    Invincible_Time: 0.5
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 301032501
+    Type: Move, Invincible, CC
+    Skill_Level: 5
+    Charge_Level: 0
+    Damage_A: 1.4
+    Damage_B: 0.1
+    Stagger_Time: 0
+    Stun_Time: 1.5
+    Airbone_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 5
+    Need_Damage: 0
+    Invincible_Time: 0.5
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 302032101
+    Type: NULL
+    Skill_Level: 1
+    Charge_Level: 0
+    Damage_A: 1.75
+    Damage_B: 0.25
+    Stagger_Time: 1
+    Stun_Time: 0
+    Airbone_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 15
+    Need_Damage: 0
+    Invincible_Time: 0
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 302032201
+    Type: NULL
+    Skill_Level: 2
+    Charge_Level: 0
+    Damage_A: 1.75
+    Damage_B: 0.25
+    Stagger_Time: 1
+    Stun_Time: 0
+    Airbone_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 14
+    Need_Damage: 0
+    Invincible_Time: 0
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 302032301
+    Type: NULL
+    Skill_Level: 3
+    Charge_Level: 0
+    Damage_A: 1.75
+    Damage_B: 0.25
+    Stagger_Time: 1
+    Stun_Time: 0
+    Airbone_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 13
+    Need_Damage: 0
+    Invincible_Time: 0
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 302032401
+    Type: NULL
+    Skill_Level: 4
+    Charge_Level: 0
+    Damage_A: 1.75
+    Damage_B: 0.25
+    Stagger_Time: 1
+    Stun_Time: 0
+    Airbone_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 12
+    Need_Damage: 0
+    Invincible_Time: 0
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 302032501
+    Type: NULL
+    Skill_Level: 5
+    Charge_Level: 0
+    Damage_A: 1.75
+    Damage_B: 0.25
+    Stagger_Time: 1
+    Stun_Time: 0
+    Airbone_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 10
+    Need_Damage: 0
+    Invincible_Time: 0
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
   Skill_Hit_Frame:
   - Skill_ID: 100
     Hit_01: 6

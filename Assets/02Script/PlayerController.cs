@@ -318,7 +318,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 anim.Move(false);
             }
 
-            if (count == 20)
+            if (count == 60)
             {
                 skillManager.SpawnBasicProjectile(weapon.transform.GetChild(1).transform.position);
                 skillManager.UseSkill(0);

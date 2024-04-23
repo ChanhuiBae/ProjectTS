@@ -81,7 +81,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.60700995
+      - time: 0.54730844
         functionName: SetAttackArea
         data: 
         objectReferenceParameter: {instanceID: 0}
