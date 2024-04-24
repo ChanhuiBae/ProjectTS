@@ -24,8 +24,6 @@ public class PlayerController : MonoBehaviour, IDamage
     private FloatingJoystick joystick;
     private WeaponType type;
     [SerializeField]
-    private float attackTime;
-    [SerializeField]
     private float moveSpeed;
     [SerializeField]
     private float rollSpeed;
@@ -48,6 +46,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private Vector3 direction;
     private Vector3 look;
+    private GameObject grenade;
 
     private SkillManager skillManager;
     private MenuManager menuManager;
@@ -76,6 +75,8 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             Debug.Log("PlayerController - Awake - PlayerAnimationController");
         }
+
+        grenade = GameObject.Find("Grenade");
 
         if (!GameObject.Find("Roll").TryGetComponent<Button>(out roll))
         {
@@ -374,6 +375,11 @@ public class PlayerController : MonoBehaviour, IDamage
         LeanTween.move(gameObject, transform.position + transform.forward * rollSpeed, 0.4f).setEase(LeanTweenType.easeOutSine);
     }
 
+    public void MoveBack()
+    {
+        LeanTween.move(gameObject, transform.position - transform.forward * rollSpeed, 0.4f).setEase(LeanTweenType.easeOutSine);
+    }
+
     public void ApplyHP(float value)
     {
         currentHP -= value;
@@ -439,6 +445,11 @@ public class PlayerController : MonoBehaviour, IDamage
         chargeLight.Stop();
     }
     
+    public void AttackGrenade()
+    {
+        skillManager.SpawnGrenade(grenade.transform.position);
+    }
+
     public void SetAttackArea(float radius)
     {
         attackArea.Attack(Vector3.zero, radius);

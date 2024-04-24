@@ -34,16 +34,25 @@ public class Projectile : MonoBehaviour, IPoolObject
         trail.enabled = true;
     }
 
-    public void Attack(Quaternion rotation)
+    public void AttackBullet(Quaternion rotation)
     {
         transform.rotation = rotation;
         rig.velocity = Vector3.zero;
         rig.AddForce(transform.forward * 8f, ForceMode.Impulse);
         StartCoroutine(TimeOut());
     }
+    public void AttackGrenade(Quaternion rotation)
+    {
+        transform.rotation = rotation;
+        rig.velocity = Vector3.zero;
+        rig.useGravity = true;
+        rig.AddForce(transform.forward * 5f + Vector3.up * 2f, ForceMode.Impulse);
+        StartCoroutine(TimeOut());
+    }
+
     private IEnumerator TimeOut()
     {
-        yield return YieldInstructionCache.WaitForSeconds(1f);
+        yield return YieldInstructionCache.WaitForSeconds(5f);
         trail.enabled = false;
         skillManager.TakeProjectile(poolName, this);
     }

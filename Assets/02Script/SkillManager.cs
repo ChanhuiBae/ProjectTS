@@ -205,10 +205,26 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         GameObject obj = projectileManager.GetFromPool<Projectile>(0).gameObject;
         Projectile projectile = obj.GetComponent<Projectile>();
         projectile.Init(pos);
-        projectile.Attack(player.transform.rotation);
+        projectile.AttackBullet(player.transform.rotation);
     }
-
-
+    
+    public void SpawnGrenade(Vector3 pos)
+    {
+        GameObject obj = projectileManager.GetFromPool<Projectile>(1).gameObject;
+        Projectile projectile = obj.GetComponent<Projectile>();
+        projectile.Init(pos);
+        projectile.AttackGrenade(player.transform.rotation);
+        //Quaternion quaternion = Quaternion.AngleAxis(45f, player.transform.eulerAngles);
+        //obj = projectileManager.GetFromPool<Projectile>(1).gameObject;
+        //projectile = obj.GetComponent<Projectile>();
+        //projectile.Init(pos);
+        //projectile.AttackGrenade(quaternion);
+        //quaternion = Quaternion.AngleAxis(90f, player.transform.eulerAngles);
+       // obj = projectileManager.GetFromPool<Projectile>(1).gameObject;
+       // projectile = obj.GetComponent<Projectile>();
+       // projectile.Init(pos);
+        //projectile.AttackGrenade(quaternion);
+    }
 
 
     public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
