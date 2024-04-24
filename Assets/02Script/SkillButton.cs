@@ -134,6 +134,7 @@ public class SkillButton : MonoBehaviour
                 {
                     icon.enabled = false;
                     handle.sprite = Resources.Load<Sprite>("Image/" + name);
+                    trigger.enabled = false;
                 }
                 else
                 {
