@@ -4,6 +4,7 @@ using UnityEngine;
 public enum CrowdControl
 {
     None,
+    Stagger,
     Stun,
     Knockback,
     Airborne,
@@ -208,34 +209,12 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         projectile.AttackBullet(player.transform.rotation);
     }
     
-    public void SpawnGrenade(Vector3 pos)
+    public void SpawnGrenade(Vector3 pos, Quaternion rotation)
     {
         GameObject obj = projectileManager.GetFromPool<Projectile>(1).gameObject;
         Projectile projectile = obj.GetComponent<Projectile>();
         projectile.Init(ProjectileType.Grenade, pos);
-        projectile.AttackGrenade(player.transform.rotation);
-
-        Quaternion quaternion = Quaternion.Euler(new Vector3(0, 180, 0));
-        quaternion = player.transform.rotation * quaternion;
-        obj = projectileManager.GetFromPool<Projectile>(1).gameObject;
-        projectile = obj.GetComponent<Projectile>();
-        projectile.Init(ProjectileType.Grenade, pos);
-        projectile.AttackGrenade(quaternion);
-
-        quaternion = Quaternion.Euler(new Vector3(0, 30, 0));
-        quaternion = player.transform.rotation * quaternion;
-        obj = projectileManager.GetFromPool<Projectile>(1).gameObject;
-        projectile = obj.GetComponent<Projectile>();
-        projectile.Init(ProjectileType.Grenade, pos);
-        projectile.AttackGrenade(quaternion);
-
-        quaternion = Quaternion.Euler(new Vector3(0, -30, 0));
-        quaternion = player.transform.rotation * quaternion;
-        obj = projectileManager.GetFromPool<Projectile>(1).gameObject;
-        projectile = obj.GetComponent<Projectile>();
-        projectile.Init(ProjectileType.Grenade, pos);
-        projectile.AttackGrenade(quaternion);
-
+        projectile.AttackGrenade(rotation);
     }
 
 

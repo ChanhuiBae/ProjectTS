@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public enum State
 {
@@ -286,7 +287,6 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         anim.Move(true);
         anim.Combat(true);
-        skillManager.SetCrowdControl(CrowdControl.Stun);
         int count = 0;
         while (true)
         {
@@ -357,6 +357,18 @@ public class PlayerController : MonoBehaviour, IDamage
         ChangeState(State.Roll);
         anim.Roll();
         StartCoroutine(Roll());
+    }
+
+    public void IsInvincibility(float time)
+    {
+        StartCoroutine(InvincibilityTime(time));
+    }
+
+    private IEnumerator InvincibilityTime(float time)
+    {
+        isInvincibility = true;
+        yield return YieldInstructionCache.WaitForSeconds(time);
+        isInvincibility = false;
     }
 
     private IEnumerator Roll()
@@ -450,7 +462,19 @@ public class PlayerController : MonoBehaviour, IDamage
     
     public void AttackGrenade()
     {
-        skillManager.SpawnGrenade(grenade.transform.position);
+        skillManager.SpawnGrenade(grenade.transform.position, transform.rotation);
+
+        Quaternion quaternion = Quaternion.Euler(new Vector3(0, 180, 0));
+        quaternion = transform.rotation * quaternion;
+        skillManager.SpawnGrenade(grenade.transform.position, quaternion);
+
+        quaternion = Quaternion.Euler(new Vector3(0, 30, 0));
+        quaternion = transform.rotation * quaternion;
+        skillManager.SpawnGrenade(grenade.transform.position,quaternion);
+
+        quaternion = Quaternion.Euler(new Vector3(0, -30, 0));
+        quaternion = transform.rotation * quaternion;
+        skillManager.SpawnGrenade(grenade.transform.position, quaternion);
     }
 
     public void SetAttackArea(float radius)
@@ -509,6 +533,10 @@ public class PlayerController : MonoBehaviour, IDamage
         {
            // ApplyHP(hiter.TakeDamage(Physics_Cut, Fire_Cut, Water_Cut, Electric_Cut, Ice_Cut, Wind_Cut));
         }
+    }
+    public void Stagger(float time)
+    {
+
     }
 
     public void Stun(float time)

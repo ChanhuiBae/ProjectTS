@@ -141,12 +141,17 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         //throw new System.NotImplementedException();
     }
 
-    public void Pulled(Vector3 center)
+    public void Stagger(float time)
     {
-        ai.StopAI(1f);
-        LeanTween.move(gameObject, center, 0.1f).setEase(LeanTweenType.easeInElastic);
+        ai.StopAI(time);
+        if (gameObject.activeSelf && !IsDie)
+            StartCoroutine(StargerTime(time));
     }
 
+    private IEnumerator StargerTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+    }
     public void Stun(float time)
     {
         ai.StopAI(time);
@@ -188,5 +193,11 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         ai.StopAI(distance * 0.01f);
         LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance, distance * 0.01f).setEase(LeanTweenType.easeOutQuart);
+    }
+
+    public void Pulled(Vector3 center)
+    {
+        ai.StopAI(1f);
+        LeanTween.move(gameObject, center, 0.1f).setEase(LeanTweenType.easeInElastic);
     }
 }
