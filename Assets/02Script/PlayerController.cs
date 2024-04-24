@@ -482,20 +482,20 @@ public class PlayerController : MonoBehaviour, IDamage
         attackArea.Attack(Vector3.zero, radius);
     }
 
-    public void Aura()
+    public void SetAura()
     {
         effect = skillManager.SpawnEffect(4);
         effect.Init(transform.position + transform.forward *1.5f, 1);
     }
 
-    public void Slash()
+    public void SetSlash()
     {
         StopCharge();   
         effect = skillManager.SpawnEffect(3);
         effect.Init(transform.position, 1);
     }
 
-    public void PowerWave()
+    public void SetPowerWave()
     {
         effect = skillManager.SpawnEffect(7);
         effect.Init(transform.position + Vector3.up, 1);
@@ -503,7 +503,7 @@ public class PlayerController : MonoBehaviour, IDamage
         attackArea.AttackInAngle();
     }
 
-    public void Pull()
+    public void SetPull()
     {
         skillManager.SetCrowdControl(CrowdControl.Pulled);
         effect = skillManager.SpawnEffect(5);
@@ -511,12 +511,12 @@ public class PlayerController : MonoBehaviour, IDamage
         
     }
 
-    public void Airborne()
+    public void SetAirborne()
     {
         skillManager.SetCrowdControl(CrowdControl.Airborne);
     }
 
-    public void AttackField()
+    public void SetAttackField()
     {
         effect = skillManager.SpawnEffect(6);
         effect.Init(transform.position, 1f);

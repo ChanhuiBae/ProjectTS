@@ -254,14 +254,34 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             {
                 creatureDamage.CalculateDamage(this);
                 TableEntity_Skill skill;
-                GameManager.Inst.GetSkillData(useSkill, out skill);
+                switch (useSkill)
+                {
+                    case 1:
+                        GameManager.Inst.GetSkillData(skill1.GetKey(), out skill);
+                        break;
+                    case 2:
+                        GameManager.Inst.GetSkillData(skill2.GetKey(), out skill);
+                        break;
+                    case 3:
+                        GameManager.Inst.GetSkillData(skill3.GetKey(), out skill);
+                        break;
+                    case 4:
+                        GameManager.Inst.GetSkillData(ultimate1.GetKey(), out skill);
+                        break;
+                    case 5:
+                        GameManager.Inst.GetSkillData(ultimate2.GetKey(), out skill);
+                        break;
+                    default:
+                        GameManager.Inst.GetSkillData(basic.GetKey(), out skill);
+                        break;
+                }
                 switch (crowdControl)
                 {
                     case CrowdControl.Stun:
                         creatureDamage.Stun(skill.Stun_Time);
                         break;
                     case CrowdControl.Airborne:
-                        creatureDamage.Airborne(skill.Airbone_Time);
+                        creatureDamage.Airborne(1);
                         break;
                     case CrowdControl.Knockback:
                         creatureDamage.Knockback(skill.Knockback_Distance);

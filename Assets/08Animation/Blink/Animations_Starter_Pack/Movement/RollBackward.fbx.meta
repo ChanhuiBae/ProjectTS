@@ -100,7 +100,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: MoveBack
+        functionName: NewEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

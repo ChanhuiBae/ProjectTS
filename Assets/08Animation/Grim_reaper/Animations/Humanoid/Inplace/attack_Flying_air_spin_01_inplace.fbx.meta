@@ -61,7 +61,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.07022471
-        functionName: Airborne
+        functionName: SetAirborne
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

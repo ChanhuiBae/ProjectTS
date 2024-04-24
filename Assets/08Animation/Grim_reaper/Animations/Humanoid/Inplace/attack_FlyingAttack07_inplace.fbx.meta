@@ -75,14 +75,14 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.19108279
-        functionName: Slash
+        functionName: SetSlash
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.8012044
-        functionName: PowerWave
+        functionName: SetPowerWave
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

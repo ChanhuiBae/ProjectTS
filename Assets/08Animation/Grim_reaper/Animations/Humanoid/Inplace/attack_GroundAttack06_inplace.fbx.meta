@@ -68,14 +68,14 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.0694236
-        functionName: Pull
+        functionName: SetPull
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 20
         intParameter: 0
         messageOptions: 0
       - time: 0.522293
-        functionName: AttackField
+        functionName: SetAttackField
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
