@@ -2,8 +2,14 @@ using Redcode.Pools;
 using System.Collections;
 using UnityEngine;
 
+public enum ProjectileType
+{
+    Bullet,
+    Grenade
+}
 public class Projectile : MonoBehaviour, IPoolObject
 {
+    private ProjectileType type;
     private Rigidbody rig;
     private float damage;
     private TrailRenderer trail;
@@ -28,8 +34,9 @@ public class Projectile : MonoBehaviour, IPoolObject
         }
 
     }
-    public void Init(Vector3 pos)
+    public void Init(ProjectileType type, Vector3 pos)
     {
+        this.type = type;
         transform.position = pos;
         trail.enabled = true;
     }
@@ -69,15 +76,31 @@ public class Projectile : MonoBehaviour, IPoolObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Creature")
+        switch (type)
         {
-            skillManager.TakeDamageOther("Projectile", other);
-            skillManager.TakeProjectile(poolName, this);
+            case ProjectileType.Bullet:
+                if (other.tag == "Creature")
+                {
+                    skillManager.TakeDamageOther("Projectile", other);
+                    skillManager.TakeProjectile(poolName, this);
+                }
+                if (other.tag == "Ground")
+                {
+                    trail.enabled = false;
+                    skillManager.TakeProjectile(poolName, this);
+                }
+                break;
+            case ProjectileType.Grenade:
+                if (other.tag == "Ground")
+                {
+                    trail.enabled = false;
+                    rig.velocity = Vector3.zero;
+                    Effect effect = skillManager.SpawnEffect(0);
+                    effect.Init(transform.position, 1f);
+                    skillManager.TakeProjectile(poolName, this);
+                }
+                break;
         }
-        if(other.tag == "Ground")
-        {
-            trail.enabled = false;
-            skillManager.TakeProjectile(poolName, this);
-        }
+
     }
 }

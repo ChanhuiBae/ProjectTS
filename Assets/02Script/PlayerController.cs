@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour, IDamage
         get => isControll;
     }
     private bool isInvincibility;
+
     private State state;
     private Weapon weapon;
     private int attackCount;
@@ -221,6 +222,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void SetIdle()
     {
+        isInvincibility = false;
         roll.enabled = true;
         anim.Skill(0);
         anim.IsCombo(false);
@@ -377,6 +379,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void MoveBack()
     {
+        isInvincibility = true;
         LeanTween.move(gameObject, transform.position - transform.forward * rollSpeed, 0.4f).setEase(LeanTweenType.easeOutSine);
     }
 
