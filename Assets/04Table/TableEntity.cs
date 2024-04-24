@@ -31,6 +31,7 @@ public class TableEntity_Skill_List
     public int Hit_Max;
     public string Skill_Name;
     public string Skill_Name_Eng;
+    public bool Is_Scoping;
 }
 
 [System.Serializable]
@@ -79,7 +80,7 @@ public class TableEntity_Skill
     public float Damage_B;
     public int Stagger_Time;
     public float Stun_Time;
-    public float Airbone_Time;
+    public float Airborne_Time;
     public int Knockback_Distance;
     public float Cool_Time;
     public float Need_Damage;

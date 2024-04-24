@@ -275,20 +275,23 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                         GameManager.Inst.GetSkillData(basic.GetKey(), out skill);
                         break;
                 }
-                switch (crowdControl)
+                if(skill != null)
                 {
-                    case CrowdControl.Stun:
-                        creatureDamage.Stun(skill.Stun_Time);
-                        break;
-                    case CrowdControl.Airborne:
-                        creatureDamage.Airborne(1);
-                        break;
-                    case CrowdControl.Knockback:
-                        creatureDamage.Knockback(skill.Knockback_Distance);
-                        break;
-                    case CrowdControl.Pulled:
-                        creatureDamage.Pulled(player.transform.position);
-                        break;
+                    switch (crowdControl)
+                    {
+                        case CrowdControl.Stun:
+                            creatureDamage.Stun(skill.Stun_Time);
+                            break;
+                        case CrowdControl.Airborne:
+                            creatureDamage.Airborne(skill.Airborne_Time);
+                            break;
+                        case CrowdControl.Knockback:
+                            creatureDamage.Knockback(skill.Knockback_Distance);
+                            break;
+                        case CrowdControl.Pulled:
+                            creatureDamage.Pulled(player.transform.position);
+                            break;
+                    }
                 }
             }
         }

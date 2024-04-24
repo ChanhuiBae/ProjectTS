@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public class SkillButton : MonoBehaviour
 {
     private PlayerController player;
+
+    private FixedJoystick joystick;
+    private Image handle;
     private Image coolTimeImage;
     private Image icon;
     private Image block;
@@ -35,19 +38,27 @@ public class SkillButton : MonoBehaviour
         }
         if(transform.childCount != 0)
         {
-            if (!transform.GetChild(0).TryGetComponent<Image>(out coolTimeImage))
+            if (!transform.Find("Joystick").TryGetComponent<FixedJoystick>(out joystick))
+            {
+                Debug.Log("SkillButton - Awake - FixedJoystick");
+            }
+            if(!joystick.transform.GetChild(0).TryGetComponent<Image>(out handle))
             {
                 Debug.Log("SkillButton - Awake - Image");
             }
-            if (!transform.GetChild(1).TryGetComponent<Image>(out icon))
+            if (!transform.Find("CoolTime").TryGetComponent<Image>(out coolTimeImage))
             {
                 Debug.Log("SkillButton - Awake - Image");
             }
-            if (!transform.GetChild(2).TryGetComponent<Image>(out block))
+            if (!transform.Find("Icon").TryGetComponent<Image>(out icon))
             {
                 Debug.Log("SkillButton - Awake - Image");
             }
-            if (!transform.GetChild(3).TryGetComponent<TextMeshProUGUI>(out time))
+            if (!transform.Find("block").TryGetComponent<Image>(out block))
+            {
+                Debug.Log("SkillButton - Awake - Image");
+            }
+            if (!transform.Find("SkillTime").TryGetComponent<TextMeshProUGUI>(out time))
             {
                 Debug.Log("SkillButton - Awake - TextMeshProUGUI");
             }
@@ -119,7 +130,16 @@ public class SkillButton : MonoBehaviour
             GameManager.Inst.GetSkillData(int.Parse(key), out info);
             if (transform.childCount != 0)
             {
-                icon.sprite = Resources.Load<Sprite>("Image/" + name);
+                if (skill.Is_Scoping)
+                {
+                    icon.enabled = false;
+                    handle.sprite = Resources.Load<Sprite>("Image/" + name);
+                }
+                else
+                {
+                    joystick.gameObject.SetActive(false);
+                    icon.sprite = Resources.Load<Sprite>("Image/" + name);
+                }
                 maxTime = info.Cool_Time;
                 currentTime = maxTime;
                 coolTimeImage.fillAmount = 1;
