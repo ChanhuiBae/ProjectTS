@@ -511,12 +511,12 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    public void Stun(int time)
+    public void Stun(float time)
     {
         StartCoroutine(StunControl(time));
     }
 
-    private IEnumerator StunControl(int time)
+    private IEnumerator StunControl(float time)
     {
         isControll = false;
         yield return YieldInstructionCache.WaitForSeconds(time);
@@ -524,12 +524,12 @@ public class PlayerController : MonoBehaviour, IDamage
         
     }
 
-    public void Airborne(int time)
+    public void Airborne(float time)
     {
         
     }
 
-    public void Knockback(int distance)
+    public void Knockback(float distance)
     {
         
     }

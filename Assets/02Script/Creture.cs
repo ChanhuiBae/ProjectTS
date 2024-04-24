@@ -147,14 +147,14 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         LeanTween.move(gameObject, center, 0.1f).setEase(LeanTweenType.easeInElastic);
     }
 
-    public void Stun(int time)
+    public void Stun(float time)
     {
         ai.StopAI(time);
         if (gameObject.activeSelf && !IsDie)
             StartCoroutine(StunEffect(time));
     }
 
-    private IEnumerator StunEffect(int time)
+    private IEnumerator StunEffect(float time)
     {
         stun.gameObject.SetActive(true);
         for (float i = 0.1f; i < time; i += 0.1f)
@@ -167,7 +167,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         stun.gameObject.SetActive(false);
     }
 
-    public void Airborne(int time)
+    public void Airborne(float time)
     {
         ai.StopAI(time);
         if(gameObject.activeSelf)
@@ -184,7 +184,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         LeanTween.move(gameObject, pos, time / 2).setEase(LeanTweenType.easeInSine);
     }
 
-    public void Knockback(int distance)
+    public void Knockback(float distance)
     {
         ai.StopAI(distance * 0.01f);
         LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance, distance * 0.01f).setEase(LeanTweenType.easeOutQuart);

@@ -6,8 +6,8 @@ public interface IDamage
 {
     public void CalculateDamage(ITakeDamage hiter);
 
-    public void Stun(int time);
-    public void Airborne(int time);
-    public void Knockback(int distance);
+    public void Stun(float time);
+    public void Airborne(float time);
+    public void Knockback(float distance);
     public void Pulled(Vector3 center);
 }

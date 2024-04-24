@@ -317,7 +317,7 @@ public class GameManager : Singleton<GameManager>
         pData.WeaponID = 3000;
         pData.basic_ID = 300;
         pData.skill1_ID = 301;
-        pData.skill2_ID = 0;
+        pData.skill2_ID = 302;
         pData.skill3_ID = 0;
         pData.ultimate1_ID =0;
         pData.ultimate2_ID =0;

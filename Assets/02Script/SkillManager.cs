@@ -274,16 +274,18 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
             {
                 creatureDamage.CalculateDamage(this);
+                TableEntity_Skill skill;
+                GameManager.Inst.GetSkillData(useSkill, out skill);
                 switch (crowdControl)
                 {
                     case CrowdControl.Stun:
-                        creatureDamage.Stun(1);
+                        creatureDamage.Stun(skill.Stun_Time);
                         break;
                     case CrowdControl.Airborne:
-                        creatureDamage.Airborne(1);
+                        creatureDamage.Airborne(skill.Airbone_Time);
                         break;
                     case CrowdControl.Knockback:
-                        creatureDamage.Knockback(5);
+                        creatureDamage.Knockback(skill.Knockback_Distance);
                         break;
                     case CrowdControl.Pulled:
                         creatureDamage.Pulled(player.transform.position);
