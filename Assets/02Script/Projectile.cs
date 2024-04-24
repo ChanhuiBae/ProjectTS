@@ -53,7 +53,7 @@ public class Projectile : MonoBehaviour, IPoolObject
         transform.rotation = rotation;
         rig.velocity = Vector3.zero;
         rig.useGravity = true;
-        rig.AddForce(transform.forward * 5f + Vector3.up * 2f, ForceMode.Impulse);
+        rig.AddForce(transform.forward * 6f + Vector3.up * 2f, ForceMode.Impulse);
         StartCoroutine(TimeOut());
     }
 
