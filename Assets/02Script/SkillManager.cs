@@ -214,16 +214,21 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         Projectile projectile = obj.GetComponent<Projectile>();
         projectile.Init(pos);
         projectile.AttackGrenade(player.transform.rotation);
-        //Quaternion quaternion = Quaternion.AngleAxis(45f, player.transform.eulerAngles);
-        //obj = projectileManager.GetFromPool<Projectile>(1).gameObject;
-        //projectile = obj.GetComponent<Projectile>();
-        //projectile.Init(pos);
-        //projectile.AttackGrenade(quaternion);
-        //quaternion = Quaternion.AngleAxis(90f, player.transform.eulerAngles);
-       // obj = projectileManager.GetFromPool<Projectile>(1).gameObject;
-       // projectile = obj.GetComponent<Projectile>();
-       // projectile.Init(pos);
-        //projectile.AttackGrenade(quaternion);
+
+        Quaternion quaternion = Quaternion.Euler(new Vector3(0, 30, 0));
+        quaternion = player.transform.rotation * quaternion;
+        obj = projectileManager.GetFromPool<Projectile>(1).gameObject;
+        projectile = obj.GetComponent<Projectile>();
+        projectile.Init(pos);
+        projectile.AttackGrenade(quaternion);
+
+        quaternion = Quaternion.Euler(new Vector3(0, -30, 0));
+        quaternion = player.transform.rotation * quaternion;
+        obj = projectileManager.GetFromPool<Projectile>(1).gameObject;
+        projectile = obj.GetComponent<Projectile>();
+        projectile.Init(pos);
+        projectile.AttackGrenade(quaternion);
+
     }
 
 
