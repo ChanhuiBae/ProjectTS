@@ -224,7 +224,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             + (weapon.Fire * (1 - Creature_Fire_Cut)) + (weapon.Water * (1 - Creature_Water_Cut))
             + (weapon.Electric * (1 - Creature_Electric_Cut)) + (weapon.Ice * (1 - Creature_Ice_Cut))
             + (weapon.Wind * (1 - Creature_Wind_Cut));
-        float skillPhysics = basic.GetDamageA() + (basic.GetDamageB() * basic.GetLevel());
+        float skillPhysics;
         switch (useSkill)
         {
             case 1:
@@ -242,6 +242,9 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             case 5:
                 skillPhysics = ultimate2.GetDamageA() + ultimate2.GetDamageB() + ultimate2.GetLevel();
                 break;
+            default:
+                skillPhysics = basic.GetDamageA() + (basic.GetDamageB() * basic.GetLevel());
+                break;
         }
         return weaponPhysics * skillPhysics;
     }
@@ -250,6 +253,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     {
         if (useSkill > -1)
         {
+            Debug.Log(name);
             if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
             {
                 creatureDamage.CalculateDamage(this);

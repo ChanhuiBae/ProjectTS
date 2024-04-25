@@ -130,11 +130,11 @@ public class SkillButton : MonoBehaviour
             GameManager.Inst.GetSkillData(int.Parse(key), out info);
             if (transform.childCount != 0)
             {
+                Debug.Log(skill.Is_Scoping);
                 if (skill.Is_Scoping)
                 {
                     icon.enabled = false;
                     handle.sprite = Resources.Load<Sprite>("Image/" + name);
-                    trigger.enabled = false;
                 }
                 else
                 {

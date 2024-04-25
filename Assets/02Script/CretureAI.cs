@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -236,4 +235,5 @@ public class CretureAI : MonoBehaviour
         navAgent.enabled = true;
         ChangeAIState(AI_State.Chase);
     }
+
 }

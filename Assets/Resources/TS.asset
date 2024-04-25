@@ -37,6 +37,7 @@ MonoBehaviour:
     Hit_Max: 2
     Skill_Name: "\uCC28\uC9C0\uB4DC \uC18C\uB4DC \uC77C\uBC18 \uACF5\uACA9"
     Skill_Name_Eng: CS_Basic
+    Is_Scoping: 1
   - ID: 200
     Weapon_ID: 02
     Category_ID: 1
@@ -45,6 +46,7 @@ MonoBehaviour:
     Hit_Max: 2
     Skill_Name: "\uBD80\uC2A4\uD2B8 \uD574\uBA38 \uC77C\uBC18 \uACF5\uACA9"
     Skill_Name_Eng: BH_Basic
+    Is_Scoping: 1
   - ID: 201
     Weapon_ID: 02
     Category_ID: 2
@@ -53,6 +55,7 @@ MonoBehaviour:
     Hit_Max: 3
     Skill_Name: "\uACE0\uB974\uB514\uC6B0\uC2A4\uC758 \uBC14\uD034"
     Skill_Name_Eng: Gordian_Wheel
+    Is_Scoping: 0
   - ID: 202
     Weapon_ID: 02
     Category_ID: 2
@@ -61,6 +64,7 @@ MonoBehaviour:
     Hit_Max: 1
     Skill_Name: "\uC2B9\uB8E1\uCD94"
     Skill_Name_Eng: Dragon_Hammer
+    Is_Scoping: 0
   - ID: 203
     Weapon_ID: 02
     Category_ID: 2
@@ -69,6 +73,7 @@ MonoBehaviour:
     Hit_Max: 3
     Skill_Name: "\uC778\uB825\uC7A5"
     Skill_Name_Eng: Attraction_Field
+    Is_Scoping: 0
   - ID: 231
     Weapon_ID: 02
     Category_ID: 3
@@ -77,6 +82,7 @@ MonoBehaviour:
     Hit_Max: 1
     Skill_Name: "\uC724\uD68C"
     Skill_Name_Eng: Samsara
+    Is_Scoping: 0
   - ID: 232
     Weapon_ID: 02
     Category_ID: 3
@@ -85,6 +91,7 @@ MonoBehaviour:
     Hit_Max: 2
     Skill_Name: "\uB098\uB77D"
     Skill_Name_Eng: Naraka
+    Is_Scoping: 1
   - ID: 300
     Weapon_ID: 03
     Category_ID: 1
@@ -93,6 +100,7 @@ MonoBehaviour:
     Hit_Max: 1
     Skill_Name: "\uD50C\uB77C\uC988\uB9C8 \uB77C\uC774\uD50C \uC77C\uBC18 \uACF5\uACA9"
     Skill_Name_Eng: PR_Basic
+    Is_Scoping: 1
   - ID: 301
     Weapon_ID: 03
     Category_ID: 2
@@ -101,6 +109,7 @@ MonoBehaviour:
     Hit_Max: 1
     Skill_Name: PG - 15
     Skill_Name_Eng: PG_15
+    Is_Scoping: 0
   - ID: 302
     Weapon_ID: 03
     Category_ID: 2
@@ -109,6 +118,7 @@ MonoBehaviour:
     Hit_Max: 1
     Skill_Name: "\uCCA0\uAC11 \uC0AC\uACA9"
     Skill_Name_Eng: APHE_Shoot
+    Is_Scoping: 1
   - ID: 303
     Weapon_ID: 03
     Category_ID: 2
@@ -117,6 +127,7 @@ MonoBehaviour:
     Hit_Max: 1
     Skill_Name: "\uD540 \uD3EC\uC778\uD2B8 \uB2E4\uC6B4"
     Skill_Name_Eng: Pin_Point_Down
+    Is_Scoping: 1
   Skill_Info_List:
   - ID: 200021101
     Type: NULL
@@ -126,7 +137,7 @@ MonoBehaviour:
     Damage_B: 1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 0
@@ -142,7 +153,7 @@ MonoBehaviour:
     Damage_B: 1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 0
@@ -158,7 +169,7 @@ MonoBehaviour:
     Damage_B: 1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 20
     Need_Damage: 0
@@ -174,7 +185,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 20
     Need_Damage: 0
@@ -190,7 +201,7 @@ MonoBehaviour:
     Damage_B: 1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 18
     Need_Damage: 0
@@ -206,7 +217,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 18
     Need_Damage: 0
@@ -222,7 +233,7 @@ MonoBehaviour:
     Damage_B: 1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 16
     Need_Damage: 0
@@ -238,7 +249,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 16
     Need_Damage: 0
@@ -254,7 +265,7 @@ MonoBehaviour:
     Damage_B: 1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 14
     Need_Damage: 0
@@ -270,7 +281,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 14
     Need_Damage: 0
@@ -286,7 +297,7 @@ MonoBehaviour:
     Damage_B: 1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 12
     Need_Damage: 0
@@ -302,7 +313,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 12
     Need_Damage: 0
@@ -318,7 +329,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 20
     Need_Damage: 0
@@ -334,7 +345,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 10
     Cool_Time: 20
     Need_Damage: 0
@@ -350,7 +361,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 18
     Need_Damage: 0
@@ -366,7 +377,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 10
     Cool_Time: 18
     Need_Damage: 0
@@ -382,7 +393,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 16
     Need_Damage: 0
@@ -398,7 +409,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 10
     Cool_Time: 16
     Need_Damage: 0
@@ -414,7 +425,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 14
     Need_Damage: 0
@@ -430,7 +441,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 10
     Cool_Time: 14
     Need_Damage: 0
@@ -446,7 +457,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 12
     Need_Damage: 0
@@ -462,7 +473,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 10
     Cool_Time: 12
     Need_Damage: 0
@@ -478,7 +489,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 20
     Need_Damage: 0
@@ -494,7 +505,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 10
     Cool_Time: 20
     Need_Damage: 0
@@ -510,7 +521,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 1
     Knockback_Distance: 10
     Cool_Time: 20
     Need_Damage: 0
@@ -526,7 +537,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 18
     Need_Damage: 0
@@ -542,7 +553,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 10
     Cool_Time: 18
     Need_Damage: 0
@@ -558,7 +569,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 1
     Knockback_Distance: 10
     Cool_Time: 18
     Need_Damage: 0
@@ -574,7 +585,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 16
     Need_Damage: 0
@@ -590,7 +601,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 10
     Cool_Time: 16
     Need_Damage: 0
@@ -606,7 +617,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 1
     Knockback_Distance: 10
     Cool_Time: 16
     Need_Damage: 0
@@ -622,7 +633,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 14
     Need_Damage: 0
@@ -638,7 +649,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 10
     Cool_Time: 14
     Need_Damage: 0
@@ -654,7 +665,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 1
     Knockback_Distance: 10
     Cool_Time: 14
     Need_Damage: 0
@@ -670,7 +681,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 12
     Need_Damage: 0
@@ -686,7 +697,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 10
     Cool_Time: 12
     Need_Damage: 0
@@ -702,7 +713,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 1
     Knockback_Distance: 10
     Cool_Time: 12
     Need_Damage: 0
@@ -718,7 +729,7 @@ MonoBehaviour:
     Damage_B: 0.15
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 1
     Knockback_Distance: 0
     Cool_Time: 5
     Need_Damage: 0
@@ -734,7 +745,7 @@ MonoBehaviour:
     Damage_B: 0.15
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 1
     Knockback_Distance: 0
     Cool_Time: 4.5
     Need_Damage: 0
@@ -750,7 +761,7 @@ MonoBehaviour:
     Damage_B: 0.15
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 1
     Knockback_Distance: 0
     Cool_Time: 4
     Need_Damage: 0
@@ -766,7 +777,7 @@ MonoBehaviour:
     Damage_B: 0.15
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 1
     Knockback_Distance: 0
     Cool_Time: 3.5
     Need_Damage: 0
@@ -782,7 +793,7 @@ MonoBehaviour:
     Damage_B: 0.15
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 1
     Knockback_Distance: 0
     Cool_Time: 3
     Need_Damage: 0
@@ -798,7 +809,7 @@ MonoBehaviour:
     Damage_B: 0.2
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 13
     Need_Damage: 0
@@ -814,7 +825,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 13
     Need_Damage: 0
@@ -830,7 +841,7 @@ MonoBehaviour:
     Damage_B: 0.2
     Stagger_Time: 0
     Stun_Time: 1
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 13
     Need_Damage: 0
@@ -846,7 +857,7 @@ MonoBehaviour:
     Damage_B: 0.2
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 12.5
     Need_Damage: 0
@@ -862,7 +873,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 12.5
     Need_Damage: 0
@@ -878,7 +889,7 @@ MonoBehaviour:
     Damage_B: 0.2
     Stagger_Time: 0
     Stun_Time: 1
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 12.5
     Need_Damage: 0
@@ -894,7 +905,7 @@ MonoBehaviour:
     Damage_B: 0.2
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 12
     Need_Damage: 0
@@ -910,7 +921,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 12
     Need_Damage: 0
@@ -926,7 +937,7 @@ MonoBehaviour:
     Damage_B: 0.2
     Stagger_Time: 0
     Stun_Time: 1
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 12
     Need_Damage: 0
@@ -942,7 +953,7 @@ MonoBehaviour:
     Damage_B: 0.2
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 11
     Need_Damage: 0
@@ -958,7 +969,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 11
     Need_Damage: 0
@@ -974,7 +985,7 @@ MonoBehaviour:
     Damage_B: 0.2
     Stagger_Time: 0
     Stun_Time: 1
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 11
     Need_Damage: 0
@@ -990,7 +1001,7 @@ MonoBehaviour:
     Damage_B: 0.2
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 10
     Need_Damage: 0
@@ -1006,7 +1017,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 10
     Need_Damage: 0
@@ -1022,7 +1033,7 @@ MonoBehaviour:
     Damage_B: 0.2
     Stagger_Time: 0
     Stun_Time: 1
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 10
     Need_Damage: 0
@@ -1038,7 +1049,7 @@ MonoBehaviour:
     Damage_B: 0.33
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0.5
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 60000
@@ -1054,7 +1065,7 @@ MonoBehaviour:
     Damage_B: 0.33
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0.5
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 55000
@@ -1070,7 +1081,7 @@ MonoBehaviour:
     Damage_B: 0.33
     Stagger_Time: 0
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0.5
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 50000
@@ -1086,7 +1097,7 @@ MonoBehaviour:
     Damage_B: 0.33
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 0
@@ -1102,7 +1113,7 @@ MonoBehaviour:
     Damage_B: 0.5
     Stagger_Time: 0
     Stun_Time: 2
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 0
@@ -1118,7 +1129,7 @@ MonoBehaviour:
     Damage_B: 0.33
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 0
@@ -1134,7 +1145,7 @@ MonoBehaviour:
     Damage_B: 0.5
     Stagger_Time: 0
     Stun_Time: 2
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 0
@@ -1150,7 +1161,7 @@ MonoBehaviour:
     Damage_B: 0.33
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 0
@@ -1166,7 +1177,7 @@ MonoBehaviour:
     Damage_B: 0.5
     Stagger_Time: 0
     Stun_Time: 2
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 0
@@ -1182,7 +1193,7 @@ MonoBehaviour:
     Damage_B: 1
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 0
@@ -1198,7 +1209,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 0
     Stun_Time: 0.5
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 10
     Need_Damage: 0
@@ -1214,7 +1225,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 0
     Stun_Time: 0.75
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 8
     Need_Damage: 0
@@ -1230,7 +1241,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 0
     Stun_Time: 1
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 7
     Need_Damage: 0
@@ -1246,7 +1257,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 0
     Stun_Time: 1.25
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 6
     Need_Damage: 0
@@ -1262,7 +1273,7 @@ MonoBehaviour:
     Damage_B: 0.1
     Stagger_Time: 0
     Stun_Time: 1.5
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 5
     Need_Damage: 0
@@ -1278,7 +1289,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 15
     Need_Damage: 0
@@ -1294,7 +1305,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 14
     Need_Damage: 0
@@ -1310,7 +1321,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 13
     Need_Damage: 0
@@ -1326,7 +1337,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 12
     Need_Damage: 0
@@ -1342,7 +1353,7 @@ MonoBehaviour:
     Damage_B: 0.25
     Stagger_Time: 1
     Stun_Time: 0
-    Airbone_Time: 0
+    Airborne_Time: 0
     Knockback_Distance: 0
     Cool_Time: 10
     Need_Damage: 0
@@ -1400,7 +1411,7 @@ MonoBehaviour:
     Hit_04: 0
     Hit_05: 0
   - Skill_ID: 301
-    Hit_01: 1
+    Hit_01: 13
     Hit_02: 0
     Hit_03: 0
     Hit_04: 0

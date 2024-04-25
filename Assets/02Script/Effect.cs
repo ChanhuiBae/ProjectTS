@@ -53,4 +53,12 @@ public class Effect : MonoBehaviour, IPoolObject
     {
         //throw new System.NotImplementedException();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Creature")
+        {
+            skillManager.TakeDamageOther("Effect", other);
+        }
+    }
 }

@@ -53,7 +53,7 @@ public class Projectile : MonoBehaviour, IPoolObject
         transform.rotation = rotation;
         rig.velocity = Vector3.zero;
         rig.useGravity = true;
-        rig.AddForce(transform.forward * 6f + Vector3.up * 2f, ForceMode.Impulse);
+        rig.AddForce(transform.forward * 6f, ForceMode.Impulse);
         StartCoroutine(TimeOut());
     }
 
@@ -95,7 +95,7 @@ public class Projectile : MonoBehaviour, IPoolObject
                 {
                     trail.enabled = false;
                     rig.velocity = Vector3.zero;
-                    Effect effect = skillManager.SpawnEffect(0);
+                    Effect effect = skillManager.SpawnEffect(8);
                     effect.Init(transform.position, 1f);
                     skillManager.TakeProjectile(poolName, this);
                 }

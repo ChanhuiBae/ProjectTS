@@ -68,6 +68,7 @@ public class Skill : MonoBehaviour
 
     public void SetIdle()
     {
+        Debug.Log("idle");
         IsActive = false;
         current_charge = 0;
         current_hit = 0;
@@ -88,7 +89,10 @@ public class Skill : MonoBehaviour
         currentInfoID = GetKey();
         GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
         if(currentInfo != null)
+        {
             IsActive = true;
+            Debug.Log(currentInfo.ID);
+        }
     }
 
     public void StartSkill()
@@ -122,6 +126,7 @@ public class Skill : MonoBehaviour
 
     private IEnumerator CountHit()
     {
+        Debug.Log("StartHit");
         for(int i = 0; i < hitInfo.Hit_01; i++)
         {
             yield return null;
@@ -164,6 +169,7 @@ public class Skill : MonoBehaviour
 
     public float GetDamageA()
     {
+        Debug.Log(IsActive);
         if(IsActive)
             return currentInfo.Damage_A;
         return 0;
