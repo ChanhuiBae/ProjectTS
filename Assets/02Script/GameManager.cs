@@ -195,20 +195,7 @@ public class GameManager : Singleton<GameManager>
             {
                 TableEntity_Skill_List skill;
                 GameManager.Inst.GetSkillList(pData.basic_ID, out skill);
-                if(pData.WeaponID < 2000)
-                {
-                    menuManager.InitBasic(WeaponType.Sowrd);
-                    menuManager.InitSkillButton(0, pData.basic_ID, skill.Skill_Name_Eng);
-                }
-                else if(pData.WeaponID < 3000)
-                {
-                    menuManager.InitBasic(WeaponType.Hammer);
-                    menuManager.InitSkillButton(0, pData.basic_ID, skill.Skill_Name_Eng);
-                }
-                else
-                {
-                    menuManager.InitBasic(WeaponType.Gun);
-                }
+                menuManager.InitSkillButton(0, pData.basic_ID, skill.Skill_Name_Eng);
                 skillManager.SetSkill(0, pData.basic_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
             }
             if (pData.skill1_ID != 0)

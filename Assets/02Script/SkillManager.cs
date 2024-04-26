@@ -28,6 +28,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private PoolManager projectileManager;
     private int useSkill;
     private bool isCharge;
+    private Vector3 playerLook;
     private CrowdControl crowdControl;
     public bool IsCharge
     {
@@ -201,6 +202,18 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         attackArea.StopView();
     }
 
+    public void SetLook(Vector3 look)
+    {
+        playerLook = look;
+    }
+
+    public Vector3 GetLook()
+    {
+        return playerLook;
+    }
+
+
+
     public void SpawnBasicProjectile(Vector3 pos)
     {
         GameObject obj = projectileManager.GetFromPool<Projectile>(0).gameObject;
@@ -216,6 +229,8 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         projectile.Init(ProjectileType.Grenade, pos);
         projectile.AttackGrenade(rotation);
     }
+
+
 
 
     public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)

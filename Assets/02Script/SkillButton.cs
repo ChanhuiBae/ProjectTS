@@ -5,14 +5,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SkillButton : MonoBehaviour
+public class SkillButton : MonoBehaviour, IDragHandler
 {
     private PlayerController player;
 
-    private FixedJoystick joystick;
-    private Image handle;
+    private bool isScoping;
     private Image coolTimeImage;
     private Image icon;
+    private RectTransform center;
     private Image block;
     private TextMeshProUGUI time;
     private float maxTime;
@@ -23,6 +23,10 @@ public class SkillButton : MonoBehaviour
     private EventTrigger trigger;
     private EventTrigger.Entry down;
     private EventTrigger.Entry up;
+    private EventTrigger.Entry drag;
+    private EventTrigger.Entry dragEnd;
+
+
     private bool UseSkill;
  
 
@@ -36,21 +40,9 @@ public class SkillButton : MonoBehaviour
                 Debug.Log("SkillButton - Awake - PlayerController");
             }
         }
-        if(transform.childCount != 0)
+        if(transform.childCount > 1)
         {
-            if (!transform.Find("Joystick").TryGetComponent<FixedJoystick>(out joystick))
-            {
-                Debug.Log("SkillButton - Awake - FixedJoystick");
-            }
-            if(!joystick.transform.GetChild(0).TryGetComponent<Image>(out handle))
-            {
-                Debug.Log("SkillButton - Awake - Image");
-            }
             if (!transform.Find("CoolTime").TryGetComponent<Image>(out coolTimeImage))
-            {
-                Debug.Log("SkillButton - Awake - Image");
-            }
-            if (!transform.Find("Icon").TryGetComponent<Image>(out icon))
             {
                 Debug.Log("SkillButton - Awake - Image");
             }
@@ -63,6 +55,14 @@ public class SkillButton : MonoBehaviour
                 Debug.Log("SkillButton - Awake - TextMeshProUGUI");
             }
         }
+        if (!transform.Find("Icon").TryGetComponent<Image>(out icon))
+        {
+            Debug.Log("SkillButton - Awake - Image");
+        }
+        if (!transform.TryGetComponent<RectTransform>(out center))
+        {
+            Debug.Log("SkillButton - Awake - RectTransform");
+        }
         if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("SkillButton - Awake - SkillManager");
@@ -73,19 +73,31 @@ public class SkillButton : MonoBehaviour
         }
         down = new EventTrigger.Entry();
         up = new EventTrigger.Entry();
+        drag = new EventTrigger.Entry();
+        dragEnd = new EventTrigger.Entry();
         down.eventID = EventTriggerType.PointerDown;
         up.eventID = EventTriggerType.PointerUp;
+        drag.eventID = EventTriggerType.Drag;
+        dragEnd.eventID = EventTriggerType.EndDrag;
         down.callback.AddListener((data)  => { OnPointerDown((PointerEventData)data); });
         trigger.triggers.Add(down);
         up.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
         trigger.triggers.Add(up);
+        drag.callback.AddListener((data) => { OnDrag((PointerEventData)data); });
+        trigger.triggers.Add(drag);
+        dragEnd.callback.AddListener((data) => { OnEndDrag((PointerEventData)data); });
+        trigger.triggers.Add(dragEnd);
     }
 
     void OnPointerDown(PointerEventData eventData)
     {
-        if(transform.childCount == 0)
+        if(transform.childCount == 1)
         {
             BasicAttack();
+            if (isScoping)
+            {
+                skillManager.SetLook(Vector3.zero);
+            }
         }
         else
         {
@@ -94,12 +106,21 @@ public class SkillButton : MonoBehaviour
                 skillManager.IsCharge = true;
                 UseSkill = true;
                 AttackSkill();
+                
+            }
+            if (isScoping)
+            {
+                skillManager.SetLook(Vector3.zero);
             }
         }
     }
 
     void OnPointerUp(PointerEventData eventData)
     {
+        if (isScoping)
+        {
+            icon.rectTransform.position = center.position;
+        }
         if (UseSkill)
         {
             skillManager.IsCharge = false;
@@ -107,6 +128,49 @@ public class SkillButton : MonoBehaviour
             trigger.enabled = false;
             StartCoroutine(CoolTime());
         }
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (isScoping)
+        {
+            Vector2 drag = eventData.position;
+            float x = eventData.position.x - center.position.x;
+            float y = eventData.position.y - center.position.y;
+            float distance = Mathf.Sqrt(x * x + y * y);
+
+            Vector3 v1 = new Vector3(x, y, 0f);
+            v1.Normalize();
+            Vector3 v2 = new Vector3(1, 0, 0);
+            Vector3 cross = Vector3.Cross(v1, v2);
+            float dot = Vector3.Dot(v1, v2);
+
+            if(Mathf.Abs(distance) <= 30)
+                icon.rectTransform.localPosition = new Vector2(x, y);
+            else
+            {
+                float theta = Mathf.Acos(dot);
+                x = Mathf.Cos(theta) * 30;
+                if(cross.z > 0)
+                {
+                    y = Mathf.Sin(theta) * 30;
+                    y = -y;
+                }
+                else
+                {
+
+                    y = Mathf.Sin(theta) * 30;
+                }
+                icon.rectTransform.localPosition = new Vector2(x, y);
+            }
+            skillManager.SetLook(new Vector3(x, 0, y));
+        }
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        icon.rectTransform.position = center.position;
+        player.SetIdle();
     }
 
     public void Init(int buttonNum, int id, string name)
@@ -125,22 +189,14 @@ public class SkillButton : MonoBehaviour
             trigger.enabled = true;
             TableEntity_Skill_List skill;
             GameManager.Inst.GetSkillList(skill_ID,out skill);
+            isScoping = skill.Is_Scoping;
+            Debug.Log(isScoping);
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + "101";
             TableEntity_Skill info;
             GameManager.Inst.GetSkillData(int.Parse(key), out info);
-            if (transform.childCount != 0)
+            if (transform.childCount != 1)
             {
-                Debug.Log(skill.Is_Scoping);
-                if (skill.Is_Scoping)
-                {
-                    icon.enabled = false;
-                    handle.sprite = Resources.Load<Sprite>("Image/" + name);
-                }
-                else
-                {
-                    joystick.gameObject.SetActive(false);
-                    icon.sprite = Resources.Load<Sprite>("Image/" + name);
-                }
+                icon.sprite = Resources.Load<Sprite>("Image/" + name);
                 maxTime = info.Cool_Time;
                 currentTime = maxTime;
                 coolTimeImage.fillAmount = 1;
@@ -176,9 +232,13 @@ public class SkillButton : MonoBehaviour
         {
             player.SwordAttack();
         }
-        else
+        else if(skill_ID < 300)
         {
             player.HammerAttack();
+        }
+        else
+        {
+            player.GunAttack();
         }
     }
     private void AttackSkill()

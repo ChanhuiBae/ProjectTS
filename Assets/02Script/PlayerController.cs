@@ -51,7 +51,6 @@ public class PlayerController : MonoBehaviour, IDamage
     private GameObject grenade;
 
     private SkillManager skillManager;
-    private MenuManager menuManager;
     private AttackArea attackArea;
 
     private ParticleSystem charge;
@@ -88,10 +87,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             roll.onClick.AddListener(ChangeRoll);
         }
-        if(!GameObject.Find("Canvas").TryGetComponent<MenuManager>(out menuManager))
-        {
-            Debug.Log("PlayerController - Awake - MenumManager");
-        }
+
         if (!GameObject.Find("ExperienceFill").TryGetComponent<Image>(out expFill))
         {
             Debug.Log("PlayerController - Awake - Image");
@@ -240,7 +236,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             if(weapon.Type == WeaponType.Gun)
             {
-                look = menuManager.GetLook();
+                look = skillManager.GetLook();
                 if (look != Vector3.zero)
                 {
                     ChangeState(State.Attack_Gun);
@@ -262,7 +258,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             if (weapon.Type == WeaponType.Gun)
             {
-                look = menuManager.GetLook();
+                look = skillManager.GetLook();
                 if (look != Vector3.zero)
                 {
                     ChangeState(State.Attack_Gun);
@@ -290,7 +286,7 @@ public class PlayerController : MonoBehaviour, IDamage
         int count = 0;
         while (true)
         {
-            look = menuManager.GetLook();
+            look = skillManager.GetLook();
             transform.LookAt(transform.position + look);
             if (look == Vector3.zero)
             {
@@ -332,7 +328,6 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-
     public void SwordAttack()
     {
         ChangeState(State.Attack_Sword);
@@ -347,7 +342,7 @@ public class PlayerController : MonoBehaviour, IDamage
         ChangeState(State.Attack_Hammer);
     }
 
-    private void GunAttack()
+    public void GunAttack()
     {
         ChangeState(State.Attack_Gun);
     }
