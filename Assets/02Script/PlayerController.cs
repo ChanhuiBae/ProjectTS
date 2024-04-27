@@ -201,6 +201,11 @@ public class PlayerController : MonoBehaviour, IDamage
     public void UseSkill(int skill_id)
     {
         anim.Skill(skill_id);
+        if(skill_id == 302)
+        {
+            StopAllCoroutines();
+            StartCoroutine(APHE_Shoot());
+        }
     }
 
     private void GetDirection()
@@ -226,6 +231,7 @@ public class PlayerController : MonoBehaviour, IDamage
         attackArea.StopAttack();
         skillManager.SetCrowdControl(CrowdControl.None);
         weapon.OffTrail();
+        StopAllCoroutines();
         ChangeState(State.Idle);
     }
 
@@ -326,6 +332,59 @@ public class PlayerController : MonoBehaviour, IDamage
             count++;
             yield return null;
         }
+    }
+
+    private IEnumerator APHE_Shoot()
+    {
+        anim.Move(true);
+        anim.Combat(true);
+        int count = 0;
+        int total = 0;
+        while (true)
+        {
+            look = skillManager.GetLook();
+            transform.LookAt(transform.position + look);
+            if (look == Vector3.zero)
+            {
+                anim.Combat(false);
+            }
+            else
+            {
+                float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
+                if (Mathf.Abs(angle) > 90)
+                {
+                    anim.MoveDir(-direction.x, -direction.z);
+                }
+                else
+                {
+                    anim.MoveDir(direction.x, direction.z);
+                }
+            }
+            GetDirection();
+            if (direction != Vector3.zero)
+            {
+                anim.Move(true);
+                Move();
+            }
+            else
+            {
+                anim.Move(false);
+            }
+
+            if (count == 60)
+            {
+                skillManager.SpawnAPHEProjectile(weapon.transform.GetChild(1).transform.position);
+                count = 0;
+            }
+            if (total >= 300)
+            {
+                break;
+            }
+            count++;
+            total++;
+            yield return null;
+        }
+        SetIdle();
     }
 
     public void SwordAttack()

@@ -94,10 +94,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         if(transform.childCount == 1)
         {
             BasicAttack();
-            if (isScoping)
-            {
-                skillManager.SetLook(Vector3.zero);
-            }
         }
         else
         {
@@ -106,11 +102,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 skillManager.IsCharge = true;
                 UseSkill = true;
                 AttackSkill();
-                
             }
             if (isScoping)
             {
-                skillManager.SetLook(Vector3.zero);
+                StartCoroutine(InitTimer(5));
             }
         }
     }
@@ -170,7 +165,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
         icon.rectTransform.position = center.position;
         skillManager.SetLook(Vector3.zero);
     }
@@ -250,5 +244,15 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         player.ChangeState(State.Attack_Skill);
         player.UseSkill(skill_ID);
         skillManager.UseSkill(buttonNum);
+    }
+
+    private IEnumerator InitTimer(float time)
+    {
+        yield return YieldInstructionCache.WaitForSeconds(time);
+        icon.rectTransform.position = center.position;
+        skillManager.IsCharge = false;
+        skillManager.StopCharge();
+        trigger.enabled = false;
+        StartCoroutine(CoolTime());
     }
 }
