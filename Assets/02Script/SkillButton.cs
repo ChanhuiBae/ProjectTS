@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SkillButton : MonoBehaviour, IDragHandler
+public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     private PlayerController player;
 
@@ -120,6 +120,7 @@ public class SkillButton : MonoBehaviour, IDragHandler
         if (isScoping)
         {
             icon.rectTransform.position = center.position;
+            skillManager.SetLook(Vector3.zero);
         }
         if (UseSkill)
         {
@@ -169,9 +170,11 @@ public class SkillButton : MonoBehaviour, IDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log("OnEndDrag");
         icon.rectTransform.position = center.position;
-        player.SetIdle();
+        skillManager.SetLook(Vector3.zero);
     }
+
 
     public void Init(int buttonNum, int id, string name)
     {
