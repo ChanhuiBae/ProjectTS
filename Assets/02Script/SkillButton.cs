@@ -205,7 +205,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             GameManager.Inst.GetSkillList(skill_ID,out skill);
             isScoping = skill.Is_Scoping;
             isCharging = skill.Is_Charging;
-            Debug.Log(isScoping);
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + level + "01";
             TableEntity_Skill info;
             GameManager.Inst.GetSkillData(int.Parse(key), out info);

@@ -11,16 +11,12 @@ public class UltimateButton : MonoBehaviour
     private Image ultimateFill;
     private TextMeshProUGUI ultimateText;
     private Image icon;
-    private float maxTime;
-    private float currentTime;
     private int skill_ID;
     private SkillManager skillManager;
     private int buttonNum;
     private EventTrigger trigger;
     private EventTrigger.Entry down;
     private EventTrigger.Entry up;
-    private EventTrigger.Entry dragStart;
-    private EventTrigger.Entry dragEnd;
     private bool UseSkill;
 
 
@@ -38,15 +34,15 @@ public class UltimateButton : MonoBehaviour
         {
             Debug.Log("UltimateButton - Awake - SkillJoystick");
         }
-        if (!transform.GetChild(0).TryGetComponent<Image>(out ultimateFill))
+        if (!transform.Find("UltimateFill").TryGetComponent<Image>(out ultimateFill))
         {
             Debug.Log("UltimateManager - Awake - Image");
         }
-        if (!transform.GetChild(1).TryGetComponent<TextMeshProUGUI>(out ultimateText))
+        if (!transform.Find("UltimateValue").TryGetComponent<TextMeshProUGUI>(out ultimateText))
         {
             Debug.Log("UltimateManager - Awake - TextMeshProUGUI");
         }
-        if (!transform.GetChild(2).TryGetComponent<Image>(out icon))
+        if (!transform.Find("Icon").TryGetComponent<Image>(out icon))
         {
             Debug.Log("UltimateButton - Awake - Image");
         }
@@ -73,6 +69,10 @@ public class UltimateButton : MonoBehaviour
     {
         ultimateFill.fillAmount = (float)value / 100f;
         ultimateText.text = value.ToString() + "%";
+        if(ultimateFill.fillAmount == 1)
+        {
+            icon.transform.SetSiblingIndex(3);
+        }
     }
 
     void OnPointerDown(PointerEventData eventData)
@@ -86,10 +86,6 @@ public class UltimateButton : MonoBehaviour
                 AttackSkill();
             }
         }
-    }
-
-    void OnPointerUp(PointerEventData eventData)
-    {
         if (UseSkill)
         {
             skillManager.IsCharge = false;
@@ -97,7 +93,13 @@ public class UltimateButton : MonoBehaviour
             transform.SetSiblingIndex(5);
             UseSkill = false;
             StartCoroutine(CheckEnd());
+            icon.transform.transform.SetSiblingIndex(0);
         }
+    }
+
+    void OnPointerUp(PointerEventData eventData)
+    {
+
     }
 
     public void Init(int buttonNum, int id, string name, int level)
@@ -119,12 +121,12 @@ public class UltimateButton : MonoBehaviour
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + level + "01";
             TableEntity_Skill info;
             GameManager.Inst.GetSkillData(int.Parse(key), out info);
+            icon.transform.SetSiblingIndex(3);
         }
     }
 
     private void AttackSkill()
     {
-        currentTime = 0;
         player.ChangeState(State.Attack_Skill);
         player.UseSkill(skill_ID);
         skillManager.UseSkill(buttonNum);

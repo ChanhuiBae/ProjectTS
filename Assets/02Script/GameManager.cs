@@ -301,13 +301,13 @@ public class GameManager : Singleton<GameManager>
         pData.Adaptation = info.Adaptation;
         pData.Available_Point = info.Available_Point;
         pData.Exp_Need = info.Exp_Need;
-        pData.WeaponID = 3000;
-        pData.basic_ID = 300;
-        pData.skill1_ID = 301;
-        pData.skill2_ID = 302;
+        pData.WeaponID = 2000;
+        pData.basic_ID = 200;
+        pData.skill1_ID = 201;
+        pData.skill2_ID = 202;
         pData.skill3_ID = 0;
-        pData.ultimate1_ID =0;
-        pData.ultimate2_ID =0;
+        pData.ultimate1_ID =231;
+        pData.ultimate2_ID =232;
         SaveData();
     }
 

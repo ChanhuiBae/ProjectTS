@@ -38,6 +38,7 @@ MonoBehaviour:
     Skill_Name: "\uCC28\uC9C0\uB4DC \uC18C\uB4DC \uC77C\uBC18 \uACF5\uACA9"
     Skill_Name_Eng: CS_Basic
     Is_Scoping: 1
+    Is_Charging: 0
   - ID: 200
     Weapon_ID: 02
     Category_ID: 1
@@ -47,6 +48,7 @@ MonoBehaviour:
     Skill_Name: "\uBD80\uC2A4\uD2B8 \uD574\uBA38 \uC77C\uBC18 \uACF5\uACA9"
     Skill_Name_Eng: BH_Basic
     Is_Scoping: 1
+    Is_Charging: 0
   - ID: 201
     Weapon_ID: 02
     Category_ID: 2
@@ -56,6 +58,7 @@ MonoBehaviour:
     Skill_Name: "\uACE0\uB974\uB514\uC6B0\uC2A4\uC758 \uBC14\uD034"
     Skill_Name_Eng: Gordian_Wheel
     Is_Scoping: 0
+    Is_Charging: 1
   - ID: 202
     Weapon_ID: 02
     Category_ID: 2
@@ -65,6 +68,7 @@ MonoBehaviour:
     Skill_Name: "\uC2B9\uB8E1\uCD94"
     Skill_Name_Eng: Dragon_Hammer
     Is_Scoping: 0
+    Is_Charging: 0
   - ID: 203
     Weapon_ID: 02
     Category_ID: 2
@@ -74,6 +78,7 @@ MonoBehaviour:
     Skill_Name: "\uC778\uB825\uC7A5"
     Skill_Name_Eng: Attraction_Field
     Is_Scoping: 0
+    Is_Charging: 0
   - ID: 231
     Weapon_ID: 02
     Category_ID: 3
@@ -83,6 +88,7 @@ MonoBehaviour:
     Skill_Name: "\uC724\uD68C"
     Skill_Name_Eng: Samsara
     Is_Scoping: 0
+    Is_Charging: 0
   - ID: 232
     Weapon_ID: 02
     Category_ID: 3
@@ -92,6 +98,7 @@ MonoBehaviour:
     Skill_Name: "\uB098\uB77D"
     Skill_Name_Eng: Naraka
     Is_Scoping: 1
+    Is_Charging: 0
   - ID: 300
     Weapon_ID: 03
     Category_ID: 1
@@ -101,6 +108,7 @@ MonoBehaviour:
     Skill_Name: "\uD50C\uB77C\uC988\uB9C8 \uB77C\uC774\uD50C \uC77C\uBC18 \uACF5\uACA9"
     Skill_Name_Eng: PR_Basic
     Is_Scoping: 1
+    Is_Charging: 0
   - ID: 301
     Weapon_ID: 03
     Category_ID: 2
@@ -110,6 +118,7 @@ MonoBehaviour:
     Skill_Name: PG - 15
     Skill_Name_Eng: PG_15
     Is_Scoping: 0
+    Is_Charging: 0
   - ID: 302
     Weapon_ID: 03
     Category_ID: 2
@@ -119,6 +128,7 @@ MonoBehaviour:
     Skill_Name: "\uCCA0\uAC11 \uC0AC\uACA9"
     Skill_Name_Eng: APHE_Shoot
     Is_Scoping: 1
+    Is_Charging: 0
   - ID: 303
     Weapon_ID: 03
     Category_ID: 2
@@ -128,6 +138,7 @@ MonoBehaviour:
     Skill_Name: "\uD540 \uD3EC\uC778\uD2B8 \uB2E4\uC6B4"
     Skill_Name_Eng: Pin_Point_Down
     Is_Scoping: 1
+    Is_Charging: 0
   Skill_Info_List:
   - ID: 200021101
     Type: NULL
