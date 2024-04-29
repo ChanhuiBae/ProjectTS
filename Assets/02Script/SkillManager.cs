@@ -233,8 +233,8 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     {
         GameObject obj = projectileManager.GetFromPool<Projectile>(2).gameObject;
         Projectile projectile = obj.GetComponent<Projectile>();
-        projectile.Init(ProjectileType.Bullet, pos);
-        projectile.AttackBullet(player.transform.rotation);
+        projectile.Init(ProjectileType.Laser, pos);
+        projectile.AttackLaser(player.transform.rotation);
     }
 
 

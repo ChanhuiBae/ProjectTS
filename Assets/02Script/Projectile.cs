@@ -5,7 +5,8 @@ using UnityEngine;
 public enum ProjectileType
 {
     Bullet,
-    Grenade
+    Grenade,
+    Laser
 }
 public class Projectile : MonoBehaviour, IPoolObject
 {
@@ -46,7 +47,7 @@ public class Projectile : MonoBehaviour, IPoolObject
         transform.rotation = rotation;
         rig.velocity = Vector3.zero;
         rig.AddForce(transform.forward * 8f, ForceMode.Impulse);
-        StartCoroutine(TimeOut());
+        StartCoroutine(TimeOut(5f));
     }
     public void AttackGrenade(Quaternion rotation)
     {
@@ -54,12 +55,20 @@ public class Projectile : MonoBehaviour, IPoolObject
         rig.velocity = Vector3.zero;
         rig.useGravity = true;
         rig.AddForce(transform.forward * 6f, ForceMode.Impulse);
-        StartCoroutine(TimeOut());
+        StartCoroutine(TimeOut(5f));
     }
 
-    private IEnumerator TimeOut()
+    public void AttackLaser(Quaternion rotation)
     {
-        yield return YieldInstructionCache.WaitForSeconds(5f);
+        transform.rotation = rotation;
+        rig.velocity = Vector3.zero;
+        rig.AddForce(transform.forward * 8f, ForceMode.Impulse);
+        StartCoroutine(TimeOut(0.5f));
+    }
+
+    private IEnumerator TimeOut(float time)
+    {
+        yield return YieldInstructionCache.WaitForSeconds(time);
         trail.enabled = false;
         skillManager.TakeProjectile(poolName, this);
     }
@@ -98,6 +107,12 @@ public class Projectile : MonoBehaviour, IPoolObject
                     Effect effect = skillManager.SpawnEffect(8);
                     effect.Init(transform.position, 1f);
                     skillManager.TakeProjectile(poolName, this);
+                }
+                break;
+            case ProjectileType.Laser:
+                if (other.tag == "Creature")
+                {
+                    skillManager.TakeDamageOther("Projectile", other);
                 }
                 break;
         }
