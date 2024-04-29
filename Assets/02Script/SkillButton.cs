@@ -10,6 +10,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     private PlayerController player;
 
     private bool isScoping;
+    private bool isCharging;
     private Image coolTimeImage;
     private Image icon;
     private RectTransform center;
@@ -107,6 +108,13 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             {
                 StartCoroutine(InitTimer(5));
             }
+            if (!isCharging && !isScoping)
+            {
+                skillManager.IsCharge = false;
+                skillManager.StopCharge();
+                trigger.enabled = false;
+                StartCoroutine(CoolTime());
+            }
         }
     }
 
@@ -117,12 +125,18 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             icon.rectTransform.position = center.position;
             skillManager.SetLook(Vector3.zero);
         }
-        if (UseSkill)
+        if (UseSkill && (isCharging || isScoping))
         {
             skillManager.IsCharge = false;
             skillManager.StopCharge();
             trigger.enabled = false;
             StartCoroutine(CoolTime());
+            if (isScoping)
+            {
+                UseSkill = false;
+                player.StopAllCoroutines();
+                player.SetIdle();
+            }
         }
     }
 
@@ -130,36 +144,39 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         if (isScoping)
         {
-            Vector2 drag = eventData.position;
-            float x = eventData.position.x - center.position.x;
-            float y = eventData.position.y - center.position.y;
-            float distance = Mathf.Sqrt(x * x + y * y);
-
-            Vector3 v1 = new Vector3(x, y, 0f);
-            v1.Normalize();
-            Vector3 v2 = new Vector3(1, 0, 0);
-            Vector3 cross = Vector3.Cross(v1, v2);
-            float dot = Vector3.Dot(v1, v2);
-
-            if(Mathf.Abs(distance) <= 30)
-                icon.rectTransform.localPosition = new Vector2(x, y);
-            else
+            if(skill_ID %100 == 0 || !coolTimeImage.enabled)
             {
-                float theta = Mathf.Acos(dot);
-                x = Mathf.Cos(theta) * 30;
-                if(cross.z > 0)
-                {
-                    y = Mathf.Sin(theta) * 30;
-                    y = -y;
-                }
+                Vector2 drag = eventData.position;
+                float x = eventData.position.x - center.position.x;
+                float y = eventData.position.y - center.position.y;
+                float distance = Mathf.Sqrt(x * x + y * y);
+
+                Vector3 v1 = new Vector3(x, y, 0f);
+                v1.Normalize();
+                Vector3 v2 = new Vector3(1, 0, 0);
+                Vector3 cross = Vector3.Cross(v1, v2);
+                float dot = Vector3.Dot(v1, v2);
+
+                if (Mathf.Abs(distance) <= 30)
+                    icon.rectTransform.localPosition = new Vector2(x, y);
                 else
                 {
+                    float theta = Mathf.Acos(dot);
+                    x = Mathf.Cos(theta) * 30;
+                    if (cross.z > 0)
+                    {
+                        y = Mathf.Sin(theta) * 30;
+                        y = -y;
+                    }
+                    else
+                    {
 
-                    y = Mathf.Sin(theta) * 30;
+                        y = Mathf.Sin(theta) * 30;
+                    }
+                    icon.rectTransform.localPosition = new Vector2(x, y);
                 }
-                icon.rectTransform.localPosition = new Vector2(x, y);
+                skillManager.SetLook(new Vector3(x, 0, y));
             }
-            skillManager.SetLook(new Vector3(x, 0, y));
         }
     }
 
@@ -187,6 +204,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             TableEntity_Skill_List skill;
             GameManager.Inst.GetSkillList(skill_ID,out skill);
             isScoping = skill.Is_Scoping;
+            isCharging = skill.Is_Charging;
             Debug.Log(isScoping);
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + "101";
             TableEntity_Skill info;

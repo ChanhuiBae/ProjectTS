@@ -32,6 +32,7 @@ public class TableEntity_Skill_List
     public string Skill_Name;
     public string Skill_Name_Eng;
     public bool Is_Scoping;
+    public bool Is_Charging;
 }
 
 [System.Serializable]
