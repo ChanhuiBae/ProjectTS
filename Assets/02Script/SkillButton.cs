@@ -187,7 +187,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     }
 
 
-    public void Init(int buttonNum, int id, string name)
+    public void Init(int buttonNum, int id, string name, int level)
     {
         this.buttonNum = buttonNum;
         skill_ID = id;
@@ -206,7 +206,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             isScoping = skill.Is_Scoping;
             isCharging = skill.Is_Charging;
             Debug.Log(isScoping);
-            string key = skill.ID + skill.Weapon_ID + skill.Category_ID + "101";
+            string key = skill.ID + skill.Weapon_ID + skill.Category_ID + level + "01";
             TableEntity_Skill info;
             GameManager.Inst.GetSkillData(int.Parse(key), out info);
             if (transform.childCount != 1)

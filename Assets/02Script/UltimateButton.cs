@@ -100,7 +100,7 @@ public class UltimateButton : MonoBehaviour
         }
     }
 
-    public void Init(int buttonNum, int id, string name)
+    public void Init(int buttonNum, int id, string name, int level)
     {
         this.buttonNum = buttonNum;
         skill_ID = id;
@@ -116,7 +116,7 @@ public class UltimateButton : MonoBehaviour
             trigger.enabled = true;
             TableEntity_Skill_List skill;
             GameManager.Inst.GetSkillList(skill_ID, out skill);
-            string key = skill.ID + skill.Weapon_ID + skill.Category_ID + "101";
+            string key = skill.ID + skill.Weapon_ID + skill.Category_ID + level + "01";
             TableEntity_Skill info;
             GameManager.Inst.GetSkillData(int.Parse(key), out info);
         }

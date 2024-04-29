@@ -70,27 +70,27 @@ public class MenuManager : MonoBehaviour
         timeBackgroun.SetActive(false);
     }
 
-    public void InitSkillButton(int num, int skill, string name)
+    public void InitSkillButton(int num, int skill, string name, int level)
     {
         switch(num)
         { 
             case 0:
-                basic.Init(0, skill, name); 
+                basic.Init(0, skill, name, level); 
                 break;
             case 1:
-                skill1.Init(1,skill, name);
+                skill1.Init(1,skill, name, level);
                 break;
             case 2:
-                skill2.Init(2,skill, name);
+                skill2.Init(2,skill, name, level);
                 break;
             case 3:
-                skill3.Init(3,skill, name);
+                skill3.Init(3,skill, name, level);
                 break;
             case 4:
-                ultimate1.Init(4,skill, name);
+                ultimate1.Init(4,skill, name, level);
                 break;
             case 5:
-                ultimate2.Init(5,skill, name);
+                ultimate2.Init(5,skill, name, level);
                 break;
         }
     }

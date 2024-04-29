@@ -195,67 +195,67 @@ public class GameManager : Singleton<GameManager>
             {
                 TableEntity_Skill_List skill;
                 GameManager.Inst.GetSkillList(pData.basic_ID, out skill);
-                menuManager.InitSkillButton(0, pData.basic_ID, skill.Skill_Name_Eng);
+                menuManager.InitSkillButton(0, pData.basic_ID, skill.Skill_Name_Eng, 1);
                 skillManager.SetSkill(0, pData.basic_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
             }
             if (pData.skill1_ID != 0)
             {
-                TableEntity_Skill_List skill1;
-                GameManager.Inst.GetSkillList(pData.skill1_ID, out skill1);
-                menuManager.InitSkillButton(1, pData.skill1_ID, skill1.Skill_Name_Eng);
-                skillManager.SetSkill(1, pData.skill1_ID, skill1.Weapon_ID, skill1.Category_ID, skill1.Skill_Level_Max, skill1.Charge_Max, skill1.Hit_Max);
+                TableEntity_Skill_List skill;
+                GameManager.Inst.GetSkillList(pData.skill1_ID, out skill);
+                menuManager.InitSkillButton(1, pData.skill1_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(1, pData.skill1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
             
             }
             else
             {
-                menuManager.InitSkillButton(1, pData.skill1_ID, "None");
+                menuManager.InitSkillButton(1, pData.skill1_ID, "None", 1);
             }
             if (pData.skill2_ID != 0)
             {
-                TableEntity_Skill_List skill2;
-                GameManager.Inst.GetSkillList(pData.skill2_ID, out skill2);
-                menuManager.InitSkillButton(2, pData.skill2_ID, skill2.Skill_Name_Eng);
-                skillManager.SetSkill(2, pData.skill2_ID, skill2.Weapon_ID, skill2.Category_ID, skill2.Skill_Level_Max, skill2.Charge_Max, skill2.Hit_Max);
+                TableEntity_Skill_List skill;
+                GameManager.Inst.GetSkillList(pData.skill2_ID, out skill);
+                menuManager.InitSkillButton(2, pData.skill2_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(2, pData.skill2_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
 
             }
             else
             {
-                menuManager.InitSkillButton(2, pData.skill2_ID, "None");
+                menuManager.InitSkillButton(2, pData.skill2_ID, "None",1);
             }
             if (pData.skill3_ID != 0)
             {
-                TableEntity_Skill_List skill3;
-                GameManager.Inst.GetSkillList(pData.skill3_ID, out skill3);
-                menuManager.InitSkillButton(3, pData.skill3_ID, skill3.Skill_Name_Eng);
-                skillManager.SetSkill(3,  pData.skill3_ID, skill3.Weapon_ID, skill3.Category_ID, skill3.Skill_Level_Max, skill3.Charge_Max, skill3.Hit_Max);
+                TableEntity_Skill_List skill;
+                GameManager.Inst.GetSkillList(pData.skill3_ID, out skill);
+                menuManager.InitSkillButton(3, pData.skill3_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(3,  pData.skill3_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
 
             }
             else
             {
-                menuManager.InitSkillButton(3, pData.skill3_ID, "None");
+                menuManager.InitSkillButton(3, pData.skill3_ID, "None",1);
             }
             if (pData.ultimate1_ID != 0)
             {
-                TableEntity_Skill_List ultimate1;
-                GameManager.Inst.GetSkillList(pData.ultimate1_ID, out ultimate1);
-                menuManager.InitSkillButton(4, pData.ultimate1_ID, ultimate1.Skill_Name_Eng);
-                skillManager.SetSkill(4, pData.ultimate1_ID, ultimate1.Weapon_ID, ultimate1.Category_ID, ultimate1.Skill_Level_Max, ultimate1.Charge_Max, ultimate1.Hit_Max);
+                TableEntity_Skill_List skill;
+                GameManager.Inst.GetSkillList(pData.ultimate1_ID, out skill);
+                menuManager.InitSkillButton(4, pData.ultimate1_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(4, pData.ultimate1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
 
             }
             else
             {
-                menuManager.InitSkillButton(4, pData.ultimate1_ID, "None");
+                menuManager.InitSkillButton(4, pData.ultimate1_ID, "None", 1);
             }
             if (pData.ultimate2_ID != 0)
             {
-                TableEntity_Skill_List ultimate2;
-                GameManager.Inst.GetSkillList(pData.ultimate2_ID, out ultimate2);
-                menuManager.InitSkillButton(5, pData.ultimate2_ID, ultimate2.Skill_Name_Eng);
-                skillManager.SetSkill(5, pData.ultimate2_ID, ultimate2.Weapon_ID, ultimate2.Category_ID, ultimate2.Skill_Level_Max, ultimate2.Charge_Max, ultimate2.Hit_Max);
+                TableEntity_Skill_List skill;
+                GameManager.Inst.GetSkillList(pData.ultimate2_ID, out skill);
+                menuManager.InitSkillButton(5, pData.ultimate2_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(5, pData.ultimate2_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
             }
             else
             {
-                menuManager.InitSkillButton(5, pData.ultimate2_ID, "None");
+                menuManager.InitSkillButton(5, pData.ultimate2_ID, "None", 1);
             }
             ultimateValue = 100;
             killCount = 0;
@@ -335,6 +335,41 @@ public class GameManager : Singleton<GameManager>
     {
         killCount++;
         menuManager.SetKillCount(killCount);
+    }
+
+    public void UpdateSkill(int num, int skill_ID, int level)
+    {
+        bool check = false;
+        switch (num)
+        {
+            case 1:
+                if (skill_ID == pData.skill1_ID)
+                    check = true;
+                break;
+            case 2:
+                if(skill_ID == pData.skill2_ID)
+                    check = true; 
+                break;
+            case 3:
+                if(skill_ID == pData.skill3_ID)
+                    check = true;
+                break;
+            case 4:
+                if(skill_ID == pData.ultimate1_ID)
+                    check = true;
+                break;
+            case 5:
+                if(skill_ID == pData.ultimate2_ID)
+                    check = true;
+                break;
+        }
+        if (check)
+        {
+            TableEntity_Skill_List skill;
+            GameManager.Inst.GetSkillList(skill_ID, out skill);
+            menuManager.InitSkillButton(num, skill_ID, skill.Skill_Name_Eng, level);
+            skillManager.SetSkill(num, pData.skill1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+        }
     }
 
     #endregion
