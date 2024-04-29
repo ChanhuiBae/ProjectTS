@@ -269,6 +269,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         icon.rectTransform.position = center.position;
         skillManager.IsCharge = false;
         skillManager.StopCharge();
+        skillManager.SetLook(Vector3.zero);
         trigger.enabled = false;
         StartCoroutine(CoolTime());
     }
