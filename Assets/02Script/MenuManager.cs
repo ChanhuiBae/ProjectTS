@@ -14,8 +14,7 @@ public class MenuManager : MonoBehaviour
     private SkillButton skill1;
     private SkillButton skill2;
     private SkillButton skill3;
-    private UltimateButton ultimate1; 
-    private SkillJoystick ultimate2;
+    private UltimateButton ultimate; 
 
     private void Awake()
     {
@@ -47,11 +46,7 @@ public class MenuManager : MonoBehaviour
         {
             Debug.Log("MenuManager - Awake - SkillButton");
         }
-        if (!GameObject.Find("Ultimate1").TryGetComponent<UltimateButton>(out ultimate1))
-        {
-            Debug.Log("MenuManager - Awake - UltimateButton");
-        }
-        if (!GameObject.Find("Ultimate2").TryGetComponent<SkillJoystick>(out ultimate2))
+        if (!GameObject.Find("Ultimate").TryGetComponent<UltimateButton>(out ultimate))
         {
             Debug.Log("MenuManager - Awake - UltimateButton");
         }
@@ -87,17 +82,17 @@ public class MenuManager : MonoBehaviour
                 skill3.Init(3,skill, name, level);
                 break;
             case 4:
-                ultimate1.Init(4,skill, name, level);
+                ultimate.InitSkill1(4,skill, name);
                 break;
             case 5:
-                ultimate2.Init(5,skill, name, level);
+                ultimate.InitSkill2(5,skill, name);
                 break;
         }
     }
 
     public void SetUaltimate(int value)
     {
-        ultimate1.SetUaltimate(value);
+        ultimate.SetUaltimate(value);
     }
 
     public void SetKillCount(int value)
