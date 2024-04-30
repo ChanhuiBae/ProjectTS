@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEditor.PlayerSettings;
 
@@ -59,100 +60,114 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void Awake()
     {
-        if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
+        if(SceneManager.GetActiveScene().buildIndex > 2)
         {
-            Debug.Log("PlayerController - Awake - SkillManager");
+            if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
+            {
+                Debug.Log("PlayerController - Awake - SkillManager");
+            }
+            grenade = GameObject.Find("Grenade");
+
+            if (!GameObject.Find("Roll").TryGetComponent<Button>(out roll))
+            {
+                Debug.Log("PlayerController - Awake - Button");
+            }
+            else
+            {
+                roll.onClick.AddListener(ChangeRoll);
+            }
+
+            if (!GameObject.Find("ExperienceFill").TryGetComponent<Image>(out expFill))
+            {
+                Debug.Log("PlayerController - Awake - Image");
+            }
+            if (!transform.Find("AttackArea").TryGetComponent<AttackArea>(out attackArea))
+            {
+                Debug.Log("PlayerController - Awake - AttackArea");
+            }
+            if (!transform.Find("Charge").TryGetComponent<ParticleSystem>(out charge))
+            {
+                Debug.Log("PlayerController - Awake - ParticleSystem");
+            }
+            else
+            {
+                charge.Stop();
+            }
+            if (!transform.Find("ChargeLight").TryGetComponent<ParticleSystem>(out chargeLight))
+            {
+                Debug.Log("PlayerController - Awake - ParticleSystem");
+            }
+            else
+            {
+                chargeLight.Stop();
+            }
         }
         if (!TryGetComponent<Rigidbody>(out rig))
         {
             Debug.Log("PlayerController - Awake - Rigidbody");
         }
-        if (!GameObject.Find("Floating Joystick").TryGetComponent< FloatingJoystick > (out joystick))
+        if (!GameObject.Find("Floating Joystick").TryGetComponent<FloatingJoystick>(out joystick))
         {
             Debug.Log("PlayerController - Awake - Floating Joystick");
         }
- 
+
         if (!TryGetComponent<PlayerAnimationController>(out anim))
         {
             Debug.Log("PlayerController - Awake - PlayerAnimationController");
-        }
-
-        grenade = GameObject.Find("Grenade");
-
-        if (!GameObject.Find("Roll").TryGetComponent<Button>(out roll))
-        {
-            Debug.Log("PlayerController - Awake - Button");
-        }
-        else
-        {
-            roll.onClick.AddListener(ChangeRoll);
-        }
-
-        if (!GameObject.Find("ExperienceFill").TryGetComponent<Image>(out expFill))
-        {
-            Debug.Log("PlayerController - Awake - Image");
-        }
-        if (!transform.Find("AttackArea").TryGetComponent<AttackArea>(out attackArea))
-        {
-            Debug.Log("PlayerController - Awake - AttackArea");
-        }
-        if(!transform.Find("Charge").TryGetComponent<ParticleSystem>(out charge))
-        {
-            Debug.Log("PlayerController - Awake - ParticleSystem");
-        }
-        else
-        {
-            charge.Stop();
-        }
-        if (!transform.Find("ChargeLight").TryGetComponent<ParticleSystem>(out chargeLight))
-        {
-            Debug.Log("PlayerController - Awake - ParticleSystem");
-        }
-        else
-        {
-            chargeLight.Stop();
         }
     }
 
     public void Init(WeaponType type)
     {
-        anim.Weapon((int)type);
-        switch (type)
+        if (SceneManager.GetActiveScene().buildIndex > 2)
         {
-            case WeaponType.Sowrd:
-                if (!GameObject.Find("Sowrd").TryGetComponent<Weapon>(out weapon))
-                {
-                    Debug.Log("PlayerController - Awake - Weapon");
-                }
-                GameObject.Find("Hammer").SetActive(false);
-                GameObject.Find("Gun").SetActive(false);
-                break;
-            case WeaponType.Hammer:
-                if (!GameObject.Find("Hammer").TryGetComponent<Weapon>(out weapon))
-                {
-                    Debug.Log("PlayerController - Awake - Weapon");
-                }
-                GameObject.Find("Sowrd").SetActive(false);
-                GameObject.Find("Gun").SetActive(false);
-                break;
-            case WeaponType.Gun:
-                GameObject.Find("Sowrd").SetActive(false);
-                GameObject.Find("Hammer").SetActive(false);
-                if (!GameObject.Find("Gun").TryGetComponent<Weapon>(out weapon))
-                {
-                    Debug.Log("PlayerController - Awake - Weapon");
-                }
-                break;
+            anim.Weapon((int)type);
+
+            switch (type)
+            {
+                case WeaponType.Sowrd:
+                    if (!GameObject.Find("Sowrd").TryGetComponent<Weapon>(out weapon))
+                    {
+                        Debug.Log("PlayerController - Awake - Weapon");
+                    }
+                    GameObject.Find("Hammer").SetActive(false);
+                    GameObject.Find("Gun").SetActive(false);
+                    break;
+                case WeaponType.Hammer:
+                    if (!GameObject.Find("Hammer").TryGetComponent<Weapon>(out weapon))
+                    {
+                        Debug.Log("PlayerController - Awake - Weapon");
+                    }
+                    GameObject.Find("Sowrd").SetActive(false);
+                    GameObject.Find("Gun").SetActive(false);
+                    break;
+                case WeaponType.Gun:
+                    GameObject.Find("Sowrd").SetActive(false);
+                    GameObject.Find("Hammer").SetActive(false);
+                    if (!GameObject.Find("Gun").TryGetComponent<Weapon>(out weapon))
+                    {
+                        Debug.Log("PlayerController - Awake - Weapon");
+                    }
+                    break;
+            }
+            weapon.Init(type);
+            attackCount = 0;
+            isInvincibility = false;
+            currentHP = GameManager.Inst.PlayerInfo.Max_HP;
+            currentEXP = 0;
+            state = State.Idle;
+            expFill.fillAmount = 0;
+            isControll = true;
+            StartCoroutine(Idle());
         }
-        weapon.Init(type);
-        attackCount = 0;
-        isInvincibility = false;
-        currentHP = GameManager.Inst.PlayerInfo.Max_HP;
-        currentEXP = 0;
-        state = State.Idle;
-        expFill.fillAmount = 0; 
-        isControll = true;
-        StartCoroutine(Idle());
+        else
+        {
+            anim.Weapon(0);
+            weapon = new Weapon();
+            weapon.Init(WeaponType.None);
+            isControll = true;
+            StartCoroutine(Idle());
+        }
     }
 
     public void ChangeState(State state)
@@ -164,7 +179,8 @@ public class PlayerController : MonoBehaviour, IDamage
             switch (this.state)
             {
                 case State.Idle:
-                    skillManager.UseSkill(-1);
+                    if (SceneManager.GetActiveScene().buildIndex > 2)
+                        skillManager.UseSkill(-1);
                     StartCoroutine(Idle());
                     break;
                 case State.MoveForward:
@@ -256,6 +272,7 @@ public class PlayerController : MonoBehaviour, IDamage
             yield return null;
         }
     }
+
 
     private IEnumerator MoveForward()
     {

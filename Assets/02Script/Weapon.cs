@@ -2,6 +2,7 @@ using Redcode.Pools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum WeaponType
 {
@@ -155,7 +156,8 @@ public class Weapon : MonoBehaviour
         cretical_Chance = data.Critical_Chance;
         critical_Mag = data.Critical_Mag;
         attack_Speed = data.Attack_Speed;
-        skillManager.WeaponInit(this);
+        if (SceneManager.GetActiveScene().buildIndex > 2)
+            skillManager.WeaponInit(this);
     }
     public void OnTrail()
     {
