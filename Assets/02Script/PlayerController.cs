@@ -355,7 +355,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         anim.Move(true);
         anim.Combat(true);
-        int count = 0;
+        int count = 60;
         int total = 0;
         while (true)
         {
