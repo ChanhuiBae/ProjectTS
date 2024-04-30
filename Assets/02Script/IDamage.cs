@@ -10,5 +10,6 @@ public interface IDamage
     public void Stun(float time);
     public void Airborne(float time);
     public void Knockback(float distance);
+    public void Airback(float time, float distance);
     public void Pulled(Vector3 center);
 }

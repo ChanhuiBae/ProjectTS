@@ -87,7 +87,16 @@ public class Skill : MonoBehaviour
         current_hit++;
         currentInfoID = GetKey();
         GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
-        if(currentInfo != null)
+        if(current_charge > 0 && current_hit > 1)
+        {
+            skillManager.SetCrowdControl(CrowdControl.Airback);
+        }
+        if (current_charge > 1 && current_hit > 2)
+        {
+            skillManager.SetCrowdControl(CrowdControl.Airback);
+        }
+
+        if (currentInfo != null)
         {
             IsActive = true;
         }

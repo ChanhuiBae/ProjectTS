@@ -8,6 +8,7 @@ public enum CrowdControl
     Stun,
     Knockback,
     Airborne,
+    Airback,
     Pulled
 }
 
@@ -311,6 +312,9 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                             break;
                         case CrowdControl.Knockback:
                             creatureDamage.Knockback(skill.Knockback_Distance);
+                            break;
+                        case CrowdControl.Airback:
+                            creatureDamage.Airback(skill.Airborne_Time, skill.Knockback_Distance);
                             break;
                         case CrowdControl.Pulled:
                             creatureDamage.Pulled(player.transform.position);

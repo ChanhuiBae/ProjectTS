@@ -195,6 +195,22 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance, distance * 0.01f).setEase(LeanTweenType.easeOutQuart);
     }
 
+    public void Airback(float time, float distance)
+    {
+        if (gameObject.activeSelf)
+        {
+            StartCoroutine(MoveAirback(time, distance));
+        }
+    }
+
+    private IEnumerator MoveAirback(float time, float distance)
+    {
+        Vector3 pos = transform.position;
+        LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance/2 + (Vector3.up * 3f), time / 2).setEase(LeanTweenType.easeOutCubic);
+        yield return YieldInstructionCache.WaitForSeconds(time / 2);
+        LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance / 2, time / 2).setEase(LeanTweenType.easeInSine);
+    }
+
     public void Pulled(Vector3 center)
     {
         ai.StopAI(1f);

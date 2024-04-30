@@ -571,6 +571,7 @@ public class PlayerController : MonoBehaviour, IDamage
         effect = skillManager.SpawnEffect(7);
         effect.Init(transform.position + Vector3.up, 1);
         effect.SetRotation(transform.rotation);
+        SetAirborne();
         attackArea.AttackInAngle();
     }
 
@@ -585,6 +586,11 @@ public class PlayerController : MonoBehaviour, IDamage
     public void SetAirborne()
     {
         skillManager.SetCrowdControl(CrowdControl.Airborne);
+    }
+
+    public void SetKnockback()
+    {
+        skillManager.SetCrowdControl(CrowdControl.Knockback);
     }
 
     public void SetAttackField()
@@ -635,5 +641,10 @@ public class PlayerController : MonoBehaviour, IDamage
     public void Pulled(Vector3 center)
     {
         // todo: move to center
+    }
+
+    public void Airback(float time, float distance)
+    {
+
     }
 }
