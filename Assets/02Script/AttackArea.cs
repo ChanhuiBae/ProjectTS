@@ -1,6 +1,7 @@
 using Redcode.Pools;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -11,7 +12,7 @@ public class AttackArea : MonoBehaviour
     private List<Collider> targets;
     private ParticleSystem view;
     private ParticleSystem full;
-    private bool IsListUp;
+    private bool isListUp;
 
     public void Awake()
     {
@@ -37,7 +38,7 @@ public class AttackArea : MonoBehaviour
         targets = new List<Collider>();
         view.Stop();
         full.Stop();
-        IsListUp = false;
+        isListUp = false;
     }
 
     public void Attack(Vector3 center, float radius)
@@ -53,21 +54,36 @@ public class AttackArea : MonoBehaviour
         sphereCol.enabled = false;
     }
 
-    public void AttackInAngle()
+    public void SetTargets()
     {
+        isListUp = true;
         sphereCol.enabled = true;
         sphereCol.center = Vector3.zero;
         sphereCol.radius = 35;
+    }
+
+
+    public void AttackInAngle()
+    {
+        StartCoroutine(Attacking());
+    }
+
+    private IEnumerator Attacking()
+    {
+        yield return null;
         for (int i = 0; i < targets.Count; i++)
         {
-            float inside = Vector2.Angle(new Vector2(transform.forward.x, transform.forward.z), new Vector2(targets[i].transform.position.x, targets[i].transform.position.z));
-            if(Mathf.Abs(inside) < 20) 
+            float inside = Vector2.Angle(new Vector2(transform.forward.x, transform.forward.z), new Vector2(targets[i].transform.position.x - transform.position.x, targets[i].transform.position.z - transform.position.z));
+            if (Mathf.Abs(inside) < 30)
             {
                 skillManager.TakeDamageOther("AttackArea", targets[i]);
             }
         }
+        StopAttack();
+        isListUp = false;
         targets.Clear();
     }
+
     public void Move(Vector3 center, float radius)
     {
         sphereCol.center = center;
@@ -97,7 +113,7 @@ public class AttackArea : MonoBehaviour
 
         if (other.tag == "Creature")
         {
-            if (IsListUp)
+            if (isListUp)
             {
                 targets.Add(other);
             }
@@ -105,6 +121,15 @@ public class AttackArea : MonoBehaviour
             {
                 skillManager.TakeDamageOther("AttackArea", other);
             }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (isListUp && other.tag == "Creature")
+        {
+            targets.Add(other);
+            targets.Distinct();
         }
     }
 }

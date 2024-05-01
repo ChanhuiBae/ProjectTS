@@ -1403,7 +1403,7 @@ AnimatorController:
   - m_Name: Weapon
     m_Type: 3
     m_DefaultFloat: 0
-    m_DefaultInt: 0
+    m_DefaultInt: 1
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: IsCombat
@@ -2444,7 +2444,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.25
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 0.01
+    m_TimeScale: -0.5
     m_CycleOffset: 0
     m_DirectBlendParameter: X
     m_Mirror: 0

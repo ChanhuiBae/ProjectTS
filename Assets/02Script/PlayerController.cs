@@ -568,10 +568,10 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void SetPowerWave()
     {
+        attackArea.SetTargets();
         effect = skillManager.SpawnEffect(7);
         effect.Init(transform.position + Vector3.up, 1);
         effect.SetRotation(transform.rotation);
-        SetAirborne();
         attackArea.AttackInAngle();
     }
 

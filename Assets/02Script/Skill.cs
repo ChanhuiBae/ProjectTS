@@ -66,7 +66,7 @@ public class Skill : MonoBehaviour
         GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
     }
 
-    public void SetIdle()
+    private void SetIdle()
     {
         IsActive = false;
         current_charge = 0;
@@ -95,7 +95,6 @@ public class Skill : MonoBehaviour
         {
             skillManager.SetCrowdControl(CrowdControl.Airback);
         }
-
         if (currentInfo != null)
         {
             IsActive = true;
@@ -106,12 +105,16 @@ public class Skill : MonoBehaviour
     {
         SetIdle();
         if(max_charge > 0)
-            StartCoroutine(CountUp());
+        {
+            StartCoroutine(CountCharge());
+        }
         else
+        {
             StartCoroutine(CountHit());
+        }
     }
 
-    private IEnumerator CountUp()
+    private IEnumerator CountCharge()
     {
         for (int i = 0; i < max_charge; i++)
         {
@@ -121,8 +124,7 @@ public class Skill : MonoBehaviour
             }
             ChargeUp();
         }
-        skillManager.StartAnimator();
-        StartCoroutine(CountHit());
+        StopCharge();
     }
     public void StopCharge()
     {
@@ -133,6 +135,7 @@ public class Skill : MonoBehaviour
 
     private IEnumerator CountHit()
     {
+        current_hit = 0;
         for(int i = 0; i < hitInfo.Hit_01; i++)
         {
             yield return null;
