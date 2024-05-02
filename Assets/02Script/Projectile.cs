@@ -12,13 +12,14 @@ public class Projectile : MonoBehaviour, IPoolObject
 {
     private ProjectileType type;
     private Rigidbody rig;
-    private float damage;
     private TrailRenderer trail;
     [SerializeField]
     private string poolName;
     private FixedJoystick dir;
     private SkillManager skillManager;
-    
+
+    public int key;
+
     private void Awake()
     {
         if (!TryGetComponent<Rigidbody>(out rig))
@@ -35,11 +36,12 @@ public class Projectile : MonoBehaviour, IPoolObject
         }
 
     }
-    public void Init(ProjectileType type, Vector3 pos)
+    public void Init(ProjectileType type, Vector3 pos, int key)
     {
         this.type = type;
         transform.position = pos;
         trail.enabled = true;
+        this.key = key;
     }
 
     public void AttackBullet(Quaternion rotation)
@@ -90,7 +92,7 @@ public class Projectile : MonoBehaviour, IPoolObject
             case ProjectileType.Bullet:
                 if (other.tag == "Creature")
                 {
-                    skillManager.TakeDamageOther("Projectile", other);
+                    skillManager.TakeDamageOther(AttackType.Projectile, other);
                     skillManager.TakeProjectile(poolName, this);
                 }
                 if (other.tag == "Ground")
@@ -112,7 +114,7 @@ public class Projectile : MonoBehaviour, IPoolObject
             case ProjectileType.Laser:
                 if (other.tag == "Creature")
                 {
-                    skillManager.TakeDamageOther("Projectile", other);
+                    skillManager.TakeDamageOther(AttackType.Projectile, other);
                 }
                 break;
         }

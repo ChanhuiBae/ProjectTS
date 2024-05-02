@@ -83,7 +83,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         stun.gameObject.SetActive(false);
     }
 
-    public void CalculateDamage(ITakeDamage hiter)
+    public void CalculateDamage(AttackType attack, ITakeDamage hiter)
     {
         if(!IsDie)
         {
@@ -129,7 +129,52 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             }
         }
     }
-
+    public void CalculateDamageProjectile(AttackType attack, Projectile projectile, ITakeDamage hiter)
+    {
+        if (!IsDie)
+        {
+            float damage = hiter.TakeDamageByKey(projectile.key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
+            currentHP -= damage;
+            Debug.Log("Damage: " + damage);
+            if (currentHP < 0)
+            {
+                IsDie = true;
+                ai.Die();
+                switch (type)
+                {
+                    case CretureType.Normal:
+                        GameManager.Inst.ChargeUaltimate(1);
+                        break;
+                    case CretureType.Noble:
+                        GameManager.Inst.ChargeUaltimate(2);
+                        break;
+                    case CretureType.Swarm_Boss:
+                        GameManager.Inst.ChargeUaltimate(50);
+                        break;
+                    case CretureType.Guvnor:
+                        GameManager.Inst.ChargeUaltimate(100);
+                        break;
+                    case CretureType.Elite:
+                        GameManager.Inst.ChargeUaltimate(30);
+                        break;
+                }
+                GameManager.Inst.AddKillCount();
+                spawnManager.SpawnHPItem(transform.position);
+                spawnManager.SpawnEXPItem(transform.position);
+                spawnManager.ReturnCreature(poolName, this);
+            }
+            if (damage < 200 && damage > 0)
+            {
+                effect = spawnManager.SpawnEffect(0);
+                effect.Init(transform.position + Vector3.up, 1);
+            }
+            else if (damage > 200)
+            {
+                effect = spawnManager.SpawnEffect(1);
+                effect.Init(transform.position + Vector3.up, 1);
+            }
+        }
+    }
 
     public void OnCreatedInPool()
     {

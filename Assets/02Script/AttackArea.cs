@@ -76,7 +76,7 @@ public class AttackArea : MonoBehaviour
             float inside = Vector2.Angle(new Vector2(transform.forward.x, transform.forward.z), new Vector2(targets[i].transform.position.x - transform.position.x, targets[i].transform.position.z - transform.position.z));
             if (Mathf.Abs(inside) < 30)
             {
-                skillManager.TakeDamageOther("AttackArea", targets[i]);
+                skillManager.TakeDamageOther(AttackType.AttackArea, targets[i]);
             }
         }
         StopAttack();
@@ -119,7 +119,7 @@ public class AttackArea : MonoBehaviour
             }
             else
             {
-                skillManager.TakeDamageOther("AttackArea", other);
+                skillManager.TakeDamageOther(AttackType.AttackArea, other);
             }
         }
     }

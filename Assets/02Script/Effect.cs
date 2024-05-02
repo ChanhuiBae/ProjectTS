@@ -58,7 +58,7 @@ public class Effect : MonoBehaviour, IPoolObject
     {
         if (other.tag == "Creature")
         {
-            skillManager.TakeDamageOther("Effect", other);
+            skillManager.TakeDamageOther(AttackType.Effect , other);
         }
     }
 }

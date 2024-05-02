@@ -604,11 +604,19 @@ public class PlayerController : MonoBehaviour, IDamage
         skillManager.SetCrowdControl(CrowdControl.None);
     }
 
-    public void CalculateDamage(ITakeDamage hiter)
+    public void CalculateDamage(AttackType attack, ITakeDamage hiter)
     {
         if (!isInvincibility)
         {
            // ApplyHP(hiter.TakeDamage(Physics_Cut, Fire_Cut, Water_Cut, Electric_Cut, Ice_Cut, Wind_Cut));
+        }
+    }
+
+    public void CalculateDamageProjectile(AttackType attack, Projectile projrectile, ITakeDamage hiter)
+    {
+        if (!isInvincibility)
+        {
+
         }
     }
     public void Stagger(float time)

@@ -12,6 +12,14 @@ public enum CrowdControl
     Pulled
 }
 
+public enum AttackType
+{
+    Weapon,
+    Projectile,
+    AttackArea,
+    Effect
+}
+
 public class SkillManager : MonoBehaviour, ITakeDamage
 {
     private PlayerController player;
@@ -219,7 +227,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     {
         GameObject obj = projectileManager.GetFromPool<Projectile>(0).gameObject;
         Projectile projectile = obj.GetComponent<Projectile>();
-        projectile.Init(ProjectileType.Bullet, pos);
+        projectile.Init(ProjectileType.Bullet, pos, basic.GetKey());
         projectile.AttackBullet(player.transform.rotation);
     }
     
@@ -227,14 +235,36 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     {
         GameObject obj = projectileManager.GetFromPool<Projectile>(1).gameObject;
         Projectile projectile = obj.GetComponent<Projectile>();
-        projectile.Init(ProjectileType.Grenade, pos);
+        switch (useSkill)
+        {
+            case 1:
+                projectile.Init(ProjectileType.Grenade, pos, skill1.GetKey());
+                break;
+            case 2:
+                projectile.Init(ProjectileType.Grenade, pos, skill2.GetKey());
+                break;
+            case 3:
+                projectile.Init(ProjectileType.Grenade, pos, skill3.GetKey());
+                break;
+        }
         projectile.AttackGrenade(rotation);
     }
     public void SpawnAPHEProjectile(Vector3 pos)
     {
         GameObject obj = projectileManager.GetFromPool<Projectile>(2).gameObject;
         Projectile projectile = obj.GetComponent<Projectile>();
-        projectile.Init(ProjectileType.Laser, pos);
+        switch(useSkill) 
+        { 
+            case 1:
+                projectile.Init(ProjectileType.Laser, pos, skill1.GetKey());
+                break;
+            case 2:
+                projectile.Init(ProjectileType.Laser, pos, skill2.GetKey());
+                break;
+            case 3:
+                projectile.Init(ProjectileType.Laser, pos, skill3.GetKey());
+                break;
+        }
         projectile.AttackLaser(player.transform.rotation);
     }
 
@@ -270,14 +300,25 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         return weaponPhysics * skillPhysics;
     }
 
-    public void TakeDamageOther(string name, Collider other)
+    public float TakeDamageByKey(int key, float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
+    {
+        float weaponPhysics = weapon.Physics * (1 - Creature_Physics_Cut) * weapon.CriticalMag()
+            + (weapon.Fire * (1 - Creature_Fire_Cut)) + (weapon.Water * (1 - Creature_Water_Cut))
+            + (weapon.Electric * (1 - Creature_Electric_Cut)) + (weapon.Ice * (1 - Creature_Ice_Cut))
+            + (weapon.Wind * (1 - Creature_Wind_Cut));
+        TableEntity_Skill skill;
+        GameManager.Inst.GetSkillData(key, out skill);
+        float skillPhysics = skill.Damage_A + skill.Damage_B * skill.Skill_Level;
+        return skillPhysics * skillPhysics;
+    }
+
+    public void TakeDamageOther(AttackType attack, Collider other)
     {
         if (useSkill > -1)
         {
-            Debug.Log(name);
             if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
             {
-                creatureDamage.CalculateDamage(this);
+                creatureDamage.CalculateDamage(attack, this);
                 TableEntity_Skill skill;
                 switch (useSkill)
                 {
@@ -301,6 +342,41 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                         break;
                 }
                 if(skill != null)
+                {
+                    switch (crowdControl)
+                    {
+                        case CrowdControl.Stun:
+                            creatureDamage.Stun(skill.Stun_Time);
+                            break;
+                        case CrowdControl.Airborne:
+                            creatureDamage.Airborne(skill.Airborne_Time);
+                            break;
+                        case CrowdControl.Knockback:
+                            creatureDamage.Knockback(skill.Knockback_Distance);
+                            break;
+                        case CrowdControl.Airback:
+                            creatureDamage.Airback(skill.Airborne_Time, skill.Knockback_Distance);
+                            break;
+                        case CrowdControl.Pulled:
+                            creatureDamage.Pulled(player.transform.position);
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void TakeDamageProjectile(AttackType attack, Projectile projectile, Collider other)
+    {
+        if (useSkill > -1)
+        {
+            Debug.Log(attack);
+            if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
+            {
+                creatureDamage.CalculateDamageProjectile(attack, projectile, this);
+                TableEntity_Skill skill;
+                GameManager.Inst.GetSkillData(projectile.key, out skill);
+                if (skill != null)
                 {
                     switch (crowdControl)
                     {

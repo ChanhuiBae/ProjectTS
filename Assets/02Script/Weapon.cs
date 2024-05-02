@@ -173,7 +173,7 @@ public class Weapon : MonoBehaviour
     {
         if (other.tag == "Creature")
         {
-            skillManager.TakeDamageOther(name,other);
+            skillManager.TakeDamageOther(AttackType.Weapon,other);
         }
     }
 }
