@@ -45,7 +45,11 @@ public class Skill : MonoBehaviour
         current_hit = 1;
         currentInfoID = GetKey();
         GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
-        GameManager.Inst.GetSkillHitFrame(id, out hitInfo);
+        GameManager.Inst.GetSkillHitFrame(ID, out hitInfo);
+        if(category == 3 && ID %10 == 1)
+        {
+            GameManager.Inst.SetMaxUltimate((int)currentInfo.Need_Damage);
+        }
     }
 
     public int GetKey()
@@ -64,6 +68,10 @@ public class Skill : MonoBehaviour
         current_level++;
         currentInfoID = GetKey();
         GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
+        if (category == 3 && ID % 10 == 1)
+        {
+            GameManager.Inst.SetMaxUltimate((int)currentInfo.Need_Damage);
+        }
     }
 
     private void SetIdle()
@@ -71,6 +79,10 @@ public class Skill : MonoBehaviour
         IsActive = false;
         current_charge = 0;
         current_hit = 0;
+        if(category == 3 && ID % 10 == 1)
+        {
+            GameManager.Inst.ResetUltimate();
+        }
     }
 
     public void ChargeUp()

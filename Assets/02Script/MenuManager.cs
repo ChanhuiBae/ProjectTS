@@ -14,7 +14,10 @@ public class MenuManager : MonoBehaviour
     private SkillButton skill1;
     private SkillButton skill2;
     private SkillButton skill3;
-    private UltimateButton ultimate; 
+    private UltimateButton ultimate;
+
+    private int maxUltimateValue;
+    private float currentUltimateValue;
 
     private void Awake()
     {
@@ -90,11 +93,31 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void SetUaltimate(int value)
+    public void SetMaxUltimate(int value)
     {
-        ultimate.SetUaltimate(value);
+        maxUltimateValue = value;
+        if (maxUltimateValue > currentUltimateValue)
+        {
+            currentUltimateValue = maxUltimateValue;
+        }
+        ultimate.SetUaltimate(currentUltimateValue / maxUltimateValue);
     }
 
+    public void SetUaltimate(float value)
+    {
+        currentUltimateValue = value;
+        ultimate.SetUaltimate(currentUltimateValue/maxUltimateValue);
+    }
+
+    public void AddUaltimate(float value)
+    {
+        currentUltimateValue += value;
+        if(currentUltimateValue > maxUltimateValue)
+        {
+            currentUltimateValue = maxUltimateValue;
+        }
+        ultimate.SetUaltimate(currentUltimateValue/maxUltimateValue);
+    }
     public void SetKillCount(int value)
     {
         killCount.text = value.ToString();

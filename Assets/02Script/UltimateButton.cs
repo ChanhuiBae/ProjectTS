@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -71,7 +72,6 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             Debug.Log("UltimateButton - Awake -  EventTrigger");
         }
-        SetUaltimate(100);
         down = new EventTrigger.Entry();
         up = new EventTrigger.Entry(); 
         drag = new EventTrigger.Entry();
@@ -90,9 +90,10 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
         trigger.triggers.Add(dragEnd);
     }
 
-    public void SetUaltimate(int value)
+    public void SetUaltimate(float value)
     {
-        ultimateFill.fillAmount = (float)value / 100f;
+        ultimateFill.fillAmount = value;
+        value = (float)Math.Truncate(value * 1000)/10;
         ultimateText.text = value.ToString() + "%";
         if(ultimateFill.fillAmount == 1)
         {

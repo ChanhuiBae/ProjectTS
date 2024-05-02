@@ -94,7 +94,6 @@ public class GameManager : Singleton<GameManager>
 
     //  private List<TableEntity_Tip> Tip = new List<TableEntity_Tip>();
 
-    private int ultimateValue;
     private int killCount;
 
     public void Awake()
@@ -262,7 +261,6 @@ public class GameManager : Singleton<GameManager>
                 {
                     menuManager.InitSkillButton(5, pData.ultimate2_ID, "None", 1);
                 }
-                ultimateValue = 100;
                 killCount = 0;
             }
             return true;
@@ -307,13 +305,13 @@ public class GameManager : Singleton<GameManager>
         pData.Adaptation = info.Adaptation;
         pData.Available_Point = info.Available_Point;
         pData.Exp_Need = info.Exp_Need;
-        pData.WeaponID = 3000;
-        pData.basic_ID = 300;
-        pData.skill1_ID = 301;
-        pData.skill2_ID = 302;
-        pData.skill3_ID =303;
-        pData.ultimate1_ID =331;
-        pData.ultimate2_ID =0;
+        pData.WeaponID = 2000;
+        pData.basic_ID = 200;
+        pData.skill1_ID = 201;
+        pData.skill2_ID = 202;
+        pData.skill3_ID =203;
+        pData.ultimate1_ID = 231;
+        pData.ultimate2_ID =232;
         SaveData();
     }
 
@@ -322,19 +320,18 @@ public class GameManager : Singleton<GameManager>
         player.CONTROLL = value;
     }
 
+    public void SetMaxUltimate(int value)
+    {
+        menuManager.SetMaxUltimate(value);
+    }
+
     public void ResetUltimate()
     {
-        ultimateValue = 0;
-        menuManager.SetUaltimate(ultimateValue);
+        menuManager.SetUaltimate(0f);
     }
-    public void ChargeUaltimate(int value)
+    public void AddUaltimate(float value)
     {
-        ultimateValue += value;
-        if(ultimateValue > 100)
-        {
-            ultimateValue = 100;
-        }
-        menuManager.SetUaltimate(ultimateValue);
+        menuManager.AddUaltimate(value);
     }
 
     public void AddKillCount()

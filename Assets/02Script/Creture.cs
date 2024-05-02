@@ -90,28 +90,29 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             float damage = hiter.TakeDamage(physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
             currentHP -= damage;
             Debug.Log("Damage: " + damage);
+            switch (type)
+            {
+                case CretureType.Normal:
+                    GameManager.Inst.AddUaltimate(damage * 0.01f);
+                    break;
+                case CretureType.Noble:
+                    GameManager.Inst.AddUaltimate(damage * 0.02f);
+                    break;
+                case CretureType.Swarm_Boss:
+                    GameManager.Inst.AddUaltimate(damage * 0.5f);
+                    break;
+                case CretureType.Guvnor:
+                    GameManager.Inst.AddUaltimate(damage);
+                    break;
+                case CretureType.Elite:
+                    GameManager.Inst.AddUaltimate(damage * 0.3f);
+                    break;
+            }
             if (currentHP < 0)
             {
                 IsDie = true;
                 ai.Die();
-                switch (type)
-                {
-                    case CretureType.Normal:
-                        GameManager.Inst.ChargeUaltimate(1);
-                        break;
-                    case CretureType.Noble:
-                        GameManager.Inst.ChargeUaltimate(2);
-                        break;
-                    case CretureType.Swarm_Boss:
-                        GameManager.Inst.ChargeUaltimate(50);
-                        break;
-                    case CretureType.Guvnor:
-                        GameManager.Inst.ChargeUaltimate(100);
-                        break;
-                    case CretureType.Elite:
-                        GameManager.Inst.ChargeUaltimate(30);
-                        break;
-                }
+
                 GameManager.Inst.AddKillCount();
                 spawnManager.SpawnHPItem(transform.position);
                 spawnManager.SpawnEXPItem(transform.position);
@@ -136,28 +137,29 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             float damage = hiter.TakeDamageByKey(projectile.key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
             currentHP -= damage;
             Debug.Log("Damage: " + damage);
+            
+            switch (type)
+            {
+                case CretureType.Normal:
+                    GameManager.Inst.AddUaltimate(damage * 0.01f);
+                    break;
+                case CretureType.Noble:
+                    GameManager.Inst.AddUaltimate(damage * 0.02f);
+                    break;
+                case CretureType.Swarm_Boss:
+                    GameManager.Inst.AddUaltimate(damage * 0.5f);
+                    break;
+                case CretureType.Guvnor:
+                    GameManager.Inst.AddUaltimate(damage);
+                    break;
+                case CretureType.Elite:
+                    GameManager.Inst.AddUaltimate(damage * 0.3f);
+                    break;
+            }
             if (currentHP < 0)
             {
                 IsDie = true;
                 ai.Die();
-                switch (type)
-                {
-                    case CretureType.Normal:
-                        GameManager.Inst.ChargeUaltimate(1);
-                        break;
-                    case CretureType.Noble:
-                        GameManager.Inst.ChargeUaltimate(2);
-                        break;
-                    case CretureType.Swarm_Boss:
-                        GameManager.Inst.ChargeUaltimate(50);
-                        break;
-                    case CretureType.Guvnor:
-                        GameManager.Inst.ChargeUaltimate(100);
-                        break;
-                    case CretureType.Elite:
-                        GameManager.Inst.ChargeUaltimate(30);
-                        break;
-                }
                 GameManager.Inst.AddKillCount();
                 spawnManager.SpawnHPItem(transform.position);
                 spawnManager.SpawnEXPItem(transform.position);
