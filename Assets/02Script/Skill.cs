@@ -111,6 +111,7 @@ public class Skill : MonoBehaviour
         {
             IsActive = true;
         }
+        Debug.Log("hitup");
     }
 
     public void StartSkill()
