@@ -69,18 +69,33 @@ public class Effect : MonoBehaviour, IPoolObject
         //throw new System.NotImplementedException();
     }
 
-    public void StayCount(int count)
+    public void StayCount(int count, float attackSpeed)
     {
         Debug.Log(key);
-        StartCoroutine(StartStayCount(count));
+        StartCoroutine(StartStayCount(count, attackSpeed));
     }
 
-    private IEnumerator StartStayCount(int count)
+    private IEnumerator StartStayCount(int MaxCount, float attackSpeed)
     {
         int i = 0;
-        while (i < count)
+        int count;
+
+        if (attackSpeed < 1.5)
+            count = 10;
+        else if(attackSpeed < 2.0)
+            count = 9;
+        else if(attackSpeed < 2.5)
+            count = 8;
+        else if (attackSpeed < 3.0)
+            count = 7;
+        else if (attackSpeed < 3.5)
+            count = 6;
+        else
+            count = 5;
+
+        while (i < MaxCount)
         {
-            if(i % 5 == 0)
+            if(i % count == 0)
             {
                 hit = true;
             }

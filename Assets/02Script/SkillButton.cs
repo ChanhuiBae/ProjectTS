@@ -245,6 +245,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         if(skill_ID < 200)
         {
             player.SwordAttack();
+            Debug.Log("sword");
         }
         else if(skill_ID < 300)
         {

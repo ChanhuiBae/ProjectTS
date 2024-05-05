@@ -406,6 +406,10 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void SwordAttack()
     {
+        if (!anim.GetCombo() && anim.IsHammerAttack1())
+        {
+            anim.IsCombo(true);
+        }
         ChangeState(State.Attack_Sword);
     }
 
@@ -580,7 +584,7 @@ public class PlayerController : MonoBehaviour, IDamage
         effect.Init(EffectType.Multiple, transform.position + Vector3.up, 600 * 0.017f);
         effect.SetRotation(transform.rotation);
         effect.Key = skillManager.GetCurrentKey();
-        effect.StayCount(600);
+        effect.StayCount(600, weapon.Attack_Speed);
     }
 
     public void SetPull()

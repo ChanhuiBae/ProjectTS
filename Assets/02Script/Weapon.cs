@@ -33,6 +33,11 @@ public class Weapon : MonoBehaviour
     private float weight;
     private Physics_Type physicsType;
     private float attack_Speed;
+    public float Attack_Speed
+    {
+        get => attack_Speed;
+        set => attack_Speed = value;
+    }
     private bool IsSlash;
     private bool IsStrike;
     private bool IsExplosion;

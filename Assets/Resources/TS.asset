@@ -37,7 +37,7 @@ MonoBehaviour:
     Hit_Max: 2
     Skill_Name: "\uCC28\uC9C0\uB4DC \uC18C\uB4DC \uC77C\uBC18 \uACF5\uACA9"
     Skill_Name_Eng: CS_Basic
-    Is_Scoping: 1
+    Is_Scoping: 0
     Is_Charging: 0
   - ID: 101
     Weapon_ID: 01
