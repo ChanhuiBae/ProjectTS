@@ -80,7 +80,7 @@ public class Effect : MonoBehaviour, IPoolObject
         int i = 0;
         while (i < count)
         {
-            if(i % 60 == 0)
+            if(i % 5 == 0)
             {
                 hit = true;
             }
