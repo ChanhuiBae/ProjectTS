@@ -233,6 +233,7 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             icon.sprite = Resources.Load<Sprite>("Image/NoneSkill");
             trigger.enabled = false;
+            ultimateText.enabled  = false;
         }
         else
         {
@@ -243,6 +244,7 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
             GameManager.Inst.GetSkillList(ID1, out skill);
             isScoping1 = skill.Is_Scoping;
             isCharging1 = skill.Is_Charging;
+            ultimateText.enabled = true;
         }
     }
 

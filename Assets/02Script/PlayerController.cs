@@ -187,6 +187,11 @@ public class PlayerController : MonoBehaviour, IDamage
                     StartCoroutine(MoveForward()); 
                     break;
                 case State.Attack_Sword:
+                    skillManager.UseSkill(0);
+                    weapon.OnTrail();
+                    anim.Attack(true);
+                    skillManager.SetCrowdControl(CrowdControl.Stun);
+                    attackCount++;
                     break;
                 case State.Attack_Hammer:
                     skillManager.UseSkill(0); 
@@ -410,6 +415,10 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             anim.IsCombo(true);
         }
+        else if(anim.GetCombo() && !anim.IsHammerAttack1())
+        {
+            anim.IsCombo(false);
+        }
         ChangeState(State.Attack_Sword);
     }
 
@@ -418,6 +427,10 @@ public class PlayerController : MonoBehaviour, IDamage
         if (!anim.GetCombo() && anim.IsHammerAttack1())
         {
             anim.IsCombo(true);
+        }
+        else if (anim.GetCombo() && !anim.IsHammerAttack1())
+        {
+            anim.IsCombo(false);
         }
         ChangeState(State.Attack_Hammer);
     }

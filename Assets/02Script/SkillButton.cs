@@ -208,9 +208,9 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + level + "01";
             TableEntity_Skill info;
             GameManager.Inst.GetSkillData(int.Parse(key), out info);
+            icon.sprite = Resources.Load<Sprite>("Image/" + name);
             if (transform.childCount != 1)
             {
-                icon.sprite = Resources.Load<Sprite>("Image/" + name);
                 maxTime = info.Cool_Time;
                 currentTime = maxTime;
                 coolTimeImage.fillAmount = 1;
@@ -245,7 +245,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         if(skill_ID < 200)
         {
             player.SwordAttack();
-            Debug.Log("sword");
         }
         else if(skill_ID < 300)
         {
