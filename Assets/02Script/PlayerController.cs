@@ -574,6 +574,14 @@ public class PlayerController : MonoBehaviour, IDamage
         effect.SetRotation(transform.rotation);
         attackArea.AttackInAngle();
     }
+    public void CallDrone()
+    {
+        effect = skillManager.SpawnEffect(9);
+        effect.Init(EffectType.Multiple, transform.position + Vector3.up, 600 * 0.017f);
+        effect.SetRotation(transform.rotation);
+        effect.Key = skillManager.GetCurrentKey();
+        effect.StayCount(600);
+    }
 
     public void SetPull()
     {

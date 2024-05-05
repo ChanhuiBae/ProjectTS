@@ -221,7 +221,24 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         return playerLook;
     }
 
-
+    public int GetCurrentKey()
+    {
+        switch (useSkill)
+        {
+            case 1:
+                return skill1.GetKey();
+            case 2:
+                return skill2.GetKey();
+            case 3:
+                return skill3.GetKey();
+            case 4:
+                return ultimate1.GetKey();
+            case 5:
+                return ultimate2.GetKey();
+            default:
+                return basic.GetKey();
+        }
+    }
 
     public void SpawnBasicProjectile(Vector3 pos)
     {
@@ -308,7 +325,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             + (weapon.Wind * (1 - Creature_Wind_Cut));
         TableEntity_Skill skill;
         GameManager.Inst.GetSkillData(key, out skill);
-        float skillPhysics = skill.Damage_A + skill.Damage_B * skill.Skill_Level;
+        float skillPhysics = 0;
+        if (skill != null)
+        {
+            skillPhysics = skill.Damage_A + skill.Damage_B * skill.Skill_Level;
+        }
         return skillPhysics * skillPhysics;
     }
 
@@ -368,34 +389,31 @@ public class SkillManager : MonoBehaviour, ITakeDamage
 
     public void TakeDamageByKey(AttackType attack, int key, Collider other)
     {
-        if (useSkill > -1)
+       
+        if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
         {
-            Debug.Log(attack);
-            if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
+            creatureDamage.CalculateDamageByKey(attack, key, this);
+            TableEntity_Skill skill;
+            GameManager.Inst.GetSkillData(key, out skill);
+            if (skill != null)
             {
-                creatureDamage.CalculateDamageByKey(attack, key, this);
-                TableEntity_Skill skill;
-                GameManager.Inst.GetSkillData(key, out skill);
-                if (skill != null)
+                switch (crowdControl)
                 {
-                    switch (crowdControl)
-                    {
-                        case CrowdControl.Stun:
-                            creatureDamage.Stun(skill.Stun_Time);
-                            break;
-                        case CrowdControl.Airborne:
-                            creatureDamage.Airborne(skill.Airborne_Time);
-                            break;
-                        case CrowdControl.Knockback:
-                            creatureDamage.Knockback(skill.Knockback_Distance);
-                            break;
-                        case CrowdControl.Airback:
-                            creatureDamage.Airback(skill.Airborne_Time, skill.Knockback_Distance);
-                            break;
-                        case CrowdControl.Pulled:
-                            creatureDamage.Pulled(player.transform.position);
-                            break;
-                    }
+                    case CrowdControl.Stun:
+                        creatureDamage.Stun(skill.Stun_Time);
+                        break;
+                    case CrowdControl.Airborne:
+                        creatureDamage.Airborne(skill.Airborne_Time);
+                        break;
+                    case CrowdControl.Knockback:
+                        creatureDamage.Knockback(skill.Knockback_Distance);
+                        break;
+                    case CrowdControl.Airback:
+                        creatureDamage.Airback(skill.Airborne_Time, skill.Knockback_Distance);
+                        break;
+                    case CrowdControl.Pulled:
+                        creatureDamage.Pulled(player.transform.position);
+                        break;
                 }
             }
         }

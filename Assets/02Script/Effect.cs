@@ -17,6 +17,7 @@ public class Effect : MonoBehaviour, IPoolObject
     private SkillManager skillManager;
     private EffectType type;  
     private int key;
+    private bool hit;
     public int Key
     {
         set { key = value; }
@@ -29,11 +30,11 @@ public class Effect : MonoBehaviour, IPoolObject
             Debug.Log("Effect - Awake - SkillManager");
         }
     }
-    public void Init(EffectType type, Vector3 pos, float lifeFrame)
+    public void Init(EffectType type, Vector3 pos, float lifeTime)
     {
         this.type = type;
         transform.position = pos;
-        StartCoroutine(ReturnPool(lifeFrame));
+        StartCoroutine(ReturnPool(lifeTime));
     }
 
     public void SetScale(float size)
@@ -68,14 +69,52 @@ public class Effect : MonoBehaviour, IPoolObject
         //throw new System.NotImplementedException();
     }
 
+    public void StayCount(int count)
+    {
+        Debug.Log(key);
+        StartCoroutine(StartStayCount(count));
+    }
+
+    private IEnumerator StartStayCount(int count)
+    {
+        int i = 0;
+        while (i < count)
+        {
+            if(i % 60 == 0)
+            {
+                hit = true;
+            }
+            else
+            {
+                hit = false;
+            }
+            i++;
+            yield return null;
+        }
+        Debug.Log("End");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Creature")
         {
             if (type == EffectType.Once)
                 skillManager.TakeDamageOther(AttackType.Effect, other);
-            else if (type == EffectType.Multiple)
+            else if (type == EffectType.Multiple && hit)
+            {
                 skillManager.TakeDamageByKey(AttackType.Effect, key, other);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Creature" && hit)
+        {
+            if (type == EffectType.Multiple)
+            {
+                skillManager.TakeDamageByKey(AttackType.Effect, key, other);
+            }
         }
     }
 }
