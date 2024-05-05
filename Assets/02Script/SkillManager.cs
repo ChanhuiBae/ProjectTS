@@ -366,16 +366,16 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         }
     }
 
-    public void TakeDamageProjectile(AttackType attack, Projectile projectile, Collider other)
+    public void TakeDamageByKey(AttackType attack, int key, Collider other)
     {
         if (useSkill > -1)
         {
             Debug.Log(attack);
             if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
             {
-                creatureDamage.CalculateDamageProjectile(attack, projectile, this);
+                creatureDamage.CalculateDamageByKey(attack, key, this);
                 TableEntity_Skill skill;
-                GameManager.Inst.GetSkillData(projectile.key, out skill);
+                GameManager.Inst.GetSkillData(key, out skill);
                 if (skill != null)
                 {
                     switch (crowdControl)

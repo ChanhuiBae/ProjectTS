@@ -556,21 +556,21 @@ public class PlayerController : MonoBehaviour, IDamage
     public void SetAura()
     {
         effect = skillManager.SpawnEffect(4);
-        effect.Init(transform.position + transform.forward *1.5f, 1);
+        effect.Init(EffectType.None, transform.position + transform.forward *1.5f, 1);
     }
 
     public void SetSlash()
     {
         StopCharge();   
         effect = skillManager.SpawnEffect(3);
-        effect.Init(transform.position, 1);
+        effect.Init(EffectType.None, transform.position, 1);
     }
 
     public void SetPowerWave()
     {
         attackArea.SetTargets();
         effect = skillManager.SpawnEffect(7);
-        effect.Init(transform.position + Vector3.up, 1);
+        effect.Init(EffectType.None, transform.position + Vector3.up, 1);
         effect.SetRotation(transform.rotation);
         attackArea.AttackInAngle();
     }
@@ -579,7 +579,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         skillManager.SetCrowdControl(CrowdControl.Pulled);
         effect = skillManager.SpawnEffect(5);
-        effect.Init(transform.position, 1.5f);
+        effect.Init(EffectType.None, transform.position, 1.5f);
         
     }
 
@@ -596,7 +596,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public void SetAttackField()
     {
         effect = skillManager.SpawnEffect(6);
-        effect.Init(transform.position, 1f);
+        effect.Init(EffectType.None, transform.position, 1f);
     }
 
     public void CrowdControlNone()
@@ -612,7 +612,7 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    public void CalculateDamageProjectile(AttackType attack, Projectile projrectile, ITakeDamage hiter)
+    public void CalculateDamageByKey(AttackType attack, int key, ITakeDamage hiter)
     {
         if (!isInvincibility)
         {

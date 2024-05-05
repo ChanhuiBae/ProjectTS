@@ -18,7 +18,11 @@ public class Projectile : MonoBehaviour, IPoolObject
     private FixedJoystick dir;
     private SkillManager skillManager;
 
-    public int key;
+    private int key;
+    public int Key
+    {
+        get { return key; }
+    }
 
     private void Awake()
     {
@@ -92,7 +96,7 @@ public class Projectile : MonoBehaviour, IPoolObject
             case ProjectileType.Bullet:
                 if (other.tag == "Creature")
                 {
-                    skillManager.TakeDamageOther(AttackType.Projectile, other);
+                    skillManager.TakeDamageByKey(AttackType.Projectile, key, other);
                     skillManager.TakeProjectile(poolName, this);
                 }
                 if (other.tag == "Ground")
@@ -107,14 +111,15 @@ public class Projectile : MonoBehaviour, IPoolObject
                     trail.enabled = false;
                     rig.velocity = Vector3.zero;
                     Effect effect = skillManager.SpawnEffect(8);
-                    effect.Init(transform.position, 1f);
+                    effect.Init(EffectType.Once, transform.position, 1f);
+                    effect.Key = key;
                     skillManager.TakeProjectile(poolName, this);
                 }
                 break;
             case ProjectileType.Laser:
                 if (other.tag == "Creature")
                 {
-                    skillManager.TakeDamageOther(AttackType.Projectile, other);
+                    skillManager.TakeDamageByKey(AttackType.Projectile, key, other);
                 }
                 break;
         }

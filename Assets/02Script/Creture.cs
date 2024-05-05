@@ -121,20 +121,20 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             if (damage < 200 && damage > 0)
             {
                 effect = spawnManager.SpawnEffect(0);
-                effect.Init(transform.position + Vector3.up, 1);
+                effect.Init(EffectType.None, transform.position + Vector3.up, 1);
             }
             else if (damage > 200)
             {
                 effect = spawnManager.SpawnEffect(1);
-                effect.Init(transform.position + Vector3.up, 1);
+                effect.Init(EffectType.None, transform.position + Vector3.up, 1);
             }
         }
     }
-    public void CalculateDamageProjectile(AttackType attack, Projectile projectile, ITakeDamage hiter)
+    public void CalculateDamageByKey(AttackType attack, int key, ITakeDamage hiter)
     {
         if (!IsDie)
         {
-            float damage = hiter.TakeDamageByKey(projectile.key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
+            float damage = hiter.TakeDamageByKey(key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
             currentHP -= damage;
             Debug.Log("Damage: " + damage);
             
@@ -168,12 +168,12 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             if (damage < 200 && damage > 0)
             {
                 effect = spawnManager.SpawnEffect(0);
-                effect.Init(transform.position + Vector3.up, 1);
+                effect.Init(EffectType.None, transform.position + Vector3.up, 1);
             }
             else if (damage > 200)
             {
                 effect = spawnManager.SpawnEffect(1);
-                effect.Init(transform.position + Vector3.up, 1);
+                effect.Init(EffectType.None, transform.position + Vector3.up, 1);
             }
         }
     }

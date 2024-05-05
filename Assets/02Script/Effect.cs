@@ -3,11 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EffectType
+{
+    None,
+    Once,
+    Multiple
+}
+
 public class Effect : MonoBehaviour, IPoolObject
 {
     [SerializeField]
     private string poolName;
     private SkillManager skillManager;
+    private EffectType type;  
+    private int key;
+    public int Key
+    {
+        set { key = value; }
+    }
 
     private void Awake()
     {
@@ -16,8 +29,9 @@ public class Effect : MonoBehaviour, IPoolObject
             Debug.Log("Effect - Awake - SkillManager");
         }
     }
-    public void Init(Vector3 pos, float lifeFrame)
+    public void Init(EffectType type, Vector3 pos, float lifeFrame)
     {
+        this.type = type;
         transform.position = pos;
         StartCoroutine(ReturnPool(lifeFrame));
     }
@@ -58,7 +72,10 @@ public class Effect : MonoBehaviour, IPoolObject
     {
         if (other.tag == "Creature")
         {
-            skillManager.TakeDamageOther(AttackType.Effect , other);
+            if (type == EffectType.Once)
+                skillManager.TakeDamageOther(AttackType.Effect, other);
+            else if (type == EffectType.Multiple)
+                skillManager.TakeDamageByKey(AttackType.Effect, key, other);
         }
     }
 }
