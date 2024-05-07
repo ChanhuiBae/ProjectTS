@@ -39,6 +39,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private bool isCharge;
     private Vector3 playerLook;
     private CrowdControl crowdControl;
+    private Vector3 pulledPoint;
     public bool IsCharge
     {
         get => isCharge;
@@ -96,6 +97,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         useSkill = -1;
         isCharge = false;
         crowdControl = CrowdControl.None;
+        pulledPoint = player.transform.position;
     }
 
     public void WeaponInit(Weapon weapon)
@@ -333,6 +335,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         return skillPhysics * skillPhysics;
     }
 
+    public void SetPulledPoint(Vector3 point)
+    {
+        pulledPoint = point;
+    }
+
     public void TakeDamageOther(AttackType attack, Collider other)
     {
         if (useSkill > -1)
@@ -379,7 +386,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                             creatureDamage.Airback(skill.Airborne_Time, skill.Knockback_Distance);
                             break;
                         case CrowdControl.Pulled:
-                            creatureDamage.Pulled(player.transform.position);
+                            creatureDamage.Pulled(pulledPoint);
                             break;
                     }
                 }
@@ -412,7 +419,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                         creatureDamage.Airback(skill.Airborne_Time, skill.Knockback_Distance);
                         break;
                     case CrowdControl.Pulled:
-                        creatureDamage.Pulled(player.transform.position);
+                        creatureDamage.Pulled(pulledPoint);
                         break;
                 }
             }

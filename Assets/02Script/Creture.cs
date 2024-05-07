@@ -261,6 +261,6 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     public void Pulled(Vector3 center)
     {
         ai.StopAI(1f);
-        LeanTween.move(gameObject, center, 0.1f).setEase(LeanTweenType.easeInElastic);
+        LeanTween.move(gameObject, center, 0.5f).setEase(LeanTweenType.easeInElastic);
     }
 }

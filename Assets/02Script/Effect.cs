@@ -71,7 +71,6 @@ public class Effect : MonoBehaviour, IPoolObject
 
     public void StayCount(int count, float attackSpeed)
     {
-        Debug.Log(key);
         StartCoroutine(StartStayCount(count, attackSpeed));
     }
 

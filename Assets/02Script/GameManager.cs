@@ -307,7 +307,7 @@ public class GameManager : Singleton<GameManager>
         pData.Exp_Need = info.Exp_Need;
         pData.WeaponID = 1000;
         pData.basic_ID = 100;
-        pData.skill1_ID = 0;
+        pData.skill1_ID = 101;
         pData.skill2_ID = 0;
         pData.skill3_ID =0;
         pData.ultimate1_ID = 0;

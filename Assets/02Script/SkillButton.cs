@@ -170,7 +170,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                     }
                     else
                     {
-
                         y = Mathf.Sin(theta) * 30;
                     }
                     icon.rectTransform.localPosition = new Vector2(x, y);

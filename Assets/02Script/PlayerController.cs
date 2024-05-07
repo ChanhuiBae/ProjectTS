@@ -603,9 +603,9 @@ public class PlayerController : MonoBehaviour, IDamage
     public void SetPull()
     {
         skillManager.SetCrowdControl(CrowdControl.Pulled);
+        skillManager.SetPulledPoint(transform.position);
         effect = skillManager.SpawnEffect(5);
         effect.Init(EffectType.None, transform.position, 1.5f);
-        
     }
 
     public void SetAirborne()
@@ -622,6 +622,14 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         effect = skillManager.SpawnEffect(6);
         effect.Init(EffectType.None, transform.position, 1f);
+    }
+
+
+    public void Push()
+    {
+        skillManager.SetCrowdControl(CrowdControl.Pulled);
+        skillManager.SetPulledPoint(transform.forward * 12f + transform.position);
+        LeanTween.move(gameObject, transform.forward * 10f + transform.position, 1f);
     }
 
     public void CrowdControlNone()
