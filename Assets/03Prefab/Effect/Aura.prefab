@@ -54,10 +54,60 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5660752195426771964}
     m_Modifications:
+    - target: {fileID: 134826399277615046, guid: d267241a193a1f447b208c21733d1b17,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 639671640205989096, guid: d267241a193a1f447b208c21733d1b17,
         type: 3}
       propertyPath: m_Name
       value: seungchu
+      objectReference: {fileID: 0}
+    - target: {fileID: 696186414106337176, guid: d267241a193a1f447b208c21733d1b17,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 868552615704371972, guid: d267241a193a1f447b208c21733d1b17,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737085903215519827, guid: d267241a193a1f447b208c21733d1b17,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3733059040654681632, guid: d267241a193a1f447b208c21733d1b17,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830153713996136023, guid: d267241a193a1f447b208c21733d1b17,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5111347182309522316, guid: d267241a193a1f447b208c21733d1b17,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5111347182309522316, guid: d267241a193a1f447b208c21733d1b17,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5268185962397846019, guid: d267241a193a1f447b208c21733d1b17,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279341567535864950, guid: d267241a193a1f447b208c21733d1b17,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8690333525075970697, guid: d267241a193a1f447b208c21733d1b17,
         type: 3}
