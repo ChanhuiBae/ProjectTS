@@ -94,14 +94,14 @@ public class RFX4_EffectSettings : MonoBehaviour
     public void ChangeParticleColor()
     {
         Debug.Log("ColorChanged");
-        //var hue = RFX4_ColorHelper.ColorToHSV(EffectColor).H;
-        //RFX4_ColorHelper.ChangeObjectColorByHUE(gameObject, hue);
+        var hue = RFX4_ColorHelper.ColorToHSV(EffectColor).H;
+        RFX4_ColorHelper.ChangeObjectColorByHUE(gameObject, hue);
 
-        //var physxMotion = GetComponentInChildren<RFX4_PhysicsMotion>();
-        //if (physxMotion != null) physxMotion.HUE = hue;
+        var physxMotion = GetComponentInChildren<RFX4_PhysicsMotion>();
+        if (physxMotion != null) physxMotion.HUE = hue;
 
-        //var rayCastCollision = GetComponentInChildren<RFX4_RaycastCollision>();
-        //if (rayCastCollision != null) rayCastCollision.HUE = hue;
+        var rayCastCollision = GetComponentInChildren<RFX4_RaycastCollision>();
+        if (rayCastCollision != null) rayCastCollision.HUE = hue;
     }
 
     public void SetFlatDecals()
@@ -126,11 +126,11 @@ public class RFX4_EffectSettings : MonoBehaviour
                 customLight.shadows = LightShadows.None;
         }
 
-        //var psLights = GetComponentsInChildren<RFX4_ParticleLight>();
-        //foreach (var psLight in psLights)
-        //{
-        //    psLight.UseShadows = false;
-        //}
+        var psLights = GetComponentsInChildren<RFX4_ParticleLight>();
+        foreach (var psLight in psLights)
+        {
+            psLight.UseShadows = false;
+        }
     }
 
     bool IsMobilePlatform()

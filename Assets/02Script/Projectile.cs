@@ -44,7 +44,10 @@ public class Projectile : MonoBehaviour, IPoolObject
     {
         this.type = type;
         transform.position = pos;
-        trail.enabled = true;
+        if(trail != null)
+        {
+            trail.enabled = true;
+        }
         this.key = key;
     }
 
@@ -60,7 +63,7 @@ public class Projectile : MonoBehaviour, IPoolObject
         transform.rotation = rotation;
         rig.velocity = Vector3.zero;
         rig.useGravity = true;
-        rig.AddForce(transform.forward * 6f, ForceMode.Impulse);
+        rig.AddForce(transform.forward * 8f, ForceMode.Impulse);
         StartCoroutine(TimeOut(5f));
     }
 
@@ -71,11 +74,26 @@ public class Projectile : MonoBehaviour, IPoolObject
         rig.AddForce(transform.forward * 8f, ForceMode.Impulse);
         StartCoroutine(TimeOut(0.5f));
     }
+    public void AttackSlash(Quaternion rotation)
+    {
+        transform.rotation = rotation;
+        rig.velocity = Vector3.zero;
+        rig.AddForce(transform.forward * 8f, ForceMode.Impulse);
+        StartCoroutine(CountDownExplosion(1f));
+    }
 
     private IEnumerator TimeOut(float time)
     {
         yield return YieldInstructionCache.WaitForSeconds(time);
-        trail.enabled = false;
+        if(trail != null)
+            trail.enabled = false;
+        skillManager.TakeProjectile(poolName, this);
+    }
+
+    private IEnumerator CountDownExplosion(float time)
+    {
+        yield return YieldInstructionCache.WaitForSeconds(time);
+        skillManager.SpawnUniqeEffect(10,EffectType.Once, transform.position, 0.5f);
         skillManager.TakeProjectile(poolName, this);
     }
 
@@ -101,7 +119,10 @@ public class Projectile : MonoBehaviour, IPoolObject
                 }
                 if (other.tag == "Ground")
                 {
-                    trail.enabled = false;
+                    if (trail != null)
+                    {
+                        trail.enabled = false;
+                    }
                     skillManager.TakeProjectile(poolName, this);
                 }
                 break;

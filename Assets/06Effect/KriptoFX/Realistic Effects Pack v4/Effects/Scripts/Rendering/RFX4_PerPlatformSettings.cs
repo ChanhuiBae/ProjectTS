@@ -31,11 +31,11 @@ public class RFX4_PerPlatformSettings : MonoBehaviour
         Legacy_Rendering_Check(cam);
     }
 
-    void Update()
-    {
-        var cam = Camera.main;
-        Legacy_Rendering_Check(cam);
-    }
+    //void Update()
+    //{
+    //    var cam = Camera.main;
+    //    Legacy_Rendering_Check(cam);
+    //}
 
     void Legacy_Rendering_Check(Camera cam)
     {
@@ -43,9 +43,9 @@ public class RFX4_PerPlatformSettings : MonoBehaviour
         if (cam == null) return;
         if (RenderMobileDistortion && !DisableOnMobiles && isMobile)
         {
-            //var mobileDistortion = cam.GetComponent<RFX4_MobileDistortion>();
-            //if (mobileDistortion == null) mobileDistortion = cam.gameObject.AddComponent<RFX4_MobileDistortion>();
-            //mobileDistortion.IsActive = true;
+            var mobileDistortion = cam.GetComponent<RFX4_MobileDistortion>();
+            if (mobileDistortion == null) mobileDistortion = cam.gameObject.AddComponent<RFX4_MobileDistortion>();
+            mobileDistortion.IsActive = true;
 
         }
 
@@ -58,8 +58,8 @@ public class RFX4_PerPlatformSettings : MonoBehaviour
         if (RenderMobileDistortion && !DisableOnMobiles && isMobile)
         {
 
-            //var mobileDistortion = cam.GetComponent<RFX4_MobileDistortion>();
-            //if (mobileDistortion != null) mobileDistortion.IsActive = false;
+            var mobileDistortion = cam.GetComponent<RFX4_MobileDistortion>();
+            if (mobileDistortion != null) mobileDistortion.IsActive = false;
         }
 
     }

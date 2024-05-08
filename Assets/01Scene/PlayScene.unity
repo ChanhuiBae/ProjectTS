@@ -198,6 +198,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12072134}
   m_CullTransparentMesh: 1
+--- !u!1 &51197662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 51197663}
+  m_Layer: 0
+  m_Name: Slash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &51197663
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51197662}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 564313840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &53265459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1807,6 +1838,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53db384f6cdbba34697025a6db8fee91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &557863437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 557863438}
+  m_Layer: 0
+  m_Name: SlashExplosion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &557863438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557863437}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1186566247}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &564313838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1855,6 +1917,12 @@ MonoBehaviour:
     _count: 30
     _container: {fileID: 1416455934}
     _nonLazy: 0
+  - _name: Slash
+    _component: {fileID: -5614894630720611793, guid: 4ad8dca1f476b3443b4ffb0d46acebd3,
+      type: 3}
+    _count: 30
+    _container: {fileID: 51197663}
+    _nonLazy: 0
 --- !u!4 &564313840
 Transform:
   m_ObjectHideFlags: 0
@@ -1871,6 +1939,7 @@ Transform:
   - {fileID: 210889450}
   - {fileID: 2127527246}
   - {fileID: 1416455934}
+  - {fileID: 51197663}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &588714930
@@ -3724,6 +3793,7 @@ Transform:
   - {fileID: 596324906}
   - {fileID: 875497489}
   - {fileID: 800930913}
+  - {fileID: 557863438}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1186566248
@@ -3798,6 +3868,12 @@ MonoBehaviour:
       type: 3}
     _count: 20
     _container: {fileID: 800930913}
+    _nonLazy: 0
+  - _name: SlashExplosion
+    _component: {fileID: 1735279535405296703, guid: 74a6e40ef2c2ffa4fa087116802ab08f,
+      type: 3}
+    _count: 20
+    _container: {fileID: 557863438}
     _nonLazy: 0
 --- !u!1 &1262281705
 GameObject:

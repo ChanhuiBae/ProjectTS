@@ -192,6 +192,13 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         return obj.GetComponent<Effect>();
     }
 
+    public void SpawnUniqeEffect(int num, EffectType type,Vector3 pos, float lifeTime)
+    {
+        GameObject obj = effectManager.GetFromPool<Effect>(num).gameObject;
+        Effect effect = obj.GetComponent<Effect>();
+        effect.Init(type, pos, lifeTime);
+    }
+
     public void SetAttackArea(Vector3 center, float radius)
     {
         attackArea.Attack(center, radius);
@@ -285,6 +292,25 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 break;
         }
         projectile.AttackLaser(player.transform.rotation);
+    }
+
+    public void SpawnSlash(Vector3 pos)
+    {
+        GameObject obj = projectileManager.GetFromPool<Projectile>(3).gameObject;
+        Projectile projectile = obj.GetComponent<Projectile>();
+        switch (useSkill)
+        {
+            case 1:
+                projectile.Init(ProjectileType.Laser, pos, skill1.GetKey());
+                break;
+            case 2:
+                projectile.Init(ProjectileType.Laser, pos, skill2.GetKey());
+                break;
+            case 3:
+                projectile.Init(ProjectileType.Laser, pos, skill3.GetKey());
+                break;
+        }
+        projectile.AttackSlash(player.transform.rotation);
     }
 
 

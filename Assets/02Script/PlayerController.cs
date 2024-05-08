@@ -576,11 +576,16 @@ public class PlayerController : MonoBehaviour, IDamage
         effect.Init(EffectType.None, transform.position + transform.forward *1.5f, 1);
     }
 
-    public void SetSlash()
+    public void SetSlashCycle()
     {
         StopCharge();   
         effect = skillManager.SpawnEffect(3);
         effect.Init(EffectType.None, transform.position, 1);
+    }
+
+    public void SetSlashForward()
+    {
+        skillManager.SpawnSlash(transform.position);
     }
 
     public void SetPowerWave()
