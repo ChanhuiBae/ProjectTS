@@ -12,6 +12,7 @@ public class PlayerAnimationController : MonoBehaviour
     private int H_X = Animator.StringToHash("X");
     private int H_Y = Animator.StringToHash("Y");
     private int H_Skill = Animator.StringToHash("Skill_ID");
+    private int H_Sit = Animator.StringToHash("Sit");
 
     private void Awake()
     {
@@ -79,6 +80,11 @@ public class PlayerAnimationController : MonoBehaviour
     public void Skill(int id)
     {
         animator.SetInteger(H_Skill, id);
+    }
+
+    public void Sit()
+    {
+        animator.SetTrigger(H_Sit);
     }
 
     public void PlayAnim(bool use)

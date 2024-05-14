@@ -150,11 +150,17 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             trigger.enabled = false;
             if(!coolTimeRun)
                 StartCoroutine(CoolTime());
-            if (isScoping)
+            if (isScoping && maxStack == 0)
             {
                 UseSkill = false;
                 player.StopAllCoroutines();
                 player.SetIdle();
+            }
+            else if(isScoping && maxStack > 0)
+            {
+                player.StopAllCoroutines();
+                skillManager.StopAttackArea();
+                player.Sit();
             }
         }
     }
@@ -193,7 +199,14 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                     }
                     icon.rectTransform.localPosition = new Vector2(x, y);
                 }
-                skillManager.SetLook(new Vector3(x, 0, y));
+                if(maxStack != 0)
+                {
+                    Vector3 direction = new Vector3(x, 0, y);
+                    skillManager.StopAttackArea();
+                    skillManager.MoveAttackArea(direction * 0.2f, 2);
+                    skillManager.ShowAttackArea();
+                    player.LookAttackArea();
+                }
             }
         }
     }

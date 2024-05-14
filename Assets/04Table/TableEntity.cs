@@ -35,6 +35,7 @@ public class TableEntity_Skill_List
     public float Scoping_Time;
     public bool Is_Charging;
     public int Stack_Max;
+    public int Linked_Skill;
 }
 
 [System.Serializable]

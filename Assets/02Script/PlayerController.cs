@@ -409,6 +409,7 @@ public class PlayerController : MonoBehaviour, IDamage
         SetIdle();
     }
 
+
     public void SwordAttack()
     {
         if (!anim.GetCombo() && anim.IsHammerAttack1())
@@ -510,7 +511,16 @@ public class PlayerController : MonoBehaviour, IDamage
     public void LookAttackArea()
     {
         transform.LookAt(attackArea.GetCenter() + transform.position);
+    }
+
+    public void MoveAttackArea()
+    {
         LeanTween.move(gameObject, attackArea.GetCenter() + transform.position, 0.4f);
+    }
+
+    public void Sit()
+    {
+        anim.Sit();
     }
 
     public void StopAnimator()
