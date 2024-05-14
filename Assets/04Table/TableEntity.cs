@@ -32,7 +32,9 @@ public class TableEntity_Skill_List
     public string Skill_Name;
     public string Skill_Name_Eng;
     public bool Is_Scoping;
+    public float Scoping_Time;
     public bool Is_Charging;
+    public int Stack_Max;
 }
 
 [System.Serializable]

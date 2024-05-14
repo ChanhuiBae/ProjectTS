@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
@@ -16,11 +17,18 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     private RectTransform center;
     private Image block;
     private TextMeshProUGUI time;
+    private TextMeshProUGUI stack;
+    private int maxStack;
+    private int currentStack;
     private float maxTime;
     private float currentTime;
+    private float scopingTime;
     private int skill_ID;
     private SkillManager skillManager;
     private int buttonNum;
+
+    private bool coolTimeRun;
+
     private EventTrigger trigger;
     private EventTrigger.Entry down;
     private EventTrigger.Entry up;
@@ -52,6 +60,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 Debug.Log("SkillButton - Awake - Image");
             }
             if (!transform.Find("SkillTime").TryGetComponent<TextMeshProUGUI>(out time))
+            {
+                Debug.Log("SkillButton - Awake - TextMeshProUGUI");
+            }
+            if (!transform.Find("Stack").TryGetComponent<TextMeshProUGUI>(out stack))
             {
                 Debug.Log("SkillButton - Awake - TextMeshProUGUI");
             }
@@ -103,17 +115,23 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 skillManager.IsCharge = true;
                 UseSkill = true;
                 AttackSkill();
+                if(currentStack > 0)
+                {
+                    currentStack--;
+                    stack.text = currentStack.ToString();
+                }
             }
-            if (isScoping)
+            if (scopingTime > 0)
             {
-                StartCoroutine(InitTimer(5));
+                StartCoroutine(InitTimer(scopingTime));
             }
             if (!isCharging && !isScoping)
             {
                 skillManager.IsCharge = false;
                 skillManager.StopCharge();
                 trigger.enabled = false;
-                StartCoroutine(CoolTime());
+                if(!coolTimeRun)
+                    StartCoroutine(CoolTime());
             }
         }
     }
@@ -130,7 +148,8 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             skillManager.IsCharge = false;
             skillManager.StopCharge();
             trigger.enabled = false;
-            StartCoroutine(CoolTime());
+            if(!coolTimeRun)
+                StartCoroutine(CoolTime());
             if (isScoping)
             {
                 UseSkill = false;
@@ -203,7 +222,9 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             TableEntity_Skill_List skill;
             GameManager.Inst.GetSkillList(skill_ID,out skill);
             isScoping = skill.Is_Scoping;
+            scopingTime = skill.Scoping_Time;
             isCharging = skill.Is_Charging;
+            maxStack = skill.Stack_Max;
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + level + "01";
             TableEntity_Skill info;
             GameManager.Inst.GetSkillData(int.Parse(key), out info);
@@ -213,6 +234,9 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 maxTime = info.Cool_Time;
                 currentTime = maxTime;
                 coolTimeImage.fillAmount = 1;
+                stack.text = "";
+                currentStack = 0;
+                coolTimeRun = false;
                 StartCoroutine(CoolTime());
             }
         }
@@ -220,23 +244,58 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private IEnumerator CoolTime()
     {
-        coolTimeImage.enabled = true;
-        block.enabled = true;
-        time.enabled = true;
-        icon.transform.SetSiblingIndex(0);
-        while (currentTime < maxTime)
+        coolTimeRun = true;
+        if(currentStack == 0)
         {
-            yield return YieldInstructionCache.WaitForSeconds(0.1f);
-            currentTime += 0.1f;
-            coolTimeImage.fillAmount = currentTime / maxTime;
-            time.text = ((int)(maxTime - currentTime)).ToString();
+            coolTimeImage.enabled = true;
+            block.enabled = true;
+            time.enabled = true;
+            icon.transform.SetSiblingIndex(0);
+            while (currentTime < maxTime)
+            {
+                yield return YieldInstructionCache.WaitForSeconds(0.1f);
+                currentTime += 0.1f;
+                coolTimeImage.fillAmount = currentTime / maxTime;
+                time.text = ((int)(maxTime - currentTime)).ToString();
+            }
+            UseSkill = false;
+            trigger.enabled = true;
+            block.enabled = false;
+            time.enabled = false;
+            icon.transform.SetSiblingIndex(1);
+            coolTimeImage.enabled = false;
         }
-        UseSkill = false;
-        trigger.enabled = true;
-        block.enabled = false;
-        time.enabled = false;
-        icon.transform.SetSiblingIndex(1);
-        coolTimeImage.enabled = false;
+        else
+        {
+            coolTimeImage.enabled = true;
+            while (currentTime < maxTime)
+            {
+                yield return YieldInstructionCache.WaitForSeconds(0.1f);
+                currentTime += 0.1f;
+                coolTimeImage.fillAmount = currentTime / maxTime;
+            }
+        }
+
+        if(maxStack != 0)
+        {
+            currentStack++;
+            stack.text = currentStack.ToString();
+        }
+        if (currentStack < maxStack)
+        {
+            currentTime = 0;
+            StartCoroutine(CoolTime());
+        }
+        if(currentStack >= maxStack)
+        {
+            currentStack = maxStack;
+            coolTimeImage.enabled = false;
+        }
+        else
+        {
+            coolTimeImage.enabled = false;
+        }
+        coolTimeRun = false;
     }
 
     private void BasicAttack()

@@ -309,7 +309,7 @@ public class GameManager : Singleton<GameManager>
         pData.basic_ID = 300;
         pData.skill1_ID = 301;
         pData.skill2_ID = 302;
-        pData.skill3_ID =303;
+        pData.skill3_ID = 303;
         pData.ultimate1_ID = 331;
         pData.ultimate2_ID =0;
         SaveData();
