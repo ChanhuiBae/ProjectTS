@@ -41,6 +41,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 0
   - ID: 101
     Weapon_ID: 01
     Category_ID: 2
@@ -53,6 +54,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 0
   - ID: 102
     Weapon_ID: 01
     Category_ID: 2
@@ -65,6 +67,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 0
   - ID: 103
     Weapon_ID: 1
     Category_ID: 2
@@ -77,6 +80,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 104
   - ID: 104
     Weapon_ID: 1
     Category_ID: 2
@@ -89,6 +93,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 0
   - ID: 200
     Weapon_ID: 02
     Category_ID: 1
@@ -101,6 +106,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 0
   - ID: 201
     Weapon_ID: 02
     Category_ID: 2
@@ -113,6 +119,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 1
     Stack_Max: 0
+    Linked_Skill: 0
   - ID: 202
     Weapon_ID: 02
     Category_ID: 2
@@ -125,6 +132,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 0
   - ID: 203
     Weapon_ID: 02
     Category_ID: 2
@@ -137,6 +145,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 0
   - ID: 231
     Weapon_ID: 02
     Category_ID: 3
@@ -149,6 +158,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 232
   - ID: 232
     Weapon_ID: 02
     Category_ID: 3
@@ -161,6 +171,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 0
   - ID: 300
     Weapon_ID: 03
     Category_ID: 1
@@ -173,6 +184,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 0
   - ID: 301
     Weapon_ID: 03
     Category_ID: 2
@@ -185,6 +197,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 0
   - ID: 302
     Weapon_ID: 03
     Category_ID: 2
@@ -197,6 +210,7 @@ MonoBehaviour:
     Scoping_Time: 5
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 0
   - ID: 303
     Weapon_ID: 03
     Category_ID: 2
@@ -209,6 +223,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 3
+    Linked_Skill: 0
   - ID: 331
     Weapon_ID: 03
     Category_ID: 3
@@ -221,6 +236,7 @@ MonoBehaviour:
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
+    Linked_Skill: 0
   Skill_Info_List:
   - ID: 100011101
     Type: NULL

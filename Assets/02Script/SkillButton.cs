@@ -199,13 +199,17 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                     }
                     icon.rectTransform.localPosition = new Vector2(x, y);
                 }
-                if(maxStack != 0)
+                Vector3 direction = new Vector3(x, 0, y);
+                if (maxStack != 0)
                 {
-                    Vector3 direction = new Vector3(x, 0, y);
                     skillManager.StopAttackArea();
                     skillManager.MoveAttackArea(direction * 0.2f, 2);
                     skillManager.ShowAttackArea();
                     player.LookAttackArea();
+                }
+                else
+                {
+                    skillManager.SetLook(direction);
                 }
             }
         }
