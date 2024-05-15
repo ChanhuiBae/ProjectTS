@@ -23,17 +23,18 @@ public enum AttackType
 public class SkillManager : MonoBehaviour, ITakeDamage
 {
     private PlayerController player;
-    private PlayerAnimationController anim;
     private Weapon weapon;
     private AttackArea attackArea;
     private Skill basic;
     private Skill skill1;
+    private Skill connected1;
     private Skill skill2;
+    private Skill connected2;
     private Skill skill3;
-    private Skill ultimate1;
-    private Skill ultimate2;
+    private Skill connected3;
+    private Skill ultimate;
+    private Skill connectedU;
     private PoolManager effectManager;
-    private Effect chargeEffect;
     private PoolManager projectileManager;
     private int useSkill;
     private bool isCharge;
@@ -53,10 +54,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         {
             Debug.Log("SkillManager - Awake - PlayerController");
         }
-        if (!obj.TryGetComponent<PlayerAnimationController>(out anim))
-        {
-            Debug.Log("SkillManager - Awake - PlayerAnimationController");
-        }
+
         if (!obj.transform.Find("AttackArea").TryGetComponent<AttackArea>(out attackArea))
         {
             Debug.Log("SkillManager - Awake - AttackArea");
@@ -78,21 +76,33 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         {
             Debug.Log("SkillManager - Awake - Skill1");
         }
+        if (!skill1.transform.GetChild(0).TryGetComponent<Skill>(out connected1))
+        {
+            Debug.Log("SkillManager - Awake - ConnectedSkill");
+        }
         if (!transform.Find("Skill2").TryGetComponent<Skill>(out skill2))
         {
             Debug.Log("SkillManager - Awake - Skill2");
+        }
+        if (!skill2.transform.GetChild(0).TryGetComponent<Skill>(out connected2))
+        {
+            Debug.Log("SkillManager - Awake - ConnectedSkill");
         }
         if (!transform.Find("Skill3").TryGetComponent<Skill>(out skill3))
         {
             Debug.Log("SkillManager - Awake - Skill3");
         }
-        if (!transform.Find("Ultimate1").TryGetComponent<Skill>(out ultimate1))
+        if (!skill3.transform.GetChild(0).TryGetComponent<Skill>(out connected3))
         {
-            Debug.Log("SkillManager - Awake - Ultimate1");
+            Debug.Log("SkillManager - Awake - ConnectedSkill");
         }
-        if (!transform.Find("Ultimate2").TryGetComponent<Skill>(out ultimate2))
+        if (!transform.Find("Ultimate").TryGetComponent<Skill>(out ultimate))
         {
-            Debug.Log("SkillManager - Awake - Ultimate2");
+            Debug.Log("SkillManager - Awake - Ultimate");
+        }
+        if (!ultimate.transform.GetChild(0).TryGetComponent<Skill>(out connectedU))
+        {
+            Debug.Log("SkillManager - Awake - ConnectedSkill");
         }
         useSkill = -1;
         isCharge = false;
@@ -115,17 +125,26 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             case 1:
                 this.skill1.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
                 break;
+            case 11:
+                this.connected1.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
+                break;
             case 2:
                 this.skill2.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
+                break;
+            case 21:
+                this.connected2.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
                 break;
             case 3:
                 this.skill3.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
                 break;
-            case 4:
-                this.ultimate1.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
+            case 31:
+                this.connected3.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
                 break;
-            case 5:
-                this.ultimate2.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
+            case 4:
+                this.ultimate.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
+                break;
+            case 41:
+                this.connectedU.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
                 break;
         }
     }
@@ -148,10 +167,10 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 skill3.StartSkill();
                 break;
             case 4:
-                ultimate1.StartSkill();
+                ultimate.StartSkill();
                 break;
-            case 5:
-                ultimate2.StartSkill();
+            case 41:
+                connectedU.StartSkill();
                 break;
         }
     }
@@ -241,9 +260,9 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             case 3:
                 return skill3.GetKey();
             case 4:
-                return ultimate1.GetKey();
-            case 5:
-                return ultimate2.GetKey();
+                return ultimate.GetKey();
+            case 41:
+                return connectedU.GetKey();
             default:
                 return basic.GetKey();
         }
@@ -333,10 +352,10 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 skillPhysics = skill3.GetDamageA() + (skill3.GetDamageB() * skill3.GetLevel());
                 break;
             case 4:
-                skillPhysics = ultimate1.GetDamageA() + ultimate1.GetDamageB() + ultimate1.GetLevel();
+                skillPhysics = ultimate.GetDamageA() + ultimate.GetDamageB() + ultimate.GetLevel();
                 break;
-            case 5:
-                skillPhysics = ultimate2.GetDamageA() + ultimate2.GetDamageB() + ultimate2.GetLevel();
+            case 41:
+                skillPhysics = connectedU.GetDamageA() + connectedU.GetDamageB() + connectedU.GetLevel();
                 break;
             default:
                 skillPhysics = basic.GetDamageA() + (basic.GetDamageB() * basic.GetLevel());
@@ -386,10 +405,10 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                         GameManager.Inst.GetSkillData(skill3.GetKey(), out skill);
                         break;
                     case 4:
-                        GameManager.Inst.GetSkillData(ultimate1.GetKey(), out skill);
+                        GameManager.Inst.GetSkillData(ultimate.GetKey(), out skill);
                         break;
-                    case 5:
-                        GameManager.Inst.GetSkillData(ultimate2.GetKey(), out skill);
+                    case 41:
+                        GameManager.Inst.GetSkillData(connectedU.GetKey(), out skill);
                         break;
                     default:
                         GameManager.Inst.GetSkillData(basic.GetKey(), out skill);

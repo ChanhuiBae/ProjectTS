@@ -24,10 +24,13 @@ public class PlayerData
     public int WeaponID;
     public int basic_ID;
     public int skill1_ID;
+    public int connected1_ID;
     public int skill2_ID;
+    public int connected2_ID;
     public int skill3_ID;
-    public int ultimate1_ID;
-    public int ultimate2_ID;
+    public int connected3_ID;
+    public int ultimate_ID;
+    public int connectedU_ID;
 }
 
 public enum SceneName
@@ -214,6 +217,18 @@ public class GameManager : Singleton<GameManager>
                 {
                     menuManager.InitSkillButton(1, pData.skill1_ID, "None", 1);
                 }
+                if (pData.connected1_ID != 0)
+                {
+                    TableEntity_Skill_List skill;
+                    GameManager.Inst.GetSkillList(pData.connected1_ID, out skill);
+                    menuManager.InitSkillButton(11, pData.connected1_ID, skill.Skill_Name_Eng, 1);
+                    skillManager.SetSkill(11, pData.connected1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+
+                }
+                else
+                {
+                    menuManager.InitSkillButton(11, pData.connected1_ID, "None", 1);
+                }
                 if (pData.skill2_ID != 0)
                 {
                     TableEntity_Skill_List skill;
@@ -225,6 +240,18 @@ public class GameManager : Singleton<GameManager>
                 else
                 {
                     menuManager.InitSkillButton(2, pData.skill2_ID, "None", 1);
+                }
+                if (pData.connected2_ID != 0)
+                {
+                    TableEntity_Skill_List skill;
+                    GameManager.Inst.GetSkillList(pData.connected2_ID, out skill);
+                    menuManager.InitSkillButton(21, pData.connected2_ID, skill.Skill_Name_Eng, 1);
+                    skillManager.SetSkill(21, pData.connected2_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+
+                }
+                else
+                {
+                    menuManager.InitSkillButton(21, pData.connected2_ID, "None", 1);
                 }
                 if (pData.skill3_ID != 0)
                 {
@@ -238,28 +265,40 @@ public class GameManager : Singleton<GameManager>
                 {
                     menuManager.InitSkillButton(3, pData.skill3_ID, "None", 1);
                 }
-                if (pData.ultimate1_ID != 0)
+                if (pData.connected3_ID != 0)
                 {
                     TableEntity_Skill_List skill;
-                    GameManager.Inst.GetSkillList(pData.ultimate1_ID, out skill);
-                    menuManager.InitSkillButton(4, pData.ultimate1_ID, skill.Skill_Name_Eng, 1);
-                    skillManager.SetSkill(4, pData.ultimate1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+                    GameManager.Inst.GetSkillList(pData.connected3_ID, out skill);
+                    menuManager.InitSkillButton(31, pData.connected3_ID, skill.Skill_Name_Eng, 1);
+                    skillManager.SetSkill(31, pData.connected3_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
 
                 }
                 else
                 {
-                    menuManager.InitSkillButton(4, pData.ultimate1_ID, "None", 1);
+                    menuManager.InitSkillButton(31, pData.connected1_ID, "None", 1);
                 }
-                if (pData.ultimate2_ID != 0)
+                if (pData.ultimate_ID != 0)
                 {
                     TableEntity_Skill_List skill;
-                    GameManager.Inst.GetSkillList(pData.ultimate2_ID, out skill);
-                    menuManager.InitSkillButton(5, pData.ultimate2_ID, skill.Skill_Name_Eng, 1);
-                    skillManager.SetSkill(5, pData.ultimate2_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+                    GameManager.Inst.GetSkillList(pData.ultimate_ID, out skill);
+                    menuManager.InitSkillButton(4, pData.ultimate_ID, skill.Skill_Name_Eng, 1);
+                    skillManager.SetSkill(4, pData.ultimate_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+
                 }
                 else
                 {
-                    menuManager.InitSkillButton(5, pData.ultimate2_ID, "None", 1);
+                    menuManager.InitSkillButton(4, pData.ultimate_ID, "None", 1);
+                }
+                if (pData.connectedU_ID != 0)
+                {
+                    TableEntity_Skill_List skill;
+                    GameManager.Inst.GetSkillList(pData.connectedU_ID, out skill);
+                    menuManager.InitSkillButton(41, pData.connectedU_ID, skill.Skill_Name_Eng, 1);
+                    skillManager.SetSkill(41, pData.connectedU_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+                }
+                else
+                {
+                    menuManager.InitSkillButton(41, pData.connectedU_ID, "None", 1);
                 }
                 killCount = 0;
             }
@@ -305,13 +344,16 @@ public class GameManager : Singleton<GameManager>
         pData.Adaptation = info.Adaptation;
         pData.Available_Point = info.Available_Point;
         pData.Exp_Need = info.Exp_Need;
-        pData.WeaponID = 3000;
-        pData.basic_ID = 300;
-        pData.skill1_ID = 301;
-        pData.skill2_ID = 302;
-        pData.skill3_ID = 303;
-        pData.ultimate1_ID = 331;
-        pData.ultimate2_ID =0;
+        pData.WeaponID = 2000;
+        pData.basic_ID = 200;
+        pData.skill1_ID = 201;
+        pData.connected1_ID = 0;
+        pData.skill2_ID = 202;
+        pData.connected2_ID = 0;
+        pData.skill3_ID = 203;
+        pData.connected3_ID = 0;
+        pData.ultimate_ID = 231;
+        pData.connectedU_ID = 232;
         SaveData();
     }
 
@@ -349,20 +391,32 @@ public class GameManager : Singleton<GameManager>
                 if (skill_ID == pData.skill1_ID)
                     check = true;
                 break;
+            case 11:
+                if (skill_ID == pData.connected1_ID)
+                    check = true;
+                break;
             case 2:
                 if(skill_ID == pData.skill2_ID)
                     check = true; 
+                break;
+            case 21:
+                if (skill_ID == pData.connected2_ID)
+                    check = true;
                 break;
             case 3:
                 if(skill_ID == pData.skill3_ID)
                     check = true;
                 break;
-            case 4:
-                if(skill_ID == pData.ultimate1_ID)
+            case 31:
+                if (skill_ID == pData.connected3_ID)
                     check = true;
                 break;
-            case 5:
-                if(skill_ID == pData.ultimate2_ID)
+            case 4:
+                if(skill_ID == pData.ultimate_ID)
+                    check = true;
+                break;
+            case 41:
+                if(skill_ID == pData.connectedU_ID)
                     check = true;
                 break;
         }

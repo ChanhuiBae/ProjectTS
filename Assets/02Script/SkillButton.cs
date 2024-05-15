@@ -9,23 +9,34 @@ using UnityEngine.UI;
 public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     private PlayerController player;
+    private SkillManager skillManager;
 
-    private bool isScoping;
-    private bool isCharging;
     private Image coolTimeImage;
     private Image icon;
     private RectTransform center;
     private Image block;
     private TextMeshProUGUI time;
-    private TextMeshProUGUI stack;
+    private TextMeshProUGUI stackCount;
     private int maxStack;
     private int currentStack;
     private float maxTime;
     private float currentTime;
     private float scopingTime;
+
     private int skill_ID;
-    private SkillManager skillManager;
+    private int connectedID;
+    private string name;
+    private string connectedName;
     private int buttonNum;
+    private int connectedNum;
+    private bool isScoping;
+    private bool connectedScoping;
+    private bool isCharging;
+    private bool connectedCharging;
+
+    private bool isUse;
+    private bool connectedUse;
+    private bool UseDrag;
 
     private bool coolTimeRun;
 
@@ -60,7 +71,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             {
                 Debug.Log("SkillButton - Awake - TextMeshProUGUI");
             }
-            if (!transform.Find("Stack").TryGetComponent<TextMeshProUGUI>(out stack))
+            if (!transform.Find("Stack").TryGetComponent<TextMeshProUGUI>(out stackCount))
             {
                 Debug.Log("SkillButton - Awake - TextMeshProUGUI");
             }
@@ -111,10 +122,11 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             {
                 skillManager.IsCharge = true;
                 AttackSkill();
+                isUse = true;
                 if(currentStack > 0)
                 {
                     currentStack--;
-                    stack.text = currentStack.ToString();
+                    stackCount.text = currentStack.ToString();
                 }
             }
             else
@@ -122,7 +134,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 if(currentStack > 0)
                 {
                     currentStack--;
-                    stack.text = currentStack.ToString();
+                    stackCount.text = currentStack.ToString();
                     player.SetCombo(1);
                 }
             }
@@ -250,6 +262,8 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         this.buttonNum = buttonNum;
         skill_ID = id;
+        this.name = name;
+        isUse = false;
         if (skill_ID == 0)
         {
             icon.sprite = Resources.Load<Sprite>("Image/NoneSkill");
@@ -274,11 +288,26 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 maxTime = info.Cool_Time;
                 currentTime = maxTime;
                 coolTimeImage.fillAmount = 1;
-                stack.text = "";
+                stackCount.text = "";
                 currentStack = 0;
                 coolTimeRun = false;
                 StartCoroutine(CoolTime());
             }
+        }
+    }
+
+    public void InitConnectedSkill(int buttonNum, int id, string name, int level)
+    {
+        connectedNum = buttonNum;
+        connectedID = id;
+        connectedName = name;
+        if (skill_ID != 0)
+        {
+            TableEntity_Skill_List skill;
+            GameManager.Inst.GetSkillList(connectedID, out skill);
+            connectedScoping = skill.Is_Scoping;
+            connectedCharging = skill.Is_Charging;
+            connectedUse = false;
         }
     }
 
@@ -318,7 +347,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         if(maxStack != 0)
         {
             currentStack++;
-            stack.text = currentStack.ToString();
+            stackCount.text = currentStack.ToString();
         }
         
         if (currentStack < maxStack)
@@ -329,7 +358,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         else if(maxStack != 0 && currentStack >= maxStack)
         {
             currentStack = maxStack;
-            stack.text = currentStack.ToString();
+            stackCount.text = currentStack.ToString();
             coolTimeImage.enabled = false;
         }
         coolTimeRun = false;
@@ -367,5 +396,12 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         skillManager.SetLook(Vector3.zero);
         trigger.enabled = false;
         StartCoroutine(CoolTime());
+    }
+
+    public void AttackConnectedSkill()
+    {
+        player.ChangeState(State.Attack_Skill);
+        player.UseSkill(connectedID);
+        skillManager.UseSkill(connectedNum);
     }
 }

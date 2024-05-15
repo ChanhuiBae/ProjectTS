@@ -78,17 +78,23 @@ public class MenuManager : MonoBehaviour
             case 1:
                 skill1.Init(1,skill, name, level);
                 break;
+            case 11:
+                break;
             case 2:
                 skill2.Init(2,skill, name, level);
+                break;
+            case 21:
                 break;
             case 3:
                 skill3.Init(3,skill, name, level);
                 break;
-            case 4:
-                ultimate.InitSkill1(4,skill, name);
+            case 31:
                 break;
-            case 5:
-                ultimate.InitSkill2(5,skill, name);
+            case 4:
+                ultimate.InitSkill(4,skill, name);
+                break;
+            case 41:
+                ultimate.InitConnectedSkill(41,skill, name);
                 break;
         }
     }

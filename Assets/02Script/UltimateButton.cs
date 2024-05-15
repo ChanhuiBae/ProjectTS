@@ -13,16 +13,16 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
     private Image icon;
     private RectTransform center;
 
-    private int ID1;
-    private int ID2;
-    private string name1;
-    private string name2;
-    private int buttonNum1;
-    private int buttonNum2;
-    private bool isScoping1;
-    private bool isScoping2;
-    private bool isCharging1;
-    private bool isCharging2;
+    private int ID;
+    private int connectedID;
+    private string name;
+    private string connectedName;
+    private int buttonNum;
+    private int connectedNum;
+    private bool isScoping;
+    private bool connectedScoping;
+    private bool isCharging;
+    private bool connectedCharging;
 
     private SkillManager skillManager;
 
@@ -32,8 +32,8 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
     private EventTrigger.Entry drag;
     private EventTrigger.Entry dragEnd;
 
-    private bool UseSkill1;
-    private bool UseSkill2;
+    private bool isUse;
+    private bool connectedUse;
     private bool UseDrag;
 
 
@@ -108,14 +108,14 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             if(ultimateFill.fillAmount >= 1)
             {
-                UseSkill1 = true;
+                isUse = true;
                 skillManager.IsCharge = true;
-                AttackSkill1();
+                AttackSkill();
             }
         }
         else
         {
-            if (UseSkill1)
+            if (isUse)
             {
                 UseDrag = true;
             }
@@ -124,33 +124,33 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 UseDrag = false;
             }
         }
-        if (UseSkill1)
+        if (isUse)
         {
             skillManager.IsCharge = false;
             GameManager.Inst.ResetUltimate();
             StartCoroutine(CheckEnd());
-            UseSkill2 = false;
+            connectedUse = false;
         }
     }
 
     void OnPointerUp(PointerEventData eventData)
     {
-        if (ID2 != 0)
+        if (connectedID != 0)
         {
-            if (UseSkill1 && UseSkill2)
+            if (isUse && connectedUse)
             {
-                UseSkill2 = false;
+                connectedUse = false;
                 transform.SetSiblingIndex(5);
                 skillManager.StopAttackArea();
                 icon.rectTransform.position = center.position;
-                AttackSkill2();
-                icon.sprite = Resources.Load<Sprite>("Image/" + name1); 
+                AttackConnectedSkill();
+                icon.sprite = Resources.Load<Sprite>("Image/" + name); 
                 icon.transform.SetSiblingIndex(0);
                 trigger.enabled = false;
             }
             else
             {
-                icon.sprite = Resources.Load<Sprite>("Image/" + name2);
+                icon.sprite = Resources.Load<Sprite>("Image/" + connectedName);
             }
         }
         else
@@ -163,14 +163,14 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        if(isScoping1 && UseSkill1)
+        if(isScoping && isUse)
         {
 
         }
-        else if (UseSkill1 && UseDrag)
+        else if (isUse && UseDrag)
         {
-            UseSkill2 = true;
-            if (isScoping2)
+            connectedUse = true;
+            if (connectedScoping)
             {
                 Vector2 drag = eventData.position;
                 float x = eventData.position.x - center.position.x;
@@ -210,25 +210,25 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (UseSkill1 && UseSkill2)
+        if (isUse && connectedUse)
         {
-            UseSkill2 = false;
+            connectedUse = false;
             transform.SetSiblingIndex(5);
             skillManager.StopAttackArea();
             icon.rectTransform.position = center.position;
-            AttackSkill2();
-            icon.sprite = Resources.Load<Sprite>("Image/" + name1);
+            AttackConnectedSkill();
+            icon.sprite = Resources.Load<Sprite>("Image/" + name);
             icon.transform.SetSiblingIndex(0);
             trigger.enabled = false;
         }
     }
 
-    public void InitSkill1(int buttonNum, int id, string name)
+    public void InitSkill(int buttonNum, int id, string name)
     {
-        buttonNum1 = buttonNum;
-        name1 = name;
-        ID1 = id;
-        UseSkill1 = false;
+        this.buttonNum = buttonNum;
+        this.name = name;
+        ID = id;
+        isUse = false;
         if (id == 0)
         {
             icon.sprite = Resources.Load<Sprite>("Image/NoneSkill");
@@ -241,54 +241,53 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
             trigger.enabled = true;
             icon.transform.SetSiblingIndex(3);
             TableEntity_Skill_List skill;
-            GameManager.Inst.GetSkillList(ID1, out skill);
-            isScoping1 = skill.Is_Scoping;
-            isCharging1 = skill.Is_Charging;
+            GameManager.Inst.GetSkillList(ID, out skill);
+            isScoping = skill.Is_Scoping;
+            isCharging = skill.Is_Charging;
             ultimateText.enabled = true;
         }
     }
 
-    public void InitSkill2(int buttonNum, int id, string name)
+    public void InitConnectedSkill(int buttonNum, int id, string name)
     {
-        buttonNum2 = buttonNum;
-        name2 = name;
-        ID2 = id;
-        UseSkill2 = false;
+        connectedNum = buttonNum;
+        connectedName = name;
+        connectedID = id;
+        connectedUse = false;
         if (id != 0)
         {
             TableEntity_Skill_List skill;
-            GameManager.Inst.GetSkillList(ID2, out skill);
-            isScoping2 = skill.Is_Scoping;
-            isCharging2 = skill.Is_Charging;
+            GameManager.Inst.GetSkillList(connectedID, out skill);
+            connectedScoping = skill.Is_Scoping;
+            connectedCharging = skill.Is_Charging;
         }
     }
 
-    private void AttackSkill1()
+    private void AttackSkill()
     {
         player.ChangeState(State.Attack_Skill);
-        player.UseSkill(ID1);
-        skillManager.UseSkill(buttonNum1);
+        player.UseSkill(ID);
+        skillManager.UseSkill(buttonNum);
     }
 
-    public void AttackSkill2()
+    public void AttackConnectedSkill()
     {
         player.ChangeState(State.Attack_Skill);
-        player.UseSkill(ID2);
-        skillManager.UseSkill(buttonNum2);
+        player.UseSkill(connectedID);
+        skillManager.UseSkill(connectedNum);
     }
 
     private IEnumerator CheckEnd()
     {
-        bool IsUse = false;
         for (int i = 0; i < 80; i++)
         {
             yield return null;
         }
-        UseSkill1 = false;
+        isUse = false;
         skillManager.StopAttackArea();
         icon.rectTransform.position = center.position;
         icon.transform.SetSiblingIndex(0);
-        icon.sprite = Resources.Load<Sprite>("Image/" + name1);
+        icon.sprite = Resources.Load<Sprite>("Image/" + name);
         trigger.enabled = false;
     }
 }
