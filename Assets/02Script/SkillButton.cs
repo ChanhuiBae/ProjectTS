@@ -34,9 +34,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     private EventTrigger.Entry up;
     private EventTrigger.Entry drag;
     private EventTrigger.Entry dragEnd;
-
-
-    private bool UseSkill;
  
 
     private void Awake()
@@ -113,7 +110,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             if (player.GetCurrentState() != State.Attack_Skill)
             {
                 skillManager.IsCharge = true;
-                UseSkill = true;
                 AttackSkill();
                 if(currentStack > 0)
                 {
@@ -139,8 +135,11 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 skillManager.IsCharge = false;
                 skillManager.StopCharge();
                 trigger.enabled = false;
-                if(!coolTimeRun)
-                    StartCoroutine(CoolTime());
+                StartCoroutine(CoolTime());
+            }
+            if(currentStack < maxStack && !coolTimeRun)
+            {
+                StartCoroutine(CoolTime());
             }
         }
     }
@@ -152,20 +151,23 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             icon.rectTransform.position = center.position;
             skillManager.SetLook(Vector3.zero);
         }
-        if (UseSkill && (isCharging || isScoping))
+        if (player.GetCurrentState() == State.Attack_Skill)
         {
-            skillManager.IsCharge = false;
-            skillManager.StopCharge();
-            trigger.enabled = false;
-            if(!coolTimeRun)
+            if(isCharging)
+            {
+                skillManager.IsCharge = false;
+                skillManager.StopCharge();
+                trigger.enabled = false;
                 StartCoroutine(CoolTime());
+            }
             if (isScoping && maxStack == 0)
             {
-                UseSkill = false;
                 player.StopAllCoroutines();
                 player.SetIdle();
+                trigger.enabled = false;
+                StartCoroutine(CoolTime());
             }
-            else if(isScoping && maxStack > 0)
+            else if (isScoping && maxStack > 0)
             {
                 skillManager.StopAttackArea();
                 player.Sit();
@@ -177,49 +179,48 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         if (isScoping)
         {
-            if(skill_ID %100 == 0 || !coolTimeImage.enabled)
+            
+            Vector2 drag = eventData.position;
+            float x = eventData.position.x - center.position.x;
+            float y = eventData.position.y - center.position.y;
+            float distance = Mathf.Sqrt(x * x + y * y);
+
+            Vector3 v1 = new Vector3(x, y, 0f);
+            v1.Normalize();
+            Vector3 v2 = new Vector3(1, 0, 0);
+            Vector3 cross = Vector3.Cross(v1, v2);
+            float dot = Vector3.Dot(v1, v2);
+
+            if (Mathf.Abs(distance) <= 30)
+                icon.rectTransform.localPosition = new Vector2(x, y);
+            else
             {
-                Vector2 drag = eventData.position;
-                float x = eventData.position.x - center.position.x;
-                float y = eventData.position.y - center.position.y;
-                float distance = Mathf.Sqrt(x * x + y * y);
-
-                Vector3 v1 = new Vector3(x, y, 0f);
-                v1.Normalize();
-                Vector3 v2 = new Vector3(1, 0, 0);
-                Vector3 cross = Vector3.Cross(v1, v2);
-                float dot = Vector3.Dot(v1, v2);
-
-                if (Mathf.Abs(distance) <= 30)
-                    icon.rectTransform.localPosition = new Vector2(x, y);
-                else
+                float theta = Mathf.Acos(dot);
+                x = Mathf.Cos(theta) * 30;
+                if (cross.z > 0)
                 {
-                    float theta = Mathf.Acos(dot);
-                    x = Mathf.Cos(theta) * 30;
-                    if (cross.z > 0)
-                    {
-                        y = Mathf.Sin(theta) * 30;
-                        y = -y;
-                    }
-                    else
-                    {
-                        y = Mathf.Sin(theta) * 30;
-                    }
-                    icon.rectTransform.localPosition = new Vector2(x, y);
-                }
-                Vector3 direction = new Vector3(x, 0, y);
-                if (maxStack != 0)
-                {
-                    skillManager.StopAttackArea();
-                    skillManager.MoveAttackArea(direction * 0.2f, 2);
-                    skillManager.ShowAttackArea();
-                    player.LookAttackArea();
+                    y = Mathf.Sin(theta) * 30;
+                    y = -y;
                 }
                 else
                 {
-                    skillManager.SetLook(direction);
+                    y = Mathf.Sin(theta) * 30;
                 }
+                icon.rectTransform.localPosition = new Vector2(x, y);
             }
+            Vector3 direction = new Vector3(x, 0, y);
+            if (maxStack != 0)
+            {
+                skillManager.StopAttackArea();
+                skillManager.MoveAttackArea(direction * 0.2f, 2);
+                skillManager.ShowAttackArea();
+                player.LookAttackArea();
+            }
+            else
+            {
+                skillManager.SetLook(direction);
+            }
+            
         }
     }
 
@@ -227,10 +228,20 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         icon.rectTransform.position = center.position;
         skillManager.SetLook(Vector3.zero);
-        if (maxStack > 0)
+        if (player.GetCurrentState() == State.Attack_Skill)
         {
-            skillManager.StopAttackArea();
-            player.Sit();
+            if (maxStack == 0)
+            {
+                player.StopAllCoroutines();
+                player.SetIdle();
+                trigger.enabled = false;
+                StartCoroutine(CoolTime());
+            }
+            else if (maxStack > 0)
+            {
+                skillManager.StopAttackArea();
+                player.Sit();
+            }
         }
     }
 
@@ -239,7 +250,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         this.buttonNum = buttonNum;
         skill_ID = id;
-        UseSkill = false;
         if (skill_ID == 0)
         {
             icon.sprite = Resources.Load<Sprite>("Image/NoneSkill");
@@ -275,7 +285,8 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     private IEnumerator CoolTime()
     {
         coolTimeRun = true;
-        if(currentStack == 0)
+        coolTimeImage.enabled = true;
+        if (currentStack == 0)
         {
             coolTimeImage.enabled = true;
             block.enabled = true;
@@ -288,7 +299,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 coolTimeImage.fillAmount = currentTime / maxTime;
                 time.text = ((int)(maxTime - currentTime)).ToString();
             }
-            UseSkill = false;
             trigger.enabled = true;
             block.enabled = false;
             time.enabled = false;
@@ -297,7 +307,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         }
         else
         {
-            coolTimeImage.enabled = true;
             while (currentTime < maxTime)
             {
                 yield return YieldInstructionCache.WaitForSeconds(0.1f);
@@ -311,18 +320,16 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             currentStack++;
             stack.text = currentStack.ToString();
         }
+        
         if (currentStack < maxStack)
         {
             currentTime = 0;
             StartCoroutine(CoolTime());
         }
-        if(currentStack >= maxStack)
+        else if(maxStack != 0 && currentStack >= maxStack)
         {
             currentStack = maxStack;
-            coolTimeImage.enabled = false;
-        }
-        else
-        {
+            stack.text = currentStack.ToString();
             coolTimeImage.enabled = false;
         }
         coolTimeRun = false;
