@@ -4923,7 +4923,7 @@ Transform:
   m_GameObject: {fileID: 1230058610569092666}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.570675, y: 4.8150306, z: -18.618113}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9856,7 +9856,7 @@ Transform:
   m_GameObject: {fileID: 2230884970114262533}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.570675, y: 4.8150306, z: -18.618113}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9876,6 +9876,7 @@ GameObject:
   - component: {fileID: 5331394945408486865}
   - component: {fileID: 175537016268762875}
   - component: {fileID: 5957149253658521441}
+  - component: {fileID: 9177649654297350263}
   m_Layer: 0
   m_Name: PinPointDown
   m_TagString: Untagged
@@ -9929,6 +9930,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolName: PinPointDown
+--- !u!135 &9177649654297350263
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2441935524831771798}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 20}
 --- !u!1 &3531120072317217434
 GameObject:
   m_ObjectHideFlags: 0
@@ -39498,7 +39520,7 @@ Transform:
   m_GameObject: {fileID: 7998304598287401871}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 42}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

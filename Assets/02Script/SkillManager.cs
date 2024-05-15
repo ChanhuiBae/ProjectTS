@@ -1,4 +1,5 @@
 using Redcode.Pools;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum CrowdControl
@@ -25,6 +26,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private PlayerController player;
     private Weapon weapon;
     private AttackArea attackArea;
+    
     private Skill basic;
     private Skill skill1;
     private Skill connected1;
@@ -34,11 +36,14 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private Skill connected3;
     private Skill ultimate;
     private Skill connectedU;
+
     private PoolManager effectManager;
     private PoolManager projectileManager;
+
     private int useSkill;
     private bool isCharge;
     private Vector3 playerLook;
+    private Queue<Vector3> queue;
     private CrowdControl crowdControl;
     private Vector3 pulledPoint;
     public bool IsCharge
@@ -108,6 +113,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         isCharge = false;
         crowdControl = CrowdControl.None;
         pulledPoint = player.transform.position;
+        queue = new Queue<Vector3>();
     }
 
     public void WeaponInit(Weapon weapon)
@@ -247,6 +253,23 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     public Vector3 GetLook()
     {
         return playerLook;
+    }
+
+    public void PushVector(Vector3 look)
+    {
+        queue.Enqueue(look);
+    }
+
+    public Vector3 PopVector()
+    {
+        if(queue.Count == 0)
+            return Vector3.zero;
+        return queue.Dequeue();
+    }
+
+    public int GetVectorCount()
+    {
+        return queue.Count;
     }
 
     public int GetCurrentKey()

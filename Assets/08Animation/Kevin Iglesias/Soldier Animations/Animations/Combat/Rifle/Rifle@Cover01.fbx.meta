@@ -493,7 +493,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: SetCombo
+        functionName: LookAtVector
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

@@ -2625,6 +2625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 744160633}
   - component: {fileID: 744160635}
+  - component: {fileID: 744160636}
   m_Layer: 0
   m_Name: PoolManager
   m_TagString: Untagged
@@ -2688,6 +2689,18 @@ MonoBehaviour:
     _count: 30
     _container: {fileID: 1346467040}
     _nonLazy: 0
+--- !u!114 &744160636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744160632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59c80e23b8002e4d94adecb7f391a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &751467975
 GameObject:
   m_ObjectHideFlags: 0

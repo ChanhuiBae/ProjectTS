@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     private Image block;
     private TextMeshProUGUI time;
     private TextMeshProUGUI stackCount;
+    
     private int maxStack;
     private int currentStack;
     private float maxTime;
@@ -39,6 +41,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     private bool UseDrag;
 
     private bool coolTimeRun;
+    private Vector3 direction;
 
     private EventTrigger trigger;
     private EventTrigger.Entry down;
@@ -135,7 +138,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 {
                     currentStack--;
                     stackCount.text = currentStack.ToString();
-                    player.SetCombo(1);
+                    player.IsCombo(true);
                 }
             }
             if (scopingTime > 0)
@@ -182,14 +185,20 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             else if (isScoping && maxStack > 0)
             {
                 skillManager.StopAttackArea();
-                player.Sit();
+            }
+            if (currentStack == 0)
+            {
+                trigger.enabled = false;
+                block.enabled = true;
+                time.enabled = true;
+                icon.transform.SetSiblingIndex(0);
             }
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (isScoping)
+        if (isScoping && trigger.enabled)
         {
             
             Vector2 drag = eventData.position;
@@ -220,13 +229,14 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 }
                 icon.rectTransform.localPosition = new Vector2(x, y);
             }
-            Vector3 direction = new Vector3(x, 0, y);
+            direction = new Vector3(x, 0, y);
             if (maxStack != 0)
             {
                 skillManager.StopAttackArea();
                 skillManager.MoveAttackArea(direction * 0.2f, 2);
                 skillManager.ShowAttackArea();
-                player.LookAttackArea();
+                if(skillManager.GetVectorCount() == 0)
+                    player.LookAttackArea();
             }
             else
             {
@@ -239,7 +249,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     public void OnEndDrag(PointerEventData eventData)
     {
         icon.rectTransform.position = center.position;
-        skillManager.SetLook(Vector3.zero);
         if (player.GetCurrentState() == State.Attack_Skill)
         {
             if (maxStack == 0)
@@ -247,12 +256,22 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 player.StopAllCoroutines();
                 player.SetIdle();
                 trigger.enabled = false;
+                skillManager.SetLook(Vector3.zero);
                 StartCoroutine(CoolTime());
             }
             else if (maxStack > 0)
             {
+                skillManager.PushVector(direction);
+                direction = Vector3.zero;
                 skillManager.StopAttackArea();
                 player.Sit();
+            }
+            if(currentStack == 0)
+            {
+                trigger.enabled = false;
+                block.enabled = true;
+                time.enabled = true;
+                icon.transform.SetSiblingIndex(0);
             }
         }
     }
@@ -341,7 +360,12 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 yield return YieldInstructionCache.WaitForSeconds(0.1f);
                 currentTime += 0.1f;
                 coolTimeImage.fillAmount = currentTime / maxTime;
+                time.text = ((int)(maxTime - currentTime)).ToString();
             }
+            trigger.enabled = true;
+            block.enabled = false;
+            time.enabled = false;
+            icon.transform.SetSiblingIndex(1);
         }
 
         if(maxStack != 0)

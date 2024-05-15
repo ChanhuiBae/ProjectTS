@@ -513,6 +513,17 @@ public class PlayerController : MonoBehaviour, IDamage
         transform.LookAt(attackArea.GetCenter() + transform.position);
     }
 
+    public void LookAtVector()
+    {
+        Vector3 look = skillManager.PopVector();
+        if(look != Vector3.zero)
+        {
+            transform.LookAt(look +transform.position);
+        }
+        if (skillManager.GetVectorCount() == 0)
+            anim.IsCombo(false);
+    }
+
     public void MoveAttackArea()
     {
         LeanTween.move(gameObject, attackArea.GetCenter() + transform.position, 0.4f);
@@ -523,17 +534,9 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.Sit();
     }
 
-    public void SetCombo(int boolean)
+    public void IsCombo(bool value)
     {
-        Debug.Log(boolean);
-        if(boolean == 1)
-        {
-            anim.IsCombo(true);
-        }
-        else
-        {
-            anim.IsCombo(false);
-        }
+        anim.IsCombo(value);
     }
 
     public void StopAnimator()
@@ -590,11 +593,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void PinPointDown()
     {
-        attackArea.enabled = true;
         effect = skillManager.SpawnEffect(11);
-        effect.Init(EffectType.None, transform.position, 1.3f);
+        effect.Init(EffectType.Once, transform.position, 1.3f);
         effect.SetRotation(transform.rotation);
-        attackArea.enabled = false;
     }
 
     public void SetAttackArea(float radius)
