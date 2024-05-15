@@ -523,6 +523,19 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.Sit();
     }
 
+    public void SetCombo(int boolean)
+    {
+        Debug.Log(boolean);
+        if(boolean == 1)
+        {
+            anim.IsCombo(true);
+        }
+        else
+        {
+            anim.IsCombo(false);
+        }
+    }
+
     public void StopAnimator()
     {
         if (skillManager.IsCharge)
@@ -573,6 +586,15 @@ public class PlayerController : MonoBehaviour, IDamage
         quaternion = Quaternion.Euler(new Vector3(0, -30, 0));
         quaternion = transform.rotation * quaternion;
         skillManager.SpawnGrenade(grenade.transform.position, quaternion);
+    }
+
+    public void PinPointDown()
+    {
+        attackArea.enabled = true;
+        effect = skillManager.SpawnEffect(11);
+        effect.Init(EffectType.None, transform.position, 1.3f);
+        effect.SetRotation(transform.rotation);
+        attackArea.enabled = false;
     }
 
     public void SetAttackArea(float radius)

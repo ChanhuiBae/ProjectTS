@@ -121,6 +121,15 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                     stack.text = currentStack.ToString();
                 }
             }
+            else
+            {
+                if(currentStack > 0)
+                {
+                    currentStack--;
+                    stack.text = currentStack.ToString();
+                    player.SetCombo(1);
+                }
+            }
             if (scopingTime > 0)
             {
                 StartCoroutine(InitTimer(scopingTime));
@@ -158,7 +167,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             }
             else if(isScoping && maxStack > 0)
             {
-                player.StopAllCoroutines();
                 skillManager.StopAttackArea();
                 player.Sit();
             }
@@ -219,6 +227,11 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         icon.rectTransform.position = center.position;
         skillManager.SetLook(Vector3.zero);
+        if (maxStack > 0)
+        {
+            skillManager.StopAttackArea();
+            player.Sit();
+        }
     }
 
 
