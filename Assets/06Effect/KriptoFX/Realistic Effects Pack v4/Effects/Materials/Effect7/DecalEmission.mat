@@ -126,5 +126,5 @@ Material:
     - _CutoutColor: {r: 1, g: 1, b: 1, a: 1}
     - _DistortionSpeedScale: {r: 1, g: 0, b: 0.1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 0.8459773, g: 0.9877158, b: 2.5247133, a: 1}
+    - _TintColor: {r: 0.8576411, g: 2.8438687, b: 3.868509, a: 1}
   m_BuildTextureStacks: []
