@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2096744302385716531}
   - component: {fileID: -5989120084536156151}
   m_Layer: 0
-  m_Name: Charge
+  m_Name: Charge1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

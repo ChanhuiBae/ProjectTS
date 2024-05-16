@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -54,8 +55,11 @@ public class PlayerController : MonoBehaviour, IDamage
     private SkillManager skillManager;
     private AttackArea attackArea;
 
-    private ParticleSystem charge;
+    private ParticleSystem charge1;
+    private ParticleSystem charge2;
     private ParticleSystem chargeLight;
+    private bool fullCharge;
+
     private Effect effect;
 
     private void Awake()
@@ -85,13 +89,21 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 Debug.Log("PlayerController - Awake - AttackArea");
             }
-            if (!transform.Find("Charge").TryGetComponent<ParticleSystem>(out charge))
+            if (!transform.Find("Charge1").TryGetComponent<ParticleSystem>(out charge1))
             {
                 Debug.Log("PlayerController - Awake - ParticleSystem");
             }
             else
             {
-                charge.Stop();
+                charge1.Stop();
+            }
+            if (!transform.Find("Charge2").TryGetComponent<ParticleSystem>(out charge2))
+            {
+                Debug.Log("PlayerController - Awake - ParticleSystem");
+            }
+            else
+            {
+                charge2.Stop();
             }
             if (!transform.Find("ChargeLight").TryGetComponent<ParticleSystem>(out chargeLight))
             {
@@ -157,6 +169,7 @@ public class PlayerController : MonoBehaviour, IDamage
             currentEXP = 0;
             state = State.Idle;
             expFill.fillAmount = 0;
+            fullCharge = false;
             isControll = true;
             StartCoroutine(Idle());
         }
@@ -552,18 +565,27 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.PlayAnim(true);
     }
 
-    public void ChargeEffect()
-    {
-        charge.Play(true);
-    }
-
     public void StopCharge()
     {
-        charge.Stop();
+        charge1.Stop();
+        charge2.Stop();
     }
 
-    public void ChargeUp()
+    public void StartCharge()
     {
+        fullCharge = false;
+        charge1.Play();
+    }
+
+    public void ChargeUp(int count)
+    {
+        if(count == 1)
+        {
+            charge1.Stop();
+            charge2.Play();
+        }
+        if (count == 2)
+            fullCharge = true;
         StartCoroutine(ChargeUpEffect());
     }
 
@@ -611,7 +633,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void SetSlashCycle()
     {
-        StopCharge();   
+        StopCharge();  
         effect = skillManager.SpawnEffect(3);
         effect.Init(EffectType.None, transform.position, 1);
     }
@@ -623,11 +645,14 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void SetPowerWave()
     {
-        attackArea.SetTargets();
-        effect = skillManager.SpawnEffect(7);
-        effect.Init(EffectType.None, transform.position + Vector3.up, 1);
-        effect.SetRotation(transform.rotation);
-        attackArea.AttackInAngle();
+        if (fullCharge)
+        {
+            attackArea.SetTargets();
+            effect = skillManager.SpawnEffect(7);
+            effect.Init(EffectType.None, transform.position + Vector3.up, 1);
+            effect.SetRotation(transform.rotation);
+            attackArea.AttackInAngle();
+        }
     }
     public void CallDrone()
     {
