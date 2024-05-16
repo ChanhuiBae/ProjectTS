@@ -69,7 +69,7 @@ MonoBehaviour:
     Stack_Max: 0
     Linked_Skill: 0
   - ID: 103
-    Weapon_ID: 1
+    Weapon_ID: 01
     Category_ID: 2
     Skill_Level_Max: 5
     Charge_Max: 0
@@ -82,13 +82,26 @@ MonoBehaviour:
     Stack_Max: 0
     Linked_Skill: 104
   - ID: 104
-    Weapon_ID: 1
+    Weapon_ID: 01
     Category_ID: 2
     Skill_Level_Max: 5
     Charge_Max: 0
     Hit_Max: 2
     Skill_Name: "\uB514\uC2A4\uD1A0\uC158"
     Skill_Name_Eng: Distortion
+    Is_Scoping: 0
+    Scoping_Time: 0
+    Is_Charging: 0
+    Stack_Max: 0
+    Linked_Skill: 0
+  - ID: 131
+    Weapon_ID: 01
+    Category_ID: 3
+    Skill_Level_Max: 3
+    Charge_Max: 0
+    Hit_Max: 1
+    Skill_Name: "\uB514\uBA58\uC158 \uB514\uC2A4\uD1A0\uC158"
+    Skill_Name_Eng: Dimension_Distortion
     Is_Scoping: 0
     Scoping_Time: 0
     Is_Charging: 0
@@ -986,6 +999,54 @@ MonoBehaviour:
     Knockback_Distance: 0
     Cool_Time: 0
     Need_Damage: 0
+    Invincible_Time: 0
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 131013101
+    Type: CC
+    Skill_Level: 1
+    Charge_Level: 0
+    Damage_A: 15
+    Damage_B: 5
+    Stagger_Time: 0
+    Stun_Time: 5
+    Airborne_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 0
+    Need_Damage: 120000
+    Invincible_Time: 0
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 131013201
+    Type: CC
+    Skill_Level: 2
+    Charge_Level: 0
+    Damage_A: 15
+    Damage_B: 5
+    Stagger_Time: 0
+    Stun_Time: 5
+    Airborne_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 0
+    Need_Damage: 110000
+    Invincible_Time: 0
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 131013301
+    Type: CC
+    Skill_Level: 3
+    Charge_Level: 0
+    Damage_A: 15
+    Damage_B: 5
+    Stagger_Time: 0
+    Stun_Time: 5
+    Airborne_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 0
+    Need_Damage: 100000
     Invincible_Time: 0
     Buff_A: 0
     Buff_B: 0
@@ -2378,6 +2439,12 @@ MonoBehaviour:
   - Skill_ID: 104
     Hit_01: 23
     Hit_02: 61
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0
+  - Skill_ID: 131
+    Hit_01: 406
+    Hit_02: 0
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
