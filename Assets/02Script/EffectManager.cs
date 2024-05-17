@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 
 public class EffectManager : MonoBehaviour
@@ -8,6 +9,8 @@ public class EffectManager : MonoBehaviour
     private SkillManager skillManager;
     private AttackArea attackArea;
     private Weapon weapon;
+
+    private PostProcessLayer post;
 
     private ParticleSystem charge1;
     private ParticleSystem charge2;
@@ -23,6 +26,10 @@ public class EffectManager : MonoBehaviour
             if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
             {
                 Debug.Log("EffectManager - Awake - SkillManager");
+            }
+            if(!Camera.main.TryGetComponent<PostProcessLayer>(out post))
+            {
+                Debug.Log("EffectManager - Awake - PostProcessLayer");
             }
         }
         if (!transform.Find("Charge1").TryGetComponent<ParticleSystem>(out charge1))
@@ -172,5 +179,17 @@ public class EffectManager : MonoBehaviour
     {
         effect = skillManager.SpawnEffect(6);
         effect.Init(EffectType.None, transform.position, 1f);
+    }
+
+    public void SetGray(bool gray)
+    {
+        if(gray)
+        {
+            post.volumeLayer = LayerMask.GetMask("Gray");
+        }
+        else
+        {
+            post.volumeLayer = LayerMask.GetMask("Post");
+        }
     }
 }
