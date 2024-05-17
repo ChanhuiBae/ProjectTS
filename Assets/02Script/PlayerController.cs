@@ -181,14 +181,14 @@ public class PlayerController : MonoBehaviour, IDamage
                     skillManager.UseSkill(0);
                     weapon.OnTrail();
                     anim.Attack(true);
-                    skillManager.SetCrowdControl(CrowdControl.Stun);
+                    skillManager.SetCrowdControl(CrowdControlType.Stun);
                     attackCount++;
                     break;
                 case State.Attack_Hammer:
                     skillManager.UseSkill(0); 
                     weapon.OnTrail();
                     anim.Attack(true);
-                    skillManager.SetCrowdControl(CrowdControl.Stun);
+                    skillManager.SetCrowdControl(CrowdControlType.Stun);
                     attackCount++;
                     break;
                 case State.Attack_Skill:
@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.Skill(0);
         anim.IsCombo(false);
         attackArea.StopAttack();
-        skillManager.SetCrowdControl(CrowdControl.None);
+        skillManager.SetCrowdControl(CrowdControlType.None);
         weapon.OffTrail();
         StopAllCoroutines();
         ChangeState(State.Idle);
@@ -568,31 +568,6 @@ public class PlayerController : MonoBehaviour, IDamage
     }
 
     
-
-    
-
-    public void SetAirborne()
-    {
-        skillManager.SetCrowdControl(CrowdControl.Airborne);
-    }
-
-    public void SetKnockback()
-    {
-        skillManager.SetCrowdControl(CrowdControl.Knockback);
-    }
-
-
-    public void Push()
-    {
-        skillManager.SetCrowdControl(CrowdControl.Pulled);
-        skillManager.SetPulledPoint(transform.forward * 12f + transform.position);
-        LeanTween.move(gameObject, transform.forward * 10f + transform.position, 1f);
-    }
-
-    public void CrowdControlNone()
-    {
-        skillManager.SetCrowdControl(CrowdControl.None);
-    }
 
     public void CalculateDamage(AttackType attack, ITakeDamage hiter)
     {

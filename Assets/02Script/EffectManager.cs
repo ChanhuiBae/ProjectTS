@@ -162,7 +162,7 @@ public class EffectManager : MonoBehaviour
 
     public void SetPull()
     {
-        skillManager.SetCrowdControl(CrowdControl.Pulled);
+        skillManager.SetCrowdControl(CrowdControlType.Pulled);
         skillManager.SetPulledPoint(transform.position);
         effect = skillManager.SpawnEffect(5);
         effect.Init(EffectType.None, transform.position, 4f);

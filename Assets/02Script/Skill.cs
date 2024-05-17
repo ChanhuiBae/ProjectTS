@@ -101,11 +101,11 @@ public class Skill : MonoBehaviour
         GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
         if(current_charge > 0 && current_hit > 1)
         {
-            skillManager.SetCrowdControl(CrowdControl.Airback);
+            skillManager.SetCrowdControl(CrowdControlType.Airback);
         }
         if (current_charge > 1 && current_hit > 2)
         {
-            skillManager.SetCrowdControl(CrowdControl.Airback);
+            skillManager.SetCrowdControl(CrowdControlType.Airback);
         }
         if (currentInfo != null)
         {

@@ -2,17 +2,6 @@ using Redcode.Pools;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CrowdControl
-{
-    None,
-    Stagger,
-    Stun,
-    Knockback,
-    Airborne,
-    Airback,
-    Pulled
-}
-
 public enum AttackType
 {
     Weapon,
@@ -45,7 +34,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private bool isCharge;
     private Vector3 playerLook;
     private Queue<Vector3> queue;
-    private CrowdControl crowdControl;
+    private CrowdControlType crowdControl;
     private Vector3 pulledPoint;
     public bool IsCharge
     {
@@ -117,7 +106,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         }
         useSkill = -1;
         isCharge = false;
-        crowdControl = CrowdControl.None;
+        crowdControl = CrowdControlType.None;
         pulledPoint = player.transform.position;
         queue = new Queue<Vector3>();
     }
@@ -214,7 +203,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         effect.ChargeUp(count);
     }
 
-    public void SetCrowdControl(CrowdControl type)
+    public void SetCrowdControl(CrowdControlType type)
     {
         crowdControl = type;
     }
@@ -448,19 +437,19 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 {
                     switch (crowdControl)
                     {
-                        case CrowdControl.Stun:
+                        case CrowdControlType.Stun:
                             creatureDamage.Stun(skill.Stun_Time);
                             break;
-                        case CrowdControl.Airborne:
+                        case CrowdControlType.Airborne:
                             creatureDamage.Airborne(skill.Airborne_Time);
                             break;
-                        case CrowdControl.Knockback:
+                        case CrowdControlType.Knockback:
                             creatureDamage.Knockback(skill.Knockback_Distance);
                             break;
-                        case CrowdControl.Airback:
+                        case CrowdControlType.Airback:
                             creatureDamage.Airback(skill.Airborne_Time, skill.Knockback_Distance);
                             break;
-                        case CrowdControl.Pulled:
+                        case CrowdControlType.Pulled:
                             creatureDamage.Pulled(pulledPoint);
                             break;
                     }
@@ -481,19 +470,19 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             {
                 switch (crowdControl)
                 {
-                    case CrowdControl.Stun:
+                    case CrowdControlType.Stun:
                         creatureDamage.Stun(skill.Stun_Time);
                         break;
-                    case CrowdControl.Airborne:
+                    case CrowdControlType.Airborne:
                         creatureDamage.Airborne(skill.Airborne_Time);
                         break;
-                    case CrowdControl.Knockback:
+                    case CrowdControlType.Knockback:
                         creatureDamage.Knockback(skill.Knockback_Distance);
                         break;
-                    case CrowdControl.Airback:
+                    case CrowdControlType.Airback:
                         creatureDamage.Airback(skill.Airborne_Time, skill.Knockback_Distance);
                         break;
-                    case CrowdControl.Pulled:
+                    case CrowdControlType.Pulled:
                         creatureDamage.Pulled(pulledPoint);
                         break;
                 }
