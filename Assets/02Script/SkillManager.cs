@@ -26,6 +26,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private PlayerController player;
     private Weapon weapon;
     private AttackArea attackArea;
+    private EffectManager effect;
     
     private Skill basic;
     private Skill skill1;
@@ -58,6 +59,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         if (!obj.TryGetComponent<PlayerController>(out player))
         {
             Debug.Log("SkillManager - Awake - PlayerController");
+        }
+
+        if (!player.TryGetComponent<EffectManager>(out effect))
+        {
+            Debug.Log("PlayerController - Awake - EffectManager");
         }
 
         if (!obj.transform.Find("AttackArea").TryGetComponent<AttackArea>(out attackArea))
@@ -205,7 +211,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
 
     public void ChargeUp(int count)
     {
-        player.ChargeUp(count);
+        effect.ChargeUp(count);
     }
 
     public void SetCrowdControl(CrowdControl type)
