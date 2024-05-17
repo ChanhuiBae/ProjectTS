@@ -625,10 +625,34 @@ public class PlayerController : MonoBehaviour, IDamage
         attackArea.Attack(Vector3.zero, radius);
     }
 
-    public void SetAura()
+    public void SetTrail()
     {
         effect = skillManager.SpawnEffect(4);
-        effect.Init(EffectType.None, transform.position + transform.forward *1.5f, 1);
+        effect.Init(EffectType.None, weapon.transform.position, 1);
+        StartCoroutine(FollowWeapon());
+    }
+
+    private IEnumerator FollowWeapon()
+    {
+        int i = 0;
+        while (i < 60)
+        {
+            yield return null;
+            effect.transform.position = weapon.transform.position;
+            i++;
+        }
+    }
+
+    public void NarakaEffect()
+    {
+        effect = skillManager.SpawnEffect(12);
+        effect.Init(EffectType.None, transform.position, 1);
+    }
+
+    public void SamsaraEffect()
+    {
+        effect = skillManager.SpawnEffect(13);
+        effect.Init(EffectType.None, transform.position, 1);
     }
 
     public void SetSlashCycle()
@@ -668,7 +692,7 @@ public class PlayerController : MonoBehaviour, IDamage
         skillManager.SetCrowdControl(CrowdControl.Pulled);
         skillManager.SetPulledPoint(transform.position);
         effect = skillManager.SpawnEffect(5);
-        effect.Init(EffectType.None, transform.position, 1.5f);
+        effect.Init(EffectType.None, transform.position, 4f);
     }
 
     public void SetAirborne()

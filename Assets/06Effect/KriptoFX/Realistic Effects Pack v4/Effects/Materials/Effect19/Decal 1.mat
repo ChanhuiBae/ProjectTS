@@ -9,8 +9,6 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Decal 1
   m_Shader: {fileID: 4800000, guid: d8f400148b999fe41bd30759b3a9126b, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - USE_CUTOUT
   - USE_CUTOUT_TEX
@@ -26,7 +24,6 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -114,5 +111,5 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CutoutColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TintColor: {r: 3.0543072, g: 5.4620457, b: 6.6753926, a: 1}
+    - _TintColor: {r: 5, g: 1.1379302, b: 0, a: 1}
   m_BuildTextureStacks: []
