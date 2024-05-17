@@ -673,8 +673,9 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             attackArea.SetTargets();
             effect = skillManager.SpawnEffect(7);
-            effect.Init(EffectType.None, transform.position + Vector3.up, 1);
+            effect.Init(EffectType.None, transform.position + Vector3.up, 1f);
             effect.SetRotation(transform.rotation);
+            effect.Powerwave(0.5f);
             attackArea.AttackInAngle();
         }
     }
