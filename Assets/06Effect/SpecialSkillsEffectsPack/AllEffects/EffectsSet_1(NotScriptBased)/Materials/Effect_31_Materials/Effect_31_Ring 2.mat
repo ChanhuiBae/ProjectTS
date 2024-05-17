@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Effect_31_Shockwave
+  m_Name: Effect_31_Ring 2
   m_Shader: {fileID: 4800000, guid: 1d58a8e283100ea4f8435e923e54553e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -58,7 +58,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9905f0bfba91aa94598123af22a8beb1, type: 3}
+        m_Texture: {fileID: 2800000, guid: d9a7b93c2989d3f4faf3caab3d7bc5c7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskDistortion:
@@ -102,7 +102,7 @@ Material:
     - _CameraFadingEnabled: 0
     - _CameraFarFadeDistance: 2
     - _CameraNearFadeDistance: 1
-    - _ColorFactor: 6
+    - _ColorFactor: 2
     - _ColorMode: 0
     - _Cull: 2
     - _Culling: 0
@@ -139,7 +139,7 @@ Material:
     - _NormalAnimate: 1
     - _NormalAnimateSpeed: 0.1
     - _NormalDistortion: 1
-    - _NormalDistortionFactor: 0.015
+    - _NormalDistortionFactor: 0.005
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ParticleInstancing: 1
@@ -183,6 +183,6 @@ Material:
     - _NoiseValue: {r: 1, g: 1, b: 1, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
-    - _TintColor: {r: 2.4243915, g: 2.9043221, b: 3.8588233, a: 1}
+    - _TintColor: {r: 3.8588233, g: 3.3136811, b: 2.4243915, a: 1}
     - _TintColor2: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
