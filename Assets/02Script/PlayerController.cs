@@ -651,7 +651,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void SamsaraEffect()
     {
-        effect = skillManager.SpawnEffect(12);
+        effect = skillManager.SpawnEffect(13);
         effect.Init(EffectType.None, transform.position, 1);
     }
 
