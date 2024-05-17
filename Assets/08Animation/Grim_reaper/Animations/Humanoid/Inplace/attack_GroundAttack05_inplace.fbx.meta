@@ -67,8 +67,8 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.2063839
-        functionName: SetAura
+      - time: 0.13302483
+        functionName: SetTrail
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
