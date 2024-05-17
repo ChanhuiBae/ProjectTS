@@ -332,6 +332,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private IEnumerator CoolTime()
     {
+        currentTime = 0;
         coolTimeRun = true;
         coolTimeImage.enabled = true;
         if (currentStack == 0)
@@ -405,7 +406,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     }
     private void AttackSkill()
     {
-        currentTime = 0;
         player.ChangeState(State.Attack_Skill);
         player.UseSkill(skill_ID);
         skillManager.UseSkill(buttonNum);
