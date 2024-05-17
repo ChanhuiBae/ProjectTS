@@ -692,7 +692,7 @@ public class PlayerController : MonoBehaviour, IDamage
         skillManager.SetCrowdControl(CrowdControl.Pulled);
         skillManager.SetPulledPoint(transform.position);
         effect = skillManager.SpawnEffect(5);
-        effect.Init(EffectType.None, transform.position, 1.5f);
+        effect.Init(EffectType.None, transform.position, 4f);
     }
 
     public void SetAirborne()
