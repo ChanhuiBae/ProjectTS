@@ -69,11 +69,11 @@ public class Effect : MonoBehaviour, IPoolObject
         //throw new System.NotImplementedException();
     }
 
-    public void Powerwave(float time)
+    public void Powerwave(float time, float distance)
     {
         transform.localScale = Vector3.zero;
         LeanTween.scale(gameObject, Vector3.one, time);
-        LeanTween.move(gameObject, transform.position + transform.forward * 5f, time);
+        LeanTween.move(gameObject, transform.position + transform.forward * distance, time);
     }
 
     public void StayCount(int count, float attackSpeed)
