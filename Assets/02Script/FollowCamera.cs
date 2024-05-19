@@ -5,6 +5,12 @@ using UnityEngine;
 public class FollowCamera : MonoBehaviour
 {
     private Transform target;
+    private bool shack;
+    public bool Shack
+    {
+        set => shack = value;
+    }
+    private float shackAmount;
 
     [SerializeField]
     private Vector3 offset;
@@ -17,6 +23,8 @@ public class FollowCamera : MonoBehaviour
     private bool InitFollowCamera()
     {
         target = GameObject.Find("Player").transform;
+        shack = false;
+        shackAmount = 0.2f;
         return target != null;
     }
 
@@ -26,6 +34,10 @@ public class FollowCamera : MonoBehaviour
         {
             if (InitFollowCamera())
                 Debug.Log("FollowCamera - Update() - target is null");
+        }
+        else if (shack)
+        {
+            transform.position = ((Vector3)Random.insideUnitCircle) * shackAmount + target.position + offset;
         }
         else
         {

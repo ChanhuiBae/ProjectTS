@@ -11,6 +11,7 @@ public class EffectManager : MonoBehaviour
     private Weapon weapon;
 
     private PostProcessLayer post;
+    private FollowCamera cameraControl;
 
     private ParticleSystem charge1;
     private ParticleSystem charge2;
@@ -30,6 +31,10 @@ public class EffectManager : MonoBehaviour
             if(!Camera.main.TryGetComponent<PostProcessLayer>(out post))
             {
                 Debug.Log("EffectManager - Awake - PostProcessLayer");
+            }
+            if(!Camera.main.TryGetComponent<FollowCamera>(out cameraControl))
+            {
+                Debug.Log("EffectManager - Awake - FollowCamera");
             }
         }
         if (!transform.Find("Charge1").TryGetComponent<ParticleSystem>(out charge1))
@@ -126,6 +131,7 @@ public class EffectManager : MonoBehaviour
     {
         effect = skillManager.SpawnEffect(12);
         effect.Init(EffectType.None, transform.position, 1);
+        StartCoroutine(CameraShack());
     }
 
     public void SamsaraEffect()
@@ -183,13 +189,14 @@ public class EffectManager : MonoBehaviour
 
     public void SetGray(bool gray)
     {
-        if(gray)
-        {
-            post.volumeLayer = LayerMask.GetMask("Gray");
-        }
-        else
-        {
-            post.volumeLayer = LayerMask.GetMask("Post");
-        }
+
     }
+
+    private IEnumerator CameraShack()
+    {
+        cameraControl.Shack = true;
+        yield return YieldInstructionCache.WaitForSeconds(1);
+        cameraControl.Shack = false;
+    }
+
 }
