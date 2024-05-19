@@ -9,6 +9,7 @@ public class EffectManager : MonoBehaviour
     private SkillManager skillManager;
     private AttackArea attackArea;
     private Weapon weapon;
+    private Transform point;
 
     private PostProcessLayer post;
     private FollowCamera cameraControl;
@@ -70,6 +71,10 @@ public class EffectManager : MonoBehaviour
     public void Init(Weapon weapon)
     {
         this.weapon = weapon;
+        if(weapon.Type == WeaponType.Hammer)
+        {
+            point = weapon.transform.Find("HammerHead").transform;
+        }
         fullCharge = false;
     }
 
@@ -113,16 +118,16 @@ public class EffectManager : MonoBehaviour
     {
         effect = skillManager.SpawnEffect(4);
         effect.Init(EffectType.None, weapon.transform.position, 1);
-        StartCoroutine(FollowWeapon());
+        StartCoroutine(FollowWeaponPoint());
     }
 
-    private IEnumerator FollowWeapon()
+    private IEnumerator FollowWeaponPoint()
     {
         int i = 0;
         while (i < 60)
         {
             yield return null;
-            effect.transform.position = weapon.transform.position;
+            effect.transform.position = point.position;
             i++;
         }
     }
@@ -130,7 +135,7 @@ public class EffectManager : MonoBehaviour
     public void NarakaEffect()
     {
         effect = skillManager.SpawnEffect(12);
-        effect.Init(EffectType.None, transform.position, 1);
+        effect.Init(EffectType.None, point.position, 1);
         StartCoroutine(CameraShack());
     }
 

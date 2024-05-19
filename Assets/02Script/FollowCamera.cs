@@ -24,7 +24,7 @@ public class FollowCamera : MonoBehaviour
     {
         target = GameObject.Find("Player").transform;
         shack = false;
-        shackAmount = 0.2f;
+        shackAmount = 0.1f;
         return target != null;
     }
 
