@@ -268,6 +268,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         return queue.Count;
     }
 
+    public void ClearVector()
+    {
+        queue.Clear();
+    }
+
     public int GetCurrentKey()
     {
         switch (useSkill)

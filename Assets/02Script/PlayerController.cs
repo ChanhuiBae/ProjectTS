@@ -242,6 +242,7 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.IsCombo(false);
         attackArea.StopAttack();
         skillManager.SetCrowdControl(CrowdControlType.None);
+        skillManager.ClearVector();
         weapon.OffTrail();
         StopAllCoroutines();
         ChangeState(State.Idle);

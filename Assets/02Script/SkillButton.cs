@@ -48,6 +48,9 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     private EventTrigger.Entry up;
     private EventTrigger.Entry drag;
     private EventTrigger.Entry dragEnd;
+
+    private bool isDrag;
+
  
 
     private void Awake()
@@ -126,18 +129,11 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 skillManager.IsCharge = true;
                 AttackSkill();
                 isUse = true;
-                if(currentStack > 0)
-                {
-                    currentStack--;
-                    stackCount.text = currentStack.ToString();
-                }
             }
             else
             {
                 if(currentStack > 0)
                 {
-                    currentStack--;
-                    stackCount.text = currentStack.ToString();
                     player.IsCombo(true);
                 }
             }
@@ -157,6 +153,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 StartCoroutine(CoolTime());
             }
         }
+        isDrag = false;
     }
 
     void OnPointerUp(PointerEventData eventData)
@@ -193,6 +190,15 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 time.enabled = true;
                 icon.transform.SetSiblingIndex(0);
             }
+            if (currentStack > 0)
+            {
+                currentStack--;
+                stackCount.text = currentStack.ToString();
+            }
+        }
+        if(!isDrag)
+        {
+            player.SetIdle();
         }
     }
 
@@ -200,7 +206,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         if (isScoping && trigger.enabled)
         {
-            
+            isDrag = true;
             Vector2 drag = eventData.position;
             float x = eventData.position.x - center.position.x;
             float y = eventData.position.y - center.position.y;
@@ -261,10 +267,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             }
             else if (maxStack > 0)
             {
+                player.Sit();
                 skillManager.PushVector(direction);
                 direction = Vector3.zero;
                 skillManager.StopAttackArea();
-                player.Sit();
             }
             if(currentStack == 0)
             {

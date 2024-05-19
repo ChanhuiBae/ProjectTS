@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public enum WeaponType
 {
-    None = 0,
-    Sowrd = 1,
-    Hammer = 2,
-    Gun = 3
+    None,
+    Sowrd,
+    Hammer,
+    Gun,
 }
 public enum Physics_Type
 {
