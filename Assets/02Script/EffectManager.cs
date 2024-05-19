@@ -178,6 +178,12 @@ public class EffectManager : MonoBehaviour
         effect.StayCount(600, weapon.Attack_Speed);
     }
 
+    public void TC_Effect()
+    {
+        effect = skillManager.SpawnEffect(14);
+        effect.Init(EffectType.None, transform.position, 1.2f);
+    }
+
     public void SetPull()
     {
         skillManager.SetCrowdControl(CrowdControlType.Pulled);
