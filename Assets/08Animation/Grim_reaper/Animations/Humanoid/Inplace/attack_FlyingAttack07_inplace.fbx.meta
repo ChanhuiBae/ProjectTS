@@ -81,7 +81,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.6209982
+      - time: 0.6203494
         functionName: SetPowerWave
         data: 
         objectReferenceParameter: {instanceID: 0}

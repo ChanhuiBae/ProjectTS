@@ -163,9 +163,9 @@ public class EffectManager : MonoBehaviour
         {
             attackArea.SetTargets();
             effect = skillManager.SpawnEffect(7);
-            effect.Init(EffectType.None, transform.position + Vector3.up, 1f);
+            effect.Init(EffectType.None, transform.position + Vector3.up, 2f);
             effect.SetRotation(transform.rotation);
-            effect.Powerwave(0.25f, 8f);
+            effect.Powerwave(0.5f, 8f);
             attackArea.AttackInAngle();
         }
     }

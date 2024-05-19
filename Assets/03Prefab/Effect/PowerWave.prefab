@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7954094174281371849}
-  - component: {fileID: 192635460203046819}
   m_Layer: 0
   m_Name: Ef_tire2
   m_TagString: Untagged
@@ -37,26 +36,6 @@ Transform:
   - {fileID: 214307896486007529}
   m_Father: {fileID: 7103224515957046554}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &192635460203046819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 740847303870763546}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa5cb770ff50fd45be824531ff122e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  time: 2
-  MoveSpeed: 20
-  AbleHit: 1
-  HitDelay: 0.5
-  m_hitObject: {fileID: 8708412796869533731, guid: 84017cb636f0ef94cbc73c1347bf215d,
-    type: 3}
-  MaxLength: 1
-  DestroyTime2: 2
 --- !u!1 &820893245076052554
 GameObject:
   m_ObjectHideFlags: 0
@@ -4947,8 +4926,8 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2113305495875103980}
   serializedVersion: 8
-  lengthInSec: 1
-  simulationSpeed: 1
+  lengthInSec: 0.5
+  simulationSpeed: 2.6
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -9845,8 +9824,8 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5397557276598777331}
   serializedVersion: 8
-  lengthInSec: 1
-  simulationSpeed: 1
+  lengthInSec: 0.5
+  simulationSpeed: 2.6
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -14744,7 +14723,7 @@ ParticleSystem:
   m_GameObject: {fileID: 6289413334396329380}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 1.6
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -14871,7 +14850,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -19641,8 +19620,8 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6460798981517586888}
   serializedVersion: 8
-  lengthInSec: 1
-  simulationSpeed: 1
+  lengthInSec: 0.5
+  simulationSpeed: 2.6
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -19769,7 +19748,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -24481,8 +24460,8 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9018422723277931679}
   serializedVersion: 8
-  lengthInSec: 1
-  simulationSpeed: 1
+  lengthInSec: 0.5
+  simulationSpeed: 2.6
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
