@@ -427,6 +427,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 {
                     case 1:
                         GameManager.Inst.GetSkillData(skill1.GetKey(), out skill);
+                        Debug.Log(skill1.GetKey());
                         break;
                     case 2:
                         GameManager.Inst.GetSkillData(skill2.GetKey(), out skill);

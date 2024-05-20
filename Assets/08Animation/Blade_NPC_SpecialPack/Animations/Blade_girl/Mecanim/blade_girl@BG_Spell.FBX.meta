@@ -719,7 +719,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.97272724
+      - time: 0.6009174
         functionName: CallDrone
         data: 
         objectReferenceParameter: {instanceID: 0}

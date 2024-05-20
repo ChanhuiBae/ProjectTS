@@ -99,6 +99,10 @@ public class Skill : MonoBehaviour
     {
         IsActive = false;
         current_hit++;
+        if(max_charge > 0 && current_hit == 1)
+        {
+            skillManager.StartAnimator();
+        }
         currentInfoID = GetKey();
         GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
         if(current_charge > 0 && current_hit > 1)
@@ -149,7 +153,6 @@ public class Skill : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(CountHit());
         }
-        skillManager.StartAnimator();
     }
 
     private IEnumerator CountHit()
