@@ -24,6 +24,8 @@ public class Skill : MonoBehaviour
     private int chargeCount;
     private SkillManager skillManager;
 
+    private bool counting;
+
     private void Awake()
     {
         if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
@@ -50,6 +52,7 @@ public class Skill : MonoBehaviour
         {
             GameManager.Inst.SetMaxUltimate((int)currentInfo.Need_Damage);
         }
+        counting = false;
     }
 
     public int GetKey()
@@ -77,6 +80,7 @@ public class Skill : MonoBehaviour
     private void SetIdle()
     {
         IsActive = false;
+        counting = false;
         current_charge = 0;
         current_hit = 0;
         if(category == 3 && ID % 10 == 1)
@@ -85,12 +89,10 @@ public class Skill : MonoBehaviour
         }
     }
 
-    public void ChargeUp()
+    private void ChargeUp()
     {
         current_charge++;
         skillManager.ChargeUp(current_charge);
-        currentInfoID = GetKey();
-        GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
     }
 
     public void HitUp() 
@@ -114,10 +116,10 @@ public class Skill : MonoBehaviour
         Debug.Log("hitup" + current_hit);
     }
 
-    public void StartSkill()
+    public void StartSkill(int skillNum)
     {
         SetIdle();
-        if(max_charge > 0)
+        if(max_charge != 0)
         {
             StartCoroutine(CountCharge());
         }
@@ -129,6 +131,7 @@ public class Skill : MonoBehaviour
 
     private IEnumerator CountCharge()
     {
+        current_charge = 0;
         for (int i = 0; i < max_charge; i++)
         {
             for (chargeCount = 0; chargeCount < 60; chargeCount++)
@@ -141,13 +144,17 @@ public class Skill : MonoBehaviour
     }
     public void StopCharge()
     {
-        StopAllCoroutines();
+        if (!counting)
+        {
+            StopCoroutine(CountCharge());
+            StartCoroutine(CountHit());
+        }
         skillManager.StartAnimator();
-        StartCoroutine(CountHit());
     }
 
     private IEnumerator CountHit()
     {
+        counting = true;
         current_hit = 0;
         for(int i = 0; i < hitInfo.Hit_01; i++)
         {

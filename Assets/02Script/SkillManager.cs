@@ -156,22 +156,22 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         switch (useSkill)
         {
             case 0:
-                basic.StartSkill();
+                basic.StartSkill(0);
                 break;
             case 1:
-                skill1.StartSkill();
+                skill1.StartSkill(1);
                 break;
             case 2:
-                skill2.StartSkill();
+                skill2.StartSkill(2);
                 break;
             case 3:
-                skill3.StartSkill();
+                skill3.StartSkill(3);
                 break;
             case 4:
-                ultimate.StartSkill();
+                ultimate.StartSkill(4);
                 break;
             case 41:
-                connectedU.StartSkill();
+                connectedU.StartSkill(41);
                 break;
         }
     }
@@ -368,6 +368,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         {
             case 1:
                 skillPhysics = skill1.GetDamageA() + (skill1.GetDamageB() * skill1.GetLevel());
+                Debug.Log(skill1.GetKey());
                 break;
             case 2:
                 skillPhysics = skill2.GetDamageA() + (skill2.GetDamageB() * skill2.GetLevel());
