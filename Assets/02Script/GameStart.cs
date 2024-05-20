@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameStart : MonoBehaviour
@@ -21,6 +22,13 @@ public class GameStart : MonoBehaviour
 
     private void GoToPlay()
     {
-        GameManager.Inst.AsyncLoadNextScene(SceneName.PlayScene);
+        if(SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            GameManager.Inst.AsyncLoadNextScene(SceneName.LobbyScene);
+        }
+        else
+        {
+            GameManager.Inst.AsyncLoadNextScene(SceneName.PlayScene);
+        }
     }
 }

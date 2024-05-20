@@ -344,6 +344,51 @@ public class GameManager : Singleton<GameManager>
         pData.Adaptation = info.Adaptation;
         pData.Available_Point = info.Available_Point;
         pData.Exp_Need = info.Exp_Need;
+        pData.WeaponID = 1000;
+        pData.basic_ID = 100;
+        pData.skill1_ID = 101;
+        pData.connected1_ID = 0;
+        pData.skill2_ID = 102;
+        pData.connected2_ID = 0;
+        pData.skill3_ID = 103;
+        pData.connected3_ID = 104;
+        pData.ultimate_ID = 131;
+        pData.connectedU_ID = 0;
+        SaveData();
+    }
+
+    public void SetSword()
+    {
+        pData.WeaponID = 1000;
+        pData.basic_ID = 100;
+        pData.skill1_ID = 101;
+        pData.connected1_ID = 0;
+        pData.skill2_ID = 102;
+        pData.connected2_ID = 0;
+        pData.skill3_ID = 103;
+        pData.connected3_ID = 104;
+        pData.ultimate_ID = 131;
+        pData.connectedU_ID = 0;
+        SaveData();
+    }
+
+    public void SetHammer()
+    {
+        pData.WeaponID = 2000;
+        pData.basic_ID = 200;
+        pData.skill1_ID = 201;
+        pData.connected1_ID = 0;
+        pData.skill2_ID = 202;
+        pData.connected2_ID = 0;
+        pData.skill3_ID = 203;
+        pData.connected3_ID = 0;
+        pData.ultimate_ID = 231;
+        pData.connectedU_ID = 232;
+        SaveData();
+    }
+
+    public void SetGun()
+    {
         pData.WeaponID = 3000;
         pData.basic_ID = 300;
         pData.skill1_ID = 301;

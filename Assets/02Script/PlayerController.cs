@@ -84,7 +84,11 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 Debug.Log("PlayerController - Awake - AttackArea");
             }
-            
+            if (!TryGetComponent<EffectManager>(out effect))
+            {
+                Debug.Log("PlayerController - Awake - EffectManager");
+            }
+
         }
         if (!TryGetComponent<Rigidbody>(out rig))
         {
@@ -98,11 +102,6 @@ public class PlayerController : MonoBehaviour, IDamage
         if (!TryGetComponent<PlayerAnimationController>(out anim))
         {
             Debug.Log("PlayerController - Awake - PlayerAnimationController");
-        }
-
-        if(!TryGetComponent<EffectManager>(out effect))
-        {
-            Debug.Log("PlayerController - Awake - EffectManager");
         }
     }
 
@@ -155,7 +154,6 @@ public class PlayerController : MonoBehaviour, IDamage
             anim.Weapon(0);
             weapon = new Weapon();
             weapon.Init(WeaponType.None);
-            effect.Init(weapon);
             isControll = true;
             StartCoroutine(Idle());
         }
