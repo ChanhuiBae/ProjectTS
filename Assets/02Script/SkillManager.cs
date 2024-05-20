@@ -273,6 +273,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         queue.Clear();
     }
 
+    public void PinPointDown(Vector3 position)
+    {
+        effect.PinPointDown(position);
+    }
+
     public int GetCurrentKey()
     {
         switch (useSkill)

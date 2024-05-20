@@ -113,15 +113,15 @@ public class EffectManager : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
         chargeLight.Stop();
     }
-    public void PinPointDown()
+    public void PinPointDown(Vector3 position)
     {
         effect = skillManager.SpawnEffect(16);
         effect.Init(EffectType.None, point.position, 1f);
         effect.SetRotation(point.rotation);
 
         effect = skillManager.SpawnEffect(11);
-        effect.Init(EffectType.Once, attackArea.transform.position, 1.3f);
-        effect.SetRotation(attackArea.transform.rotation);
+        effect.Init(EffectType.Once, transform.position + position/5, 1.3f);
+        effect.SetRotation(Quaternion.identity);
     }
     public void SetTrail()
     {
