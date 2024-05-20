@@ -146,7 +146,7 @@ public class Skill : MonoBehaviour
     {
         if (!counting)
         {
-            StopCoroutine(CountCharge());
+            StopAllCoroutines();
             StartCoroutine(CountHit());
         }
         skillManager.StartAnimator();

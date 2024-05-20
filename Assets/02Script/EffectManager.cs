@@ -76,6 +76,10 @@ public class EffectManager : MonoBehaviour
         {
             point = weapon.transform.Find("HammerHead").transform;
         }
+        else if(weapon.Type == WeaponType.Gun)
+        {
+            point = weapon.transform.Find("Muzzle").transform;
+        }
         fullCharge = false;
     }
 
@@ -111,9 +115,13 @@ public class EffectManager : MonoBehaviour
     }
     public void PinPointDown()
     {
+        effect = skillManager.SpawnEffect(16);
+        effect.Init(EffectType.None, point.position, 1f);
+        effect.SetRotation(point.rotation);
+
         effect = skillManager.SpawnEffect(11);
-        effect.Init(EffectType.Once, transform.position, 1.3f);
-        effect.SetRotation(transform.rotation);
+        effect.Init(EffectType.Once, attackArea.transform.position, 1.3f);
+        effect.SetRotation(attackArea.transform.rotation);
     }
     public void SetTrail()
     {
