@@ -2455,9 +2455,9 @@ MonoBehaviour:
     Hit_04: 0
     Hit_05: 0
   - Skill_ID: 201
-    Hit_01: 6
-    Hit_02: 15
-    Hit_03: 12
+    Hit_01: 1
+    Hit_02: 6
+    Hit_03: 19
     Hit_04: 0
     Hit_05: 0
   - Skill_ID: 202

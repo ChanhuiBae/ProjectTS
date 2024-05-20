@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class EffectManager : MonoBehaviour
 {
@@ -137,6 +138,9 @@ public class EffectManager : MonoBehaviour
         effect = skillManager.SpawnEffect(12);
         effect.Init(EffectType.None, point.position, 1);
         StartCoroutine(CameraShack());
+
+        effect = skillManager.SpawnEffect(15);
+        effect.Init(EffectType.None, point.position+ new Vector3(0,0.5f,0), 12f);
     }
 
     public void SamsaraEffect()
@@ -208,6 +212,11 @@ public class EffectManager : MonoBehaviour
         cameraControl.Shack = true;
         yield return YieldInstructionCache.WaitForSeconds(1);
         cameraControl.Shack = false;
+    }
+
+    private IEnumerator SpawnDent(Vector3 position)
+    {
+        yield return YieldInstructionCache.WaitForSeconds(1f);
     }
 
 }
