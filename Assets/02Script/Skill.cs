@@ -57,8 +57,7 @@ public class Skill : MonoBehaviour
 
     public int GetKey()
     {
-        string key;
-            key = ID + weapon_type + category + current_level + current_charge + current_hit;
+        string key = ID + weapon_type + category + current_level + current_charge + current_hit;
         return int.Parse(key);
     }
 
@@ -147,9 +146,10 @@ public class Skill : MonoBehaviour
     {
         if (!counting)
         {
-            StopAllCoroutines();
+            StopCoroutine(CountCharge());
             StartCoroutine(CountHit());
         }
+        skillManager.StartAnimator();
     }
 
     private IEnumerator CountHit()
@@ -161,7 +161,6 @@ public class Skill : MonoBehaviour
             yield return null;
         }
         HitUp();
-        skillManager.StartAnimator();
         if (hitInfo.Hit_02 != 0)
         {
             for (int i = 0; i < hitInfo.Hit_02; i++)
