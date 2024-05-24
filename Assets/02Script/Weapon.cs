@@ -174,15 +174,6 @@ public class Weapon : MonoBehaviour
         trail.enabled = false;
     }
 
-    public void SetColider(bool use)
-    {
-        if(use)
-            col.enabled = true;
-        else
-            col.enabled = false;
-        Debug.Log(use);
-    }
-
 
     private void OnTriggerEnter(Collider other)
     {

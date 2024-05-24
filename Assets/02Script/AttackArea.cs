@@ -76,6 +76,7 @@ public class AttackArea : MonoBehaviour
             float inside = Vector2.Angle(new Vector2(transform.forward.x, transform.forward.z), new Vector2(targets[i].transform.position.x - transform.position.x, targets[i].transform.position.z - transform.position.z));
             if (Mathf.Abs(inside) < 30)
             {
+                skillManager.SetCrowdControl(CrowdControlType.Airback);
                 skillManager.TakeDamageByKey(AttackType.AttackArea, 201022123, targets[i]);
             }
         }

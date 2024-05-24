@@ -107,10 +107,6 @@ public class Skill : MonoBehaviour
         {
             skillManager.SetCrowdControl(CrowdControlType.Airback);
         }
-        if (current_charge > 1 && current_hit > 2)
-        {
-            skillManager.SetCrowdControl(CrowdControlType.Airback);
-        }
         if (currentInfo != null)
         {
             IsActive = true;

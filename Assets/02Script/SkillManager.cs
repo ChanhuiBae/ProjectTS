@@ -176,11 +176,6 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         }
     }
 
-    public void SetWeaponColider(bool use)
-    {
-        weapon.SetColider(use);
-    }
-
     public void StopCharge()
     {
         switch (useSkill)
@@ -223,6 +218,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         GameObject obj = effectManager.GetFromPool<Effect>(num).gameObject;
         Effect effect = obj.GetComponent<Effect>();
         effect.Init(type, pos, lifeTime);
+    }
+
+    public void SetAttackAreaRadius(float radius)
+    {
+        attackArea.Attack(player.transform.position, radius);
     }
 
     public void SetAttackArea(Vector3 center, float radius)
