@@ -2,6 +2,7 @@ using Redcode.Pools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public enum EffectType
 {
@@ -18,6 +19,9 @@ public class Effect : MonoBehaviour, IPoolObject
     private EffectType type;  
     private int key;
     private bool hit;
+    private PostProcessVolume post;
+    private ColorGrading postColor;
+
     public int Key
     {
         set { key = value; }
@@ -28,6 +32,14 @@ public class Effect : MonoBehaviour, IPoolObject
         if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("Effect - Awake - SkillManager");
+        }
+        if(!GameObject.Find("Post").TryGetComponent<PostProcessVolume>(out post))
+        {
+            Debug.Log("Effect - Awake - PostProcessVolume");
+        }
+        if(!post.profile.TryGetSettings<ColorGrading>(out postColor))
+        {
+            Debug.Log("Effect - Awake - ColorGranding");
         }
     }
     public void Init(EffectType type, Vector3 pos, float lifeTime)
@@ -113,6 +125,19 @@ public class Effect : MonoBehaviour, IPoolObject
             yield return null;
         }
         Debug.Log("End");
+    }
+
+    public void SetGray(bool gray)
+    {
+        if (gray)
+        {
+            postColor.saturation.value = -100f;
+        }
+        else
+        {
+            postColor.saturation.value = 0f;
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
