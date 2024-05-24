@@ -26,6 +26,8 @@ public class Skill : MonoBehaviour
 
     private bool counting;
 
+    private IEnumerator coroutine;
+
     private void Awake()
     {
         if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
@@ -99,10 +101,6 @@ public class Skill : MonoBehaviour
     {
         IsActive = false;
         current_hit++;
-        if(max_charge > 0 && current_hit == 1)
-        {
-            skillManager.StartAnimator();
-        }
         currentInfoID = GetKey();
         GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
         if(current_charge > 0 && current_hit > 1)
@@ -118,6 +116,10 @@ public class Skill : MonoBehaviour
             IsActive = true;
         }
         Debug.Log("hitup" + current_hit);
+        if (max_charge > 0 && current_hit == 1)
+        {
+            skillManager.StartAnimator();
+        }
     }
 
     public void StartSkill(int skillNum)
@@ -125,7 +127,8 @@ public class Skill : MonoBehaviour
         SetIdle();
         if(max_charge != 0)
         {
-            StartCoroutine(CountCharge());
+            coroutine = CountCharge();
+            StartCoroutine(coroutine);
         }
         else
         {
@@ -144,13 +147,13 @@ public class Skill : MonoBehaviour
             }
             ChargeUp();
         }
-        StopCharge();
+        StartCoroutine(CountHit());
     }
     public void StopCharge()
     {
         if (!counting)
         {
-            StopAllCoroutines();
+            StopCoroutine(coroutine);
             StartCoroutine(CountHit());
         }
     }
@@ -159,11 +162,18 @@ public class Skill : MonoBehaviour
     {
         counting = true;
         current_hit = 0;
-        for(int i = 0; i < hitInfo.Hit_01; i++)
+        if(ChargeMax > 0)
         {
-            yield return null;
+            HitUp();
         }
-        HitUp();
+        else
+        {
+            for (int i = 0; i < hitInfo.Hit_01; i++)
+            {
+                yield return null;
+            }
+            HitUp();
+        }
         if (hitInfo.Hit_02 != 0)
         {
             for (int i = 0; i < hitInfo.Hit_02; i++)

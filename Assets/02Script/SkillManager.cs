@@ -176,6 +176,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         }
     }
 
+    public void SetWeaponColider(bool use)
+    {
+        weapon.SetColider(use);
+    }
+
     public void StopCharge()
     {
         switch (useSkill)
@@ -407,7 +412,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         {
             skillPhysics = skill.Damage_A + skill.Damage_B * skill.Skill_Level;
         }
-        return skillPhysics * skillPhysics;
+        return weaponPhysics * skillPhysics;
     }
 
     public void SetPulledPoint(Vector3 point)
