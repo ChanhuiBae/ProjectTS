@@ -127,6 +127,18 @@ public class Effect : MonoBehaviour, IPoolObject
         Debug.Log("End");
     }
 
+    public void SetColorInversion(bool use)
+    {
+        if (use)
+        {
+            postColor.gradingMode.Override(GradingMode.LowDefinitionRange);
+        }
+        else
+        {
+            postColor.gradingMode.Override(GradingMode.HighDefinitionRange);
+        }
+    }
+
     public void SetGray(bool gray)
     {
         if (gray)
