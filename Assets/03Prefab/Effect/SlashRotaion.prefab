@@ -104,10 +104,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3516644108848336400, guid: 97541ad477dcb854cbc82c2f2f048ecd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072226739457455275, guid: 97541ad477dcb854cbc82c2f2f048ecd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5268635810390304481, guid: 97541ad477dcb854cbc82c2f2f048ecd,
         type: 3}
       propertyPath: m_Name
       value: EF_tire
+      objectReference: {fileID: 0}
+    - target: {fileID: 5268635810390304481, guid: 97541ad477dcb854cbc82c2f2f048ecd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
