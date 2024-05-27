@@ -93460,6 +93460,89 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1001 &1474198356
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1607871971071739154, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607871971071739154, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607871971071739154, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607871971071739154, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607871971071739154, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607871971071739154, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607871971071739154, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607871971071739154, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607871971071739154, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607871971071739154, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607871971071739155, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607871971071739181, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_Name
+      value: CFXR4 Laser + Trail (Blue)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607871971130964457, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830482881508094580, guid: bb453bed59e1b5848bcbd1e9eb07745a,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb453bed59e1b5848bcbd1e9eb07745a, type: 3}
 --- !u!1 &1483840966
 GameObject:
   m_ObjectHideFlags: 0
@@ -113867,7 +113950,7 @@ PrefabInstance:
     - target: {fileID: 3491031501486089240, guid: 6ff6eb917ae5174468aa0f3aaa822bc6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5747626853613307883, guid: 6ff6eb917ae5174468aa0f3aaa822bc6,
         type: 3}
@@ -138787,3 +138870,4 @@ SceneRoots:
   - {fileID: 1924362267}
   - {fileID: 1209093599}
   - {fileID: 1931825369}
+  - {fileID: 1474198356}
