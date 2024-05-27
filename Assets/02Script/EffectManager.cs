@@ -12,7 +12,9 @@ public class EffectManager : MonoBehaviour
     private Weapon weapon;
     private Transform point;
 
-    private PostProcessLayer post;
+    private PostProcessVolume post;
+    private ColorGrading postColor;
+
     private FollowCamera cameraControl;
 
     private ParticleSystem charge1;
@@ -30,11 +32,15 @@ public class EffectManager : MonoBehaviour
             {
                 Debug.Log("EffectManager - Awake - SkillManager");
             }
-            if(!Camera.main.TryGetComponent<PostProcessLayer>(out post))
+            if (!GameObject.Find("Post").TryGetComponent<PostProcessVolume>(out post))
             {
-                Debug.Log("EffectManager - Awake - PostProcessLayer");
+                Debug.Log("Effect - Awake - PostProcessVolume");
             }
-            if(!Camera.main.TryGetComponent<FollowCamera>(out cameraControl))
+            if (!post.profile.TryGetSettings<ColorGrading>(out postColor))
+            {
+                Debug.Log("Effect - Awake - ColorGranding");
+            }
+            if (!Camera.main.TryGetComponent<FollowCamera>(out cameraControl))
             {
                 Debug.Log("EffectManager - Awake - FollowCamera");
             }
@@ -205,8 +211,28 @@ public class EffectManager : MonoBehaviour
         effect.Init(EffectType.None, transform.position, 1f);
     }
 
+    public void SetColorInversion(bool use)
+    {
+        if (use)
+        {
+            postColor.gradingMode.Override(GradingMode.LowDefinitionRange);
+        }
+        else
+        {
+            postColor.gradingMode.Override(GradingMode.HighDefinitionRange);
+        }
+    }
+
     public void SetGray(bool gray)
     {
+        if (gray)
+        {
+            postColor.saturation.value = -100f;
+        }
+        else
+        {
+            postColor.saturation.value = 0f;
+        }
 
     }
 
