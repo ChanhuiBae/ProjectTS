@@ -477,7 +477,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.43767774
+      - time: 0.4239791
         functionName: AttackGrenade
         data: 
         objectReferenceParameter: {instanceID: 0}

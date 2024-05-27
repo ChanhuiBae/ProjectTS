@@ -102,11 +102,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         down.eventID = EventTriggerType.PointerDown;
         down.callback.AddListener((data)  => { OnPointerDown((PointerEventData)data); });
         trigger.triggers.Add(down);
-
-        up = new EventTrigger.Entry();
-        up.eventID = EventTriggerType.PointerUp;
-        up.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
-        trigger.triggers.Add(up);
     }
 
     void OnPointerDown(PointerEventData eventData)
@@ -122,6 +117,13 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 skillManager.IsCharge = true;
                 AttackSkill();
                 isUse = true;
+                if (!isCharging && !isScoping)
+                {
+                    skillManager.IsCharge = false;
+                    skillManager.StopCharge();
+                    trigger.enabled = false;
+                    StartCoroutine(CoolTime());
+                }
             }
             else
             {
@@ -133,13 +135,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             if (scopingTime > 0)
             {
                 StartCoroutine(InitTimer(scopingTime));
-            }
-            if (!isCharging && !isScoping)
-            {
-                skillManager.IsCharge = false;
-                skillManager.StopCharge();
-                trigger.enabled = false;
-                StartCoroutine(CoolTime());
             }
             if(currentStack < maxStack && !coolTimeRun)
             {
@@ -300,6 +295,13 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             }
             scopingTime = skill.Scoping_Time;
             isCharging = skill.Is_Charging;
+            if (isCharging)
+            {
+                up = new EventTrigger.Entry();
+                up.eventID = EventTriggerType.PointerUp;
+                up.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
+                trigger.triggers.Add(up);
+            }
             maxStack = skill.Stack_Max;
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + level + "01";
             TableEntity_Skill info;
