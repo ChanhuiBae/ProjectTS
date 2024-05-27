@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using static UnityEditor.PlayerSettings;
 
 public enum EffectType
 {
@@ -49,6 +50,13 @@ public class Effect : MonoBehaviour, IPoolObject
         StartCoroutine(ReturnPool(lifeTime));
     }
 
+    public void InitFollow(EffectType type, GameObject target, float lifeTime)
+    {
+        this.type = type;
+        StartCoroutine(FollowTarget(target, lifeTime));
+        StartCoroutine(ReturnPool(lifeTime));
+    }
+
     public void SetScale(float size)
     {
         transform.LeanScale(Vector3.one * size,0);
@@ -64,7 +72,16 @@ public class Effect : MonoBehaviour, IPoolObject
         yield return YieldInstructionCache.WaitForSeconds(lifeTime);
         skillManager.TakeEffect(poolName, this);
     }
-
+    private IEnumerator FollowTarget(GameObject target, float lifeTime)
+    {
+        float i = 0;
+        while (i < lifeTime)
+        {
+            yield return null;
+            i += 0.017f;
+            transform.position = target.transform.position;
+        }
+    }
     public void ReturenEffect()
     {
         StopAllCoroutines();

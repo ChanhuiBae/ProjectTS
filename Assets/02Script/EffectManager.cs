@@ -126,19 +126,7 @@ public class EffectManager : MonoBehaviour
     public void SetTrail()
     {
         effect = skillManager.SpawnEffect(4);
-        effect.Init(EffectType.None, weapon.transform.position, 1);
-        StartCoroutine(FollowWeaponPoint());
-    }
-
-    private IEnumerator FollowWeaponPoint()
-    {
-        int i = 0;
-        while (i < 60)
-        {
-            yield return null;
-            effect.transform.position = point.position;
-            i++;
-        }
+        effect.InitFollow(EffectType.None, point.gameObject, 1f);
     }
 
     public void NarakaEffect()
@@ -149,6 +137,13 @@ public class EffectManager : MonoBehaviour
 
         effect = skillManager.SpawnEffect(15);
         effect.Init(EffectType.None, point.position+ new Vector3(0,0.5f,0), 12f);
+    }
+
+    public void NarakaPlayerEffect()
+    {
+        float time = 1.5f;
+        effect = skillManager.SpawnEffect(17);
+        effect.InitFollow(EffectType.None, gameObject, time);
     }
 
     public void SamsaraEffect()
