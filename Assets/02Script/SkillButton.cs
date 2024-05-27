@@ -99,21 +99,14 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             Debug.Log("SkillButton - Awake -  EventTrigger");
         }
         down = new EventTrigger.Entry();
-        up = new EventTrigger.Entry();
-        drag = new EventTrigger.Entry();
-        dragEnd = new EventTrigger.Entry();
         down.eventID = EventTriggerType.PointerDown;
-        up.eventID = EventTriggerType.PointerUp;
-        drag.eventID = EventTriggerType.Drag;
-        dragEnd.eventID = EventTriggerType.EndDrag;
         down.callback.AddListener((data)  => { OnPointerDown((PointerEventData)data); });
         trigger.triggers.Add(down);
+
+        up = new EventTrigger.Entry();
+        up.eventID = EventTriggerType.PointerUp;
         up.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
         trigger.triggers.Add(up);
-        drag.callback.AddListener((data) => { OnDrag((PointerEventData)data); });
-        trigger.triggers.Add(drag);
-        dragEnd.callback.AddListener((data) => { OnEndDrag((PointerEventData)data); });
-        trigger.triggers.Add(dragEnd);
     }
 
     void OnPointerDown(PointerEventData eventData)
@@ -301,6 +294,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             TableEntity_Skill_List skill;
             GameManager.Inst.GetSkillList(skill_ID,out skill);
             isScoping = skill.Is_Scoping;
+            if (isScoping)
+            {
+                SetDrag();
+            }
             scopingTime = skill.Scoping_Time;
             isCharging = skill.Is_Charging;
             maxStack = skill.Stack_Max;
@@ -331,9 +328,26 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             TableEntity_Skill_List skill;
             GameManager.Inst.GetSkillList(connectedID, out skill);
             connectedScoping = skill.Is_Scoping;
+            if (connectedScoping)
+            {
+                SetDrag();
+            }
             connectedCharging = skill.Is_Charging;
             connectedUse = false;
         }
+    }
+
+    private void SetDrag()
+    {
+        drag = new EventTrigger.Entry();
+        drag.eventID = EventTriggerType.Drag;
+        drag.callback.AddListener((data) => { OnDrag((PointerEventData)data); });
+        trigger.triggers.Add(drag);
+
+        dragEnd = new EventTrigger.Entry();
+        dragEnd.eventID = EventTriggerType.EndDrag;
+        dragEnd.callback.AddListener((data) => { OnEndDrag((PointerEventData)data); });
+        trigger.triggers.Add(dragEnd);
     }
 
     private IEnumerator CoolTime()

@@ -338,7 +338,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
             if (count >= hit_count)
             {
-                skillManager.SpawnBasicProjectile(weapon.transform.GetChild(1).transform.position);
+                skillManager.SpawnBasicProjectile(weapon.transform.GetChild(0).transform.position);
                 skillManager.UseSkill(0);
                 count = 0;
             }
@@ -387,7 +387,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
             if (count >= hit_count)
             {
-                skillManager.SpawnAPHEProjectile(weapon.transform.GetChild(1).transform.position);
+                skillManager.SpawnAPHEProjectile(weapon.transform.GetChild(0).transform.position);
                 count = 0;
             }
             if (total >= 300)

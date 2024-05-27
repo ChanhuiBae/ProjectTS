@@ -192,10 +192,6 @@ public class EffectManager : MonoBehaviour
         effect.StayCount(600, weapon.Attack_Speed);
     }
 
-    public void CallDrone()
-    {
-
-    }
 
     public void TC_Effect()
     {

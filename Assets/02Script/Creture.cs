@@ -95,7 +95,12 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             float damage = hiter.TakeDamage(physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
             currentHP -= damage;
             Debug.Log("Damage: " + damage);
-           
+
+            ChargeUltimate(damage);
+            if (!DieCheck())
+            {
+                SpawnHitEffect(damage);
+            }
         }
     }
     public void CalculateDamageByKey(AttackType attack, int key, ITakeDamage hiter)
@@ -104,7 +109,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         {
             float damage = hiter.TakeDamageByKey(key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
             currentHP -= damage;
-            Debug.Log("Damage: " + damage);
+            Debug.Log("Damage key: " + damage);
 
             ChargeUltimate(damage);
             if (!DieCheck())

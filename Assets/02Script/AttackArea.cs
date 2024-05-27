@@ -93,7 +93,7 @@ public class AttackArea : MonoBehaviour
     public void StartView()
     {
         full.Play();
-        view.transform.position = transform.root.position + sphereCol.center;
+        view.transform.position = transform.root.position + sphereCol.center + new Vector3(0,0.2f,0);
         view.startSize = sphereCol.radius * 2;
         view.Play();
     }

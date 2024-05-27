@@ -27,7 +27,7 @@ public class HPItem : MonoBehaviour, IPoolObject
     {
         this.hp = hp;
         transform.position = pos + new Vector3(Random.Range(-2f, 2f), 3f, Random.Range(-2f, 2f));
-        LeanTween.move(gameObject, new Vector3(transform.position.x, 1.5f, transform.position.z), 1f).setEase(LeanTweenType.easeOutBounce);
+        LeanTween.move(gameObject, new Vector3(transform.position.x, 0.5f, transform.position.z), 1f).setEase(LeanTweenType.easeOutBounce);
     }
     private IEnumerator Absorb(GameObject target)
     {
