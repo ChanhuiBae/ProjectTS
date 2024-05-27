@@ -335,12 +335,24 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 SetDrag();
             }
             connectedCharging = skill.Is_Charging;
+            if (connectedCharging)
+            {
+                up = new EventTrigger.Entry();
+                up.eventID = EventTriggerType.PointerUp;
+                up.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
+                trigger.triggers.Add(up);
+            }
             connectedUse = false;
         }
     }
 
     private void SetDrag()
     {
+        up = new EventTrigger.Entry();
+        up.eventID = EventTriggerType.PointerUp;
+        up.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
+        trigger.triggers.Add(up);
+
         drag = new EventTrigger.Entry();
         drag.eventID = EventTriggerType.Drag;
         drag.callback.AddListener((data) => { OnDrag((PointerEventData)data); });
