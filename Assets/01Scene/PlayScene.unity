@@ -4063,6 +4063,7 @@ Transform:
   - {fileID: 1834764980}
   - {fileID: 1085298597}
   - {fileID: 1315144707}
+  - {fileID: 1592944034}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1186566248
@@ -4185,6 +4186,12 @@ MonoBehaviour:
       type: 3}
     _count: 2
     _container: {fileID: 1315144707}
+    _nonLazy: 0
+  - _name: CreatureDie
+    _component: {fileID: 1735279535405296703, guid: e9cf34292a9cfb94690623b1140b415b,
+      type: 3}
+    _count: 30
+    _container: {fileID: 1592944034}
     _nonLazy: 0
 --- !u!1 &1262281705
 GameObject:
@@ -5280,6 +5287,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1586095333}
   m_CullTransparentMesh: 1
+--- !u!1 &1592944033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1592944034}
+  m_Layer: 0
+  m_Name: CreturreDie
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1592944034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592944033}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1186566247}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1594292094
 GameObject:
   m_ObjectHideFlags: 0

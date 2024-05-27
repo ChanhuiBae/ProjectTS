@@ -11,6 +11,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     [SerializeField]
     private string poolName;
     private SpawnManager spawnManager;
+    private SkillManager skillManager;
     private int ID;
     private float maxHP;
     private float currentHP;
@@ -45,6 +46,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         if (!GameObject.Find("PoolManager").TryGetComponent<SpawnManager>(out spawnManager))
         {
             Debug.Log("Creture - Awake - SpawnManager");
+        }
+        if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
+        {
+            Debug.Log("Creture - Awake - skillManager");
         }
         if(!transform.Find("Stun").gameObject.TryGetComponent<Effect>(out stun))
         {
@@ -114,6 +119,9 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
                 ai.Die();
 
                 GameManager.Inst.AddKillCount();
+
+                effect = skillManager.SpawnEffect(18);
+                effect.Init(EffectType.None, transform.position, 1f);
                 spawnManager.SpawnHPItem(transform.position);
                 spawnManager.SpawnEXPItem(transform.position);
                 spawnManager.ReturnCreature(poolName, this);
