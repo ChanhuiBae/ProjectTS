@@ -95,47 +95,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             float damage = hiter.TakeDamage(physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
             currentHP -= damage;
             Debug.Log("Damage: " + damage);
-            switch (type)
-            {
-                case CretureType.Normal:
-                    GameManager.Inst.AddUaltimate(damage * 0.01f);
-                    break;
-                case CretureType.Noble:
-                    GameManager.Inst.AddUaltimate(damage * 0.02f);
-                    break;
-                case CretureType.Swarm_Boss:
-                    GameManager.Inst.AddUaltimate(damage * 0.5f);
-                    break;
-                case CretureType.Guvnor:
-                    GameManager.Inst.AddUaltimate(damage);
-                    break;
-                case CretureType.Elite:
-                    GameManager.Inst.AddUaltimate(damage * 0.3f);
-                    break;
-            }
-            if (currentHP < 0)
-            {
-                IsDie = true;
-                ai.Die();
-
-                GameManager.Inst.AddKillCount();
-
-                effect = skillManager.SpawnEffect(18);
-                effect.Init(EffectType.None, transform.position, 1f);
-                spawnManager.SpawnHPItem(transform.position);
-                spawnManager.SpawnEXPItem(transform.position);
-                spawnManager.ReturnCreature(poolName, this);
-            }
-            if (damage < 200 && damage > 0)
-            {
-                effect = spawnManager.SpawnEffect(0);
-                effect.Init(EffectType.None, transform.position + Vector3.up, 1);
-            }
-            else if (damage > 200)
-            {
-                effect = spawnManager.SpawnEffect(1);
-                effect.Init(EffectType.None, transform.position + Vector3.up, 1);
-            }
+           
         }
     }
     public void CalculateDamageByKey(AttackType attack, int key, ITakeDamage hiter)
@@ -145,45 +105,67 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             float damage = hiter.TakeDamageByKey(key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
             currentHP -= damage;
             Debug.Log("Damage: " + damage);
-            
-            switch (type)
+
+            ChargeUltimate(damage);
+            if (!DieCheck())
             {
-                case CretureType.Normal:
-                    GameManager.Inst.AddUaltimate(damage * 0.01f);
-                    break;
-                case CretureType.Noble:
-                    GameManager.Inst.AddUaltimate(damage * 0.02f);
-                    break;
-                case CretureType.Swarm_Boss:
-                    GameManager.Inst.AddUaltimate(damage * 0.5f);
-                    break;
-                case CretureType.Guvnor:
-                    GameManager.Inst.AddUaltimate(damage);
-                    break;
-                case CretureType.Elite:
-                    GameManager.Inst.AddUaltimate(damage * 0.3f);
-                    break;
-            }
-            if (currentHP < 0)
-            {
-                IsDie = true;
-                ai.Die();
-                GameManager.Inst.AddKillCount();
-                spawnManager.SpawnHPItem(transform.position);
-                spawnManager.SpawnEXPItem(transform.position);
-                spawnManager.ReturnCreature(poolName, this);
-            }
-            if (damage < 200 && damage > 0)
-            {
-                effect = spawnManager.SpawnEffect(0);
-                effect.Init(EffectType.None, transform.position + Vector3.up, 1);
-            }
-            else if (damage > 200)
-            {
-                effect = spawnManager.SpawnEffect(1);
-                effect.Init(EffectType.None, transform.position + Vector3.up, 1);
+                SpawnHitEffect(damage);
             }
         }
+    }
+
+    private void ChargeUltimate(float damage)
+    {
+        switch (type)
+        {
+            case CretureType.Normal:
+                GameManager.Inst.AddUaltimate(damage * 0.01f);
+                break;
+            case CretureType.Noble:
+                GameManager.Inst.AddUaltimate(damage * 0.02f);
+                break;
+            case CretureType.Swarm_Boss:
+                GameManager.Inst.AddUaltimate(damage * 0.5f);
+                break;
+            case CretureType.Guvnor:
+                GameManager.Inst.AddUaltimate(damage);
+                break;
+            case CretureType.Elite:
+                GameManager.Inst.AddUaltimate(damage * 0.3f);
+                break;
+        }
+    }
+
+    private void SpawnHitEffect(float damage)
+    {
+        if (damage < 200 && damage > 0)
+        {
+            effect = spawnManager.SpawnEffect(0);
+            effect.Init(EffectType.None, transform.position + Vector3.up, 1);
+        }
+        else if (damage > 200)
+        {
+            effect = spawnManager.SpawnEffect(1);
+            effect.Init(EffectType.None, transform.position + Vector3.up, 1);
+        }
+    }
+
+    private bool DieCheck()
+    {
+        if (currentHP < 0)
+        {
+            IsDie = true;
+            ai.Die();
+
+            GameManager.Inst.AddKillCount();
+
+            effect = skillManager.SpawnEffect(18);
+            effect.Init(EffectType.None, transform.position, 2f);
+            spawnManager.SpawnHPItem(transform.position);
+            spawnManager.SpawnEXPItem(transform.position);
+            spawnManager.ReturnCreature(poolName, this);
+        }
+        return IsDie;
     }
 
     public void OnCreatedInPool()

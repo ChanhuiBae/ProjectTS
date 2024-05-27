@@ -132,7 +132,7 @@ public class Projectile : MonoBehaviour, IPoolObject
                     trail.enabled = false;
                     rig.velocity = Vector3.zero;
                     Effect effect = skillManager.SpawnEffect(8);
-                    effect.Init(EffectType.Once, transform.position, 1f);
+                    effect.Init(EffectType.Once, transform.position, 2f);
                     effect.Key = key;
                     skillManager.TakeProjectile(poolName, this);
                 }

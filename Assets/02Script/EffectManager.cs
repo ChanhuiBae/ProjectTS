@@ -182,13 +182,19 @@ public class EffectManager : MonoBehaviour
             attackArea.AttackInAngle();
         }
     }
-    public void CallDrone()
+    public void SpawnDrone()
     {
+        //old version
         effect = skillManager.SpawnEffect(9);
         effect.Init(EffectType.Multiple, transform.position + Vector3.up, 600 * 0.017f);
         effect.SetRotation(transform.rotation);
         effect.Key = skillManager.GetCurrentKey();
         effect.StayCount(600, weapon.Attack_Speed);
+    }
+
+    public void CallDrone()
+    {
+
     }
 
     public void TC_Effect()
