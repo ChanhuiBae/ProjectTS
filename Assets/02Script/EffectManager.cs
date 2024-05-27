@@ -120,7 +120,7 @@ public class EffectManager : MonoBehaviour
         effect.SetRotation(point.rotation);
 
         effect = skillManager.SpawnEffect(11);
-        effect.Init(EffectType.Once, position, 1.3f);
+        effect.Init(EffectType.Once, position, 3f);
         effect.SetRotation(Quaternion.identity);
     }
     public void SetTrail()
