@@ -166,12 +166,14 @@ public class Weapon : MonoBehaviour
     }
     public void OnTrail()
     {
-        trail.Play();
+        if(trail != null)
+            trail.Play();
     }
 
     public void OffTrail()
     {
-        trail.Stop();
+        if(trail != null)
+            trail.Stop();
     }
 
 
