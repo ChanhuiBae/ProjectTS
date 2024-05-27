@@ -302,6 +302,7 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.Move(true);
         anim.Combat(true);
         int count = 0;
+        float hit_count = 60 / weapon.Attack_Speed;
         while (true)
         {
             look = skillManager.GetLook();
@@ -335,7 +336,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 anim.Move(false);
             }
 
-            if (count == 60)
+            if (count >= hit_count)
             {
                 skillManager.SpawnBasicProjectile(weapon.transform.GetChild(1).transform.position);
                 skillManager.UseSkill(0);
@@ -351,6 +352,7 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.Move(true);
         anim.Combat(true);
         int count = 60;
+        float hit_count = 30 / weapon.Attack_Speed;
         int total = 0;
         while (true)
         {
@@ -383,7 +385,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 anim.Move(false);
             }
 
-            if (count == 60)
+            if (count >= hit_count)
             {
                 skillManager.SpawnAPHEProjectile(weapon.transform.GetChild(1).transform.position);
                 count = 0;
