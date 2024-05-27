@@ -422,6 +422,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
 
     public void TakeDamageOther(AttackType attack, Collider other)
     {
+        Debug.Log(useSkill);
         if (useSkill > -1)
         {
             if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))

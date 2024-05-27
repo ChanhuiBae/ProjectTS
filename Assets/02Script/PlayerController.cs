@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 case State.Idle:
                     if (SceneManager.GetActiveScene().buildIndex > 2)
-                        skillManager.UseSkill(-1);
+                        skillManager.UseSkill(-2);
                     StartCoroutine(Idle());
                     break;
                 case State.MoveForward:
@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour, IDamage
         attackArea.StopAttack();
         skillManager.SetCrowdControl(CrowdControlType.None);
         skillManager.ClearVector();
-        weapon.OffTrail();
+        weapon.OffTrail(); 
         StopAllCoroutines();
         ChangeState(State.Idle);
     }
@@ -289,7 +289,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 Move();
                 transform.LookAt(transform.position + direction);
             }
-            else
+            else if(state != State.Attack_Skill && direction == Vector3.zero)
             {
                 ChangeState(State.Idle);
             }

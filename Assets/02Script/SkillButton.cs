@@ -184,7 +184,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 stackCount.text = currentStack.ToString();
             }
         }
-        if(!isDrag)
+        if(!isDrag && !isCharging)
         {
             player.SetIdle();
         }

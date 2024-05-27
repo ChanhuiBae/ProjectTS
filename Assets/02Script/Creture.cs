@@ -165,7 +165,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             GameManager.Inst.AddKillCount();
 
             effect = skillManager.SpawnEffect(18);
-            effect.Init(EffectType.None, transform.position, 2f);
+            effect.Init(EffectType.None, transform.position, 6f);
             spawnManager.SpawnHPItem(transform.position);
             spawnManager.SpawnEXPItem(transform.position);
             spawnManager.ReturnCreature(poolName, this);
