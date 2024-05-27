@@ -107,7 +107,7 @@ public class Weapon : MonoBehaviour
     }
     private BoxCollider col;
     private SkillManager skillManager;
-    private TrailRenderer trail;
+    private ParticleSystem trail;
 
     private void Awake()
     {
@@ -120,13 +120,13 @@ public class Weapon : MonoBehaviour
             Debug.Log("Weapon - Awake - SkillManager");
         }
 
-        if (!transform.GetChild(0).TryGetComponent<TrailRenderer>(out trail))
+        if (!transform.GetChild(0).TryGetComponent<ParticleSystem>(out trail))
         {
-            Debug.Log("Weapon - Awake - TrailRenderer");
+            Debug.Log("Weapon - Awake - ParticleSystem");
         }
         else
         {
-            trail.enabled = false;
+            trail.Stop();
         }
     }
 
@@ -166,12 +166,12 @@ public class Weapon : MonoBehaviour
     }
     public void OnTrail()
     {
-        trail.enabled = true;
+        trail.Play();
     }
 
     public void OffTrail()
     {
-        trail.enabled = false;
+        trail.Stop();
     }
 
 
