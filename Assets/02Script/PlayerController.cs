@@ -509,7 +509,7 @@ public class PlayerController : MonoBehaviour, IDamage
         if(look != Vector3.zero)
         {
             transform.LookAt(look + transform.position);
-            skillManager.PinPointDown(look);
+            skillManager.PinPointDown(look/2 + transform.position);
         }
         if (skillManager.GetVectorCount() == 0)
             anim.IsCombo(false);

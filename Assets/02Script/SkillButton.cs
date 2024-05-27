@@ -239,7 +239,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             if (maxStack != 0)
             {
                 skillManager.StopAttackArea();
-                skillManager.MoveAttackArea(direction * 0.2f, 2);
+                skillManager.MoveAttackArea(direction * 0.5f, 2);
                 skillManager.ShowAttackArea();
                 if(skillManager.GetVectorCount() == 0)
                     player.LookAttackArea();
