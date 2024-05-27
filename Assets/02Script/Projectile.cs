@@ -55,7 +55,7 @@ public class Projectile : MonoBehaviour, IPoolObject
     {
         transform.rotation = rotation;
         rig.velocity = Vector3.zero;
-        rig.AddForce(transform.forward * 8f, ForceMode.Impulse);
+        rig.AddForce(transform.forward * 12f, ForceMode.Impulse);
         StartCoroutine(TimeOut(5f));
     }
     public void AttackGrenade(Quaternion rotation)
@@ -71,8 +71,8 @@ public class Projectile : MonoBehaviour, IPoolObject
     {
         transform.rotation = rotation;
         rig.velocity = Vector3.zero;
-        rig.AddForce(transform.forward * 8f, ForceMode.Impulse);
-        StartCoroutine(TimeOut(0.5f));
+        rig.AddForce(transform.forward * 12f, ForceMode.Impulse);
+        StartCoroutine(TimeOut(5f));
     }
     public void AttackSlash(Quaternion rotation)
     {
