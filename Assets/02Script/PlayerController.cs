@@ -284,7 +284,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 }
             }
             GetDirection();
-            if(direction != Vector3.zero)
+            if(direction != Vector3.zero && anim.CanMove())
             {
                 Move();
                 transform.LookAt(transform.position + direction);

@@ -70,6 +70,15 @@ public class PlayerAnimationController : MonoBehaviour
         return animator.GetCurrentAnimatorStateInfo(0).IsName("HammerAttack1");
     }
 
+    public bool CanMove()
+    {
+        float skillID = animator.GetInteger(H_Skill);
+        if (skillID == 0)
+            return true;
+        else 
+            return false;
+    }
+
     public void Roll()
     {
         animator.SetTrigger(H_Roll);
