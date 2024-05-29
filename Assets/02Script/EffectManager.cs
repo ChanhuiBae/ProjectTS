@@ -133,7 +133,13 @@ public class EffectManager : MonoBehaviour
     public void SetTrail()
     {
         effect = skillManager.SpawnEffect(4);
-        effect.InitFollow(EffectType.None, point.gameObject, 1f);
+        effect.InitFollow(EffectType.None, point.gameObject, 2f);
+    }
+
+    public void DragonEffect()
+    {
+        effect = skillManager.SpawnEffect(23);
+        effect.InitFollow(EffectType.None, point.gameObject, 2f);
     }
 
     public void NarakaEffect()
