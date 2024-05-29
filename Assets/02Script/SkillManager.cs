@@ -13,6 +13,7 @@ public enum AttackType
 public class SkillManager : MonoBehaviour, ITakeDamage
 {
     private PlayerController player;
+    private PlayerAnimationController anim;
     private Weapon weapon;
     private AttackArea attackArea;
     private EffectManager effect;
@@ -49,10 +50,13 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         {
             Debug.Log("SkillManager - Awake - PlayerController");
         }
-
+        if(!player.TryGetComponent<PlayerAnimationController>(out anim))
+        {
+            Debug.Log("SkillManager - Awake - PlayerAnimationControllerr");
+        }
         if (!player.TryGetComponent<EffectManager>(out effect))
         {
-            Debug.Log("PlayerController - Awake - EffectManager");
+            Debug.Log("SkillManager - Awake - EffectManager");
         }
 
         if (!obj.transform.Find("AttackArea").TryGetComponent<AttackArea>(out attackArea))
@@ -417,6 +421,27 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     public void SetPulledPoint(Vector3 point)
     {
         pulledPoint = point;
+    }
+
+    public void SetBoxes()
+    {
+        effect.SetBoxArea();
+    }
+
+    public void MoveBoxes(Vector3 look)
+    {
+        player.transform.LookAt(look + transform.position);
+        effect.MoveBoxes(look);
+    }
+
+    public void DropMissile()
+    {
+        effect.DropMissile();
+    }
+
+    public void AttackAnim()
+    {
+        anim.Attack(true);
     }
 
     public void TakeDamageOther(AttackType attack, Collider other)

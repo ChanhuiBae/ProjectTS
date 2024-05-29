@@ -23,6 +23,7 @@ public class EffectManager : MonoBehaviour
     private bool fullCharge;
 
     private Effect effect;
+    List<Effect> effects = new List<Effect>();
 
     private void Awake()
     {
@@ -211,6 +212,59 @@ public class EffectManager : MonoBehaviour
     {
         effect = skillManager.SpawnEffect(6);
         effect.Init(EffectType.None, transform.position, 1f);
+    }
+
+    public void SetBoxArea()
+    { 
+        effects.Clear();
+        for(int i = 0; i < 5; i++)
+        {
+            effect = skillManager.SpawnEffect(19);
+            effect.InitNotTime(EffectType.None, transform.position + transform.forward * (i+1));
+            effect.SetRotation(transform.rotation);
+            effects.Add(effect);
+        }
+    }
+
+    public void MoveBoxes(Vector3 dirction)
+    {
+        dirction /= 18;
+        for(int i = 0;i < 5;i++)
+        {
+            effects[i].transform.position = transform.position + dirction * i + transform.forward;
+            effects[i].SetRotation(transform.rotation);
+        }
+    }
+
+    public void DropMissile()
+    {
+        StartCoroutine(StartDrop());
+    }
+
+    private IEnumerator StartDrop()
+    {
+        effect = skillManager.SpawnEffect(22);
+        effect.Init(EffectType.None, transform.position - transform.forward * 50 + Vector3.up*10, 5f);
+        effect.SetRotation(transform.rotation);
+        effect.MoveForward();
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            effect = skillManager.SpawnEffect(20);
+            effect.Init(EffectType.None, effects[i].transform.position + Vector3.up, 1f);
+            effect.SetRotation(effects[i].transform.rotation);
+            yield return YieldInstructionCache.WaitForSeconds(0.5f);
+
+            effect = skillManager.SpawnEffect(21);
+            effect.Init(EffectType.Once, effects[i].transform.position, 1f);
+            effect.SetRotation(effects[i].transform.rotation);
+            effects[i].ReturenEffect();
+            yield return YieldInstructionCache.WaitForSeconds(1f);
+        }
+        effects.Clear();
+        PlayerController player = transform.GetComponent<PlayerController>();
+        player.SetIdle();
     }
 
     public void SetColorInversion(bool use)

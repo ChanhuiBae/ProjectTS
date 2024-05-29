@@ -40,6 +40,12 @@ public class Effect : MonoBehaviour, IPoolObject
         StartCoroutine(ReturnPool(lifeTime));
     }
 
+    public void InitNotTime(EffectType type, Vector3 pos)
+    {
+        this.type = type;
+        transform.position = pos;
+    }
+
     public void InitFollow(EffectType type, GameObject target, float lifeTime)
     {
         this.type = type;
@@ -55,6 +61,11 @@ public class Effect : MonoBehaviour, IPoolObject
     public void SetRotation(Quaternion rotation)
     {
         transform.rotation = rotation;
+    }
+
+    public void MoveForward()
+    {
+        transform.LeanMove(transform.forward *30, 2f);
     }
 
     private IEnumerator ReturnPool(float lifeTime)

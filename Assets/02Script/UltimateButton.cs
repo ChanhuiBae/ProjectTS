@@ -129,8 +129,15 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             skillManager.IsCharge = false;
             GameManager.Inst.ResetUltimate();
-            StartCoroutine(CheckEnd());
             connectedUse = false;
+        }
+        if(ID == 331)
+        {
+            skillManager.SetBoxes();
+        }
+        else
+        {
+            StartCoroutine(CheckEnd());
         }
     }
 
@@ -158,50 +165,62 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             icon.rectTransform.position = center.position;
             icon.transform.SetSiblingIndex(0);
+            icon.sprite = Resources.Load<Sprite>("Image/" + name);
             trigger.enabled = false;
+            if (ID == 331)
+            {
+                skillManager.AttackAnim();
+                skillManager.DropMissile();
+
+                SetUaltimate(1);  // todo: delete. this is using for test.
+            }
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if(isScoping && isUse)
-        {
+        Vector2 drag = eventData.position;
+        float x = eventData.position.x - center.position.x;
+        float y = eventData.position.y - center.position.y;
+        float distance = Mathf.Sqrt(x * x + y * y);
 
+        Vector3 v1 = new Vector3(x, y, 0f);
+        v1.Normalize();
+        Vector3 v2 = new Vector3(1, 0, 0);
+        Vector3 cross = Vector3.Cross(v1, v2);
+        float dot = Vector3.Dot(v1, v2);
+
+        if (Mathf.Abs(distance) <= 50)
+            icon.rectTransform.localPosition = new Vector2(x, y);
+        else
+        {
+            float theta = Mathf.Acos(dot);
+            x = Mathf.Cos(theta) * 50;
+            if (cross.z > 0)
+            {
+                y = Mathf.Sin(theta) * 50;
+                y = -y;
+            }
+            else
+            {
+                y = Mathf.Sin(theta) * 50;
+            }
+            icon.rectTransform.localPosition = new Vector2(x, y);
+        }
+        Vector3 direction = new Vector3(x, 0, y);
+
+        if (isScoping && isUse)
+        {
+            if (ID == 331)
+            {
+                skillManager.MoveBoxes(direction);
+            }
         }
         else if (isUse && UseDrag)
         {
             connectedUse = true;
             if (connectedScoping)
             {
-                Vector2 drag = eventData.position;
-                float x = eventData.position.x - center.position.x;
-                float y = eventData.position.y - center.position.y;
-                float distance = Mathf.Sqrt(x * x + y * y);
-
-                Vector3 v1 = new Vector3(x, y, 0f);
-                v1.Normalize();
-                Vector3 v2 = new Vector3(1, 0, 0);
-                Vector3 cross = Vector3.Cross(v1, v2);
-                float dot = Vector3.Dot(v1, v2);
-
-                if (Mathf.Abs(distance) <= 50)
-                    icon.rectTransform.localPosition = new Vector2(x, y);
-                else
-                {
-                    float theta = Mathf.Acos(dot);
-                    x = Mathf.Cos(theta) * 50;
-                    if (cross.z > 0)
-                    {
-                        y = Mathf.Sin(theta) * 50;
-                        y = -y;
-                    }
-                    else
-                    {
-                        y = Mathf.Sin(theta) * 50;
-                    }
-                    icon.rectTransform.localPosition = new Vector2(x, y);
-                }
-                Vector3 direction = new Vector3(x, 0, y);
                 skillManager.StopAttackArea();
                 skillManager.MoveAttackArea(direction * 0.075f, 2);
                 skillManager.ShowAttackArea();
