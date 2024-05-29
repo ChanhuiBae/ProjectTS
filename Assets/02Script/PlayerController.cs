@@ -507,14 +507,18 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void LookAtVector()
     {
-        Vector3 look = skillManager.PopVector();
-        if(look != Vector3.zero)
+        Debug.Log(skillManager.GetVectorCount());
+        if(skillManager.GetVectorCount() != 0)
         {
+            Vector3 look = skillManager.PopVector();
+            Debug.Log(look);
             transform.LookAt(look + transform.position);
-            skillManager.PinPointDown(look/2 + transform.position);
+            skillManager.PinPointDown(look / 4 + transform.position);
+            if (skillManager.GetVectorCount() == 0)
+            {
+                anim.IsCombo(false);
+            }
         }
-        if (skillManager.GetVectorCount() == 0)
-            anim.IsCombo(false);
     }
 
     public void MoveAttackArea()

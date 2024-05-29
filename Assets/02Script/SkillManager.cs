@@ -259,12 +259,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     public void PushVector(Vector3 look)
     {
         queue.Enqueue(look);
+        Debug.Log(queue.Count);
     }
 
     public Vector3 PopVector()
     {
-        if(queue.Count == 0)
-            return Vector3.zero;
         return queue.Dequeue();
     }
 
@@ -422,7 +421,6 @@ public class SkillManager : MonoBehaviour, ITakeDamage
 
     public void TakeDamageOther(AttackType attack, Collider other)
     {
-        Debug.Log(useSkill);
         if (useSkill > -1)
         {
             if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
@@ -433,7 +431,6 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 {
                     case 1:
                         GameManager.Inst.GetSkillData(skill1.GetKey(), out skill);
-                        Debug.Log(skill1.GetKey());
                         break;
                     case 2:
                         GameManager.Inst.GetSkillData(skill2.GetKey(), out skill);

@@ -50,7 +50,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     private EventTrigger.Entry dragEnd;
 
     private bool isDrag;
-
+    private float dragDistance;
  
 
     private void Awake()
@@ -124,6 +124,11 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                     trigger.enabled = false;
                     StartCoroutine(CoolTime());
                 }
+                if (maxStack > 0)
+                {
+                    skillManager.MoveAttackArea(player.transform.forward, 2);
+                    skillManager.ShowAttackArea();
+                }
             }
             else
             {
@@ -167,9 +172,14 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 trigger.enabled = false;
                 StartCoroutine(CoolTime());
             }
-            else if (isScoping && maxStack > 0)
+            else if (maxStack > 0)
             {
+                if(isDrag)
+                    skillManager.PushVector(direction);
+                else
+                    skillManager.PushVector(player.transform.forward);
                 skillManager.StopAttackArea();
+                player.Sit();
             }
             if (currentStack == 0)
             {
@@ -184,10 +194,11 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 stackCount.text = currentStack.ToString();
             }
         }
-        if(!isDrag && !isCharging)
+        if(!isDrag && !isCharging && maxStack == 0)
         {
             player.SetIdle();
         }
+        isDrag = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -206,20 +217,20 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             Vector3 cross = Vector3.Cross(v1, v2);
             float dot = Vector3.Dot(v1, v2);
 
-            if (Mathf.Abs(distance) <= 30)
+            if (Mathf.Abs(distance) <= 40)
                 icon.rectTransform.localPosition = new Vector2(x, y);
             else
             {
                 float theta = Mathf.Acos(dot);
-                x = Mathf.Cos(theta) * 30;
+                x = Mathf.Cos(theta) * dragDistance;
                 if (cross.z > 0)
                 {
-                    y = Mathf.Sin(theta) * 30;
+                    y = Mathf.Sin(theta) * dragDistance;
                     y = -y;
                 }
                 else
                 {
-                    y = Mathf.Sin(theta) * 30;
+                    y = Mathf.Sin(theta) * dragDistance;
                 }
                 icon.rectTransform.localPosition = new Vector2(x, y);
             }
@@ -227,7 +238,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             if (maxStack != 0)
             {
                 skillManager.StopAttackArea();
-                skillManager.MoveAttackArea(direction * 0.5f, 2);
+                skillManager.MoveAttackArea(direction*0.25f, 2);
                 skillManager.ShowAttackArea();
                 if(skillManager.GetVectorCount() == 0)
                     player.LookAttackArea();
@@ -255,12 +266,13 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             }
             else if (maxStack > 0)
             {
-                player.Sit();
-                skillManager.PushVector(direction);
-                direction = Vector3.zero;
+                if (isDrag)
+                    skillManager.PushVector(direction);
                 skillManager.StopAttackArea();
+                player.Sit();
             }
-            if(currentStack == 0)
+
+            if (currentStack == 0)
             {
                 trigger.enabled = false;
                 block.enabled = true;
@@ -268,6 +280,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 icon.transform.SetSiblingIndex(0);
             }
         }
+        isDrag = false;
     }
 
 
@@ -285,6 +298,14 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         }
         else
         {
+            if(skill_ID > 300)
+            {
+                dragDistance = 35;
+            }
+            else
+            {
+                dragDistance = 30;
+            }
             trigger.enabled = true;
             TableEntity_Skill_List skill;
             GameManager.Inst.GetSkillList(skill_ID,out skill);
