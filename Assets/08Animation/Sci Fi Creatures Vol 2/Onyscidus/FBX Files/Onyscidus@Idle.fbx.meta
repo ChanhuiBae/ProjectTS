@@ -1,115 +1,323 @@
 fileFormatVersion: 2
 guid: 356a5684596c0b64e9d9e16d3ce4b7e6
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: Onyscidus_Head
-    100004: Onyscidus_JawLowerLeft
-    100006: Onyscidus_JawLowerRight
-    100008: Onyscidus_JawUpperLeft
-    100010: Onyscidus_JawUpperRight
-    100012: Onyscidus_LegFontLeft1
-    100014: Onyscidus_LegFontLeft2
-    100016: Onyscidus_LegFontLeft3
-    100018: Onyscidus_LegFontRight1
-    100020: Onyscidus_LegFontRight2
-    100022: Onyscidus_LegFontRight3
-    100024: Onyscidus_LegMiddleLeft1
-    100026: Onyscidus_LegMiddleLeft2
-    100028: Onyscidus_LegMiddleLeft3
-    100030: Onyscidus_LegMiddleRight1
-    100032: Onyscidus_LegMiddleRight2
-    100034: Onyscidus_LegMiddleRight3
-    100036: Onyscidus_LegRearLeft1
-    100038: Onyscidus_LegRearLeft2
-    100040: Onyscidus_LegRearLeft3
-    100042: Onyscidus_LegRearRight1
-    100044: Onyscidus_LegRearRight2
-    100046: Onyscidus_LegRearRight3
-    100048: Onyscidus_LowerSpine1
-    100050: Onyscidus_LowerSpine2
-    100052: Onyscidus_LowerSpine3
-    100054: Onyscidus_LowerSpine4
-    100056: Onyscidus_MandibuleLowerLeft1
-    100058: Onyscidus_MandibuleLowerLeft2
-    100060: Onyscidus_MandibuleLowerLeft3
-    100062: Onyscidus_MandibuleLowerRight1
-    100064: Onyscidus_MandibuleLowerRight2
-    100066: Onyscidus_MandibuleLowerRight3
-    100068: Onyscidus_MandibuleMiddleLeft1
-    100070: Onyscidus_MandibuleMiddleLeft2
-    100072: Onyscidus_MandibuleMiddleLeft3
-    100074: Onyscidus_MandibuleMiddleRight1
-    100076: Onyscidus_MandibuleMiddleRight2
-    100078: Onyscidus_MandibuleMiddleRight3
-    100080: Onyscidus_MandibuleUpperLeft1
-    100082: Onyscidus_MandibuleUpperLeft2
-    100084: Onyscidus_MandibuleUpperLeft3
-    100086: Onyscidus_MandibuleUpperRight1
-    100088: Onyscidus_MandibuleUpperRight2
-    100090: Onyscidus_MandibuleUpperRight3
-    100092: Onyscidus_Pelvis
-    100094: Onyscidus_Pelvis2
-    100096: Onyscidus_UpperSpine1
-    100098: Onyscidus_UpperSpine2
-    100100: root
-    400000: //RootNode
-    400002: Onyscidus_Head
-    400004: Onyscidus_JawLowerLeft
-    400006: Onyscidus_JawLowerRight
-    400008: Onyscidus_JawUpperLeft
-    400010: Onyscidus_JawUpperRight
-    400012: Onyscidus_LegFontLeft1
-    400014: Onyscidus_LegFontLeft2
-    400016: Onyscidus_LegFontLeft3
-    400018: Onyscidus_LegFontRight1
-    400020: Onyscidus_LegFontRight2
-    400022: Onyscidus_LegFontRight3
-    400024: Onyscidus_LegMiddleLeft1
-    400026: Onyscidus_LegMiddleLeft2
-    400028: Onyscidus_LegMiddleLeft3
-    400030: Onyscidus_LegMiddleRight1
-    400032: Onyscidus_LegMiddleRight2
-    400034: Onyscidus_LegMiddleRight3
-    400036: Onyscidus_LegRearLeft1
-    400038: Onyscidus_LegRearLeft2
-    400040: Onyscidus_LegRearLeft3
-    400042: Onyscidus_LegRearRight1
-    400044: Onyscidus_LegRearRight2
-    400046: Onyscidus_LegRearRight3
-    400048: Onyscidus_LowerSpine1
-    400050: Onyscidus_LowerSpine2
-    400052: Onyscidus_LowerSpine3
-    400054: Onyscidus_LowerSpine4
-    400056: Onyscidus_MandibuleLowerLeft1
-    400058: Onyscidus_MandibuleLowerLeft2
-    400060: Onyscidus_MandibuleLowerLeft3
-    400062: Onyscidus_MandibuleLowerRight1
-    400064: Onyscidus_MandibuleLowerRight2
-    400066: Onyscidus_MandibuleLowerRight3
-    400068: Onyscidus_MandibuleMiddleLeft1
-    400070: Onyscidus_MandibuleMiddleLeft2
-    400072: Onyscidus_MandibuleMiddleLeft3
-    400074: Onyscidus_MandibuleMiddleRight1
-    400076: Onyscidus_MandibuleMiddleRight2
-    400078: Onyscidus_MandibuleMiddleRight3
-    400080: Onyscidus_MandibuleUpperLeft1
-    400082: Onyscidus_MandibuleUpperLeft2
-    400084: Onyscidus_MandibuleUpperLeft3
-    400086: Onyscidus_MandibuleUpperRight1
-    400088: Onyscidus_MandibuleUpperRight2
-    400090: Onyscidus_MandibuleUpperRight3
-    400092: Onyscidus_Pelvis
-    400094: Onyscidus_Pelvis2
-    400096: Onyscidus_UpperSpine1
-    400098: Onyscidus_UpperSpine2
-    400100: root
-    7400000: Idle
-    9500000: //RootNode
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: Onyscidus_Head
+  - first:
+      1: 100004
+    second: Onyscidus_JawLowerLeft
+  - first:
+      1: 100006
+    second: Onyscidus_JawLowerRight
+  - first:
+      1: 100008
+    second: Onyscidus_JawUpperLeft
+  - first:
+      1: 100010
+    second: Onyscidus_JawUpperRight
+  - first:
+      1: 100012
+    second: Onyscidus_LegFontLeft1
+  - first:
+      1: 100014
+    second: Onyscidus_LegFontLeft2
+  - first:
+      1: 100016
+    second: Onyscidus_LegFontLeft3
+  - first:
+      1: 100018
+    second: Onyscidus_LegFontRight1
+  - first:
+      1: 100020
+    second: Onyscidus_LegFontRight2
+  - first:
+      1: 100022
+    second: Onyscidus_LegFontRight3
+  - first:
+      1: 100024
+    second: Onyscidus_LegMiddleLeft1
+  - first:
+      1: 100026
+    second: Onyscidus_LegMiddleLeft2
+  - first:
+      1: 100028
+    second: Onyscidus_LegMiddleLeft3
+  - first:
+      1: 100030
+    second: Onyscidus_LegMiddleRight1
+  - first:
+      1: 100032
+    second: Onyscidus_LegMiddleRight2
+  - first:
+      1: 100034
+    second: Onyscidus_LegMiddleRight3
+  - first:
+      1: 100036
+    second: Onyscidus_LegRearLeft1
+  - first:
+      1: 100038
+    second: Onyscidus_LegRearLeft2
+  - first:
+      1: 100040
+    second: Onyscidus_LegRearLeft3
+  - first:
+      1: 100042
+    second: Onyscidus_LegRearRight1
+  - first:
+      1: 100044
+    second: Onyscidus_LegRearRight2
+  - first:
+      1: 100046
+    second: Onyscidus_LegRearRight3
+  - first:
+      1: 100048
+    second: Onyscidus_LowerSpine1
+  - first:
+      1: 100050
+    second: Onyscidus_LowerSpine2
+  - first:
+      1: 100052
+    second: Onyscidus_LowerSpine3
+  - first:
+      1: 100054
+    second: Onyscidus_LowerSpine4
+  - first:
+      1: 100056
+    second: Onyscidus_MandibuleLowerLeft1
+  - first:
+      1: 100058
+    second: Onyscidus_MandibuleLowerLeft2
+  - first:
+      1: 100060
+    second: Onyscidus_MandibuleLowerLeft3
+  - first:
+      1: 100062
+    second: Onyscidus_MandibuleLowerRight1
+  - first:
+      1: 100064
+    second: Onyscidus_MandibuleLowerRight2
+  - first:
+      1: 100066
+    second: Onyscidus_MandibuleLowerRight3
+  - first:
+      1: 100068
+    second: Onyscidus_MandibuleMiddleLeft1
+  - first:
+      1: 100070
+    second: Onyscidus_MandibuleMiddleLeft2
+  - first:
+      1: 100072
+    second: Onyscidus_MandibuleMiddleLeft3
+  - first:
+      1: 100074
+    second: Onyscidus_MandibuleMiddleRight1
+  - first:
+      1: 100076
+    second: Onyscidus_MandibuleMiddleRight2
+  - first:
+      1: 100078
+    second: Onyscidus_MandibuleMiddleRight3
+  - first:
+      1: 100080
+    second: Onyscidus_MandibuleUpperLeft1
+  - first:
+      1: 100082
+    second: Onyscidus_MandibuleUpperLeft2
+  - first:
+      1: 100084
+    second: Onyscidus_MandibuleUpperLeft3
+  - first:
+      1: 100086
+    second: Onyscidus_MandibuleUpperRight1
+  - first:
+      1: 100088
+    second: Onyscidus_MandibuleUpperRight2
+  - first:
+      1: 100090
+    second: Onyscidus_MandibuleUpperRight3
+  - first:
+      1: 100092
+    second: Onyscidus_Pelvis
+  - first:
+      1: 100094
+    second: Onyscidus_Pelvis2
+  - first:
+      1: 100096
+    second: Onyscidus_UpperSpine1
+  - first:
+      1: 100098
+    second: Onyscidus_UpperSpine2
+  - first:
+      1: 100100
+    second: root
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: Onyscidus_Head
+  - first:
+      4: 400004
+    second: Onyscidus_JawLowerLeft
+  - first:
+      4: 400006
+    second: Onyscidus_JawLowerRight
+  - first:
+      4: 400008
+    second: Onyscidus_JawUpperLeft
+  - first:
+      4: 400010
+    second: Onyscidus_JawUpperRight
+  - first:
+      4: 400012
+    second: Onyscidus_LegFontLeft1
+  - first:
+      4: 400014
+    second: Onyscidus_LegFontLeft2
+  - first:
+      4: 400016
+    second: Onyscidus_LegFontLeft3
+  - first:
+      4: 400018
+    second: Onyscidus_LegFontRight1
+  - first:
+      4: 400020
+    second: Onyscidus_LegFontRight2
+  - first:
+      4: 400022
+    second: Onyscidus_LegFontRight3
+  - first:
+      4: 400024
+    second: Onyscidus_LegMiddleLeft1
+  - first:
+      4: 400026
+    second: Onyscidus_LegMiddleLeft2
+  - first:
+      4: 400028
+    second: Onyscidus_LegMiddleLeft3
+  - first:
+      4: 400030
+    second: Onyscidus_LegMiddleRight1
+  - first:
+      4: 400032
+    second: Onyscidus_LegMiddleRight2
+  - first:
+      4: 400034
+    second: Onyscidus_LegMiddleRight3
+  - first:
+      4: 400036
+    second: Onyscidus_LegRearLeft1
+  - first:
+      4: 400038
+    second: Onyscidus_LegRearLeft2
+  - first:
+      4: 400040
+    second: Onyscidus_LegRearLeft3
+  - first:
+      4: 400042
+    second: Onyscidus_LegRearRight1
+  - first:
+      4: 400044
+    second: Onyscidus_LegRearRight2
+  - first:
+      4: 400046
+    second: Onyscidus_LegRearRight3
+  - first:
+      4: 400048
+    second: Onyscidus_LowerSpine1
+  - first:
+      4: 400050
+    second: Onyscidus_LowerSpine2
+  - first:
+      4: 400052
+    second: Onyscidus_LowerSpine3
+  - first:
+      4: 400054
+    second: Onyscidus_LowerSpine4
+  - first:
+      4: 400056
+    second: Onyscidus_MandibuleLowerLeft1
+  - first:
+      4: 400058
+    second: Onyscidus_MandibuleLowerLeft2
+  - first:
+      4: 400060
+    second: Onyscidus_MandibuleLowerLeft3
+  - first:
+      4: 400062
+    second: Onyscidus_MandibuleLowerRight1
+  - first:
+      4: 400064
+    second: Onyscidus_MandibuleLowerRight2
+  - first:
+      4: 400066
+    second: Onyscidus_MandibuleLowerRight3
+  - first:
+      4: 400068
+    second: Onyscidus_MandibuleMiddleLeft1
+  - first:
+      4: 400070
+    second: Onyscidus_MandibuleMiddleLeft2
+  - first:
+      4: 400072
+    second: Onyscidus_MandibuleMiddleLeft3
+  - first:
+      4: 400074
+    second: Onyscidus_MandibuleMiddleRight1
+  - first:
+      4: 400076
+    second: Onyscidus_MandibuleMiddleRight2
+  - first:
+      4: 400078
+    second: Onyscidus_MandibuleMiddleRight3
+  - first:
+      4: 400080
+    second: Onyscidus_MandibuleUpperLeft1
+  - first:
+      4: 400082
+    second: Onyscidus_MandibuleUpperLeft2
+  - first:
+      4: 400084
+    second: Onyscidus_MandibuleUpperLeft3
+  - first:
+      4: 400086
+    second: Onyscidus_MandibuleUpperRight1
+  - first:
+      4: 400088
+    second: Onyscidus_MandibuleUpperRight2
+  - first:
+      4: 400090
+    second: Onyscidus_MandibuleUpperRight3
+  - first:
+      4: 400092
+    second: Onyscidus_Pelvis
+  - first:
+      4: 400094
+    second: Onyscidus_Pelvis2
+  - first:
+      4: 400096
+    second: Onyscidus_UpperSpine1
+  - first:
+      4: 400098
+    second: Onyscidus_UpperSpine2
+  - first:
+      4: 400100
+    second: root
+  - first:
+      74: 7400000
+    second: Idle
+  - first:
+      95: 9500000
+    second: //RootNode
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -118,16 +326,20 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Onyscidus_LowerSpine1' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 0
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -138,6 +350,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 60
       wrapMode: 0
@@ -170,25 +383,36 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -197,12 +421,267 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 1
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Onyscidus@Idle(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: root
+      parentName: Onyscidus@Idle(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Onyscidus_Pelvis
+      parentName: root
+      position: {x: -0, y: 0, z: 1.2771642}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Onyscidus_Pelvis2
+      parentName: Onyscidus_Pelvis
+      position: {x: 0, y: -0.2951877, z: 1.0001936}
+      rotation: {x: -0.49626216, y: 0.5037101, z: -0.4962695, w: 0.5037028}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Onyscidus_UpperSpine1
+      parentName: Onyscidus_Pelvis2
+      position: {x: -0.69017243, y: -0.014880447, z: 0}
+      rotation: {x: -0.00005151436, y: -0.00005788277, z: 0.7490475, w: 0.66251636}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Onyscidus_UpperSpine2
+      parentName: Onyscidus_UpperSpine1
+      position: {x: -0.9677289, y: 0.0000001552701, z: -0.00000011464369}
+      rotation: {x: 0.000073280884, y: 0.0000043517293, z: 0.1755717, w: 0.9844666}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Onyscidus_Head
+      parentName: Onyscidus_UpperSpine2
+      position: {x: -0.5937072, y: -0.00000015258789, z: -5.2580163e-15}
+      rotation: {x: -0.07258836, y: -0.10311416, z: -0.17102996, w: 0.97716284}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Onyscidus_MandibuleUpperRight1
+      parentName: Onyscidus_Head
+      position: {x: -0.3151277, y: 0.08404953, z: 0.2419999}
+      rotation: {x: 0.53913254, y: -0.4714195, z: -0.52646184, w: -0.4581896}
+      scale: {x: 0.99999976, y: 0.9999998, z: 1}
+    - name: Onyscidus_MandibuleUpperRight2
+      parentName: Onyscidus_MandibuleUpperRight1
+      position: {x: -0.3376415, y: 0.00000030517577, z: 0.00000015258789}
+      rotation: {x: -0.0037981565, y: -0.012230812, z: -0.018092675, w: 0.9997543}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Onyscidus_MandibuleUpperRight3
+      parentName: Onyscidus_MandibuleUpperRight2
+      position: {x: -0.42534477, y: -0.0000015258788, z: -0.00000015258789}
+      rotation: {x: 0.003608717, y: 0.01158578, z: -0.6076443, w: 0.79411656}
+      scale: {x: 1.0000001, y: 1, z: 0.99999976}
+    - name: Onyscidus_MandibuleMiddleRight1
+      parentName: Onyscidus_Head
+      position: {x: -0.5199579, y: -0.0064578247, z: 0.23299988}
+      rotation: {x: 0.78410804, y: -0.5427995, z: -0.26605982, w: -0.14055431}
+      scale: {x: 0.9999999, y: 0.99999994, z: 1.0000002}
+    - name: Onyscidus_MandibuleMiddleRight2
+      parentName: Onyscidus_MandibuleMiddleRight1
+      position: {x: -0.2819774, y: 0, z: 0.00000022888183}
+      rotation: {x: 0.003292861, y: 0.008725351, z: -0.4754009, w: 0.87971985}
+      scale: {x: 1, y: 0.9999999, z: 0.99999976}
+    - name: Onyscidus_MandibuleMiddleRight3
+      parentName: Onyscidus_MandibuleMiddleRight2
+      position: {x: -0.32464224, y: -0.0000012207031, z: -0.000000076293944}
+      rotation: {x: 0.0050107003, y: 0.025639188, z: -0.61130697, w: 0.7909623}
+      scale: {x: 1.0000001, y: 0.99999994, z: 0.9999998}
+    - name: Onyscidus_MandibuleLowerRight1
+      parentName: Onyscidus_Head
+      position: {x: -0.6230259, y: -0.2197699, z: 0.25299996}
+      rotation: {x: 0.8709806, y: -0.44281754, z: -0.19884247, w: -0.07594085}
+      scale: {x: 0.99999994, y: 0.9999997, z: 0.9999996}
+    - name: Onyscidus_MandibuleLowerRight2
+      parentName: Onyscidus_MandibuleLowerRight1
+      position: {x: -0.2324481, y: -0.00000030517577, z: 0}
+      rotation: {x: 0.005346983, y: 0.009948776, z: -0.47477332, w: 0.8800357}
+      scale: {x: 1.0000001, y: 0.99999994, z: 1.0000002}
+    - name: Onyscidus_MandibuleLowerRight3
+      parentName: Onyscidus_MandibuleLowerRight2
+      position: {x: -0.24221511, y: -0.0000009155273, z: 0.000000076293944}
+      rotation: {x: 0.0028070062, y: 0.026497133, z: -0.61909956, w: 0.7848604}
+      scale: {x: 0.99999976, y: 1.0000002, z: 0.99999994}
+    - name: Onyscidus_MandibuleUpperLeft1
+      parentName: Onyscidus_Head
+      position: {x: -0.31512782, y: 0.08404968, z: -0.2424456}
+      rotation: {x: -0.45817134, y: -0.52644825, z: -0.4714291, w: 0.539153}
+      scale: {x: 0.9999998, y: 0.9999999, z: 1.0000001}
+    - name: Onyscidus_MandibuleUpperLeft2
+      parentName: Onyscidus_MandibuleUpperLeft1
+      position: {x: -0.33764166, y: -0.0000001513958, z: -0.00000003362292}
+      rotation: {x: 0.0038162759, y: -0.012234655, z: 0.018092241, w: 0.99975425}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Onyscidus_MandibuleUpperLeft3
+      parentName: Onyscidus_MandibuleUpperLeft2
+      position: {x: -0.42534477, y: 0.0000014483277, z: 7.3952866e-10}
+      rotation: {x: -0.0036576546, y: 0.011584977, z: 0.6076476, w: 0.7941139}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: Onyscidus_MandibuleMiddleLeft1
+      parentName: Onyscidus_Head
+      position: {x: -0.5199579, y: -0.006457672, z: -0.23310997}
+      rotation: {x: -0.14054988, y: -0.26603952, z: -0.5427772, w: 0.78413117}
+      scale: {x: 0.9999999, y: 0.9999999, z: 1.0000001}
+    - name: Onyscidus_MandibuleMiddleLeft2
+      parentName: Onyscidus_MandibuleMiddleLeft1
+      position: {x: -0.28197744, y: -0.00000012360513, z: -0.00000002371365}
+      rotation: {x: -0.003287671, y: 0.00867159, z: 0.4754467, w: 0.87969565}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Onyscidus_MandibuleMiddleLeft3
+      parentName: Onyscidus_MandibuleMiddleLeft2
+      position: {x: -0.3246421, y: 0.0000011073681, z: 0.000000029593647}
+      rotation: {x: -0.0050617806, y: 0.025632536, z: 0.6113072, w: 0.790962}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: Onyscidus_MandibuleLowerLeft1
+      parentName: Onyscidus_Head
+      position: {x: -0.62302595, y: -0.21977004, z: -0.25281495}
+      rotation: {x: -0.15316159, y: -0.39882296, z: -0.5039737, w: 0.75066125}
+      scale: {x: 0.99999994, y: 0.9999998, z: 0.99999964}
+    - name: Onyscidus_MandibuleLowerLeft2
+      parentName: Onyscidus_MandibuleLowerLeft1
+      position: {x: -0.232448, y: -0.000000101998445, z: -0.000000028407516}
+      rotation: {x: -0.0053619375, y: 0.00998703, z: 0.47486758, w: 0.87998426}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Onyscidus_MandibuleLowerLeft3
+      parentName: Onyscidus_MandibuleLowerLeft2
+      position: {x: -0.24221498, y: 0.0000008068186, z: 0.0000000147926045}
+      rotation: {x: -0.0027949489, y: 0.026875347, z: 0.61911964, w: 0.78483176}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: Onyscidus_JawUpperLeft
+      parentName: Onyscidus_Head
+      position: {x: -0.6282687, y: -0.023864288, z: -0.09719124}
+      rotation: {x: -0.677189, y: -0.08600163, z: 0.18077542, w: 0.708053}
+      scale: {x: 0.9999999, y: 1.0000001, z: 0.9999998}
+    - name: Onyscidus_JawLowerLeft
+      parentName: Onyscidus_Head
+      position: {x: -0.48760518, y: -0.2221846, z: -0.10643364}
+      rotation: {x: -0.7220634, y: 0.024757622, z: -0.06120643, w: 0.68866926}
+      scale: {x: 0.9999997, y: 1, z: 0.9999998}
+    - name: Onyscidus_JawUpperRight
+      parentName: Onyscidus_Head
+      position: {x: -0.6282688, y: -0.023864135, z: 0.09699989}
+      rotation: {x: -0.7080739, y: -0.18071114, z: 0.08606646, w: 0.67717606}
+      scale: {x: 0.9999997, y: 1.0000002, z: 0.99999976}
+    - name: Onyscidus_JawLowerRight
+      parentName: Onyscidus_Head
+      position: {x: -0.48760524, y: -0.2221846, z: 0.105999984}
+      rotation: {x: -0.68865246, y: 0.061260592, z: -0.024719298, w: 0.7220762}
+      scale: {x: 0.99999976, y: 1.0000001, z: 0.9999999}
+    - name: Onyscidus_LegFontRight1
+      parentName: Onyscidus_UpperSpine1
+      position: {x: -0.32504278, y: -0.4630751, z: 0.6530001}
+      rotation: {x: 0.8721105, y: 0.3554945, z: -0.27821288, w: -0.18879773}
+      scale: {x: 1, y: 0.9999999, z: 1}
+    - name: Onyscidus_LegFontRight2
+      parentName: Onyscidus_LegFontRight1
+      position: {x: -0.7699976, y: -0.00000015258789, z: 0.000000038146972}
+      rotation: {x: -0.047442175, y: 0.01756493, z: 0.7328219, w: 0.67853725}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: Onyscidus_LegFontRight3
+      parentName: Onyscidus_LegFontRight2
+      position: {x: -1.29402, y: -0.00000072479247, z: -0.000000114440915}
+      rotation: {x: 0.061524045, y: 0.038472626, z: -0.834282, w: 0.54654205}
+      scale: {x: 0.9999998, y: 1.0000001, z: 1.0000002}
+    - name: Onyscidus_LegFontLeft1
+      parentName: Onyscidus_UpperSpine1
+      position: {x: -0.32504258, y: -0.46307477, z: -0.6530308}
+      rotation: {x: -0.18790163, y: -0.27815378, z: 0.3539397, w: 0.87295485}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: Onyscidus_LegFontLeft2
+      parentName: Onyscidus_LegFontLeft1
+      position: {x: -0.7699976, y: 0.00000030517577, z: 0.000000019073486}
+      rotation: {x: 0.046865247, y: 0.01708854, z: -0.73276, w: 0.67865634}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: Onyscidus_LegFontLeft3
+      parentName: Onyscidus_LegFontLeft2
+      position: {x: -1.2940199, y: 0.00000015258789, z: -0.000000038146972}
+      rotation: {x: -0.061782766, y: 0.041493874, z: 0.8162302, w: 0.5729132}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Onyscidus_LowerSpine1
+      parentName: Onyscidus_Pelvis2
+      position: {x: -0.69017243, y: -0.014880466, z: 0}
+      rotation: {x: 0.000000061799504, y: -0.0000000014804366, z: -0.7238382, w: 0.6899697}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Onyscidus_LowerSpine2
+      parentName: Onyscidus_LowerSpine1
+      position: {x: -0.9115342, y: 0.000008850097, z: 0.00000010856467}
+      rotation: {x: -0.00009673129, y: 0.000017111297, z: -0.1646227, w: 0.9863566}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Onyscidus_LowerSpine3
+      parentName: Onyscidus_LowerSpine2
+      position: {x: -0.7985864, y: -9.094947e-15, z: 0.00000010783068}
+      rotation: {x: 0.000076886165, y: 0.00002325425, z: -0.17675388, w: 0.9842551}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Onyscidus_LowerSpine4
+      parentName: Onyscidus_LowerSpine3
+      position: {x: -0.47169352, y: -2.2737367e-15, z: 0.00000005982274}
+      rotation: {x: -0.0000014758232, y: 0.000031525105, z: -0.09710051, w: 0.9952746}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1}
+    - name: Onyscidus_LegRearRight1
+      parentName: Onyscidus_LowerSpine2
+      position: {x: -0.3905353, y: 0.5080638, z: 0.39899993}
+      rotation: {x: -0.34275576, y: 0.3958404, z: -0.2990567, w: 0.797743}
+      scale: {x: 0.9999999, y: 1.0000001, z: 0.9999999}
+    - name: Onyscidus_LegRearRight2
+      parentName: Onyscidus_LegRearRight1
+      position: {x: -0.5575864, y: -0.00000015258789, z: -0.000000076293944}
+      rotation: {x: -0.009340697, y: -0.018049696, z: 0.70910364, w: 0.7048113}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
+    - name: Onyscidus_LegRearRight3
+      parentName: Onyscidus_LegRearRight2
+      position: {x: -0.7973666, y: 0.00000015258789, z: -0.000000076293944}
+      rotation: {x: 0.000875758, y: 0.0005689177, z: -0.8099195, w: 0.58654016}
+      scale: {x: 0.99999976, y: 0.9999996, z: 0.9999997}
+    - name: Onyscidus_LegRearLeft1
+      parentName: Onyscidus_LowerSpine2
+      position: {x: -0.39053562, y: 0.5080641, z: -0.39902654}
+      rotation: {x: 0.7975731, y: -0.2992285, z: 0.39571744, w: -0.34314325}
+      scale: {x: 0.9999999, y: 0.9999999, z: 1}
+    - name: Onyscidus_LegRearLeft2
+      parentName: Onyscidus_LegRearLeft1
+      position: {x: -0.5575864, y: 0, z: 0}
+      rotation: {x: 0.009575423, y: -0.017852351, z: -0.7092412, w: 0.70467484}
+      scale: {x: 0.99999994, y: 1, z: 1.0000001}
+    - name: Onyscidus_LegRearLeft3
+      parentName: Onyscidus_LegRearLeft2
+      position: {x: -0.7973671, y: -0.000000076293944, z: 0.00000015258789}
+      rotation: {x: 0.000000042676948, y: 0.00000008317353, z: 0.811503, w: 0.58434826}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: Onyscidus_LegMiddleRight1
+      parentName: Onyscidus_LowerSpine1
+      position: {x: -0.48582262, y: 0.37885466, z: 0.65000004}
+      rotation: {x: -0.37860414, y: 0.09045085, z: -0.03496339, w: 0.92046463}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Onyscidus_LegMiddleRight2
+      parentName: Onyscidus_LegMiddleRight1
+      position: {x: -0.7145419, y: 0, z: 0.00000015258789}
+      rotation: {x: 0.09101784, y: -0.11152414, z: 0.23204254, w: 0.96199495}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Onyscidus_LegMiddleRight3
+      parentName: Onyscidus_LegMiddleRight2
+      position: {x: -1.0124055, y: 0.00000022888183, z: -0.00000015258789}
+      rotation: {x: -0.07463596, y: 0.5963532, z: -0.5228404, w: 0.60450834}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Onyscidus_LegMiddleLeft1
+      parentName: Onyscidus_LowerSpine1
+      position: {x: -0.485823, y: 0.3788545, z: -0.6498323}
+      rotation: {x: 0.925773, y: -0.0337514, z: 0.09228322, w: -0.36508787}
+      scale: {x: 0.9999999, y: 1, z: 0.99999994}
+    - name: Onyscidus_LegMiddleLeft2
+      parentName: Onyscidus_LegMiddleLeft1
+      position: {x: -0.71454144, y: 0.00000015258789, z: 0.000000038146972}
+      rotation: {x: -0.09069327, y: -0.11085638, z: -0.23267663, w: 0.96194977}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: Onyscidus_LegMiddleLeft3
+      parentName: Onyscidus_LegMiddleLeft2
+      position: {x: -1.0124053, y: -0.000000114440915, z: 0}
+      rotation: {x: 0.07136186, y: 0.59358907, z: 0.5174674, w: 0.61219865}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -210,23 +689,20 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: root
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 31d7511636360e046a439c1b7e1c27ec,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 205696
-  packageName: SCI FI CREATURES PACK VOL 2
-  packageVersion: 1.11
-  assetPath: Assets/Protofactor/Sci Fi/Sci Fi Characters Mega Pack Vol 2/Sci Fi Creatures
-    Vol 2/Onyscidus/FBX Files/Onyscidus@Idle.fbx
-  uploadId: 502958
