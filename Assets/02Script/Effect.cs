@@ -65,7 +65,7 @@ public class Effect : MonoBehaviour, IPoolObject
 
     public void MoveForward()
     {
-        transform.LeanMove(transform.forward *30, 2f);
+        transform.LeanMove(transform.position + transform.forward *50, 3f);
     }
 
     private IEnumerator ReturnPool(float lifeTime)
