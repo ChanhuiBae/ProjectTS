@@ -6,7 +6,7 @@ public interface IDamage
 {
     public void CalculateDamage(AttackType attack, ITakeDamage hiter);
 
-    public void CalculateDamageByKey(AttackType attack, int key, ITakeDamage hiter);
+    public void CalculateDamage(AttackType attack, int key, ITakeDamage hiter);
     public void Stagger(float time);
     public void Stun(float time);
     public void Airborne(float time);

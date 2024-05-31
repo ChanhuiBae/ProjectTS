@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections;
+using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,17 +16,15 @@ public enum State
     Attack_Gun,
     Attack_Skill,
     Roll,
-    Stun,
-    Airborne,
-    Knockback,
-    Pulled
+    CrowdControl
 }
 
 public class PlayerController : MonoBehaviour, IDamage
 {
     private Rigidbody rig;
     private FloatingJoystick joystick;
-    private WeaponType type;
+    private WeaponType weaponType;
+    private CrowdControlType CCType;
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
@@ -40,9 +39,11 @@ public class PlayerController : MonoBehaviour, IDamage
         get => isControll;
     }
     private bool isInvincibility;
+    private bool isDie;
 
     private State state;
     private Weapon weapon;
+    private Armor armor;
     private int attackCount;
 
     private float currentHP;
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private SkillManager skillManager;
     private AttackArea attackArea;
 
+    private Effect stun;
 
     private void Awake()
     {
@@ -103,6 +105,11 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             Debug.Log("PlayerController - Awake - PlayerAnimationController");
         }
+
+        if(!TryGetComponent<Armor>(out armor))
+        {
+            Debug.Log("PlayerController - Awake - Armor");
+        }
     }
 
     public void Init(WeaponType type)
@@ -140,12 +147,15 @@ public class PlayerController : MonoBehaviour, IDamage
             }
             weapon.Init(type);
             effect.Init(weapon);
+            CCType = CrowdControlType.None;
             attackCount = 0;
             isInvincibility = false;
             currentHP = GameManager.Inst.PlayerInfo.Max_HP;
             currentEXP = 0;
             state = State.Idle;
             expFill.fillAmount = 0;
+            skillManager.ArmorInit(armor);
+            isDie = false;
             isControll = true;
             StartCoroutine(Idle());
         }
@@ -154,51 +164,84 @@ public class PlayerController : MonoBehaviour, IDamage
             anim.Weapon(0);
             weapon = new Weapon();
             weapon.Init(WeaponType.None);
+            CCType = CrowdControlType.None;
+            isDie = false;
             isControll = true;
             StartCoroutine(Idle());
         }
     }
 
-    public void ChangeState(State state)
+    public bool ChangeState(State state)
     {
         if(this.state != state)
         {
-            this.state = state;
-            StopAllCoroutines();
-            switch (this.state)
+            if(state == State.Idle)
             {
-                case State.Idle:
-                    if (SceneManager.GetActiveScene().buildIndex > 2)
-                        skillManager.UseSkill(-2);
-                    StartCoroutine(Idle());
-                    break;
-                case State.MoveForward:
-                    StartCoroutine(MoveForward()); 
-                    break;
-                case State.Attack_Sword:
-                    skillManager.UseSkill(0);
-                    weapon.OnTrail();
-                    anim.Attack(true);
-                    skillManager.SetCrowdControl(CrowdControlType.Stun);
-                    attackCount++;
-                    break;
-                case State.Attack_Hammer:
-                    skillManager.UseSkill(0); 
-                    weapon.OnTrail();
-                    anim.Attack(true);
-                    skillManager.SetCrowdControl(CrowdControlType.Stun);
-                    attackCount++;
-                    break;
-                case State.Attack_Skill:
-                    roll.enabled = false;
-                    weapon.OnTrail();
-                    break;
-                case State.Attack_Gun:
-                    StartCoroutine(Attack_Gun());
-                    break;
-                case State.Roll:
-                    break;
+                this.state = state;
+                StopAllCoroutines();
+                if (SceneManager.GetActiveScene().buildIndex > 2)
+                    skillManager.UseSkill(-1);
+                StartCoroutine(Idle());
+                return true;
             }
+            else if(this.state == State.CrowdControl)
+            {
+                return false;
+            }
+            else if(state == State.Roll)
+            {
+                if(this.state == State.Attack_Skill)
+                {
+                    return false;
+                }
+                else
+                {
+                    this.state = state;
+                    StopAllCoroutines();
+                    anim.Roll();
+                    StartCoroutine(Roll());
+                    return true;
+                }
+            }
+            else
+            {
+                this.state = state;
+                StopAllCoroutines();
+                switch (this.state)
+                {
+                    case State.MoveForward:
+                        StartCoroutine(MoveForward());
+                        break;
+                    case State.Attack_Sword:
+                        skillManager.UseSkill(0);
+                        weapon.OnTrail();
+                        anim.Attack(true);
+                        skillManager.SetCrowdControl(CrowdControlType.Stun);
+                        attackCount++;
+                        break;
+                    case State.Attack_Hammer:
+                        skillManager.UseSkill(0);
+                        weapon.OnTrail();
+                        anim.Attack(true);
+                        skillManager.SetCrowdControl(CrowdControlType.Stun);
+                        attackCount++;
+                        break;
+                    case State.Attack_Gun:
+                        StartCoroutine(Attack_Gun());
+                        break;
+                    case State.Attack_Skill:
+                        roll.enabled = false;
+                        weapon.OnTrail();
+                        break;
+                    case State.CrowdControl:
+                        break;
+                }
+                return true;
+            }
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -211,7 +254,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public void UseSkill(int skill_id)
     {
         anim.Skill(skill_id);
-        if(skill_id == 302)
+        if (skill_id == 302)
         {
             StopAllCoroutines();
             StartCoroutine(APHE_Shoot());
@@ -436,8 +479,6 @@ public class PlayerController : MonoBehaviour, IDamage
     private void ChangeRoll()
     {
         ChangeState(State.Roll);
-        anim.Roll();
-        StartCoroutine(Roll());
     }
 
     public void IsInvincibility(float time)
@@ -577,49 +618,104 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void CalculateDamage(AttackType attack, ITakeDamage hiter)
     {
-        if (!isInvincibility)
+        if (!isInvincibility && !isDie)
         {
-           // ApplyHP(hiter.TakeDamage(Physics_Cut, Fire_Cut, Water_Cut, Electric_Cut, Ice_Cut, Wind_Cut));
+
+
         }
     }
 
-    public void CalculateDamageByKey(AttackType attack, int key, ITakeDamage hiter)
+    public void CalculateDamage(AttackType attack, int key, ITakeDamage hiter)
     {
-        if (!isInvincibility)
+        if (!isInvincibility && !isDie)
         {
 
         }
     }
     public void Stagger(float time)
     {
+        if (!isDie)
+        {
+            ChangeState(State.CrowdControl);
+            isControll = false;
+            StartCoroutine(StaggerTime(time));
+        }
+    }
 
+    private IEnumerator StaggerTime(float time)
+    {
+        // todo: stagger animation;
+        yield return new WaitForSeconds(time);
+        ChangeState(State.Idle); 
+        isControll = true;
     }
 
     public void Stun(float time)
     {
-        StartCoroutine(StunControl(time));
+        if (!isDie)
+        {
+            ChangeState(State.CrowdControl);
+            isControll = false;
+            StartCoroutine(StunControl(time));
+        }
     }
 
     private IEnumerator StunControl(float time)
     {
-        isControll = false;
-        yield return YieldInstructionCache.WaitForSeconds(time);
+        stun.gameObject.SetActive(true);
+        for (float i = 0.1f; i < time; i += 0.1f)
+        {
+            LeanTween.move(gameObject, transform.position - transform.forward * 0.1f, 0.1f);
+            yield return YieldInstructionCache.WaitForSeconds(0.1f);
+            LeanTween.move(gameObject, transform.position + transform.forward * 0.1f, 0.1f);
+            yield return YieldInstructionCache.WaitForSeconds(0.1f);
+        }
+        stun.gameObject.SetActive(false);
+        ChangeState(State.Idle);
         isControll = true;
         
     }
 
     public void Airborne(float time)
     {
-        
+        if (isDie)
+        {
+            ChangeState(State.CrowdControl);
+            isControll = false;
+            StartCoroutine(MoveAirborne(time));
+        }
+    }
+    private IEnumerator MoveAirborne(float time)
+    {
+        Vector3 pos = transform.position;
+        LeanTween.move(gameObject, pos + (Vector3.up * 3f), time / 2).setEase(LeanTweenType.easeOutCubic);
+        yield return YieldInstructionCache.WaitForSeconds(time / 2);
+        LeanTween.move(gameObject, pos, time / 2).setEase(LeanTweenType.easeInSine);
+        yield return YieldInstructionCache.WaitForSeconds(time / 2);
+        ChangeState(State.Idle);
+        isControll = true;
     }
 
     public void Knockback(float distance)
     {
-        
+        if (isDie)
+        {
+            ChangeState(State.CrowdControl);
+            isControll = false;
+            StartCoroutine(MoveKnockback(distance));
+        }
     }
+
+    private IEnumerator MoveKnockback(float distance)
+    {
+        LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance, distance * 0.01f).setEase(LeanTweenType.easeOutQuart);
+        yield return YieldInstructionCache.WaitForSeconds(distance * 0.01f);
+        ChangeState(State.Idle);
+    }
+
     public void Pulled(Vector3 center)
     {
-        // todo: move to center
+        
     }
 
     public void Airback(float time, float distance)

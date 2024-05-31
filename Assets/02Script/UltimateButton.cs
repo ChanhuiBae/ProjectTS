@@ -260,8 +260,8 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
             icon.sprite = Resources.Load<Sprite>("Image/" + name);
             trigger.enabled = true;
             icon.transform.SetSiblingIndex(3);
-            TableEntity_Skill_List skill;
-            GameManager.Inst.GetSkillList(ID, out skill);
+            TableEntity_Skill skill;
+            GameManager.Inst.GetSkillData(ID, out skill);
             isScoping = skill.Is_Scoping;
             isCharging = skill.Is_Charging;
             ultimateText.enabled = true;
@@ -276,8 +276,8 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
         connectedUse = false;
         if (id != 0)
         {
-            TableEntity_Skill_List skill;
-            GameManager.Inst.GetSkillList(connectedID, out skill);
+            TableEntity_Skill skill;
+            GameManager.Inst.GetSkillData(connectedID, out skill);
             connectedScoping = skill.Is_Scoping;
             connectedCharging = skill.Is_Charging;
         }
@@ -292,9 +292,11 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void AttackConnectedSkill()
     {
-        player.ChangeState(State.Attack_Skill);
-        player.UseSkill(connectedID);
-        skillManager.UseSkill(connectedNum);
+        if (player.ChangeState(State.Attack_Skill))
+        {
+            player.UseSkill(connectedID);
+            skillManager.UseSkill(connectedNum);
+        }
     }
 
     private IEnumerator CheckEnd()

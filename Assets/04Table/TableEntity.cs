@@ -1,7 +1,7 @@
 using JetBrains.Annotations;
 
 [System.Serializable]
-public class TableEntity_Player_Stats
+public class TableEntity_Player
 {
     public int Level;
     public int Max_Weight;
@@ -21,7 +21,7 @@ public class TableEntity_Player_Stats
 }
 
 [System.Serializable]
-public class TableEntity_Skill_List
+public class TableEntity_Skill
 {
     public int ID;
     public string Weapon_ID;
@@ -65,16 +65,21 @@ public class TableEntity_Armor
     public int ID;
     public int Weight;
     public int Physics_Def;
-    public int Physics_Cut;
     public int Fire_Def;
     public int Water_Def;
     public int Electric_Def;
     public int Ice_Def;
     public int Wind_Def;
+    public float Physics_Cut;
+    public float Fire_Cut;
+    public float Water_Cut;
+    public float Electric_Cut;
+    public float Ice_Cut;
+    public float Wind_Cut;
 }
 
 [System.Serializable] 
-public class TableEntity_Skill
+public class TableEntity_Skill_Info
 {
     public int ID;
     public string Type;

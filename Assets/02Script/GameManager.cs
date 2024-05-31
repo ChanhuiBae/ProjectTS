@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using TMPro;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class PlayerData
@@ -22,6 +23,7 @@ public class PlayerData
     public float Exp_Need;
     public Inventory inventory;
     public int WeaponID;
+    public int ArmorID;
     public int basic_ID;
     public int skill1_ID;
     public int connected1_ID;
@@ -53,31 +55,31 @@ public class GameManager : Singleton<GameManager>
     private SkillManager skillManager;
 
     private TS table;
-    private Dictionary<int, TableEntity_Player_Stats> playerDataTable = new Dictionary<int, TableEntity_Player_Stats>();
-    private Dictionary<int, TableEntity_Skill_List> skillListTable = new Dictionary<int, TableEntity_Skill_List>();
-    public bool GetSkillList(int skillID, out TableEntity_Skill_List data)
+    private Dictionary<int, TableEntity_Player> playerDataTable = new Dictionary<int, TableEntity_Player>();
+    private Dictionary<int, TableEntity_Skill> skillTable = new Dictionary<int, TableEntity_Skill>();
+    public bool GetSkillData(int skillID, out TableEntity_Skill data)
     {
-        return skillListTable.TryGetValue(skillID, out data);
+        return skillTable.TryGetValue(skillID, out data);
     }
-    private Dictionary<int, TableEntity_Skill> skillDataTable = new Dictionary<int, TableEntity_Skill>();
-    public bool GetSkillData(int ID, out TableEntity_Skill data)
+    private Dictionary<int, TableEntity_Skill_Info> skillInfoTable = new Dictionary<int, TableEntity_Skill_Info>();
+    public bool GetSkillInfoData(int ID, out TableEntity_Skill_Info data)
     {
-        return skillDataTable.TryGetValue(ID, out data);
+        return skillInfoTable.TryGetValue(ID, out data);
     }
-    private Dictionary<int, TableEntity_Skill_Hit_Frame> skillHitFrame = new Dictionary<int, TableEntity_Skill_Hit_Frame>();
+    private Dictionary<int, TableEntity_Skill_Hit_Frame> skillHitFrameTable = new Dictionary<int, TableEntity_Skill_Hit_Frame>();
     public bool GetSkillHitFrame(int skillID, out TableEntity_Skill_Hit_Frame data)
     {
-        return skillHitFrame.TryGetValue(skillID, out data);
+        return skillHitFrameTable.TryGetValue(skillID, out data);
     }
-    private Dictionary<int, TableEntity_Weapon> weaponDataTable = new Dictionary<int, TableEntity_Weapon>();
+    private Dictionary<int, TableEntity_Weapon> weaponTable = new Dictionary<int, TableEntity_Weapon>();
     public bool GetWeapon(int weaponID, out TableEntity_Weapon data)
     {
-        return weaponDataTable.TryGetValue(weaponID, out data);
+        return weaponTable.TryGetValue(weaponID, out data);
     }
     public WeaponType GetWeaponType(int weaponID)
     {
         TableEntity_Weapon weapon;
-        weaponDataTable.TryGetValue(weaponID, out weapon);
+        weaponTable.TryGetValue(weaponID, out weapon);
         switch(weapon.Type)
         {
             case 1:
@@ -89,12 +91,39 @@ public class GameManager : Singleton<GameManager>
         }
         return WeaponType.None;
     }
-    private Dictionary<int, TableEntity_Creature> creatureDataTable = new Dictionary<int, TableEntity_Creature>();
-    public bool GetCreatureData(int key, out TableEntity_Creature data)
+
+    private Dictionary<int,TableEntity_Armor> armorTable = new Dictionary<int, TableEntity_Armor>();
+    public bool GetArmorData(int key, out TableEntity_Armor data)
     {
-        return creatureDataTable.TryGetValue(key, out data);
+        return armorTable.TryGetValue(key, out data);
     }
 
+    private Dictionary<int, TableEntity_Creature> creatureTable = new Dictionary<int, TableEntity_Creature>();
+    public bool GetCreatureData(int key, out TableEntity_Creature data)
+    {
+        return creatureTable.TryGetValue(key, out data);
+    }
+
+    private Dictionary<int, TableEntity_Pattern> patternTable = new Dictionary<int, TableEntity_Pattern>();
+
+    public bool GetPatternData(int key, out TableEntity_Pattern data)
+    {
+        return patternTable.TryGetValue(key, out data);
+    }
+
+    private Dictionary<int, TableEntity_Pattern_Info> patternInfoTable = new Dictionary<int, TableEntity_Pattern_Info>();
+
+    public bool GetPatternInfoData(int key, out TableEntity_Pattern_Info data)
+    {
+        return patternInfoTable.TryGetValue(key, out data);
+    }
+
+    private Dictionary<int, TableEntity_Pattern_Hit_Frame> patternHitFrameTable = new Dictionary<int, TableEntity_Pattern_Hit_Frame>();
+
+    public bool GetPatternHitFrameData(int key, out TableEntity_Pattern_Hit_Frame data)
+    {
+        return patternHitFrameTable.TryGetValue(key, out data);
+    }
     //  private List<TableEntity_Tip> Tip = new List<TableEntity_Tip>();
 
     private int killCount;
@@ -110,23 +139,39 @@ public class GameManager : Singleton<GameManager>
         playerDataTable.Add(0, table.Player_Stats[0]);
         for(int i = 0; i < table.Skill_List.Count; i++)
         {
-            skillListTable.Add(table.Skill_List[i].ID, table.Skill_List[i]);
+            skillTable.Add(table.Skill_List[i].ID, table.Skill_List[i]);
         }
         for(int i = 0; i < table.Skill_Info_List.Count; i++)
         {
-            skillDataTable.Add(table.Skill_Info_List[i].ID, table.Skill_Info_List[i]);
+            skillInfoTable.Add(table.Skill_Info_List[i].ID, table.Skill_Info_List[i]);
         }
         for (int i = 0; i < table.Skill_Hit_Frame.Count; i++)
         {
-            skillHitFrame.Add(table.Skill_Hit_Frame[i].ID, table.Skill_Hit_Frame[i]);
+            skillHitFrameTable.Add(table.Skill_Hit_Frame[i].ID, table.Skill_Hit_Frame[i]);
         }
         for (int i = 0; i < table.Weapon_List.Count; i++)
         {
-            weaponDataTable.Add(table.Weapon_List[i].ID, table.Weapon_List[i]);
+            weaponTable.Add(table.Weapon_List[i].ID, table.Weapon_List[i]);
+        }
+        for(int i = 0; i < table.Armor_List.Count; i++)
+        {
+            armorTable.Add(table.Armor_List[i].ID, table.Armor_List[i]);
         }
         for (int i = 0; i < table.Creature_List.Count; i++)
         {
-            creatureDataTable.Add(table.Creature_List[i].ID, table.Creature_List[i]);
+            creatureTable.Add(table.Creature_List[i].ID, table.Creature_List[i]);
+        }
+        for (int i = 0; i < table.Pattern_List.Count; i++)
+        {
+            patternTable.Add(table.Pattern_List[i].ID, table.Pattern_List[i]);
+        }
+        for(int i = 0; i < table.Pattern_Info_List.Count; i++) 
+        {
+            patternInfoTable.Add(table.Pattern_Info_List[i].ID, table.Pattern_Info_List[i]);
+        }
+        for(int i = 0; i < table.Pattern_Hit_Frame.Count; i++)
+        {
+            patternHitFrameTable.Add(table.Pattern_Hit_Frame[i].ID, table.Pattern_Hit_Frame[i]);
         }
         #endregion
 
@@ -200,15 +245,15 @@ public class GameManager : Singleton<GameManager>
             {
                 if (pData.basic_ID != 0)
                 {
-                    TableEntity_Skill_List skill;
-                    GameManager.Inst.GetSkillList(pData.basic_ID, out skill);
+                    TableEntity_Skill skill;
+                    GameManager.Inst.GetSkillData(pData.basic_ID, out skill);
                     menuManager.InitSkillButton(0, pData.basic_ID, skill.Skill_Name_Eng, 1);
                     skillManager.SetSkill(0, pData.basic_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
                 }
                 if (pData.skill1_ID != 0)
                 {
-                    TableEntity_Skill_List skill;
-                    GameManager.Inst.GetSkillList(pData.skill1_ID, out skill);
+                    TableEntity_Skill skill;
+                    GameManager.Inst.GetSkillData(pData.skill1_ID, out skill);
                     menuManager.InitSkillButton(1, pData.skill1_ID, skill.Skill_Name_Eng, 1);
                     skillManager.SetSkill(1, pData.skill1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
 
@@ -219,8 +264,8 @@ public class GameManager : Singleton<GameManager>
                 }
                 if (pData.connected1_ID != 0)
                 {
-                    TableEntity_Skill_List skill;
-                    GameManager.Inst.GetSkillList(pData.connected1_ID, out skill);
+                    TableEntity_Skill skill;
+                    GameManager.Inst.GetSkillData(pData.connected1_ID, out skill);
                     menuManager.InitSkillButton(11, pData.connected1_ID, skill.Skill_Name_Eng, 1);
                     skillManager.SetSkill(11, pData.connected1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
 
@@ -231,8 +276,8 @@ public class GameManager : Singleton<GameManager>
                 }
                 if (pData.skill2_ID != 0)
                 {
-                    TableEntity_Skill_List skill;
-                    GameManager.Inst.GetSkillList(pData.skill2_ID, out skill);
+                    TableEntity_Skill skill;
+                    GameManager.Inst.GetSkillData(pData.skill2_ID, out skill);
                     menuManager.InitSkillButton(2, pData.skill2_ID, skill.Skill_Name_Eng, 1);
                     skillManager.SetSkill(2, pData.skill2_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
 
@@ -243,8 +288,8 @@ public class GameManager : Singleton<GameManager>
                 }
                 if (pData.connected2_ID != 0)
                 {
-                    TableEntity_Skill_List skill;
-                    GameManager.Inst.GetSkillList(pData.connected2_ID, out skill);
+                    TableEntity_Skill skill;
+                    GameManager.Inst.GetSkillData(pData.connected2_ID, out skill);
                     menuManager.InitSkillButton(21, pData.connected2_ID, skill.Skill_Name_Eng, 1);
                     skillManager.SetSkill(21, pData.connected2_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
 
@@ -255,8 +300,8 @@ public class GameManager : Singleton<GameManager>
                 }
                 if (pData.skill3_ID != 0)
                 {
-                    TableEntity_Skill_List skill;
-                    GameManager.Inst.GetSkillList(pData.skill3_ID, out skill);
+                    TableEntity_Skill skill;
+                    GameManager.Inst.GetSkillData(pData.skill3_ID, out skill);
                     menuManager.InitSkillButton(3, pData.skill3_ID, skill.Skill_Name_Eng, 1);
                     skillManager.SetSkill(3, pData.skill3_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
 
@@ -267,8 +312,8 @@ public class GameManager : Singleton<GameManager>
                 }
                 if (pData.connected3_ID != 0)
                 {
-                    TableEntity_Skill_List skill;
-                    GameManager.Inst.GetSkillList(pData.connected3_ID, out skill);
+                    TableEntity_Skill skill;
+                    GameManager.Inst.GetSkillData(pData.connected3_ID, out skill);
                     menuManager.InitSkillButton(31, pData.connected3_ID, skill.Skill_Name_Eng, 1);
                     skillManager.SetSkill(31, pData.connected3_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
 
@@ -279,8 +324,8 @@ public class GameManager : Singleton<GameManager>
                 }
                 if (pData.ultimate_ID != 0)
                 {
-                    TableEntity_Skill_List skill;
-                    GameManager.Inst.GetSkillList(pData.ultimate_ID, out skill);
+                    TableEntity_Skill skill;
+                    GameManager.Inst.GetSkillData(pData.ultimate_ID, out skill);
                     menuManager.InitSkillButton(4, pData.ultimate_ID, skill.Skill_Name_Eng, 1);
                     skillManager.SetSkill(4, pData.ultimate_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
 
@@ -291,8 +336,8 @@ public class GameManager : Singleton<GameManager>
                 }
                 if (pData.connectedU_ID != 0)
                 {
-                    TableEntity_Skill_List skill;
-                    GameManager.Inst.GetSkillList(pData.connectedU_ID, out skill);
+                    TableEntity_Skill skill;
+                    GameManager.Inst.GetSkillData(pData.connectedU_ID, out skill);
                     menuManager.InitSkillButton(41, pData.connectedU_ID, skill.Skill_Name_Eng, 1);
                     skillManager.SetSkill(41, pData.connectedU_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
                 }
@@ -333,7 +378,7 @@ public class GameManager : Singleton<GameManager>
     public void CreateUserData()
     {
         pData.uidCounter = 0;
-        playerDataTable.TryGetValue(0, out TableEntity_Player_Stats info);
+        playerDataTable.TryGetValue(0, out TableEntity_Player info);
         pData.Level = info.Level;
         pData.Max_Weight = info.Max_Weight;
         pData.Max_HP = info.Max_Hp;
@@ -345,6 +390,7 @@ public class GameManager : Singleton<GameManager>
         pData.Available_Point = info.Available_Point;
         pData.Exp_Need = info.Exp_Need;
         pData.WeaponID = 1000;
+        pData.ArmorID = 1;
         pData.basic_ID = 100;
         pData.skill1_ID = 101;
         pData.connected1_ID = 0;
@@ -467,8 +513,8 @@ public class GameManager : Singleton<GameManager>
         }
         if (check)
         {
-            TableEntity_Skill_List skill;
-            GameManager.Inst.GetSkillList(skill_ID, out skill);
+            TableEntity_Skill skill;
+            GameManager.Inst.GetSkillData(skill_ID, out skill);
             menuManager.InitSkillButton(num, skill_ID, skill.Skill_Name_Eng, level);
             skillManager.SetSkill(num, pData.skill1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
         }

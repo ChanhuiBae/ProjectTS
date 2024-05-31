@@ -15,6 +15,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private PlayerController player;
     private PlayerAnimationController anim;
     private Weapon weapon;
+    private Armor armor;
     private AttackArea attackArea;
     private EffectManager effect;
     
@@ -118,6 +119,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     public void WeaponInit(Weapon weapon)
     {
         this.weapon = weapon;
+    }
+
+    public void ArmorInit(Armor armor) 
+    { 
+        this.armor = armor; 
     }
 
     public void SetSkill(int num, int ID, string Weapon_ID, int Category_ID, int Skill_Level_Max, int Charge_Max, int Hit_Max)
@@ -368,7 +374,13 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         }
         projectile.AttackSlash(player.transform.rotation);
     }
+    
+    public float TakeDamage()
+    {
+        float damage = 0f;
 
+        return damage;
+    }
 
     public float TakeDamage(float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
     {
@@ -402,14 +414,14 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         return weaponPhysics * skillPhysics;
     }
 
-    public float TakeDamageByKey(int key, float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
+    public float TakeDamage(int key, float Creature_Physics_Cut, float Creature_Fire_Cut, float Creature_Water_Cut, float Creature_Electric_Cut, float Creature_Ice_Cut, float Creature_Wind_Cut)
     {
         float weaponPhysics = weapon.Physics * (1 - Creature_Physics_Cut) * weapon.CriticalMag()
             + (weapon.Fire * (1 - Creature_Fire_Cut)) + (weapon.Water * (1 - Creature_Water_Cut))
             + (weapon.Electric * (1 - Creature_Electric_Cut)) + (weapon.Ice * (1 - Creature_Ice_Cut))
             + (weapon.Wind * (1 - Creature_Wind_Cut));
-        TableEntity_Skill skill;
-        GameManager.Inst.GetSkillData(key, out skill);
+        TableEntity_Skill_Info skill;
+        GameManager.Inst.GetSkillInfoData(key, out skill);
         float skillPhysics = 0;
         if (skill != null)
         {
@@ -451,26 +463,26 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
             {
                 creatureDamage.CalculateDamage(attack, this);
-                TableEntity_Skill skill;
+                TableEntity_Skill_Info skill;
                 switch (useSkill)
                 {
                     case 1:
-                        GameManager.Inst.GetSkillData(skill1.GetKey(), out skill);
+                        GameManager.Inst.GetSkillInfoData(skill1.GetKey(), out skill);
                         break;
                     case 2:
-                        GameManager.Inst.GetSkillData(skill2.GetKey(), out skill);
+                        GameManager.Inst.GetSkillInfoData(skill2.GetKey(), out skill);
                         break;
                     case 3:
-                        GameManager.Inst.GetSkillData(skill3.GetKey(), out skill);
+                        GameManager.Inst.GetSkillInfoData(skill3.GetKey(), out skill);
                         break;
                     case 4:
-                        GameManager.Inst.GetSkillData(ultimate.GetKey(), out skill);
+                        GameManager.Inst.GetSkillInfoData(ultimate.GetKey(), out skill);
                         break;
                     case 41:
-                        GameManager.Inst.GetSkillData(connectedU.GetKey(), out skill);
+                        GameManager.Inst.GetSkillInfoData(connectedU.GetKey(), out skill);
                         break;
                     default:
-                        GameManager.Inst.GetSkillData(basic.GetKey(), out skill);
+                        GameManager.Inst.GetSkillInfoData(basic.GetKey(), out skill);
                         break;
                 }
                 if(skill != null)
@@ -503,9 +515,9 @@ public class SkillManager : MonoBehaviour, ITakeDamage
        
         if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
         {
-            creatureDamage.CalculateDamageByKey(attack, key, this);
-            TableEntity_Skill skill;
-            GameManager.Inst.GetSkillData(key, out skill);
+            creatureDamage.CalculateDamage(attack, key, this);
+            TableEntity_Skill_Info skill;
+            GameManager.Inst.GetSkillInfoData(key, out skill);
             if (skill != null)
             {
                 switch (crowdControl)

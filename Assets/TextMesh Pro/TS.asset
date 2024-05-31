@@ -2645,7 +2645,7 @@ MonoBehaviour:
     Attack_Speed: 1.5
   Armor_List:
   - ID: 1
-    Weight: 1
+    Weight: 1000
     Physics_Def: 0
     Fire_Def: 0
     Water_Def: 0

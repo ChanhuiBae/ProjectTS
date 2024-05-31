@@ -101,11 +101,11 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             }
         }
     }
-    public void CalculateDamageByKey(AttackType attack, int key, ITakeDamage hiter)
+    public void CalculateDamage(AttackType attack, int key, ITakeDamage hiter)
     {
         if (!IsDie)
         {
-            float damage = hiter.TakeDamageByKey(key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
+            float damage = hiter.TakeDamage(key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
             currentHP -= damage;
             Debug.Log("Damage key: " + damage);
 
@@ -185,10 +185,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         ai.StopAI(time);
         if (gameObject.activeSelf && !IsDie)
-            StartCoroutine(StargerTime(time));
+            StartCoroutine(StaggerTime(time));
     }
 
-    private IEnumerator StargerTime(float time)
+    private IEnumerator StaggerTime(float time)
     {
         yield return new WaitForSeconds(time);
     }

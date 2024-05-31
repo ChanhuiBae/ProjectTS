@@ -307,8 +307,8 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 dragDistance = 30;
             }
             trigger.enabled = true;
-            TableEntity_Skill_List skill;
-            GameManager.Inst.GetSkillList(skill_ID,out skill);
+            TableEntity_Skill skill;
+            GameManager.Inst.GetSkillData(skill_ID,out skill);
             isScoping = skill.Is_Scoping;
             if (isScoping)
             {
@@ -325,8 +325,8 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             }
             maxStack = skill.Stack_Max;
             string key = skill.ID + skill.Weapon_ID + skill.Category_ID + level + "01";
-            TableEntity_Skill info;
-            GameManager.Inst.GetSkillData(int.Parse(key), out info);
+            TableEntity_Skill_Info info;
+            GameManager.Inst.GetSkillInfoData(int.Parse(key), out info);
             icon.sprite = Resources.Load<Sprite>("Image/" + name);
             if (transform.childCount != 1)
             {
@@ -348,8 +348,8 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         connectedName = name;
         if (skill_ID != 0)
         {
-            TableEntity_Skill_List skill;
-            GameManager.Inst.GetSkillList(connectedID, out skill);
+            TableEntity_Skill skill;
+            GameManager.Inst.GetSkillData(connectedID, out skill);
             connectedScoping = skill.Is_Scoping;
             if (connectedScoping)
             {
@@ -479,8 +479,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void AttackConnectedSkill()
     {
-        player.ChangeState(State.Attack_Skill);
-        player.UseSkill(connectedID);
-        skillManager.UseSkill(connectedNum);
+        if (player.ChangeState(State.Attack_Skill))
+        {
+            player.UseSkill(connectedID);
+            skillManager.UseSkill(connectedNum);
+        }
     }
 }

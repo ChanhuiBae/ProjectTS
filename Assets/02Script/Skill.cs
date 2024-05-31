@@ -18,7 +18,7 @@ public class Skill : MonoBehaviour
     private int current_hit;
     private int max_hit;
     private int currentInfoID;
-    private TableEntity_Skill currentInfo;
+    private TableEntity_Skill_Info currentInfo;
     private TableEntity_Skill_Hit_Frame hitInfo;
     private bool IsActive;
     private int chargeCount;
@@ -48,7 +48,7 @@ public class Skill : MonoBehaviour
         this.max_hit = max_hit;
         current_hit = 1;
         currentInfoID = GetKey();
-        GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
+        GameManager.Inst.GetSkillInfoData(currentInfoID, out currentInfo);
         GameManager.Inst.GetSkillHitFrame(ID, out hitInfo);
         if(category == 3 && ID %10 == 1)
         {
@@ -72,7 +72,7 @@ public class Skill : MonoBehaviour
     { 
         current_level++;
         currentInfoID = GetKey();
-        GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
+        GameManager.Inst.GetSkillInfoData(currentInfoID, out currentInfo);
         if (category == 3 && ID % 10 == 1)
         {
             GameManager.Inst.SetMaxUltimate((int)currentInfo.Need_Damage);
@@ -102,7 +102,7 @@ public class Skill : MonoBehaviour
         IsActive = false;
         current_hit++;
         currentInfoID = GetKey();
-        GameManager.Inst.GetSkillData(currentInfoID, out currentInfo);
+        GameManager.Inst.GetSkillInfoData(currentInfoID, out currentInfo);
         if(current_charge > 0 && current_hit > 1)
         {
             skillManager.SetCrowdControl(CrowdControlType.Airback);

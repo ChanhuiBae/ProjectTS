@@ -203,7 +203,7 @@ public class EffectManager : MonoBehaviour
     public void TC_Effect()
     {
         effect = skillManager.SpawnEffect(14);
-        effect.Init(EffectType.None, transform.position, 1.2f);
+        effect.InitFollow(EffectType.None, gameObject, 1.2f);
     }
 
     public void SetPull()
