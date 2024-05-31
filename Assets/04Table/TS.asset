@@ -2492,103 +2492,103 @@ MonoBehaviour:
     Buff_B: 0
     Buff_C: 0
   Skill_Hit_Frame:
-  - Skill_ID: 100
+  - ID: 100
     Hit_01: 6
     Hit_02: 42
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 101
+  - ID: 101
     Hit_01: 7
     Hit_02: 17
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 102
+  - ID: 102
     Hit_01: 11
     Hit_02: 1
     Hit_03: 22
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 103
+  - ID: 103
     Hit_01: 6
     Hit_02: 23
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 104
+  - ID: 104
     Hit_01: 23
     Hit_02: 61
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 131
+  - ID: 131
     Hit_01: 406
     Hit_02: 0
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 200
+  - ID: 200
     Hit_01: 11
     Hit_02: 60
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 201
+  - ID: 201
     Hit_01: 1
     Hit_02: 25
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 202
+  - ID: 202
     Hit_01: 9
     Hit_02: 0
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 203
+  - ID: 203
     Hit_01: 3
     Hit_02: 11
     Hit_03: 5
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 231
+  - ID: 231
     Hit_01: 6
     Hit_02: 0
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 232
+  - ID: 232
     Hit_01: 6
     Hit_02: 9
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 300
+  - ID: 300
     Hit_01: 1
     Hit_02: 0
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 301
+  - ID: 301
     Hit_01: 13
     Hit_02: 0
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 302
+  - ID: 302
     Hit_01: 1
     Hit_02: 0
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 303
+  - ID: 303
     Hit_01: 11
     Hit_02: 0
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-  - Skill_ID: 331
+  - ID: 331
     Hit_01: 1
     Hit_02: 0
     Hit_03: 0
@@ -2648,6 +2648,8 @@ MonoBehaviour:
     Name: "\uCE74\uD0C0\uC548\uD0AC\uB85C"
     Category_ID: 1
     Category: "\uC77C\uBC18 \uD06C\uB9AC\uCC98"
+    Max_HP: 150
+    Move_Speed: 5
     Physics: 5
     Fire: 0
     Water: 0
@@ -2660,14 +2662,13 @@ MonoBehaviour:
     Electric_Cut: 0
     Ice_Cut: 0
     Wind_Cut: 0
-    Max_HP: 150
-    Move_Speed: 5
-    Attack_Speed: 0.5
-    Pattern_01: 10000
+    Pattern_01: 100000
   - ID: 2000
     Name: "\uB4C0\uB9AC\uB178"
     Category_ID: 2
     Category: "\uC815\uC608 \uD06C\uB9AC\uCC98"
+    Max_HP: 700
+    Move_Speed: 5
     Physics: 10
     Fire: 0
     Water: 0
@@ -2680,7 +2681,65 @@ MonoBehaviour:
     Electric_Cut: 0
     Ice_Cut: 0
     Wind_Cut: 0
-    Max_HP: 700
-    Move_Speed: 5
-    Attack_Speed: 0.5
-    Pattern_01: 10000
+    Pattern_01: 200000
+  Pattern_List:
+  - ID: 100000
+    Category_ID: 0
+    Hit_Max: 1
+    Delay_Min: 0
+    Delay_Max: 0
+    Cool_Time: 0
+    Trigger_Phase_01: 1
+    Trigger_Phase_02: 0
+    Trigger_Phase_03: 0
+    Name: "\uCE74\uD0C0\uC548\uD0AC\uB85C \uC77C\uBC18 \uACF5\uACA9"
+  - ID: 200000
+    Category_ID: 0
+    Hit_Max: 1
+    Delay_Min: 0
+    Delay_Max: 0
+    Cool_Time: 0
+    Trigger_Phase_01: 1
+    Trigger_Phase_02: 0
+    Trigger_Phase_03: 0
+    Name: "\uB4C0\uB9AC\uB178 \uC77C\uBC18 \uACF5\uACA9"
+  Pattern_Info_List:
+  - ID: 1000001
+    Damage_Type: Physics
+    Physics_A: 1
+    Fire_A: 1
+    Water_A: 1
+    Electric_A: 1
+    Ice_A: 1
+    Wind_A: 1
+    Stagger_Time: 0
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0
+  - ID: 2000001
+    Damage_Type: Physics
+    Physics_A: 1
+    Fire_A: 1
+    Water_A: 1
+    Electric_A: 1
+    Ice_A: 1
+    Wind_A: 1
+    Stagger_Time: 0
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0
+  Pattern_Hit_Frame:
+  - ID: 100000
+    Hit_01: 14
+    Hit_02: 0
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0
+  - ID: 200000
+    Hit_01: 26
+    Hit_02: 0
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0

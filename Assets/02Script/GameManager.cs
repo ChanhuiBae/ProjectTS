@@ -118,7 +118,7 @@ public class GameManager : Singleton<GameManager>
         }
         for (int i = 0; i < table.Skill_Hit_Frame.Count; i++)
         {
-            skillHitFrame.Add(table.Skill_Hit_Frame[i].Skill_ID, table.Skill_Hit_Frame[i]);
+            skillHitFrame.Add(table.Skill_Hit_Frame[i].ID, table.Skill_Hit_Frame[i]);
         }
         for (int i = 0; i < table.Weapon_List.Count; i++)
         {

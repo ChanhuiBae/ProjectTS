@@ -28,7 +28,6 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private float electricCut;
     private float iceCut;
     private float windCut;
-    private float attackSpeed;
     private bool IsDie;
     private Effect stun;
     private Effect effect;
@@ -82,7 +81,6 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         electricCut = creature.Electric_Cut;
         iceCut = creature.Ice_Cut;
         windCut = creature.Wind_Cut;
-        attackSpeed = creature.Attack_Speed;
         ai.InitAI(this.type, creature.Move_Speed);
         IsDie = false;
         stun.gameObject.SetActive(false);

@@ -13,4 +13,7 @@ public class TS : ScriptableObject
 	public List<TableEntity_Weapon> Weapon_List;
 	//public List<TableEntity_Armor> Armor_List;
 	public List<TableEntity_Creature> Creature_List;
+	public List<TableEntity_Pattern> Pattern_List;
+	public List<TableEntity_Pattern_Info> Pattern_Info_List;
+	public List<TableEntity_Pattern_Hit_Frame> Pattern_Hit_Frame;
 }
