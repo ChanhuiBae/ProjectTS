@@ -107,7 +107,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         {
             float damage = hiter.TakeDamage(key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
             currentHP -= damage;
-            Debug.Log("Damage key: " + damage);
+            Debug.Log("Damage: " + damage);
 
             ChargeUltimate(damage);
             if (!DieCheck())

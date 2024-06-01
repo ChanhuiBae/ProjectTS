@@ -15,7 +15,6 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private PlayerController player;
     private PlayerAnimationController anim;
     private Weapon weapon;
-    private Armor armor;
     private AttackArea attackArea;
     private EffectManager effect;
     
@@ -119,11 +118,6 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     public void WeaponInit(Weapon weapon)
     {
         this.weapon = weapon;
-    }
-
-    public void ArmorInit(Armor armor) 
-    { 
-        this.armor = armor; 
     }
 
     public void SetSkill(int num, int ID, string Weapon_ID, int Category_ID, int Skill_Level_Max, int Charge_Max, int Hit_Max)
@@ -428,6 +422,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             skillPhysics = skill.Damage_A + skill.Damage_B * skill.Skill_Level;
         }
         return weaponPhysics * skillPhysics;
+    }
+
+    public float TakeDamage(Armor armor)
+    {
+        return 0;
     }
 
     public void SetPulledPoint(Vector3 point)

@@ -155,12 +155,12 @@ public class TableEntity_Pattern_Info
 {
     public int ID;
     public string Damage_Type;
-    public float Physics_A;
-    public float Fire_A;
-    public float Water_A;
-    public float Electric_A;
-    public float Ice_A;
-    public float Wind_A;
+    public float Physics_Mul;
+    public float Fire_Mul;
+    public float Water_Mul;
+    public float Electric_Mul;
+    public float Ice_Mul;
+    public float Wind_Mul;
     public float Stagger_Time;
     public float Stun_Time;
     public float Stun_Chance;

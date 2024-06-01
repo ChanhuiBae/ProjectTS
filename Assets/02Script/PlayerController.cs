@@ -16,7 +16,8 @@ public enum State
     Attack_Gun,
     Attack_Skill,
     Roll,
-    CrowdControl
+    CrowdControl,
+    Die
 }
 
 public class PlayerController : MonoBehaviour, IDamage
@@ -154,7 +155,6 @@ public class PlayerController : MonoBehaviour, IDamage
             currentEXP = 0;
             state = State.Idle;
             expFill.fillAmount = 0;
-            skillManager.ArmorInit(armor);
             isDie = false;
             isControll = true;
             StartCoroutine(Idle());
@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public bool ChangeState(State state)
     {
-        if(this.state != state)
+        if(this.state != state && this.state != State.Die)
         {
             if(state == State.Idle)
             {
@@ -234,6 +234,8 @@ public class PlayerController : MonoBehaviour, IDamage
                         weapon.OnTrail();
                         break;
                     case State.CrowdControl:
+                        break;
+                    case State.Die:
                         break;
                 }
                 return true;
@@ -620,8 +622,15 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (!isInvincibility && !isDie)
         {
+            float damage = hiter.TakeDamage();
+            currentHP -= damage;
+            Debug.Log("Take Damage: " + damage);
 
-
+            if(currentHP <= 0)
+            {
+                isDie = true;
+                ChangeState(State.Die);
+            }
         }
     }
 

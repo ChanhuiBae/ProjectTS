@@ -2721,12 +2721,12 @@ MonoBehaviour:
   Pattern_Info_List:
   - ID: 1000001
     Damage_Type: Physics
-    Physics_A: 1
-    Fire_A: 1
-    Water_A: 1
-    Electric_A: 1
-    Ice_A: 1
-    Wind_A: 1
+    Physics_Mul: 1
+    Fire_Mul: 1
+    Water_Mul: 1
+    Electric_Mul: 1
+    Ice_Mul: 1
+    Wind_Mul: 1
     Stagger_Time: 0
     Stun_Time: 0
     Stun_Chance: 0
@@ -2734,12 +2734,12 @@ MonoBehaviour:
     Knockback_Distance: 0
   - ID: 2000001
     Damage_Type: Physics
-    Physics_A: 1
-    Fire_A: 1
-    Water_A: 1
-    Electric_A: 1
-    Ice_A: 1
-    Wind_A: 1
+    Physics_Mul: 1
+    Fire_Mul: 1
+    Water_Mul: 1
+    Electric_Mul: 1
+    Ice_Mul: 1
+    Wind_Mul: 1
     Stagger_Time: 0
     Stun_Time: 0
     Stun_Chance: 0

@@ -250,23 +250,23 @@ public class EffectManager : MonoBehaviour
     private IEnumerator StartDrop()
     {
         effect = skillManager.SpawnEffect(22);
-        effect.Init(EffectType.None, transform.position - transform.forward * 20 + Vector3.up*2 + Vector3.back, 3f);
+        effect.Init(EffectType.None, transform.position - transform.forward * 20 + Vector3.up*2 + Vector3.back, 1f);
         effect.SetRotation(transform.rotation);
         effect.MoveForward();
-        yield return YieldInstructionCache.WaitForSeconds(1f);
+        yield return YieldInstructionCache.WaitForSeconds(0.2f);
 
         for (int i = 0; i < 5; i++)
         {
             effect = skillManager.SpawnEffect(20);
-            effect.Init(EffectType.None, effects[i].transform.position + Vector3.up, 1f);
+            effect.Init(EffectType.None, effects[i].transform.position + Vector3.up*50, 0.5f);
             effect.SetRotation(effects[i].transform.rotation);
+            effect.MoveDown();
             yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
             effect = skillManager.SpawnEffect(21);
-            effect.Init(EffectType.Once, effects[i].transform.position, 1f);
+            effect.Init(EffectType.Once, effects[i].transform.position, 0.5f);
             effect.SetRotation(effects[i].transform.rotation);
             effects[i].ReturenEffect();
-            yield return YieldInstructionCache.WaitForSeconds(0.5f);
         }
         effects.Clear();
         PlayerController player = transform.GetComponent<PlayerController>();
