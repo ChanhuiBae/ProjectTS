@@ -112,7 +112,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         }
         else
         {
-            if (player.GetCurrentState() != State.Attack_Skill)
+            if (player.ChangeState(State.Attack_Skill))
             {
                 skillManager.IsCharge = true;
                 AttackSkill();
@@ -479,10 +479,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void AttackConnectedSkill()
     {
-        if (player.ChangeState(State.Attack_Skill))
-        {
-            player.UseSkill(connectedID);
-            skillManager.UseSkill(connectedNum);
-        }
+        player.UseSkill(connectedID);
+        skillManager.UseSkill(connectedNum);
     }
 }

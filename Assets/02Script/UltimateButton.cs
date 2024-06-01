@@ -105,26 +105,16 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     void OnPointerDown(PointerEventData eventData)
     {
-        if (player.GetCurrentState() != State.Attack_Skill)
+        if (ultimateFill.fillAmount >= 1)
         {
-            if(ultimateFill.fillAmount >= 1)
+            if (player.ChangeState(State.Attack_Skill))
             {
                 isUse = true;
                 skillManager.IsCharge = true;
                 AttackSkill();
             }
         }
-        else
-        {
-            if (isUse)
-            {
-                UseDrag = true;
-            }
-            else
-            {
-                UseDrag = false;
-            }
-        }
+     
         if (isUse)
         {
             skillManager.IsCharge = false;
@@ -143,6 +133,14 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     void OnPointerUp(PointerEventData eventData)
     {
+        if (isUse)
+        {
+            UseDrag = true;
+        }
+        else
+        {
+            UseDrag = false;
+        }
         if (connectedID != 0)
         {
             if (isUse && connectedUse)
@@ -179,35 +177,40 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 drag = eventData.position;
-        float x = eventData.position.x - center.position.x;
-        float y = eventData.position.y - center.position.y;
-        float distance = Mathf.Sqrt(x * x + y * y);
-
-        Vector3 v1 = new Vector3(x, y, 0f);
-        v1.Normalize();
-        Vector3 v2 = new Vector3(1, 0, 0);
-        Vector3 cross = Vector3.Cross(v1, v2);
-        float dot = Vector3.Dot(v1, v2);
-
-        if (Mathf.Abs(distance) <= 50)
-            icon.rectTransform.localPosition = new Vector2(x, y);
-        else
+        Vector3 direction = Vector3.zero;
+        if ((isScoping && isUse)|| UseDrag)
         {
-            float theta = Mathf.Acos(dot);
-            x = Mathf.Cos(theta) * 50;
-            if (cross.z > 0)
-            {
-                y = Mathf.Sin(theta) * 50;
-                y = -y;
-            }
+            Vector2 drag = eventData.position;
+            float x = eventData.position.x - center.position.x;
+            float y = eventData.position.y - center.position.y;
+            float distance = Mathf.Sqrt(x * x + y * y);
+
+            Vector3 v1 = new Vector3(x, y, 0f);
+            v1.Normalize();
+            Vector3 v2 = new Vector3(1, 0, 0);
+            Vector3 cross = Vector3.Cross(v1, v2);
+            float dot = Vector3.Dot(v1, v2);
+
+            if (Mathf.Abs(distance) <= 50)
+                icon.rectTransform.localPosition = new Vector2(x, y);
             else
             {
-                y = Mathf.Sin(theta) * 50;
+                float theta = Mathf.Acos(dot);
+                x = Mathf.Cos(theta) * 50;
+                if (cross.z > 0)
+                {
+                    y = Mathf.Sin(theta) * 50;
+                    y = -y;
+                }
+                else
+                {
+                    y = Mathf.Sin(theta) * 50;
+                }
+                icon.rectTransform.localPosition = new Vector2(x, y);
             }
-            icon.rectTransform.localPosition = new Vector2(x, y);
+            direction = new Vector3(x, 0, y);
         }
-        Vector3 direction = new Vector3(x, 0, y);
+           
 
         if (isScoping && isUse)
         {
@@ -216,7 +219,7 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 skillManager.MoveBoxes(direction);
             }
         }
-        else if (isUse && UseDrag)
+        else if (UseDrag)
         {
             connectedUse = true;
             if (connectedScoping)
@@ -285,14 +288,13 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void AttackSkill()
     {
-        player.ChangeState(State.Attack_Skill);
         player.UseSkill(ID);
         skillManager.UseSkill(buttonNum);
     }
 
     public void AttackConnectedSkill()
     {
-        if (player.ChangeState(State.Attack_Skill))
+        if (player.GetCurrentState() == State.Attack_Skill)
         {
             player.UseSkill(connectedID);
             skillManager.UseSkill(connectedNum);
