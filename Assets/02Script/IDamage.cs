@@ -5,8 +5,9 @@ using UnityEngine;
 public interface IDamage
 {
     public void CalculateDamage(AttackType attack, ITakeDamage hiter);
-
     public void CalculateDamage(AttackType attack, int key, ITakeDamage hiter);
+    public void CalulateDamage(int creatueKey, int patternKey, ITakeDamage hiter);
+
     public void Stagger(float time);
     public void Stun(float time);
     public void Airborne(float time);

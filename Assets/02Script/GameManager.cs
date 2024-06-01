@@ -53,6 +53,7 @@ public class GameManager : Singleton<GameManager>
     private MenuManager menuManager;
     private SoundManager soundManager;
     private SkillManager skillManager;
+    private PatternManager patternManager;
 
     private TS table;
     private Dictionary<int, TableEntity_Player> playerDataTable = new Dictionary<int, TableEntity_Player>();
@@ -193,6 +194,19 @@ public class GameManager : Singleton<GameManager>
             if (skillManager == null)
             {
                 GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager);
+            }
+            if(patternManager == null)
+            {
+                GameObject.Find("PatternManager").TryGetComponent<PatternManager>(out patternManager);
+                if(skillManager != null)
+                {
+                    List<int> creatureIDList = new List<int>();
+                    for(int i = 0; creatureTable.Count < 0; i++)
+                    {
+                        creatureIDList.Add(creatureTable[i].ID);
+                    }
+                    patternManager.Init(creatureIDList);
+                }
             }
         }
         if (level > 1)

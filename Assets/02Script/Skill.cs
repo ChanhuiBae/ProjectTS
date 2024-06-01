@@ -60,7 +60,7 @@ public class Skill : MonoBehaviour
     public int GetKey()
     {
         string key = ID + weapon_type + category + current_level + current_charge + current_hit;
-        return int.Parse(key);
+        return int.Parse(key); // string to int
     }
 
     public int GetLevel()

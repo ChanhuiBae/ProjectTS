@@ -131,7 +131,8 @@ public class TableEntity_Creature
     public float Electric_Cut;
     public float Ice_Cut;
     public float Wind_Cut;
-    public int Pattern_01;
+    public int Phase_2_HP;
+    public int Phase_3_HP;
 }
 
 
@@ -139,7 +140,7 @@ public class TableEntity_Creature
 public class TableEntity_Pattern
 {
     public int ID;
-    public int Category_ID;
+    public int Creature_ID;
     public int Hit_Max;
     public float Delay_Min;
     public float Delay_Max;

@@ -39,7 +39,7 @@ public class Armor : MonoBehaviour
     }
 
     private float physics_Cut;
-    public float Physics
+    public float Physics_Cut
     {
         get => physics_Cut;
     }

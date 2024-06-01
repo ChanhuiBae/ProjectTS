@@ -7,5 +7,5 @@ public interface ITakeDamage
     public float TakeDamage(float Physics_Cut, float Fire_Cut, float Water_Cut, float Electric_Cut, float Ice_Cut, float Wind_Cut);
     public float TakeDamage(int key, float Physics_Cut, float Fire_Cut, float Water_Cut, float Electric_Cut, float Ice_Cut, float Wind_Cut);
 
-    public float TakeDamage();
+    public float TakeDamage(int creatureKey, int PatternInfoKey);
 }

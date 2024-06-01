@@ -44,7 +44,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private State state;
     private Weapon weapon;
-    private Armor armor;
     private int attackCount;
 
     private float currentHP;
@@ -105,11 +104,6 @@ public class PlayerController : MonoBehaviour, IDamage
         if (!TryGetComponent<PlayerAnimationController>(out anim))
         {
             Debug.Log("PlayerController - Awake - PlayerAnimationController");
-        }
-
-        if(!TryGetComponent<Armor>(out armor))
-        {
-            Debug.Log("PlayerController - Awake - Armor");
         }
     }
 
@@ -619,13 +613,21 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void CalculateDamage(AttackType attack, ITakeDamage hiter)
     {
+    }
+
+    public void CalculateDamage(AttackType attack, int key, ITakeDamage hiter)
+    {
+    }
+
+    public void CalulateDamage(int creatueKey, int patternKey, ITakeDamage hiter)
+    {
         if (!isInvincibility && !isDie)
         {
-            float damage = hiter.TakeDamage();
+            float damage = hiter.TakeDamage(creatueKey, patternKey);
             currentHP -= damage;
             Debug.Log("Take Damage: " + damage);
 
-            if(currentHP <= 0)
+            if (currentHP <= 0)
             {
                 isDie = true;
                 ChangeState(State.Die);
@@ -633,13 +635,6 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    public void CalculateDamage(AttackType attack, int key, ITakeDamage hiter)
-    {
-        if (!isInvincibility && !isDie)
-        {
-
-        }
-    }
     public void Stagger(float time)
     {
         if (!isDie)

@@ -176,7 +176,6 @@ public class Weapon : MonoBehaviour
             trail.Stop();
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Creature")

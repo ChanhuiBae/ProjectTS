@@ -14,6 +14,14 @@ public enum AI_State
     Stop,
     Die
 }
+
+public enum Phase
+{
+    Die,
+    One,
+    Two, 
+    Three
+}
 public enum CretureType
 {
     Normal,
@@ -24,27 +32,24 @@ public enum CretureType
 }
 public class CretureAI : MonoBehaviour
 {
-
-    protected NavMeshAgent navAgent;
-    protected AI_State currentState;
+    private NavMeshAgent navAgent;
+    private AI_State currentState;
     public AI_State State
     {
         get => currentState;
     }
-    protected CretureType type;
-    protected Creture creture;
-    protected GameObject attackTarget;
-    protected PlayerController target;
+    private CretureType type;
+    private Creture creture;
+    private GameObject attackTarget;
+    private PlayerController target;
 
-    protected Vector3 homePos;
-    protected Vector3 movePos;
+    private Vector3 homePos;
+    private Vector3 movePos;
 
-    protected bool haveOneHand;
-    protected bool haveShield;
-    protected bool haveRanged;
-    protected float attackDistance;
+    private int currentPhase;
+    private float attackDistance;
 
-    protected bool isInit;
+    private bool isInit;
 
     // MosterBase 초기화 시 호출
     public void InitAI(CretureType type, float speed)
@@ -63,6 +68,7 @@ public class CretureAI : MonoBehaviour
         {
             Debug.Log("CretureAI - Init - PlayerController");
         }
+        currentPhase = 1;
         navAgent.speed = speed;
         navAgent.enabled = true;
         Spawn();
@@ -75,6 +81,11 @@ public class CretureAI : MonoBehaviour
             currentState = newState;
             StartCoroutine(currentState.ToString());
         }
+    }
+
+    public void SetPhase(int phase)
+    {
+        currentPhase = phase;
     }
 
     protected void SetMoveTarget(Vector3 targetPos)
@@ -180,6 +191,7 @@ public class CretureAI : MonoBehaviour
             {
                 ChangeAIState(AI_State.Chase);
             }
+            
         }
     }
 

@@ -2677,7 +2677,8 @@ MonoBehaviour:
     Electric_Cut: 0
     Ice_Cut: 0
     Wind_Cut: 0
-    Pattern_01: 100000
+    Phase_2_HP: 0
+    Phase_3_HP: 0
   - ID: 2000
     Name: "\uB4C0\uB9AC\uB178"
     Category_ID: 2
@@ -2696,10 +2697,11 @@ MonoBehaviour:
     Electric_Cut: 0
     Ice_Cut: 0
     Wind_Cut: 0
-    Pattern_01: 200000
+    Phase_2_HP: 0
+    Phase_3_HP: 0
   Pattern_List:
   - ID: 100000
-    Category_ID: 0
+    Creature_ID: 1000
     Hit_Max: 1
     Delay_Min: 0
     Delay_Max: 0
@@ -2709,7 +2711,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: "\uCE74\uD0C0\uC548\uD0AC\uB85C \uC77C\uBC18 \uACF5\uACA9"
   - ID: 200000
-    Category_ID: 0
+    Creature_ID: 2000
     Hit_Max: 1
     Delay_Min: 0
     Delay_Max: 0

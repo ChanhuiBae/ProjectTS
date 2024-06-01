@@ -28,6 +28,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private float electricCut;
     private float iceCut;
     private float windCut;
+    private int phase2HP;
+    private int phase3HP;
+
+    private int currentPhase;
     private bool IsDie;
     private Effect stun;
     private Effect effect;
@@ -81,7 +85,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         electricCut = creature.Electric_Cut;
         iceCut = creature.Ice_Cut;
         windCut = creature.Wind_Cut;
+        phase2HP = creature.Phase_2_HP;
+        phase3HP = creature.Phase_3_HP;
         ai.InitAI(this.type, creature.Move_Speed);
+        currentPhase = 1;
         IsDie = false;
         stun.gameObject.SetActive(false);
     }
@@ -95,6 +102,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             Debug.Log("Damage: " + damage);
 
             ChargeUltimate(damage);
+            CheckPhase();
             if (!DieCheck())
             {
                 SpawnHitEffect(damage);
@@ -110,10 +118,28 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             Debug.Log("Damage: " + damage);
 
             ChargeUltimate(damage);
+            CheckPhase();
             if (!DieCheck())
             {
                 SpawnHitEffect(damage);
             }
+        }
+    }
+    public void CalulateDamage(int creatueKey, int patternKey, ITakeDamage hiter)
+    {
+    }
+
+    private void CheckPhase()
+    {
+        if (phase2HP != 0 && currentHP <= phase2HP && currentPhase == 1)
+        {
+            currentPhase = 2;
+            ai.SetPhase(currentPhase);
+        }
+        if (phase3HP != 0 && currentPhase == 2 && currentHP <= phase3HP)
+        {
+            currentPhase = 3;
+            ai.SetPhase(currentPhase);
         }
     }
 
