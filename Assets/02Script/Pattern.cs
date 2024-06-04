@@ -5,11 +5,20 @@ using UnityEngine;
 
 public class Pattern : MonoBehaviour
 {
+    private CretureAI ai;
     private TableEntity_Pattern pattern;
     private TableEntity_Pattern_Hit_Frame hit;
     private int current_hit;
     private int currentTime;
-    
+
+    private void Awake()
+    {
+        if(!transform.parent.parent.transform.TryGetComponent<CretureAI>(out ai))
+        {
+
+        }  
+    }
+
     public void Init()
     {
         current_hit = 0;
