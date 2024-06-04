@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -35,6 +36,7 @@ public class CretureAI : MonoBehaviour
 {
     private NavMeshAgent navAgent;
     private CreatureAnimationController anim;
+    private List<Pattern> patterns;
     private AI_State currentState;
     public AI_State State
     {
@@ -53,15 +55,25 @@ public class CretureAI : MonoBehaviour
 
     private bool isInit;
 
+    private void Awake()
+    {
+        if (!TryGetComponent<NavMeshAgent>(out navAgent))
+            Debug.Log("CreatureAI - Awake - NavMeshAgent");
+        if (!TryGetComponent<CreatureAnimationController>(out anim))
+            Debug.Log("CreatureAI - Awake - CreatureAnimationController");
+        if (!TryGetComponent<Creture>(out creture))
+            Debug.Log("CretureAI - Awake - Creture");
+        GameObject obj = transform.Find("Patterns").gameObject;
+        patterns = new List<Pattern>();
+        for(int i =0; i < obj.transform.childCount; i++)
+        {
+            patterns.Add(obj.transform.GetChild(i).GetComponent<Pattern>());
+        }
+    }
+
     // MosterBase 초기화 시 호출
     public void InitAI(CretureType type, float speed)
     {
-        if (!TryGetComponent<NavMeshAgent>(out navAgent))
-            Debug.Log("CreatureAI - Init - NavMeshAgent");
-        if (!TryGetComponent<CreatureAnimationController>(out anim))
-            Debug.Log("CreatureAI - Init - CreatureAnimationController");
-        if (!TryGetComponent<Creture>(out creture))
-            Debug.Log("CretureAI - Init - Creture");
         this.type = type;
         isInit = true;
         attackTarget = null;
@@ -75,6 +87,10 @@ public class CretureAI : MonoBehaviour
         currentPhase = 1;
         navAgent.speed = speed;
         navAgent.enabled = true;
+        for(int i = 0; i < patterns.Count; i++)
+        {
+            patterns[i].Init();
+        }
         Spawn();
     }
     protected void ChangeAIState(AI_State newState)

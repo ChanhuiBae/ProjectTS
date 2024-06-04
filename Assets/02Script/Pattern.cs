@@ -10,6 +10,12 @@ public class Pattern : MonoBehaviour
     private int current_hit;
     private int currentTime;
     
+    public void Init()
+    {
+        current_hit = 0;
+        currentTime = 0;
+    }
+
     public int GetKey()
     {
         int key = pattern.ID * 10 + current_hit;

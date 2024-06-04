@@ -7,6 +7,7 @@ using static UnityEditor.PlayerSettings;
 public class Creture : MonoBehaviour, IDamage, IPoolObject
 {
     private Rigidbody rig;
+    private CreatureAnimationController anim;
     private CretureAI ai;
     [SerializeField]
     private string poolName;
@@ -42,6 +43,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         {
             Debug.Log("Creture - Awake - Rigidbody");
         }
+        if(!TryGetComponent<CreatureAnimationController>(out anim))
+        {
+            Debug.Log("Creature - Awake - AnimatorController");
+        }
         if (!TryGetComponent<CretureAI>(out ai))
         {
             Debug.Log("Creture - Awake - AI");
@@ -66,6 +71,8 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Init(Vector3 SpawnPos, int ID, CretureType type)
     {
+        anim.Move(false);
+        anim.SetPattern(0);
         transform.position = SpawnPos;
         this.ID = ID;
         this.type = type;
@@ -167,6 +174,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     private void SpawnHitEffect(float damage)
     {
+        anim.Hit();
         if (damage < 200 && damage > 0)
         {
             effect = spawnManager.SpawnEffect(0);
