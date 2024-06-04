@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 1929000506611709413}
   - component: {fileID: 9027386709340009985}
   - component: {fileID: 7636973872926440626}
+  - component: {fileID: 2883900237393291985}
   m_Layer: 0
   m_Name: NormalCreature
   m_TagString: Creature
@@ -222,6 +223,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2883900237393291985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4620981060732528443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c38c2ea6cf302429e15fb819ca636d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &481685099629959979
 PrefabInstance:
   m_ObjectHideFlags: 0

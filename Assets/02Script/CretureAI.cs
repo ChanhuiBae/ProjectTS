@@ -30,9 +30,11 @@ public enum CretureType
     Guvnor,
     Elite
 }
+
 public class CretureAI : MonoBehaviour
 {
     private NavMeshAgent navAgent;
+    private CreatureAnimationController anim;
     private AI_State currentState;
     public AI_State State
     {
@@ -55,7 +57,9 @@ public class CretureAI : MonoBehaviour
     public void InitAI(CretureType type, float speed)
     {
         if (!TryGetComponent<NavMeshAgent>(out navAgent))
-            Debug.Log("CretureAI - Init - NavMeshAgent");
+            Debug.Log("CreatureAI - Init - NavMeshAgent");
+        if (!TryGetComponent<CreatureAnimationController>(out anim))
+            Debug.Log("CreatureAI - Init - CreatureAnimationController");
         if (!TryGetComponent<Creture>(out creture))
             Debug.Log("CretureAI - Init - Creture");
         this.type = type;
@@ -148,6 +152,7 @@ public class CretureAI : MonoBehaviour
 
     protected IEnumerator Chase()
     {
+        anim.Move(true);
         navAgent.speed = 5f;
         //IBase.Run();
         yield return null;
@@ -183,12 +188,14 @@ public class CretureAI : MonoBehaviour
 
     protected IEnumerator Attack()
     {
+        anim.SetPattern(1);
         yield return null;
         while (true)
         {
             yield return null;
-            if (GetDistanceToTarget() > 10f)
+            if (GetDistanceToTarget() > 6f)
             {
+                anim.SetPattern(0);
                 ChangeAIState(AI_State.Chase);
             }
             
@@ -209,6 +216,8 @@ public class CretureAI : MonoBehaviour
 
     protected IEnumerable Idle()
     {
+        anim.Move(false);
+        anim.SetPattern(0);
         yield return null;
         navAgent.speed = 0f;
     }
