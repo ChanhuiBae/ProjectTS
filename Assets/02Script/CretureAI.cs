@@ -55,7 +55,8 @@ public class CretureAI : MonoBehaviour
 
     private bool isInit;
 
-    private void Awake()
+    // MosterBase 초기화 시 호출
+    public void InitAI(CretureType type, float speed)
     {
         if (!TryGetComponent<NavMeshAgent>(out navAgent))
             Debug.Log("CreatureAI - Awake - NavMeshAgent");
@@ -65,15 +66,10 @@ public class CretureAI : MonoBehaviour
             Debug.Log("CretureAI - Awake - Creture");
         GameObject obj = transform.Find("Patterns").gameObject;
         patterns = new List<Pattern>();
-        for(int i =0; i < obj.transform.childCount; i++)
+        for (int i = 0; i < obj.transform.childCount; i++)
         {
             patterns.Add(obj.transform.GetChild(i).GetComponent<Pattern>());
         }
-    }
-
-    // MosterBase 초기화 시 호출
-    public void InitAI(CretureType type, float speed)
-    {
         this.type = type;
         isInit = true;
         attackTarget = null;
