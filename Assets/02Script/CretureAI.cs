@@ -70,6 +70,7 @@ public class CretureAI : MonoBehaviour
         for (int i = 0; i < obj.transform.childCount; i++)
         {
             patterns.Add(obj.transform.GetChild(i).GetComponent<Pattern>());
+            patterns[i].Init();
         }
         this.type = type;
         isInit = true;
@@ -83,15 +84,14 @@ public class CretureAI : MonoBehaviour
         }
         navAgent.speed = speed;
         navAgent.enabled = true;
-
-        
+        SetPhase(1);
         Spawn();
     }
     protected void ChangeAIState(AI_State newState)
     {
         if (isInit)
         {
-            StopCoroutine(currentState.ToString());
+            StopAllCoroutines();
             currentState = newState;
             StartCoroutine(currentState.ToString());
         }
@@ -167,7 +167,6 @@ public class CretureAI : MonoBehaviour
             if (GetDistanceToTarget() <= (float)attackDistance)
             {
                 navAgent.SetDestination(transform.position);
-                //IBase.StopMove();
                 ChangeAIState(AI_State.Attack);
             }
             else
@@ -178,30 +177,53 @@ public class CretureAI : MonoBehaviour
         }
     }
 
-    protected IEnumerator ReturnHome()
-    {
-        yield return null;
-        SetMoveTarget(homePos);
-        //IBase.Run();
-
-        while (true)
-        {
-            yield return YieldInstructionCache.WaitForSeconds(1f);
-            if (navAgent.remainingDistance < 1f) // 목표까지 남은 거리
-                ChangeAIState(AI_State.Roaming);
-        }
-    }
-
     protected IEnumerator Attack()
     {
         yield return null;
         while (true)
         {
             yield return null;
-            if (GetDistanceToTarget() > 6f)
+            if (GetDistanceToTarget() > 10f)
             {
                 anim.SetPattern(0);
                 ChangeAIState(AI_State.Chase);
+            }
+            if(phase == Phase.One)
+            {
+                foreach (KeyValuePair<Pattern, bool> items in currentPatterns)
+                {
+                    if (items.Value == true)
+                    {
+                        Debug.Log("key" + items.Key.GetPatternKey());
+                        anim.SetPattern(items.Key.GetPatternKey());
+                        SetPatternDisable(items.Key);
+                        break;
+                    }
+                }
+            }
+            else if(phase == Phase.Two)
+            {
+                foreach (KeyValuePair<Pattern, bool> items in currentPatterns)
+                {
+                    if (items.Value == true)
+                    {
+                        anim.SetPattern(items.Key.GetPatternKey());
+                        SetPatternDisable(items.Key);
+                        break;
+                    }
+                }
+            }
+            else if(phase == Phase.Three) 
+            {
+                foreach (KeyValuePair<Pattern, bool> items in currentPatterns)
+                {
+                    if (items.Value == true)
+                    {
+                        anim.SetPattern(items.Key.GetPatternKey());
+                        SetPatternDisable(items.Key);
+                        break;
+                    }
+                }
             }
         }
     }
@@ -221,7 +243,6 @@ public class CretureAI : MonoBehaviour
     protected IEnumerable Idle()
     {
         anim.Move(false);
-        anim.SetPattern(0);
         yield return null;
         navAgent.speed = 0f;
     }
@@ -234,6 +255,7 @@ public class CretureAI : MonoBehaviour
 
     public void SetIdle()
     {
+        anim.SetPattern(0);
         currentState = AI_State.Idle;
         attackTarget = null;
         phase = Phase.Die;
@@ -267,12 +289,12 @@ public class CretureAI : MonoBehaviour
         switch(phase)
         {
             case 1:
+                currentPatterns = new Dictionary<Pattern, bool>();
                 for (int i = 0; i < patterns.Count; i++)
-                {
+                { 
                     if (patterns[i].IsUsePhase(1))
                     {
                         currentPatterns.Add(patterns[i], true);
-                        patterns[i].Init();
                     }
                 }
                 break;
@@ -285,7 +307,6 @@ public class CretureAI : MonoBehaviour
                     if (patterns[i].IsUsePhase(2))
                     {
                         currentPatterns.Add(patterns[i], true);
-                        patterns[i].Init();
                     }
                 }
                 break;
@@ -298,7 +319,6 @@ public class CretureAI : MonoBehaviour
                     if (patterns[i].IsUsePhase(3))
                     {
                         currentPatterns.Add(patterns[i], true);
-                        patterns[i].Init();
                     }
                 }
                 break;

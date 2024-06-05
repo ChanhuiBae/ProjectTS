@@ -31,8 +31,8 @@ public class SpawnManager : MonoBehaviour
     private IEnumerator Spawn()
     {
         yield return YieldInstructionCache.WaitForSeconds(2f);
-        for (int i = 0; i < 30; i++)
-        {
+        //for (int i = 0; i < 30; i++)
+        //{
             GameObject obj = pool.GetFromPool<Creture>(2).gameObject;
             Creture creture = obj.GetComponent<Creture>();
             creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x , 0f, Random.Range(-10f, 10f) + player.transform.position.z), 1000, CretureType.Normal);
@@ -41,7 +41,7 @@ public class SpawnManager : MonoBehaviour
             creture = obj.GetComponent<Creture>();
             creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x, 0f, Random.Range(-10f, 10f) + player.transform.position.z), 2000,CretureType.Noble);
             yield return YieldInstructionCache.WaitForSeconds(2f);
-        }
+        //}
     }
 
     public void SpawnHPItem(Vector3 pos)

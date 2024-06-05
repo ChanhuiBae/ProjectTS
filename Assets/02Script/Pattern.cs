@@ -11,19 +11,19 @@ public class Pattern : MonoBehaviour
     private int current_hit;
     private float currentTime;
 
-    private void Awake()
-    {
-        if(!transform.parent.parent.transform.TryGetComponent<CretureAI>(out ai))
-        {
-            Debug.Log("Pattern - Awake - CreatrureAI");
-        }  
-    }
 
     public void Init()
     {
+        if (!transform.parent.parent.transform.TryGetComponent<CretureAI>(out ai))
+        {
+            Debug.Log("Pattern - Awake - CreatrureAI");
+        }
+        GameManager.Inst.GetPatternData(int.Parse(transform.name), out pattern);
+        GameManager.Inst.GetPatternHitFrameData(int.Parse(transform.name), out hit);
         StopAllCoroutines();
         current_hit = 0;
         currentTime = pattern.Cool_Time;
+
     }
 
     public bool IsUsePhase(int i)
