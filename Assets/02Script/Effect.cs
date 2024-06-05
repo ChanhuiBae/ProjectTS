@@ -70,7 +70,7 @@ public class Effect : MonoBehaviour, IPoolObject
 
     public void MoveDown()
     {
-        transform.LeanMove(transform.position + Vector3.down * 50, 0.5f);
+        transform.LeanMove(transform.position + Vector3.down * 50, 0.3f);
     }
 
     private IEnumerator ReturnPool(float lifeTime)

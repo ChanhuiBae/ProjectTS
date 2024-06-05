@@ -105,6 +105,7 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     void OnPointerDown(PointerEventData eventData)
     {
+        ultimateFill.fillAmount = 1;
         if (ultimateFill.fillAmount >= 1)
         {
             if (player.ChangeState(State.Attack_Skill))
@@ -123,6 +124,7 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
         }
         if(ID == 331)
         {
+            player.StopAllCoroutines();
             skillManager.SetBoxes();
         }
         else

@@ -258,10 +258,10 @@ public class EffectManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             effect = skillManager.SpawnEffect(20);
-            effect.Init(EffectType.None, effects[i].transform.position + Vector3.up*50, 0.5f);
+            effect.Init(EffectType.None, effects[i].transform.position + Vector3.up*50, 0.3f);
             effect.SetRotation(effects[i].transform.rotation);
             effect.MoveDown();
-            yield return YieldInstructionCache.WaitForSeconds(0.5f);
+            yield return YieldInstructionCache.WaitForSeconds(0.3f);
 
             effect = skillManager.SpawnEffect(21);
             effect.Init(EffectType.Once, effects[i].transform.position, 0.5f);
