@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: player
-  m_Shader: {fileID: 4800000, guid: 481153b840b6e408da95e6afbe176397, type: 3}
+  m_Shader: {fileID: 4800000, guid: 7cd5de0b884b14f88ab763ef465e1799, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -211,6 +211,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _OverlayTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -228,6 +232,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SecondColorTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SeeThroughTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -343,6 +351,9 @@ Material:
     - _Glossiness: 0.542
     - _GlossyReflections: 1
     - _Glow: 1.19
+    - _GlowStencilComp: 6
+    - _GlowStencilOp: 0
+    - _GlowZTest: 4
     - _HdrBoost: 0
     - _HdrMultiply: 2
     - _Height: 0.25
@@ -392,8 +403,10 @@ Material:
     - _OutlineSharpness: 1
     - _OutlineSize: 10
     - _OutlineStencilComp: 6
-    - _OutlineWidth: 0.01
+    - _OutlineWidth: 0.001
     - _OutlineZTest: 4
+    - _OverlayHitStartTime: 0
+    - _OverlayZTest: 4
     - _Parallax: 0.02
     - _RampEnabled: 0
     - _RampLevels: 2
@@ -413,6 +426,17 @@ Material:
     - _ScanStr2: 0
     - _SecondColor: 0
     - _SecondColorSmooth: 0.2
+    - _SeeThrough: 0.8
+    - _SeeThroughBorderConstantWidth: 1
+    - _SeeThroughBorderWidth: 0.01
+    - _SeeThroughDepthOffset: 0
+    - _SeeThroughMaxDepth: 0
+    - _SeeThroughNoise: 1
+    - _SeeThroughOrdered: 1
+    - _SeeThroughStencilComp: 5
+    - _SeeThroughStencilPassOp: 0
+    - _SeeThroughStencilRef: 2
+    - _SeeThroughTextureScale: 1
     - _Segmented: 1
     - _ShadowStrength: 1
     - _Shininess: 0.078125
@@ -509,6 +533,7 @@ Material:
     - _Glow: {r: 1, g: 0.025, b: 0.75, a: 0.5}
     - _Glow2: {r: 0.01, g: 1, b: 0.5, a: 0}
     - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowDirection: {r: 1, g: 1, b: 0, a: 1}
     - _HighColor: {r: 1, g: 1, b: 1, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
     - _HighlightColor2: {r: 1, g: 1, b: 1, a: 1}
@@ -517,11 +542,17 @@ Material:
     - _LowColor: {r: 1, g: 1, b: 1, a: 1}
     - _NoiseSpeedScale: {r: 1, g: 1, b: 1, a: 1}
     - _OtlColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineDirection: {r: 0, g: 0, b: 0, a: 1}
+    - _OverlayBackColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayData: {r: 1, g: 0.5, b: 1, a: 1}
+    - _OverlayHitPosData: {r: 0, g: 0, b: 0, a: 0}
     - _OverlayTex_Scroll: {r: 0.1, g: 0.1, b: 1, a: 1}
     - _RimColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _ScleraColor: {r: 1, g: 1, b: 1, a: 0}
+    - _SeeThroughBorderColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SeeThroughTintColor: {r: 1, g: 0, b: 0, a: 0.8}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShnColor: {r: 1, g: 1, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
