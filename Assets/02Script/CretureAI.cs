@@ -289,6 +289,8 @@ public class CretureAI : MonoBehaviour
         switch(phase)
         {
             case 1:
+                this.phase = Phase.One;
+
                 currentPatterns = new Dictionary<Pattern, bool>();
                 for (int i = 0; i < patterns.Count; i++)
                 { 
