@@ -1,5 +1,6 @@
 using Redcode.Pools;
 using System.Collections;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -31,17 +32,22 @@ public class SpawnManager : MonoBehaviour
     private IEnumerator Spawn()
     {
         yield return YieldInstructionCache.WaitForSeconds(2f);
-        //for (int i = 0; i < 30; i++)
-        //{
-            GameObject obj = pool.GetFromPool<Creture>(2).gameObject;
-            Creture creture = obj.GetComponent<Creture>();
+        GameObject obj = pool.GetFromPool<Creture>(4).gameObject;
+        Creture creture = obj.GetComponent<Creture>();
+        creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x, 0f, Random.Range(-10f, 10f) + player.transform.position.z), 1000, CretureType.Normal);
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+
+        for (int i = 0; i < 30; i++)
+        {
+            obj = pool.GetFromPool<Creture>(2).gameObject;
+            creture = obj.GetComponent<Creture>();
             creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x , 0f, Random.Range(-10f, 10f) + player.transform.position.z), 1000, CretureType.Normal);
-            yield return YieldInstructionCache.WaitForSeconds(2f);
+            yield return YieldInstructionCache.WaitForSeconds(1f);
             obj = pool.GetFromPool<Creture>(3).gameObject;
             creture = obj.GetComponent<Creture>();
             creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x, 0f, Random.Range(-10f, 10f) + player.transform.position.z), 2000,CretureType.Noble);
-            yield return YieldInstructionCache.WaitForSeconds(2f);
-        //}
+            yield return YieldInstructionCache.WaitForSeconds(1f);
+        }
     }
 
     public void SpawnHPItem(Vector3 pos)

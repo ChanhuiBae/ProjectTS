@@ -2734,6 +2734,7 @@ Transform:
   - {fileID: 286043488}
   - {fileID: 523812617}
   - {fileID: 1346467040}
+  - {fileID: 1547287441}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &744160635
@@ -2772,6 +2773,12 @@ MonoBehaviour:
       type: 3}
     _count: 30
     _container: {fileID: 1346467040}
+    _nonLazy: 0
+  - _name: 3000
+    _component: {fileID: 935712332201360022, guid: 278126ea29132894d86704036812937e,
+      type: 3}
+    _count: 2
+    _container: {fileID: 1547287441}
     _nonLazy: 0
 --- !u!114 &744160636
 MonoBehaviour:
@@ -5247,6 +5254,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!1 &1547287440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1547287441}
+  m_Layer: 0
+  m_Name: SwamCreature
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1547287441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547287440}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 744160633}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1567239654
 GameObject:
   m_ObjectHideFlags: 0
