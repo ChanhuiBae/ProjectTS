@@ -264,6 +264,7 @@ public class EffectManager : MonoBehaviour
             yield return YieldInstructionCache.WaitForSeconds(0.3f);
 
             effect = skillManager.SpawnEffect(21);
+            effect.Key = skillManager.GetCurrentKey();
             effect.Init(EffectType.Once, effects[i].transform.position, 0.5f);
             effect.SetRotation(effects[i].transform.rotation);
             effects[i].ReturenEffect();

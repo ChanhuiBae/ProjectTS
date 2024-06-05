@@ -156,7 +156,12 @@ public class Effect : MonoBehaviour, IPoolObject
         if (other.tag == "Creature")
         {
             if (type == EffectType.Once)
-                skillManager.TakeDamageOther(AttackType.Effect, other);
+            {
+                if(key != null)
+                    skillManager.TakeDamageByKey(AttackType.Effect, key, other);
+                else
+                    skillManager.TakeDamageOther(AttackType.Effect, other);
+            }
             else if (type == EffectType.Multiple && hit)
             {
                 skillManager.TakeDamageByKey(AttackType.Effect, key, other);
