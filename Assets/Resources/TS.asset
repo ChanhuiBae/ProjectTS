@@ -2699,6 +2699,26 @@ MonoBehaviour:
     Wind_Cut: 0
     Phase_2_HP: 0
     Phase_3_HP: 0
+  - ID: 3000
+    Name: 
+    Category_ID: 3
+    Category: 
+    Max_HP: 700
+    Move_Speed: 5
+    Physics: 10
+    Fire: 0
+    Water: 0
+    Electric: 0
+    Ice: 0
+    Wind: 0
+    Physics_Cut: 0.2
+    Fire_Cut: 0
+    Water_Cut: 0
+    Electric_Cut: 0
+    Ice_Cut: 0
+    Wind_Cut: 0
+    Phase_2_HP: 0
+    Phase_3_HP: 0
   Pattern_List:
   - ID: 100000
     Creature_ID: 1000

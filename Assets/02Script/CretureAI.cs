@@ -194,7 +194,6 @@ public class CretureAI : MonoBehaviour
                 {
                     if (items.Value == true)
                     {
-                        Debug.Log("key" + items.Key.GetPatternKey());
                         anim.SetPattern(items.Key.GetPatternKey());
                         SetPatternDisable(items.Key);
                         break;
