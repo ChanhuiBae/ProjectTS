@@ -37,11 +37,13 @@ public class CretureAI : MonoBehaviour
     private NavMeshAgent navAgent;
     private CreatureAnimationController anim;
     private List<Pattern> patterns;
+    private Dictionary<Pattern, bool> currentPatterns;
     private AI_State currentState;
     public AI_State State
     {
         get => currentState;
     }
+    private Phase phase;
     private CretureType type;
     private Creture creture;
     private GameObject attackTarget;
@@ -50,7 +52,6 @@ public class CretureAI : MonoBehaviour
     private Vector3 homePos;
     private Vector3 movePos;
 
-    private int currentPhase;
     private float attackDistance;
 
     private bool isInit;
@@ -80,13 +81,10 @@ public class CretureAI : MonoBehaviour
         {
             Debug.Log("CretureAI - Init - PlayerController");
         }
-        currentPhase = 1;
         navAgent.speed = speed;
         navAgent.enabled = true;
-        for(int i = 0; i < patterns.Count; i++)
-        {
-            patterns[i].Init();
-        }
+
+        
         Spawn();
     }
     protected void ChangeAIState(AI_State newState)
@@ -99,10 +97,6 @@ public class CretureAI : MonoBehaviour
         }
     }
 
-    public void SetPhase(int phase)
-    {
-        currentPhase = phase;
-    }
 
     protected void SetMoveTarget(Vector3 targetPos)
     {
@@ -200,7 +194,6 @@ public class CretureAI : MonoBehaviour
 
     protected IEnumerator Attack()
     {
-        anim.SetPattern(1);
         yield return null;
         while (true)
         {
@@ -210,7 +203,6 @@ public class CretureAI : MonoBehaviour
                 anim.SetPattern(0);
                 ChangeAIState(AI_State.Chase);
             }
-            
         }
     }
 
@@ -244,6 +236,7 @@ public class CretureAI : MonoBehaviour
     {
         currentState = AI_State.Idle;
         attackTarget = null;
+        phase = Phase.Die;
         StartCoroutine(AI_State.Idle.ToString());
     }
     public void StopAI(float time)
@@ -267,6 +260,60 @@ public class CretureAI : MonoBehaviour
     {
         navAgent.enabled = true;
         ChangeAIState(AI_State.Chase);
+    }
+
+    public void SetPhase(int phase)
+    {
+        switch(phase)
+        {
+            case 1:
+                for (int i = 0; i < patterns.Count; i++)
+                {
+                    if (patterns[i].IsUsePhase(1))
+                    {
+                        currentPatterns.Add(patterns[i], true);
+                        patterns[i].Init();
+                    }
+                }
+                break;
+            case 2:
+                this.phase = Phase.Two;
+
+                currentPatterns.Clear();
+                for (int i = 0; i < patterns.Count; i++)
+                {
+                    if (patterns[i].IsUsePhase(2))
+                    {
+                        currentPatterns.Add(patterns[i], true);
+                        patterns[i].Init();
+                    }
+                }
+                break;
+            case 3:
+                this.phase = Phase.Three;
+
+                currentPatterns.Clear();
+                for (int i = 0; i < patterns.Count; i++)
+                {
+                    if (patterns[i].IsUsePhase(3))
+                    {
+                        currentPatterns.Add(patterns[i], true);
+                        patterns[i].Init();
+                    }
+                }
+                break;
+        }
+    }
+
+    public void SetPatternEnable(Pattern pattern)
+    {
+        currentPatterns[pattern] = true;
+    }
+
+    public void SetPatternDisable(Pattern pattern)
+    {
+        currentPatterns[pattern] = false;
+        pattern.StartCoolTime();
     }
 
 }

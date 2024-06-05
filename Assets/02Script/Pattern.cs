@@ -9,20 +9,40 @@ public class Pattern : MonoBehaviour
     private TableEntity_Pattern pattern;
     private TableEntity_Pattern_Hit_Frame hit;
     private int current_hit;
-    private int currentTime;
+    private float currentTime;
 
     private void Awake()
     {
         if(!transform.parent.parent.transform.TryGetComponent<CretureAI>(out ai))
         {
-
+            Debug.Log("Pattern - Awake - CreatrureAI");
         }  
     }
 
     public void Init()
     {
+        StopAllCoroutines();
         current_hit = 0;
-        currentTime = 0;
+        currentTime = pattern.Cool_Time;
+    }
+
+    public bool IsUsePhase(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                return pattern.Trigger_Phase_01;
+            case 2:
+                return pattern.Trigger_Phase_02;
+            case 3:
+                return pattern.Trigger_Phase_03;
+        }
+        return false;
+    }
+
+    public int GetPatternKey()
+    {
+        return pattern.ID;
     }
 
     public int GetKey()
@@ -90,7 +110,7 @@ public class Pattern : MonoBehaviour
         {
             yield return null;
         }
-        // todo: ai에게 공격 시키기
+        ai.SetPatternEnable(this);
     }
 
     public void StartCoolTime()
