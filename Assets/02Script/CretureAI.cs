@@ -159,6 +159,7 @@ public class CretureAI : MonoBehaviour
     protected IEnumerator Chase()
     {
         anim.Move(true);
+        anim.SetPattern(0);
         navAgent.speed = 5f;
         //IBase.Run();
         yield return null;
@@ -179,6 +180,7 @@ public class CretureAI : MonoBehaviour
 
     protected IEnumerator Attack()
     {
+        anim.Move(false);
         yield return null;
         while (true)
         {
