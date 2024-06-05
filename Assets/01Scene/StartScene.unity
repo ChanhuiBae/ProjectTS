@@ -958,6 +958,7 @@ MonoBehaviour:
     inventory:
       items: []
     WeaponID: 0
+    ArmorID: 0
     basic_ID: 0
     skill1_ID: 0
     connected1_ID: 0
