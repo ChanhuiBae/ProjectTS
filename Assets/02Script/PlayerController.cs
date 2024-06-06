@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private int attackCount;
 
     private float currentHP;
+    private Image hpFill;
     private float currentEXP;
     private Image expFill;
 
@@ -77,8 +78,11 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 roll.onClick.AddListener(ChangeRoll);
             }
-
             if (!GameObject.Find("ExperienceFill").TryGetComponent<Image>(out expFill))
+            {
+                Debug.Log("PlayerController - Awake - Image");
+            }
+            if (!GameObject.Find("HPFill").TryGetComponent<Image>(out hpFill))
             {
                 Debug.Log("PlayerController - Awake - Image");
             }
@@ -149,6 +153,7 @@ public class PlayerController : MonoBehaviour, IDamage
             currentEXP = 0;
             state = State.Idle;
             expFill.fillAmount = 0;
+            hpFill.fillAmount = 1;
             isDie = false;
             isControll = true;
             StartCoroutine(Idle());
@@ -626,13 +631,18 @@ public class PlayerController : MonoBehaviour, IDamage
             float damage = hiter.TakeDamage(creatueKey, patternKey);
             currentHP -= damage;
             Debug.Log("Take Damage: " + damage);
-
+            SetHPUI();
             if (currentHP <= 0)
             {
                 isDie = true;
                 ChangeState(State.Die);
             }
         }
+    }
+
+    private void SetHPUI()
+    {
+        hpFill.fillAmount = currentHP / GameManager.Inst.PlayerInfo.Max_HP;
     }
 
     public void Stagger(float time)
