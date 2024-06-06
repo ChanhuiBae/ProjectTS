@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
+using Image = UnityEngine.UI.Image;
 
 public class EffectManager : MonoBehaviour
 {
@@ -21,6 +23,8 @@ public class EffectManager : MonoBehaviour
     private ParticleSystem charge2;
     private ParticleSystem chargeLight;
     private bool fullCharge;
+
+    private Image fadeImg;
 
     private Effect effect;
     List<Effect> effects = new List<Effect>();
@@ -44,6 +48,14 @@ public class EffectManager : MonoBehaviour
             if (!Camera.main.TryGetComponent<FollowCamera>(out cameraControl))
             {
                 Debug.Log("EffectManager - Awake - FollowCamera");
+            }
+            if(!GameObject.Find("White").TryGetComponent<Image>(out fadeImg))
+            {
+                Debug.Log("EffectManager - Awake - Image");
+            }
+            else
+            {
+                fadeImg.enabled = false;
             }
         }
         if (!transform.Find("Charge1").TryGetComponent<ParticleSystem>(out charge1))
@@ -299,6 +311,50 @@ public class EffectManager : MonoBehaviour
 
     }
 
+    public void StartWhiteInOut()
+    {
+        fadeImg.enabled = true;
+        StartCoroutine(WhiteInOut());
+    }
+
+    private IEnumerator WhiteInOut()
+    {
+        Fade_InOut(false);
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        Fade_InOut(true);
+    }
+
+    private void Fade_InOut(bool isIn)
+    {
+        if (isIn)
+            StartCoroutine(Fade(1f, 0f, 0.25f));
+        else
+            StartCoroutine(Fade(0f, 1f, 0.25f));
+    }
+
+    IEnumerator Fade(float start, float end, float fadeTime)
+    {
+        fadeImg.raycastTarget = true;
+        fadeTime = Mathf.Clamp(fadeTime, 0.1f, 1f);
+        float percent = 0f;
+        float current = 0f;
+
+        Color alpha = fadeImg.color;
+        while (percent < 1f)
+        {
+            current += Time.deltaTime;
+            percent = current / fadeTime;
+
+            alpha.a = Mathf.Lerp(start, end, percent);
+            fadeImg.color = alpha;
+            yield return null;
+        }
+
+        if (end < 0.1f)
+            fadeImg.raycastTarget = false; // 다른 UI 활성화
+        else
+            fadeImg.raycastTarget = true;
+    }
     private IEnumerator CameraShack()
     {
         cameraControl.Shack = true;

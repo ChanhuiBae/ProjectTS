@@ -18,7 +18,8 @@ public class FadeManager : MonoBehaviour
     IEnumerator Fade(float start, float end, float fadeTime)
     {
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        //GameManager.Inst.PlayerIsController(false);
+        GameManager.Inst.PlayerIsController(false);
+
         fadeImg.raycastTarget = true;
         fadeTime = Mathf.Clamp(fadeTime, 0.1f, 1f);
         float percent = 0f;
