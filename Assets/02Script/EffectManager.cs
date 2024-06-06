@@ -329,13 +329,13 @@ public class EffectManager : MonoBehaviour
                 fadeImg.raycastTarget = false; // 다른 UI 활성화
                 Time.timeScale = 1;
 
-
                 effect = skillManager.SpawnEffect(24);
                 effect.Key = skillManager.GetCurrentKey();
+                effect.Key = (effect.Key / 10) * 10 + 1;
                 skillManager.SetCrowdControl(CrowdControlType.Stun);
                 effect.Init(EffectType.Once, transform.position, 1f);
             }
-            else if(frame == 95)
+            else if(frame == 92)
             {
                 player.SetIdle();
                 GameManager.Inst.PlayerIsController(true);
