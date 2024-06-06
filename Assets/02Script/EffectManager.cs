@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class EffectManager : MonoBehaviour
 {
     private SkillManager skillManager;
+    PlayerController player;
     private AttackArea attackArea;
     private Weapon weapon;
     private Transform point;
@@ -57,6 +59,7 @@ public class EffectManager : MonoBehaviour
             {
                 fadeImg.enabled = false;
             }
+            player = transform.GetComponent<PlayerController>();
         }
         if (!transform.Find("Charge1").TryGetComponent<ParticleSystem>(out charge1))
         {
@@ -282,14 +285,51 @@ public class EffectManager : MonoBehaviour
             effects[i].ReturenEffect();
         }
         effects.Clear();
-        PlayerController player = transform.GetComponent<PlayerController>();
+        
         player.SetIdle();
     }
-
-    public void SetColorInversion(bool use)
+    
+    private IEnumerator Dimension_Distortion()
     {
-        if (use)
+        //Time.timeScale = 0f;
+        GameManager.Inst.PlayerIsController(false);
+        RedTrail();
+        yield return YieldInstructionCache.WaitForSeconds(0.017f * 31);
+
+        fadeImg.enabled = true;
+        SetGray(false);
+        Fade_InOut(false);
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
+        Fade_InOut(true);
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
+
+        Time.timeScale = 1;
+        effect = skillManager.SpawnEffect(24);
+        effect.Key = skillManager.GetCurrentKey();
+        skillManager.SetCrowdControl(CrowdControlType.Stun);
+        effect.Init(EffectType.Once, transform.position, 5f);
+        player.SetIdle();
+        GameManager.Inst.PlayerIsController(true);
+        
+    }
+
+    public void WhiteTrail()
+    {
+        SetColorInversion(0);
+        SetGray(true);
+        StartCoroutine(Dimension_Distortion());
+    }
+
+    public void RedTrail()
+    {
+
+    }
+
+    public void SetColorInversion(int use)
+    {
+        if (use > 0)
         {
+            GameManager.Inst.PlayerIsController(false);
             postColor.gradingMode.Override(GradingMode.LowDefinitionRange);
         }
         else
@@ -298,7 +338,7 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    public void SetGray(bool gray)
+    private void SetGray(bool gray)
     {
         if (gray)
         {
@@ -309,19 +349,6 @@ public class EffectManager : MonoBehaviour
             postColor.saturation.value = 0f;
         }
 
-    }
-
-    public void StartWhiteInOut()
-    {
-        fadeImg.enabled = true;
-        StartCoroutine(WhiteInOut());
-    }
-
-    private IEnumerator WhiteInOut()
-    {
-        Fade_InOut(false);
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        Fade_InOut(true);
     }
 
     private void Fade_InOut(bool isIn)
@@ -355,6 +382,7 @@ public class EffectManager : MonoBehaviour
         else
             fadeImg.raycastTarget = true;
     }
+
     private IEnumerator CameraShack()
     {
         cameraControl.Shack = true;
