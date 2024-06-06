@@ -111,7 +111,6 @@ public class Skill : MonoBehaviour
         {
             IsActive = true;
         }
-        Debug.Log("hitup" + current_hit);
         if (max_charge > 0 && current_hit == 1)
         {
             skillManager.StartAnimator();

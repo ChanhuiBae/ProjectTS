@@ -80,14 +80,6 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
         up.eventID = EventTriggerType.PointerUp;
         drag.eventID = EventTriggerType.Drag;
         dragEnd.eventID = EventTriggerType.EndDrag;
-        down.callback.AddListener((data) => { OnPointerDown((PointerEventData)data); });
-        trigger.triggers.Add(down);
-        up.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
-        trigger.triggers.Add(up);
-        drag.callback.AddListener((data) => { OnDrag((PointerEventData)data); });
-        trigger.triggers.Add(drag);
-        dragEnd.callback.AddListener((data) => { OnEndDrag((PointerEventData)data); });
-        trigger.triggers.Add(dragEnd);
     }
 
     public void SetUaltimate(float value)
@@ -250,6 +242,8 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void InitSkill(int buttonNum, int id, string name)
     {
+        down.callback.AddListener((data) => { OnPointerDown((PointerEventData)data); });
+        trigger.triggers.Add(down);
         this.buttonNum = buttonNum;
         this.name = name;
         ID = id;
@@ -268,7 +262,18 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
             TableEntity_Skill skill;
             GameManager.Inst.GetSkillData(ID, out skill);
             isScoping = skill.Is_Scoping;
+            if(isScoping)
+            {
+                SetDrag();
+            }
             isCharging = skill.Is_Charging;
+            if (isCharging)
+            {
+                up = new EventTrigger.Entry();
+                up.eventID = EventTriggerType.PointerUp;
+                up.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
+                trigger.triggers.Add(up);
+            }
             ultimateText.enabled = true;
         }
     }
@@ -285,7 +290,37 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
             GameManager.Inst.GetSkillData(connectedID, out skill);
             connectedScoping = skill.Is_Scoping;
             connectedCharging = skill.Is_Charging;
+            if (connectedScoping)
+            {
+                SetDrag();
+            }
+            isCharging = skill.Is_Charging;
+            if (connectedCharging)
+            {
+                up = new EventTrigger.Entry();
+                up.eventID = EventTriggerType.PointerUp;
+                up.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
+                trigger.triggers.Add(up);
+            }
         }
+    }
+
+    private void SetDrag()
+    {
+        up = new EventTrigger.Entry();
+        up.eventID = EventTriggerType.PointerUp;
+        up.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
+        trigger.triggers.Add(up);
+
+        drag = new EventTrigger.Entry();
+        drag.eventID = EventTriggerType.Drag;
+        drag.callback.AddListener((data) => { OnDrag((PointerEventData)data); });
+        trigger.triggers.Add(drag);
+
+        dragEnd = new EventTrigger.Entry();
+        dragEnd.eventID = EventTriggerType.EndDrag;
+        dragEnd.callback.AddListener((data) => { OnEndDrag((PointerEventData)data); });
+        trigger.triggers.Add(dragEnd);
     }
 
     private void AttackSkill()

@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
+using Unity.VisualScripting;
 
 public class EffectManager : MonoBehaviour
 {
@@ -27,12 +28,17 @@ public class EffectManager : MonoBehaviour
     private bool fullCharge;
 
     private Image fadeImg;
+    private bool Dimension_Distortion_Trigger;
+    private int frame;
+
 
     private Effect effect;
     List<Effect> effects = new List<Effect>();
 
     private void Awake()
     {
+        Dimension_Distortion_Trigger = false;
+        frame = 0;
         if (SceneManager.GetActiveScene().buildIndex > 2)
         {
             if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
@@ -289,35 +295,62 @@ public class EffectManager : MonoBehaviour
         player.SetIdle();
     }
     
-    private IEnumerator Dimension_Distortion()
+    private void Update()
     {
-        //Time.timeScale = 0f;
-        GameManager.Inst.PlayerIsController(false);
-        RedTrail();
-        yield return YieldInstructionCache.WaitForSeconds(0.017f * 31);
+        if (Dimension_Distortion_Trigger)
+        {
+            if(frame == 0)
+            {
+                GameManager.Inst.PlayerIsController(false);
+                RedTrail();
+                Time.timeScale = 0f;
+            }
+            else if(frame == 30)
+            {
+                fadeImg.enabled = true;
+                SetGray(false);
 
-        fadeImg.enabled = true;
-        SetGray(false);
-        Fade_InOut(false);
-        yield return YieldInstructionCache.WaitForSeconds(0.5f);
-        Fade_InOut(true);
-        yield return YieldInstructionCache.WaitForSeconds(0.5f);
+                fadeImg.raycastTarget = true;
+            }
+            else if(frame >= 31 && frame <= 60)
+            {
+                Color alpha = fadeImg.color;
+                alpha.a = Mathf.Lerp(0, 1, (frame-31)/30);
+                fadeImg.color = alpha;
+            }
+            else if (frame >= 61 && frame <= 90)
+            {
+                Color alpha = fadeImg.color;
+                alpha.a = Mathf.Lerp(1, 0, (frame - 60) / 30);
+                fadeImg.color = alpha;
+            }
+            else if(frame == 91)
+            {
+                fadeImg.raycastTarget = false; // 다른 UI 활성화
+                Time.timeScale = 1;
 
-        Time.timeScale = 1;
-        effect = skillManager.SpawnEffect(24);
-        effect.Key = skillManager.GetCurrentKey();
-        skillManager.SetCrowdControl(CrowdControlType.Stun);
-        effect.Init(EffectType.Once, transform.position, 5f);
-        player.SetIdle();
-        GameManager.Inst.PlayerIsController(true);
-        
+
+                effect = skillManager.SpawnEffect(24);
+                effect.Key = skillManager.GetCurrentKey();
+                skillManager.SetCrowdControl(CrowdControlType.Stun);
+                effect.Init(EffectType.Once, transform.position, 1f);
+            }
+            else if(frame == 95)
+            {
+                player.SetIdle();
+                GameManager.Inst.PlayerIsController(true);
+                Dimension_Distortion_Trigger = false;
+            }
+            frame++;
+        }
     }
 
     public void WhiteTrail()
     {
         SetColorInversion(0);
         SetGray(true);
-        StartCoroutine(Dimension_Distortion());
+        frame = 0;
+        Dimension_Distortion_Trigger = true;
     }
 
     public void RedTrail()
@@ -349,38 +382,6 @@ public class EffectManager : MonoBehaviour
             postColor.saturation.value = 0f;
         }
 
-    }
-
-    private void Fade_InOut(bool isIn)
-    {
-        if (isIn)
-            StartCoroutine(Fade(1f, 0f, 0.25f));
-        else
-            StartCoroutine(Fade(0f, 1f, 0.25f));
-    }
-
-    IEnumerator Fade(float start, float end, float fadeTime)
-    {
-        fadeImg.raycastTarget = true;
-        fadeTime = Mathf.Clamp(fadeTime, 0.1f, 1f);
-        float percent = 0f;
-        float current = 0f;
-
-        Color alpha = fadeImg.color;
-        while (percent < 1f)
-        {
-            current += Time.deltaTime;
-            percent = current / fadeTime;
-
-            alpha.a = Mathf.Lerp(start, end, percent);
-            fadeImg.color = alpha;
-            yield return null;
-        }
-
-        if (end < 0.1f)
-            fadeImg.raycastTarget = false; // 다른 UI 활성화
-        else
-            fadeImg.raycastTarget = true;
     }
 
     private IEnumerator CameraShack()

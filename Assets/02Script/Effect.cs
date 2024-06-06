@@ -24,6 +24,7 @@ public class Effect : MonoBehaviour, IPoolObject
     public int Key
     {
         set { key = value; }
+        get { return key; }
     }
 
     private void Awake()
