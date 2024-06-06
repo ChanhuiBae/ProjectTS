@@ -70,7 +70,7 @@ public class CretureAI : MonoBehaviour
         for (int i = 0; i < obj.transform.childCount; i++)
         {
             patterns.Add(obj.transform.GetChild(i).GetComponent<Pattern>());
-            patterns[i].Init();
+            patterns[i].Init(creture.GetKey());
         }
         this.type = type;
         isInit = true;
@@ -197,6 +197,7 @@ public class CretureAI : MonoBehaviour
                     if (items.Value == true)
                     {
                         anim.SetPattern(items.Key.GetPatternKey());
+                        items.Key.StartPattern();
                         SetPatternDisable(items.Key);
                         break;
                     }

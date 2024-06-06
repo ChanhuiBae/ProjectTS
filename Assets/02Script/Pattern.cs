@@ -6,21 +6,28 @@ using UnityEngine;
 public class Pattern : MonoBehaviour
 {
     private CretureAI ai;
+    private PatternManager patternManager;
     private TableEntity_Pattern pattern;
     private TableEntity_Pattern_Hit_Frame hit;
+    private int creatureKey;
     private int current_hit;
     private float currentTime;
 
 
-    public void Init()
+    public void Init(int creatureKey)
     {
+        if(!GameObject.Find("PatternManager").TryGetComponent<PatternManager>(out patternManager))
+        {
+            Debug.Log("Pattern - Init - PatternManager");
+        }
         if (!transform.parent.parent.transform.TryGetComponent<CretureAI>(out ai))
         {
-            Debug.Log("Pattern - Awake - CreatrureAI");
+            Debug.Log("Pattern - Init - CreatrureAI");
         }
         GameManager.Inst.GetPatternData(int.Parse(transform.name), out pattern);
         GameManager.Inst.GetPatternHitFrameData(int.Parse(transform.name), out hit);
         StopAllCoroutines();
+        this.creatureKey = creatureKey;
         current_hit = 0;
         currentTime = pattern.Cool_Time;
 
@@ -116,5 +123,13 @@ public class Pattern : MonoBehaviour
     public void StartCoolTime()
     {
         StartCoroutine(CoolTime());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player" && current_hit != 0)
+        {
+            patternManager.TakeDamageOther(creatureKey, GetKey(), other);
+        }
     }
 }

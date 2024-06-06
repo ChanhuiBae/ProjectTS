@@ -2725,7 +2725,7 @@ MonoBehaviour:
     Hit_Max: 1
     Delay_Min: 0
     Delay_Max: 0
-    Cool_Time: 0
+    Cool_Time: 28
     Trigger_Phase_01: 1
     Trigger_Phase_02: 0
     Trigger_Phase_03: 0
@@ -2735,7 +2735,7 @@ MonoBehaviour:
     Hit_Max: 1
     Delay_Min: 0
     Delay_Max: 0
-    Cool_Time: 0
+    Cool_Time: 52
     Trigger_Phase_01: 1
     Trigger_Phase_02: 0
     Trigger_Phase_03: 0

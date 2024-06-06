@@ -534,6 +534,9 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                     case CrowdControlType.Pulled:
                         creatureDamage.Pulled(pulledPoint);
                         break;
+                    case CrowdControlType.Stagger:
+                        creatureDamage.Stagger(skill.Stagger_Time);
+                        break;
                 }
             }
         }

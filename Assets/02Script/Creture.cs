@@ -101,6 +101,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         stun.gameObject.SetActive(false);
     }
 
+    public int GetKey()
+    {
+        return ID;
+    }
     public void CalculateDamage(AttackType attack, ITakeDamage hiter)
     {
         if(!IsDie)

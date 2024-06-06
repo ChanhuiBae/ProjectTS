@@ -47,6 +47,35 @@ public class PatternManager : MonoBehaviour, ITakeDamage
     }
 
 
+    public void TakeDamageOther(int creatureKey, int patternKey, Collider other)
+    {
+        if (other.TryGetComponent<IDamage>(out IDamage playerDamage))
+        {
+            playerDamage.CalulateDamage(creatureKey, patternKey, this);
+            TableEntity_Pattern_Info pattern;
+            GameManager.Inst.GetPatternInfoData(patternKey, out pattern);
+            if(pattern != null)
+            {
+                if(pattern.Airborne_Time > 0)
+                {
+                    playerDamage.Airborne(pattern.Airborne_Time);
+                }
+                else if(pattern.Stagger_Time > 0)
+                {
+                    playerDamage.Stagger(pattern.Stagger_Time);
+                }
+                else if(pattern.Knockback_Distance > 0)
+                {
+                    playerDamage.Knockback(pattern.Knockback_Distance);
+                }
+                else if(pattern.Stun_Time > 0)
+                {
+                    playerDamage.Stun(pattern.Stun_Time);
+                }
+            }
+        }
+    }
+
 }
 
 
