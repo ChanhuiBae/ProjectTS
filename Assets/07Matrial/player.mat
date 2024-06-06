@@ -8,13 +8,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: player
-  m_Shader: {fileID: 4800000, guid: 7cd5de0b884b14f88ab763ef465e1799, type: 3}
+  m_Shader: {fileID: 4800000, guid: 128c5f1edaefa4c4fb3f9f7a4615edb2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _
-  - _ALPHABLEND_ON
   - _CFXR_DITHERED_SHADOWS_OFF
   - _CFXR_OVERLAYBLEND_RGBA
   - _CFXR_OVERLAYTEX_OFF
@@ -398,7 +397,7 @@ Material:
     - _Offset: 0
     - _OffsetPower: 0
     - _Opacity: 1
-    - _OtlWidth: 1
+    - _OtlWidth: 0.1
     - _Outline: 0.01
     - _OutlineSharpness: 1
     - _OutlineSize: 10
@@ -469,6 +468,7 @@ Material:
     - _StrengthY: -1
     - _TextureAnimate: 0
     - _TextureAnimateSpeed: 1
+    - _Thickness: 1
     - _Tiling: 14.79
     - _TintColor: 0
     - _TranslucencyViewDependency: 0.7

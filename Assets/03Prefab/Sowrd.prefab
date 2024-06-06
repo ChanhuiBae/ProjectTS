@@ -4841,7 +4841,7 @@ GameObject:
   - component: {fileID: 2209610901630830473}
   - component: {fileID: 6902477055561346855}
   - component: {fileID: 9085839944304166212}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sowrd
   m_TagString: Untagged
   m_Icon: {fileID: 0}

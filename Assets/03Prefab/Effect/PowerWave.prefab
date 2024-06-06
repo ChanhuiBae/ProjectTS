@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 5263504415449551735}
   - component: {fileID: 5466136968441240725}
   - component: {fileID: 5219347248895764424}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PowerWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
