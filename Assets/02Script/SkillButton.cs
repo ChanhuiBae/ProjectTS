@@ -172,7 +172,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 trigger.enabled = false;
                 StartCoroutine(CoolTime());
             }
-            else if (maxStack > 0)
+            if (maxStack > 0)
             {
                 if(isDrag)
                     skillManager.PushVector(direction);
@@ -237,9 +237,8 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             direction = new Vector3(x, 0, y);
             if (maxStack != 0)
             {
-                skillManager.StopAttackArea();
-                skillManager.MoveAttackArea(direction*0.25f, 2);
                 skillManager.ShowAttackArea();
+                skillManager.MoveAttackArea(direction*0.25f, 2);
                 if(skillManager.GetVectorCount() == 0)
                     player.LookAttackArea();
             }
@@ -264,7 +263,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 skillManager.SetLook(Vector3.zero);
                 StartCoroutine(CoolTime());
             }
-            else if (maxStack > 0)
+            if (maxStack > 0)
             {
                 if (isDrag)
                     skillManager.PushVector(direction);

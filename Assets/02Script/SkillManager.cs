@@ -241,7 +241,8 @@ public class SkillManager : MonoBehaviour, ITakeDamage
 
     public void ShowAttackArea()
     {
-        attackArea.StartView();
+        attackArea.SetArea(0.8f);
+        attackArea.ShowAttackArea();
     }
 
     public void StopAttackArea()

@@ -10,8 +10,8 @@ public class AttackArea : MonoBehaviour
     private SphereCollider sphereCol;
     private SkillManager skillManager;
     private List<Collider> targets;
-    private ParticleSystem view;
-    private ParticleSystem full;
+    private GameObject view;
+    private GameObject full;
     private bool isListUp;
 
     public void Awake()
@@ -25,19 +25,14 @@ public class AttackArea : MonoBehaviour
         {
             Debug.Log("AttackArea - Init - SphereCollider");
         }
-        if (!transform.GetChild(0).TryGetComponent<ParticleSystem>(out view))
-        {
-            Debug.Log("AttackArea - Init - ParticleSystem");
-        }
-        if (!GameObject.Find("FullAttackAreaView").TryGetComponent<ParticleSystem>(out full))
-        {
-            Debug.Log("AttackArea - Init - ParticleSystem");
-        }
+        view = transform.GetChild(0).gameObject;
+        full = GameObject.Find("FullAttackAreaView");
+
 
         sphereCol.enabled = false;
         targets = new List<Collider>();
-        view.Stop();
-        full.Stop();
+        view.SetActive(false);
+        full.SetActive(false);
         isListUp = false;
     }
 
@@ -87,21 +82,25 @@ public class AttackArea : MonoBehaviour
 
     public void Move(Vector3 center, float radius)
     {
-        sphereCol.center = center;
-        sphereCol.radius = radius;
+        sphereCol.center = center; 
+        view.transform.position = transform.root.position + sphereCol.center + new Vector3(0, 0.2f, 0);
+        view.transform.LeanScale(new Vector3(radius / 5, 1, radius / 5), 0);
     }
-    public void StartView()
+    public void SetArea(float size)
     {
-        full.Play();
-        view.transform.position = transform.root.position + sphereCol.center + new Vector3(0,0.2f,0);
-        view.startSize = sphereCol.radius * 2;
-        view.Play();
+        full.SetActive(true);
+        full.transform.LeanScale(new Vector3(size, 1, size), 0);
+    }
+
+    public void ShowAttackArea()
+    {
+        view.SetActive(true);
     }
 
     public void StopView()
     {
-        view.Clear();
-        full.Clear();
+        view.SetActive(false);
+        full.SetActive(false);
     }
 
     public Vector3 GetCenter()
