@@ -110,6 +110,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11437802, guid: 87738b5a38cb9d34aaa6cbf49c05e518, type: 3}
+      propertyPath: AudioCurve.m_RotationOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445476, guid: 87738b5a38cb9d34aaa6cbf49c05e518, type: 3}
+      propertyPath: AudioCurve.m_RotationOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 19831956, guid: 87738b5a38cb9d34aaa6cbf49c05e518, type: 3}
+      propertyPath: UVModule.flipU
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 19841358, guid: 87738b5a38cb9d34aaa6cbf49c05e518, type: 3}
       propertyPath: lengthInSec
       value: 0.5
@@ -119,6 +131,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19924996, guid: 87738b5a38cb9d34aaa6cbf49c05e518, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19931456, guid: 87738b5a38cb9d34aaa6cbf49c05e518, type: 3}
+      propertyPath: m_Flip.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 19931456, guid: 87738b5a38cb9d34aaa6cbf49c05e518, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -140,8 +160,24 @@ PrefabInstance:
       propertyPath: m_ReflectionProbeUsage
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114442000944375290, guid: 87738b5a38cb9d34aaa6cbf49c05e518,
+        type: 3}
+      propertyPath: GraphTimeMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114442000944375290, guid: 87738b5a38cb9d34aaa6cbf49c05e518,
+        type: 3}
+      propertyPath: FloatCurve.m_RotationOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114963718127438984, guid: 87738b5a38cb9d34aaa6cbf49c05e518,
+        type: 3}
+      propertyPath: FloatCurve.m_RotationOrder
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 113632, guid: 87738b5a38cb9d34aaa6cbf49c05e518, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87738b5a38cb9d34aaa6cbf49c05e518, type: 3}
