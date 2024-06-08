@@ -4,9 +4,9 @@ using UnityEngine;
 
 public interface IDamage
 {
-    public void CalculateDamage(AttackType attack, ITakeDamage hiter);
-    public void CalculateDamage(AttackType attack, int key, ITakeDamage hiter);
-    public void CalulateDamage(int creatueKey, int patternKey, ITakeDamage hiter);
+    public bool CalculateDamage(AttackType attack, ITakeDamage hiter);
+    public bool CalculateDamage(AttackType attack, int key, ITakeDamage hiter);
+    public bool CalulateDamage(int creatueKey, int patternKey, ITakeDamage hiter);
 
     public void Stagger(float time);
     public void Stun(float time);
@@ -14,4 +14,6 @@ public interface IDamage
     public void Knockback(float distance);
     public void Airback(float time, float distance);
     public void Pulled(Vector3 center);
+
+    public bool IsAttack();
 }

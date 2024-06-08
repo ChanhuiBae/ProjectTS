@@ -1,4 +1,5 @@
 using Redcode.Pools;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,6 +38,8 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private Queue<Vector3> queue;
     private CrowdControlType crowdControl;
     private Vector3 pulledPoint;
+    private bool counter;
+
     public bool IsCharge
     {
         get => isCharge;
@@ -156,6 +159,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
 
     public void UseSkill(int num)
     {
+        counter = false;
         useSkill = num;
         switch (useSkill)
         {
@@ -165,11 +169,20 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             case 1:
                 skill1.StartSkill(1);
                 break;
+            case 11:
+                connected1.StartSkill(11);
+                break;
             case 2:
                 skill2.StartSkill(2);
                 break;
+            case 21:
+                connected2.StartSkill(21);
+                break;
             case 3:
                 skill3.StartSkill(3);
+                break;
+            case 31:
+                connected3.StartSkill(31);
                 break;
             case 4:
                 ultimate.StartSkill(4);
@@ -293,10 +306,16 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         {
             case 1:
                 return skill1.GetKey();
+            case 11:
+                return connected1.GetKey();
             case 2:
                 return skill2.GetKey();
+            case 21:
+                return connected2.GetKey();
             case 3:
                 return skill3.GetKey();
+            case 31:
+                return connected3.GetKey();
             case 4:
                 return ultimate.GetKey();
             case 41:
@@ -454,36 +473,107 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         anim.Attack(true);
     }
 
+    public void CounterCheck()
+    {
+        StartCoroutine(CounterChecking());
+    }
+
+    private IEnumerator CounterChecking()
+    {
+        anim.IsCombo(false);
+        counter = false;
+        for(int i = 0; i < 10; i++)
+        {
+            if (counter)
+            {
+                anim.IsCombo(true);
+            }
+            yield return null;
+        }
+        if(!counter)
+        {
+            player.SetIdle();
+        }
+    }
+
     public void TakeDamageOther(AttackType attack, Collider other)
     {
         if (useSkill > -1)
         {
             if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
             {
-                creatureDamage.CalculateDamage(attack, this);
-                TableEntity_Skill_Info skill;
-                switch (useSkill)
+                if(creatureDamage.CalculateDamage(attack, this))
                 {
-                    case 1:
-                        GameManager.Inst.GetSkillInfoData(skill1.GetKey(), out skill);
-                        break;
-                    case 2:
-                        GameManager.Inst.GetSkillInfoData(skill2.GetKey(), out skill);
-                        break;
-                    case 3:
-                        GameManager.Inst.GetSkillInfoData(skill3.GetKey(), out skill);
-                        break;
-                    case 4:
-                        GameManager.Inst.GetSkillInfoData(ultimate.GetKey(), out skill);
-                        break;
-                    case 41:
-                        GameManager.Inst.GetSkillInfoData(connectedU.GetKey(), out skill);
-                        break;
-                    default:
-                        GameManager.Inst.GetSkillInfoData(basic.GetKey(), out skill);
-                        break;
+                    counter = true;
+                    TableEntity_Skill_Info skill;
+                    switch (useSkill)
+                    {
+                        case 1:
+                            GameManager.Inst.GetSkillInfoData(skill1.GetKey(), out skill);
+                            break;
+                        case 2:
+                            GameManager.Inst.GetSkillInfoData(skill2.GetKey(), out skill);
+                            break;
+                        case 3:
+                            GameManager.Inst.GetSkillInfoData(skill3.GetKey(), out skill);
+                            break;
+                        case 4:
+                            GameManager.Inst.GetSkillInfoData(ultimate.GetKey(), out skill);
+                            break;
+                        case 41:
+                            GameManager.Inst.GetSkillInfoData(connectedU.GetKey(), out skill);
+                            break;
+                        default:
+                            GameManager.Inst.GetSkillInfoData(basic.GetKey(), out skill);
+                            break;
+                    }
+                    if (skill != null)
+                    {
+                        if (skill.Stun_Time > 0)
+                        {
+                            creatureDamage.Stun(skill.Stun_Time);
+                        }
+                        if (skill.Stagger_Time > 0)
+                        {
+                            creatureDamage.Stagger(skill.Stagger_Time);
+                        }
+                        if (skill.Airborne_Time > 0)
+                        {
+                            creatureDamage.Airborne(skill.Airborne_Time);
+                        }
+                        if (skill.Knockback_Distance > 0)
+                        {
+                            creatureDamage.Knockback(skill.Knockback_Distance);
+                        }
+                        switch (crowdControl)
+                        {
+                            case CrowdControlType.Airback:
+                                creatureDamage.Airback(skill.Airborne_Time, skill.Knockback_Distance);
+                                break;
+                            case CrowdControlType.Pulled:
+                                creatureDamage.Pulled(pulledPoint);
+                                break;
+                        }
+                    }
                 }
-                if(skill != null)
+            }
+        }
+    }
+
+    public void TakeDamageByKey(AttackType attack, int key, Collider other)
+    {
+       
+        if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
+        {
+            if(creatureDamage.CalculateDamage(attack, key, this))
+            {
+                if (creatureDamage.IsAttack())
+                {
+                    counter = true;
+                }
+                TableEntity_Skill_Info skill;
+                GameManager.Inst.GetSkillInfoData(key, out skill);
+                if (skill != null)
                 {
                     switch (crowdControl)
                     {
@@ -502,42 +592,10 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                         case CrowdControlType.Pulled:
                             creatureDamage.Pulled(pulledPoint);
                             break;
+                        case CrowdControlType.Stagger:
+                            creatureDamage.Stagger(skill.Stagger_Time);
+                            break;
                     }
-                }
-            }
-        }
-    }
-
-    public void TakeDamageByKey(AttackType attack, int key, Collider other)
-    {
-       
-        if (other.TryGetComponent<IDamage>(out IDamage creatureDamage))
-        {
-            creatureDamage.CalculateDamage(attack, key, this);
-            TableEntity_Skill_Info skill;
-            GameManager.Inst.GetSkillInfoData(key, out skill);
-            if (skill != null)
-            {
-                switch (crowdControl)
-                {
-                    case CrowdControlType.Stun:
-                        creatureDamage.Stun(skill.Stun_Time);
-                        break;
-                    case CrowdControlType.Airborne:
-                        creatureDamage.Airborne(skill.Airborne_Time);
-                        break;
-                    case CrowdControlType.Knockback:
-                        creatureDamage.Knockback(skill.Knockback_Distance);
-                        break;
-                    case CrowdControlType.Airback:
-                        creatureDamage.Airback(skill.Airborne_Time, skill.Knockback_Distance);
-                        break;
-                    case CrowdControlType.Pulled:
-                        creatureDamage.Pulled(pulledPoint);
-                        break;
-                    case CrowdControlType.Stagger:
-                        creatureDamage.Stagger(skill.Stagger_Time);
-                        break;
                 }
             }
         }

@@ -105,40 +105,61 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         return ID;
     }
-    public void CalculateDamage(AttackType attack, ITakeDamage hiter)
+
+    public bool IsAttack()
+    {
+        if(ai.GetState() == AI_State.Attack)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool CalculateDamage(AttackType attack, ITakeDamage hiter)
     {
         if(!IsDie)
         {
             float damage = hiter.TakeDamage(physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
-            currentHP -= damage;
-            Debug.Log("Damage: " + damage);
-
-            ChargeUltimate(damage);
-            CheckPhase();
-            if (!DieCheck())
+            if(damage > 0)
             {
-                SpawnHitEffect(damage);
+                currentHP -= damage;
+                Debug.Log("Damage: " + damage);
+
+                ChargeUltimate(damage);
+                CheckPhase();
+                if (!DieCheck())
+                {
+                    SpawnHitEffect(damage);
+                }
+                return true;
             }
         }
+        return false;
     }
-    public void CalculateDamage(AttackType attack, int key, ITakeDamage hiter)
+    public bool CalculateDamage(AttackType attack, int key, ITakeDamage hiter)
     {
         if (!IsDie)
         {
             float damage = hiter.TakeDamage(key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
-            currentHP -= damage;
-            Debug.Log("Damage: " + damage);
-
-            ChargeUltimate(damage);
-            CheckPhase();
-            if (!DieCheck())
+            if(damage > 0)
             {
-                SpawnHitEffect(damage);
+                currentHP -= damage;
+                Debug.Log("Damage: " + damage);
+
+                ChargeUltimate(damage);
+                CheckPhase();
+                if (!DieCheck())
+                {
+                    SpawnHitEffect(damage);
+                }
+                return true;
             }
         }
+        return false;
     }
-    public void CalulateDamage(int creatueKey, int patternKey, ITakeDamage hiter)
+    public bool CalulateDamage(int creatueKey, int patternKey, ITakeDamage hiter)
     {
+        return false;
     }
 
     private void CheckPhase()

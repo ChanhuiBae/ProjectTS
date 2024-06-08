@@ -97,6 +97,10 @@ public class CretureAI : MonoBehaviour
         }
     }
 
+    public AI_State GetState()
+    {
+        return currentState;
+    }
 
     protected void SetMoveTarget(Vector3 targetPos)
     {

@@ -475,6 +475,12 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         ChangeState(State.Attack_Gun);
     }
+    
+    public void CounterCheck()
+    {
+        skillManager.CounterCheck();
+    }
+
 
     private void ChangeRoll()
     {
@@ -614,30 +620,44 @@ public class PlayerController : MonoBehaviour, IDamage
         attackArea.Attack(Vector3.zero, radius);
     }
 
-    
-
-    public void CalculateDamage(AttackType attack, ITakeDamage hiter)
+    public bool IsAttack()
     {
+        if(state == State.Attack_Skill || state == State.Attack_Sword || state == State.Attack_Hammer || state == State.Attack_Gun)
+        {
+            return true;
+        }
+        return false;
     }
 
-    public void CalculateDamage(AttackType attack, int key, ITakeDamage hiter)
+    public bool CalculateDamage(AttackType attack, ITakeDamage hiter)
     {
+        return false;
     }
 
-    public void CalulateDamage(int creatueKey, int patternKey, ITakeDamage hiter)
+    public bool CalculateDamage(AttackType attack, int key, ITakeDamage hiter)
+    {
+        return false;
+    }
+
+    public bool CalulateDamage(int creatueKey, int patternKey, ITakeDamage hiter)
     {
         if (!isInvincibility && !isDie)
         {
             float damage = hiter.TakeDamage(creatueKey, patternKey);
-            currentHP -= damage;
-            Debug.Log("Take Damage: " + damage);
-            SetHPUI();
-            if (currentHP <= 0)
+            if(damage > 0)
             {
-                isDie = true;
-                ChangeState(State.Die);
+                currentHP -= damage;
+                Debug.Log("Take Damage: " + damage);
+                SetHPUI();
+                if (currentHP <= 0)
+                {
+                    isDie = true;
+                    ChangeState(State.Die);
+                }
+                return true;
             }
         }
+        return false;
     }
 
     private void SetHPUI()

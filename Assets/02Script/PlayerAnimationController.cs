@@ -53,7 +53,6 @@ public class PlayerAnimationController : MonoBehaviour
         {
             animator.ResetTrigger(H_Attack);
         }
-
     }
 
     public void IsCombo(bool use)
