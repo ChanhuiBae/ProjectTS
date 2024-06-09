@@ -473,6 +473,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         anim.Attack(true);
     }
 
+    public void SetInvincible(float time)
+    {
+        player.IsInvincibility(time);
+    }
+
     public void CounterCheck()
     {
         StartCoroutine(CounterChecking());
@@ -529,6 +534,15 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                     }
                     if (skill != null)
                     {
+                        switch (crowdControl)
+                        {
+                            case CrowdControlType.Airback:
+                                creatureDamage.Airback(skill.Airborne_Time, skill.Knockback_Distance);
+                                break;
+                            case CrowdControlType.Pulled:
+                                creatureDamage.Pulled(pulledPoint);
+                                break;
+                        }
                         if (skill.Stun_Time > 0)
                         {
                             creatureDamage.Stun(skill.Stun_Time);
@@ -544,15 +558,6 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                         if (skill.Knockback_Distance > 0)
                         {
                             creatureDamage.Knockback(skill.Knockback_Distance);
-                        }
-                        switch (crowdControl)
-                        {
-                            case CrowdControlType.Airback:
-                                creatureDamage.Airback(skill.Airborne_Time, skill.Knockback_Distance);
-                                break;
-                            case CrowdControlType.Pulled:
-                                creatureDamage.Pulled(pulledPoint);
-                                break;
                         }
                     }
                 }

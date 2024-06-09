@@ -284,7 +284,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private IEnumerator MoveAirborne(float time)
     {
         Vector3 pos = transform.position;
-        LeanTween.move(gameObject, pos + (Vector3.up * 3f), time / 2).setEase(LeanTweenType.easeOutCubic);
+        LeanTween.move(gameObject, pos + (Vector3.up * time), time / 2).setEase(LeanTweenType.easeOutCubic);
         yield return YieldInstructionCache.WaitForSeconds(time/2);
         LeanTween.move(gameObject, pos, time / 2).setEase(LeanTweenType.easeInSine);
     }

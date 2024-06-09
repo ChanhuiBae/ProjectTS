@@ -411,7 +411,7 @@ public class GameManager : Singleton<GameManager>
         pData.skill2_ID = 102;
         pData.connected2_ID = 0;
         pData.skill3_ID = 103;
-        pData.connected3_ID = 104;
+        pData.connected3_ID = 0;
         pData.ultimate_ID = 131;
         pData.connectedU_ID = 0;
         SaveData();
@@ -426,7 +426,7 @@ public class GameManager : Singleton<GameManager>
         pData.skill2_ID = 102;
         pData.connected2_ID = 0;
         pData.skill3_ID = 103;
-        pData.connected3_ID = 104;
+        pData.connected3_ID = 0;
         pData.ultimate_ID = 131;
         pData.connectedU_ID = 0;
         SaveData();

@@ -103,10 +103,6 @@ public class Skill : MonoBehaviour
         current_hit++;
         currentInfoID = GetKey();
         GameManager.Inst.GetSkillInfoData(currentInfoID, out currentInfo);
-        if(current_charge > 0 && current_hit > 1)
-        {
-            skillManager.SetCrowdControl(CrowdControlType.Airback);
-        }
         if (currentInfo != null)
         {
             IsActive = true;
@@ -114,6 +110,10 @@ public class Skill : MonoBehaviour
         if (max_charge > 0 && current_hit == 1)
         {
             skillManager.StartAnimator();
+        }
+        if(currentInfo.Invincible_Time > 0)
+        {
+            skillManager.SetInvincible(currentInfo.Invincible_Time);
         }
     }
 
