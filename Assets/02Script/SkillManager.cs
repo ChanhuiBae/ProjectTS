@@ -405,7 +405,6 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         {
             case 1:
                 skillPhysics = skill1.GetDamageA() + (skill1.GetDamageB() * skill1.GetLevel());
-                Debug.Log(skill1.GetKey());
                 break;
             case 2:
                 skillPhysics = skill2.GetDamageA() + (skill2.GetDamageB() * skill2.GetLevel());

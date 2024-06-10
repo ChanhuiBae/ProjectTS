@@ -659,8 +659,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Loading Tip
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 27e0d3862a6ec9c49bdbd1ee67461c31, type: 2}
-  m_sharedMaterial: {fileID: -1857079477033407455, guid: 27e0d3862a6ec9c49bdbd1ee67461c31,
+  m_fontAsset: {fileID: 11400000, guid: d0eb072dabad83f4eae7a8ea5e22b837, type: 2}
+  m_sharedMaterial: {fileID: -8481365338451462639, guid: d0eb072dabad83f4eae7a8ea5e22b837,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

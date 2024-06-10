@@ -106,14 +106,14 @@ public class Skill : MonoBehaviour
         if (currentInfo != null)
         {
             IsActive = true;
+            if (currentInfo.Invincible_Time > 0)
+            {
+                skillManager.SetInvincible(currentInfo.Invincible_Time);
+            }
         }
         if (max_charge > 0 && current_hit == 1)
         {
             skillManager.StartAnimator();
-        }
-        if(currentInfo.Invincible_Time > 0)
-        {
-            skillManager.SetInvincible(currentInfo.Invincible_Time);
         }
     }
 

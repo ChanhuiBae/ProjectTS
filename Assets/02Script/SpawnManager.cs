@@ -52,16 +52,20 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnHPItem(Vector3 pos)
     {
-        GameObject obj = pool.GetFromPool<HPItem>(0).gameObject;
-        HPItem hp = obj.GetComponent<HPItem>();
+        HPItem hp = pool.GetFromPool<HPItem>(0);
         hp.Init(1f, pos);
     }
 
     public void SpawnEXPItem(Vector3 pos)
     {
-        GameObject obj = pool.GetFromPool<EXPItem>(1).gameObject;
-        EXPItem exp = obj.GetComponent<EXPItem>();
+        EXPItem exp = pool.GetFromPool<EXPItem>(1);
         exp.Init(1f, pos);
+    }
+
+    public void SpawnFloatingDamage(Vector3 pos, float damage)
+    {
+        FloatingDamage fd = pool.GetFromPool<FloatingDamage>(5);
+        fd.Init(pos, damage);
     }
 
     public void ReturnCreature(string name, Creture creture)
