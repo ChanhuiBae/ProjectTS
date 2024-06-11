@@ -50,7 +50,7 @@ public class FloatingDamage : MonoBehaviour, IPoolObject
         for(int i = 0; i < 10;  i++)
         {
             yield return YieldInstructionCache.WaitForSeconds(0.1f);
-            rect.position += new Vector3(0, 5f, 0);
+            rect.position += new Vector3(0, 10f, 0);
             text.fontSize -= 1f;
             text.alpha = 1 - (0.1f * i);
         }
