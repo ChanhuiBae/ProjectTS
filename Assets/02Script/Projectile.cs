@@ -70,6 +70,7 @@ public class Projectile : MonoBehaviour, IPoolObject
     public void AttackLaser(Quaternion rotation)
     {
         transform.rotation = rotation;
+        transform.position += transform.forward * 1f;
         rig.velocity = Vector3.zero;
         rig.AddForce(transform.forward * 16f, ForceMode.Impulse);
         StartCoroutine(TimeOut(0.5f));
