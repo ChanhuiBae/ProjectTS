@@ -307,6 +307,7 @@ public class MenuManager : MonoBehaviour
 
     private void OnExit()
     {
+        Time.timeScale = 1f;
         GameManager.Inst.AsyncLoadNextScene(SceneName.LobbyScene);
     }
 

@@ -127,14 +127,7 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     void OnPointerUp(PointerEventData eventData)
     {
-        if (isUse)
-        {
-            UseDrag = true;
-        }
-        else
-        {
-            UseDrag = false;
-        }
+        UseDrag = !UseDrag;
         if (connectedID != 0)
         {
             if (isUse && connectedUse)
@@ -172,7 +165,7 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
     public void OnDrag(PointerEventData eventData)
     {
         Vector3 direction = Vector3.zero;
-        if ((isScoping && isUse)&& UseDrag)
+        if (UseDrag || (isScoping && isUse))
         {
             Vector2 drag = eventData.position;
             float x = eventData.position.x - center.position.x;
@@ -229,6 +222,7 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         if (isUse && connectedUse)
         {
+            UseDrag = false;
             connectedUse = false;
             transform.SetSiblingIndex(5);
             skillManager.StopAttackArea();

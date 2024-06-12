@@ -95,6 +95,7 @@ public class EffectManager : MonoBehaviour
         {
             Debug.Log("EffectManager - Awake - AttackArea");
         }
+        SetColorInversion(0);
     }
 
     public void Init(Weapon weapon)
