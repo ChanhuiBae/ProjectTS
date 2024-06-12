@@ -1,11 +1,7 @@
-using JetBrains.Annotations;
 using System.Collections;
-using System.ComponentModel;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
 
 public enum State
 {
