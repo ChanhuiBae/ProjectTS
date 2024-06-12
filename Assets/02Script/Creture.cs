@@ -123,13 +123,16 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             if(damage > 0)
             {
                 currentHP -= damage;
-                spawnManager.SpawnFloatingDamage(transform.position, damage);
 
                 ChargeUltimate(damage);
                 CheckPhase();
                 if (!DieCheck())
                 {
                     SpawnHitEffect(damage);
+                }
+                if (GameManager.Inst.OnDamageText)
+                {
+                    spawnManager.SpawnFloatingDamage(transform.position, damage);
                 }
                 return true;
             }
@@ -151,6 +154,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
                 if (!DieCheck())
                 {
                     SpawnHitEffect(damage);
+                }
+                if (GameManager.Inst.OnDamageText)
+                {
+                    spawnManager.SpawnFloatingDamage(transform.position, damage);
                 }
                 return true;
             }

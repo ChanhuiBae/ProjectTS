@@ -36,7 +36,7 @@ public class FollowCamera : MonoBehaviour
             if (InitFollowCamera())
                 Debug.Log("FollowCamera - Update() - target is null");
         }
-        else if (shack)
+        else if (shack && GameManager.Inst.OnCamaraShake)
         {
             transform.position = ((Vector3)Random.insideUnitCircle) * shackAmount + target.position + offset;
         }

@@ -307,11 +307,12 @@ public class MenuManager : MonoBehaviour
 
     private void OnExit()
     {
-
+        GameManager.Inst.AsyncLoadNextScene(SceneName.LobbyScene);
     }
 
     private void OnSettingBack()
     {
+        GameManager.Inst.SaveData();
         settingPopup.SetActive(false);
         pausePopup.SetActive(true);
     }
@@ -328,11 +329,11 @@ public class MenuManager : MonoBehaviour
 
     private void SetDamageText()
     {
-
+        GameManager.Inst.OnDamageText = damageText.isOn;
     }
 
     private void SetCameraShake()
     {
-
+        GameManager.Inst.OnCamaraShake = camShake.isOn;
     }
 }

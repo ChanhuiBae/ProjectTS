@@ -409,6 +409,18 @@ public class GameManager : Singleton<GameManager>
         get => setData;
     }
 
+    public bool OnDamageText
+    {
+        get => setData.damageText;
+        set => setData.damageText = value;
+    }
+
+    public bool OnCamaraShake
+    {
+        get => setData.cameraShake;
+        set => setData.cameraShake = value;
+    }
+
     public Inventory INVENTORY
     {
         get
@@ -505,14 +517,12 @@ public class GameManager : Singleton<GameManager>
     {
         setData.bgm = value;
         soundManager.SetVolumBGM(value);
-        SaveData();
     }
 
     public void SetVolumSFX(int value)
     {
         setData.sfx = value;
         soundManager.SetVolumSFX(value);
-        SaveData();
     }
 
     public void PlayerIsController(bool value)
