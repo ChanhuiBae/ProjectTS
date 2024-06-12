@@ -157,6 +157,11 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         }
     }
 
+    public int GetCurrentSkill()
+    {
+        return useSkill;
+    }
+
     public void UseSkill(int num)
     {
         counter = false;

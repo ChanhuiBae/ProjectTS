@@ -14,6 +14,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private Image coolTimeImage;
     private Image icon;
+    private Image bar;
     private RectTransform center;
     private Image block;
     private TextMeshProUGUI time;
@@ -81,6 +82,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             {
                 Debug.Log("SkillButton - Awake - TextMeshProUGUI");
             }
+            if(!transform.Find("Bar").TryGetComponent<Image>(out bar))
+            {
+                Debug.Log("SkillButton - Awake - Image");
+            }
         }
         if (!transform.Find("Icon").TryGetComponent<Image>(out icon))
         {
@@ -108,7 +113,8 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         if(transform.childCount == 1)
         {
-            BasicAttack();
+            BasicAttack(); 
+            skillManager.UseSkill(0);
         }
         else
         {
@@ -151,59 +157,62 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     void OnPointerUp(PointerEventData eventData)
     {
-        if (isScoping)
+        if(buttonNum == skillManager.GetCurrentSkill())
         {
-            icon.rectTransform.position = center.position;
-            skillManager.SetLook(Vector3.zero);
-        }
-        if (player.GetCurrentState() == State.Attack_Skill)
-        {
-            if(isCharging)
+            if (isScoping)
             {
-                skillManager.IsCharge = false;
-                skillManager.StopCharge();
-                trigger.enabled = false;
-                StartCoroutine(CoolTime());
+                icon.rectTransform.position = center.position;
+                skillManager.SetLook(Vector3.zero);
             }
-            if (isScoping && maxStack == 0)
+            if (player.GetCurrentState() == State.Attack_Skill)
             {
-                player.StopAllCoroutines();
+                if (isCharging)
+                {
+                    skillManager.IsCharge = false;
+                    skillManager.StopCharge();
+                    trigger.enabled = false;
+                    StartCoroutine(CoolTime());
+                }
+                if (isScoping && maxStack == 0)
+                {
+                    player.StopAllCoroutines();
+                    player.SetIdle();
+                    trigger.enabled = false;
+                    StartCoroutine(CoolTime());
+                }
+                if (maxStack > 0)
+                {
+                    if (isDrag)
+                        skillManager.PushVector(direction);
+                    else
+                        skillManager.PushVector(player.transform.forward);
+                    skillManager.StopAttackArea();
+                    player.Sit();
+                }
+                if (currentStack == 0)
+                {
+                    trigger.enabled = false;
+                    block.enabled = true;
+                    time.enabled = true;
+                    icon.transform.SetSiblingIndex(0);
+                }
+                if (currentStack > 0)
+                {
+                    currentStack--;
+                    stackCount.text = currentStack.ToString();
+                }
+            }
+            if (!isDrag && !isCharging && maxStack == 0)
+            {
                 player.SetIdle();
-                trigger.enabled = false;
-                StartCoroutine(CoolTime());
             }
-            if (maxStack > 0)
-            {
-                if(isDrag)
-                    skillManager.PushVector(direction);
-                else
-                    skillManager.PushVector(player.transform.forward);
-                skillManager.StopAttackArea();
-                player.Sit();
-            }
-            if (currentStack == 0)
-            {
-                trigger.enabled = false;
-                block.enabled = true;
-                time.enabled = true;
-                icon.transform.SetSiblingIndex(0);
-            }
-            if (currentStack > 0)
-            {
-                currentStack--;
-                stackCount.text = currentStack.ToString();
-            }
+            isDrag = false;
         }
-        if(!isDrag && !isCharging && maxStack == 0)
-        {
-            player.SetIdle();
-        }
-        isDrag = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (isScoping && trigger.enabled)
+        if (buttonNum == skillManager.GetCurrentSkill() && isScoping && trigger.enabled)
         {
             isDrag = true;
             Vector2 drag = eventData.position;
@@ -218,7 +227,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             float dot = Vector3.Dot(v1, v2);
 
             if (Mathf.Abs(distance) <= 40)
+            {
                 icon.rectTransform.localPosition = new Vector2(x, y);
+                bar.rectTransform.localPosition = new Vector2(x, y);
+            }
             else
             {
                 float theta = Mathf.Acos(dot);
@@ -233,6 +245,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                     y = Mathf.Sin(theta) * dragDistance;
                 }
                 icon.rectTransform.localPosition = new Vector2(x, y);
+                bar.rectTransform.localPosition = new Vector2(x, y);
             }
             direction = new Vector3(x, 0, y);
             if (maxStack != 0)
@@ -252,9 +265,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        icon.rectTransform.position = center.position;
-        if (player.GetCurrentState() == State.Attack_Skill)
+        if (buttonNum == skillManager.GetCurrentSkill() && player.GetCurrentState() == State.Attack_Skill)
         {
+            icon.rectTransform.position = center.position;
+            bar.rectTransform.localPosition = center.position;
             if (maxStack == 0)
             {
                 player.StopAllCoroutines();
@@ -481,4 +495,5 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         player.UseSkill(connectedID);
         skillManager.UseSkill(connectedNum);
     }
+
 }

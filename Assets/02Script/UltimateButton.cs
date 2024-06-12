@@ -172,7 +172,7 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
     public void OnDrag(PointerEventData eventData)
     {
         Vector3 direction = Vector3.zero;
-        if ((isScoping && isUse)|| UseDrag)
+        if ((isScoping && isUse)&& UseDrag)
         {
             Vector2 drag = eventData.position;
             float x = eventData.position.x - center.position.x;
@@ -353,4 +353,5 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
         SetUaltimate(1);  // todo: delete. this is using for test.
     }
+
 }

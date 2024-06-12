@@ -5275,13 +5275,13 @@ MonoBehaviour:
   - _name: 1000
     _component: {fileID: 935712332201360022, guid: 2290f21c7f4225b47b739eb8af593a77,
       type: 3}
-    _count: 30
+    _count: 40
     _container: {fileID: 523812617}
     _nonLazy: 0
   - _name: 2000
     _component: {fileID: 3746003526297542573, guid: 33c3df74438046644ab4f4f78d42cfb0,
       type: 3}
-    _count: 30
+    _count: 40
     _container: {fileID: 1346467040}
     _nonLazy: 0
   - _name: 3000
@@ -5293,7 +5293,7 @@ MonoBehaviour:
   - _name: Damage
     _component: {fileID: 3364980617409008346, guid: 58b21f2d3cf39c64c9188c058cf0ea40,
       type: 3}
-    _count: 100
+    _count: 200
     _container: {fileID: 1478499594}
     _nonLazy: 0
 --- !u!114 &744160636
