@@ -132,7 +132,7 @@ public class Weapon : MonoBehaviour
 
     public void Init(WeaponType type)
     {
-        id = GameManager.Inst.PlayerInfo.WeaponID;
+        id = GameManager.Inst.WeaponSkillData.WeaponID;
         this.type = type;
         TableEntity_Weapon data;
         GameManager.Inst.GetWeapon(id, out data);

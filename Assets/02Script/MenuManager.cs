@@ -298,6 +298,11 @@ public class MenuManager : MonoBehaviour
     {
         pausePopup.SetActive(false);
         settingPopup.SetActive(true);
+        SettingData data = GameManager.Inst.GetSettinggData;
+        bgm.value = data.bgm;
+        sfx.value = data.sfx;
+        damageText.isOn = data.damageText;
+        camShake.isOn = data.cameraShake;
     }
 
     private void OnExit()
@@ -313,12 +318,12 @@ public class MenuManager : MonoBehaviour
 
     private void SetVolumBGM()
     {
-
+        GameManager.Inst.SetVolumBGM((int)bgm.value);
     }
 
     private void SetVolumSFX()
     {
-
+        GameManager.Inst.SetVolumSFX((int)sfx.value);
     }
 
     private void SetDamageText()

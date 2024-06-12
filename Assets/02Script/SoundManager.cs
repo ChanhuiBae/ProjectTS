@@ -40,6 +40,13 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private List<AudioClip> sfxList;
 
+    private void Start()
+    {
+        SettingData data = GameManager.Inst.GetSettinggData;
+        SetVolumBGM(data.bgm);
+        SetVolumSFX(data.sfx);
+    }
+
     public void SetVolumBGM(float volum)
     {
         if(volum < min)
