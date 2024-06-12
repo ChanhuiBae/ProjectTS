@@ -19,12 +19,34 @@ public class MenuManager : MonoBehaviour
     private int maxUltimateValue;
     private float currentUltimateValue;
 
+    private Button pause;
+    private Image current;
+    private bool isPause;
+    private Sprite pauseImage;
+    private Sprite restartImage;
+    private GameObject pausePopup;
+    private Button play;
+    private Image book;
+    private Button setting;
+    private Button exit;
+
+    private GameObject settingPopup;
+    private Button settingBack;
+    private Slider bgm;
+    private Slider sfx;
+    private Toggle damageText;
+    private Toggle camShake;
+    private Button setSkill1;
+    private Button setSkill2;
+    private Button setSkill3;
+
+
     private void Awake()
     {
         timeBackgroun = GameObject.Find("TimeBackground");
         if (!GameObject.Find("GameTime").TryGetComponent<TextMeshProUGUI>(out countdown))
         {
-            Debug.Log("SpawnMananger - Awake - TextMeshProUGUI");
+            Debug.Log("MenuManager - Awake - TextMeshProUGUI");
         }
         time = 900;
         
@@ -53,6 +75,123 @@ public class MenuManager : MonoBehaviour
         {
             Debug.Log("MenuManager - Awake - UltimateButton");
         }
+
+
+        if (!GameObject.Find("Pause").TryGetComponent<Button>(out pause))
+        {
+            Debug.Log("MenuManager - Awake - Button");
+        }
+        else
+        {
+            isPause = false;
+            pause.onClick.AddListener(PressPause);
+        }
+        if (!GameObject.Find("Pause").TryGetComponent<Image>(out current))
+        {
+            Debug.Log("MenuManager - Awake - Image");
+        }
+        pauseImage = Resources.Load<Sprite>("Image/Pasue");
+        restartImage = Resources.Load<Sprite>("Image/Restart");
+        if (pauseImage == null || restartImage == null)
+        {
+            Debug.Log("MenuManager - Awake - Resources Image");
+        }
+        pausePopup = GameObject.Find("PausePopup");
+        if (pausePopup != null)
+        {
+            if (!pausePopup.transform.Find("Play").TryGetComponent<Button>(out play))
+            {
+                Debug.Log("MenuManager - Awake - Button");
+            }
+            else
+            {
+                play.onClick.AddListener(OnPlay);
+            }
+            if (!pausePopup.transform.Find("Book").TryGetComponent<Image>(out book))
+            {
+                Debug.Log("MenuManager - Awake - Image");
+            }
+            if (!pausePopup.transform.Find("Setting").TryGetComponent<Button>(out setting))
+            {
+                Debug.Log("MenuManager - Awake - Button");
+            }
+            else
+            {
+                setting.onClick.AddListener(OnSetting);
+            }
+            if (!pausePopup.transform.Find("Exit").TryGetComponent<Button>(out exit))
+            {
+                Debug.Log("MenuManager - Awake - Button");
+            }
+            else
+            {
+                exit.onClick.AddListener(OnExit);
+            }
+        }
+        settingPopup = GameObject.Find("SettingPopup");
+        if (settingPopup != null)
+        {
+            if (!settingPopup.transform.Find("Back").TryGetComponent<Button>(out settingBack))
+            {
+                Debug.Log("MenuManager - Awake - Button");
+            }
+            else
+            {
+                settingBack.onClick.AddListener(OnSettingBack);
+            }
+            if(!settingPopup.transform.Find("Bgm").TryGetComponent<Slider>(out bgm))
+            {
+                Debug.Log("MenuManager - Awake - Slider");
+            }
+            else
+            {
+                bgm.minValue = -40;
+                bgm.maxValue = 0;
+                bgm.onValueChanged.AddListener(delegate { SetVolumBGM(); });
+            }
+            if (!settingPopup.transform.Find("Sfx").TryGetComponent<Slider>(out sfx))
+            {
+                Debug.Log("MenuManager - Awake - Slider");
+            }
+            else
+            {
+                sfx.minValue = -40;
+                sfx.maxValue = 0;
+                sfx.onValueChanged.AddListener(delegate { SetVolumSFX(); });
+            }
+            if(!settingPopup.transform.Find("DamageText").TryGetComponent<Toggle>(out damageText))
+            {
+                Debug.Log("MenuManager - Awake - Toggle");
+            }
+            else
+            {
+                damageText.onValueChanged.AddListener(delegate { SetDamageText(); });
+            }
+            if (!settingPopup.transform.Find("Shake").TryGetComponent<Toggle>(out camShake))
+            {
+                Debug.Log("MenuManager - Awake - Toggle");
+            }
+            else
+            {
+                camShake.onValueChanged.AddListener(delegate { SetCameraShake(); });
+            }
+            if (!settingPopup.transform.Find("SetSkill1").TryGetComponent<Button>(out setSkill1))
+            {
+                Debug.Log("MenuManager - Awake - Image");
+            }
+            if (!settingPopup.transform.Find("SetSkill2").TryGetComponent<Button>(out setSkill2))
+            {
+                Debug.Log("MenuManager - Awake - Image");
+            }
+            if (!settingPopup.transform.Find("SetSkill3").TryGetComponent<Button>(out setSkill3))
+            {
+                Debug.Log("MenuManager - Awake - Image");
+            }
+        }
+
+
+        pausePopup.SetActive(false);
+        settingPopup.SetActive(false);
         StartCoroutine(Timer());
     }
 
@@ -127,5 +266,68 @@ public class MenuManager : MonoBehaviour
     public void SetKillCount(int value)
     {
         killCount.text = value.ToString();
+    }
+
+
+    private void PressPause()
+    {
+        isPause = !isPause;
+        if (isPause)
+        {
+            Time.timeScale = 0f;
+            current.sprite = restartImage;
+            pausePopup.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+            current.sprite = pauseImage;
+            pausePopup.SetActive(false);
+        }
+    }
+
+    private void OnPlay()
+    {
+        isPause = false;
+        Time.timeScale = 1.0f;
+        current.sprite = pauseImage;
+        pausePopup.SetActive(false);
+    }
+
+    private void OnSetting()
+    {
+        pausePopup.SetActive(false);
+        settingPopup.SetActive(true);
+    }
+
+    private void OnExit()
+    {
+
+    }
+
+    private void OnSettingBack()
+    {
+        settingPopup.SetActive(false);
+        pausePopup.SetActive(true);
+    }
+
+    private void SetVolumBGM()
+    {
+
+    }
+
+    private void SetVolumSFX()
+    {
+
+    }
+
+    private void SetDamageText()
+    {
+
+    }
+
+    private void SetCameraShake()
+    {
+
     }
 }

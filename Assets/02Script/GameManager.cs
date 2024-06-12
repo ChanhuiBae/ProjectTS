@@ -231,15 +231,14 @@ public class GameManager : Singleton<GameManager>
                 yield return YieldInstructionCache.WaitForSeconds(0.05f);
             }
         }
-    
-      
+
         if (soundManager == null)
         {
-            //GameObject.Find("SoundManager").TryGetComponent<SoundManager>(out soundManager);
-            //if (soundManager != null)
-            //{
-            //    int activeScene = SceneManager.GetActiveScene().buildIndex;
-            //}
+            GameObject.Find("SoundManager").TryGetComponent<SoundManager>(out soundManager);
+            if (soundManager != null)
+            {
+                //int activeScene = SceneManager.GetActiveScene().buildIndex;
+            }
         }
     }
 
