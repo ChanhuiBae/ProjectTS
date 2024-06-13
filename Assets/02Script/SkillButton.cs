@@ -103,6 +103,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             Debug.Log("SkillButton - Awake -  EventTrigger");
         }
+        if(bar == null)
+        {
+            bar = icon;
+        }
         down = new EventTrigger.Entry();
         down.eventID = EventTriggerType.PointerDown;
         down.callback.AddListener((data)  => { OnPointerDown((PointerEventData)data); });
@@ -162,6 +166,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             if (isScoping)
             {
                 icon.rectTransform.position = center.position;
+                bar.rectTransform.localPosition = center.position;
                 skillManager.SetLook(Vector3.zero);
             }
             if (player.GetCurrentState() == State.Attack_Skill)
@@ -483,6 +488,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         yield return YieldInstructionCache.WaitForSeconds(time);
         icon.rectTransform.position = center.position;
+        bar.rectTransform.localPosition = center.position;
         skillManager.IsCharge = false;
         skillManager.StopCharge();
         skillManager.SetLook(Vector3.zero);
