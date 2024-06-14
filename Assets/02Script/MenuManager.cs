@@ -37,9 +37,12 @@ public class MenuManager : MonoBehaviour
     private Toggle damageText;
     private Toggle camShake;
     private Button setSkill1;
+    private Image icon1;
     private Button setSkill2;
+    private Image icon2;
     private Button setSkill3;
-
+    private Image icon3;
+    private int select;
 
     private void Awake()
     {
@@ -175,23 +178,49 @@ public class MenuManager : MonoBehaviour
             {
                 camShake.onValueChanged.AddListener(delegate { SetCameraShake(); });
             }
-            if (!settingPopup.transform.Find("SetSkill1").TryGetComponent<Button>(out setSkill1))
+            GameObject obj = settingPopup.transform.Find("SetSkill1").gameObject;
+            if (!obj.TryGetComponent<Button>(out setSkill1))
+            {
+                Debug.Log("MenuManager - Awake - Button");
+            }
+            else
+            {
+                setSkill1.onClick.AddListener(delegate { ChangeSkillPos(1); });
+            }
+            if(!obj.TryGetComponent<Image>(out icon1))
             {
                 Debug.Log("MenuManager - Awake - Image");
             }
-            if (!settingPopup.transform.Find("SetSkill2").TryGetComponent<Button>(out setSkill2))
+            obj = settingPopup.transform.Find("SetSkill2").gameObject;
+            if (!obj.TryGetComponent<Button>(out setSkill2))
+            {
+                Debug.Log("MenuManager - Awake - Button");
+            }
+            else
+            {
+                setSkill2.onClick.AddListener(delegate { ChangeSkillPos(2); });
+            }
+            if(!obj.TryGetComponent<Image>(out icon2))
             {
                 Debug.Log("MenuManager - Awake - Image");
             }
-            if (!settingPopup.transform.Find("SetSkill3").TryGetComponent<Button>(out setSkill3))
+            obj = settingPopup.transform.Find("SetSkill3").gameObject;
+            if (!obj.TryGetComponent<Button>(out setSkill3))
+            {
+                Debug.Log("MenuManager - Awake - Button");
+            }
+            else
+            {
+                setSkill3.onClick.AddListener(delegate { ChangeSkillPos(3); });
+            }
+            if(!obj.TryGetComponent<Image>(out icon3))
             {
                 Debug.Log("MenuManager - Awake - Image");
             }
         }
 
-
+        select = 0;
         pausePopup.SetActive(false);
-        settingPopup.SetActive(false);
         StartCoroutine(Timer());
     }
 
@@ -216,16 +245,19 @@ public class MenuManager : MonoBehaviour
                 break;
             case 1:
                 skill1.Init(1,skill, name, level);
+                icon1.sprite = Resources.Load<Sprite>("Image/" + name);
                 break;
             case 11:
                 break;
             case 2:
                 skill2.Init(2,skill, name, level);
+                icon2.sprite = Resources.Load<Sprite>("Image/" + name);
                 break;
             case 21:
                 break;
             case 3:
                 skill3.Init(3,skill, name, level);
+                icon3.sprite = Resources.Load<Sprite>("Image/" + name);
                 break;
             case 31:
                 break;
@@ -236,6 +268,7 @@ public class MenuManager : MonoBehaviour
                 ultimate.InitConnectedSkill(41,skill, name);
                 break;
         }
+        settingPopup.SetActive(false);
     }
 
     public void SetMaxUltimate(int value)
@@ -337,4 +370,78 @@ public class MenuManager : MonoBehaviour
     {
         GameManager.Inst.OnCamaraShake = camShake.isOn;
     }
+
+    private void ChangeSkillPos(int num)
+    {
+        switch (select)
+        {
+            case 0:
+                select = num;
+                break;
+            case 1:
+                Vector3 pos = icon1.transform.position;
+                Vector3 button = skill1.transform.position;
+                switch (num)
+                {
+                    case 2:
+                        icon1.transform.position = icon2.transform.position;
+                        icon2.transform.position = pos;
+                        skill1.transform.position = skill2.transform.position;
+                        skill2.transform.position = button;
+                        select = 0;
+                        break;
+                    case 3:
+                        icon1.transform.position = icon3.transform.position;
+                        icon3.transform.position = pos;
+                        skill1.transform.position = skill3.transform.position;
+                        skill3.transform.position = button;
+                        select = 0;
+                        break;
+                }
+                break;
+            case 2:
+                pos = icon2.transform.position;
+                button = skill2.transform.position;
+                switch (num)
+                {
+                    case 1:
+                        icon2.transform.position = icon1.transform.position;
+                        icon1.transform.position = pos;
+                        skill2.transform.position = skill1.transform.position;
+                        skill1.transform.position = button;
+                        select = 0;
+                        break;
+                    case 3:
+                        icon2.transform.position = icon3.transform.position;
+                        icon3.transform.position = pos;
+                        skill2.transform.position = skill3.transform.position;
+                        skill3.transform.position = button;
+                        select = 0;
+                        break;
+                }
+                break;
+            case 3:
+                pos = icon3.transform.position;
+                button = skill3.transform.position;
+                switch (num)
+                {
+                    case 1:
+                        icon3.transform.position = icon1.transform.position;
+                        icon1.transform.position = pos;
+                        skill3.transform.position = skill1.transform.position;
+                        skill1.transform.position = button;
+                        select = 0;
+                        break;
+                    case 2:
+                        icon3.transform.position = icon2.transform.position;
+                        icon2.transform.position = pos;
+                        skill3.transform.position = skill2.transform.position;
+                        skill2.transform.position = button;
+                        select = 0;
+                        break;
+                }
+                break;
+        }
+    }
+
 }
