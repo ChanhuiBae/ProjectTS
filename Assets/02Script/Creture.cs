@@ -146,7 +146,6 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             if(damage > 0)
             {
                 currentHP -= damage;
-                spawnManager.SpawnFloatingDamage(transform.position, damage);
 
                 ChargeUltimate(damage);
                 CheckPhase();
