@@ -103,10 +103,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             Debug.Log("SkillButton - Awake -  EventTrigger");
         }
-        if(bar == null)
-        {
-            bar = icon;
-        }
         down = new EventTrigger.Entry();
         down.eventID = EventTriggerType.PointerDown;
         down.callback.AddListener((data)  => { OnPointerDown((PointerEventData)data); });
@@ -166,7 +162,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             if (isScoping)
             {
                 icon.rectTransform.position = center.position;
-                bar.rectTransform.localPosition = center.position;
+                if (bar != null)
+                {
+                    bar.rectTransform.localPosition = center.position;
+                }
                 skillManager.SetLook(Vector3.zero);
             }
             if (player.GetCurrentState() == State.Attack_Skill)
@@ -199,7 +198,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                     trigger.enabled = false;
                     block.enabled = true;
                     time.enabled = true;
-                    icon.transform.SetSiblingIndex(0);
                 }
                 if (currentStack > 0)
                 {
@@ -234,7 +232,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             if (Mathf.Abs(distance) <= 40)
             {
                 icon.rectTransform.localPosition = new Vector2(x, y);
-                bar.rectTransform.localPosition = new Vector2(x, y);
+                if (bar != null)
+                {
+                    bar.rectTransform.localPosition = center.position;
+                }
             }
             else
             {
@@ -273,7 +274,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         if (buttonNum == skillManager.GetCurrentSkill() && player.GetCurrentState() == State.Attack_Skill)
         {
             icon.rectTransform.position = center.position;
-            bar.rectTransform.localPosition = center.position;
+            if (bar != null)
+            {
+                bar.rectTransform.localPosition = center.position;
+            }
             if (maxStack == 0)
             {
                 player.StopAllCoroutines();
@@ -295,7 +299,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 trigger.enabled = false;
                 block.enabled = true;
                 time.enabled = true;
-                icon.transform.SetSiblingIndex(0);
             }
         }
         isDrag = false;

@@ -102,7 +102,7 @@ MonoBehaviour:
     Hit_Max: 2
     Skill_Name: "\uBD80\uC2A4\uD2B8 \uD574\uBA38 \uC77C\uBC18 \uACF5\uACA9"
     Skill_Name_Eng: BH_Basic
-    Is_Scoping: 1
+    Is_Scoping: 0
     Scoping_Time: 0
     Is_Charging: 0
     Stack_Max: 0
