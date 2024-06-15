@@ -44,6 +44,10 @@ public class MenuManager : MonoBehaviour
     private Image icon3;
     private int select;
 
+    private GameObject exitPopup;
+    private Button exitButton;
+    private Button notexitButton;
+
     private void Awake()
     {
         timeBackgroun = GameObject.Find("TimeBackground");
@@ -218,9 +222,31 @@ public class MenuManager : MonoBehaviour
                 Debug.Log("MenuManager - Awake - Image");
             }
         }
+        exitPopup = GameObject.Find("ExitPopup");
+        if (exitPopup != null)
+        {
+            if(!exitPopup.transform.Find("Yes").TryGetComponent<Button>(out exitButton))
+            {
+                Debug.Log("MenuManager - Awake - Button");
+            }
+            else
+            {
+                exitButton.onClick.AddListener(Exit);
+            }
+            if(!exitPopup.transform.Find("No").TryGetComponent<Button>(out notexitButton))
+            {
+                Debug.Log("MenuManager - Awake - Button");
+            }
+            else
+            {
+                notexitButton.onClick.AddListener(NotExit);
+            }
+        }
 
         select = 0;
         pausePopup.SetActive(false);
+        settingPopup.SetActive(false);
+        exitPopup.SetActive(false);
         StartCoroutine(Timer());
     }
 
@@ -340,8 +366,8 @@ public class MenuManager : MonoBehaviour
 
     private void OnExit()
     {
-        Time.timeScale = 1f;
-        GameManager.Inst.AsyncLoadNextScene(SceneName.LobbyScene);
+        pausePopup.SetActive(false);
+        exitPopup.SetActive(true);
     }
 
     private void OnSettingBack()
@@ -351,6 +377,25 @@ public class MenuManager : MonoBehaviour
         pausePopup.SetActive(true);
     }
 
+    private void Exit()
+    {
+        Time.timeScale = 1f;
+        exitPopup.SetActive(false);
+        // todo: player effect
+        StartCoroutine(Exiting());
+    }
+
+    private IEnumerator Exiting()
+    {
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        GameManager.Inst.AsyncLoadNextScene(SceneName.LobbyScene);
+    }
+
+    private void NotExit()
+    {
+        pausePopup.SetActive(true);
+        exitPopup.SetActive(false);
+    }
     private void SetVolumBGM()
     {
         GameManager.Inst.SetVolumBGM((int)bgm.value);
