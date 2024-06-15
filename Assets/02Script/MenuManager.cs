@@ -21,12 +21,9 @@ public class MenuManager : MonoBehaviour
 
     private Button pause;
     private Image current;
-    private bool isPause;
     private Sprite pauseImage;
-    private Sprite restartImage;
     private GameObject pausePopup;
     private Button play;
-    private Image book;
     private Button setting;
     private Button exit;
 
@@ -90,7 +87,6 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            isPause = false;
             pause.onClick.AddListener(PressPause);
         }
         if (!GameObject.Find("Pause").TryGetComponent<Image>(out current))
@@ -98,8 +94,7 @@ public class MenuManager : MonoBehaviour
             Debug.Log("MenuManager - Awake - Image");
         }
         pauseImage = Resources.Load<Sprite>("Image/Pasue");
-        restartImage = Resources.Load<Sprite>("Image/Restart");
-        if (pauseImage == null || restartImage == null)
+        if (pauseImage == null)
         {
             Debug.Log("MenuManager - Awake - Resources Image");
         }
@@ -113,10 +108,6 @@ public class MenuManager : MonoBehaviour
             else
             {
                 play.onClick.AddListener(OnPlay);
-            }
-            if (!pausePopup.transform.Find("Book").TryGetComponent<Image>(out book))
-            {
-                Debug.Log("MenuManager - Awake - Image");
             }
             if (!pausePopup.transform.Find("Setting").TryGetComponent<Button>(out setting))
             {
@@ -330,26 +321,17 @@ public class MenuManager : MonoBehaviour
 
     private void PressPause()
     {
-        isPause = !isPause;
-        if (isPause)
-        {
-            Time.timeScale = 0f;
-            current.sprite = restartImage;
-            pausePopup.SetActive(true);
-        }
-        else
-        {
-            Time.timeScale = 1.0f;
-            current.sprite = pauseImage;
-            pausePopup.SetActive(false);
-        }
+        Time.timeScale = 0f;
+        pause.gameObject.SetActive(false);
+        pausePopup.SetActive(true);
+
     }
 
     private void OnPlay()
     {
-        isPause = false;
         Time.timeScale = 1.0f;
         current.sprite = pauseImage;
+        pause.gameObject.SetActive(true);
         pausePopup.SetActive(false);
     }
 
