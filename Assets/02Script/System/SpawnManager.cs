@@ -1,6 +1,5 @@
 using Redcode.Pools;
 using System.Collections;
-using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -42,10 +41,10 @@ public class SpawnManager : MonoBehaviour
         }
 
         count = 1;
-        radius = Screen.width / 2;
-        outline.radius = radius + 10f;
+        radius = Screen.width / 50;
+        outline.radius = radius;
         spawn1 = new Vector3(0, 0, radius);
-        float pos = Mathf.Pow(radius, 2) / Mathf.Sqrt(2);
+        float pos = radius / Mathf.Sqrt(2);
         spawn2 = new Vector3(- pos, 0, pos);
         spawn3 = new Vector3(-radius, 0, 0);
         spawn4 = new Vector3(-pos, 0, -pos);
@@ -57,50 +56,56 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(Spawn());
     }
 
+    private void Update()
+    {
+        outline.center = player.transform.position;
+    }
+
     private IEnumerator Spawn()
     {
         yield return YieldInstructionCache.WaitForSeconds(2f);
         GameObject obj;
         Creture creture;
         int spawn = Random.Range(1, 8);
-
         for (int i = 0; i < 30; i++)
         {
+            
+            obj = pool.GetFromPool<Creture>(2).gameObject;
+            creture = obj.GetComponent<Creture>();
             switch (spawn)
             {
                 case 1:
-                    
+                    creture.Init(spawn1 + player.transform.position, 1000, CretureType.Normal);
                     break;
                 case 2:
-
+                    creture.Init(spawn2 + player.transform.position, 1000, CretureType.Normal);
                     break;
                 case 3:
-
+                    creture.Init(spawn3 + player.transform.position, 1000, CretureType.Normal);
                     break;
                 case 4:
-
+                    creture.Init(spawn4 + player.transform.position, 1000, CretureType.Normal);
                     break;
                 case 5:
-
+                    creture.Init(spawn5 + player.transform.position, 1000, CretureType.Normal);
                     break;
                 case 6:
-
+                    creture.Init(spawn6 + player.transform.position, 1000, CretureType.Normal);
                     break;
                 case 7:
-
+                    creture.Init(spawn7 + player.transform.position, 1000, CretureType.Normal);
                     break;
                 case 8:
-
+                    creture.Init(spawn8 + player.transform.position, 1000, CretureType.Normal);
                     break;
             }
-            obj = pool.GetFromPool<Creture>(2).gameObject;
-            creture = obj.GetComponent<Creture>();
-            creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x , 0f, Random.Range(-10f, 10f) + player.transform.position.z), 1000, CretureType.Normal);
             yield return YieldInstructionCache.WaitForSeconds(1f);
-            obj = pool.GetFromPool<Creture>(3).gameObject;
-            creture = obj.GetComponent<Creture>();
-            creture.Init(new Vector3(Random.Range(-10f, 10f) + player.transform.position.x, 0f, Random.Range(-10f, 10f) + player.transform.position.z), 2000,CretureType.Noble);
-            yield return YieldInstructionCache.WaitForSeconds(1f);
+            spawn += 3;
+            if(spawn > 8)
+            {
+                spawn -= 8;
+            }
+            spawn = Random.Range(spawn, spawn + 2);
         }
     }
 
@@ -131,5 +136,41 @@ public class SpawnManager : MonoBehaviour
     {
         GameObject obj = effects.GetFromPool<Effect>(num).gameObject;
         return obj.GetComponent<Effect>();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        switch (count)
+        {
+            case 1:
+                other.transform.position = spawn1 + player.transform.position;
+                break;
+            case 2:
+                other.transform.position = spawn2 + player.transform.position;
+                break;
+            case 3:
+                other.transform.position = spawn3 + player.transform.position;
+                break;
+            case 4:
+                other.transform.position = spawn4 + player.transform.position;
+                break;
+            case 5:
+                other.transform.position = spawn5 + player.transform.position;
+                break;
+            case 6:
+                other.transform.position = spawn6 + player.transform.position;
+                break;
+            case 7:
+                other.transform.position = spawn7 + player.transform.position;
+                break;
+            case 8:
+                other.transform.position = spawn8 + player.transform.position;
+                break;
+        }
+        count++;
+        if (count > 8)
+        {
+            count = 1;
+        }
     }
 }

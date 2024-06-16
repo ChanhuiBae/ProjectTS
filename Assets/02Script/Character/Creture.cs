@@ -94,7 +94,6 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         phase2HP = creature.Phase_2_HP;
         phase3HP = creature.Phase_3_HP;
         ai.InitAI(this.type, creature.Move_Speed);
-        ai.InitAI(this.type, creature.Move_Speed);
         currentPhase = 1;
         IsDie = false;
         stun.gameObject.SetActive(false);

@@ -82,6 +82,10 @@ public class CretureAI : MonoBehaviour
         {
             Debug.Log("CretureAI - Init - PlayerController");
         }
+        else
+        {
+            SetTarget(attackTarget);
+        }
         navAgent.speed = speed;
         navAgent.enabled = true;
         SetPhase(1);
@@ -136,7 +140,7 @@ public class CretureAI : MonoBehaviour
 
     public void Spawn()
     {
-        ChangeAIState(AI_State.Roaming); // first state
+        ChangeAIState(AI_State.Chase); // first state
     }
 
     protected IEnumerator Roaming()
