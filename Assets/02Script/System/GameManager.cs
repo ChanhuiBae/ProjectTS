@@ -248,7 +248,7 @@ public class GameManager : Singleton<GameManager>
                 GameObject.Find("Canvas").TryGetComponent<FadeManager>(out fadeManager);
                 if (fadeManager != null)
                 {
-                    fadeManager.Fade_InOut(true);
+                    fadeManager.FadeOut(0.25f);
                 }
             }
             while (!end)

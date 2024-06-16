@@ -6,13 +6,23 @@ public class FadeManager : MonoBehaviour
 {
     [SerializeField]
     private Image fadeImg;
-
-    public void Fade_InOut(bool isIn)
+    
+    public void FadeInOut(float time)
     {
-        if (isIn)
-            StartCoroutine(Fade(1f, 0f, 0.25f));
-        else
-            StartCoroutine(Fade(0f, 1f, 0.25f));
+        StartCoroutine(Fading(time));
+    }
+
+    public void FadeOut(float time)
+    {
+        StartCoroutine(Fade(1f, 0f, time));
+    }
+
+    private IEnumerator Fading(float time)
+    {
+        time /= 2;
+        StartCoroutine(Fade(0f, 1f, time));
+        yield return YieldInstructionCache.WaitForSeconds(time);
+        StartCoroutine(Fade(1f, 0f, time));
     }
 
     IEnumerator Fade(float start, float end, float fadeTime)
