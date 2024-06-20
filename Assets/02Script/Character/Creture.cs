@@ -34,6 +34,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private int currentPhase;
     private bool IsDie;
     private Effect stun;
+    private Effect hit;
     private Effect effect;
 
     public void Awake()
@@ -66,6 +67,14 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         {
             stun.gameObject.SetActive(false);
         }
+        if (!transform.Find("Hit").gameObject.TryGetComponent<Effect>(out hit))
+        {
+            Debug.Log("Creature - Awake - Effect");
+        }
+        else
+        {
+            hit.gameObject.SetActive(false);
+        }
     }
 
     public void Init(Vector3 SpawnPos, int ID, CretureType type)
@@ -96,7 +105,8 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         ai.InitAI(this.type, creature.Move_Speed);
         currentPhase = 1;
         IsDie = false;
-        stun.gameObject.SetActive(false);
+        stun.gameObject.SetActive(false); 
+        hit.gameObject.SetActive(false);
     }
 
     public int GetKey()
@@ -205,16 +215,14 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private void SpawnHitEffect(float damage)
     {
         anim.Hit();
-        if (damage < 200 && damage > 0)
-        {
-            effect = spawnManager.SpawnEffect(0);
-            effect.Init(EffectType.None, transform.position + Vector3.up, 1);
-        }
-        else if (damage > 200)
-        {
-            effect = spawnManager.SpawnEffect(1);
-            effect.Init(EffectType.None, transform.position + Vector3.up, 1);
-        }
+        StartCoroutine(Hit());
+    }
+
+    private IEnumerator Hit()
+    {
+        hit.gameObject.SetActive(true);
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        hit.gameObject.SetActive(false);
     }
 
     private bool DieCheck()

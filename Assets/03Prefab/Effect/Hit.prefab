@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 456679280677116712}
   - component: {fileID: 2055418749921293632}
   m_Layer: 0
-  m_Name: SmallHit
+  m_Name: Hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
