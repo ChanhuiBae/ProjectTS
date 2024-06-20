@@ -169,9 +169,6 @@ public class EffectManager : MonoBehaviour
         effect = skillManager.SpawnEffect(12);
         effect.Init(EffectType.None, point.position, 1);
         StartCoroutine(CameraShack());
-
-        effect = skillManager.SpawnEffect(15);
-        effect.Init(EffectType.None, point.position+ new Vector3(0,0.5f,0), 12f);
     }
 
     public void NarakaPlayerEffect()
