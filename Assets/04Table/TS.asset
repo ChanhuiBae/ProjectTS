@@ -42,6 +42,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: 
   - ID: 101
     Weapon_ID: 01
     Category_ID: 2
@@ -55,6 +56,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: 
   - ID: 102
     Weapon_ID: 01
     Category_ID: 2
@@ -68,6 +70,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: 
   - ID: 103
     Weapon_ID: 01
     Category_ID: 2
@@ -81,6 +84,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: 
   - ID: 131
     Weapon_ID: 01
     Category_ID: 3
@@ -94,6 +98,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: 
   - ID: 200
     Weapon_ID: 02
     Category_ID: 1
@@ -107,6 +112,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: NULL
   - ID: 201
     Weapon_ID: 02
     Category_ID: 2
@@ -120,6 +126,8 @@ MonoBehaviour:
     Is_Charging: 1
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: "\uC804\uC2E0\uC758 \uD798\uC744 \uB04C\uC5B4\uBAA8\uC544 \uAC15\uB825\uD55C
+      \uC77C\uACA9\uC744 \uB0A0\uB9BD\uB2C8\uB2E4"
   - ID: 202
     Weapon_ID: 02
     Category_ID: 2
@@ -133,6 +141,8 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: "\uD574\uBA38\uB97C \uC62C\uB824\uCCD0 \uC801\uC744 \uACF5\uC911\uC5D0
+      \uB744\uC6C1\uB2C8\uB2E4"
   - ID: 203
     Weapon_ID: 02
     Category_ID: 2
@@ -146,6 +156,8 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: "\uAC15\uD55C \uC778\uB825\uC744 \uBC1C\uC0DD\uC2DC\uCF1C \uC801\uB4E4\uC744
+      \uB04C\uC5B4 \uBAA8\uC74D\uB2C8\uB2E4"
   - ID: 231
     Weapon_ID: 02
     Category_ID: 3
@@ -159,6 +171,9 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 232
+    Explanation: "\uD574\uBA38\uB97C \uD68C\uC804\uC2DC\uD0A4\uBA70 \uD558\uB298
+      \uB192\uC774 \uB6F0\uC5B4\uC62C\uB77C \uBC88\uAC1C\uC640 \uD568\uAED8 \uAC15\uB825\uD55C
+      \uC77C\uACA9\uC744 \uB0A0\uB9BD\uB2C8\uB2E4"
   - ID: 232
     Weapon_ID: 02
     Category_ID: 3
@@ -172,6 +187,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: NULL
   - ID: 300
     Weapon_ID: 03
     Category_ID: 1
@@ -185,6 +201,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: NULL
   - ID: 301
     Weapon_ID: 03
     Category_ID: 2
@@ -198,6 +215,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: 
   - ID: 302
     Weapon_ID: 03
     Category_ID: 2
@@ -211,6 +229,9 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: "\uB300\uBBF8\uC9C0\uC640 \uAD00\uD1B5\uB825\uC744 \uADF9\uB2E8\uC801\uC73C\uB85C
+      \uB04C\uC5B4\uC62C\uB9B0 \uB300\uC2E0 \uC0AC\uAC70\uB9AC\uAC00 \uC904\uC5B4\uB4E0
+      \uD0C4\uD658\uC744 \uC5F0\uC18D\uD558\uC5EC \uBC1C\uC0AC\uD569\uB2C8\uB2E4"
   - ID: 303
     Weapon_ID: 03
     Category_ID: 2
@@ -224,6 +245,8 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 3
     Linked_Skill: 0
+    Explanation: "\uC9C0\uC815\uB41C \uBC94\uC704\uC5D0 \uD3ED\uBC1C\uD558\uB294
+      \uD50C\uB77C\uC988\uB9C8 \uD0C4\uC744 \uBC1C\uC0AC\uD569\uB2C8\uB2E4"
   - ID: 331
     Weapon_ID: 03
     Category_ID: 3
@@ -237,6 +260,8 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
+    Explanation: "\uD3ED\uACA9\uAE30\uB97C \uC18C\uD658\uD574 \uC9C0\uC815\uB41C
+      \uC9C0\uC5ED\uC5D0 \uAC15\uB825\uD55C \uD3ED\uD0C4\uC744 \uD22C\uD558\uD569\uB2C8\uB2E4"
   Skill_Info_List:
   - ID: 100011101
     Type: NULL

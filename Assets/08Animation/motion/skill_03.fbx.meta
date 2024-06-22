@@ -19,7 +19,12 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'skill_005' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'test_Spine1' has translation animation
+      that will be discarded.\n\t'test_Head' has translation animation that will
+      be discarded.\n\t'test_LeftHand' has translation animation that will be discarded.\n\t'test_RightHand'
+      has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -82,7 +87,117 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: skill_03(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_Hips
+      parentName: skill_03(Clone)
+      position: {x: 0, y: 8.030852, z: 0}
+      rotation: {x: -0.02458198, y: -0.023207137, z: 0.0002756709, w: 0.9994284}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_Spine
+      parentName: test_Hips
+      position: {x: -0, y: 0.77705777, z: 0}
+      rotation: {x: 0.01586991, y: 0.02518811, z: -0.010054171, w: 0.99950624}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_Spine1
+      parentName: test_Spine
+      position: {x: -0.00009417534, y: 1.9950198, z: -0.00018239021}
+      rotation: {x: 0.008597986, y: 0.008397575, z: 0.02131147, w: 0.99970067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_Neck
+      parentName: test_Spine1
+      position: {x: -0, y: 2.2816358, z: 0}
+      rotation: {x: 0.061099466, y: 0.0026114075, z: 0.023726633, w: 0.99784625}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_Head
+      parentName: test_Neck
+      position: {x: -0, y: 1.4688287, z: 0.18952629}
+      rotation: {x: 0.028240962, y: 0.004495046, z: 0.010480408, w: 0.9995361}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftShoulder
+      parentName: test_Spine1
+      position: {x: -0.37656546, y: 1.7551643, z: -0.0143585345}
+      rotation: {x: -0.02195887, y: 0.044985242, z: -0.10423735, w: 0.99329185}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftArm
+      parentName: test_LeftShoulder
+      position: {x: -1.5996592, y: 0, z: 0}
+      rotation: {x: 0.3764453, y: -0.008253894, z: 0.12011223, w: 0.9185825}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftForeArm
+      parentName: test_LeftArm
+      position: {x: -2.2330887, y: 0, z: 0}
+      rotation: {x: -0.10785031, y: 0.008132478, z: -0.019560445, w: 0.9939414}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftHand
+      parentName: test_LeftForeArm
+      position: {x: -2.0694487, y: -0.000053048134, z: -0.000033974648}
+      rotation: {x: -0.1006134, y: 0.15227331, z: -0.019270774, w: 0.983015}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightShoulder
+      parentName: test_Spine1
+      position: {x: 0.3812828, y: 1.7551643, z: -0.0143585345}
+      rotation: {x: -0.015266135, y: -0.01259801, z: 0.10507311, w: 0.9942675}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightArm
+      parentName: test_RightShoulder
+      position: {x: 1.5996592, y: 0, z: 0}
+      rotation: {x: 0.259963, y: -0.033046663, z: -0.13035208, w: 0.9562089}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightForeArm
+      parentName: test_RightArm
+      position: {x: 2.2330887, y: 0, z: 0}
+      rotation: {x: -0.022382358, y: -0.015316643, z: 0.013216453, w: 0.9995448}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightHand
+      parentName: test_RightForeArm
+      position: {x: 1.9323586, y: -0.0002619624, z: -0.000113248825}
+      rotation: {x: -0.017200336, y: -0.056728236, z: 0.17361863, w: 0.9830273}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftUpLeg
+      parentName: test_Hips
+      position: {x: -0.9476314, y: 0, z: 0}
+      rotation: {x: -0.08342073, y: -0.049314972, z: -0.07740859, w: 0.99227864}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftLeg
+      parentName: test_LeftUpLeg
+      position: {x: -0, y: -4.1127295, z: 0}
+      rotation: {x: 0.21552709, y: -0.06075178, z: 0.042814385, w: 0.97366536}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftFoot
+      parentName: test_LeftLeg
+      position: {x: -0, y: -3.3763924, z: 0}
+      rotation: {x: -0.16790223, y: -0.004506186, z: -0.118733376, w: 0.9786169}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftToeBase
+      parentName: test_LeftFoot
+      position: {x: -0, y: -0.61596036, z: 1.4214473}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightUpLeg
+      parentName: test_Hips
+      position: {x: 0.9476314, y: 0, z: 0}
+      rotation: {x: -0.08503973, y: 0.13697372, z: 0.07089181, w: 0.9843682}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightLeg
+      parentName: test_RightUpLeg
+      position: {x: -0, y: -4.1127295, z: 0}
+      rotation: {x: 0.28973174, y: 0.093463846, z: -0.00036537304, w: 0.9525334}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightFoot
+      parentName: test_RightLeg
+      position: {x: -0, y: -3.3763924, z: 0}
+      rotation: {x: -0.22835493, y: -0.029099062, z: -0.11407163, w: 0.9664341}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightToeBase
+      parentName: test_RightFoot
+      position: {x: -0, y: -0.61596036, z: 1.4214473}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -97,7 +212,7 @@ ModelImporter:
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 3
+  animationType: 2
   humanoidOversampling: 1
   avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1

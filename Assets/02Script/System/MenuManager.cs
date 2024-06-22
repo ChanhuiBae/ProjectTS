@@ -45,6 +45,8 @@ public class MenuManager : MonoBehaviour
     private Button exitButton;
     private Button notexitButton;
 
+    private PlayerController player;
+
     private void Awake()
     {
         timeBackgroun = GameObject.Find("TimeBackground");
@@ -233,6 +235,10 @@ public class MenuManager : MonoBehaviour
                 notexitButton.onClick.AddListener(NotExit);
             }
         }
+        if(!GameObject.Find("Player").TryGetComponent<PlayerController>(out player))
+        {
+            Debug.Log("MenuManager - Awake - PlayerController");
+        }
 
         select = 0;
         pausePopup.SetActive(false);
@@ -363,7 +369,7 @@ public class MenuManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         exitPopup.SetActive(false);
-        // todo: player effect
+        player.ChangeState(State.Die);
         StartCoroutine(Exiting());
     }
 

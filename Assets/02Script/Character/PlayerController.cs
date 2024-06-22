@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -56,6 +57,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private Effect stun;
 
+    private GameObject basePlayer;
+    private SkinnedMeshRenderer dissolve;
+
     private void Awake()
     {
         if(SceneManager.GetActiveScene().buildIndex > 2)
@@ -100,6 +104,8 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             Debug.Log("PlayerController - Awake - Floating Joystick");
         }
+        basePlayer = transform.GetChild(0).Find("Base").gameObject;
+        dissolve = transform.GetChild(0).Find("Dissolve").GetComponent<SkinnedMeshRenderer>();
 
         if (!TryGetComponent<PlayerAnimationController>(out anim))
         {
@@ -231,6 +237,8 @@ public class PlayerController : MonoBehaviour, IDamage
                     case State.CrowdControl:
                         break;
                     case State.Die:
+                        isControll = false;
+                        StartCoroutine(Dissolve());
                         break;
                 }
                 return true;
@@ -246,6 +254,23 @@ public class PlayerController : MonoBehaviour, IDamage
     public State GetCurrentState()
     {
         return state;
+    }
+
+    private IEnumerator Dissolve()
+    {
+        basePlayer.SetActive(false);
+        weapon.gameObject.SetActive(false);
+        float speed = 5;
+        float t = 0;
+       
+        float value = 0;
+        for(t = 0; t < 1; t += 0.017f)
+        {
+            Material mat = dissolve.material;
+            mat.SetFloat("_Cutoff", t);
+            dissolve.material = mat;
+            yield return null;
+        }
     }
 
     public void UseSkill(int skill_id)

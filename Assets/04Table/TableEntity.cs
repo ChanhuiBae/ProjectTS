@@ -36,6 +36,7 @@ public class TableEntity_Skill
     public bool Is_Charging;
     public int Stack_Max;
     public int Linked_Skill;
+    public string Explanation;
 }
 
 [System.Serializable]

@@ -82,7 +82,117 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: pattern_15(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_Hips
+      parentName: pattern_15(Clone)
+      position: {x: 0, y: 7.9450903, z: 0}
+      rotation: {x: 0.0055212304, y: -0.008748413, z: -0.0033216276, w: 0.999941}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_Spine
+      parentName: test_Hips
+      position: {x: -0, y: 0.77705777, z: 0}
+      rotation: {x: 0.02045033, y: 0.011606628, z: -0.0059970114, w: 0.99970555}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_Spine1
+      parentName: test_Spine
+      position: {x: -0.0000029802322, y: 1.9241804, z: 0.000052452087}
+      rotation: {x: -0.038591452, y: 0.0038713648, z: 0.018993974, w: 0.99906707}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_Neck
+      parentName: test_Spine1
+      position: {x: -0, y: 2.2816358, z: 0}
+      rotation: {x: 0.08044974, y: -0.01031804, z: 0.03586062, w: 0.99605995}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_Head
+      parentName: test_Neck
+      position: {x: -0, y: 1.4688287, z: 0.18952629}
+      rotation: {x: 0.12477026, y: -0.00973174, z: 0.029806351, w: 0.9916901}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftShoulder
+      parentName: test_Spine1
+      position: {x: -0.37656546, y: 1.7551643, z: -0.0143585345}
+      rotation: {x: 0.021274127, y: -0.01314833, z: -0.10883422, w: 0.99374527}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftArm
+      parentName: test_LeftShoulder
+      position: {x: -1.5996592, y: 0, z: 0}
+      rotation: {x: 0.30622423, y: 0.043738488, z: 0.10770003, w: 0.9448357}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftForeArm
+      parentName: test_LeftArm
+      position: {x: -2.2330887, y: 0, z: 0}
+      rotation: {x: -0.07826869, y: 0.025148915, z: -0.021508958, w: 0.99638295}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftHand
+      parentName: test_LeftForeArm
+      position: {x: -2.122068, y: 0.000019669533, z: -0.0000023841858}
+      rotation: {x: -0.07555965, y: 0.102476224, z: 0.0008370681, w: 0.9918612}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightShoulder
+      parentName: test_Spine1
+      position: {x: 0.3812828, y: 1.7551643, z: -0.0143585345}
+      rotation: {x: 0.027657501, y: 0.018852716, z: 0.1053008, w: 0.99387693}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightArm
+      parentName: test_RightShoulder
+      position: {x: 1.5996592, y: 0, z: 0}
+      rotation: {x: 0.15085976, y: -0.04972433, z: -0.12584454, w: 0.9792507}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightForeArm
+      parentName: test_RightArm
+      position: {x: 2.2330887, y: 0, z: 0}
+      rotation: {x: -0.011639669, y: -0.023329264, z: 0.00096310757, w: 0.99965966}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightHand
+      parentName: test_RightForeArm
+      position: {x: 2.0914865, y: -0.000025629997, z: 0.000011920929}
+      rotation: {x: -0.009607226, y: 0.0375709, z: 0.09548312, w: 0.9946754}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftUpLeg
+      parentName: test_Hips
+      position: {x: -0.9476314, y: 0, z: 0}
+      rotation: {x: -0.106537186, y: -0.10381778, z: -0.094108455, w: 0.98438585}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftLeg
+      parentName: test_LeftUpLeg
+      position: {x: -0, y: -4.1127295, z: 0}
+      rotation: {x: 0.27736023, y: 0.032730483, z: 0.04780131, w: 0.95901775}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftFoot
+      parentName: test_LeftLeg
+      position: {x: -0, y: -3.3763924, z: 0}
+      rotation: {x: -0.06318698, y: 0.010682545, z: -0.18710232, w: 0.980248}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_LeftToeBase
+      parentName: test_LeftFoot
+      position: {x: -0, y: -0.61596036, z: 1.4214473}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightUpLeg
+      parentName: test_Hips
+      position: {x: 0.9476314, y: 0, z: 0}
+      rotation: {x: -0.1113073, y: 0.11779228, z: 0.09046109, w: 0.9826253}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightLeg
+      parentName: test_RightUpLeg
+      position: {x: -0, y: -4.1127295, z: 0}
+      rotation: {x: 0.3421981, y: 0.06680712, z: -0.017807085, w: 0.93708074}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightFoot
+      parentName: test_RightLeg
+      position: {x: -0, y: -3.3763924, z: 0}
+      rotation: {x: -0.18047987, y: -0.05649467, z: 0.09900763, w: 0.9769508}
+      scale: {x: 1, y: 1, z: 1}
+    - name: test_RightToeBase
+      parentName: test_RightFoot
+      position: {x: -0, y: -0.61596036, z: 1.4214473}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
