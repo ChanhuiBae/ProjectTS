@@ -37,6 +37,9 @@ public class WeaponSkillSetData
     public int connected3_ID;
     public int ultimate_ID;
     public int connectedU_ID;
+    public int passive1_ID;
+    public int passive2_ID;
+    public int passive3_ID;
 }
 
 [System.Serializable]
@@ -77,6 +80,11 @@ public class GameManager : Singleton<GameManager>
     public bool GetSkillData(int skillID, out TableEntity_Skill data)
     {
         return skillTable.TryGetValue(skillID, out data);
+    }
+    private Dictionary<int, TableEntitiy_Passive_Skill> passiveTable = new Dictionary<int, TableEntitiy_Passive_Skill>();
+    public bool GetPassiveData(int passiveID, out TableEntity_Skill data)
+    {
+        return skillTable.TryGetValue(passiveID, out data);
     }
     private Dictionary<int, TableEntity_Skill_Info> skillInfoTable = new Dictionary<int, TableEntity_Skill_Info>();
     public bool GetSkillInfoData(int ID, out TableEntity_Skill_Info data)
@@ -189,6 +197,10 @@ public class GameManager : Singleton<GameManager>
         for(int i = 0; i < table.Pattern_Hit_Frame.Count; i++)
         {
             patternHitFrameTable.Add(table.Pattern_Hit_Frame[i].ID, table.Pattern_Hit_Frame[i]);
+        }
+        for(int i = 0; i < table.Passive_Skill.Count; i++)
+        {
+            passiveTable.Add(table.Passive_Skill[i].ID, table.Passive_Skill[i]);
         }
         #endregion
 

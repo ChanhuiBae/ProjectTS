@@ -2786,3 +2786,52 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
+  Passive_Skill:
+  - Weapon_Type: 2
+    ID: 2000
+    Name: "\uCD9C\uB825 \uAC15\uD654"
+    Name_Eng: Output_Enhance
+    Passive_Type: 1
+    Max_Level: 5
+    Base_Figure: 0.1
+    Increase_Value: 0.1
+  - Weapon_Type: 2
+    ID: 2001
+    Name: "\uC561\uCE68 \uB0C9\uAC01"
+    Name_Eng: Water_Cooler
+    Passive_Type: 2
+    Max_Level: 5
+    Base_Figure: 0.1
+    Increase_Value: 0.15
+  - Weapon_Type: 2
+    ID: 2002
+    Name: "\uACE0\uB0B4\uAD6C\uC131 \uC7A5\uAC11"
+    Name_Eng: High_Durability
+    Passive_Type: 3
+    Max_Level: 5
+    Base_Figure: 0.2
+    Increase_Value: 0.2
+  - Weapon_Type: 3
+    ID: 3000
+    Name: "\uC804\uC790\uB3D9 \uD2B8\uB9AC\uAC70"
+    Name_Eng: Full_Auto_Trigger
+    Passive_Type: 4
+    Max_Level: 5
+    Base_Figure: 0.1
+    Increase_Value: 0.1
+  - Weapon_Type: 3
+    ID: 3001
+    Name: "\uD30C\uC1C4\uD0C4"
+    Name_Eng: Shredded_Bullet
+    Passive_Type: 5
+    Max_Level: 5
+    Base_Figure: 0.1
+    Increase_Value: 0.1
+  - Weapon_Type: 3
+    ID: 3002
+    Name: "\uC758\uB8CC\uC120"
+    Name_Eng: Medical_Ship
+    Passive_Type: 6
+    Max_Level: 5
+    Base_Figure: 0.02
+    Increase_Value: 0.02

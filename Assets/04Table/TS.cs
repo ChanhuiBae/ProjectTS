@@ -16,4 +16,5 @@ public class TS : ScriptableObject
 	public List<TableEntity_Pattern> Pattern_List;
 	public List<TableEntity_Pattern_Info> Pattern_Info_List;
 	public List<TableEntity_Pattern_Hit_Frame> Pattern_Hit_Frame;
+	public List<TableEntitiy_Passive_Skill> Passive_Skill;
 }

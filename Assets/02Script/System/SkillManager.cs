@@ -29,6 +29,10 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private Skill ultimate;
     private Skill connectedU;
 
+    private PassiveSkill passive1;
+    private PassiveSkill passive2;
+    private PassiveSkill passive3;
+
     private PoolManager effectManager;
     private PoolManager projectileManager;
 

@@ -180,3 +180,16 @@ public class TableEntity_Pattern_Hit_Frame
     public int Hit_04;
     public int Hit_05;
 }
+
+[System.Serializable] 
+public class TableEntitiy_Passive_Skill
+{
+    public int Weapon_Type;
+    public int ID;
+    public string Name;
+    public string Name_Eng;
+    public int Passive_Type;
+    public int Max_Level;
+    public float Base_Figure;
+    public float Increase_Value;
+}
