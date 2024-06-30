@@ -477,4 +477,11 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void CoolTime_Passive(float passive)
+    {
+        skill1.Passive = passive;
+        skill2.Passive = passive;
+        skill3.Passive = passive;
+    }
+
 }

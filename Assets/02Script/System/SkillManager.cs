@@ -33,6 +33,12 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     private PassiveSkill passive2;
     private PassiveSkill passive3;
 
+    private float additionalDamgae;
+    public float AdditionalDamgae
+    {
+        set => additionalDamgae = value;
+    }
+
     private PoolManager effectManager;
     private PoolManager projectileManager;
 
@@ -120,6 +126,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         crowdControl = CrowdControlType.None;
         pulledPoint = player.transform.position;
         queue = new Queue<Vector3>();
+        additionalDamgae = 0;
     }
 
     public void WeaponInit(Weapon weapon)
@@ -157,6 +164,22 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 break;
             case 41:
                 this.connectedU.init(ID, Weapon_ID, Category_ID, Skill_Level_Max, Charge_Max, Hit_Max);
+                break;
+        }
+    }
+
+    public void SetPassive(int num, TableEntitiy_Passive_Skill passive)
+    {
+        switch (num)
+        {
+            case 1:
+                this.passive1.Init(passive); 
+                break;
+            case 2:
+                this.passive1.Init(passive);
+                break;
+            case 3:
+                this.passive1.Init(passive);
                 break;
         }
     }
@@ -408,7 +431,8 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         float weaponPhysics = weapon.Physics * (1 - Creature_Physics_Cut) * weapon.CriticalMag()
             + (weapon.Fire * (1 - Creature_Fire_Cut)) + (weapon.Water * (1 - Creature_Water_Cut))
             + (weapon.Electric * (1 - Creature_Electric_Cut)) + (weapon.Ice * (1 - Creature_Ice_Cut))
-            + (weapon.Wind * (1 - Creature_Wind_Cut));
+            + (weapon.Wind * (1 - Creature_Wind_Cut))
+            + (weapon.Physics * additionalDamgae / 100);
         float skillPhysics;
         switch (useSkill)
         {
@@ -439,7 +463,8 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         float weaponPhysics = weapon.Physics * (1 - Creature_Physics_Cut) * weapon.CriticalMag()
             + (weapon.Fire * (1 - Creature_Fire_Cut)) + (weapon.Water * (1 - Creature_Water_Cut))
             + (weapon.Electric * (1 - Creature_Electric_Cut)) + (weapon.Ice * (1 - Creature_Ice_Cut))
-            + (weapon.Wind * (1 - Creature_Wind_Cut));
+            + (weapon.Wind * (1 - Creature_Wind_Cut))
+            + (weapon.Physics * additionalDamgae /100);
         TableEntity_Skill_Info skill;
         GameManager.Inst.GetSkillInfoData(key, out skill);
         float skillPhysics = 0;
@@ -623,4 +648,16 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     {
         effectManager.TakeToPool<Effect>(name, effect);
     }
+
+    public void ATK_Passive(float passive) 
+    {
+        weapon.ATK_Passive = passive;
+    }
+
+    public void Speed_Passive(float passive)
+    {
+        weapon.Speed_Passive = passive;
+    }
+
+
 }

@@ -19,6 +19,19 @@ public enum Physics_Type
 }
 public class Weapon : MonoBehaviour
 {
+    private float atk_passive;
+    public float ATK_Passive
+    {
+        set => atk_passive = value;
+    }
+
+    private float speed_passive;
+
+    public float Speed_Passive
+    {
+        set => speed_passive = value;  
+    }
+
     private int id;
     private WeaponType type;
     public WeaponType Type
@@ -35,7 +48,7 @@ public class Weapon : MonoBehaviour
     private float attack_Speed;
     public float Attack_Speed
     {
-        get => attack_Speed;
+        get => attack_Speed + (attack_Speed * speed_passive /100);
         set => attack_Speed = value;
     }
     private bool IsSlash;
@@ -78,7 +91,7 @@ public class Weapon : MonoBehaviour
     private float weapon_Physics;
     public float Physics
     {
-        get => weapon_Physics;
+        get => weapon_Physics + (weapon_Physics * atk_passive / 100);
     }
     private float fire;
     public float Fire
@@ -128,6 +141,8 @@ public class Weapon : MonoBehaviour
         {
             trail.Stop();
         }
+        atk_passive = 0;
+        speed_passive = 0;
     }
 
     public void Init(WeaponType type)

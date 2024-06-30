@@ -44,7 +44,20 @@ public class PlayerController : MonoBehaviour, IDamage
     private int attackCount;
 
     private float currentHP;
+    private float MaxHP;
+    public float MAXHP
+    {
+        get => MaxHP;
+    }
     private Image hpFill;
+    private float MaxHPpassive;
+
+    public void MaxHP_Passive(float value)
+    {
+        MaxHPpassive = value;
+        MaxHP = GameManager.Inst.PlayerInfo.Max_HP + (GameManager.Inst.PlayerInfo.Max_HP * MaxHPpassive / 100);
+    }
+
     private float currentEXP;
     private Image expFill;
 
@@ -151,6 +164,8 @@ public class PlayerController : MonoBehaviour, IDamage
             CCType = CrowdControlType.None;
             attackCount = 0;
             isInvincibility = false;
+            MaxHPpassive = 0;
+            MaxHP = GameManager.Inst.PlayerInfo.Max_HP;
             currentHP = GameManager.Inst.PlayerInfo.Max_HP;
             currentEXP = 0;
             state = State.Idle;
@@ -551,9 +566,9 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             currentHP = 0;
         }
-        else if(currentHP > GameManager.Inst.PlayerInfo.Max_HP)
+        else if(currentHP > MaxHP)
         {
-            currentHP = GameManager.Inst.PlayerInfo.Max_HP;
+            currentHP = MaxHP;
         }
     }
 
@@ -617,8 +632,6 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.PlayAnim(true);
     }
 
-
-    
     public void AttackGrenade()
     {
         skillManager.SpawnGrenade(grenade.transform.position, transform.rotation);
@@ -683,8 +696,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void SetHPUI()
     {
-        hpFill.fillAmount = currentHP / GameManager.Inst.PlayerInfo.Max_HP;
+        hpFill.fillAmount = currentHP / MaxHP;
     }
+
 
     public void Stagger(float time)
     {
