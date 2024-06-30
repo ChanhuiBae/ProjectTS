@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public void MaxHP_Passive(float value)
     {
         MaxHPpassive = value;
-        MaxHP = GameManager.Inst.PlayerInfo.Max_HP + (GameManager.Inst.PlayerInfo.Max_HP * MaxHPpassive / 100);
+        MaxHP = GameManager.Inst.PlayerInfo.Max_HP + (GameManager.Inst.PlayerInfo.Max_HP * MaxHPpassive);
     }
 
     private float currentEXP;

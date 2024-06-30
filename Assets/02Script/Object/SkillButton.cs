@@ -422,12 +422,12 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             block.enabled = true;
             time.enabled = true;
             icon.transform.SetSiblingIndex(0);
-            while (currentTime < (maxTime * (100 - passive) / 100))
+            while (currentTime < (maxTime * (1 - passive)))
             {
                 yield return YieldInstructionCache.WaitForSeconds(0.1f);
                 currentTime += 0.1f;
-                coolTimeImage.fillAmount = currentTime / (maxTime * (100 - passive) / 100);
-                time.text = ((int)((maxTime * (100 - passive)) - currentTime)).ToString();
+                coolTimeImage.fillAmount = currentTime / (maxTime * (1 - passive) / 1);
+                time.text = ((int)((maxTime * (1 - passive)) - currentTime)).ToString();
             }
             trigger.enabled = true;
             block.enabled = false;
@@ -437,12 +437,12 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         }
         else
         {
-            while (currentTime < (maxTime * (100 - passive) / 100))
+            while (currentTime < (maxTime * (1 - passive)))
             {
                 yield return YieldInstructionCache.WaitForSeconds(0.1f);
                 currentTime += 0.1f;
-                coolTimeImage.fillAmount = currentTime / (maxTime * (100 - passive) / 100);
-                time.text = ((int)((maxTime * (100 - passive)) - currentTime)).ToString();
+                coolTimeImage.fillAmount = currentTime / (maxTime * (1 - passive));
+                time.text = ((int)((maxTime * (1 - passive)) - currentTime)).ToString();
             }
             trigger.enabled = true;
             block.enabled = false;

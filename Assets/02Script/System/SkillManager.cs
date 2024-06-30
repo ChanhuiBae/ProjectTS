@@ -440,7 +440,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             + (weapon.Fire * (1 - Creature_Fire_Cut)) + (weapon.Water * (1 - Creature_Water_Cut))
             + (weapon.Electric * (1 - Creature_Electric_Cut)) + (weapon.Ice * (1 - Creature_Ice_Cut))
             + (weapon.Wind * (1 - Creature_Wind_Cut))
-            + (weapon.Physics * additionalDamgae / 100);
+            + (weapon.Physics * additionalDamgae);
         float skillPhysics;
         switch (useSkill)
         {
@@ -472,7 +472,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             + (weapon.Fire * (1 - Creature_Fire_Cut)) + (weapon.Water * (1 - Creature_Water_Cut))
             + (weapon.Electric * (1 - Creature_Electric_Cut)) + (weapon.Ice * (1 - Creature_Ice_Cut))
             + (weapon.Wind * (1 - Creature_Wind_Cut))
-            + (weapon.Physics * additionalDamgae /100);
+            + (weapon.Physics * additionalDamgae);
         TableEntity_Skill_Info skill;
         GameManager.Inst.GetSkillInfoData(key, out skill);
         float skillPhysics = 0;

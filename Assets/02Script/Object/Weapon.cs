@@ -48,7 +48,7 @@ public class Weapon : MonoBehaviour
     private float attack_Speed;
     public float Attack_Speed
     {
-        get => attack_Speed + (attack_Speed * speed_passive /100);
+        get => attack_Speed + (attack_Speed * speed_passive);
         set => attack_Speed = value;
     }
     private bool IsSlash;
@@ -91,7 +91,7 @@ public class Weapon : MonoBehaviour
     private float weapon_Physics;
     public float Physics
     {
-        get => weapon_Physics + (weapon_Physics * atk_passive / 100);
+        get => weapon_Physics + (weapon_Physics * atk_passive);
     }
     private float fire;
     public float Fire

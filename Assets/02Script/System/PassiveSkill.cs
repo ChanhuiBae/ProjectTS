@@ -100,7 +100,7 @@ public class PassiveSkill : MonoBehaviour
 
     private IEnumerator Heal()
     {
-        float add = playerController.MAXHP * (info.Base_Figure + (level - 1) * info.Increase_Value) / 100;
+        float add = playerController.MAXHP * (info.Base_Figure + (level - 1) * info.Increase_Value);
         while (true)
         {
             playerController.ApplyHP(add);
