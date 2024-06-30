@@ -590,11 +590,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void LookAtVector()
     {
-        Debug.Log(skillManager.GetVectorCount());
         if(skillManager.GetVectorCount() != 0)
         {
             Vector3 look = skillManager.PopVector();
-            Debug.Log(look);
             transform.LookAt(look + transform.position);
             skillManager.PinPointDown(look / 4 + transform.position);
             if (skillManager.GetVectorCount() == 0)

@@ -284,10 +284,18 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         attackArea.Move(center, radius);
     }
 
-    public void ShowAttackArea()
+    public void ShowAttackArea(int num)
     {
-        attackArea.SetArea(0.8f);
-        attackArea.ShowAttackArea();
+        if(num < 4)
+        {
+            attackArea.SetArea(1.8f);
+            attackArea.ShowAttackArea();
+        }
+        else
+        {
+            attackArea.SetArea(0.8f);
+            attackArea.ShowAttackArea();
+        }
     }
 
     public void StopAttackArea()

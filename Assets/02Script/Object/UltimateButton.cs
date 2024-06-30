@@ -213,7 +213,7 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
             {
                 skillManager.StopAttackArea();
                 skillManager.MoveAttackArea(direction * 0.075f, 2);
-                skillManager.ShowAttackArea();
+                skillManager.ShowAttackArea(4);
             }
         }
     }

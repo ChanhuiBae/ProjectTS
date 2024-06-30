@@ -138,7 +138,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                 if (maxStack > 0)
                 {
                     skillManager.MoveAttackArea(player.transform.forward, 2);
-                    skillManager.ShowAttackArea();
+                    skillManager.ShowAttackArea(1);
                 }
             }
             else
@@ -261,7 +261,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             direction = new Vector3(x, 0, y);
             if (maxStack != 0)
             {
-                skillManager.ShowAttackArea();
+                skillManager.ShowAttackArea(1);
                 skillManager.MoveAttackArea(direction*0.25f, 2);
                 if(skillManager.GetVectorCount() == 0)
                     player.LookAttackArea();
@@ -422,11 +422,11 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             block.enabled = true;
             time.enabled = true;
             icon.transform.SetSiblingIndex(0);
-            while (currentTime < (maxTime * (100 - passive)))
+            while (currentTime < (maxTime * (100 - passive) / 100))
             {
                 yield return YieldInstructionCache.WaitForSeconds(0.1f);
                 currentTime += 0.1f;
-                coolTimeImage.fillAmount = currentTime / (maxTime * (100 - passive));
+                coolTimeImage.fillAmount = currentTime / (maxTime * (100 - passive) / 100);
                 time.text = ((int)((maxTime * (100 - passive)) - currentTime)).ToString();
             }
             trigger.enabled = true;
@@ -437,11 +437,11 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         }
         else
         {
-            while (currentTime < (maxTime * (100 - passive)))
+            while (currentTime < (maxTime * (100 - passive) / 100))
             {
                 yield return YieldInstructionCache.WaitForSeconds(0.1f);
                 currentTime += 0.1f;
-                coolTimeImage.fillAmount = currentTime / (maxTime * (100 - passive));
+                coolTimeImage.fillAmount = currentTime / (maxTime * (100 - passive) / 100);
                 time.text = ((int)((maxTime * (100 - passive)) - currentTime)).ToString();
             }
             trigger.enabled = true;
