@@ -134,6 +134,7 @@ public class TableEntity_Creature
     public float Wind_Cut;
     public int Phase_2_HP;
     public int Phase_3_HP;
+    public int Drop_Exp;
 }
 
 
@@ -192,4 +193,5 @@ public class TableEntitiy_Passive_Skill
     public int Max_Level;
     public float Base_Figure;
     public float Increase_Value;
+    public string Description;
 }

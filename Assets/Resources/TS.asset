@@ -42,7 +42,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
-    Explanation: 
+    Explanation: NULL
   - ID: 101
     Weapon_ID: 01
     Category_ID: 2
@@ -56,7 +56,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
-    Explanation: 
+    Explanation: NULL
   - ID: 102
     Weapon_ID: 01
     Category_ID: 2
@@ -70,7 +70,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
-    Explanation: 
+    Explanation: NULL
   - ID: 103
     Weapon_ID: 01
     Category_ID: 2
@@ -84,7 +84,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
-    Explanation: 
+    Explanation: NULL
   - ID: 131
     Weapon_ID: 01
     Category_ID: 3
@@ -98,7 +98,7 @@ MonoBehaviour:
     Is_Charging: 0
     Stack_Max: 0
     Linked_Skill: 0
-    Explanation: 
+    Explanation: NULL
   - ID: 200
     Weapon_ID: 02
     Category_ID: 1
@@ -2685,13 +2685,56 @@ MonoBehaviour:
     Wind_Cut: 0
     Phase_2_HP: 0
     Phase_3_HP: 0
+    Drop_Exp: 1
+  - ID: 1001
+    Name: "\uCE74\uD0C0\uC548\uD0AC\uB85C V2"
+    Category_ID: 1
+    Category: "\uC77C\uBC18 \uD06C\uB9AC\uCC98"
+    Max_HP: 200
+    Move_Speed: 5
+    Physics: 7
+    Fire: 0
+    Water: 0
+    Electric: 0
+    Ice: 0
+    Wind: 0
+    Physics_Cut: 0.1
+    Fire_Cut: 0
+    Water_Cut: 0
+    Electric_Cut: 0
+    Ice_Cut: 0
+    Wind_Cut: 0
+    Phase_2_HP: 0
+    Phase_3_HP: 0
+    Drop_Exp: 2
+  - ID: 1002
+    Name: "\uCE74\uD0C0\uC548\uD0AC\uB85C V3"
+    Category_ID: 1
+    Category: "\uC77C\uBC18 \uD06C\uB9AC\uCC98"
+    Max_HP: 250
+    Move_Speed: 5
+    Physics: 10
+    Fire: 0
+    Water: 0
+    Electric: 0
+    Ice: 0
+    Wind: 0
+    Physics_Cut: 0.1
+    Fire_Cut: 0
+    Water_Cut: 0
+    Electric_Cut: 0
+    Ice_Cut: 0
+    Wind_Cut: 0
+    Phase_2_HP: 0
+    Phase_3_HP: 0
+    Drop_Exp: 3
   - ID: 2000
     Name: "\uB4C0\uB9AC\uB178"
     Category_ID: 2
     Category: "\uC815\uC608 \uD06C\uB9AC\uCC98"
     Max_HP: 700
     Move_Speed: 5
-    Physics: 10
+    Physics: 20
     Fire: 0
     Water: 0
     Electric: 0
@@ -2705,13 +2748,14 @@ MonoBehaviour:
     Wind_Cut: 0
     Phase_2_HP: 0
     Phase_3_HP: 0
-  - ID: 3000
-    Name: 
-    Category_ID: 3
-    Category: 
-    Max_HP: 700
+    Drop_Exp: 20
+  - ID: 2001
+    Name: "\uB4C0\uB9AC\uB178 V2"
+    Category_ID: 2
+    Category: "\uC815\uC608 \uD06C\uB9AC\uCC98"
+    Max_HP: 800
     Move_Speed: 5
-    Physics: 10
+    Physics: 30
     Fire: 0
     Water: 0
     Electric: 0
@@ -2725,6 +2769,28 @@ MonoBehaviour:
     Wind_Cut: 0
     Phase_2_HP: 0
     Phase_3_HP: 0
+    Drop_Exp: 40
+  - ID: 2002
+    Name: "\uB4C0\uB9AC\uB178 V3"
+    Category_ID: 2
+    Category: "\uC815\uC608 \uD06C\uB9AC\uCC98"
+    Max_HP: 900
+    Move_Speed: 5
+    Physics: 40
+    Fire: 0
+    Water: 0
+    Electric: 0
+    Ice: 0
+    Wind: 0
+    Physics_Cut: 0.2
+    Fire_Cut: 0
+    Water_Cut: 0
+    Electric_Cut: 0
+    Ice_Cut: 0
+    Wind_Cut: 0
+    Phase_2_HP: 0
+    Phase_3_HP: 0
+    Drop_Exp: 60
   Pattern_List:
   - ID: 100000
     Creature_ID: 1000
@@ -2786,3 +2852,58 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
+  Passive_Skill:
+  - Weapon_Type: 2
+    ID: 2000
+    Name: "\uCD9C\uB825 \uAC15\uD654"
+    Name_Eng: Output_Enhance
+    Passive_Type: 1
+    Max_Level: 5
+    Base_Figure: 0.1
+    Increase_Value: 0.1
+    Description: "\uBB3C\uB9AC \uACF5\uACA9\uB825 \uAC15\uD654"
+  - Weapon_Type: 2
+    ID: 2001
+    Name: "\uC561\uCE68 \uB0C9\uAC01"
+    Name_Eng: Water_Cooler
+    Passive_Type: 2
+    Max_Level: 5
+    Base_Figure: 0.1
+    Increase_Value: 0.15
+    Description: "\uC2A4\uD0AC \uCFE8\uD0C0\uC784 \uAC10\uC18C"
+  - Weapon_Type: 2
+    ID: 2002
+    Name: "\uACE0\uB0B4\uAD6C\uC131 \uC7A5\uAC11"
+    Name_Eng: High_Durability
+    Passive_Type: 3
+    Max_Level: 5
+    Base_Figure: 0.2
+    Increase_Value: 0.2
+    Description: "\uCD5C\uB300 \uCCB4\uB825 \uAC15\uD654"
+  - Weapon_Type: 3
+    ID: 3000
+    Name: "\uC804\uC790\uB3D9 \uD2B8\uB9AC\uAC70"
+    Name_Eng: Full_Auto_Trigger
+    Passive_Type: 4
+    Max_Level: 5
+    Base_Figure: 0.1
+    Increase_Value: 0.1
+    Description: "\uACF5\uACA9 \uC18D\uB3C4 \uC99D\uAC00"
+  - Weapon_Type: 3
+    ID: 3001
+    Name: "\uD30C\uC1C4\uD0C4"
+    Name_Eng: Shredded_Bullet
+    Passive_Type: 5
+    Max_Level: 5
+    Base_Figure: 0.1
+    Increase_Value: 0.1
+    Description: "\uACE0\uC815 \uB300\uBBF8\uC9C0 \uCD94\uAC00"
+  - Weapon_Type: 3
+    ID: 3002
+    Name: "\uC758\uB8CC\uC120"
+    Name_Eng: Medical_Ship
+    Passive_Type: 6
+    Max_Level: 5
+    Base_Figure: 0.02
+    Increase_Value: 0.02
+    Description: "\uCCB4\uB825 10\uCD08\uB9C8\uB2E4 \uD68C\uBCF5"
