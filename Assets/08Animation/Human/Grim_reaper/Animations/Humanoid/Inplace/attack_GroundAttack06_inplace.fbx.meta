@@ -64,14 +64,14 @@ ModelImporter:
         functionName: SetAttackArea
         data: 
         objectReferenceParameter: {instanceID: 0}
-        floatParameter: 20
+        floatParameter: 10
         intParameter: 0
         messageOptions: 0
       - time: 0.0694236
         functionName: SetPull
         data: 
         objectReferenceParameter: {instanceID: 0}
-        floatParameter: 20
+        floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.522293

@@ -273,10 +273,12 @@ public class CretureAI : MonoBehaviour
     }
     public void StopAI(float time)
     {
+        if (navAgent == null)
+            return;
+        navAgent.enabled = false;
         StopAllCoroutines();
         currentState = AI_State.Stop;
-        navAgent.enabled = false;
-        if(gameObject.activeSelf)
+        if (gameObject.activeSelf)
         {
             StartCoroutine(Stop(time));
         }

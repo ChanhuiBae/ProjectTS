@@ -2686,6 +2686,8 @@ MonoBehaviour:
     Phase_2_HP: 0
     Phase_3_HP: 0
     Drop_Exp: 1
+    Groggy_HP: 0
+    Stagger_Mul: 0
   - ID: 1001
     Name: "\uCE74\uD0C0\uC548\uD0AC\uB85C V2"
     Category_ID: 1
@@ -2707,6 +2709,8 @@ MonoBehaviour:
     Phase_2_HP: 0
     Phase_3_HP: 0
     Drop_Exp: 2
+    Groggy_HP: 0
+    Stagger_Mul: 0
   - ID: 1002
     Name: "\uCE74\uD0C0\uC548\uD0AC\uB85C V3"
     Category_ID: 1
@@ -2728,6 +2732,8 @@ MonoBehaviour:
     Phase_2_HP: 0
     Phase_3_HP: 0
     Drop_Exp: 3
+    Groggy_HP: 0
+    Stagger_Mul: 0
   - ID: 2000
     Name: "\uB4C0\uB9AC\uB178"
     Category_ID: 2
@@ -2749,6 +2755,8 @@ MonoBehaviour:
     Phase_2_HP: 0
     Phase_3_HP: 0
     Drop_Exp: 20
+    Groggy_HP: 0
+    Stagger_Mul: 0
   - ID: 2001
     Name: "\uB4C0\uB9AC\uB178 V2"
     Category_ID: 2
@@ -2770,6 +2778,8 @@ MonoBehaviour:
     Phase_2_HP: 0
     Phase_3_HP: 0
     Drop_Exp: 40
+    Groggy_HP: 0
+    Stagger_Mul: 0
   - ID: 2002
     Name: "\uB4C0\uB9AC\uB178 V3"
     Category_ID: 2
@@ -2791,6 +2801,123 @@ MonoBehaviour:
     Phase_2_HP: 0
     Phase_3_HP: 0
     Drop_Exp: 60
+    Groggy_HP: 0
+    Stagger_Mul: 0
+  - ID: 3000
+    Name: "\uD544 \uB370\uBE4C V1"
+    Category_ID: 3
+    Category: "\uBB34\uB9AC\uC5B4\uBBF8"
+    Max_HP: 4000
+    Move_Speed: 6
+    Physics: 40
+    Fire: 0
+    Water: 0
+    Electric: 0
+    Ice: 0
+    Wind: 0
+    Physics_Cut: 0.4
+    Fire_Cut: 0.5
+    Water_Cut: 0
+    Electric_Cut: 0.5
+    Ice_Cut: 0
+    Wind_Cut: 0
+    Phase_2_HP: 0
+    Phase_3_HP: 0
+    Drop_Exp: 5000
+    Groggy_HP: 3000
+    Stagger_Mul: 0.2
+  - ID: 3001
+    Name: "\uD544 \uB370\uBE4C V2"
+    Category_ID: 3
+    Category: "\uBB34\uB9AC\uC5B4\uBBF8"
+    Max_HP: 8000
+    Move_Speed: 6
+    Physics: 65
+    Fire: 0
+    Water: 0
+    Electric: 0
+    Ice: 0
+    Wind: 0
+    Physics_Cut: 0.4
+    Fire_Cut: 0
+    Water_Cut: 0
+    Electric_Cut: 0
+    Ice_Cut: 0
+    Wind_Cut: 0
+    Phase_2_HP: 0
+    Phase_3_HP: 0
+    Drop_Exp: 7000
+    Groggy_HP: 6000
+    Stagger_Mul: 0.2
+  - ID: 3002
+    Name: "\uC2DC\uC800\uC2A4\uB3C4\uB77C V1"
+    Category_ID: 3
+    Category: "\uBB34\uB9AC\uC5B4\uBBF8"
+    Max_HP: 5000
+    Move_Speed: 6
+    Physics: 50
+    Fire: 0
+    Water: 0
+    Electric: 0
+    Ice: 0
+    Wind: 0
+    Physics_Cut: 0.2
+    Fire_Cut: 0
+    Water_Cut: 0
+    Electric_Cut: 0
+    Ice_Cut: 0
+    Wind_Cut: 0
+    Phase_2_HP: 0
+    Phase_3_HP: 0
+    Drop_Exp: 5000
+    Groggy_HP: 2000
+    Stagger_Mul: 0.5
+  - ID: 3003
+    Name: "\uC2DC\uC800\uC2A4\uB3C4\uB77C V2"
+    Category_ID: 3
+    Category: "\uBB34\uB9AC\uC5B4\uBBF8"
+    Max_HP: 10000
+    Move_Speed: 6
+    Physics: 85
+    Fire: 0
+    Water: 0
+    Electric: 0
+    Ice: 0
+    Wind: 0
+    Physics_Cut: 0.2
+    Fire_Cut: 0
+    Water_Cut: 0
+    Electric_Cut: 0
+    Ice_Cut: 0
+    Wind_Cut: 0
+    Phase_2_HP: 0
+    Phase_3_HP: 0
+    Drop_Exp: 7000
+    Groggy_HP: 4000
+    Stagger_Mul: 0.5
+  - ID: 4000
+    Name: "\uBCA0\uB178\uBBF8\uB4DC\uB77C"
+    Category_ID: 4
+    Category: "\uC6B0\uB450\uBA38\uB9AC"
+    Max_HP: 15000
+    Move_Speed: 0
+    Physics: 100
+    Fire: 0
+    Water: 0
+    Electric: 0
+    Ice: 0
+    Wind: 0
+    Physics_Cut: 0.2
+    Fire_Cut: 0
+    Water_Cut: 0
+    Electric_Cut: 0
+    Ice_Cut: 0
+    Wind_Cut: 0
+    Phase_2_HP: 7500
+    Phase_3_HP: 0
+    Drop_Exp: 0
+    Groggy_HP: 7000
+    Stagger_Mul: 0.33
   Pattern_List:
   - ID: 100000
     Creature_ID: 1000
@@ -2907,3 +3034,21 @@ MonoBehaviour:
     Base_Figure: 0.02
     Increase_Value: 0.02
     Description: "\uCCB4\uB825 10\uCD08\uB9C8\uB2E4 \uD68C\uBCF5"
+  Creature_Part:
+  - ID: 4000
+    Head_HP: 3000
+    Head_Type: Crush
+    Body_HP: 0
+    Body_Type: NULL
+    Left_Arm_HP: 0
+    Left_Arm_Type: NULL
+    Right_Arm_HP: 0
+    Right_Arm_Type: NULL
+    Left_Leg_HP: 0
+    Left_Leg_Type: NULL
+    Right_Leg_HP: 0
+    Right_Leg_Type: NULL
+    Wing_HP: 0
+    Wing_Type: NULL
+    Tail_HP: 0
+    Tail_Type: NULL

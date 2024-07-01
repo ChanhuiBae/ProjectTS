@@ -135,6 +135,8 @@ public class TableEntity_Creature
     public int Phase_2_HP;
     public int Phase_3_HP;
     public int Drop_Exp;
+    public int Groggy_HP;
+    public float Stagger_Mul;
 }
 
 
@@ -194,4 +196,27 @@ public class TableEntitiy_Passive_Skill
     public float Base_Figure;
     public float Increase_Value;
     public string Description;
+}
+
+[System.Serializable]
+
+public class TableEntitiy_Creature_Part
+{
+    public int ID;
+    public int Head_HP;
+    public string Head_Type;
+    public int Body_HP;
+    public string Body_Type;
+    public int Left_Arm_HP;
+    public string Left_Arm_Type;
+    public int Right_Arm_HP;
+    public string Right_Arm_Type;
+    public int Left_Leg_HP;
+    public string Left_Leg_Type;
+    public int Right_Leg_HP;
+    public string Right_Leg_Type;
+    public int Wing_HP;
+    public string Wing_Type;
+    public int Tail_HP;
+    public string Tail_Type;
 }

@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 7636973872926440626}
   - component: {fileID: 2883900237393291985}
   m_Layer: 0
-  m_Name: SwamCreature
+  m_Name: GuvnorCreature
   m_TagString: Creature
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

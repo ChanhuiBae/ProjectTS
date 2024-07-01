@@ -43,7 +43,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         {
             Debug.Log("Creture - Awake - Rigidbody");
         }
-        if(!TryGetComponent<CreatureAnimationController>(out anim))
+        if (!TryGetComponent<CreatureAnimationController>(out anim))
         {
             Debug.Log("Creature - Awake - AnimatorController");
         }
@@ -55,11 +55,11 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         {
             Debug.Log("Creture - Awake - SpawnManager");
         }
-        if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
+        if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("Creture - Awake - skillManager");
         }
-        if(!transform.Find("Stun").gameObject.TryGetComponent<Effect>(out stun))
+        if (!transform.Find("Stun").gameObject.TryGetComponent<Effect>(out stun))
         {
             Debug.Log("Creature - Awake - Effect");
         }
@@ -105,7 +105,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         ai.InitAI(this.type, creature.Move_Speed);
         currentPhase = 1;
         IsDie = false;
-        stun.gameObject.SetActive(false); 
+        stun.gameObject.SetActive(false);
         hit.gameObject.SetActive(false);
     }
 
@@ -116,7 +116,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public bool IsAttack()
     {
-        if(ai.GetState() == AI_State.Attack)
+        if (ai.GetState() == AI_State.Attack)
         {
             return true;
         }
@@ -125,16 +125,17 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public bool CalculateDamage(AttackType attack, ITakeDamage hiter)
     {
-        if(!IsDie)
+        if (!IsDie)
         {
             float damage = hiter.TakeDamage(physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
-            if(damage > 0)
+            if (damage > 0)
             {
                 currentHP -= damage;
 
                 ChargeUltimate(damage);
                 CheckPhase();
-                if (!DieCheck())
+                DieCheck();
+                if (!IsDie)
                 {
                     SpawnHitEffect(damage);
                 }
@@ -152,13 +153,14 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         if (!IsDie)
         {
             float damage = hiter.TakeDamage(key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
-            if(damage > 0)
+            if (damage > 0)
             {
                 currentHP -= damage;
 
                 ChargeUltimate(damage);
                 CheckPhase();
-                if (!DieCheck())
+                DieCheck();
+                if (!IsDie)
                 {
                     SpawnHitEffect(damage);
                 }
@@ -225,7 +227,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         hit.gameObject.SetActive(false);
     }
 
-    private bool DieCheck()
+    private void DieCheck()
     {
         if (currentHP < 0)
         {
@@ -240,7 +242,6 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             spawnManager.SpawnEXPItem(transform.position);
             spawnManager.ReturnCreature(poolName, this);
         }
-        return IsDie;
     }
 
     public void OnCreatedInPool()
@@ -287,7 +288,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     public void Airborne(float time)
     {
         ai.StopAI(time);
-        if(gameObject.activeSelf)
+        if (gameObject.activeSelf)
         {
             StartCoroutine(MoveAirborne(time));
         }
@@ -297,7 +298,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         Vector3 pos = transform.position;
         LeanTween.move(gameObject, pos + (Vector3.up * time), time / 2).setEase(LeanTweenType.easeOutCubic);
-        yield return YieldInstructionCache.WaitForSeconds(time/2);
+        yield return YieldInstructionCache.WaitForSeconds(time / 2);
         LeanTween.move(gameObject, pos, time / 2).setEase(LeanTweenType.easeInSine);
     }
 
@@ -318,7 +319,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private IEnumerator MoveAirback(float time, float distance)
     {
         Vector3 pos = transform.position;
-        LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance/2 + (Vector3.up * 3f), time / 2).setEase(LeanTweenType.easeOutCubic);
+        LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance / 2 + (Vector3.up * 3f), time / 2).setEase(LeanTweenType.easeOutCubic);
         yield return YieldInstructionCache.WaitForSeconds(time / 2);
         LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance / 2, time / 2).setEase(LeanTweenType.easeInSine);
     }
