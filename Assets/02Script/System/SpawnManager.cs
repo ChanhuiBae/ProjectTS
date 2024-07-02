@@ -331,7 +331,7 @@ public class SpawnManager : MonoBehaviour
     public void SpawnHPItem(Vector3 pos)
     {
         HPItem hp = pool.GetFromPool<HPItem>(0);
-        hp.Init(1f, pos);
+        hp.Init(GameManager.Inst.PlayerInfo.Max_HP * 0.3f, pos);
     }
 
     public void SpawnEXPItem(Vector3 pos,float dropEXP)

@@ -37,6 +37,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private Effect hit;
     private Effect effect;
 
+    private int HPCount;
     public void Awake()
     {
         if (!TryGetComponent(out rig))
@@ -84,6 +85,14 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         transform.position = SpawnPos;
         this.ID = ID;
         this.type = type;
+        if(type == CretureType.Guvnor)
+        {
+            HPCount = 9;
+        }
+        else
+        {
+            HPCount = 1;
+        }
         TableEntity_Creature creature;
         GameManager.Inst.GetCreatureData(this.ID, out creature);
         maxHP = creature.Max_HP;
@@ -135,6 +144,8 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
                 ChargeUltimate(damage);
                 CheckPhase();
                 DieCheck();
+                if (type == CretureType.Guvnor)
+                    CheckDropHP();
                 if (!IsDie)
                 {
                     SpawnHitEffect(damage);
@@ -160,6 +171,8 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
                 ChargeUltimate(damage);
                 CheckPhase();
                 DieCheck();
+                if(type == CretureType.Guvnor)
+                    CheckDropHP();
                 if (!IsDie)
                 {
                     SpawnHitEffect(damage);
@@ -238,12 +251,45 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
             effect = skillManager.SpawnEffect(18);
             effect.Init(EffectType.None, transform.position, 6f);
-            spawnManager.SpawnHPItem(transform.position);
+            DropHP();
             TableEntity_Creature exp;
             GameManager.Inst.GetCreatureData(int.Parse(poolName), out exp);
             spawnManager.SpawnEXPItem(transform.position,exp.Drop_Exp);
             spawnManager.ReturnCreature(poolName, this);
         }
+    }
+
+    private void CheckDropHP()
+    {
+        if(currentHP*10/maxHP < HPCount)
+        {
+            spawnManager.SpawnHPItem(transform.position);
+            HPCount--;
+        }
+    }
+
+    private void DropHP()
+    {
+        float spawn = Random.Range(1,100);
+        switch (type)
+        {
+            case CretureType.Normal:
+                if(spawn <= 1)
+                {
+                    spawnManager.SpawnHPItem(transform.position);
+                }
+                break;
+            case CretureType.Noble:
+                if(spawn <= 2)
+                {
+                    spawnManager.SpawnHPItem(transform.position);
+                }
+                break;
+            case CretureType.Swarm_Boss:
+                spawnManager.SpawnHPItem(transform.position);
+                break;
+        }
+        
     }
 
     public void OnCreatedInPool()
