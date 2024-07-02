@@ -67,35 +67,39 @@ public class EffectManager : MonoBehaviour
             }
             player = transform.GetComponent<PlayerController>();
         }
-        if (!transform.Find("Charge1").TryGetComponent<ParticleSystem>(out charge1))
+        Transform trans = transform.Find("Charge1");
+        if (trans != null && !trans.TryGetComponent<ParticleSystem>(out charge1))
         {
             Debug.Log("EffectManager - Awake - ParticleSystem");
         }
-        else
+        else if(charge1 != null)
         {
             charge1.Stop();
         }
-        if (!transform.Find("Charge2").TryGetComponent<ParticleSystem>(out charge2))
+        trans = transform.Find("Charge2");
+        if (trans != null && !trans.TryGetComponent<ParticleSystem>(out charge2))
         {
             Debug.Log("EffectManager - Awake - ParticleSystem");
         }
-        else
+        else if (charge2 != null)
         {
             charge2.Stop();
         }
-        if (!transform.Find("ChargeLight").TryGetComponent<ParticleSystem>(out chargeLight))
+        trans = transform.Find("ChargeLight");
+        if (trans != null && !trans.TryGetComponent<ParticleSystem>(out chargeLight))
         {
             Debug.Log("EffectManager - Awake - ParticleSystem");
         }
-        else
+        else if(chargeLight != null)
         {
             chargeLight.Stop();
         }
-        if (!transform.Find("AttackArea").TryGetComponent<AttackArea>(out attackArea))
+        trans = transform.Find("AttackArea");
+        if (trans != null && !trans.TryGetComponent<AttackArea>(out attackArea))
         {
             Debug.Log("EffectManager - Awake - AttackArea");
         }
-        SetColorInversion(0);
+       
     }
 
     public void Init(Weapon weapon)

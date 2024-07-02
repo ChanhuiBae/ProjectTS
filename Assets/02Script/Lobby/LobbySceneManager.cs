@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class LobbySceneManager : MonoBehaviour
 {
+    private GameObject weaponPopup;
     private Button sword;
     private Button hammer;
     private Button gun;
@@ -23,10 +24,30 @@ public class LobbySceneManager : MonoBehaviour
         {
             Debug.Log("LobbySceneManager - Awake - Button");
         }
+        weaponPopup = GameObject.Find("Popup");
+        if (weaponPopup != null)
+        {
+            weaponPopup.SetActive(false);
+        }
 
         sword.onClick.AddListener(SetSword);
         hammer.onClick.AddListener(SetHammer);
         gun.onClick.AddListener(SetGun);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(weaponPopup.activeSelf)
+            {
+                weaponPopup.SetActive(false);
+            }
+            else
+            {
+                weaponPopup.SetActive(true);
+            }
+        }
     }
 
     private void SetSword()
