@@ -578,7 +578,8 @@ public class PlayerController : MonoBehaviour, IDamage
         if(currentEXP > GameManager.Inst.PlayerInfo.Exp_Need)
         {
             currentEXP = 0;
-            // todo : Level Up
+            Time.timeScale = 0;
+            //GameManager.Inst.menuManager.
         }
         expFill.fillAmount = currentEXP / GameManager.Inst.PlayerInfo.Exp_Need;
     }

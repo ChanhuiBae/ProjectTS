@@ -334,10 +334,10 @@ public class SpawnManager : MonoBehaviour
         hp.Init(1f, pos);
     }
 
-    public void SpawnEXPItem(Vector3 pos)
+    public void SpawnEXPItem(Vector3 pos,float dropEXP)
     {
         EXPItem exp = pool.GetFromPool<EXPItem>(1);
-        exp.Init(1f, pos);
+        exp.Init(dropEXP, pos);
     }
 
     public void SpawnFloatingDamage(Vector3 pos, float damage)

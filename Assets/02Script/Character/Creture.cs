@@ -239,7 +239,9 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             effect = skillManager.SpawnEffect(18);
             effect.Init(EffectType.None, transform.position, 6f);
             spawnManager.SpawnHPItem(transform.position);
-            spawnManager.SpawnEXPItem(transform.position);
+            TableEntity_Creature exp;
+            GameManager.Inst.GetCreatureData(int.Parse(poolName), out exp);
+            spawnManager.SpawnEXPItem(transform.position,exp.Drop_Exp);
             spawnManager.ReturnCreature(poolName, this);
         }
     }

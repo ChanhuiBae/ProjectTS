@@ -69,9 +69,9 @@ public class GameManager : Singleton<GameManager>
 
     private PlayerController player;
     private FadeManager fadeManager;
-    private MenuManager menuManager;
+    public MenuManager menuManager;
     private SoundManager soundManager;
-    private SkillManager skillManager;
+    public SkillManager skillManager;
     private PatternManager patternManager;
 
     private TS table;
