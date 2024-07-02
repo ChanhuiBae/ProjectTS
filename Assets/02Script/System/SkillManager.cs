@@ -1,6 +1,7 @@
 using Redcode.Pools;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public enum AttackType
@@ -181,6 +182,37 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         }
     }
 
+    public void LevelUpSkill(int num, int id)
+    {
+        switch (num)
+        {
+            case 1:
+                skill1.LevelUp(id);
+                break;
+            case 11:
+                connected1.LevelUp(id);
+                break;
+            case 2:
+                skill2.LevelUp(id);
+                break;
+            case 21:
+                connected2.LevelUp(id);
+                break;
+            case 3:
+                skill3.LevelUp(id);
+                break;
+            case 31:
+                connected3.LevelUp(id);
+                break;
+            case 4:
+                ultimate.LevelUp(id);
+                break;
+            case 41:
+                connectedU.LevelUp(id);
+                break;
+        }
+    }
+
     public void SetPassive(int num, TableEntitiy_Passive_Skill passive)
     {
         switch (num)
@@ -189,10 +221,26 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 this.passive1.Init(passive); 
                 break;
             case 2:
-                this.passive1.Init(passive);
+                this.passive2.Init(passive);
                 break;
             case 3:
-                this.passive1.Init(passive);
+                this.passive3.Init(passive);
+                break;
+        }
+    }
+
+    public void LevelUpPassive(int num, int id)
+    {
+        switch (num)
+        {
+            case 1:
+                passive1.LevelUp(id);
+                break;
+            case 2:
+                passive2.LevelUp(id);
+                break;
+            case 3:
+                passive3.LevelUp(id);
                 break;
         }
     }

@@ -68,14 +68,17 @@ public class Skill : MonoBehaviour
         return current_level;
     }
 
-    public void LevelUp()
+    public void LevelUp(int id)
     { 
-        current_level++;
-        currentInfoID = GetKey();
-        GameManager.Inst.GetSkillInfoData(currentInfoID, out currentInfo);
-        if (category == 3 && ID % 10 == 1)
+        if(ID == id)
         {
-            GameManager.Inst.SetMaxUltimate((int)currentInfo.Need_Damage);
+            current_level++;
+            currentInfoID = GetKey();
+            GameManager.Inst.GetSkillInfoData(currentInfoID, out currentInfo);
+            if (category == 3 && ID % 10 == 1)
+            {
+                GameManager.Inst.SetMaxUltimate((int)currentInfo.Need_Damage);
+            }
         }
     }
 

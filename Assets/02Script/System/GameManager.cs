@@ -82,9 +82,9 @@ public class GameManager : Singleton<GameManager>
         return skillTable.TryGetValue(skillID, out data);
     }
     private Dictionary<int, TableEntitiy_Passive_Skill> passiveTable = new Dictionary<int, TableEntitiy_Passive_Skill>();
-    public bool GetPassiveData(int passiveID, out TableEntity_Skill data)
+    public bool GetPassiveData(int passiveID, out TableEntitiy_Passive_Skill data)
     {
-        return skillTable.TryGetValue(passiveID, out data);
+        return passiveTable.TryGetValue(passiveID, out data);
     }
     private Dictionary<int, TableEntity_Skill_Info> skillInfoTable = new Dictionary<int, TableEntity_Skill_Info>();
     public bool GetSkillInfoData(int ID, out TableEntity_Skill_Info data)
@@ -149,7 +149,7 @@ public class GameManager : Singleton<GameManager>
     {
         return patternHitFrameTable.TryGetValue(key, out data);
     }
-    //  private List<TableEntity_Tip> Tip = new List<TableEntity_Tip>();
+   
 
     private int killCount;
 
@@ -296,105 +296,18 @@ public class GameManager : Singleton<GameManager>
                 if (wsData.basic_ID != 0)
                 {
                     TableEntity_Skill skill;
-                    GameManager.Inst.GetSkillData(wsData.basic_ID, out skill);
+                    GetSkillData(wsData.basic_ID, out skill);
                     menuManager.InitSkillButton(0, wsData.basic_ID, skill.Skill_Name_Eng, 1);
                     skillManager.SetSkill(0, wsData.basic_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
                 }
-                if (wsData.skill1_ID != 0)
-                {
-                    TableEntity_Skill skill;
-                    GameManager.Inst.GetSkillData(wsData.skill1_ID, out skill);
-                    menuManager.InitSkillButton(1, wsData.skill1_ID, skill.Skill_Name_Eng, 1);
-                    skillManager.SetSkill(1, wsData.skill1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
-
-                }
-                else
-                {
-                    menuManager.InitSkillButton(1, wsData.skill1_ID, "None", 1);
-                }
-                if (wsData.connected1_ID != 0)
-                {
-                    TableEntity_Skill skill;
-                    GameManager.Inst.GetSkillData(wsData.connected1_ID, out skill);
-                    menuManager.InitSkillButton(11, wsData.connected1_ID, skill.Skill_Name_Eng, 1);
-                    skillManager.SetSkill(11, wsData.connected1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
-
-                }
-                else
-                {
-                    menuManager.InitSkillButton(11, wsData.connected1_ID, "None", 1);
-                }
-                if (wsData.skill2_ID != 0)
-                {
-                    TableEntity_Skill skill;
-                    GameManager.Inst.GetSkillData(wsData.skill2_ID, out skill);
-                    menuManager.InitSkillButton(2, wsData.skill2_ID, skill.Skill_Name_Eng, 1);
-                    skillManager.SetSkill(2, wsData.skill2_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
-
-                }
-                else
-                {
-                    menuManager.InitSkillButton(2, wsData.skill2_ID, "None", 1);
-                }
-                if (wsData.connected2_ID != 0)
-                {
-                    TableEntity_Skill skill;
-                    GameManager.Inst.GetSkillData(wsData.connected2_ID, out skill);
-                    menuManager.InitSkillButton(21, wsData.connected2_ID, skill.Skill_Name_Eng, 1);
-                    skillManager.SetSkill(21, wsData.connected2_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
-
-                }
-                else
-                {
-                    menuManager.InitSkillButton(21, wsData.connected2_ID, "None", 1);
-                }
-                if (wsData.skill3_ID != 0)
-                {
-                    TableEntity_Skill skill;
-                    GameManager.Inst.GetSkillData(wsData.skill3_ID, out skill);
-                    menuManager.InitSkillButton(3, wsData.skill3_ID, skill.Skill_Name_Eng, 1);
-                    skillManager.SetSkill(3, wsData.skill3_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
-
-                }
-                else
-                {
-                    menuManager.InitSkillButton(3, wsData.skill3_ID, "None", 1);
-                }
-                if (wsData.connected3_ID != 0)
-                {
-                    TableEntity_Skill skill;
-                    GameManager.Inst.GetSkillData(wsData.connected3_ID, out skill);
-                    menuManager.InitSkillButton(31, wsData.connected3_ID, skill.Skill_Name_Eng, 1);
-                    skillManager.SetSkill(31,wsData.connected3_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
-
-                }
-                else
-                {
-                    menuManager.InitSkillButton(31, wsData.connected1_ID, "None", 1);
-                }
-                if (wsData.ultimate_ID != 0)
-                {
-                    TableEntity_Skill skill;
-                    GameManager.Inst.GetSkillData(wsData.ultimate_ID, out skill);
-                    menuManager.InitSkillButton(4, wsData.ultimate_ID, skill.Skill_Name_Eng, 1);
-                    skillManager.SetSkill(4, wsData.ultimate_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
-
-                }
-                else
-                {
-                    menuManager.InitSkillButton(4, wsData.ultimate_ID, "None", 1);
-                }
-                if (wsData.connectedU_ID != 0)
-                {
-                    TableEntity_Skill skill;
-                    GameManager.Inst.GetSkillData(wsData.connectedU_ID, out skill);
-                    menuManager.InitSkillButton(41, wsData.connectedU_ID, skill.Skill_Name_Eng, 1);
-                    skillManager.SetSkill(41, wsData.connectedU_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
-                }
-                else
-                {
-                    menuManager.InitSkillButton(41, wsData.connectedU_ID, "None", 1);
-                }
+                menuManager.InitSkillButton(1, wsData.skill1_ID, "None", 1);
+                menuManager.InitSkillButton(11, wsData.connected1_ID, "None", 1);
+                menuManager.InitSkillButton(2, wsData.skill2_ID, "None", 1);
+                menuManager.InitSkillButton(21, wsData.connected2_ID, "None", 1);
+                menuManager.InitSkillButton(3, wsData.skill3_ID, "None", 1);
+                menuManager.InitSkillButton(31, wsData.connected1_ID, "None", 1);
+                menuManager.InitSkillButton(4, wsData.ultimate_ID, "None", 1);
+                menuManager.InitSkillButton(41, wsData.connectedU_ID, "None", 1);
                 killCount = 0;
             }
             return true;
@@ -490,22 +403,6 @@ public class GameManager : Singleton<GameManager>
         wsData.WeaponID = 2000;
         wsData.basic_ID = 200; 
     }
-    public void SetHammerTest()
-    {
-        wsData.WeaponID = 2000;
-        wsData.basic_ID = 200;
-        wsData.skill1_ID = 201;
-        wsData.connected1_ID = 0;
-        wsData.skill2_ID = 202;
-        wsData.connected2_ID = 0;
-        wsData.skill3_ID = 203;
-        wsData.connected3_ID = 0;
-        wsData.ultimate_ID = 231;
-        wsData.connectedU_ID = 232;
-        wsData.passive1_ID = 2000;
-        wsData.passive2_ID = 2001;
-        wsData.passive3_ID = 2002;
-    }
 
     public void SetGun()
     {
@@ -513,21 +410,87 @@ public class GameManager : Singleton<GameManager>
         wsData.basic_ID = 300;
     }
 
-    public void SetGunTest()
+    public void SetSkill(int num, int id)
     {
-        wsData.WeaponID = 3000;
-        wsData.basic_ID = 300;
-        wsData.skill1_ID = 301;
-        wsData.connected1_ID = 0;
-        wsData.skill2_ID = 302;
-        wsData.connected2_ID = 0;
-        wsData.skill3_ID = 303;
-        wsData.connected3_ID = 0;
-        wsData.ultimate_ID = 331;
-        wsData.connectedU_ID = 0;
-        wsData.passive1_ID = 3000;
-        wsData.passive2_ID = 3001;
-        wsData.passive3_ID = 3002;
+        TableEntity_Skill skill;
+        switch (num)
+        {
+            case 1:
+                wsData.skill1_ID = id;
+                GetSkillData(wsData.skill1_ID, out skill);
+                menuManager.InitSkillButton(1, wsData.skill1_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(1, wsData.skill1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+                break;
+            case 11:
+                wsData.connected1_ID = id;
+                GetSkillData(wsData.connected1_ID, out skill);
+                menuManager.InitSkillButton(11, wsData.connected1_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(11, wsData.connected1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+                break;
+            case 2:
+                wsData.skill2_ID = id;
+                GetSkillData(wsData.skill2_ID, out skill);
+                menuManager.InitSkillButton(2, wsData.skill2_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(2, wsData.skill2_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+                break;
+            case 21:
+                wsData.connected2_ID = id;
+                GetSkillData(wsData.connected2_ID, out skill);
+                menuManager.InitSkillButton(21, wsData.connected2_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(21, wsData.connected2_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+                break;
+            case 3:
+                wsData.skill3_ID = id;
+                GetSkillData(wsData.skill3_ID, out skill);
+                menuManager.InitSkillButton(3, wsData.skill3_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(3, wsData.skill3_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+                break;
+            case 31:
+                wsData.connected3_ID = id;
+                GetSkillData(wsData.connected3_ID, out skill);
+                menuManager.InitSkillButton(31, wsData.connected3_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(31, wsData.connected3_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+                break;
+            case 4:
+                wsData.ultimate_ID = id;
+                GetSkillData(wsData.ultimate_ID, out skill);
+                menuManager.InitSkillButton(4, wsData.ultimate_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(4, wsData.ultimate_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+                break;
+            case 41:
+                wsData.connectedU_ID = id;
+                GetSkillData(wsData.connectedU_ID, out skill);
+                menuManager.InitSkillButton(41, wsData.connectedU_ID, skill.Skill_Name_Eng, 1);
+                skillManager.SetSkill(41, wsData.connectedU_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+                break;
+        }
+    }
+
+    public void SetPassive(int num, int id)
+    {
+        TableEntitiy_Passive_Skill passive;
+        switch (num)
+        {
+            case 1:
+                wsData.passive1_ID = id;
+                GetPassiveData(wsData.passive1_ID, out passive);
+                menuManager.InitPassive(1, passive.Name_Eng);
+                skillManager.SetPassive(1, passive);
+                break;
+            case 2:
+                wsData.passive2_ID = id;
+                GetPassiveData(wsData.passive2_ID, out passive);
+                menuManager.InitPassive(2, passive.Name_Eng);
+                skillManager.SetPassive(2, passive);
+                break;
+            case 3:
+                wsData.passive3_ID = id;
+                GetPassiveData(wsData.passive3_ID, out passive);
+                menuManager.InitPassive(3, passive.Name_Eng);
+                skillManager.SetPassive(3, passive);
+                break;
+        }
+
     }
 
     public void SetVolumBGM(int value)
@@ -567,7 +530,7 @@ public class GameManager : Singleton<GameManager>
         menuManager.SetKillCount(killCount);
     }
 
-    public void UpdateSkill(int num, int skill_ID, int level)
+    public void LevelUpSkill(int num, int skill_ID, int level)
     {
         bool check = false;
         switch (num)
@@ -581,15 +544,15 @@ public class GameManager : Singleton<GameManager>
                     check = true;
                 break;
             case 2:
-                if(skill_ID == wsData.skill2_ID)
-                    check = true; 
+                if (skill_ID == wsData.skill2_ID)
+                    check = true;
                 break;
             case 21:
                 if (skill_ID == wsData.connected2_ID)
                     check = true;
                 break;
             case 3:
-                if(skill_ID == wsData.skill3_ID)
+                if (skill_ID == wsData.skill3_ID)
                     check = true;
                 break;
             case 31:
@@ -597,11 +560,11 @@ public class GameManager : Singleton<GameManager>
                     check = true;
                 break;
             case 4:
-                if(skill_ID == wsData.ultimate_ID)
+                if (skill_ID == wsData.ultimate_ID)
                     check = true;
                 break;
             case 41:
-                if(skill_ID == wsData.connectedU_ID)
+                if (skill_ID == wsData.connectedU_ID)
                     check = true;
                 break;
         }
@@ -610,8 +573,13 @@ public class GameManager : Singleton<GameManager>
             TableEntity_Skill skill;
             GameManager.Inst.GetSkillData(skill_ID, out skill);
             menuManager.InitSkillButton(num, skill_ID, skill.Skill_Name_Eng, level);
-            skillManager.SetSkill(num, wsData.skill1_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+            skillManager.LevelUpSkill(num, skill_ID);
         }
+    }
+
+    public void LevelUpPassive(int num, int level)
+    {
+        skillManager.LevelUpPassive(num, level);
     }
 
     #endregion

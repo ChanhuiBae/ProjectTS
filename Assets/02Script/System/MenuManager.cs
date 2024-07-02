@@ -334,6 +334,24 @@ public class MenuManager : MonoBehaviour
         }
         ultimate.SetUaltimate(currentUltimateValue/maxUltimateValue);
     }
+
+    public void InitPassive(int num, string name)
+    {
+        Sprite icon = Resources.Load<Sprite>("Image/"+ name);
+        switch(num)
+        {
+            case 1:
+                passive1.sprite = icon;
+                break;
+            case 2:
+                passive2.sprite = icon;
+                break;
+            case 3:
+                passive3.sprite = icon;
+                break;
+        }
+    }
+
     public void SetKillCount(int value)
     {
         killCount.text = value.ToString();

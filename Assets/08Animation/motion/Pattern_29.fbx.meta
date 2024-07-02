@@ -1,0 +1,180 @@
+fileFormatVersion: 2
+guid: c6df46537bbf5ac4b8f1e27c8ce06bf0
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftUpperLeg' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Pattern_29(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_Hips
+      parentName: Pattern_29(Clone)
+      position: {x: -3.4190989, y: 8.297933, z: -4.0748315}
+      rotation: {x: -0.09064357, y: 0.30430838, z: 0.027390718, w: 0.9478554}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_Spine
+      parentName: hanna_Hips
+      position: {x: -0, y: 0.69728357, z: 0}
+      rotation: {x: 0.073836766, y: 0.016975705, z: 0.009150733, w: 0.99708384}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_Spine1
+      parentName: hanna_Spine
+      position: {x: 0.00000044703484, y: 1.954022, z: 0}
+      rotation: {x: -0.04057304, y: 0.005721196, z: -0.0016221051, w: 0.9991589}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_Neck
+      parentName: hanna_Spine1
+      position: {x: -0, y: 1.828428, z: 0}
+      rotation: {x: -0.0022263555, y: 0.19450006, z: 0.037660044, w: 0.9801768}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_Head
+      parentName: hanna_Neck
+      position: {x: -0, y: 1.3180358, z: 0.17006914}
+      rotation: {x: 0.022898428, y: 0.21020536, z: -0.036242593, w: 0.9767169}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_LeftShoulder
+      parentName: hanna_Spine1
+      position: {x: -0.3377062, y: 1.351502, z: -0.02866447}
+      rotation: {x: 0.012090141, y: -0.17987834, z: -0.10528007, w: 0.97796404}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_LeftArm
+      parentName: hanna_LeftShoulder
+      position: {x: -1.4526043, y: 0, z: 0}
+      rotation: {x: -0.18859525, y: -0.15233424, z: 0.046495117, w: 0.9690533}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_LeftForeArm
+      parentName: hanna_LeftArm
+      position: {x: -2.4092023, y: 0, z: 0}
+      rotation: {x: 0.03922196, y: -0.0028693972, z: -0.017540315, w: 0.99907255}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_LeftHand
+      parentName: hanna_LeftForeArm
+      position: {x: -1.9503247, y: 0, z: -0.00000029802322}
+      rotation: {x: 0.058677956, y: -0.32276174, z: 0.36465752, w: 0.8714394}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_RightShoulder
+      parentName: hanna_Spine1
+      position: {x: 0.34196585, y: 1.351502, z: -0.02866447}
+      rotation: {x: 0.06941388, y: -0.18584184, z: 0.035642687, w: 0.9794765}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_RightArm
+      parentName: hanna_RightShoulder
+      position: {x: 1.4526043, y: 0, z: 0}
+      rotation: {x: -0.49183014, y: -0.09270408, z: -0.12890564, w: 0.8560913}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_RightForeArm
+      parentName: hanna_RightArm
+      position: {x: 2.4092023, y: 0, z: 0}
+      rotation: {x: -0.053405862, y: 0.023480197, z: -0.009276155, w: -0.9982537}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hanna_RightHand
+      parentName: hanna_RightForeArm
+      position: {x: 1.8863189, y: 0, z: -0.0000040233135}
+      rotation: {x: 0.058457863, y: 0.45994914, z: -0.23609085, w: 0.85398513}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

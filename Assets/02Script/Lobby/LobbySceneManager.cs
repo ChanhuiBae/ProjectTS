@@ -46,11 +46,11 @@ public class LobbySceneManager : MonoBehaviour
 
     private void SetHammer()
     {
-        GameManager.Inst.SetHammerTest();
+        GameManager.Inst.SetHammer();
     }
 
     private void SetGun()
     {
-        GameManager.Inst.SetGunTest();  
+        GameManager.Inst.SetGun();  
     }
 }

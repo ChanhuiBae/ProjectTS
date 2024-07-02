@@ -63,9 +63,9 @@ public class PassiveSkill : MonoBehaviour
         return info.Base_Figure + (info.Increase_Value * (level-1));
     }
 
-    public void LevelUp()
+    public void LevelUp(int id)
     {
-        if (level < info.Max_Level)
+        if (key == id && level < info.Max_Level)
         {
             level++;
             ApplySkill();
