@@ -6,16 +6,11 @@ using UnityEngine.UI;
 public class LobbySceneManager : MonoBehaviour
 {
     private GameObject weaponPopup;
-    private Button sword;
     private Button hammer;
     private Button gun;
 
     private void Awake()
     {
-        if(!GameObject.Find("SwordButton").TryGetComponent<Button>(out sword))
-        {
-            Debug.Log("LobbySceneManager - Awake - Button");
-        }
         if (!GameObject.Find("HammerButton").TryGetComponent<Button>(out hammer))
         {
             Debug.Log("LobbySceneManager - Awake - Button");
@@ -29,8 +24,6 @@ public class LobbySceneManager : MonoBehaviour
         {
             weaponPopup.SetActive(false);
         }
-
-        sword.onClick.AddListener(SetSword);
         hammer.onClick.AddListener(SetHammer);
         gun.onClick.AddListener(SetGun);
     }
@@ -50,18 +43,14 @@ public class LobbySceneManager : MonoBehaviour
         }
     }
 
-    private void SetSword()
-    {
-        GameManager.Inst.SetSword();
-    }
 
     private void SetHammer()
     {
-        GameManager.Inst.SetHammer();
+        GameManager.Inst.SetHammerTest();
     }
 
     private void SetGun()
     {
-        GameManager.Inst.SetGun();  
+        GameManager.Inst.SetGunTest();  
     }
 }

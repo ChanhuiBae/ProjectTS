@@ -206,7 +206,6 @@ public class GameManager : Singleton<GameManager>
 
         pData = new PlayerData();
         wsData = new WeaponSkillSetData();
-        SetSword();
         setData = new SettingData();
         if (CheckData())
         {
@@ -466,16 +465,19 @@ public class GameManager : Singleton<GameManager>
         pData.Available_Point = info.Available_Point;
         pData.Exp_Need = info.Exp_Need;
         pData.ArmorID = 1;
-        wsData.WeaponID = 1000;
-        wsData.basic_ID = 100;
-        wsData.skill1_ID = 101;
+        wsData.WeaponID = 2000;
+        wsData.basic_ID = 200;
+        wsData.skill1_ID = 0;
         wsData.connected1_ID = 0;
-        wsData.skill2_ID = 102;
+        wsData.skill2_ID = 0;
         wsData.connected2_ID = 0;
-        wsData.skill3_ID = 103;
+        wsData.skill3_ID = 0;
         wsData.connected3_ID = 0;
-        wsData.ultimate_ID = 131;
+        wsData.ultimate_ID = 0;
         wsData.connectedU_ID = 0;
+        wsData.passive1_ID = 0;
+        wsData.passive2_ID = 0;
+        wsData.passive3_ID = 0;
         setData.bgm = 0;
         setData.sfx = 0;
         setData.damageText = true;
@@ -483,21 +485,12 @@ public class GameManager : Singleton<GameManager>
         SaveData();
     }
 
-    public void SetSword()
-    {
-        wsData.WeaponID = 1000;
-        wsData.basic_ID = 100;
-        wsData.skill1_ID = 101;
-        wsData.connected1_ID = 0;
-        wsData.skill2_ID = 102;
-        wsData.connected2_ID = 0;
-        wsData.skill3_ID = 103;
-        wsData.connected3_ID = 0;
-        wsData.ultimate_ID = 131;
-        wsData.connectedU_ID = 0;
-    }
-
     public void SetHammer()
+    {
+        wsData.WeaponID = 2000;
+        wsData.basic_ID = 200; 
+    }
+    public void SetHammerTest()
     {
         wsData.WeaponID = 2000;
         wsData.basic_ID = 200;
@@ -509,9 +502,18 @@ public class GameManager : Singleton<GameManager>
         wsData.connected3_ID = 0;
         wsData.ultimate_ID = 231;
         wsData.connectedU_ID = 232;
+        wsData.passive1_ID = 2000;
+        wsData.passive2_ID = 2001;
+        wsData.passive3_ID = 2002;
     }
 
     public void SetGun()
+    {
+        wsData.WeaponID = 3000;
+        wsData.basic_ID = 300;
+    }
+
+    public void SetGunTest()
     {
         wsData.WeaponID = 3000;
         wsData.basic_ID = 300;
@@ -523,6 +525,9 @@ public class GameManager : Singleton<GameManager>
         wsData.connected3_ID = 0;
         wsData.ultimate_ID = 331;
         wsData.connectedU_ID = 0;
+        wsData.passive1_ID = 3000;
+        wsData.passive2_ID = 3001;
+        wsData.passive3_ID = 3002;
     }
 
     public void SetVolumBGM(int value)

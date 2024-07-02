@@ -16,8 +16,15 @@ public class MenuManager : MonoBehaviour
     private SkillButton skill3;
     private UltimateButton ultimate;
 
+    private Image passive1;
+    private Image passive2;
+    private Image passive3;
+
     private int maxUltimateValue;
     private float currentUltimateValue;
+
+    private GameObject levelupPopup;
+
 
     private Button pause;
     private Image current;
@@ -65,21 +72,29 @@ public class MenuManager : MonoBehaviour
             Debug.Log("PlayerController - Awake - Button");
         }
 
-        if (!GameObject.Find("Skill1").TryGetComponent<SkillButton>(out skill1))
+        if (!GameObject.Find("Skill1B").TryGetComponent<SkillButton>(out skill1))
         {
             Debug.Log("MenuManager - Awake - SkillButton");
         }
-        if (!GameObject.Find("Skill2").TryGetComponent<SkillButton>(out skill2))
+        if (!GameObject.Find("Skill2B").TryGetComponent<SkillButton>(out skill2))
         {
             Debug.Log("MenuManager - Awake - SkillButton");
         }
-        if (!GameObject.Find("Skill3").TryGetComponent<SkillButton>(out skill3))
+        if (!GameObject.Find("Skill3B").TryGetComponent<SkillButton>(out skill3))
         {
             Debug.Log("MenuManager - Awake - SkillButton");
         }
-        if (!GameObject.Find("Ultimate").TryGetComponent<UltimateButton>(out ultimate))
+        if (!GameObject.Find("UltimateB").TryGetComponent<UltimateButton>(out ultimate))
         {
             Debug.Log("MenuManager - Awake - UltimateButton");
+        }
+
+
+
+        levelupPopup = GameObject.Find("LevelUpPopup");
+        if(levelupPopup != null)
+        {
+            levelupPopup.SetActive(false);
         }
 
 

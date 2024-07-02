@@ -121,6 +121,19 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         {
             Debug.Log("SkillManager - Awake - ConnectedSkill");
         }
+
+        if(!transform.Find("Passive1").TryGetComponent<PassiveSkill>(out passive1))
+        {
+            Debug.Log("SkillManager - Awake - Passive1");
+        }
+        if (!transform.Find("Passive2").TryGetComponent<PassiveSkill>(out passive2))
+        {
+            Debug.Log("SkillManager - Awake - Passive1");
+        }
+        if (!transform.Find("Passive3").TryGetComponent<PassiveSkill>(out passive3))
+        {
+            Debug.Log("SkillManager - Awake - Passive1");
+        }
         useSkill = -1;
         isCharge = false;
         crowdControl = CrowdControlType.None;
