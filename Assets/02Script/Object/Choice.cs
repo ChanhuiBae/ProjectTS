@@ -11,6 +11,7 @@ public class Choice : MonoBehaviour
     private TextMeshProUGUI name;
     private TextMeshProUGUI description;
     private Button btn;
+    private bool isLevelUp;
 
     private void Awake()
     {
@@ -42,20 +43,51 @@ public class Choice : MonoBehaviour
         {
             btn.onClick.AddListener(PickUp);
         }
+        isLevelUp = false;
     }
 
-    public void SetNew(int id)
+    public void SetNewSkill(int id)
     {
-
+        isLevelUp = false;
+        TableEntity_Skill skill;
+        GameManager.Inst.GetSkillData(id, out skill);
+        icon.sprite = Resources.Load<Sprite>("Image/" + skill.Skill_Name_Eng);
+        name.text = skill.Skill_Name;
+        description.text = skill.Explanation;
     }
 
-    public void SetLevelUp(int id, int level)
+    public void SetNewPassive(int id)
     {
+        isLevelUp = false;
+        TableEntitiy_Passive_Skill skill;
+        GameManager.Inst.GetPassiveData(id, out skill);
+        icon.sprite = Resources.Load<Sprite>("Image/" + skill.Name_Eng);
+        name.text = skill.Name;
+        description.text = skill.Description;
+    }
 
+    public void LevelUpSkill(int id, int level)
+    {
+        isLevelUp = true;
+        TableEntity_Skill skill;
+        GameManager.Inst.GetSkillData(id, out skill);
+        icon.sprite = Resources.Load<Sprite>("Image/" + skill.Skill_Name_Eng);
+        name.text = skill.Skill_Name;
+        description.text = level.ToString() + " -> " + (level + 1).ToString(); 
+    }
+
+    public void LevelUpPassive(int id, int level)
+    {
+        isLevelUp = true;
+        TableEntitiy_Passive_Skill skill;
+        GameManager.Inst.GetPassiveData(id, out skill);
+        icon.sprite = Resources.Load<Sprite>("Image/" + skill.Name_Eng);
+        name.text = skill.Name;
+        description.text = level.ToString() + " -> " + (level + 1).ToString();
     }
 
     private void PickUp()
     {
-
+        
     }
 }

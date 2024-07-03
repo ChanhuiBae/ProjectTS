@@ -24,7 +24,7 @@ public class MenuManager : MonoBehaviour
     private float currentUltimateValue;
 
     private GameObject levelupPopup;
-
+    private Choice selection;
 
     private Button pause;
     private Image current;
