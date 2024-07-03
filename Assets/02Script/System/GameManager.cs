@@ -105,6 +105,10 @@ public class GameManager : Singleton<GameManager>
     {
         TableEntity_Weapon weapon;
         weaponTable.TryGetValue(weaponID, out weapon);
+        if(weapon == null)
+        {
+            return WeaponType.None;
+        }
         switch(weapon.Type)
         {
             case 1:
@@ -242,7 +246,6 @@ public class GameManager : Singleton<GameManager>
                     {
                         creatureIDList.Add(creatureTable[i].ID);
                     }
-                    patternManager.Init(creatureIDList);
                 }
             }
             if (menuManager == null)

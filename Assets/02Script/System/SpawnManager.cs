@@ -113,6 +113,12 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnLogic()
     {
+        yield return null;
+        Spawn(3);
+        Spawn(10);
+
+
+        /*
         for (int i = 0; i < 264; i++)
         {
             Spawn(3);
@@ -182,9 +188,7 @@ public class SpawnManager : MonoBehaviour
         }
         //04분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        int swarm = Random.Range(0, 1);
-        swarm = swarm == 0 ? 9: 11;
-        Spawn(swarm);
+        Spawn(9);
         for (int i = 0; i < 264; i++)
         {
             Spawn(4);
@@ -254,9 +258,7 @@ public class SpawnManager : MonoBehaviour
         }
         //9분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        swarm = Random.Range(0, 1);
-        swarm = swarm == 0 ? 10 : 12;
-        Spawn(swarm);
+        Spawn(10);
         for (int i = 0; i < 264; i++)
         {
             Spawn(5);
@@ -320,12 +322,13 @@ public class SpawnManager : MonoBehaviour
             yield return YieldInstructionCache.WaitForSeconds(0.1f);
         }
         // 14분 59초
+        */
     }
 
     private IEnumerator SpawnGuvnor()
     {
         yield return YieldInstructionCache.WaitForSeconds(900);
-        Spawn(13);
+        Spawn(11);
     }
 
     public void SpawnHPItem(Vector3 pos)

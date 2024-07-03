@@ -15,10 +15,6 @@ public class PatternManager : MonoBehaviour, ITakeDamage
         }
     }
 
-    public void Init(List<int> creatures)
-    {
-
-    }
 
     public float TakeDamage(float Physics_Cut, float Fire_Cut, float Water_Cut, float Electric_Cut, float Ice_Cut, float Wind_Cut)
     {

@@ -24,7 +24,12 @@ public class MenuManager : MonoBehaviour
     private float currentUltimateValue;
 
     private GameObject levelupPopup;
-    private Choice selection;
+    private Choice selection1;
+    private Choice selection2;
+    private Choice selection3;
+    private Button selectBtn;
+    private int choice;
+    private List<int> UsingSkills;
 
     private Button pause;
     private Image current;
@@ -94,6 +99,22 @@ public class MenuManager : MonoBehaviour
         levelupPopup = GameObject.Find("LevelUpPopup");
         if(levelupPopup != null)
         {
+            if(!levelupPopup.transform.Find("Selection1").TryGetComponent<Choice>(out selection1))
+            {
+                Debug.Log("MenuManager - Awake - Choice");
+            }
+            if (!levelupPopup.transform.Find("Selection2").TryGetComponent<Choice>(out selection2))
+            {
+                Debug.Log("MenuManager - Awake - Choice");
+            }
+            if (!levelupPopup.transform.Find("Selection3").TryGetComponent<Choice>(out selection3))
+            {
+                Debug.Log("MenuManager - Awake - Choice");
+            }
+            if(!levelupPopup.transform.Find("Select").TryGetComponent<Button>(out selectBtn))
+            {
+                Debug.Log("MenuManager - Awake - Button");
+            }
             levelupPopup.SetActive(false);
         }
 
@@ -356,6 +377,12 @@ public class MenuManager : MonoBehaviour
     {
         killCount.text = value.ToString();
     }
+
+    public void SetLevelUpPopup(int playerLevel)
+    {
+
+    }
+
 
 
     private void PressPause()

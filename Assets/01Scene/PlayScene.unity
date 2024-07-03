@@ -5140,7 +5140,7 @@ MonoBehaviour:
   - _name: 1002
     _component: {fileID: 935712332201360022, guid: 64bdbc0ab378d2945b9789ac2680e565,
       type: 3}
-    _count: 150
+    _count: 1000
     _container: {fileID: 797113329}
     _nonLazy: 0
   - _name: 2000
@@ -5164,26 +5164,14 @@ MonoBehaviour:
   - _name: 3000
     _component: {fileID: 935712332201360022, guid: 278126ea29132894d86704036812937e,
       type: 3}
-    _count: 4
+    _count: 2
     _container: {fileID: 1547287441}
     _nonLazy: 0
   - _name: 3001
     _component: {fileID: 935712332201360022, guid: c62c5b2faeff6dd4c93fcfe3942d464f,
       type: 3}
-    _count: 4
+    _count: 2
     _container: {fileID: 155855786}
-    _nonLazy: 0
-  - _name: 3002
-    _component: {fileID: 935712332201360022, guid: 99eaaaa3577256c4b8675818ccb0d63e,
-      type: 3}
-    _count: 4
-    _container: {fileID: 400127172}
-    _nonLazy: 0
-  - _name: 3003
-    _component: {fileID: 935712332201360022, guid: c08dbd27178b4064d9b6cfc344180866,
-      type: 3}
-    _count: 4
-    _container: {fileID: 1627869300}
     _nonLazy: 0
   - _name: 4000
     _component: {fileID: 935712332201360022, guid: dd3d984e448fa4944948be7a1c06d1bd,

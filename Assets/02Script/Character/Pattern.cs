@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Pattern : MonoBehaviour
@@ -10,6 +11,7 @@ public class Pattern : MonoBehaviour
     private int creatureKey;
     private int current_hit;
     private float currentTime;
+    private List<BoxCollider> colliders;
 
 
     public void Init(int creatureKey)
@@ -29,6 +31,19 @@ public class Pattern : MonoBehaviour
         current_hit = 0;
         currentTime = pattern.Cool_Time;
 
+        colliders = new List<BoxCollider>();
+        BoxCollider collider;
+        foreach (Transform child in transform) 
+        {
+            if(child.TryGetComponent<BoxCollider>(out collider))
+            {
+                colliders.Add(collider);
+            }
+        }
+        foreach (BoxCollider col in colliders)
+        {
+            col.enabled = false;
+        }
     }
 
     public bool IsUsePhase(int i)
@@ -58,7 +73,12 @@ public class Pattern : MonoBehaviour
 
     private void HitUp()
     {
+        if (current_hit != 0)
+        {
+            colliders[current_hit].enabled = false;
+        }
         current_hit++;
+        colliders[current_hit].enabled = true;
     }
 
     private IEnumerator CountHit()
@@ -101,6 +121,11 @@ public class Pattern : MonoBehaviour
             }
             HitUp();
         }
+        for(int i = 0; i < hit.End; i++)
+        {
+            yield return null;
+        }
+        colliders[current_hit].enabled = false;
     }
 
     public void StartPattern()

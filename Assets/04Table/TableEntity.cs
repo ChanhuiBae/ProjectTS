@@ -58,6 +58,7 @@ public class TableEntity_Weapon
     public float Critical_Chance;
     public float Critical_Mag;
     public float Attack_Speed;
+    public int Skill;
 }
 
 [System.Serializable]
@@ -144,7 +145,7 @@ public class TableEntity_Creature
 public class TableEntity_Pattern
 {
     public int ID;
-    public int Creature_ID;
+    public string Creature_ID;
     public int Hit_Max;
     public float Delay_Min;
     public float Delay_Max;
@@ -182,6 +183,7 @@ public class TableEntity_Pattern_Hit_Frame
     public int Hit_03;
     public int Hit_04;
     public int Hit_05;
+    public int End;
 }
 
 [System.Serializable] 

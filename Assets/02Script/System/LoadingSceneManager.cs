@@ -7,14 +7,11 @@ using TMPro;
 public class LoadingSceneManager : MonoBehaviour
 {
     private Image loadingBar;
-    private TextMeshProUGUI tipText;
 
     private void Awake()
     {
         if (!GameObject.Find("Loading").TryGetComponent<Image>(out loadingBar))
             Debug.Log("LoadingSceneManager - Awake - Image");
-        if (!GameObject.Find("Tip").TryGetComponent<TextMeshProUGUI>(out tipText))
-            Debug.Log("LoadingSceneManager - Awake - TextMeshProUGUI");
         loadingBar.fillAmount = 0f;
         StartCoroutine(LoadAsyncScene());
     }
