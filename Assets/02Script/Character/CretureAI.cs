@@ -45,7 +45,7 @@ public class CretureAI : MonoBehaviour
     }
     private Phase phase;
     private CretureType type;
-    private Creture creture;
+    private Creture creature;
     private GameObject attackTarget;
     private PlayerController target;
 
@@ -56,6 +56,7 @@ public class CretureAI : MonoBehaviour
 
     private bool isInit;
 
+
     // MosterBase 초기화 시 호출
     public void InitAI(CretureType type, float speed)
     {
@@ -63,14 +64,18 @@ public class CretureAI : MonoBehaviour
             Debug.Log("CreatureAI - Awake - NavMeshAgent");
         if (!TryGetComponent<CreatureAnimationController>(out anim))
             Debug.Log("CreatureAI - Awake - CreatureAnimationController");
-        if (!TryGetComponent<Creture>(out creture))
+        if (!TryGetComponent<Creture>(out creature))
             Debug.Log("CretureAI - Awake - Creture");
-        GameObject obj = transform.Find("Patterns").gameObject;
+        Transform obj = transform.Find("Patterns");
         patterns = new List<Pattern>();
-        for (int i = 0; i < obj.transform.childCount; i++)
+        foreach (Transform transform in obj)
         {
-            patterns.Add(obj.transform.GetChild(i).GetComponent<Pattern>());
-            patterns[i].Init(creture.GetKey());
+            patterns.Add(transform.GetComponent<Pattern>());
+        }
+        Debug.Log("Patterns" + patterns.Count);
+        foreach (Pattern pattern in patterns)
+        {
+            pattern.Init(creature.GetKey());
         }
         this.type = type;
         isInit = true;

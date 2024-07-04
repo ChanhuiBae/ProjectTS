@@ -114,7 +114,8 @@ public class SpawnManager : MonoBehaviour
     private IEnumerator SpawnLogic()
     {
         yield return null;
-        Spawn(3);
+        //Spawn(3);
+        //Spawn(6);
         Spawn(10);
 
 

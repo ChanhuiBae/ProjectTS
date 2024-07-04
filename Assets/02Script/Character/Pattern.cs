@@ -13,6 +13,18 @@ public class Pattern : MonoBehaviour
     private float currentTime;
     private List<BoxCollider> colliders;
 
+    private void Awake()
+    {
+        colliders = new List<BoxCollider>();
+        BoxCollider collider;
+        foreach (Transform child in transform)
+        {
+            if (child.TryGetComponent<BoxCollider>(out collider))
+            {
+                colliders.Add(collider);
+            }
+        }
+    }
 
     public void Init(int creatureKey)
     {
@@ -31,15 +43,6 @@ public class Pattern : MonoBehaviour
         current_hit = 0;
         currentTime = pattern.Cool_Time;
 
-        colliders = new List<BoxCollider>();
-        BoxCollider collider;
-        foreach (Transform child in transform) 
-        {
-            if(child.TryGetComponent<BoxCollider>(out collider))
-            {
-                colliders.Add(collider);
-            }
-        }
         foreach (BoxCollider col in colliders)
         {
             col.enabled = false;
@@ -73,12 +76,14 @@ public class Pattern : MonoBehaviour
 
     private void HitUp()
     {
-        if (current_hit != 0)
+        Debug.Log(current_hit + "pre" + colliders.Count);
+        if (current_hit > 0)
         {
-            colliders[current_hit].enabled = false;
+            colliders[current_hit-1].enabled = false;
         }
         current_hit++;
-        colliders[current_hit].enabled = true;
+        colliders[current_hit-1].enabled = true;
+        Debug.Log(current_hit + "cur" + colliders.Count);
     }
 
     private IEnumerator CountHit()
@@ -125,7 +130,7 @@ public class Pattern : MonoBehaviour
         {
             yield return null;
         }
-        colliders[current_hit].enabled = false;
+        colliders[colliders.Count-1].enabled = false;
     }
 
     public void StartPattern()
