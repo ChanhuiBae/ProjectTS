@@ -4,20 +4,12 @@ using UnityEngine;
 using UnityEngine.Audio;
 public enum BGM_Type
 {
-    BGM_Home = 0,
-    BGM_Stage = 1,
-    BGM_Boss = 2,
+    BGM_Play = 0,
 }
 
 public enum SFX_Type
 {
-    SFX_ChangeWeapon = 0,
-    SFX_OnehandAttack = 1,
-    SFX_Ranged = 2,
-    SFX_Hit = 3,
-    SFX_Coin = 4,
-    SFX_Item = 5,
-    SFX_Drink = 6,
+    SFX_EXP = 0,
 }
 
 public class SoundManager : MonoBehaviour

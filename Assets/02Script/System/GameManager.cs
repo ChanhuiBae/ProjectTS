@@ -70,7 +70,7 @@ public class GameManager : Singleton<GameManager>
     private PlayerController player;
     private FadeManager fadeManager;
     public MenuManager menuManager;
-    private SoundManager soundManager;
+    public SoundManager soundManager;
     public SkillManager skillManager;
     private PatternManager patternManager;
 

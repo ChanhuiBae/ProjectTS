@@ -40,6 +40,7 @@ public class EXPItem : MonoBehaviour
             LeanTween.move(gameObject, goal, 0.3f);
             yield return YieldInstructionCache.WaitForSeconds(0.3f);
         }
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_EXP);
         poolManager.TakeToPool<EXPItem>(name, this);
     }
 
