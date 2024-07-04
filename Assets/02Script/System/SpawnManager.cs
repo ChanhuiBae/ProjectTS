@@ -116,65 +116,60 @@ public class SpawnManager : MonoBehaviour
         yield return null;
         //Spawn(3);
         //Spawn(6);
-        Spawn(10);
+       // Spawn(10);
 
-
-        /*
-        for (int i = 0; i < 264; i++)
+        for (int i = 0; i < 132; i++)
         {
             Spawn(3);
-            yield return YieldInstructionCache.WaitForSeconds(0.17f);
+            yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
         //00분 44초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 264; i++)
+        for (int i = 0; i < 132; i++)
         {
             Spawn(3);
-            if (i % 18 == 0)
+            if (i % 13 == 0)
             {
                 Spawn(6);
             }
-            yield return YieldInstructionCache.WaitForSeconds(0.17f);
+            yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
         //01분 29초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for(int i = 0; i < 174; i += 3)
+        for(int i = 0; i < 29; i++)
         {
             Spawn(3);
             if(i % 2 == 0)
             {
                 Spawn(6);
             }
-            yield return YieldInstructionCache.WaitForSeconds(0.5f);
+            yield return YieldInstructionCache.WaitForSeconds(1f);
         }
         //01분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 354; i++)
+        for (int i = 0; i < 118; i++)
         {
-            if (i % 1.5f == 0)
-            {
-                Spawn(3);
-            }
-            if (i % 3 == 0)
+            Spawn(3);
+            if (i % 2 == 0)
             {
                 Spawn(4);
             }
-            if (i % 30 == 0)
+            if (i % 20 == 0)
             {
                 Spawn(6);
             }
-            yield return YieldInstructionCache.WaitForSeconds(0.17f);
+            yield return YieldInstructionCache.WaitForSeconds(0.5f);
         }
         //02분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 1180; i++)
+        for (int i = 0; i < 590; i++)
         {
             Spawn(3);
-            yield return YieldInstructionCache.WaitForSeconds(0.05f);
+            yield return YieldInstructionCache.WaitForSeconds(0.1f);
         }
         //03분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 1770; i++)
+        for (int i = 0; i < 885; i++)
         {
             if(i % 4 == 0)
             {
@@ -184,42 +179,44 @@ public class SpawnManager : MonoBehaviour
             {
                 Spawn(6);
             }
-            yield return null;
-            yield return null;
+            yield return YieldInstructionCache.WaitForSeconds(0.066f);
         }
         //04분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
         Spawn(9);
-        for (int i = 0; i < 264; i++)
+        for (int i = 0; i < 132; i++)
         {
             Spawn(4);
-            yield return YieldInstructionCache.WaitForSeconds(0.17f);
+            yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
         //5분 44초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 264; i++)
+        for (int i = 0; i < 132; i++)
         {
             Spawn(4);
-            if(i % 18 == 0)
+            if(i % 13 == 0)
+            {
+                Spawn(7);
+            }
+            yield return YieldInstructionCache.WaitForSeconds(0.33f);
+        }
+        //6분 29초
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        for (int i = 0; i < 174; i++)
+        {
+            if (i % 5 == 0)
+            {
+                Spawn(4);
+            }
+            if (i % 10 == 0)
             {
                 Spawn(7);
             }
             yield return YieldInstructionCache.WaitForSeconds(0.17f);
         }
-        //6분 29초
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 69.6; i++)
-        {
-            Spawn(4);
-            if(i % 2 == 0)
-            {
-                Spawn(7);
-            }
-            yield return YieldInstructionCache.WaitForSeconds(0.415f);
-        }
         //6분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 3540; i++)
+        for (int i = 0; i < 1770; i++)
         {
             if (i % 13 == 0)
             {
@@ -234,18 +231,18 @@ public class SpawnManager : MonoBehaviour
                 Spawn(7);
             }
             yield return null;
+            yield return null;
         }
         //7분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 1770; i++)
+        for (int i = 0; i < 885; i++)
         {
             Spawn(4);
-            yield return null;
-            yield return null;
+            yield return YieldInstructionCache.WaitForSeconds(0.066f);
         }
         //8분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 3540; i++)
+        for (int i = 0; i < 1680; i++)
         {
             if(i % 7 == 0)
             {
@@ -256,60 +253,59 @@ public class SpawnManager : MonoBehaviour
                 Spawn(7);
             }
             yield return null;
+            yield return null;
         }
         //9분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
         Spawn(10);
-        for (int i = 0; i < 264; i++)
+        for (int i = 0; i < 132; i++)
         {
             Spawn(5);
-            yield return YieldInstructionCache.WaitForSeconds(0.17f);
+            yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
         //10분 44초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 264; i++)
+        for (int i = 0; i < 132; i++)
         {
             Spawn(5);
-            if (i % 18 == 0)
+            if (i % 13 == 0)
             {
                 Spawn(8);
             }
-            yield return YieldInstructionCache.WaitForSeconds(0.17f);
+            yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
         // 11분 29초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 87; i++)
+        for (int i = 0; i <43.5; i++)
         {
             Spawn(5);
             if (i % 2 == 0)
             {
                 Spawn(8);
             }
-            yield return YieldInstructionCache.WaitForSeconds(0.33f);
+            yield return YieldInstructionCache.WaitForSeconds(0.66f);
         }
         // 11분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 1770; i++)
+        for (int i = 0; i < 885; i++)
         {
             Spawn(5);
-            yield return null;
-            yield return null;
+            yield return YieldInstructionCache.WaitForSeconds(0.066f);
         }
         // 12분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 1770; i++)
+        for (int i = 0; i < 885; i++)
         {
             Spawn(5);
             if(i % 30 == 0)
             {
                 Spawn(8);
             }
-            yield return null;
-            yield return null;
+            yield return YieldInstructionCache.WaitForSeconds(0.066f);
         }
         // 13분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 590; i++)
+        for (int i = 0; i < 295; i++)
         {
             Spawn(3);
             Spawn(4);
@@ -320,10 +316,10 @@ public class SpawnManager : MonoBehaviour
                 Spawn(7);
                 Spawn(8);
             }
-            yield return YieldInstructionCache.WaitForSeconds(0.1f);
+            yield return YieldInstructionCache.WaitForSeconds(0.2f);
         }
         // 14분 59초
-        */
+ 
     }
 
     private IEnumerator SpawnGuvnor()

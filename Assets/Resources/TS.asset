@@ -2705,7 +2705,7 @@ MonoBehaviour:
     Wind_Cut: 0
     Phase_2_HP: 0
     Phase_3_HP: 0
-    Drop_Exp: 1
+    Drop_Exp: 2
     Groggy_HP: 0
     Stagger_Mul: 0
   - ID: 1001
@@ -2728,7 +2728,7 @@ MonoBehaviour:
     Wind_Cut: 0
     Phase_2_HP: 0
     Phase_3_HP: 0
-    Drop_Exp: 2
+    Drop_Exp: 4
     Groggy_HP: 0
     Stagger_Mul: 0
   - ID: 1002
@@ -2751,7 +2751,7 @@ MonoBehaviour:
     Wind_Cut: 0
     Phase_2_HP: 0
     Phase_3_HP: 0
-    Drop_Exp: 3
+    Drop_Exp: 6
     Groggy_HP: 0
     Stagger_Mul: 0
   - ID: 2000
@@ -2774,7 +2774,7 @@ MonoBehaviour:
     Wind_Cut: 0
     Phase_2_HP: 0
     Phase_3_HP: 0
-    Drop_Exp: 20
+    Drop_Exp: 40
     Groggy_HP: 0
     Stagger_Mul: 0
   - ID: 2001
@@ -2797,7 +2797,7 @@ MonoBehaviour:
     Wind_Cut: 0
     Phase_2_HP: 0
     Phase_3_HP: 0
-    Drop_Exp: 40
+    Drop_Exp: 80
     Groggy_HP: 0
     Stagger_Mul: 0
   - ID: 2002
@@ -2820,7 +2820,7 @@ MonoBehaviour:
     Wind_Cut: 0
     Phase_2_HP: 0
     Phase_3_HP: 0
-    Drop_Exp: 60
+    Drop_Exp: 120
     Groggy_HP: 0
     Stagger_Mul: 0
   - ID: 3000
