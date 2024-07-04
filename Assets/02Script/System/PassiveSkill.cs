@@ -29,7 +29,9 @@ public class PassiveSkill : MonoBehaviour
     {
         key = passive.ID;
         level = 1;
-        info = passive;
+        info = new TableEntitiy_Passive_Skill();
+        info.Base_Figure = passive.Base_Figure;
+        info.Increase_Value = passive.Increase_Value;
         switch(passive.Passive_Type)
         {
             case 1:
