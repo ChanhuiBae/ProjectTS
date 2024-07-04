@@ -76,14 +76,20 @@ public class Pattern : MonoBehaviour
 
     private void HitUp()
     {
-        Debug.Log(current_hit + "pre" + colliders.Count);
+        if(current_hit > colliders.Count)
+        {
+            return;
+        } 
         if (current_hit > 0)
         {
             colliders[current_hit-1].enabled = false;
         }
         current_hit++;
+        if (current_hit > colliders.Count)
+        {
+            return;
+        }
         colliders[current_hit-1].enabled = true;
-        Debug.Log(current_hit + "cur" + colliders.Count);
     }
 
     private IEnumerator CountHit()

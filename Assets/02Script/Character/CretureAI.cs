@@ -72,7 +72,6 @@ public class CretureAI : MonoBehaviour
         {
             patterns.Add(transform.GetComponent<Pattern>());
         }
-        Debug.Log("Patterns" + patterns.Count);
         foreach (Pattern pattern in patterns)
         {
             pattern.Init(creature.GetKey());
@@ -347,10 +346,12 @@ public class CretureAI : MonoBehaviour
     public void SetPatternEnable(Pattern pattern)
     {
         currentPatterns[pattern] = true;
+        Debug.Log("enable"+pattern.GetKey());
     }
 
     public void SetPatternDisable(Pattern pattern)
     {
+        Debug.Log("disable"+pattern.GetKey());
         currentPatterns[pattern] = false;
         pattern.StartCoolTime();
     }

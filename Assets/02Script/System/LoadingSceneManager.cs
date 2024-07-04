@@ -10,6 +10,7 @@ public class LoadingSceneManager : MonoBehaviour
 
     private void Awake()
     {
+        QualitySettings.shadowDistance = 25;
         if (!GameObject.Find("Loading").TryGetComponent<Image>(out loadingBar))
             Debug.Log("LoadingSceneManager - Awake - Image");
         loadingBar.fillAmount = 0f;

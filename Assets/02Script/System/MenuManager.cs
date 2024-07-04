@@ -61,6 +61,7 @@ public class MenuManager : MonoBehaviour
 
     private void Awake()
     {
+        QualitySettings.shadowDistance = 55;
         timeBackgroun = GameObject.Find("TimeBackground");
         if (!GameObject.Find("GameTime").TryGetComponent<TextMeshProUGUI>(out countdown))
         {
