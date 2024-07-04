@@ -26,7 +26,7 @@ public class FloatingDamage : MonoBehaviour, IPoolObject
             Debug.Log("FloatingDamage - Awake - TextMeshProUGUI");
         }
     }
-    public void Init(Vector3 pos,float damage)
+    public void Init(Vector3 pos,int damage)
     {
         rect.position = Camera.main.WorldToScreenPoint(pos + Vector3.up);
         text.text = damage.ToString();

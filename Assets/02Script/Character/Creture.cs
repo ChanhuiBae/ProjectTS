@@ -152,7 +152,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
                 }
                 if (GameManager.Inst.OnDamageText)
                 {
-                    spawnManager.SpawnFloatingDamage(transform.position, damage);
+                    spawnManager.SpawnFloatingDamage(transform.position, (int)damage);
                 }
                 return true;
             }
@@ -179,7 +179,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
                 }
                 if (GameManager.Inst.OnDamageText)
                 {
-                    spawnManager.SpawnFloatingDamage(transform.position, damage);
+                    spawnManager.SpawnFloatingDamage(transform.position, (int)damage);
                 }
                 return true;
             }
