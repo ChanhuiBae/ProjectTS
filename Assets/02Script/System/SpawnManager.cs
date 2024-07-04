@@ -65,7 +65,7 @@ public class SpawnManager : MonoBehaviour
         outline.center = player.transform.position;
     }
 
-    private void Spawn(int num)
+    private void Spawn(int num, int id, CretureType type)
     {
         Creture creature;
 
@@ -79,28 +79,28 @@ public class SpawnManager : MonoBehaviour
         switch (spawn)
         {
             case 1:
-                creature.Init(spawn1 + player.transform.position, 1000, CretureType.Normal);
+                creature.Init(spawn1 + player.transform.position, id, type);
                 break;
             case 2:
-                creature.Init(spawn2 + player.transform.position, 1000, CretureType.Normal);
+                creature.Init(spawn2 + player.transform.position, id, type);
                 break;
             case 3:
-                creature.Init(spawn3 + player.transform.position, 1000, CretureType.Normal);
+                creature.Init(spawn3 + player.transform.position, id, type);
                 break;
             case 4:
-                creature.Init(spawn4 + player.transform.position, 1000, CretureType.Normal);
+                creature.Init(spawn4 + player.transform.position, id, type); 
                 break;
             case 5:
-                creature.Init(spawn5 + player.transform.position, 1000, CretureType.Normal);
+                creature.Init(spawn5 + player.transform.position, id, type);
                 break;
             case 6:
-                creature.Init(spawn6 + player.transform.position, 1000, CretureType.Normal);
+                creature.Init(spawn6 + player.transform.position, id, type);
                 break;
             case 7:
-                creature.Init(spawn7 + player.transform.position, 1000, CretureType.Normal);
+                creature.Init(spawn7 + player.transform.position, id, type);
                 break;
             case 8:
-                creature.Init(spawn8 + player.transform.position, 1000, CretureType.Normal);
+                creature.Init(spawn8 + player.transform.position, id, type);
                 break;
         }
         spawn += 3;
@@ -120,17 +120,17 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < 132; i++)
         {
-            Spawn(3);
+            Spawn(3, 1000, CretureType.Normal);
             yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
         //00분 44초
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i < 132; i++)
         {
-            Spawn(3);
+            Spawn(3, 1000, CretureType.Normal);
             if (i % 13 == 0)
             {
-                Spawn(6);
+                Spawn(6, 2000, CretureType.Noble);
             }
             yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
@@ -138,10 +138,10 @@ public class SpawnManager : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for(int i = 0; i < 29; i++)
         {
-            Spawn(3);
-            if(i % 2 == 0)
+            Spawn(3, 1000, CretureType.Normal);
+            if (i % 2 == 0)
             {
-                Spawn(6);
+                Spawn(6, 2000, CretureType.Noble);
             }
             yield return YieldInstructionCache.WaitForSeconds(1f);
         }
@@ -149,14 +149,14 @@ public class SpawnManager : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i < 118; i++)
         {
-            Spawn(3);
+            Spawn(3, 1000, CretureType.Normal);
             if (i % 2 == 0)
             {
-                Spawn(4);
+                Spawn(4, 1001, CretureType.Normal);
             }
             if (i % 20 == 0)
             {
-                Spawn(6);
+                Spawn(6, 2000, CretureType.Noble);
             }
             yield return YieldInstructionCache.WaitForSeconds(0.5f);
         }
@@ -164,7 +164,7 @@ public class SpawnManager : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i < 590; i++)
         {
-            Spawn(3);
+            Spawn(3, 1000, CretureType.Normal);
             yield return YieldInstructionCache.WaitForSeconds(0.1f);
         }
         //03분 59초
@@ -173,30 +173,30 @@ public class SpawnManager : MonoBehaviour
         {
             if(i % 4 == 0)
             {
-                Spawn(3);
+                Spawn(3, 1000, CretureType.Normal);
             }
             if(i % 75 == 0)
             {
-                Spawn(6);
+                Spawn(6, 2000, CretureType.Noble);
             }
             yield return YieldInstructionCache.WaitForSeconds(0.066f);
         }
         //04분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        Spawn(9);
+        Spawn(9, 3000, CretureType.Swarm_Boss);
         for (int i = 0; i < 132; i++)
         {
-            Spawn(4);
+            Spawn(4, 1001, CretureType.Normal);
             yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
         //5분 44초
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i < 132; i++)
         {
-            Spawn(4);
-            if(i % 13 == 0)
+            Spawn(4, 1001, CretureType.Normal);
+            if (i % 13 == 0)
             {
-                Spawn(7);
+                Spawn(7, 2001, CretureType.Noble);
             }
             yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
@@ -206,11 +206,11 @@ public class SpawnManager : MonoBehaviour
         {
             if (i % 5 == 0)
             {
-                Spawn(4);
+                Spawn(4, 1001, CretureType.Normal);
             }
             if (i % 10 == 0)
             {
-                Spawn(7);
+                Spawn(7, 2001, CretureType.Noble);
             }
             yield return YieldInstructionCache.WaitForSeconds(0.17f);
         }
@@ -220,15 +220,15 @@ public class SpawnManager : MonoBehaviour
         {
             if (i % 13 == 0)
             {
-                Spawn(4);
+                Spawn(4, 1001, CretureType.Normal);
             }
             if (i % 25 == 0)
             {
-                Spawn(5);
+                Spawn(5, 1002, CretureType.Normal);
             }
             if(i % 280 == 0)
             {
-                Spawn(7);
+                Spawn(7, 2001, CretureType.Noble);
             }
             yield return null;
             yield return null;
@@ -237,7 +237,7 @@ public class SpawnManager : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i < 885; i++)
         {
-            Spawn(4);
+            Spawn(4, 1001, CretureType.Normal);
             yield return YieldInstructionCache.WaitForSeconds(0.066f);
         }
         //8분 59초
@@ -246,31 +246,31 @@ public class SpawnManager : MonoBehaviour
         {
             if(i % 7 == 0)
             {
-                Spawn(4);
+                Spawn(4, 1001, CretureType.Normal);
             }
             if(i % 135 == 0)
             {
-                Spawn(7);
+                Spawn(7, 2001, CretureType.Noble);
             }
             yield return null;
             yield return null;
         }
         //9분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        Spawn(10);
+        Spawn(10, 3001, CretureType.Swarm_Boss);
         for (int i = 0; i < 132; i++)
         {
-            Spawn(5);
+            Spawn(5, 1002, CretureType.Normal);
             yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
         //10분 44초
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i < 132; i++)
         {
-            Spawn(5);
+            Spawn(5, 1002, CretureType.Normal);
             if (i % 13 == 0)
             {
-                Spawn(8);
+                Spawn(8, 2002, CretureType.Noble);
             }
             yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
@@ -278,10 +278,10 @@ public class SpawnManager : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i <43.5; i++)
         {
-            Spawn(5);
+            Spawn(5, 1002, CretureType.Normal);
             if (i % 2 == 0)
             {
-                Spawn(8);
+                Spawn(8, 2002, CretureType.Noble);
             }
             yield return YieldInstructionCache.WaitForSeconds(0.66f);
         }
@@ -289,17 +289,17 @@ public class SpawnManager : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i < 885; i++)
         {
-            Spawn(5);
+            Spawn(5, 1002, CretureType.Normal);
             yield return YieldInstructionCache.WaitForSeconds(0.066f);
         }
         // 12분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i < 885; i++)
         {
-            Spawn(5);
-            if(i % 30 == 0)
+            Spawn(5, 1002, CretureType.Normal);
+            if (i % 30 == 0)
             {
-                Spawn(8);
+                Spawn(8, 2002, CretureType.Noble);
             }
             yield return YieldInstructionCache.WaitForSeconds(0.066f);
         }
@@ -307,14 +307,14 @@ public class SpawnManager : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i < 295; i++)
         {
-            Spawn(3);
-            Spawn(4);
-            Spawn(5);
+            Spawn(3, 1000, CretureType.Normal);
+            Spawn(4, 1001, CretureType.Normal);
+            Spawn(5, 1002, CretureType.Normal);
             if (i % 10 == 0)
             {
-                Spawn(6);
-                Spawn(7);
-                Spawn(8);
+                Spawn(6, 2000, CretureType.Noble);
+                Spawn(7, 2001, CretureType.Noble);
+                Spawn(8, 2002, CretureType.Noble);
             }
             yield return YieldInstructionCache.WaitForSeconds(0.2f);
         }
@@ -325,7 +325,7 @@ public class SpawnManager : MonoBehaviour
     private IEnumerator SpawnGuvnor()
     {
         yield return YieldInstructionCache.WaitForSeconds(900);
-        Spawn(11);
+        Spawn(11,4000, CretureType.Guvnor);
     }
 
     public void SpawnHPItem(Vector3 pos)
