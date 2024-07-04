@@ -23,6 +23,8 @@ public class MenuManager : MonoBehaviour
     private int maxUltimateValue;
     private float currentUltimateValue;
 
+    private TextMeshProUGUI level;
+
     private GameObject levelupPopup;
     private Choice selection1;
     private Choice selection2;
@@ -94,8 +96,24 @@ public class MenuManager : MonoBehaviour
         {
             Debug.Log("MenuManager - Awake - UltimateButton");
         }
+        if (!GameObject.Find("Passive1I").TryGetComponent<Image>(out passive1))
+        {
+            Debug.Log("MenuManager - Awake - Image");
+        }
+        if (!GameObject.Find("Passive2I").TryGetComponent<Image>(out passive2))
+        {
+            Debug.Log("MenuManager - Awake - Image");
+        }
+        if (!GameObject.Find("Passive3I").TryGetComponent<Image>(out passive3))
+        {
+            Debug.Log("MenuManager - Awake - Image");
+        }
 
 
+        if (!GameObject.Find("Level").TryGetComponent<TextMeshProUGUI>(out level))
+        {
+            Debug.Log("MenuManager - Awake - TextMeshProUGUI");
+        }
 
         levelupPopup = GameObject.Find("LevelUpPopup");
         if(levelupPopup != null)
@@ -116,9 +134,13 @@ public class MenuManager : MonoBehaviour
             {
                 Debug.Log("MenuManager - Awake - Button");
             }
+            else
+            {
+                selectBtn.onClick.AddListener(Select);
+            }
             levelupPopup.SetActive(false);
         }
-
+        UsingSkills = new List<int>();
 
         if (!GameObject.Find("Pause").TryGetComponent<Button>(out pause))
         {
@@ -379,12 +401,162 @@ public class MenuManager : MonoBehaviour
         killCount.text = value.ToString();
     }
 
-    public void SetLevelUpPopup(int playerLevel)
+    public void SetSkillList(int weaponID)
     {
-
+        TableEntity_Weapon weapon;
+        GameManager.Inst.GetWeapon(weaponID, out weapon);
+        int skillID = weaponID;
+        for (int i = 0; i < weapon.Skill; i++)
+        {
+            if(i == 3)
+            {
+                skillID = weaponID / 10 - 2;
+            }
+            if(i < 6)
+            {
+                UsingSkills.Add(skillID + i);
+                UsingSkills.Add(0);
+            }
+            else
+            {
+                UsingSkills.Add(skillID + i + 27);
+                UsingSkills.Add(0);
+            }
+        }
     }
 
+    public void SetLevelUpPopup(int playerLevel)
+    {
+        level.text = "Lv"+playerLevel.ToString();
+        levelupPopup.SetActive(true);
+        choice = 0;
+        int pick1 = Random.Range(2, UsingSkills.Count -5);
+        int pick2;
+        int pick3;
+        if(pick1 % 2 != 0)
+        {
+            pick1++;
+        }
+        pick2 = Random.Range(0, pick1 - 1);
+        if (pick2 % 2 != 0)
+        {
+            pick2--;
+        }
+        pick3 = Random.Range(pick1 + 2, UsingSkills.Count - 1);
+        if(pick3 % 2 != 0)
+        {
+            pick3--;
+        }
+        SetSelection(selection1, pick1);
+        SetSelection(selection2, pick2);
+        SetSelection(selection3, pick3);
+        Time.timeScale = 0;
+    }
 
+    private void SetSelection(Choice selection, int pick)
+    {
+        if (UsingSkills[pick+1] == 0)
+        {
+            if(pick < 6)
+            {
+                selection.SetNewPassive(UsingSkills[pick]);
+            }
+            else
+            {
+                selection.SetNewSkill(UsingSkills[pick]);
+            }
+        }
+        else
+        {
+            if (pick < 6)
+            {
+                selection.LevelUpPassive(UsingSkills[pick], UsingSkills[pick+1]);
+            }
+            else
+            {
+                selection.LevelUpSkill(UsingSkills[pick], UsingSkills[pick + 1]);
+            }
+        }
+    }
+    public void SetChoice(int value)
+    {
+        choice = value;
+        selection1.SetPickLine(value);
+        selection2.SetPickLine(value);
+        selection3.SetPickLine(value);
+    }
+
+    private void Select()
+    {
+        Time.timeScale = 1;
+        Debug.Log(choice);
+        if(choice == 0)
+        {
+            return;
+        }
+        else
+        {
+            for(int i = 0; i < UsingSkills.Count; i++)
+            {
+                if (UsingSkills[i] == choice)
+                {
+                    if (UsingSkills[i+1] == 0)
+                    {
+                        if(i < 6)
+                        {
+                            GameManager.Inst.SetPassive(choice % 10 + 1, choice);
+                        }
+                        else
+                        {
+                            if(choice % 100 > 30)
+                            {
+                                if(choice % 10 == 1)
+                                {
+                                    GameManager.Inst.SetSkill(4, choice);
+                                }
+                                else
+                                {
+                                    GameManager.Inst.SetSkill(41, choice);
+                                }
+                            }
+                            else
+                            {
+                                GameManager.Inst.SetSkill(choice % 10, choice);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if(i < 6)
+                        {
+                            GameManager.Inst.LevelUpPassive(choice % 10 + 1, choice);
+                        }
+                        else
+                        {
+                            if (choice % 100 > 30)
+                            {
+                                if (choice % 10 == 1)
+                                {
+                                    GameManager.Inst.LevelUpSkill(4, choice, UsingSkills[i+1]);
+                                }
+                                else
+                                {
+                                    GameManager.Inst.LevelUpSkill(41, choice, UsingSkills[i + 1]);
+                                }
+                            }
+                            else
+                            {
+                                GameManager.Inst.LevelUpSkill(choice % 10, choice, UsingSkills[i + 1]);
+                            }
+                        }
+                    }
+                    UsingSkills[i + 1] += 1;
+                    break;
+                }
+            }
+        }
+        levelupPopup.SetActive(false);
+    }
 
     private void PressPause()
     {

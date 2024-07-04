@@ -592,9 +592,10 @@ public class PlayerController : MonoBehaviour, IDamage
         currentEXP += value;
         if(currentEXP > maxEXP)
         {
+            level++;
+            SetMaxEXP();
             currentEXP = 0;
-            Time.timeScale = 0;
-            //GameManager.Inst.menuManager.
+            GameManager.Inst.menuManager.SetLevelUpPopup(level);
         }
         expFill.fillAmount = currentEXP / maxEXP;
     }

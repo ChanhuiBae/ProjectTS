@@ -296,6 +296,7 @@ public class GameManager : Singleton<GameManager>
             player.Init(GetWeaponType(wsData.WeaponID));
             if(SceneManager.GetActiveScene().buildIndex > 2)
             {
+                menuManager.SetSkillList(wsData.WeaponID);
                 if (wsData.basic_ID != 0)
                 {
                     TableEntity_Skill skill;

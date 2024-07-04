@@ -11,6 +11,7 @@ public class Choice : MonoBehaviour
     private TextMeshProUGUI name;
     private TextMeshProUGUI description;
     private Button btn;
+    private int id;
     private bool isLevelUp;
 
     private void Awake()
@@ -27,11 +28,11 @@ public class Choice : MonoBehaviour
         {
             Debug.Log("Choice - Awake - Image");
         }
-        if(transform.Find("Name").TryGetComponent<TextMeshProUGUI>(out name))
+        if(!transform.Find("Name").TryGetComponent<TextMeshProUGUI>(out name))
         {
             Debug.Log("Choice - Awake - TextMeshProUGUI");
         }
-        if (transform.Find("Description").TryGetComponent<TextMeshProUGUI>(out description))
+        if (!transform.Find("Description").TryGetComponent<TextMeshProUGUI>(out description))
         {
             Debug.Log("Choice - Awake - TextMeshProUGUI");
         }
@@ -48,16 +49,19 @@ public class Choice : MonoBehaviour
 
     public void SetNewSkill(int id)
     {
+        this.id = id;
         isLevelUp = false;
         TableEntity_Skill skill;
         GameManager.Inst.GetSkillData(id, out skill);
-        icon.sprite = Resources.Load<Sprite>("Image/" + skill.Skill_Name_Eng);
+        Debug.Log(id);
+        icon.sprite = Resources.Load<Sprite>("Image/"+ skill.Skill_Name_Eng);
         name.text = skill.Skill_Name;
         description.text = skill.Explanation;
     }
 
     public void SetNewPassive(int id)
     {
+        this.id = id;
         isLevelUp = false;
         TableEntitiy_Passive_Skill skill;
         GameManager.Inst.GetPassiveData(id, out skill);
@@ -68,6 +72,7 @@ public class Choice : MonoBehaviour
 
     public void LevelUpSkill(int id, int level)
     {
+        this.id = id;
         isLevelUp = true;
         TableEntity_Skill skill;
         GameManager.Inst.GetSkillData(id, out skill);
@@ -78,6 +83,7 @@ public class Choice : MonoBehaviour
 
     public void LevelUpPassive(int id, int level)
     {
+        this.id = id;
         isLevelUp = true;
         TableEntitiy_Passive_Skill skill;
         GameManager.Inst.GetPassiveData(id, out skill);
@@ -88,6 +94,18 @@ public class Choice : MonoBehaviour
 
     private void PickUp()
     {
-        
+        GameManager.Inst.menuManager.SetChoice(id);
+    }
+
+    public void SetPickLine(int id)
+    {
+        if(this.id == id)
+        {
+            pick.enabled = true;
+        }
+        else
+        {
+            pick.enabled = false;
+        }
     }
 }
