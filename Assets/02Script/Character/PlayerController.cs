@@ -59,7 +59,9 @@ public class PlayerController : MonoBehaviour, IDamage
     }
 
     private float currentEXP;
+    private float maxEXP;
     private Image expFill;
+    private int level;
 
     private Vector3 direction;
     private Vector3 look;
@@ -166,9 +168,11 @@ public class PlayerController : MonoBehaviour, IDamage
             isInvincibility = false;
             MaxHPpassive = 0;
             MaxHP = GameManager.Inst.PlayerInfo.Max_HP;
+            level = 1;
             currentHP = GameManager.Inst.PlayerInfo.Max_HP;
             currentEXP = 0;
             state = State.Idle;
+            SetMaxEXP();
             expFill.fillAmount = 0;
             hpFill.fillAmount = 1;
             isDie = false;
@@ -265,6 +269,17 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
+    private void SetMaxEXP()
+    {
+        if(level < 7)
+        {
+            maxEXP = 10 + 12*(level - 1);
+        }
+        else
+        {
+            maxEXP = 150 + 100 * (level - 7);
+        }
+    }
 
     public State GetCurrentState()
     {
@@ -575,13 +590,13 @@ public class PlayerController : MonoBehaviour, IDamage
     public void GetEXP(float value)
     {
         currentEXP += value;
-        if(currentEXP > GameManager.Inst.PlayerInfo.Exp_Need)
+        if(currentEXP > maxEXP)
         {
             currentEXP = 0;
             Time.timeScale = 0;
             //GameManager.Inst.menuManager.
         }
-        expFill.fillAmount = currentEXP / GameManager.Inst.PlayerInfo.Exp_Need;
+        expFill.fillAmount = currentEXP / maxEXP;
     }
 
     public void LookAttackArea()
