@@ -256,7 +256,10 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
                     y = Mathf.Sin(theta) * dragDistance;
                 }
                 icon.rectTransform.localPosition = new Vector2(x, y);
-                bar.rectTransform.localPosition = new Vector2(x, y);
+                if(bar != null)
+                {
+                    bar.rectTransform.localPosition = new Vector2(x, y);
+                }
             }
             direction = new Vector3(x, 0, y);
             if (maxStack != 0)

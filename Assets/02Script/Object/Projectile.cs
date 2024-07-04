@@ -116,7 +116,6 @@ public class Projectile : MonoBehaviour, IPoolObject
                 if (other.tag == "Creature")
                 {
                     skillManager.TakeDamageByKey(AttackType.Projectile, key, other);
-                    skillManager.TakeProjectile(poolName, this);
                 }
                 if (other.tag == "Ground")
                 {
