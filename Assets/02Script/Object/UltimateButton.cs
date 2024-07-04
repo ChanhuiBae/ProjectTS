@@ -156,8 +156,6 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
             {
                 skillManager.AttackAnim();
                 skillManager.DropMissile();
-
-                SetUaltimate(1);  // todo: delete. this is using for test.
             }
         }
     }
@@ -344,8 +342,6 @@ public class UltimateButton : MonoBehaviour, IDragHandler, IEndDragHandler
         icon.transform.SetSiblingIndex(0);
         icon.sprite = Resources.Load<Sprite>("Image/" + name);
         trigger.enabled = false;
-
-        SetUaltimate(1);  // todo: delete. this is using for test.
     }
 
 }

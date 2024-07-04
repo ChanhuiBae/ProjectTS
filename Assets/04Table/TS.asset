@@ -1105,7 +1105,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 20
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1121,7 +1121,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 20
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1137,7 +1137,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 18
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1153,7 +1153,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 18
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1169,7 +1169,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 16
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1185,7 +1185,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 16
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1201,7 +1201,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 14
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1217,7 +1217,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 14
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1233,7 +1233,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 12
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1249,7 +1249,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 12
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1265,7 +1265,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 20
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1281,7 +1281,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 20
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1297,7 +1297,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 18
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1313,7 +1313,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 18
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1329,7 +1329,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 16
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1345,7 +1345,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 16
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1361,7 +1361,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 14
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1377,7 +1377,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 14
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1393,7 +1393,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 12
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1409,7 +1409,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 12
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1425,7 +1425,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 20
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1441,7 +1441,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 20
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1457,7 +1457,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 1
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 20
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1473,7 +1473,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 18
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1489,7 +1489,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 18
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1505,7 +1505,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 1
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 18
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1521,7 +1521,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 16
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1537,7 +1537,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 16
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1553,7 +1553,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 1
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 16
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1569,7 +1569,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 14
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1585,7 +1585,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 14
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1601,7 +1601,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 1
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 14
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1617,7 +1617,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 12
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1633,7 +1633,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 12
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1649,7 +1649,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 1
     Knockback_Distance: 10
-    Cool_Time: 1
+    Cool_Time: 12
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1665,7 +1665,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 1
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 5
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1681,7 +1681,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 1
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 4.5
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1697,7 +1697,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 1
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 4
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1713,7 +1713,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 1
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 3.5
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1729,7 +1729,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 1
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 3
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1745,7 +1745,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 13
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1761,7 +1761,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 13
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1777,7 +1777,7 @@ MonoBehaviour:
     Stun_Time: 1
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 13
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1793,7 +1793,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 12.5
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1809,7 +1809,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 12.5
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1825,7 +1825,7 @@ MonoBehaviour:
     Stun_Time: 1
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 12.5
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1841,7 +1841,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 12
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1857,7 +1857,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 12
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1873,7 +1873,7 @@ MonoBehaviour:
     Stun_Time: 1
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 12
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1889,7 +1889,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 11
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1905,7 +1905,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 11
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1921,7 +1921,7 @@ MonoBehaviour:
     Stun_Time: 1
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 11
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1937,7 +1937,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 10
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1953,7 +1953,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 10
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1969,7 +1969,7 @@ MonoBehaviour:
     Stun_Time: 1
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 10
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -1985,7 +1985,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0.5
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 0
     Need_Damage: 60000
     Invincible_Time: 1.5
     Buff_A: 0
@@ -2001,7 +2001,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0.5
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 0
     Need_Damage: 55000
     Invincible_Time: 1.5
     Buff_A: 0
@@ -2017,7 +2017,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0.5
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 0
     Need_Damage: 50000
     Invincible_Time: 1.5
     Buff_A: 0
@@ -2033,7 +2033,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 0
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2049,7 +2049,7 @@ MonoBehaviour:
     Stun_Time: 2
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 0
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2065,7 +2065,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 0
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2081,7 +2081,7 @@ MonoBehaviour:
     Stun_Time: 2
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 0
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2097,7 +2097,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 0
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2113,7 +2113,7 @@ MonoBehaviour:
     Stun_Time: 2
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 0
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2145,7 +2145,7 @@ MonoBehaviour:
     Stun_Time: 0.5
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 10
     Need_Damage: 0
     Invincible_Time: 0.5
     Buff_A: 0
@@ -2161,7 +2161,7 @@ MonoBehaviour:
     Stun_Time: 0.75
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 8
     Need_Damage: 0
     Invincible_Time: 0.5
     Buff_A: 0
@@ -2177,7 +2177,7 @@ MonoBehaviour:
     Stun_Time: 1
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 7
     Need_Damage: 0
     Invincible_Time: 0.5
     Buff_A: 0
@@ -2193,7 +2193,7 @@ MonoBehaviour:
     Stun_Time: 1.25
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 6
     Need_Damage: 0
     Invincible_Time: 0.5
     Buff_A: 0
@@ -2209,7 +2209,7 @@ MonoBehaviour:
     Stun_Time: 1.5
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 5
     Need_Damage: 0
     Invincible_Time: 0.5
     Buff_A: 0
@@ -2225,7 +2225,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 15
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2241,7 +2241,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 14
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2257,7 +2257,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 13
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2273,7 +2273,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 12
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2289,7 +2289,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 10
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2305,7 +2305,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 3
-    Cool_Time: 1
+    Cool_Time: 5
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2321,7 +2321,7 @@ MonoBehaviour:
     Stun_Time: 1
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 5
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2337,7 +2337,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 3
-    Cool_Time: 1
+    Cool_Time: 4.5
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2353,7 +2353,7 @@ MonoBehaviour:
     Stun_Time: 1
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 4.5
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2369,7 +2369,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 3
-    Cool_Time: 1
+    Cool_Time: 4
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2385,7 +2385,7 @@ MonoBehaviour:
     Stun_Time: 1
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 4
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2401,7 +2401,7 @@ MonoBehaviour:
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 3
-    Cool_Time: 1
+    Cool_Time: 3.5
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2417,7 +2417,7 @@ MonoBehaviour:
     Stun_Time: 1
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 3.5
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2433,7 +2433,7 @@ MonoBehaviour:
     Stun_Time: 1
     Airborne_Time: 0
     Knockback_Distance: 3
-    Cool_Time: 1
+    Cool_Time: 3
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0
@@ -2449,7 +2449,7 @@ MonoBehaviour:
     Stun_Time: 1
     Airborne_Time: 0
     Knockback_Distance: 0
-    Cool_Time: 1
+    Cool_Time: 3
     Need_Damage: 0
     Invincible_Time: 0
     Buff_A: 0

@@ -974,7 +974,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1204391273779593063, guid: 9c2b9540862487943b72d86ec2f81da4,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: fbe6e9cffca737240b97af8977ae02ec, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1102,19 +1102,11 @@ MonoBehaviour:
     Adaptation: 0
     Available_Point: 0
     Exp_Need: 0
+    ArmorID: 0
     inventory:
       items: []
-    WeaponID: 0
-    ArmorID: 0
-    basic_ID: 0
-    skill1_ID: 0
-    connected1_ID: 0
-    skill2_ID: 0
-    connected2_ID: 0
-    skill3_ID: 0
-    connected3_ID: 0
-    ultimate_ID: 0
-    connectedU_ID: 0
+  menuManager: {fileID: 0}
+  skillManager: {fileID: 0}
 --- !u!4 &2130128400
 Transform:
   m_ObjectHideFlags: 0
