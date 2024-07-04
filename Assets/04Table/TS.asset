@@ -2651,7 +2651,7 @@ MonoBehaviour:
     Critical_Chance: 0
     Critical_Mag: 150
     Attack_Speed: 1
-    Skill: 8
+    Skill: 7
   - ID: 3000
     Type: 3
     Weight: 15

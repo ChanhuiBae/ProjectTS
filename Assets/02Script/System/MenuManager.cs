@@ -510,13 +510,12 @@ public class MenuManager : MonoBehaviour
                         {
                             if(choice % 100 > 30)
                             {
-                                if(choice % 10 == 1)
+                                GameManager.Inst.SetSkill(4, choice);
+                                TableEntity_Skill skill;
+                                GameManager.Inst.GetSkillData(choice, out skill);
+                                if(skill.Linked_Skill != 0)
                                 {
-                                    GameManager.Inst.SetSkill(4, choice);
-                                }
-                                else
-                                {
-                                    GameManager.Inst.SetSkill(41, choice);
+                                    GameManager.Inst.SetSkill(41, choice + 1);
                                 }
                             }
                             else
@@ -535,13 +534,12 @@ public class MenuManager : MonoBehaviour
                         {
                             if (choice % 100 > 30)
                             {
-                                if (choice % 10 == 1)
+                                GameManager.Inst.LevelUpSkill(4, choice, UsingSkills[i + 1]);
+                                TableEntity_Skill skill;
+                                GameManager.Inst.GetSkillData(choice,out skill);
+                                if(skill.Linked_Skill != 0)
                                 {
-                                    GameManager.Inst.LevelUpSkill(4, choice, UsingSkills[i+1]);
-                                }
-                                else
-                                {
-                                    GameManager.Inst.LevelUpSkill(41, choice, UsingSkills[i + 1]);
+                                    GameManager.Inst.LevelUpSkill(41, choice + 1, UsingSkills[i + 1]);
                                 }
                             }
                             else
