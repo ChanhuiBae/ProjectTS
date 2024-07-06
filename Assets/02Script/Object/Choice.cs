@@ -47,8 +47,14 @@ public class Choice : MonoBehaviour
         isLevelUp = false;
     }
 
+    public void NoChoice()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void SetNewSkill(int id)
     {
+        pick.enabled = false;
         this.id = id;
         isLevelUp = false;
         TableEntity_Skill skill;
@@ -56,11 +62,12 @@ public class Choice : MonoBehaviour
         Debug.Log(id);
         icon.sprite = Resources.Load<Sprite>("Image/"+ skill.Skill_Name_Eng);
         name.text = skill.Skill_Name;
-        description.text = skill.Explanation;
+        description.text = skill.Description;
     }
 
     public void SetNewPassive(int id)
     {
+        pick.enabled = false;
         this.id = id;
         isLevelUp = false;
         TableEntitiy_Passive_Skill skill;
@@ -72,6 +79,7 @@ public class Choice : MonoBehaviour
 
     public void LevelUpSkill(int id, int level)
     {
+        pick.enabled = false;
         this.id = id;
         isLevelUp = true;
         TableEntity_Skill skill;
@@ -83,6 +91,7 @@ public class Choice : MonoBehaviour
 
     public void LevelUpPassive(int id, int level)
     {
+        pick.enabled = false;
         this.id = id;
         isLevelUp = true;
         TableEntitiy_Passive_Skill skill;

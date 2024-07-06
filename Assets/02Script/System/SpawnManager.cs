@@ -113,10 +113,10 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnLogic()
     {
-        yield return null;
+        yield return null; 
         //Spawn(3);
         //Spawn(6);
-       // Spawn(10);
+        // Spawn(10);
 
         for (int i = 0; i < 132; i++)
         {

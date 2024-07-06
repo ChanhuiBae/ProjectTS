@@ -31,7 +31,14 @@ public class MenuManager : MonoBehaviour
     private Choice selection3;
     private Button selectBtn;
     private int choice;
-    private List<int> UsingSkills;
+    private List<int> allSkills;
+    private List<int> usingSkills;
+    private List<int> maxSkills;
+    private int priSkill;
+    private int priPassive;
+    private int listCount;
+    private List<int> list;
+
 
     private Button pause;
     private Image current;
@@ -140,7 +147,10 @@ public class MenuManager : MonoBehaviour
             }
             levelupPopup.SetActive(false);
         }
-        UsingSkills = new List<int>();
+        allSkills = new List<int>();
+        usingSkills = new List<int>();
+        maxSkills = new List<int>();
+        list = new List<int>();
 
         if (!GameObject.Find("Pause").TryGetComponent<Button>(out pause))
         {
@@ -406,6 +416,7 @@ public class MenuManager : MonoBehaviour
         TableEntity_Weapon weapon;
         GameManager.Inst.GetWeapon(weaponID, out weapon);
         int skillID = weaponID;
+
         for (int i = 0; i < weapon.Skill; i++)
         {
             if(i == 3)
@@ -414,14 +425,53 @@ public class MenuManager : MonoBehaviour
             }
             if(i < 6)
             {
-                UsingSkills.Add(skillID + i);
-                UsingSkills.Add(0);
+                allSkills.Add(skillID + i);
+                usingSkills.Add(0);
+                maxSkills.Add(5);
             }
             else
             {
-                UsingSkills.Add(skillID + i + 27);
-                UsingSkills.Add(0);
+                allSkills.Add(skillID + i + 27);
+                usingSkills.Add(0);
+                maxSkills.Add(3);
             }
+        }
+        TableEntity_Skill ultimate;
+        GameManager.Inst.GetSkillData(allSkills[allSkills.Count - 1], out ultimate);
+        for(int i = 0; i < allSkills.Count; i++)
+        {
+            if (allSkills[i] == ultimate.Primal_Active)
+            {
+                priSkill = i;
+            }
+            else if (allSkills[i] == ultimate.Primal_Passive) 
+            { 
+                priPassive = i;
+            }
+        }
+    }
+
+    private int GetIndexAtAllSkills(int value)
+    {
+        for(int i = 0; i < allSkills.Count; i++)
+        {
+            if (allSkills[i] == value)
+                return i;
+        }
+        return -1;
+    }
+
+    private int PickSkill()
+    {
+        int pick = Random.Range(0, list.Count-1);
+        int i = GetIndexAtAllSkills(list[pick]);
+        if(usingSkills[i] < maxSkills[i]) 
+        {
+            return list[pick];
+        }
+        else
+        {
+            return PickSkill();
         }
     }
 
@@ -430,51 +480,76 @@ public class MenuManager : MonoBehaviour
         level.text = "Lv"+playerLevel.ToString();
         levelupPopup.SetActive(true);
         choice = 0;
-        int pick1 = Random.Range(2, UsingSkills.Count -5);
-        int pick2;
-        int pick3;
-        if(pick1 % 2 != 0)
+        list.Clear();
+        if (usingSkills[priSkill] == maxSkills[priSkill] && usingSkills[priPassive] == maxSkills[priPassive])
         {
-            pick1++;
+            listCount = allSkills.Count+1;
         }
-        pick2 = Random.Range(0, pick1 - 1);
-        if (pick2 % 2 != 0)
+        else
         {
-            pick2--;
+            listCount = allSkills.Count;
         }
-        pick3 = Random.Range(pick1 + 2, UsingSkills.Count - 1);
-        if(pick3 % 2 != 0)
+        for (int i =0; i < listCount; i++)
         {
-            pick3--;
+            if (usingSkills[i] != maxSkills[i])
+            {
+                list.Add(allSkills[i]);
+            }
         }
-        SetSelection(selection1, pick1);
-        SetSelection(selection2, pick2);
-        SetSelection(selection3, pick3);
+
+        int pick1 = -1;
+        int pick2 = -1;
+        int pick3 = -1;
+
+        if (list.Count > 0)
+        {
+            pick1 = PickSkill();
+            Debug.Log(pick1);
+            list.Remove(pick1);
+        }
+        if (list.Count > 0)
+        {
+            pick2 = PickSkill();
+            list.Remove(pick2);
+        }
+        if(list.Count > 0)
+        {
+            pick3 = PickSkill();
+        }
+
+        SetSelection(selection1, GetIndexAtAllSkills(pick1));
+        SetSelection(selection2, GetIndexAtAllSkills(pick2));
+        SetSelection(selection3, GetIndexAtAllSkills(pick3));
         Time.timeScale = 0;
     }
 
     private void SetSelection(Choice selection, int pick)
     {
-        if (UsingSkills[pick+1] == 0)
+        if(pick == -1)
         {
-            if(pick < 6)
+            selection.NoChoice();
+            return;
+        }
+        if (usingSkills[pick] == 0)
+        {
+            if(pick < 3)
             {
-                selection.SetNewPassive(UsingSkills[pick]);
+                selection.SetNewPassive(allSkills[pick]);
             }
             else
             {
-                selection.SetNewSkill(UsingSkills[pick]);
+                selection.SetNewSkill(allSkills[pick]);
             }
         }
         else
         {
-            if (pick < 6)
+            if (pick < 3)
             {
-                selection.LevelUpPassive(UsingSkills[pick], UsingSkills[pick+1]);
+                selection.LevelUpPassive(allSkills[pick], usingSkills[pick]);
             }
             else
             {
-                selection.LevelUpSkill(UsingSkills[pick], UsingSkills[pick + 1]);
+                selection.LevelUpSkill(allSkills[pick], usingSkills[pick]);
             }
         }
     }
@@ -488,21 +563,20 @@ public class MenuManager : MonoBehaviour
 
     private void Select()
     {
-        Time.timeScale = 1;
-        Debug.Log(choice);
         if(choice == 0)
         {
             return;
         }
         else
         {
-            for(int i = 0; i < UsingSkills.Count; i++)
+            Time.timeScale = 1;
+            for (int i = 0; i < allSkills.Count; i++)
             {
-                if (UsingSkills[i] == choice)
+                if (allSkills[i] == choice)
                 {
-                    if (UsingSkills[i+1] == 0)
+                    if (usingSkills[i] == 0)
                     {
-                        if(i < 6)
+                        if(i < 3)
                         {
                             GameManager.Inst.SetPassive(choice % 10 + 1, choice);
                         }
@@ -526,7 +600,7 @@ public class MenuManager : MonoBehaviour
                     }
                     else
                     {
-                        if(i < 6)
+                        if(i < 3)
                         {
                             GameManager.Inst.LevelUpPassive(choice % 10 + 1, choice);
                         }
@@ -534,21 +608,21 @@ public class MenuManager : MonoBehaviour
                         {
                             if (choice % 100 > 30)
                             {
-                                GameManager.Inst.LevelUpSkill(4, choice, UsingSkills[i + 1]);
+                                GameManager.Inst.LevelUpSkill(4, choice, usingSkills[i]);
                                 TableEntity_Skill skill;
                                 GameManager.Inst.GetSkillData(choice,out skill);
                                 if(skill.Linked_Skill != 0)
                                 {
-                                    GameManager.Inst.LevelUpSkill(41, choice + 1, UsingSkills[i + 1]);
+                                    GameManager.Inst.LevelUpSkill(41, choice + 1, usingSkills[i]);
                                 }
                             }
                             else
                             {
-                                GameManager.Inst.LevelUpSkill(choice % 10, choice, UsingSkills[i + 1]);
+                                GameManager.Inst.LevelUpSkill(choice % 10, choice, usingSkills[i]);
                             }
                         }
                     }
-                    UsingSkills[i + 1] += 1;
+                    usingSkills[i] += 1;
                     break;
                 }
             }
