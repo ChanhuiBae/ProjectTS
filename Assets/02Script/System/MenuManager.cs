@@ -413,11 +413,9 @@ public class MenuManager : MonoBehaviour
 
     public void SetSkillList(int weaponID)
     {
-        TableEntity_Weapon weapon;
-        GameManager.Inst.GetWeapon(weaponID, out weapon);
         int skillID = weaponID;
 
-        for (int i = 0; i < weapon.Skill; i++)
+        for (int i = 0; i < 7; i++)
         {
             if(i == 3)
             {

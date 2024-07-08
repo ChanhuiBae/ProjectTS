@@ -150,8 +150,21 @@ public class Weapon : MonoBehaviour
         id = GameManager.Inst.WeaponSkillData.WeaponID;
         this.type = type;
         TableEntity_Weapon data;
-        GameManager.Inst.GetWeapon(id, out data);
-        weight = data.Weight;
+        switch (type)
+        {
+            case WeaponType.Sowrd:
+                GameManager.Inst.GetSword(id, out data);
+                break;
+            case WeaponType.Hammer:
+                GameManager.Inst.GetHammer(id, out data);
+                break;
+            case WeaponType.Gun:
+                GameManager.Inst.GetRifle(id, out data);
+                break;
+            default:
+                data = GameManager.Inst.GetNoWeapon();
+                break;
+        }
         switch (data.Physics_Type)
         {
             case "Slash":
@@ -164,6 +177,8 @@ public class Weapon : MonoBehaviour
                 physicsType = Physics_Type.Thrust;
                 break;
         }
+
+        weight = data.Weight;
         IsSlash = data.Is_Slash;
         IsStrike = data.Is_Strike;
         IsExplosion = data.Is_Explosion;

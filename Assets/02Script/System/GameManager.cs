@@ -22,7 +22,6 @@ public class PlayerData
     public int Available_Point;
     public float Exp_Need;
     public int ArmorID;
-    public Inventory inventory;
 }
 
 public class WeaponSkillSetData
@@ -96,28 +95,57 @@ public class GameManager : Singleton<GameManager>
     {
         return skillHitFrameTable.TryGetValue(skillID, out data);
     }
-    private Dictionary<int, TableEntity_Weapon> weaponTable = new Dictionary<int, TableEntity_Weapon>();
-    public bool GetWeapon(int weaponID, out TableEntity_Weapon data)
+
+    private TableEntity_Weapon noWeapon = new TableEntity_Weapon();
+    public TableEntity_Weapon GetNoWeapon ()
     {
-        return weaponTable.TryGetValue(weaponID, out data);
+        return noWeapon;
     }
+
+    private Dictionary<int, TableEntity_Weapon> hammerTable = new Dictionary<int, TableEntity_Weapon>();
+    public bool GetHammer(int weaponID, out TableEntity_Weapon data)
+    {
+        return hammerTable.TryGetValue(weaponID, out data);
+    }
+    public int GetHammerCount()
+    {
+        return hammerTable.Count;
+    }
+
+    private Dictionary<int, TableEntity_Weapon> rifleTable = new Dictionary<int, TableEntity_Weapon>();
+    public bool GetRifle(int weaponID, out TableEntity_Weapon data)
+    {
+        return rifleTable.TryGetValue(weaponID, out data);
+    }
+    public int GetRifleCount()
+    {
+        return rifleTable.Count;
+    }
+
+    private Dictionary<int, TableEntity_Weapon> swordTable = new Dictionary<int, TableEntity_Weapon>();
+    public bool GetSword(int weaponID, out TableEntity_Weapon data)
+    {
+        return swordTable.TryGetValue(weaponID, out data);
+    }
+    public int GetSwordCount()
+    {
+        return swordTable.Count;
+    }
+
     public WeaponType GetWeaponType(int weaponID)
     {
-        TableEntity_Weapon weapon;
-        weaponTable.TryGetValue(weaponID, out weapon);
-        if(weapon == null)
+        if (weaponID >= 3000)
         {
-            return WeaponType.None;
+            return WeaponType.Gun;
         }
-        switch(weapon.Type)
+        else if(weaponID >= 2000)
         {
-            case 1:
-                return WeaponType.Sowrd;
-            case 2:
-                return WeaponType.Hammer;
-            case 3:
-                return WeaponType.Gun;
+            return WeaponType.Hammer;
         }
+        else if(weaponID >= 1000)
+        {
+            return WeaponType.Sowrd;
+        } 
         return WeaponType.None;
     }
 
@@ -180,7 +208,22 @@ public class GameManager : Singleton<GameManager>
         }
         for (int i = 0; i < table.Weapon_List.Count; i++)
         {
-            weaponTable.Add(table.Weapon_List[i].ID, table.Weapon_List[i]);
+            if(table.Weapon_List[i].ID >= 3000)
+            {
+                rifleTable.Add(table.Weapon_List[i].ID, table.Weapon_List[i]);
+            }
+            else if (table.Weapon_List[i].ID >= 2000)
+            {
+                hammerTable.Add(table.Weapon_List[i].ID, table.Weapon_List[i]);
+            }
+            else if (table.Weapon_List[i].ID >= 1000)
+            {
+                swordTable.Add(table.Weapon_List[i].ID, table.Weapon_List[i]);
+            }
+            else
+            {
+                noWeapon = table.Weapon_List[i];
+            }
         }
         for(int i = 0; i < table.Armor_List.Count; i++)
         {
@@ -349,13 +392,6 @@ public class GameManager : Singleton<GameManager>
         set => setData.cameraShake = value;
     }
 
-    public Inventory INVENTORY
-    {
-        get
-        {
-            return pData.inventory;
-        }
-    }
 
     public int PlayerUIDMaker
     {
@@ -405,13 +441,35 @@ public class GameManager : Singleton<GameManager>
     public void SetHammer()
     {
         wsData.WeaponID = 2000;
-        wsData.basic_ID = 200; 
+        wsData.basic_ID = 200;
+        wsData.skill1_ID = 0;
+        wsData.connected1_ID = 0;
+        wsData.skill2_ID = 0;
+        wsData.connected2_ID = 0;
+        wsData.skill3_ID = 0;
+        wsData.connected3_ID = 0;
+        wsData.ultimate_ID = 0;
+        wsData.connectedU_ID = 0;
+        wsData.passive1_ID = 0;
+        wsData.passive2_ID = 0;
+        wsData.passive3_ID = 0;
     }
 
     public void SetGun()
     {
         wsData.WeaponID = 3000;
         wsData.basic_ID = 300;
+        wsData.skill1_ID = 0;
+        wsData.connected1_ID = 0;
+        wsData.skill2_ID = 0;
+        wsData.connected2_ID = 0;
+        wsData.skill3_ID = 0;
+        wsData.connected3_ID = 0;
+        wsData.ultimate_ID = 0;
+        wsData.connectedU_ID = 0;
+        wsData.passive1_ID = 0;
+        wsData.passive2_ID = 0;
+        wsData.passive3_ID = 0;
     }
 
     public void SetSkill(int num, int id)

@@ -1,42 +1,74 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LobbySceneManager : MonoBehaviour
+public enum Interaction_Type
 {
-    private GameObject weaponPopup;
-    private Button hammer;
-    private Button gun;
+    None,
+    Armory,
+    Mission
+}
+public class LobbySceneManager : MonoBehaviour
+{ 
+    private Interaction_Type interaction;
+    private Button interBtn;
+    private Image namePopup;
+    private TextMeshProUGUI nameText;
+    private ArmoryPopup armory;
+
 
     private void Awake()
     {
-
+        if(!GameObject.Find("Interaction").TryGetComponent<Button>(out interBtn))
+        {
+            Debug.Log("LobbySceneManager - Awake - Button");
+        }
+        else
+        {
+            interBtn.onClick.AddListener(InteracteType);
+        }
+        if(!GameObject.Find("NamePopup").TryGetComponent<Image>(out namePopup))
+        {
+            Debug.Log("LobbySceneManager - Awake - Image");
+        }
+        if(!namePopup.transform.GetChild(0).TryGetComponent<TextMeshProUGUI>(out nameText))
+        {
+            Debug.Log("LobbySceneManager - Awake - TextMeshProUGUI");
+        }
+        if(!GameObject.Find("ArmoryPopup").TryGetComponent<ArmoryPopup>(out armory))
+        {
+            Debug.Log("LobbySceneManager - Awake - ArmoryPopup");
+        }
+        interaction = Interaction_Type.None;
+        interBtn.gameObject.SetActive(false);
+        namePopup.enabled = false;
     }
 
-    private void Update()
+    public void SetInteracte(Interaction_Type type, bool use)
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        interaction = type;
+        nameText.enabled = use;
+        namePopup.enabled = use;
+        interBtn.gameObject.SetActive(use);
+        switch (interaction)
         {
-            if(weaponPopup.activeSelf)
-            {
-                weaponPopup.SetActive(false);
-            }
-            else
-            {
-                weaponPopup.SetActive(true);
-            }
+            case Interaction_Type.Armory:
+                nameText.text = "¹«±â°í";
+                break;
         }
     }
 
-
-    private void SetHammer()
+    private void InteracteType()
     {
-        GameManager.Inst.SetHammer();
-    }
-
-    private void SetGun()
-    {
-        GameManager.Inst.SetGun();  
+        switch (interaction)
+        {
+            case Interaction_Type.Armory:
+                armory.gameObject.SetActive(true);
+                armory.OpenArmorPopup();
+                break;
+        }
     }
 }
