@@ -11,21 +11,7 @@ public class LobbySceneManager : MonoBehaviour
 
     private void Awake()
     {
-        if (!GameObject.Find("HammerButton").TryGetComponent<Button>(out hammer))
-        {
-            Debug.Log("LobbySceneManager - Awake - Button");
-        }
-        if (!GameObject.Find("GunButton").TryGetComponent<Button>(out gun))
-        {
-            Debug.Log("LobbySceneManager - Awake - Button");
-        }
-        weaponPopup = GameObject.Find("Popup");
-        if (weaponPopup != null)
-        {
-            weaponPopup.SetActive(false);
-        }
-        hammer.onClick.AddListener(SetHammer);
-        gun.onClick.AddListener(SetGun);
+
     }
 
     private void Update()
