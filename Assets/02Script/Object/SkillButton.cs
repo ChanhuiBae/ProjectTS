@@ -429,7 +429,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             {
                 yield return YieldInstructionCache.WaitForSeconds(0.1f);
                 currentTime += 0.1f;
-                coolTimeImage.fillAmount = currentTime / (maxTime * (1 - passive) / 1);
+                coolTimeImage.fillAmount = currentTime / (maxTime * (1 - passive));
                 time.text = ((int)((maxTime * (1 - passive)) - currentTime)).ToString();
             }
             trigger.enabled = true;
