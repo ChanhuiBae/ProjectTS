@@ -88,7 +88,7 @@ public class ArmoryPopup : MonoBehaviour
         choice = Resources.Load<Sprite>("Image/Choice");
 
                 
-        if (!GameObject.Find("Out").TryGetComponent<Button>(out outBtn))
+        if (!transform.Find("Out").TryGetComponent<Button>(out outBtn))
         {
             Debug.Log("ArmoryPopup - Awake - Button");
         }
@@ -110,17 +110,7 @@ public class ArmoryPopup : MonoBehaviour
                 outlines.Add(t.Find("outline").GetComponent<Image>());
             }
         }
-        if(!weaponsIcon[0].gameObject.TryGetComponent<Button>(out weaponBtn))
-        {
-            Debug.Log("ArmoryPopup - Awake - Button");
-        }
-        else 
-        {
-            weaponBtn.onClick.AddListener(ClickWeaponIcon);
-        }
-
-
-        thinOutline = outlines[0].sprite;
+        thinOutline = Resources.Load<Sprite>("Image/thinOutline");
         choiceOutline = Resources.Load<Sprite>("Image/Outline");
 
 
@@ -188,7 +178,7 @@ public class ArmoryPopup : MonoBehaviour
         {
             Debug.Log("ArmoryPopup - Awake - TextMeshProUGUI");
         }
-        if (!GameObject.Find("Back").TryGetComponent<Button>(out back))
+        if (!weaponPopup.transform.Find("Back").TryGetComponent<Button>(out back))
         {
             Debug.Log("ArmoryPopup - Awake - Button");
         }
@@ -196,6 +186,10 @@ public class ArmoryPopup : MonoBehaviour
         {
             back.onClick.AddListener(Back);
         }
+    }
+
+    private void Start()
+    {
         weaponPopup.SetActive(false);
         gameObject.SetActive(false);
     }

@@ -18,11 +18,20 @@ public class LobbySceneManager : MonoBehaviour
     private Image namePopup;
     private TextMeshProUGUI nameText;
     private ArmoryPopup armory;
+    private MissionPopup map;
 
 
     private void Awake()
     {
-        if(!GameObject.Find("Interaction").TryGetComponent<Button>(out interBtn))
+        if (!GameObject.Find("ArmoryPopup").TryGetComponent<ArmoryPopup>(out armory))
+        {
+            Debug.Log("LobbySceneManager - Awake - ArmoryPopup");
+        }
+        if (!GameObject.Find("MapPopup").TryGetComponent<MissionPopup>(out map))
+        {
+            Debug.Log("LobbySceneManager - Awake - MissionPopup");
+        }
+        if (!GameObject.Find("Interaction").TryGetComponent<Button>(out interBtn))
         {
             Debug.Log("LobbySceneManager - Awake - Button");
         }
@@ -38,13 +47,10 @@ public class LobbySceneManager : MonoBehaviour
         {
             Debug.Log("LobbySceneManager - Awake - TextMeshProUGUI");
         }
-        if(!GameObject.Find("ArmoryPopup").TryGetComponent<ArmoryPopup>(out armory))
-        {
-            Debug.Log("LobbySceneManager - Awake - ArmoryPopup");
-        }
         interaction = Interaction_Type.None;
         interBtn.gameObject.SetActive(false);
         namePopup.enabled = false;
+        nameText.enabled = false;
     }
 
     public void SetInteracte(Interaction_Type type, bool use)
@@ -58,6 +64,9 @@ public class LobbySceneManager : MonoBehaviour
             case Interaction_Type.Armory:
                 nameText.text = "무기고";
                 break;
+            case Interaction_Type.Mission:
+                nameText.text = "우주 지도";
+                break;
         }
     }
 
@@ -68,6 +77,10 @@ public class LobbySceneManager : MonoBehaviour
             case Interaction_Type.Armory:
                 armory.gameObject.SetActive(true);
                 armory.OpenArmorPopup();
+                break;
+            case Interaction_Type.Mission:
+                map.gameObject.SetActive(true);
+                map.OpenMapPopup();
                 break;
         }
     }
