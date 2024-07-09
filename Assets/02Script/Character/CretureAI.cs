@@ -43,6 +43,8 @@ public class CretureAI : MonoBehaviour
     {
         get => currentState;
     }
+    private float speed;
+
     private Phase phase;
     private CretureType type;
     private Creture creature;
@@ -90,8 +92,10 @@ public class CretureAI : MonoBehaviour
         {
             SetTarget(attackTarget);
         }
-        navAgent.speed = speed;
+
         navAgent.enabled = true;
+        this.speed = speed;
+        navAgent.speed = speed;
         SetPhase(1);
         Spawn();
     }
@@ -148,7 +152,6 @@ public class CretureAI : MonoBehaviour
 
     protected IEnumerator Roaming()
     {
-        navAgent.speed = 5f;
         yield return null;
         while (true)
         {
@@ -171,8 +174,6 @@ public class CretureAI : MonoBehaviour
     {
         anim.Move(true);
         anim.SetPattern(0);
-        navAgent.speed = 5f;
-        //IBase.Run();
         yield return null;
         while (attackTarget != null)
         {
@@ -272,7 +273,6 @@ public class CretureAI : MonoBehaviour
         currentState = AI_State.Idle;
         attackTarget = null;
         phase = Phase.Die;
-        StartCoroutine(AI_State.Idle.ToString());
     }
     public void StopAI(float time)
     {
@@ -354,5 +354,4 @@ public class CretureAI : MonoBehaviour
         currentPatterns[pattern] = false;
         pattern.StartCoolTime();
     }
-
 }

@@ -281,6 +281,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         {
             DieCheck();
         }
+        if (ai.GetState() == AI_State.Idle)
+        {
+            spawnManager.ReturnCreature(poolName, this);
+        }
     }
 
     public void OnCreatedInPool()
