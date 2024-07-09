@@ -360,7 +360,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             if (transform.childCount != 1)
             {
                 maxTime = info.Cool_Time;
-                currentTime = maxTime;
+                currentTime = maxTime * (1 - passive);
                 coolTimeImage.fillAmount = 1;
                 stackCount.text = "";
                 currentStack = 0;
@@ -416,7 +416,6 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private IEnumerator CoolTime()
     {
-        currentTime = 0;
         coolTimeRun = true;
         coolTimeImage.enabled = true;
         if (currentStack == 0)
@@ -490,6 +489,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
     }
     private void AttackSkill()
     {
+        currentTime = 0;
         player.ChangeState(State.Attack_Skill);
         player.UseSkill(skill_ID);
         skillManager.UseSkill(buttonNum);

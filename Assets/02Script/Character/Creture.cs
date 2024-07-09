@@ -207,24 +207,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     private void ChargeUltimate(float damage)
     {
-        switch (type)
-        {
-            case CretureType.Normal:
-                GameManager.Inst.AddUaltimate(damage * 0.01f);
-                break;
-            case CretureType.Noble:
-                GameManager.Inst.AddUaltimate(damage * 0.02f);
-                break;
-            case CretureType.Swarm_Boss:
-                GameManager.Inst.AddUaltimate(damage * 0.5f);
-                break;
-            case CretureType.Guvnor:
-                GameManager.Inst.AddUaltimate(damage);
-                break;
-            case CretureType.Elite:
-                GameManager.Inst.AddUaltimate(damage * 0.3f);
-                break;
-        }
+        GameManager.Inst.AddUaltimate(damage);
     }
 
     private void SpawnHitEffect(float damage)

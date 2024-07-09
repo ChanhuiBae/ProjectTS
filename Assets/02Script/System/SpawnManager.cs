@@ -55,9 +55,12 @@ public class SpawnManager : MonoBehaviour
         spawn8 = new Vector3(pos, 0, pos);
 
         spawn = Random.Range(1, 8);
+    }
 
+    private void Start()
+    {
         StartCoroutine(SpawnLogic());
-        StartCoroutine(SpawnGuvnor());
+        StartCoroutine(SpawnBoss());
     }
 
     private void Update()
@@ -114,9 +117,6 @@ public class SpawnManager : MonoBehaviour
     private IEnumerator SpawnLogic()
     {
         yield return null; 
-        //Spawn(3);
-        //Spawn(6);
-        // Spawn(10);
 
         for (int i = 0; i < 132; i++)
         {
@@ -183,7 +183,6 @@ public class SpawnManager : MonoBehaviour
         }
         //04분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        Spawn(9, 3000, CretureType.Swarm_Boss);
         for (int i = 0; i < 132; i++)
         {
             Spawn(4, 1001, CretureType.Normal);
@@ -257,7 +256,6 @@ public class SpawnManager : MonoBehaviour
         }
         //9분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        Spawn(10, 3001, CretureType.Swarm_Boss);
         for (int i = 0; i < 132; i++)
         {
             Spawn(5, 1002, CretureType.Normal);
@@ -322,9 +320,13 @@ public class SpawnManager : MonoBehaviour
  
     }
 
-    private IEnumerator SpawnGuvnor()
+    private IEnumerator SpawnBoss()
     {
-        yield return YieldInstructionCache.WaitForSeconds(900);
+        yield return YieldInstructionCache.WaitForSeconds(300);
+        Spawn(9, 3000, CretureType.Swarm_Boss);
+        yield return YieldInstructionCache.WaitForSeconds(300);
+        Spawn(10, 3001, CretureType.Swarm_Boss);
+        yield return YieldInstructionCache.WaitForSeconds(300);
         Spawn(11,4000, CretureType.Guvnor);
     }
 
