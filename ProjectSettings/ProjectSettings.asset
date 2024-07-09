@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: ts
   productName: The Scouter
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -281,7 +281,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 93cd0a5bc92999c4b9bd9388efd3a6bf, type: 3}
+      m_Icon: {fileID: 2800000, guid: 074bf1e9041d54b49924dbf33cfa9d56, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

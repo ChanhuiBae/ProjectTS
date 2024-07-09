@@ -103,7 +103,7 @@ public class CretureAI : MonoBehaviour
             currentState = newState;
             StartCoroutine(currentState.ToString());
         }
-    }
+    } 
 
     public AI_State GetState()
     {
@@ -112,7 +112,6 @@ public class CretureAI : MonoBehaviour
 
     protected void SetMoveTarget(Vector3 targetPos)
     {
-        // debug message 남길 수 있도록 이동 로직을 하나의 평선으로 통일
         navAgent.SetDestination(targetPos);
     }
 

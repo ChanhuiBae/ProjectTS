@@ -461,7 +461,7 @@ public class MenuManager : MonoBehaviour
 
     private int PickSkill()
     {
-        int pick = Random.Range(0, list.Count-1);
+        int pick = Random.Range(0, list.Count);
         int i = GetIndexAtAllSkills(list[pick]);
         if(usingSkills[i] < maxSkills[i]) 
         {
@@ -479,13 +479,13 @@ public class MenuManager : MonoBehaviour
         levelupPopup.SetActive(true);
         choice = 0;
         list.Clear();
-        if (usingSkills[priSkill] == maxSkills[priSkill] && usingSkills[priPassive] == maxSkills[priPassive])
+        if (usingSkills[priSkill] > 0 && usingSkills[priPassive] > 0)
         {
-            listCount = allSkills.Count+1;
+            listCount = allSkills.Count;
         }
         else
         {
-            listCount = allSkills.Count;
+            listCount = allSkills.Count - 1;
         }
         for (int i =0; i < listCount; i++)
         {

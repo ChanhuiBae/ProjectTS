@@ -275,6 +275,14 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         
     }
 
+    private void FixedUpdate()
+    {
+        if (currentHP <= 0)
+        {
+            DieCheck();
+        }
+    }
+
     public void OnCreatedInPool()
     {
         //throw new System.NotImplementedException();

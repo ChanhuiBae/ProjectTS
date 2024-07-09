@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Init(WeaponType type)
     {
-        if (SceneManager.GetActiveScene().buildIndex > 2)
+        if (type != WeaponType.None)
         {
             anim.Weapon((int)type);
 
