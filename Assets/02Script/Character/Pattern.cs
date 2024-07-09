@@ -45,7 +45,7 @@ public class Pattern : MonoBehaviour
 
         foreach (BoxCollider col in colliders)
         {
-            col.enabled = false;
+           col.enabled = false;
         }
     }
 
@@ -82,7 +82,7 @@ public class Pattern : MonoBehaviour
         } 
         if (current_hit > 0)
         {
-            colliders[current_hit-1].enabled = false;
+           colliders[current_hit-1].enabled = false;
         }
         current_hit++;
         if (current_hit > colliders.Count)
@@ -90,8 +90,6 @@ public class Pattern : MonoBehaviour
             return;
         }
         colliders[current_hit-1].enabled = true;
-        Debug.Log(this.name);
-        Debug.Log(colliders[current_hit - 1].enabled);
     }
 
     private IEnumerator CountHit()
@@ -163,12 +161,13 @@ public class Pattern : MonoBehaviour
         StartCoroutine(CoolTime());
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    public void OnEnterPlayer(Collider other)
     {
-        Debug.Log(other.tag);
-        if (other.tag == "Player" && current_hit != 0)
+        if (current_hit != 0)
         {
             patternManager.TakeDamageOther(creatureKey, GetKey(), other);
         }
+
     }
 }
