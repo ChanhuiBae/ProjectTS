@@ -184,6 +184,12 @@ public class GameManager : Singleton<GameManager>
    
 
     private int killCount;
+    private float exp;
+    public float EXP
+    {
+        set => exp = value;
+        get => exp;
+    }
 
     public void Awake()
     {

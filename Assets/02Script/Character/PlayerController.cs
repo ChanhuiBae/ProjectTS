@@ -690,6 +690,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public bool CalulateDamage(int creatueKey, int patternKey, ITakeDamage hiter)
     {
+        Debug.Log("calulate");
         if (!isInvincibility && !isDie)
         {
             float damage = hiter.TakeDamage(creatueKey, patternKey);

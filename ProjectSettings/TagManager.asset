@@ -8,6 +8,8 @@ TagManager:
   - AttackArea
   - Weapon
   - Creature
+  - Exp
+  - Hp
   layers:
   - Default
   - TransparentFX

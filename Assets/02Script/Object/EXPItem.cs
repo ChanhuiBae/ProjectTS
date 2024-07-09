@@ -10,6 +10,10 @@ public class EXPItem : MonoBehaviour
     private PoolManager poolManager;
     private Rigidbody rig;
     private float exp;
+    public float EXP
+    {
+        get => exp;
+    }
 
     private void Awake()
     {
@@ -41,6 +45,11 @@ public class EXPItem : MonoBehaviour
             yield return YieldInstructionCache.WaitForSeconds(0.3f);
         }
         GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_EXP);
+        poolManager.TakeToPool<EXPItem>(name, this);
+    }
+
+    public void ReturnItem()
+    {
         poolManager.TakeToPool<EXPItem>(name, this);
     }
 

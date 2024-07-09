@@ -76,7 +76,7 @@ public class Pattern : MonoBehaviour
 
     private void HitUp()
     {
-        if(current_hit > colliders.Count)
+        if (current_hit > colliders.Count)
         {
             return;
         } 
@@ -90,6 +90,8 @@ public class Pattern : MonoBehaviour
             return;
         }
         colliders[current_hit-1].enabled = true;
+        Debug.Log(this.name);
+        Debug.Log(colliders[current_hit - 1].enabled);
     }
 
     private IEnumerator CountHit()
@@ -137,6 +139,8 @@ public class Pattern : MonoBehaviour
             yield return null;
         }
         colliders[colliders.Count-1].enabled = false;
+        ai.UsePattern = false;
+        StartCoolTime();
     }
 
     public void StartPattern()
@@ -161,6 +165,7 @@ public class Pattern : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.tag);
         if (other.tag == "Player" && current_hit != 0)
         {
             patternManager.TakeDamageOther(creatureKey, GetKey(), other);

@@ -7,7 +7,6 @@ using UnityEngine.AI;
 public enum AI_State
 {
     Idle,
-    Roaming,
     Chase,
     Attack,
     Defense,
@@ -38,6 +37,11 @@ public class CretureAI : MonoBehaviour
     private CreatureAnimationController anim;
     private List<Pattern> patterns;
     private Dictionary<Pattern, bool> currentPatterns;
+    private bool usePattern;
+    public bool UsePattern
+    {
+        set => usePattern = value;
+    }
     private AI_State currentState;
     public AI_State State
     {
@@ -82,7 +86,14 @@ public class CretureAI : MonoBehaviour
         isInit = true;
         attackTarget = null;
         homePos = transform.position;
-        attackDistance = 10f;
+        if(type == CretureType.Swarm_Boss)
+        {
+            attackDistance = 15f;
+        }
+        else
+        {
+            attackDistance = 10f;
+        }
         attackTarget = GameObject.Find("Player");
         if (attackTarget == null || !attackTarget.TryGetComponent<PlayerController>(out target))
         {
@@ -96,6 +107,7 @@ public class CretureAI : MonoBehaviour
         navAgent.enabled = true;
         this.speed = speed;
         navAgent.speed = speed;
+        usePattern = false;
         SetPhase(1);
         Spawn();
     }
@@ -129,7 +141,7 @@ public class CretureAI : MonoBehaviour
 
     public void SetTarget(GameObject newTarget)
     {
-        if (currentState == AI_State.Idle || currentState == AI_State.Roaming)
+        if (currentState == AI_State.Idle)
         {
             attackTarget = newTarget;
             try
@@ -150,26 +162,7 @@ public class CretureAI : MonoBehaviour
         ChangeAIState(AI_State.Chase); // first state
     }
 
-    protected IEnumerator Roaming()
-    {
-        yield return null;
-        while (true)
-        {
-            movePos.x = UnityEngine.Random.Range(-10f, 10f);
-            movePos.y = transform.position.y;
-            movePos.z = UnityEngine.Random.Range(-10f, 10f);
-            Vector3 target = homePos + movePos;
-            SetMoveTarget(target);
-            //IBase.Walk();
-            while ((target - transform.position).sqrMagnitude > 0.3)
-            {
-                yield return YieldInstructionCache.WaitForSeconds(1f);
-            }
-            //IBase.StopMove();
-            yield return YieldInstructionCache.WaitForSeconds(UnityEngine.Random.Range(7f, 10f));
-        }
-    }
-
+    
     protected IEnumerator Chase()
     {
         anim.Move(true);
@@ -204,38 +197,56 @@ public class CretureAI : MonoBehaviour
             }
             if(phase == Phase.One)
             {
-                foreach (KeyValuePair<Pattern, bool> items in currentPatterns)
+                if (!usePattern)
                 {
-                    if (items.Value == true)
+                    int use = UnityEngine.Random.Range(0, currentPatterns.Count);
+                    int i = 0;
+                    foreach (KeyValuePair<Pattern, bool> items in currentPatterns)
                     {
-                        anim.SetPattern(items.Key.GetPatternKey());
-                        items.Key.StartPattern();
-                        SetPatternDisable(items.Key);
-                        break;
+                        if(i == use)
+                        {
+                            if (items.Value == true)
+                            {
+                                anim.SetPattern(items.Key.GetPatternKey());
+                                items.Key.StartPattern();
+                                SetPatternDisable(items.Key);
+                                usePattern = true;
+                                break;
+                            }
+                        }
+                        i++;
                     }
                 }
             }
             else if(phase == Phase.Two)
             {
-                foreach (KeyValuePair<Pattern, bool> items in currentPatterns)
+                if (!usePattern)
                 {
-                    if (items.Value == true)
+                    foreach (KeyValuePair<Pattern, bool> items in currentPatterns)
                     {
-                        anim.SetPattern(items.Key.GetPatternKey());
-                        SetPatternDisable(items.Key);
-                        break;
+                        if (items.Value == true)
+                        {
+                            anim.SetPattern(items.Key.GetPatternKey());
+                            SetPatternDisable(items.Key);
+                            usePattern = true;
+                            break;
+                        }
                     }
                 }
             }
             else if(phase == Phase.Three) 
             {
-                foreach (KeyValuePair<Pattern, bool> items in currentPatterns)
+                if(!usePattern)
                 {
-                    if (items.Value == true)
+                    foreach (KeyValuePair<Pattern, bool> items in currentPatterns)
                     {
-                        anim.SetPattern(items.Key.GetPatternKey());
-                        SetPatternDisable(items.Key);
-                        break;
+                        if (items.Value == true)
+                        {
+                            anim.SetPattern(items.Key.GetPatternKey());
+                            SetPatternDisable(items.Key);
+                            usePattern = true;
+                            break;
+                        }
                     }
                 }
             }
@@ -352,6 +363,5 @@ public class CretureAI : MonoBehaviour
     {
         //Debug.Log("disable"+pattern.GetKey());
         currentPatterns[pattern] = false;
-        pattern.StartCoolTime();
     }
 }

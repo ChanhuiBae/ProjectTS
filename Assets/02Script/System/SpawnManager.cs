@@ -59,7 +59,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnLogic());
+        //StartCoroutine(SpawnLogic());
         StartCoroutine(SpawnBoss());
     }
 
@@ -322,7 +322,7 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnBoss()
     {
-        yield return YieldInstructionCache.WaitForSeconds(300);
+        //yield return YieldInstructionCache.WaitForSeconds(300);
         Spawn(9, 3000, CretureType.Swarm_Boss);
         yield return YieldInstructionCache.WaitForSeconds(300);
         Spawn(10, 3001, CretureType.Swarm_Boss);
@@ -361,37 +361,51 @@ public class SpawnManager : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        switch (count)
+        if(other.tag == "Exp")
         {
-            case 1:
-                other.transform.position = spawn1 + player.transform.position;
-                break;
-            case 2:
-                other.transform.position = spawn2 + player.transform.position;
-                break;
-            case 3:
-                other.transform.position = spawn3 + player.transform.position;
-                break;
-            case 4:
-                other.transform.position = spawn4 + player.transform.position;
-                break;
-            case 5:
-                other.transform.position = spawn5 + player.transform.position;
-                break;
-            case 6:
-                other.transform.position = spawn6 + player.transform.position;
-                break;
-            case 7:
-                other.transform.position = spawn7 + player.transform.position;
-                break;
-            case 8:
-                other.transform.position = spawn8 + player.transform.position;
-                break;
+            EXPItem item = other.transform.GetComponent<EXPItem>();
+            GameManager.Inst.EXP = item.EXP;
+            item.ReturnItem();
         }
-        count++;
-        if (count > 8)
+        else if(other.tag == "Hp")
         {
-            count = 1;
+            HPItem item = other.transform.GetComponent<HPItem>();
+            item.ReturnItem();
+        }
+        else if(other.tag == "Creature")
+        {
+            switch (count)
+            {
+                case 1:
+                    other.transform.position = spawn1 + player.transform.position;
+                    break;
+                case 2:
+                    other.transform.position = spawn2 + player.transform.position;
+                    break;
+                case 3:
+                    other.transform.position = spawn3 + player.transform.position;
+                    break;
+                case 4:
+                    other.transform.position = spawn4 + player.transform.position;
+                    break;
+                case 5:
+                    other.transform.position = spawn5 + player.transform.position;
+                    break;
+                case 6:
+                    other.transform.position = spawn6 + player.transform.position;
+                    break;
+                case 7:
+                    other.transform.position = spawn7 + player.transform.position;
+                    break;
+                case 8:
+                    other.transform.position = spawn8 + player.transform.position;
+                    break;
+            }
+            count++;
+            if (count > 8)
+            {
+                count = 1;
+            }
         }
     }
 }

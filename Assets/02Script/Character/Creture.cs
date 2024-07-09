@@ -237,7 +237,8 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             DropHP();
             TableEntity_Creature exp;
             GameManager.Inst.GetCreatureData(int.Parse(poolName), out exp);
-            spawnManager.SpawnEXPItem(transform.position,exp.Drop_Exp);
+            spawnManager.SpawnEXPItem(transform.position,exp.Drop_Exp + GameManager.Inst.EXP);
+            GameManager.Inst.EXP = 0;
             spawnManager.ReturnCreature(poolName, this);
         }
     }
@@ -295,6 +296,11 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     public void OnGettingFromPool()
     {
         //throw new System.NotImplementedException();
+    }
+
+    private void StartGroggy()
+    {
+        ai.StopAI(10.5f);
     }
 
     public void Stagger(float time)

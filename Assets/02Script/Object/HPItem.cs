@@ -41,6 +41,11 @@ public class HPItem : MonoBehaviour, IPoolObject
         poolManager.TakeToPool<HPItem>(name, this);
     }
 
+    public void ReturnItem()
+    {
+        poolManager.TakeToPool<HPItem>(name, this);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Ground")
