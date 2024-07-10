@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour, IDamage
     }
 
     public void Init(WeaponType type)
-    {
+    {   
         if (sceneNum > 2 && type != WeaponType.None)
         {
             anim.Weapon((int)type);
@@ -163,7 +163,6 @@ public class PlayerController : MonoBehaviour, IDamage
                     }
                     break;
             }
-
             weapon.Init(type);
             effect.Init(weapon);
             CCType = CrowdControlType.None;
