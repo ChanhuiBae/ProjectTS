@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
+public class SkillButton : MonoBehaviour
 {
     private PlayerController player;
     private SkillManager skillManager;
@@ -114,11 +114,16 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         trigger.triggers.Add(down);
     }
 
-    void OnPointerDown(PointerEventData eventData)
+    private void OnPointerDown(PointerEventData eventData)
     {
-        if(transform.childCount == 1)
+        Down();
+    }
+
+    private void Down()
+    {
+        if (transform.childCount == 1)
         {
-            BasicAttack(); 
+            BasicAttack();
             skillManager.UseSkill(0);
         }
         else
@@ -143,7 +148,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             }
             else
             {
-                if(currentStack > 0)
+                if (currentStack > 0)
                 {
                     player.IsCombo(true);
                 }
@@ -152,7 +157,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
             {
                 StartCoroutine(InitTimer(scopingTime));
             }
-            if(currentStack < maxStack && !coolTimeRun)
+            if (currentStack < maxStack && !coolTimeRun)
             {
                 StartCoroutine(CoolTime());
             }
@@ -160,7 +165,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         isDrag = false;
     }
 
-    void OnPointerUp(PointerEventData eventData)
+    private void OnPointerUp(PointerEventData eventData)
     {
         if(buttonNum == skillManager.GetCurrentSkill())
         {
@@ -218,8 +223,9 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         }
     }
 
-    public void OnDrag(PointerEventData eventData)
+    void OnDrag(PointerEventData eventData)
     {
+        Debug.Log("Drag");
         if (buttonNum == skillManager.GetCurrentSkill() && isScoping && trigger.enabled)
         {
             isDrag = true;
@@ -277,7 +283,7 @@ public class SkillButton : MonoBehaviour, IDragHandler, IEndDragHandler
         }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    void OnEndDrag(PointerEventData eventData)
     {
         if (buttonNum == skillManager.GetCurrentSkill() && player.GetCurrentState() == State.Attack_Skill)
         {
