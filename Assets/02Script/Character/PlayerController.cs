@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private State state;
     private Weapon weapon;
+    private int sceneNum;
     private int attackCount;
 
     private float currentHP;
@@ -77,7 +78,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void Awake()
     {
-        if(SceneManager.GetActiveScene().buildIndex > 2)
+        sceneNum = SceneManager.GetActiveScene().buildIndex;
+        if (sceneNum > 2)
         {
             if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
             {
@@ -130,7 +132,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Init(WeaponType type)
     {
-        if (type != WeaponType.None)
+        if (sceneNum > 2 && type != WeaponType.None)
         {
             anim.Weapon((int)type);
 
@@ -161,6 +163,7 @@ public class PlayerController : MonoBehaviour, IDamage
                     }
                     break;
             }
+
             weapon.Init(type);
             effect.Init(weapon);
             CCType = CrowdControlType.None;
@@ -171,24 +174,19 @@ public class PlayerController : MonoBehaviour, IDamage
             level = 1;
             currentHP = GameManager.Inst.PlayerInfo.Max_HP;
             currentEXP = 0;
-            state = State.Idle;
             SetMaxEXP();
             expFill.fillAmount = 0;
             hpFill.fillAmount = 1;
-            isDie = false;
-            isControll = true;
-            StartCoroutine(Idle());
         }
         else
         {
             anim.Weapon(0);
-            weapon = new Weapon();
-            weapon.Init(WeaponType.None);
-            CCType = CrowdControlType.None;
-            isDie = false;
-            isControll = true;
-            StartCoroutine(Idle());
         }
+        
+        state = State.Idle;
+        isDie = false;
+        isControll = true;
+        StartCoroutine(Idle());
     }
 
     public bool ChangeState(State state)
@@ -199,7 +197,7 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 this.state = state;
                 StopAllCoroutines();
-                if (SceneManager.GetActiveScene().buildIndex > 2)
+                if (sceneNum > 2)
                     skillManager.UseSkill(-1);
                 StartCoroutine(Idle());
                 return true;
@@ -345,7 +343,7 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.Move(false);
         while (true)
         {
-            if(weapon.Type == WeaponType.Gun)
+            if(sceneNum > 2 && weapon.Type == WeaponType.Gun)
             {
                 look = skillManager.GetLook();
                 if (look != Vector3.zero)
@@ -368,7 +366,7 @@ public class PlayerController : MonoBehaviour, IDamage
         anim.Move(true);
         while (true)
         {
-            if (weapon.Type == WeaponType.Gun)
+            if (sceneNum > 2 && weapon.Type == WeaponType.Gun)
             {
                 look = skillManager.GetLook();
                 if (look != Vector3.zero)

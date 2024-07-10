@@ -109,8 +109,7 @@ public class MissionPopup : MonoBehaviour
 
     private void GameStart()
     {
-        WeaponSkillSetData data = GameManager.Inst.WeaponSkillData;
-        if(data.WeaponID != 0)
+        if(GameManager.Inst.PlayerInfo.WeaponID != 0)
         {
             GameManager.Inst.AsyncLoadNextScene(SceneName.PlayScene);
         }

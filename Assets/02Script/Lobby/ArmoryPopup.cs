@@ -217,8 +217,8 @@ public class ArmoryPopup : MonoBehaviour
     private void OpenWeaponPopup()
     {
         outBtn.gameObject.SetActive(false);
-        WeaponSkillSetData data = GameManager.Inst.WeaponSkillData;
-        if(data.WeaponID > 2000)
+        int data = GameManager.Inst.PlayerInfo.WeaponID;
+        if(data >= 3000)
         {
             rifleImage.sprite = use;
             hammerImage.sprite = dontUse;
@@ -226,7 +226,7 @@ public class ArmoryPopup : MonoBehaviour
 
             icon.sprite = weaponsIcon[0].sprite;
             TableEntity_Weapon weapon;
-            GameManager.Inst.GetRifle(data.WeaponID, out weapon);
+            GameManager.Inst.GetRifle(data, out weapon);
             weaponName.text = weapon.ID.ToString();
             attack.text = weapon.Physics_Type + "\n" + weapon.Physics;
             critical.text = weapon.Critical_Chance + "%\n" + weapon.Critical_Mag + "%";
@@ -237,14 +237,14 @@ public class ArmoryPopup : MonoBehaviour
             wind.text = weapon.Wind.ToString();
             outlines[0].sprite = choiceOutline;
         }
-        else if(data.WeaponID > 1000)
+        else if(data >= 2000)
         {
             rifleImage.sprite = dontUse;
             hammerImage.sprite = use;
             weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/BH_Basic_Image");
             icon.sprite = weaponsIcon[0].sprite;
             TableEntity_Weapon weapon;
-            GameManager.Inst.GetHammer(data.WeaponID, out weapon);
+            GameManager.Inst.GetHammer(data, out weapon);
             weaponName.text = weapon.ID.ToString();
             attack.text = weapon.Physics_Type + "\n" + weapon.Physics;
             critical.text = weapon.Critical_Chance + "%\n" + weapon.Critical_Mag +"%";
@@ -268,12 +268,12 @@ public class ArmoryPopup : MonoBehaviour
         rifleImage.sprite = dontUse;
         hammerImage.sprite = use;
         weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/BH_Basic_Image");
-        WeaponSkillSetData data = GameManager.Inst.WeaponSkillData;
-        if (data.WeaponID > 2000)
+        int data = GameManager.Inst.PlayerInfo.WeaponID;
+        if (data >= 3000)
         {
             outlines[0].sprite = thinOutline;
         }
-        else if (data.WeaponID > 1000)
+        else if (data >= 2000)
         {
             outlines[0].sprite = choiceOutline;
         }
@@ -285,12 +285,12 @@ public class ArmoryPopup : MonoBehaviour
         rifleImage.sprite = use;
         hammerImage.sprite = dontUse;
         weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/PR_Basic_Image");
-        WeaponSkillSetData data = GameManager.Inst.WeaponSkillData;
-        if (data.WeaponID > 2000)
+        int data = GameManager.Inst.PlayerInfo.WeaponID;
+        if (data>= 3000)
         {
             outlines[0].sprite = choiceOutline;
         }
-        else if (data.WeaponID > 1000)
+        else if (data >= 2000)
         {
             outlines[0].sprite = thinOutline;
         }

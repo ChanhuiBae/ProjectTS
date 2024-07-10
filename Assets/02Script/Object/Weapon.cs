@@ -147,7 +147,7 @@ public class Weapon : MonoBehaviour
 
     public void Init(WeaponType type)
     {
-        id = GameManager.Inst.WeaponSkillData.WeaponID;
+        id = GameManager.Inst.PlayerInfo.WeaponID;
         this.type = type;
         TableEntity_Weapon data;
         switch (type)

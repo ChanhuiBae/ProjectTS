@@ -22,12 +22,12 @@ public class PlayerData
     public int Available_Point;
     public float Exp_Need;
     public int ArmorID;
+    public int WeaponID;
+    public int basic_ID;
 }
 
 public class WeaponSkillSetData
 {
-    public int WeaponID;
-    public int basic_ID;
     public int skill1_ID;
     public int connected1_ID;
     public int skill2_ID;
@@ -278,6 +278,7 @@ public class GameManager : Singleton<GameManager>
     private IEnumerator InitGameManager(int level)
     {
         LoadData();
+
         yield return YieldInstructionCache.WaitForSeconds(0.05f);
         if (level > 2)
         {
@@ -342,16 +343,16 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            player.Init(GetWeaponType(wsData.WeaponID));
+            player.Init(GetWeaponType(pData.WeaponID));
             if(SceneManager.GetActiveScene().buildIndex > 2)
             {
-                menuManager.SetSkillList(wsData.WeaponID);
-                if (wsData.basic_ID != 0)
+                menuManager.SetSkillList(pData.WeaponID);
+                if (pData.basic_ID != 0)
                 {
                     TableEntity_Skill skill;
-                    GetSkillData(wsData.basic_ID, out skill);
-                    menuManager.InitSkillButton(0, wsData.basic_ID, skill.Skill_Name_Eng, 1);
-                    skillManager.SetSkill(0, wsData.basic_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
+                    GetSkillData(pData.basic_ID, out skill);
+                    menuManager.InitSkillButton(0, pData.basic_ID, skill.Skill_Name_Eng, 1);
+                    skillManager.SetSkill(0, pData.basic_ID, skill.Weapon_ID, skill.Category_ID, skill.Skill_Level_Max, skill.Charge_Max, skill.Hit_Max);
                 }
                 menuManager.InitSkillButton(1, wsData.skill1_ID, "None", 1);
                 menuManager.InitSkillButton(11, wsData.connected1_ID, "None", 1);
@@ -424,8 +425,8 @@ public class GameManager : Singleton<GameManager>
         pData.Available_Point = info.Available_Point;
         pData.Exp_Need = info.Exp_Need;
         pData.ArmorID = 1;
-        wsData.WeaponID = 2000;
-        wsData.basic_ID = 200;
+        pData.WeaponID = 2000;
+        pData.basic_ID = 200;
         wsData.skill1_ID = 0;
         wsData.connected1_ID = 0;
         wsData.skill2_ID = 0;
@@ -446,8 +447,8 @@ public class GameManager : Singleton<GameManager>
 
     public void SetHammer()
     {
-        wsData.WeaponID = 2000;
-        wsData.basic_ID = 200;
+        pData.WeaponID = 2000;
+        pData.basic_ID = 200;
         wsData.skill1_ID = 0;
         wsData.connected1_ID = 0;
         wsData.skill2_ID = 0;
@@ -459,12 +460,13 @@ public class GameManager : Singleton<GameManager>
         wsData.passive1_ID = 0;
         wsData.passive2_ID = 0;
         wsData.passive3_ID = 0;
+        SaveData();
     }
 
     public void SetGun()
     {
-        wsData.WeaponID = 3000;
-        wsData.basic_ID = 300;
+        pData.WeaponID = 3000;
+        pData.basic_ID = 300;
         wsData.skill1_ID = 0;
         wsData.connected1_ID = 0;
         wsData.skill2_ID = 0;
@@ -476,6 +478,7 @@ public class GameManager : Singleton<GameManager>
         wsData.passive1_ID = 0;
         wsData.passive2_ID = 0;
         wsData.passive3_ID = 0;
+        SaveData();
     }
 
     public void SetSkill(int num, int id)
