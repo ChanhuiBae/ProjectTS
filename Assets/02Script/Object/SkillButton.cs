@@ -225,7 +225,6 @@ public class SkillButton : MonoBehaviour
 
     void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("Drag");
         if (buttonNum == skillManager.GetCurrentSkill() && isScoping && trigger.enabled)
         {
             isDrag = true;

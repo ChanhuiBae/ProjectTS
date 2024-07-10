@@ -245,6 +245,10 @@ public class EffectManager : MonoBehaviour
 
     public void SetBoxArea()
     { 
+        foreach(Effect e  in effects)
+        {
+            e.ReturenEffect();
+        }
         effects.Clear();
         for(int i = 0; i < 5; i++)
         {

@@ -435,7 +435,7 @@ public class MenuManager : MonoBehaviour
             }
         }
         TableEntity_Skill ultimate;
-        GameManager.Inst.GetSkillData(allSkills[allSkills.Count - 1], out ultimate);
+        GameManager.Inst.GetSkillData(allSkills[6], out ultimate);
         for(int i = 0; i < allSkills.Count; i++)
         {
             if (allSkills[i] == ultimate.Primal_Active)
