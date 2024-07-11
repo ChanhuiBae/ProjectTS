@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MissionPopup : MonoBehaviour
 {
+    private LobbySceneManager lobby;
+
     private Image mainImage;
     private Button main;
     private Button sub;
@@ -16,12 +18,25 @@ public class MissionPopup : MonoBehaviour
     private Button outBtn;
 
     private GameObject missionPopup;
-    private Button startBtn;
+    private Button receive;
+
+    private TextMeshProUGUI mission1;
+    private TextMeshProUGUI planet;
+    private TextMeshProUGUI misstionObject;
+    private TextMeshProUGUI creature;
+    private TextMeshProUGUI DNA;
+    private TextMeshProUGUI EXP;
+    private TextMeshProUGUI description;
 
     private Button back;
 
     private void Awake()
     {
+        if(!GameObject.Find("LobbySceneManager").TryGetComponent<LobbySceneManager>(out lobby))
+        {
+            Debug.Log("MissionPopup - Awake - LobbySceneManager");
+        }
+
         if (!GameObject.Find("MainMission").TryGetComponent<Image>(out mainImage))
         {
             Debug.Log("MissionPopup - Awake - Image");
@@ -48,7 +63,7 @@ public class MissionPopup : MonoBehaviour
         choice = Resources.Load<Sprite>("Image/Choice");
 
 
-        if (!transform.Find("Out").TryGetComponent<Button>(out outBtn))
+        if (!TryGetComponent<Button>(out outBtn))
         {
             Debug.Log("MissionPopup - Awake - Button");
         }
@@ -58,13 +73,13 @@ public class MissionPopup : MonoBehaviour
         }
 
         missionPopup = GameObject.Find("MissionPopup");
-        if(!missionPopup.transform.Find("Start").TryGetComponent<Button> (out startBtn))
+        if(!GameObject.Find("Receive").TryGetComponent<Button> (out receive))
         {
             Debug.Log("MissionPopup - Awake - Button");
         }
         else
         {
-            startBtn.onClick.AddListener(GameStart);
+            receive.onClick.AddListener(OutStartPopup);
         }
        
         if (!missionPopup.transform.Find("Back").TryGetComponent<Button>(out back))
@@ -107,13 +122,6 @@ public class MissionPopup : MonoBehaviour
         missionPopup.SetActive(true);
     }
 
-    private void GameStart()
-    {
-        if(GameManager.Inst.PlayerInfo.WeaponID != 0)
-        {
-            GameManager.Inst.AsyncLoadNextScene(SceneName.PlayScene);
-        }
-    }
 
     private void Back()
     {
@@ -124,6 +132,13 @@ public class MissionPopup : MonoBehaviour
 
     private void Out()
     {
+        gameObject.SetActive(false);
+    }
+
+    private void OutStartPopup()
+    {
+        lobby.SetStart();
+        lobby.OpenStartPopup();
         gameObject.SetActive(false);
     }
 }

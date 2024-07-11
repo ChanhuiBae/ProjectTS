@@ -88,7 +88,7 @@ public class ArmoryPopup : MonoBehaviour
         choice = Resources.Load<Sprite>("Image/Choice");
 
                 
-        if (!transform.Find("Out").TryGetComponent<Button>(out outBtn))
+        if (!TryGetComponent<Button>(out outBtn))
         {
             Debug.Log("ArmoryPopup - Awake - Button");
         }
@@ -224,7 +224,6 @@ public class ArmoryPopup : MonoBehaviour
 
     private void OpenWeaponPopup()
     {
-        outBtn.gameObject.SetActive(false);
         int data = GameManager.Inst.PlayerInfo.WeaponID;
         if(data >= 3000)
         {
@@ -326,6 +325,7 @@ public class ArmoryPopup : MonoBehaviour
 
     private void Out()
     {
+        GameManager.Inst.PlayerIsController(true);
         gameObject.SetActive(false);
     }
 }

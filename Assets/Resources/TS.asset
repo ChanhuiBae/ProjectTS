@@ -3667,3 +3667,27 @@ MonoBehaviour:
     Wing_Type: NULL
     Tail_HP: 0
     Tail_Type: NULL
+  Mission:
+  - ID: 100
+    Name: "\uBE44\uC5F4\uD55C \uB3C5\uC758 \uC655"
+    Planet_Name: "\uD589\uC131 - MTSF"
+    Object: "\uBCA0\uB178\uBBF8\uB4DC\uB77C \uD1A0\uBC8C"
+    Creature: "\uBCA0\uB178\uBBF8\uB4DC\uB77C, \uD544 \uB370\uBE4C"
+    DNA_Essence: 2000
+    Scouter_EXP: 1000
+    Description: "\uADFC\uCC98\uC758 \uD589\uC131\uACC4\uC5D0\uC11C \uCC28\uAC00\uC6B4
+      \uC554\uC11D\uC758 \uD589\uC131\uC744 \uBC1C\uACAC\uD588\uC2B5\uB2C8\uB2E4.
+      \uD574\uB2F9 \uD589\uC131\uC744 \uC870\uC0AC\uD558\uACE0 \uD589\uC131\uC758
+      \uC6B0\uB450\uBA38\uB9AC\uB97C \uD1A0\uBC8C\uD558\uC2ED\uC2DC\uC624."
+  Reward:
+  - Mission_ID: 100
+    DNA_Essence: 2000
+    Scouter_EXP: 1000
+    Material_01: "\uBCA0\uB178\uBBF8\uB4DC\uB77C\uC758 \uAC11\uAC01"
+    M_01_Percent: 0.3
+    Material_02: "\uBCA0\uB178\uBBF8\uB4DC\uB77C\uC758 \uAF2C\uB9AC"
+    M_02_Percent: 0.2
+    Material_03: "\uBCA0\uB178\uBBF8\uB4DC\uB77C\uC758 \uAC00\uC2DC"
+    M_03_Percent: 0.25
+    Material_04: "\uBCA0\uB178\uBBF8\uB4DC\uB77C\uC758 \uC9D1\uAC8C\uBC1C"
+    M_04_Percent: 0.25

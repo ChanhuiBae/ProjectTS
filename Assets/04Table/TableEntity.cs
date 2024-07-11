@@ -224,3 +224,34 @@ public class TableEntitiy_Creature_Part
     public int Tail_HP;
     public string Tail_Type;
 }
+
+
+[System.Serializable]
+public class TableEntitiy_Mission
+{
+    public int ID;
+    public string Name;
+    public string Planet_Name;
+    public string Object;
+    public string Creature;
+    public int DNA_Essence;
+    public int Scouter_EXP;
+    public string Description;
+}
+
+[System.Serializable]
+
+public class TableEntity_Reward
+{
+    public int Mission_ID;
+    public int DNA_Essence;
+    public int Scouter_EXP;
+    public string Material_01;
+    public float M_01_Percent;
+    public string Material_02;
+    public float M_02_Percent;
+    public string Material_03;
+    public float M_03_Percent;
+    public string Material_04;
+    public float M_04_Percent;
+}

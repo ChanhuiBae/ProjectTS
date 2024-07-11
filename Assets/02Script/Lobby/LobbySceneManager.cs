@@ -31,7 +31,7 @@ public class LobbySceneManager : MonoBehaviour
         {
             Debug.Log("LobbySceneManager - Awake - MissionPopup");
         }
-        if (!GameObject.Find("Interaction").TryGetComponent<Button>(out interBtn))
+        if (!GameObject.Find("NamePopup").TryGetComponent<Button>(out interBtn))
         {
             Debug.Log("LobbySceneManager - Awake - Button");
         }
@@ -83,5 +83,16 @@ public class LobbySceneManager : MonoBehaviour
                 map.OpenMapPopup();
                 break;
         }
+        GameManager.Inst.PlayerIsController(false);
+    }
+
+    public void SetStart()
+    {
+        
+    }
+
+    public void OpenStartPopup()
+    {
+
     }
 }
