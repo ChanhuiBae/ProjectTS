@@ -30,9 +30,9 @@ public class FloatingDamage : MonoBehaviour, IPoolObject
     {
         rect.position = Camera.main.WorldToScreenPoint(pos + Vector3.up);
         text.text = damage.ToString();
-        text.fontSize = 25;
+        text.fontSize = 0;
         text.color = Color.white;
-        StartCoroutine(Disable());
+        StartCoroutine(Enable());
     }
 
     public void OnCreatedInPool()
@@ -45,12 +45,22 @@ public class FloatingDamage : MonoBehaviour, IPoolObject
         //throw new System.NotImplementedException();
     }
 
+    private IEnumerator Enable()
+    {
+        for (int i = 0; i < 25; i++)
+        {
+            yield return null;
+            text.fontSize += 1f;
+        }
+        StartCoroutine(Disable());
+    }
+
     private IEnumerator Disable()
     {
         for(int i = 0; i < 10;  i++)
         {
-            yield return YieldInstructionCache.WaitForSeconds(0.1f);
-            rect.position += new Vector3(0, 10f, 0);
+            yield return YieldInstructionCache.WaitForSeconds(0.01f);
+            rect.position += new Vector3(0, 2f, 0);
             text.fontSize -= 1f;
             text.alpha = 1 - (0.1f * i);
         }
