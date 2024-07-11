@@ -378,7 +378,6 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     public void PushVector(Vector3 look)
     {
         queue.Enqueue(look);
-        Debug.Log(queue.Count);
     }
 
     public Vector3 PopVector()

@@ -156,7 +156,7 @@ public class Effect : MonoBehaviour, IPoolObject
         {
             if (type == EffectType.Once)
             {
-                if(key != null)
+                if(key != 0)
                     skillManager.TakeDamageByKey(AttackType.Effect, key, other);
                 else
                     skillManager.TakeDamageOther(AttackType.Effect, other);
