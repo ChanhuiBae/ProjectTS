@@ -116,11 +116,6 @@ public class SkillButton : MonoBehaviour
 
     private void OnPointerDown(PointerEventData eventData)
     {
-        Down();
-    }
-
-    private void Down()
-    {
         if (transform.childCount == 1)
         {
             BasicAttack();
@@ -164,6 +159,7 @@ public class SkillButton : MonoBehaviour
         }
         isDrag = false;
     }
+
 
     private void OnPointerUp(PointerEventData eventData)
     {

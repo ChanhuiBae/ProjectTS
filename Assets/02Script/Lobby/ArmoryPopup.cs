@@ -112,6 +112,14 @@ public class ArmoryPopup : MonoBehaviour
         }
         thinOutline = Resources.Load<Sprite>("Image/thinOutline");
         choiceOutline = Resources.Load<Sprite>("Image/Outline");
+        if (!content.transform.GetChild(0).TryGetComponent<Button>(out weaponBtn))
+        {
+            Debug.Log("ArmoryPopup - Awake - Button");
+        }
+        else
+        {
+            weaponBtn.onClick.AddListener(ClickWeaponIcon);
+        }
 
 
         if (!GameObject.Find("Hammer").TryGetComponent<Button>(out hammer))
@@ -277,7 +285,6 @@ public class ArmoryPopup : MonoBehaviour
         {
             outlines[0].sprite = choiceOutline;
         }
-        ClickWeaponIcon();
     }
 
     private void SelectRifle()
@@ -294,7 +301,6 @@ public class ArmoryPopup : MonoBehaviour
         {
             outlines[0].sprite = thinOutline;
         }
-        ClickWeaponIcon();
     }
 
     public void ClickWeaponIcon()
