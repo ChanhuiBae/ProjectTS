@@ -21,15 +21,12 @@ public class FadeManager : MonoBehaviour
     {
         time /= 2;
         StartCoroutine(Fade(0f, 1f, time));
-        yield return YieldInstructionCache.WaitForSeconds(time);
+        yield return YieldInstructionCache.WaitForSeconds(time-1f);
         StartCoroutine(Fade(1f, 0f, time));
     }
 
     IEnumerator Fade(float start, float end, float fadeTime)
     {
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        GameManager.Inst.PlayerIsController(false);
-
         fadeImg.raycastTarget = true;
         fadeTime = Mathf.Clamp(fadeTime, 0.1f, 1f);
         float percent = 0f;
@@ -50,7 +47,5 @@ public class FadeManager : MonoBehaviour
             fadeImg.raycastTarget = false; // 다른 UI 활성화
         else
             fadeImg.raycastTarget = true;
-
-        GameManager.Inst.PlayerIsController(true);
     }
 }

@@ -67,7 +67,7 @@ public class GameManager : Singleton<GameManager>
     private SettingData setData;
 
     private PlayerController player;
-    private FadeManager fadeManager;
+    public FadeManager fadeManager;
     public MenuManager menuManager;
     public SoundManager soundManager;
     public SkillManager skillManager;

@@ -22,7 +22,8 @@ public class MainToWeapon : MonoBehaviour
 
     private IEnumerator Move()
     {
-        yield return YieldInstructionCache.WaitForSeconds(1f);
+        GameManager.Inst.fadeManager.FadeInOut(1f);
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
         player.transform.position = new Vector3(-50, 1, -8);
     }
 
