@@ -108,13 +108,13 @@ public class ArmoryPopup : MonoBehaviour
 
         weaponsIcon = new List<Image>();
         outlines = new List<Image>();
-        GameObject content  = GameObject.Find("Content");
+        GameObject content  = GameObject.Find("WContent");
         if (content != null)
         {
             foreach (Transform t in content.transform)
             {
-                weaponsIcon.Add(t.Find("Weapon").GetComponent<Image>());
                 outlines.Add(t.Find("outline").GetComponent<Image>());
+                weaponsIcon.Add(t.Find("Weapon").GetComponent<Image>());
             }
         }
         thinOutline = Resources.Load<Sprite>("Image/thinOutline");
