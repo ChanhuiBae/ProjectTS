@@ -9339,7 +9339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5660752195426771964}
   - component: {fileID: 4849411052423977127}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SeungchuTR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

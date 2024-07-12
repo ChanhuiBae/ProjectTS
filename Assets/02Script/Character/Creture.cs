@@ -1,3 +1,4 @@
+using HighlightPlus;
 using Redcode.Pools;
 using System.Collections;
 using UnityEngine;
@@ -36,6 +37,8 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private Effect stun;
     private Effect hit;
     private Effect effect;
+
+    private HighlightEffect inner;
 
     private int HPCount;
     public void Awake()
@@ -76,10 +79,16 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         {
             hit.gameObject.SetActive(false);
         }
+
+        if(!TryGetComponent<HighlightEffect>(out inner))
+        {
+            Debug.Log("Creature - Awake - HighligtEffect");
+        }
     }
 
     public void Init(Vector3 SpawnPos, int ID, CretureType type)
     {
+        inner.innerGlow = 0;
         anim.Move(false);
         anim.SetPattern(0);
         transform.position = SpawnPos;
@@ -218,9 +227,11 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     private IEnumerator Hit()
     {
+        inner.innerGlow = 0.7f;
         hit.gameObject.SetActive(true);
         yield return YieldInstructionCache.WaitForSeconds(1f);
         hit.gameObject.SetActive(false);
+        inner.innerGlow = 0f;
     }
 
     private void DieCheck()

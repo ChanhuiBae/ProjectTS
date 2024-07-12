@@ -1,3 +1,4 @@
+using HighlightPlus;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -29,6 +30,8 @@ public class PlayerController : MonoBehaviour, IDamage
     private float rollSpeed;
     private PlayerAnimationController anim;
     private EffectManager effect;
+    private HighlightEffect inner;
+
     private Button roll;
     private bool isControll = true;
     public bool CONTROLL
@@ -111,6 +114,10 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 Debug.Log("PlayerController - Awake - EffectManager");
             }
+            if(!TryGetComponent<HighlightEffect>(out inner))
+            {
+                Debug.Log("PlayerController - Awake - HighlightEffect");
+            }
 
         }
         if (!TryGetComponent<Rigidbody>(out rig))
@@ -135,7 +142,7 @@ public class PlayerController : MonoBehaviour, IDamage
         if (sceneNum > 2 && type != WeaponType.None)
         {
             anim.Weapon((int)type);
-
+            inner.innerGlow = 0;
             switch (type)
             {
                 case WeaponType.Sowrd:
@@ -693,6 +700,7 @@ public class PlayerController : MonoBehaviour, IDamage
             float damage = hiter.TakeDamage(creatueKey, patternKey);
             if(damage > 0)
             {
+                StartCoroutine(HitGlow());
                 currentHP -= damage;
                 Debug.Log("Take Damage: " + damage);
                 SetHPUI();
@@ -705,6 +713,17 @@ public class PlayerController : MonoBehaviour, IDamage
             }
         }
         return false;
+    }
+
+    private IEnumerator HitGlow()
+    {
+        inner.innerGlow = 1.4f;
+        yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
+        inner.innerGlow = 0f;
     }
 
     private void SetHPUI()

@@ -410,7 +410,7 @@ MonoBehaviour:
   glowIgnoreMask: 0
   innerGlow: 0.7
   innerGlowWidth: 1.3
-  innerGlowColor: {r: 1, g: 0, b: 0, a: 1}
+  innerGlowColor: {r: 0.06289297, g: 0.85153896, b: 1, a: 1}
   innerGlowBlendMode: 0
   innerGlowVisibility: 1
   targetFX: 0
@@ -456,7 +456,7 @@ MonoBehaviour:
   seeThroughTextureScale: 1
   seeThroughChildrenSortingMode: 0
   rmsCount: 8
-  hitFxInitialIntensity: 1
+  hitFxInitialIntensity: 0
   hitFxMode: 1
   hitFxFadeOutDuration: 0.25
   hitFxColor: {r: 1, g: 0, b: 0, a: 1}

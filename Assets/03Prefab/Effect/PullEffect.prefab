@@ -49009,7 +49009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8468555968599774857}
   - component: {fileID: 5800277981500589078}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PullEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

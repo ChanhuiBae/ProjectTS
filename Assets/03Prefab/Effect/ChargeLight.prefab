@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1454941123302602466}
   - component: {fileID: 4813155340629584142}
   - component: {fileID: 843251997728016709}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ChargeLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

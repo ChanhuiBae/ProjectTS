@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8199006875652165328}
   - component: {fileID: -6550225051527959629}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SlashRotaion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
