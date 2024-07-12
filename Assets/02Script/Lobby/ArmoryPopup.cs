@@ -211,6 +211,7 @@ public class ArmoryPopup : MonoBehaviour
 
     public void OpenArmorPopup()
     {
+        GameManager.Inst.PlayerIsController(false);
         lobby.CloseStartPopup();
         weaponImage.sprite = nonChoice;
         weaponPopup.SetActive(false);
@@ -232,6 +233,7 @@ public class ArmoryPopup : MonoBehaviour
 
     private void OpenWeaponPopup()
     {
+        outBtn.enabled = false;
         int data = GameManager.Inst.PlayerInfo.WeaponID;
         if(data >= 3000)
         {
@@ -328,7 +330,7 @@ public class ArmoryPopup : MonoBehaviour
     {
         weaponPopup.gameObject.SetActive(false);
         weaponImage.sprite = nonChoice;
-        outBtn.gameObject.SetActive(true);
+        outBtn.enabled = true;
     }
 
     private void Out()

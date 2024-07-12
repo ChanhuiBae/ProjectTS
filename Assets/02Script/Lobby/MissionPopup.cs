@@ -99,6 +99,7 @@ public class MissionPopup : MonoBehaviour
 
     public void OpenMapPopup()
     {
+        GameManager.Inst.PlayerIsController(false);
         lobby.CloseStartPopup();
         mainImage.sprite = nonChoice;
         missionPopup.SetActive(false);
@@ -120,6 +121,7 @@ public class MissionPopup : MonoBehaviour
 
     private void OpenMissionPopup()
     {
+        outBtn.enabled = false;
         missionPopup.SetActive(true);
     }
 
@@ -128,11 +130,12 @@ public class MissionPopup : MonoBehaviour
     {
         missionPopup.gameObject.SetActive(false);
         mainImage.sprite = nonChoice;
-        outBtn.gameObject.SetActive(true);
+        outBtn.enabled = true;
     }
 
     private void Out()
     {
+        GameManager.Inst.PlayerIsController(true);
         lobby.OpenStartPopup();
         gameObject.SetActive(false);
     }
