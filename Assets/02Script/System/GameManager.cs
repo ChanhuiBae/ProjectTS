@@ -132,6 +132,20 @@ public class GameManager : Singleton<GameManager>
         return swordTable.Count;
     }
 
+    private TableEntitiy_Mission mission = new TableEntitiy_Mission();
+
+    public TableEntitiy_Mission GetMission()
+    {
+        return mission;
+    }
+
+    private TableEntity_Reward reward = new TableEntity_Reward();
+
+    public TableEntity_Reward GetReward()
+    {
+        return reward;
+    }
+
     public WeaponType GetWeaponType(int weaponID)
     {
         if (weaponID >= 3000)
@@ -255,6 +269,8 @@ public class GameManager : Singleton<GameManager>
         {
             passiveTable.Add(table.Passive_Skill[i].ID, table.Passive_Skill[i]);
         }
+        mission = table.Mission[0];
+        reward = table.Reward[0];
         #endregion
 
         pData = new PlayerData();

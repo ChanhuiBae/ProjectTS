@@ -99,6 +99,7 @@ public class MissionPopup : MonoBehaviour
 
     public void OpenMapPopup()
     {
+        lobby.CloseStartPopup();
         mainImage.sprite = nonChoice;
         missionPopup.SetActive(false);
     }
@@ -132,12 +133,13 @@ public class MissionPopup : MonoBehaviour
 
     private void Out()
     {
+        lobby.OpenStartPopup();
         gameObject.SetActive(false);
     }
 
     private void OutStartPopup()
     {
-        lobby.SetStart();
+        lobby.SetStart(true);
         lobby.OpenStartPopup();
         gameObject.SetActive(false);
     }

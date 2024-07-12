@@ -19,7 +19,8 @@ public class LobbySceneManager : MonoBehaviour
     private TextMeshProUGUI nameText;
     private ArmoryPopup armory;
     private MissionPopup map;
-
+    private StartPopup start;
+    private bool haveMission;
 
     private void Awake()
     {
@@ -30,6 +31,10 @@ public class LobbySceneManager : MonoBehaviour
         if (!GameObject.Find("MapPopup").TryGetComponent<MissionPopup>(out map))
         {
             Debug.Log("LobbySceneManager - Awake - MissionPopup");
+        }
+        if(!GameObject.Find("StartPopup").TryGetComponent<StartPopup>(out start))
+        {
+            Debug.Log("LobbySceneManager - Awake - StartPopup");
         }
         if (!GameObject.Find("NamePopup").TryGetComponent<Button>(out interBtn))
         {
@@ -51,6 +56,7 @@ public class LobbySceneManager : MonoBehaviour
         interBtn.gameObject.SetActive(false);
         namePopup.enabled = false;
         nameText.enabled = false;
+        haveMission = false;
     }
 
     public void SetInteracte(Interaction_Type type, bool use)
@@ -86,13 +92,22 @@ public class LobbySceneManager : MonoBehaviour
         GameManager.Inst.PlayerIsController(false);
     }
 
-    public void SetStart()
+    public void SetStart(bool have)
     {
-        
+        haveMission = have;
     }
 
     public void OpenStartPopup()
     {
+        if(haveMission)
+        {
+            start.gameObject.SetActive(true);
+            start.OpenStartPopup();
+        }
+    }
 
+    public void CloseStartPopup()
+    {
+        start.gameObject.SetActive(false);
     }
 }

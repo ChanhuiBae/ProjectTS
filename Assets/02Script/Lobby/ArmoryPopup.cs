@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class ArmoryPopup : MonoBehaviour
 {
+    private LobbySceneManager lobby;
+
     private Image weaponImage;
     private Button weapon;
     private Button armor;
@@ -47,6 +49,11 @@ public class ArmoryPopup : MonoBehaviour
 
     private void Awake()
     {
+        if(!GameObject.Find("LobbySceneManager").TryGetComponent<LobbySceneManager>(out lobby))
+        {
+            Debug.Log("ArmoryPopup - Awake - LobbySceneManaer");
+        }
+
         if(!GameObject.Find("WeaponCategory").TryGetComponent<Image>(out weaponImage))
         {
             Debug.Log("ArmoryPopup - Awake - Image");
@@ -204,6 +211,7 @@ public class ArmoryPopup : MonoBehaviour
 
     public void OpenArmorPopup()
     {
+        lobby.CloseStartPopup();
         weaponImage.sprite = nonChoice;
         weaponPopup.SetActive(false);
     }
@@ -326,6 +334,7 @@ public class ArmoryPopup : MonoBehaviour
     private void Out()
     {
         GameManager.Inst.PlayerIsController(true);
+        lobby.OpenStartPopup();
         gameObject.SetActive(false);
     }
 }
