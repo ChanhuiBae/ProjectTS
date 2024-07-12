@@ -298,6 +298,7 @@ public class PlayerController : MonoBehaviour, IDamage
             dissolve.material = mat;
             yield return null;
         }
+        GameManager.Inst.AsyncLoadNextScene(SceneName.LobbyScene);
     }
 
     public void UseSkill(int skill_id)
