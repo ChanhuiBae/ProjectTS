@@ -88,7 +88,7 @@ public class CretureAI : MonoBehaviour
         homePos = transform.position;
         if(type == CretureType.Swarm_Boss)
         {
-            attackDistance = 30f;
+            attackDistance = 10f;
         }
         else
         {
@@ -113,10 +113,13 @@ public class CretureAI : MonoBehaviour
     }
     protected void ChangeAIState(AI_State newState)
     {
-        if (isInit)
+        if (!usePattern)
         {
             StopAllCoroutines();
             currentState = newState;
+
+            anim.Move(true);
+            anim.SetPattern(0);
             StartCoroutine(currentState.ToString());
         }
     } 
@@ -165,8 +168,6 @@ public class CretureAI : MonoBehaviour
     
     protected IEnumerator Chase()
     {
-        anim.Move(true);
-        anim.SetPattern(0);
         yield return null;
         while (attackTarget != null)
         {
@@ -190,7 +191,7 @@ public class CretureAI : MonoBehaviour
         while (true)
         {
             yield return null;
-            if (GetDistanceToTarget() > 10f)
+            if (GetDistanceToTarget() > attackDistance)
             {
                 anim.SetPattern(0);
                 ChangeAIState(AI_State.Chase);
@@ -280,7 +281,6 @@ public class CretureAI : MonoBehaviour
 
     public void SetIdle()
     {
-        anim.SetPattern(0);
         currentState = AI_State.Idle;
         attackTarget = null;
         phase = Phase.Die;

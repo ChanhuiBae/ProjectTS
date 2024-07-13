@@ -20,6 +20,7 @@ public class CreatureAnimationController : MonoBehaviour
 
     public void SetPattern(int pattern)
     {
+        Debug.Log(pattern);
         animator.SetInteger(H_Pattern, pattern);
     }
 

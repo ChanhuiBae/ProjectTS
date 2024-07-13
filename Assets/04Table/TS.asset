@@ -2637,7 +2637,7 @@ MonoBehaviour:
   - ID: 1000
     Type: 1
     Weight: 30
-    Physics_Type: Slash
+    Physics_Type: "\uCC38\uACA9"
     Is_Slash: 1
     Is_Strike: 0
     Is_Explosion: 0
@@ -2651,10 +2651,11 @@ MonoBehaviour:
     Critical_Mag: 150
     Attack_Speed: 1.3
     Skill: 4
+    Name: "\uAE30\uBCF8 \uC9C0\uAE09 \uCC28\uC9C0\uB4DC \uC18C\uB4DC"
   - ID: 2000
     Type: 2
     Weight: 20
-    Physics_Type: Strike
+    Physics_Type: "\uD0C0\uACA9"
     Is_Slash: 0
     Is_Strike: 1
     Is_Explosion: 0
@@ -2668,10 +2669,11 @@ MonoBehaviour:
     Critical_Mag: 150
     Attack_Speed: 1
     Skill: 7
+    Name: "\uAE30\uBCF8 \uC9C0\uAE09 \uBD80\uC2A4\uD2B8 \uD574\uBA38"
   - ID: 3000
     Type: 3
     Weight: 15
-    Physics_Type: Thrust
+    Physics_Type: "\uAD00\uD1B5"
     Is_Slash: 0
     Is_Strike: 0
     Is_Explosion: 0
@@ -2685,6 +2687,7 @@ MonoBehaviour:
     Critical_Mag: 150
     Attack_Speed: 1.5
     Skill: 7
+    Name: "\uAE30\uBCF8 \uC9C0\uAE09 \uD50C\uB77C\uC988\uB9C8 \uB77C\uC774\uD50C"
   Armor_List:
   - ID: 1
     Weight: 1
@@ -2747,29 +2750,6 @@ MonoBehaviour:
     Drop_Exp: 4
     Groggy_HP: 0
     Stagger_Mul: 0
-  - ID: 1002
-    Name: "\uCE74\uD0C0\uC548\uD0AC\uB85C V3"
-    Category_ID: 1
-    Category: "\uC77C\uBC18 \uD06C\uB9AC\uCC98"
-    Max_HP: 250
-    Move_Speed: 5
-    Physics: 10
-    Fire: 0
-    Water: 0
-    Electric: 0
-    Ice: 0
-    Wind: 0
-    Physics_Cut: 0.1
-    Fire_Cut: 0
-    Water_Cut: 0
-    Electric_Cut: 0
-    Ice_Cut: 0
-    Wind_Cut: 0
-    Phase_2_HP: 0
-    Phase_3_HP: 0
-    Drop_Exp: 6
-    Groggy_HP: 0
-    Stagger_Mul: 0
   - ID: 2000
     Name: "\uB4C0\uB9AC\uB178"
     Category_ID: 2
@@ -2816,29 +2796,6 @@ MonoBehaviour:
     Drop_Exp: 80
     Groggy_HP: 0
     Stagger_Mul: 0
-  - ID: 2002
-    Name: "\uB4C0\uB9AC\uB178 V3"
-    Category_ID: 2
-    Category: "\uC815\uC608 \uD06C\uB9AC\uCC98"
-    Max_HP: 900
-    Move_Speed: 5
-    Physics: 40
-    Fire: 0
-    Water: 0
-    Electric: 0
-    Ice: 0
-    Wind: 0
-    Physics_Cut: 0.2
-    Fire_Cut: 0
-    Water_Cut: 0
-    Electric_Cut: 0
-    Ice_Cut: 0
-    Wind_Cut: 0
-    Phase_2_HP: 0
-    Phase_3_HP: 0
-    Drop_Exp: 120
-    Groggy_HP: 0
-    Stagger_Mul: 0
   - ID: 3000
     Name: "\uD544 \uB370\uBE4C V1"
     Category_ID: 3
@@ -2862,75 +2819,6 @@ MonoBehaviour:
     Drop_Exp: 5000
     Groggy_HP: 3000
     Stagger_Mul: 0.2
-  - ID: 3001
-    Name: "\uD544 \uB370\uBE4C V2"
-    Category_ID: 3
-    Category: "\uBB34\uB9AC\uC5B4\uBBF8"
-    Max_HP: 8000
-    Move_Speed: 6
-    Physics: 65
-    Fire: 0
-    Water: 0
-    Electric: 0
-    Ice: 0
-    Wind: 0
-    Physics_Cut: 0.4
-    Fire_Cut: 0
-    Water_Cut: 0
-    Electric_Cut: 0
-    Ice_Cut: 0
-    Wind_Cut: 0
-    Phase_2_HP: 0
-    Phase_3_HP: 0
-    Drop_Exp: 7000
-    Groggy_HP: 6000
-    Stagger_Mul: 0.2
-  - ID: 3002
-    Name: "\uC2DC\uC800\uC2A4\uB3C4\uB77C V1"
-    Category_ID: 3
-    Category: "\uBB34\uB9AC\uC5B4\uBBF8"
-    Max_HP: 5000
-    Move_Speed: 6
-    Physics: 50
-    Fire: 0
-    Water: 0
-    Electric: 0
-    Ice: 0
-    Wind: 0
-    Physics_Cut: 0.2
-    Fire_Cut: 0
-    Water_Cut: 0
-    Electric_Cut: 0
-    Ice_Cut: 0
-    Wind_Cut: 0
-    Phase_2_HP: 0
-    Phase_3_HP: 0
-    Drop_Exp: 5000
-    Groggy_HP: 2000
-    Stagger_Mul: 0.5
-  - ID: 3003
-    Name: "\uC2DC\uC800\uC2A4\uB3C4\uB77C V2"
-    Category_ID: 3
-    Category: "\uBB34\uB9AC\uC5B4\uBBF8"
-    Max_HP: 10000
-    Move_Speed: 6
-    Physics: 85
-    Fire: 0
-    Water: 0
-    Electric: 0
-    Ice: 0
-    Wind: 0
-    Physics_Cut: 0.2
-    Fire_Cut: 0
-    Water_Cut: 0
-    Electric_Cut: 0
-    Ice_Cut: 0
-    Wind_Cut: 0
-    Phase_2_HP: 0
-    Phase_3_HP: 0
-    Drop_Exp: 7000
-    Groggy_HP: 4000
-    Stagger_Mul: 0.5
   - ID: 4000
     Name: "\uBCA0\uB178\uBBF8\uB4DC\uB77C"
     Category_ID: 4
@@ -2956,7 +2844,7 @@ MonoBehaviour:
     Stagger_Mul: 0.33
   Pattern_List:
   - ID: 100000
-    Creature_ID: 1000, 1001, 1002
+    Creature_ID: 1000, 1001
     Hit_Max: 1
     Delay_Min: 0
     Delay_Max: 0
@@ -2966,7 +2854,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: "\uCE74\uD0C0\uC548\uD0AC\uB85C \uC77C\uBC18 \uACF5\uACA9"
   - ID: 200000
-    Creature_ID: 2000, 2001, 2002
+    Creature_ID: 2000, 2001
     Hit_Max: 1
     Delay_Min: 0
     Delay_Max: 0
@@ -2976,7 +2864,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: "\uB4C0\uB9AC\uB178 \uC77C\uBC18 \uACF5\uACA9"
   - ID: 300000
-    Creature_ID: 3000, 3001
+    Creature_ID: 3000
     Hit_Max: 2
     Delay_Min: 2
     Delay_Max: 5
@@ -2986,7 +2874,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: BothHandSwing
   - ID: 300001
-    Creature_ID: 3000, 3001
+    Creature_ID: 3000
     Hit_Max: 4
     Delay_Min: 5
     Delay_Max: 8
@@ -2996,7 +2884,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: SwingBodyCheck
   - ID: 300002
-    Creature_ID: 3000, 3001
+    Creature_ID: 3000
     Hit_Max: 4
     Delay_Min: 2
     Delay_Max: 5
@@ -3006,7 +2894,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: TwiceBothHandSwing
   - ID: 300003
-    Creature_ID: 3000, 3001
+    Creature_ID: 3000
     Hit_Max: 4
     Delay_Min: 3
     Delay_Max: 6
@@ -3016,7 +2904,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: SwingButt
   - ID: 300004
-    Creature_ID: 3000, 3001
+    Creature_ID: 3000
     Hit_Max: 3
     Delay_Min: 5
     Delay_Max: 8
@@ -3026,7 +2914,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: SwingStamp
   - ID: 300005
-    Creature_ID: 3000, 3001
+    Creature_ID: 3000
     Hit_Max: 1
     Delay_Min: 0
     Delay_Max: 0
@@ -3036,7 +2924,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: LeftThrust
   - ID: 300006
-    Creature_ID: 3000, 3001
+    Creature_ID: 3000
     Hit_Max: 1
     Delay_Min: 2
     Delay_Max: 4
@@ -3046,7 +2934,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: RightThrust
   - ID: 300008
-    Creature_ID: 3000, 3001
+    Creature_ID: 3000
     Hit_Max: 1
     Delay_Min: 0
     Delay_Max: 0
@@ -3056,7 +2944,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: ChargingButt
   - ID: 300009
-    Creature_ID: 3000, 3001
+    Creature_ID: 3000
     Hit_Max: 2
     Delay_Min: 2
     Delay_Max: 5
@@ -3066,7 +2954,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: BodyCheck
   - ID: 300010
-    Creature_ID: 3000, 3001
+    Creature_ID: 3000
     Hit_Max: 5
     Delay_Min: 0
     Delay_Max: 0
@@ -3076,7 +2964,7 @@ MonoBehaviour:
     Trigger_Phase_03: 0
     Name: DiggingRush
   - ID: 300011
-    Creature_ID: 3000, 3001
+    Creature_ID: 3000
     Hit_Max: 3
     Delay_Min: 0
     Delay_Max: 0

@@ -61,6 +61,7 @@ public class TableEntity_Weapon
     public float Critical_Mag;
     public float Attack_Speed;
     public int Skill;
+    public string Name;
 }
 
 [System.Serializable]
