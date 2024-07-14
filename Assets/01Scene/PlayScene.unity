@@ -976,37 +976,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150522765}
   m_CullTransparentMesh: 1
---- !u!1 &155855785
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 155855786}
-  m_Layer: 0
-  m_Name: PillDevilCreatureV2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &155855786
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155855785}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 744160633}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &189465692
 GameObject:
   m_ObjectHideFlags: 0
@@ -6366,12 +6335,9 @@ Transform:
   - {fileID: 286043488}
   - {fileID: 523812617}
   - {fileID: 50470388}
-  - {fileID: 797113329}
   - {fileID: 1346467040}
   - {fileID: 1854117268}
-  - {fileID: 802900463}
   - {fileID: 1547287441}
-  - {fileID: 155855786}
   - {fileID: 435214630}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6418,12 +6384,6 @@ MonoBehaviour:
     _count: 1000
     _container: {fileID: 50470388}
     _nonLazy: 0
-  - _name: 1002
-    _component: {fileID: 935712332201360022, guid: 64bdbc0ab378d2945b9789ac2680e565,
-      type: 3}
-    _count: 1000
-    _container: {fileID: 797113329}
-    _nonLazy: 0
   - _name: 2000
     _component: {fileID: 3746003526297542573, guid: 33c3df74438046644ab4f4f78d42cfb0,
       type: 3}
@@ -6436,23 +6396,11 @@ MonoBehaviour:
     _count: 1000
     _container: {fileID: 1854117268}
     _nonLazy: 0
-  - _name: 2002
-    _component: {fileID: 3746003526297542573, guid: 60f9728e189e904459a7969ecded1b97,
-      type: 3}
-    _count: 1000
-    _container: {fileID: 802900463}
-    _nonLazy: 0
   - _name: 3000
     _component: {fileID: 935712332201360022, guid: 278126ea29132894d86704036812937e,
       type: 3}
     _count: 2
     _container: {fileID: 1547287441}
-    _nonLazy: 0
-  - _name: 3001
-    _component: {fileID: 935712332201360022, guid: c62c5b2faeff6dd4c93fcfe3942d464f,
-      type: 3}
-    _count: 2
-    _container: {fileID: 155855786}
     _nonLazy: 0
   - _name: 4000
     _component: {fileID: 935712332201360022, guid: dd3d984e448fa4944948be7a1c06d1bd,
@@ -6987,37 +6935,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788481370}
   m_CullTransparentMesh: 1
---- !u!1 &797113328
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 797113329}
-  m_Layer: 0
-  m_Name: NormalCretureV3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &797113329
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 797113328}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 744160633}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &800930912
 GameObject:
   m_ObjectHideFlags: 0
@@ -7048,37 +6965,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1186566247}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &802900462
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 802900463}
-  m_Layer: 0
-  m_Name: NobleCretureV3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &802900463
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 802900462}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 744160633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &811037821
 GameObject:
