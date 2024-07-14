@@ -168,6 +168,7 @@ public class CretureAI : MonoBehaviour
     
     protected IEnumerator Chase()
     {
+        anim.Move(true);
         yield return null;
         while (attackTarget != null)
         {
@@ -193,7 +194,6 @@ public class CretureAI : MonoBehaviour
             yield return null;
             if (GetDistanceToTarget() > attackDistance)
             {
-                anim.SetPattern(0);
                 ChangeAIState(AI_State.Chase);
             }
             if(phase == Phase.One)
