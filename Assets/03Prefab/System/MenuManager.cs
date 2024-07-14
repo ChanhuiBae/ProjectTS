@@ -66,6 +66,8 @@ public class MenuManager : MonoBehaviour
     private Button exitButton;
     private Button notexitButton;
 
+    private RewardPopup rewardPopup;
+
     private PlayerController player;
 
     private void Awake()
@@ -76,7 +78,7 @@ public class MenuManager : MonoBehaviour
         {
             Debug.Log("MenuManager - Awake - TextMeshProUGUI");
         }
-        time = 900;
+        time = 600;
         
         if (!GameObject.Find("KillCount").TryGetComponent<TextMeshProUGUI>(out killCount))
         {
