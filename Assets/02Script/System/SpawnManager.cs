@@ -60,7 +60,7 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         //StartCoroutine(SpawnLogic());
-        StartCoroutine(SpawnBoss());
+       // StartCoroutine(SpawnBoss());
     }
 
     private void Update()

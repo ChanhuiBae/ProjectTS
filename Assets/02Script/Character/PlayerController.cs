@@ -13,13 +13,14 @@ public enum State
     Attack_Hammer,
     Attack_Gun,
     Attack_Skill,
-    Roll,
     CrowdControl,
     Die
 }
 
 public class PlayerController : MonoBehaviour, IDamage
 {
+    private bool rollvalue;
+
     private Rigidbody rig;
     private FloatingJoystick joystick;
     private WeaponType weaponType;
@@ -139,6 +140,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Init(WeaponType type)
     {   
+        rollvalue = false;
         if (sceneNum > 2 && type != WeaponType.None)
         {
             anim.Weapon((int)type);
@@ -183,6 +185,8 @@ public class PlayerController : MonoBehaviour, IDamage
             SetMaxEXP();
             expFill.fillAmount = 0;
             hpFill.fillAmount = 1;
+
+            rollvalue = false;
         }
         else
         {
@@ -197,7 +201,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public bool ChangeState(State state)
     {
-        if(this.state != state && this.state != State.Die)
+        if(this.state != state && this.state != State.Die && !rollvalue)
         {
             if(state == State.Idle)
             {
@@ -211,21 +215,6 @@ public class PlayerController : MonoBehaviour, IDamage
             else if(this.state == State.CrowdControl)
             {
                 return false;
-            }
-            else if(state == State.Roll)
-            {
-                if(this.state == State.Attack_Skill)
-                {
-                    return false;
-                }
-                else
-                {
-                    this.state = state;
-                    StopAllCoroutines();
-                    anim.Roll();
-                    StartCoroutine(Roll());
-                    return true;
-                }
             }
             else
             {
@@ -329,7 +318,14 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void Move()
     {
-        rig.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
+        if (rollvalue)
+        {
+            rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.5f * Time.deltaTime);
+        }
+        else
+        {
+            rig.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
+        }
     }
 
     public void SetIdle()
@@ -370,9 +366,10 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private IEnumerator MoveForward()
     {
-        anim.Move(true);
         while (true)
         {
+            anim.Move(true);
+
             if (sceneNum > 2 && weapon.Type == WeaponType.Gun)
             {
                 look = skillManager.GetLook();
@@ -386,7 +383,8 @@ public class PlayerController : MonoBehaviour, IDamage
             if(direction != Vector3.zero && anim.CanMove())
             {
                 Move();
-                transform.LookAt(transform.position + direction);
+                if(!rollvalue)
+                    transform.LookAt(transform.position + direction);
             }
             else if(state != State.Attack_Skill && direction == Vector3.zero)
             {
@@ -540,7 +538,10 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void ChangeRoll()
     {
-        ChangeState(State.Roll);
+        if (this.state != State.Attack_Skill && !rollvalue)
+        {
+            StartCoroutine(Roll());
+        }
     }
 
     public void IsInvincibility(float time)
@@ -557,21 +558,50 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private IEnumerator Roll()
     {
-        GetDirection();
         transform.LookAt(transform.position + direction);
-        isInvincibility = true;
-        for(int i = 0; i < 45; i++)
+        anim.Roll();
+        rollvalue = true;
+        for (int i = 0; i < 3; i++)
         {
+            if (state == State.Idle && rollvalue)
+                rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.5f * Time.deltaTime);
+            yield return null;
+        }
+        isInvincibility = true;
+        for (int i = 0; i < 15; i++)
+        {
+            if (state == State.Idle && rollvalue)
+                rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.5f * Time.deltaTime);
             yield return null;
         }
         isInvincibility = false;
-        ChangeState(State.Idle);
+        for (int i = 0; i < 21; i++)
+        {
+            if (state == State.Idle && rollvalue)
+                rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.5f * Time.deltaTime);
+            yield return null;
+        }
+        rollvalue = false;
+        GetDirection();
+        if (state == State.Idle && direction != Vector3.zero)
+        {
+            StopAllCoroutines();
+            ChangeState(State.MoveForward);
+            anim.Move(true);
+        }
+        else if(state == State.MoveForward && direction ==  Vector3.zero)
+        {
+            StopAllCoroutines();
+            ChangeState(State.Idle);
+            anim.Move(false);
+        }
     }
 
     public void RollMove()
     {
-        LeanTween.move(gameObject, transform.position + transform.forward * rollSpeed, 0.4f).setEase(LeanTweenType.easeOutSine);
+        rollvalue = true;
     }
+
 
     public void MoveBack()
     {
