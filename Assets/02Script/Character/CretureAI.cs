@@ -115,13 +115,14 @@ public class CretureAI : MonoBehaviour
     {
         if (!usePattern)
         {
-            StopAllCoroutines();
-            currentState = newState;
 
-            anim.Move(true);
-            anim.SetPattern(0);
-            StartCoroutine(currentState.ToString());
         }
+        StopAllCoroutines();
+        currentState = newState;
+
+        anim.Move(true);
+        anim.SetPattern(0);
+        StartCoroutine(currentState.ToString());
     } 
 
     public AI_State GetState()
