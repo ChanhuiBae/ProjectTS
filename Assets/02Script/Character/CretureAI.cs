@@ -88,11 +88,11 @@ public class CretureAI : MonoBehaviour
         homePos = transform.position;
         if(type == CretureType.Swarm_Boss)
         {
-            attackDistance = 10f;
+            attackDistance = 6f;
         }
         else
         {
-            attackDistance = 5f;
+            attackDistance = 3f;
         }
         attackTarget = GameObject.Find("Player");
         if (attackTarget == null || !attackTarget.TryGetComponent<PlayerController>(out target))
