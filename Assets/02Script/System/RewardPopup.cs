@@ -145,31 +145,65 @@ public class RewardPopup : MonoBehaviour
             passive3.sprite = Resources.Load<Sprite>("Image/" + data.Name_Eng);
         }
 
+        TableEntitiy_Mission table = GameManager.Inst.GetMission();
         if(time > 480)
         {
-
+            DNA.text = 0.ToString();
+            EXP.text = 0.ToString();
+            
         }
         else if (time > 360)
         {
+            DNA.text = (table.DNA_Essence * 0.2f).ToString();
+            EXP.text = (table.Scouter_EXP * 0.2f).ToString();
+
+         
 
         }
         else if(time > 240)
         {
+            DNA.text = (table.DNA_Essence * 0.4f).ToString();
+            EXP.text = (table.Scouter_EXP * 0.4f).ToString();
 
         }
         else if(time > 120)
         {
+            DNA.text = (table.DNA_Essence * 0.6f).ToString();
+            EXP.text = (table.Scouter_EXP * 0.6f).ToString();
 
         }
         else if(!boss)
         {
-
+            DNA.text = (table.DNA_Essence * 0.8f).ToString();
+            EXP.text = (table.Scouter_EXP * 0.8f).ToString();
+            
         }
         else
         {
+            DNA.text = table.DNA_Essence.ToString();
+            EXP.text = table.Scouter_EXP.ToString();
 
         }
     }
+
+    private int GetRandomReward()
+    {
+        int random = Random.Range(0, 99);
+        if (random < 30)
+        {
+            return 1;
+        }
+        else if(random < 50)
+        {
+            return 2;
+        }
+        else if(random < 75)
+        {
+            return 3;
+        }
+        return 4;
+    }
+
 
     private void End()
     {
