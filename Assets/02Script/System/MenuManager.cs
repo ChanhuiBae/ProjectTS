@@ -311,6 +311,11 @@ public class MenuManager : MonoBehaviour
             Debug.Log("MenuManager - Awake - PlayerController");
         }
 
+        if(!GameObject.Find("RewardPopup").TryGetComponent<RewardPopup>(out rewardPopup))
+        {
+            Debug.Log("MenuManager - Awake - RewardPopup");
+        }
+
         select = 0;
         pausePopup.SetActive(false);
         settingPopup.SetActive(false);
@@ -689,6 +694,13 @@ public class MenuManager : MonoBehaviour
         pausePopup.SetActive(true);
         exitPopup.SetActive(false);
     }
+
+    public void SetReward(bool boss)
+    {
+        rewardPopup.gameObject.SetActive(true);
+        rewardPopup.SetRewardPopup(time, boss);
+    }
+
     private void SetVolumBGM()
     {
         GameManager.Inst.SetVolumBGM((int)bgm.value);

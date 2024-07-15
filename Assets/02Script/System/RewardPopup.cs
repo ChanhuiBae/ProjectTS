@@ -156,52 +156,60 @@ public class RewardPopup : MonoBehaviour
         {
             DNA.text = (table.DNA_Essence * 0.2f).ToString();
             EXP.text = (table.Scouter_EXP * 0.2f).ToString();
-
-         
-
+            reward1.sprite = GetRandomReward();
         }
         else if(time > 240)
         {
             DNA.text = (table.DNA_Essence * 0.4f).ToString();
             EXP.text = (table.Scouter_EXP * 0.4f).ToString();
-
+            reward1.sprite = GetRandomReward();
+            reward2.sprite = GetRandomReward();
         }
         else if(time > 120)
         {
             DNA.text = (table.DNA_Essence * 0.6f).ToString();
             EXP.text = (table.Scouter_EXP * 0.6f).ToString();
-
+            reward1.sprite = GetRandomReward();
+            reward2.sprite = GetRandomReward();
+            reward3.sprite = GetRandomReward();
         }
         else if(!boss)
         {
             DNA.text = (table.DNA_Essence * 0.8f).ToString();
             EXP.text = (table.Scouter_EXP * 0.8f).ToString();
-            
+            reward1.sprite = GetRandomReward();
+            reward2.sprite = GetRandomReward();
+            reward3.sprite = GetRandomReward();
+            reward4.sprite = GetRandomReward();
         }
         else
         {
             DNA.text = table.DNA_Essence.ToString();
             EXP.text = table.Scouter_EXP.ToString();
-
+            reward1.sprite = GetRandomReward();
+            reward2.sprite = GetRandomReward();
+            reward3.sprite = GetRandomReward();
+            reward4.sprite = GetRandomReward();
+            reward5.sprite = GetRandomReward();
         }
     }
 
-    private int GetRandomReward()
+    private Sprite GetRandomReward()
     {
         int random = Random.Range(0, 99);
         if (random < 30)
         {
-            return 1;
+            return Resources.Load<Sprite>("Image/reward_1");
         }
         else if(random < 50)
         {
-            return 2;
+            return Resources.Load<Sprite>("Image/reward_2");
         }
         else if(random < 75)
         {
-            return 3;
+            return Resources.Load<Sprite>("Image/reward_3");
         }
-        return 4;
+        return Resources.Load<Sprite>("Image/reward_4");
     }
 
 

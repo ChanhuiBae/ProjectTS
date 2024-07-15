@@ -108,7 +108,7 @@ public class ArmoryPopup : MonoBehaviour
 
         weaponsIcon = new List<Image>();
         outlines = new List<Image>();
-        GameObject content  = GameObject.Find("Content");
+        GameObject content  = GameObject.Find("WContent");
         if (content != null)
         {
             foreach (Transform t in content.transform)
