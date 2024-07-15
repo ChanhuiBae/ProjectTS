@@ -108,7 +108,7 @@ public class ArmoryPopup : MonoBehaviour
 
         weaponsIcon = new List<Image>();
         outlines = new List<Image>();
-        GameObject content  = GameObject.Find("WContent");
+        GameObject content  = GameObject.Find("Content");
         if (content != null)
         {
             foreach (Transform t in content.transform)
@@ -157,7 +157,7 @@ public class ArmoryPopup : MonoBehaviour
         dontUse = rifleImage.sprite;
 
 
-        if (!GameObject.Find("WeaponIcon").TryGetComponent<Image>(out icon))
+        if (!GameObject.Find("SelectIcon").TryGetComponent<Image>(out icon))
         {
             Debug.Log("ArmoryPopup - Awake - Image");
         }
@@ -244,7 +244,7 @@ public class ArmoryPopup : MonoBehaviour
             icon.sprite = weaponsIcon[0].sprite;
             TableEntity_Weapon weapon;
             GameManager.Inst.GetRifle(data, out weapon);
-            weaponName.text = weapon.ID.ToString();
+            weaponName.text = weapon.Name.ToString();
             attack.text = weapon.Physics_Type + "\n" + weapon.Physics;
             critical.text = weapon.Critical_Chance + "%\n" + weapon.Critical_Mag + "%";
             fire.text = weapon.Fire.ToString();
@@ -262,7 +262,7 @@ public class ArmoryPopup : MonoBehaviour
             icon.sprite = weaponsIcon[0].sprite;
             TableEntity_Weapon weapon;
             GameManager.Inst.GetHammer(data, out weapon);
-            weaponName.text = weapon.ID.ToString();
+            weaponName.text = weapon.Name.ToString();
             attack.text = weapon.Physics_Type + "\n" + weapon.Physics;
             critical.text = weapon.Critical_Chance + "%\n" + weapon.Critical_Mag +"%";
             fire.text = weapon.Fire.ToString();

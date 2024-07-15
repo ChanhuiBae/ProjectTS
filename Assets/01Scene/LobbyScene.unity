@@ -12764,6 +12764,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 722879022070862784, guid: f73c1bc58d852b040a2b848f8e536121,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 933532506922572554, guid: f73c1bc58d852b040a2b848f8e536121,
+        type: 3}
+      propertyPath: m_Name
+      value: SelectIcon
+      objectReference: {fileID: 0}
     - target: {fileID: 1668372945889453178, guid: f73c1bc58d852b040a2b848f8e536121,
         type: 3}
       propertyPath: m_text
@@ -12794,6 +12804,11 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 2170367549246159032, guid: f73c1bc58d852b040a2b848f8e536121,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2886373986857500051, guid: f73c1bc58d852b040a2b848f8e536121,
         type: 3}
       propertyPath: m_Name
@@ -12802,7 +12817,7 @@ PrefabInstance:
     - target: {fileID: 3681878987522767254, guid: f73c1bc58d852b040a2b848f8e536121,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00008793726
+      value: 0.00001700021
       objectReference: {fileID: 0}
     - target: {fileID: 3979824930185244044, guid: f73c1bc58d852b040a2b848f8e536121,
         type: 3}
