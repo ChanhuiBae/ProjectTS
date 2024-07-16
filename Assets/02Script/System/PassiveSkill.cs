@@ -17,22 +17,37 @@ public enum Passive
 public class PassiveSkill : MonoBehaviour
 {
     private SkillManager skillManager;
-    private MenuManager menuManager;
-    private PlayerController playerController;
+    private PlayerController player;
 
     private int key;
     private Passive type;
     private int level;
-    private TableEntitiy_Passive_Skill info;
+    private int Max_Level;
+    private float Base_Figure;
+    private float Increase_Value;
 
-    public void Init(TableEntitiy_Passive_Skill passive)
+
+    private void Awake()
     {
-        key = passive.ID;
+        if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
+        {
+            Debug.Log("");
+        }
+        if(!GameObject.Find("Player").TryGetComponent<PlayerController>(out player))
+        {
+            Debug.Log("");
+        }
+    }
+
+    public void Init(int ID, int max_Level, float base_Figure, float increase_Value, int passiveType)
+    {
+        key = ID;
         level = 1;
-        info = new TableEntitiy_Passive_Skill();
-        info.Base_Figure = passive.Base_Figure;
-        info.Increase_Value = passive.Increase_Value;
-        switch(passive.Passive_Type)
+        Max_Level = max_Level;
+        Base_Figure = base_Figure;
+        Increase_Value = increase_Value;
+     
+        switch (passiveType)
         {
             case 1:
                 type = Passive.ATK;
@@ -53,6 +68,7 @@ public class PassiveSkill : MonoBehaviour
                 type = Passive.Heal;
                 break;
         }
+        ApplySkill();
     }
 
     private int GetLevel()
@@ -62,12 +78,12 @@ public class PassiveSkill : MonoBehaviour
 
     public float GetFigure()
     {
-        return info.Base_Figure + (info.Increase_Value * (level-1));
+        return Base_Figure + (Increase_Value * (level-1));
     }
 
     public void LevelUp(int id)
     {
-        if (key == id && level < info.Max_Level)
+        if (key == id && level < Max_Level)
         {
             level++;
             ApplySkill();
@@ -76,22 +92,23 @@ public class PassiveSkill : MonoBehaviour
 
     public void ApplySkill()
     {
+        Debug.Log("increase" + Increase_Value);
         switch(type)
         {
             case Passive.ATK:
-                skillManager.ATK_Passive(info.Base_Figure + (level - 1) * info.Increase_Value);
+                skillManager.ATK_Passive(Base_Figure + (level - 1) * Increase_Value);
                 break;
             case Passive.CoolTime:
-                menuManager.CoolTime_Passive(info.Base_Figure + (level - 1) * info.Increase_Value);
+                GameManager.Inst.menuManager.CoolTime_Passive(Base_Figure + (level - 1) * Increase_Value);
                 break;
             case Passive.MaxHP:
-                playerController.MaxHP_Passive(info.Base_Figure + (level - 1) * info.Increase_Value);
+                player.MaxHP_Passive(Base_Figure + (level - 1) * Increase_Value);
                 break;
             case Passive.AttackSpeed:
-                skillManager.Speed_Passive(info.Base_Figure + (level - 1) * info.Increase_Value);
+                skillManager.Speed_Passive(Base_Figure + (level - 1) * Increase_Value);
                 break;
             case Passive.AdditionalDamage:
-                skillManager.AdditionalDamgae = info.Base_Figure + (level -1) * info.Increase_Value;
+                skillManager.AdditionalDamgae = Base_Figure + (level -1) * Increase_Value;
                 break;
             case Passive.Heal:
                 StopAllCoroutines();
@@ -102,10 +119,9 @@ public class PassiveSkill : MonoBehaviour
 
     private IEnumerator Heal()
     {
-        float add = playerController.MAXHP * (info.Base_Figure + (level - 1) * info.Increase_Value);
+        float add = player.MAXHP * (Base_Figure + (level - 1) * Increase_Value);
         while (true)
         {
-            playerController.ApplyHP(add);
             yield return YieldInstructionCache.WaitForSeconds(10f);
         }
     }

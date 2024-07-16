@@ -605,6 +605,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void ApplyHP(float value)
     {
+        Debug.Log("hp" + value);
         currentHP -= value;
         if(currentHP < 0)
         {
@@ -726,7 +727,6 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 StartCoroutine(HitGlow());
                 currentHP -= damage;
-                Debug.Log("Take Damage: " + damage);
                 SetHPUI();
                 if (currentHP <= 0)
                 {
