@@ -348,7 +348,7 @@ Material:
     - _Gloss: 0.2
     - _Gloss2: 0.2
     - _GlossMapScale: 1
-    - _Glossiness: 0.542
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _Glow: 1.19
     - _GlowStencilComp: 6
