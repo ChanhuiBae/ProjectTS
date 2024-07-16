@@ -377,14 +377,17 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Stagger(float time)
     {
-        if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
+        if (type == CretureType.Swarm_Boss || type == CretureType.Guvnor)
         {
             CalulateGroggyDamage();
             return;
         }
-        ai.StopAI(time);
-        if (gameObject.activeSelf && !IsDie)
-            StartCoroutine(StaggerTime(time));
+        else
+        {
+            ai.StopAI(time);
+            if (gameObject.activeSelf && !IsDie)
+                StartCoroutine(StaggerTime(time));
+        }
     }
 
     private IEnumerator StaggerTime(float time)
@@ -395,14 +398,16 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     }
     public void Stun(float time)
     {
-        if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
+        if (type == CretureType.Swarm_Boss || type == CretureType.Guvnor)
         {
             CalulateGroggyDamage();
-            return;
         }
-        ai.StopAI(time);
-        if (gameObject.activeSelf && !IsDie)
-            StartCoroutine(StunEffect(time));
+        else
+        {
+            ai.StopAI(time);
+            if (gameObject.activeSelf && !IsDie)
+                StartCoroutine(StunEffect(time));
+        }
     }
 
     private IEnumerator StunEffect(float time)
@@ -420,15 +425,17 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Airborne(float time)
     {
-        if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
+        if (type == CretureType.Swarm_Boss || type == CretureType.Guvnor)
         {
             CalulateGroggyDamage();
-            return;
         }
-        ai.StopAI(time);
-        if (gameObject.activeSelf)
+        else
         {
-            StartCoroutine(MoveAirborne(time));
+            ai.StopAI(time);
+            if (gameObject.activeSelf)
+            {
+                StartCoroutine(MoveAirborne(time));
+            }
         }
     }
 
@@ -445,20 +452,21 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
         {
             CalulateGroggyDamage();
-            return;
         }
-        ai.StopAI(distance * 0.01f);
-        LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance, distance * 0.01f).setEase(LeanTweenType.easeOutQuart);
+        else
+        {
+            ai.StopAI(distance * 0.01f);
+            LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance, distance * 0.01f).setEase(LeanTweenType.easeOutQuart);
+        }
     }
 
     public void Airback(float time, float distance)
     {
-        if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
+        if (type == CretureType.Swarm_Boss || type == CretureType.Guvnor)
         {
             CalulateGroggyDamage();
-            return;
         }
-        if (gameObject.activeSelf)
+        else if (gameObject.activeSelf)
         {
             StartCoroutine(MoveAirback(time, distance));
         }
@@ -474,12 +482,14 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Pulled(Vector3 center)
     {
-        if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
+        if (type == CretureType.Swarm_Boss || type == CretureType.Guvnor)
         {
             CalulateGroggyDamage();
-            return;
         }
-        ai.StopAI(1f);
-        LeanTween.move(gameObject, center, 0.5f).setEase(LeanTweenType.easeInElastic);
+        else
+        {
+            ai.StopAI(1f);
+            LeanTween.move(gameObject, center, 0.5f).setEase(LeanTweenType.easeInElastic);
+        }
     }
 }
