@@ -13,6 +13,8 @@ public class PlayerAnimationController : MonoBehaviour
     private int H_Y = Animator.StringToHash("Y");
     private int H_Skill = Animator.StringToHash("Skill_ID");
     private int H_Sit = Animator.StringToHash("Sit");
+    private int H_KnockBack = Animator.StringToHash("IsKnockBack");
+    private int H_KnockDown = Animator.StringToHash("IsKnockDown");
 
     private void Awake()
     {
@@ -64,9 +66,24 @@ public class PlayerAnimationController : MonoBehaviour
         return animator.GetBool(H_Combo);
     }
 
+    public void SetKnockBack()
+    {
+        animator.SetTrigger(H_KnockBack);
+    }
+
+    public void SetKnockDown()
+    {
+        animator.SetTrigger(H_KnockDown);
+    }
+
     public bool IsHammerAttack1()
     {
         return animator.GetCurrentAnimatorStateInfo(0).IsName("HammerAttack1");
+    }
+
+    public bool isRoll()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName("RollForward");
     }
 
     public bool CanMove()
@@ -81,10 +98,9 @@ public class PlayerAnimationController : MonoBehaviour
     public void Roll()
     {
         animator.SetTrigger(H_Roll);
-        Move(false);
         Attack(false);
     }
-    
+
     public void Skill(int id)
     {
         animator.SetInteger(H_Skill, id);

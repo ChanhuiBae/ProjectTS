@@ -193,6 +193,7 @@ public class PlayerController : MonoBehaviour, IDamage
             anim.Weapon(0);
         }
         
+        dissolve.enabled = false;
         state = State.Idle;
         isDie = false;
         isControll = true;
@@ -282,6 +283,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private IEnumerator Dissolve()
     {
         basePlayer.SetActive(false);
+        dissolve.enabled = true;
         weapon.gameObject.SetActive(false);
         float speed = 5;
         float t = 0;
@@ -318,12 +320,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void Move()
     {
-        if (rollvalue)
+        if (!rollvalue)
         {
-            rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.5f * Time.deltaTime);
-        }
-        else
-        {
+            anim.Move(true);
             rig.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
         }
     }
@@ -368,8 +367,6 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         while (true)
         {
-            anim.Move(true);
-
             if (sceneNum > 2 && weapon.Type == WeaponType.Gun)
             {
                 look = skillManager.GetLook();
@@ -396,7 +393,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private IEnumerator Attack_Gun()
     {
-        anim.Move(true);
         anim.Combat(true);
         int count = 0;
         float hit_count = 60 / weapon.Attack_Speed;
@@ -425,7 +421,6 @@ public class PlayerController : MonoBehaviour, IDamage
             GetDirection();
             if (direction != Vector3.zero)
             {
-                anim.Move(true);
                 Move();
             }
             else
@@ -474,7 +469,6 @@ public class PlayerController : MonoBehaviour, IDamage
             GetDirection();
             if (direction != Vector3.zero)
             {
-                anim.Move(true);
                 Move();
             }
             else
@@ -558,42 +552,42 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private IEnumerator Roll()
     {
-        transform.LookAt(transform.position + direction);
-        anim.Roll();
-        rollvalue = true;
-        for (int i = 0; i < 3; i++)
+        if (!anim.isRoll())
         {
-            if (state == State.Idle && rollvalue)
+            transform.LookAt(transform.position + direction);
+            rollvalue = true;
+            anim.Roll();
+            for (int i = 0; i < 3; i++)
+            {
+                rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.2f * Time.deltaTime);
+                yield return null;
+            }
+            isInvincibility = true;
+            for (int i = 0; i < 15; i++)
+            {
                 rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.5f * Time.deltaTime);
-            yield return null;
-        }
-        isInvincibility = true;
-        for (int i = 0; i < 15; i++)
-        {
-            if (state == State.Idle && rollvalue)
-                rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.5f * Time.deltaTime);
-            yield return null;
-        }
-        isInvincibility = false;
-        for (int i = 0; i < 21; i++)
-        {
-            if (state == State.Idle && rollvalue)
-                rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.5f * Time.deltaTime);
-            yield return null;
-        }
-        rollvalue = false;
-        GetDirection();
-        if (state == State.Idle && direction != Vector3.zero)
-        {
-            StopAllCoroutines();
-            ChangeState(State.MoveForward);
-            anim.Move(true);
-        }
-        else if(state == State.MoveForward && direction ==  Vector3.zero)
-        {
-            StopAllCoroutines();
-            ChangeState(State.Idle);
-            anim.Move(false);
+                yield return null;
+            }
+            isInvincibility = false;
+            for (int i = 0; i < 20; i++)
+            {
+                rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.3f * Time.deltaTime);
+                yield return null;
+            }
+            rollvalue = false;
+            GetDirection();
+            if (state == State.Idle && direction != Vector3.zero)
+            {
+                StopAllCoroutines();
+                ChangeState(State.MoveForward);
+                anim.Move(true);
+            }
+            else if (state == State.MoveForward && direction == Vector3.zero)
+            {
+                StopAllCoroutines();
+                ChangeState(State.Idle);
+                anim.Move(false);
+            }
         }
     }
 

@@ -16,6 +16,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private int ID;
     private float maxHP;
     private float currentHP;
+
     private CretureType type;
     private int physics;
     private int fire;
@@ -41,6 +42,9 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private HighlightEffect inner;
 
     private int HPCount;
+
+    private float groggyHP;
+
     public void Awake()
     {
         if (!TryGetComponent(out rig))
@@ -106,6 +110,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         GameManager.Inst.GetCreatureData(this.ID, out creature);
         maxHP = creature.Max_HP;
         currentHP = maxHP;
+        groggyHP = creature.Groggy_HP;
         physics = creature.Physics;
         fire = creature.Fire;
         water = creature.Water;
@@ -316,6 +321,11 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Stagger(float time)
     {
+        if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
+        {
+
+            return;
+        }
         ai.StopAI(time);
         if (gameObject.activeSelf && !IsDie)
             StartCoroutine(StaggerTime(time));
@@ -327,6 +337,11 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     }
     public void Stun(float time)
     {
+        if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
+        {
+
+            return;
+        }
         ai.StopAI(time);
         if (gameObject.activeSelf && !IsDie)
             StartCoroutine(StunEffect(time));
@@ -347,6 +362,11 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Airborne(float time)
     {
+        if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
+        {
+
+            return;
+        }
         ai.StopAI(time);
         if (gameObject.activeSelf)
         {
@@ -364,12 +384,22 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Knockback(float distance)
     {
+        if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
+        {
+
+            return;
+        }
         ai.StopAI(distance * 0.01f);
         LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance, distance * 0.01f).setEase(LeanTweenType.easeOutQuart);
     }
 
     public void Airback(float time, float distance)
     {
+        if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
+        {
+
+            return;
+        }
         if (gameObject.activeSelf)
         {
             StartCoroutine(MoveAirback(time, distance));
@@ -386,6 +416,11 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Pulled(Vector3 center)
     {
+        if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
+        {
+
+            return;
+        }
         ai.StopAI(1f);
         LeanTween.move(gameObject, center, 0.5f).setEase(LeanTweenType.easeInElastic);
     }
