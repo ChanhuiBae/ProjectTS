@@ -162,10 +162,10 @@ public class SpawnManager : MonoBehaviour
         }
         //02분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 590; i++)
+        for (int i = 0; i < 295; i++)
         {
             Spawn(3, 1000, CretureType.Normal);
-            yield return YieldInstructionCache.WaitForSeconds(0.1f);
+            yield return YieldInstructionCache.WaitForSeconds(0.2f);
         }
         //03분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
@@ -215,103 +215,36 @@ public class SpawnManager : MonoBehaviour
         }
         //6분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 1770; i++)
+        for (int i = 0; i < 354; i++)
         {
-            if (i % 13 == 0)
-            {
-                Spawn(4, 1001, CretureType.Normal);
-            }
-            if(i % 280 == 0)
-            {
-                Spawn(6, 2001, CretureType.Noble);
-            }
-            yield return null;
-            yield return null;
+            Spawn(4, 1001, CretureType.Normal);
+            yield return YieldInstructionCache.WaitForSeconds(0.17f);
         }
         //7분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 885; i++)
+        for (int i = 0; i < 354; i++)
         {
             Spawn(4, 1001, CretureType.Normal);
-            yield return YieldInstructionCache.WaitForSeconds(0.066f);
-        }
-        //8분 59초
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 1680; i++)
-        {
-            if(i % 7 == 0)
-            {
-                Spawn(4, 1001, CretureType.Normal);
-            }
-            if(i % 135 == 0)
+            if(i % 12 == 0)
             {
                 Spawn(6, 2001, CretureType.Noble);
             }
-            yield return null;
-            yield return null;
+            yield return YieldInstructionCache.WaitForSeconds(0.17f);
         }
-        //9분 59초
+        //8분 59초
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 132; i++)
-        {
-            Spawn(5, 1002, CretureType.Normal);
-            yield return YieldInstructionCache.WaitForSeconds(0.33f);
-        }
-        //10분 44초
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 132; i++)
-        {
-            Spawn(5, 1002, CretureType.Normal);
-            if (i % 13 == 0)
-            {
-                Spawn(6, 2002, CretureType.Noble);
-            }
-            yield return YieldInstructionCache.WaitForSeconds(0.33f);
-        }
-        // 11분 29초
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i <43.5; i++)
-        {
-            Spawn(5, 1002, CretureType.Normal);
-            if (i % 2 == 0)
-            {
-                Spawn(6, 2002, CretureType.Noble);
-            }
-            yield return YieldInstructionCache.WaitForSeconds(0.66f);
-        }
-        // 11분 59초
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 885; i++)
-        {
-            Spawn(5, 1002, CretureType.Normal);
-            yield return YieldInstructionCache.WaitForSeconds(0.066f);
-        }
-        // 12분 59초
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 885; i++)
-        {
-            Spawn(5, 1002, CretureType.Normal);
-            if (i % 30 == 0)
-            {
-                Spawn(6, 2002, CretureType.Noble);
-            }
-            yield return YieldInstructionCache.WaitForSeconds(0.066f);
-        }
-        // 13분 59초
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        for (int i = 0; i < 295; i++)
+        for (int i = 0; i < 177; i++)
         {
             Spawn(3, 1000, CretureType.Normal);
             Spawn(4, 1001, CretureType.Normal);
-            if (i % 10 == 0)
+            if (i % 6 == 0)
             {
                 Spawn(5, 2000, CretureType.Noble);
                 Spawn(6, 2001, CretureType.Noble);
             }
-            yield return YieldInstructionCache.WaitForSeconds(0.2f);
+            yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
-        // 14분 59초
- 
+        //9분 59초
     }
 
     private IEnumerator SpawnBoss()

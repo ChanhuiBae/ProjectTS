@@ -324,17 +324,17 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     private void CalulateGroggyDamage()
     {
-        float groggyD = 0;
+        float groggyD = damage;
         if (GameManager.Inst.PlayerInfo.physics == Physics_Type.Strike)
         {
-            groggyD = damage + (damage * 0.2f);
+            groggyD += damage * 0.2f;
         }
         if (ai.GetState() == AI_State.Attack)
         {
             groggyD *= 3;
         }
         groggyHP -= groggyD;
-        CheckDropHP();
+        CheckGroggyHP();
     }
 
     private void CheckGroggyHP()
@@ -343,7 +343,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         {
             StartGroggy();
             groggyHP = maxGroggyHP;
-            staggerCheck = 1 / staggerMul - 1;
+            staggerCheck = 1 / staggerMul;
         }
         else
         {
@@ -359,6 +359,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private void StartGroggy()
     {
         ai.StopAI(10f);
+        StartCoroutine(Groggy());
     }
 
     private IEnumerator Groggy()
