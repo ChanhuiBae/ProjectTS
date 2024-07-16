@@ -605,6 +605,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void ApplyHP(float value)
     {
+        Debug.Log("hp" + value);
         currentHP -= value;
         if(currentHP < 0)
         {
@@ -614,6 +615,8 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             currentHP = MaxHP;
         }
+
+        SetHPUI();
     }
 
     public void GetEXP(float value)
@@ -725,9 +728,7 @@ public class PlayerController : MonoBehaviour, IDamage
             if(damage > 0)
             {
                 StartCoroutine(HitGlow());
-                currentHP -= damage;
-                Debug.Log("Take Damage: " + damage);
-                SetHPUI();
+                ApplyHP(damage);
                 if (currentHP <= 0)
                 {
                     isDie = true;

@@ -38,6 +38,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
     public float AdditionalDamgae
     {
         set => additionalDamgae = value;
+        get => additionalDamgae;
     }
 
     private PoolManager effectManager;
@@ -218,13 +219,13 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         switch (num)
         {
             case 1:
-                this.passive1.Init(passive); 
+                this.passive1.Init(passive.ID, passive.Max_Level, passive.Base_Figure, passive.Increase_Value, passive.Passive_Type); 
                 break;
             case 2:
-                this.passive2.Init(passive);
+                this.passive2.Init(passive.ID, passive.Max_Level, passive.Base_Figure, passive.Increase_Value, passive.Passive_Type);
                 break;
             case 3:
-                this.passive3.Init(passive);
+                this.passive3.Init(passive.ID, passive.Max_Level, passive.Base_Figure, passive.Increase_Value, passive.Passive_Type);
                 break;
         }
     }

@@ -299,7 +299,6 @@ public class SpawnManager : MonoBehaviour
         }
         else if(other.tag == "Creature")
         {
-            Debug.Log(other.name);
             switch (count)
             {
                 case 1:
