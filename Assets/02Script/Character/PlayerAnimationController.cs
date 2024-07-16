@@ -81,6 +81,11 @@ public class PlayerAnimationController : MonoBehaviour
         return animator.GetCurrentAnimatorStateInfo(0).IsName("HammerAttack1");
     }
 
+    public bool isRoll()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName("RollForward");
+    }
+
     public bool CanMove()
     {
         float skillID = animator.GetInteger(H_Skill);
@@ -93,10 +98,9 @@ public class PlayerAnimationController : MonoBehaviour
     public void Roll()
     {
         animator.SetTrigger(H_Roll);
-        Move(false);
         Attack(false);
     }
-    
+
     public void Skill(int id)
     {
         animator.SetInteger(H_Skill, id);
