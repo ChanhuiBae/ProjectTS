@@ -92,7 +92,6 @@ public class PassiveSkill : MonoBehaviour
 
     public void ApplySkill()
     {
-        Debug.Log("increase" + Increase_Value);
         switch(type)
         {
             case Passive.ATK:
