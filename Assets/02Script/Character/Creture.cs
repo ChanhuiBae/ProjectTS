@@ -43,7 +43,12 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     private int HPCount;
 
+    private float maxGroggyHP;
     private float groggyHP;
+    private float staggerMul;
+    private float staggerCheck;
+
+    private float damage;
 
     public void Awake()
     {
@@ -110,7 +115,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         GameManager.Inst.GetCreatureData(this.ID, out creature);
         maxHP = creature.Max_HP;
         currentHP = maxHP;
-        groggyHP = creature.Groggy_HP;
+        maxGroggyHP = creature.Groggy_HP;
+        groggyHP = maxGroggyHP;
+        staggerMul = creature.Stagger_Mul;
+        staggerCheck = 1 / staggerMul;
         physics = creature.Physics;
         fire = creature.Fire;
         water = creature.Water;
@@ -150,7 +158,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         if (!IsDie)
         {
-            float damage = hiter.TakeDamage(physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
+            damage = hiter.TakeDamage(physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
             if (damage > 0)
             {
                 currentHP -= damage;
@@ -177,7 +185,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         if (!IsDie)
         {
-            float damage = hiter.TakeDamage(key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
+            damage = hiter.TakeDamage(key, physicsCut, fireCut, waterCut, electricCut, iceCut, windCut);
             if (damage > 0)
             {
                 currentHP -= damage;
@@ -226,7 +234,6 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     private void SpawnHitEffect(float damage)
     {
-        anim.Hit();
         StartCoroutine(Hit());
     }
 
@@ -234,9 +241,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         inner.innerGlow = 0.7f;
         hit.gameObject.SetActive(true);
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        hit.gameObject.SetActive(false);
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
         inner.innerGlow = 0f;
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
+        hit.gameObject.SetActive(false);
     }
 
     private void DieCheck()
@@ -314,16 +322,63 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         //throw new System.NotImplementedException();
     }
 
+    private void CalulateGroggyDamage()
+    {
+        float groggyD = 0;
+        if (GameManager.Inst.PlayerInfo.physics == Physics_Type.Strike)
+        {
+            groggyD = damage + (damage * 0.2f);
+        }
+        if (ai.GetState() == AI_State.Attack)
+        {
+            groggyD *= 3;
+        }
+        groggyHP -= groggyD;
+        CheckDropHP();
+    }
+
+    private void CheckGroggyHP()
+    {
+        if(groggyHP < 0)
+        {
+            StartGroggy();
+            groggyHP = maxGroggyHP;
+            staggerCheck = 1 / staggerMul - 1;
+        }
+        else
+        {
+            float current = groggyHP / maxGroggyHP;
+            current /= staggerMul;
+            if(staggerCheck - current >= 1)
+            {
+                staggerCheck -= (int)current;
+                StartStagger();
+            }
+        }
+    }
     private void StartGroggy()
     {
-        ai.StopAI(10.5f);
+        ai.StopAI(10f);
+    }
+
+    private IEnumerator Groggy()
+    {
+        anim.SetGroggy(true);
+        yield return new WaitForSeconds(10f);
+        anim.SetGroggy(false);
+    }
+
+    private void StartStagger()
+    {
+        ai.StopAI(3f);
+        StartCoroutine(StaggerTime(3f));
     }
 
     public void Stagger(float time)
     {
         if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
         {
-
+            CalulateGroggyDamage();
             return;
         }
         ai.StopAI(time);
@@ -333,13 +388,15 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     private IEnumerator StaggerTime(float time)
     {
+        anim.SetStagger(true);
         yield return new WaitForSeconds(time);
+        anim.SetStagger(false);
     }
     public void Stun(float time)
     {
         if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
         {
-
+            CalulateGroggyDamage();
             return;
         }
         ai.StopAI(time);
@@ -364,7 +421,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
         {
-
+            CalulateGroggyDamage();
             return;
         }
         ai.StopAI(time);
@@ -386,7 +443,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
         {
-
+            CalulateGroggyDamage();
             return;
         }
         ai.StopAI(distance * 0.01f);
@@ -397,7 +454,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
         {
-
+            CalulateGroggyDamage();
             return;
         }
         if (gameObject.activeSelf)
@@ -418,7 +475,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
         {
-
+            CalulateGroggyDamage();
             return;
         }
         ai.StopAI(1f);

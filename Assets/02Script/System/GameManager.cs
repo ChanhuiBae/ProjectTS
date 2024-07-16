@@ -24,6 +24,7 @@ public class PlayerData
     public int ArmorID;
     public int WeaponID;
     public int basic_ID;
+    public Physics_Type physics;
 }
 
 public class WeaponSkillSetData
@@ -443,6 +444,7 @@ public class GameManager : Singleton<GameManager>
         pData.ArmorID = 1;
         pData.WeaponID = 2000;
         pData.basic_ID = 200;
+        pData.physics = Physics_Type.Strike;
         wsData.skill1_ID = 0;
         wsData.connected1_ID = 0;
         wsData.skill2_ID = 0;
@@ -465,6 +467,7 @@ public class GameManager : Singleton<GameManager>
     {
         pData.WeaponID = 2000;
         pData.basic_ID = 200;
+        pData.physics = Physics_Type.Strike;
         wsData.skill1_ID = 0;
         wsData.connected1_ID = 0;
         wsData.skill2_ID = 0;
@@ -483,6 +486,7 @@ public class GameManager : Singleton<GameManager>
     {
         pData.WeaponID = 3000;
         pData.basic_ID = 300;
+        pData.physics = Physics_Type.Thrust;
         wsData.skill1_ID = 0;
         wsData.connected1_ID = 0;
         wsData.skill2_ID = 0;

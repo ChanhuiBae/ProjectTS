@@ -15,7 +15,8 @@ public enum Physics_Type
 {
     Slash,
     Strike,
-    Thrust
+    Thrust,
+    Explotion
 }
 public class Weapon : MonoBehaviour
 {
