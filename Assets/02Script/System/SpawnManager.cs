@@ -59,7 +59,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnLogic());
+       // StartCoroutine(SpawnLogic());
         StartCoroutine(SpawnBoss());
     }
 
@@ -249,7 +249,7 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnBoss()
     {
-        yield return YieldInstructionCache.WaitForSeconds(300);
+        //yield return YieldInstructionCache.WaitForSeconds(300);
         Spawn(7, 3000, CretureType.Swarm_Boss);
         yield return YieldInstructionCache.WaitForSeconds(300);
         Spawn(8,4000, CretureType.Guvnor);
@@ -332,5 +332,36 @@ public class SpawnManager : MonoBehaviour
                 count = 1;
             }
         }
+    }
+
+
+    public Vector3 RushInit()
+    {
+        int random = Random.Range(1, 8);
+        switch (random)
+        {
+            case 2:
+                return spawn2 + player.transform.position;
+                break;
+            case 3:
+                return spawn3 + player.transform.position;
+                break;
+            case 4:
+                return spawn4 + player.transform.position;
+                break;
+            case 5:
+                return spawn5 + player.transform.position;
+                break;
+            case 6:
+                return spawn6 + player.transform.position;
+                break;
+            case 7:
+                return spawn7 + player.transform.position;
+                break;
+            case 8:
+                return spawn8 + player.transform.position;
+                break;
+        }
+        return spawn1 + player.transform.position;
     }
 }

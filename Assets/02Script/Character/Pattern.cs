@@ -168,6 +168,5 @@ public class Pattern : MonoBehaviour
         {
             patternManager.TakeDamageOther(creatureKey, GetKey(), other);
         }
-
     }
 }

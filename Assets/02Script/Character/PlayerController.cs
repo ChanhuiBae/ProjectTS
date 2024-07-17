@@ -606,7 +606,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public void ApplyHP(float value)
     {
         Debug.Log("hp" + value);
-        currentHP -= value;
+        //currentHP -= value;
         if(currentHP < 0)
         {
             currentHP = 0;

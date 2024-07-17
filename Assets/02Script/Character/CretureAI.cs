@@ -88,7 +88,7 @@ public class CretureAI : MonoBehaviour
         homePos = transform.position;
         if(type == CretureType.Swarm_Boss)
         {
-            attackDistance = 6f;
+            attackDistance = 20f;
         }
         else
         {
@@ -210,6 +210,7 @@ public class CretureAI : MonoBehaviour
                             if (items.Value == true)
                             {
                                 anim.SetPattern(items.Key.GetPatternKey());
+                                Debug.Log(items.Key.GetPatternKey());
                                 items.Key.StartPattern();
                                 SetPatternDisable(items.Key);
                                 usePattern = true;
@@ -364,12 +365,5 @@ public class CretureAI : MonoBehaviour
     {
         //Debug.Log("disable"+pattern.GetKey());
         currentPatterns[pattern] = false;
-    }
-
-    // patterns
-
-    public void SuperStamp()
-    {
-
     }
 }
