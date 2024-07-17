@@ -365,4 +365,11 @@ public class CretureAI : MonoBehaviour
         //Debug.Log("disable"+pattern.GetKey());
         currentPatterns[pattern] = false;
     }
+
+    // patterns
+
+    public void SuperStamp()
+    {
+
+    }
 }

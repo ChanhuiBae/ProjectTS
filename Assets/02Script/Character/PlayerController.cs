@@ -807,6 +807,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             ChangeState(State.CrowdControl);
             isControll = false;
+            anim.SetKnockDown(true);
             StartCoroutine(MoveAirborne(time));
         }
     }
@@ -817,6 +818,7 @@ public class PlayerController : MonoBehaviour, IDamage
         yield return YieldInstructionCache.WaitForSeconds(time / 2);
         LeanTween.move(gameObject, pos, time / 2).setEase(LeanTweenType.easeInSine);
         yield return YieldInstructionCache.WaitForSeconds(time / 2);
+        anim.SetKnockDown(false);
         ChangeState(State.Idle);
         isControll = true;
     }
@@ -827,6 +829,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             ChangeState(State.CrowdControl);
             isControll = false;
+            anim.SetKnockBack(true);
             StartCoroutine(MoveKnockback(distance));
         }
     }
@@ -835,6 +838,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance, distance * 0.01f).setEase(LeanTweenType.easeOutQuart);
         yield return YieldInstructionCache.WaitForSeconds(distance * 0.01f);
+        anim.SetKnockBack(false);
         ChangeState(State.Idle);
     }
 

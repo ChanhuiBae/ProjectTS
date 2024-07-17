@@ -239,9 +239,9 @@ public class ArmoryPopup : MonoBehaviour
         {
             rifleImage.sprite = use;
             hammerImage.sprite = dontUse;
-            weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/PR_Basic_Image");
+            weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/PR");
 
-            icon.sprite = weaponsIcon[0].sprite;
+            icon.sprite = Resources.Load<Sprite>("Image/PR_Basic_Image");
             TableEntity_Weapon weapon;
             GameManager.Inst.GetRifle(data, out weapon);
             weaponName.text = weapon.Name.ToString();
@@ -258,8 +258,8 @@ public class ArmoryPopup : MonoBehaviour
         {
             rifleImage.sprite = dontUse;
             hammerImage.sprite = use;
-            weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/BH_Basic_Image");
-            icon.sprite = weaponsIcon[0].sprite;
+            weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/BH");
+            icon.sprite = Resources.Load<Sprite>("Image/BH_Basic_Image");
             TableEntity_Weapon weapon;
             GameManager.Inst.GetHammer(data, out weapon);
             weaponName.text = weapon.Name.ToString();
@@ -284,7 +284,7 @@ public class ArmoryPopup : MonoBehaviour
     {
         rifleImage.sprite = dontUse;
         hammerImage.sprite = use;
-        weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/BH_Basic_Image");
+        weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/BH");
         int data = GameManager.Inst.PlayerInfo.WeaponID;
         if (data >= 3000)
         {
@@ -300,7 +300,7 @@ public class ArmoryPopup : MonoBehaviour
     {
         rifleImage.sprite = use;
         hammerImage.sprite = dontUse;
-        weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/PR_Basic_Image");
+        weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/PR");
         int data = GameManager.Inst.PlayerInfo.WeaponID;
         if (data>= 3000)
         {
@@ -315,7 +315,7 @@ public class ArmoryPopup : MonoBehaviour
     public void ClickWeaponIcon()
     {
         outlines[0].sprite = choiceOutline;
-        if (weaponsIcon[0].sprite == Resources.Load<Sprite>("Image/PR_Basic_Image"))
+        if (weaponsIcon[0].sprite == Resources.Load<Sprite>("Image/PR"))
         {
             GameManager.Inst.SetGun();
         }

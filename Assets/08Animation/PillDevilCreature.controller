@@ -242,7 +242,7 @@ AnimatorStateMachine:
     m_Position: {x: 810, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5690978685682100602}
-    m_Position: {x: 1020, y: 360, z: 0}
+    m_Position: {x: 1080, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4392758570874000462}
     m_Position: {x: 840, y: 470, z: 0}
@@ -920,6 +920,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: Groggy
     m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Struge
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -1694,7 +1700,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Struge
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5690978685682100602}
   m_Solo: 0
@@ -1704,7 +1713,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.9788484
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

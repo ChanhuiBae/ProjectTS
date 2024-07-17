@@ -9,6 +9,7 @@ public class CreatureAnimationController : MonoBehaviour
     private int H_Stagger = Animator.StringToHash("Stagger");
     private int H_Pattern = Animator.StringToHash("Pattern");
     private int H_Groggy = Animator.StringToHash("Groggy");
+    private int H_Struge = Animator.StringToHash("Struge");
 
 
     private void Awake()
@@ -37,6 +38,11 @@ public class CreatureAnimationController : MonoBehaviour
     public void Move(bool use)
     {
         animator.SetBool(H_IsMove, use);
+    }
+
+    public void Struge()
+    {
+        animator.SetTrigger(H_Struge);
     }
 
 

@@ -66,14 +66,14 @@ public class PlayerAnimationController : MonoBehaviour
         return animator.GetBool(H_Combo);
     }
 
-    public void SetKnockBack()
+    public void SetKnockBack(bool use)
     {
-        animator.SetTrigger(H_KnockBack);
+        animator.SetBool(H_KnockBack, use);
     }
 
-    public void SetKnockDown()
+    public void SetKnockDown(bool use)
     {
-        animator.SetTrigger(H_KnockDown);
+        animator.SetBool(H_KnockDown, use);
     }
 
     public bool IsHammerAttack1()
