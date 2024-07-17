@@ -2865,6 +2865,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: swam
       objectReference: {fileID: 0}
+    - target: {fileID: 5695959340776513265, guid: 4616b35e4f2f8464ab203778e3fcf0fc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e9eeac51ef0984746aa3902103706399, type: 2}
     m_RemovedComponents:
     - {fileID: 5866666021909216657, guid: 4616b35e4f2f8464ab203778e3fcf0fc, type: 3}
     m_RemovedGameObjects: []
