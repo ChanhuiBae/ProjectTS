@@ -339,7 +339,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     private void CheckGroggyHP()
     {
-        if(groggyHP < 0)
+        if(groggyHP <= 0)
         {
             StartGroggy();
             groggyHP = maxGroggyHP;

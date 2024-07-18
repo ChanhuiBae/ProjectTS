@@ -40,7 +40,7 @@ public class PillDevil : MonoBehaviour
     public void SuperStamp()
     {
         ai.StopAI(8);
-        transform.LeanMove(new Vector3(0, 10, 0), 0.5f);
+        transform.LeanMove(transform.position + new Vector3(0, 20, 0), 0.5f);
         StartCoroutine(SetDownPosition());
     }
 
@@ -49,9 +49,9 @@ public class PillDevil : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(1f);
         effect = skillManager.SpawnEffect(25);
         effect.Init(EffectType.None, player.transform.position, 1f);
-        transform.position = effect.transform.position + new Vector3(0,10,0);
+        transform.position = effect.transform.position + new Vector3(0,20,0);
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        transform.LeanMove(new Vector3(0, -10, 0), 0.5f);
+        transform.LeanMove(transform.position + new Vector3(0, -20, 0), 0.5f);
         anim.Struge();
     }
 
@@ -63,21 +63,33 @@ public class PillDevil : MonoBehaviour
     }
     private IEnumerator RushTime()
     {
-        transform.position = spawnManager.RushInit();
-        transform.LookAt(player.transform.position);
-        effect = skillManager.SpawnEffect(26);
-        effect.Init(EffectType.None, player.transform.position, 1f);
-        effect.SetRotation(transform.rotation);
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        transform.LeanMove(transform.position + transform.forward  * 20f, 0.5f);
-        yield return YieldInstructionCache.WaitForSeconds(0.5f);
-        rushCount++;
-        if(rushCount < 4)
+
+        if (rushCount < 4)
         {
+            transform.position = spawnManager.RushInit();
+            transform.LookAt(player.transform.position);
+            effect = skillManager.SpawnEffect(26);
+            effect.Init(EffectType.None, player.transform.position, 1f);
+            effect.SetRotation(transform.rotation);
+            yield return YieldInstructionCache.WaitForSeconds(1f);
+            transform.LeanMove(transform.position + (transform.forward * 40f), 0.5f);
+            yield return YieldInstructionCache.WaitForSeconds(0.5f);
+
+            rushCount++;
             StartCoroutine(RushTime());
         }
         else
         {
+            transform.position = spawnManager.RushInit();
+            transform.LookAt(player.transform.position);
+            effect = skillManager.SpawnEffect(26);
+            effect.Init(EffectType.None, player.transform.position, 1f);
+            effect.SetRotation(transform.rotation);
+            yield return YieldInstructionCache.WaitForSeconds(1f);
+            transform.LeanMove(transform.position + (transform.forward * 30f), 0.5f);
+            yield return YieldInstructionCache.WaitForSeconds(0.5f);
+
+            rushCount++;
             SuperStamp();
         }
     }

@@ -95,6 +95,7 @@ public class Pattern : MonoBehaviour
     private IEnumerator CountHit()
     {
         current_hit = 0;
+        ai.LookTarget();
         for (int i = 0; i < hit.Hit_01; i++)
         {
             yield return null;
@@ -102,6 +103,7 @@ public class Pattern : MonoBehaviour
         HitUp();
         if (hit.Hit_02 != 0)
         {
+            ai.LookTarget();
             for (int i = 0; i < hit.Hit_02; i++)
             {
                 yield return null;
@@ -110,6 +112,7 @@ public class Pattern : MonoBehaviour
         }
         if (hit.Hit_03 != 0)
         {
+            ai.LookTarget();
             for (int i = 0; i < hit.Hit_03; i++)
             {
                 yield return null;
@@ -118,6 +121,7 @@ public class Pattern : MonoBehaviour
         }
         if (hit.Hit_04 != 0)
         {
+            ai.LookTarget();
             for (int i = 0; i < hit.Hit_04; i++)
             {
                 yield return null;
@@ -126,6 +130,7 @@ public class Pattern : MonoBehaviour
         }
         if (hit.Hit_05 != 0)
         {
+            ai.LookTarget();
             for (int i = 0; i < hit.Hit_05; i++)
             {
                 yield return null;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public enum AI_State
 {
@@ -166,10 +167,23 @@ public class CretureAI : MonoBehaviour
         ChangeAIState(AI_State.Chase); // first state
     }
 
+
+    public void LookTarget()
+    {
+        if(attackTarget != null)
+        {
+            transform.LookAt(target.transform.position);   
+        }
+    }
     
     protected IEnumerator Chase()
     {
+        while (usePattern)
+        {
+            yield return null;
+        }
         anim.Move(true);
+        navAgent.speed = speed;
         yield return null;
         while (attackTarget != null)
         {
@@ -189,6 +203,7 @@ public class CretureAI : MonoBehaviour
     protected IEnumerator Attack()
     {
         anim.Move(false);
+        navAgent.speed = 0;
         yield return null;
         while (true)
         {
