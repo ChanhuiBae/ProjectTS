@@ -300,7 +300,7 @@ public class EffectManager : MonoBehaviour
         
         player.SetIdle();
     }
-    
+    /*
     private void Update()
     {
         if (Dimension_Distortion_Trigger)
@@ -350,7 +350,7 @@ public class EffectManager : MonoBehaviour
             frame++;
         }
     }
-
+    */
     public void WhiteTrail()
     {
         SetColorInversion(0);
