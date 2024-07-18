@@ -63,35 +63,45 @@ public class PillDevil : MonoBehaviour
     }
     private IEnumerator RushTime()
     {
+        transform.position = spawnManager.RushInit();
+        transform.LookAt(player.transform.position);
+        effect = skillManager.SpawnEffect(26);
+        effect.Init(EffectType.None, player.transform.position, 1f);
+        effect.SetRotation(transform.rotation);
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        transform.LeanMove(transform.position + (transform.forward * 40f), 0.5f);
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
-        if (rushCount < 4)
-        {
-            transform.position = spawnManager.RushInit();
-            transform.LookAt(player.transform.position);
-            effect = skillManager.SpawnEffect(26);
-            effect.Init(EffectType.None, player.transform.position, 1f);
-            effect.SetRotation(transform.rotation);
-            yield return YieldInstructionCache.WaitForSeconds(1f);
-            transform.LeanMove(transform.position + (transform.forward * 40f), 0.5f);
-            yield return YieldInstructionCache.WaitForSeconds(0.5f);
+        transform.position = spawnManager.RushInit();
+        transform.LookAt(player.transform.position);
+        effect = skillManager.SpawnEffect(26);
+        effect.Init(EffectType.None, player.transform.position, 1f);
+        effect.SetRotation(transform.rotation);
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        transform.LeanMove(transform.position + (transform.forward * 40f), 0.5f);
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
-            rushCount++;
-            StartCoroutine(RushTime());
-        }
-        else
-        {
-            transform.position = spawnManager.RushInit();
-            transform.LookAt(player.transform.position);
-            effect = skillManager.SpawnEffect(26);
-            effect.Init(EffectType.None, player.transform.position, 1f);
-            effect.SetRotation(transform.rotation);
-            yield return YieldInstructionCache.WaitForSeconds(1f);
-            transform.LeanMove(transform.position + (transform.forward * 30f), 0.5f);
-            yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
-            rushCount++;
-            SuperStamp();
-        }
+        transform.position = spawnManager.RushInit();
+        transform.LookAt(player.transform.position);
+        effect = skillManager.SpawnEffect(26);
+        effect.Init(EffectType.None, player.transform.position, 1f);
+        effect.SetRotation(transform.rotation);
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        transform.LeanMove(transform.position + (transform.forward * 40f), 0.5f);
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
+
+        transform.position = spawnManager.RushInit();
+        transform.LookAt(player.transform.position);
+        effect = skillManager.SpawnEffect(26);
+        effect.Init(EffectType.None, player.transform.position, 1f);
+        effect.SetRotation(transform.rotation);
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        transform.LeanMove(transform.position + (transform.forward * 30f), 0.5f);
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
+
+        rushCount++;
+        SuperStamp();
     }
 
 }

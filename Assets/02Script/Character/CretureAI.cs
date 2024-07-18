@@ -114,17 +114,29 @@ public class CretureAI : MonoBehaviour
     }
     protected void ChangeAIState(AI_State newState)
     {
-        if (!usePattern)
+        if (usePattern)
         {
-
+            StartCoroutine(WaitState(newState));
         }
-        StopAllCoroutines();
-        currentState = newState;
+        else
+        {
+            StopAllCoroutines();
+            currentState = newState;
 
-        anim.Move(true);
-        anim.SetPattern(0);
-        StartCoroutine(currentState.ToString());
+            anim.Move(true);
+            anim.SetPattern(0);
+            StartCoroutine(currentState.ToString());
+        }
     } 
+
+    private IEnumerator WaitState(AI_State newState)
+    {
+        while(usePattern)
+        {
+            yield return null;
+        }
+        ChangeAIState(newState);
+    }
 
     public AI_State GetState()
     {
@@ -178,10 +190,6 @@ public class CretureAI : MonoBehaviour
     
     protected IEnumerator Chase()
     {
-        while (usePattern)
-        {
-            yield return null;
-        }
         anim.Move(true);
         navAgent.speed = speed;
         yield return null;

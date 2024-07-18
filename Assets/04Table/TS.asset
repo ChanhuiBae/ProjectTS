@@ -3469,12 +3469,12 @@ MonoBehaviour:
     Hit_05: 0
     End: 7
   - ID: 300010
-    Hit_01: 1
-    Hit_02: 0
-    Hit_03: 0
-    Hit_04: 0
-    Hit_05: 0
-    End: 1
+    Hit_01: 260
+    Hit_02: 90
+    Hit_03: 90
+    Hit_04: 90
+    Hit_05: 90
+    End: 2
   - ID: 300011
     Hit_01: 345
     Hit_02: 251

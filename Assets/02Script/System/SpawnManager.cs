@@ -337,8 +337,13 @@ public class SpawnManager : MonoBehaviour
 
     public Vector3 RushInit()
     {
-        int random = Random.Range(1, 8);
-        switch (random)
+        spawn += 3;
+        if (spawn > 8)
+        {
+            spawn -= 8;
+        }
+        spawn = Random.Range(spawn, spawn + 2);
+        switch (spawn)
         {
             case 2:
                 return spawn2 + player.transform.position;
