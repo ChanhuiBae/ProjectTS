@@ -278,7 +278,6 @@ public class GameManager : Singleton<GameManager>
         wsData = new WeaponSkillSetData();
         setData = new SettingData();
 
-        CreateUserData();
         if (CheckData())
         {
             LoadData();
