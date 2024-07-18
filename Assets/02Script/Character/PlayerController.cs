@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private HighlightEffect inner;
 
     private Button roll;
+    private Image rollBlock;
     private bool isControll = true;
     public bool CONTROLL
     {
@@ -98,6 +99,14 @@ public class PlayerController : MonoBehaviour, IDamage
             else
             {
                 roll.onClick.AddListener(ChangeRoll);
+                if(!roll.transform.Find("block").TryGetComponent<Image>(out rollBlock))
+                {
+                    Debug.Log("PlayerController - Awake - Image");
+                }
+                else
+                {
+                    rollBlock.enabled = false;
+                }
             }
             if (!GameObject.Find("ExperienceFill").TryGetComponent<Image>(out expFill))
             {
@@ -554,6 +563,8 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (!anim.isRoll())
         {
+            rollBlock.enabled = true;
+            roll.enabled = false;
             transform.LookAt(transform.position + direction);
             rollvalue = true;
             anim.Roll();
@@ -569,7 +580,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 yield return null;
             }
             isInvincibility = false;
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 21; i++)
             {
                 rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.3f * Time.deltaTime);
                 yield return null;
@@ -588,6 +599,8 @@ public class PlayerController : MonoBehaviour, IDamage
                 ChangeState(State.Idle);
                 anim.Move(false);
             }
+            rollBlock.enabled = false;
+            roll.enabled = true;
         }
     }
 
