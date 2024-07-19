@@ -73,7 +73,7 @@ public class MenuManager : MonoBehaviour
     private void Awake()
     {
         QualitySettings.shadowDistance = 55;
-        if (!GameObject.Find("Background").TryGetComponent<Image>(out block))
+        if (!GameObject.Find("BACKGROUND").TryGetComponent<Image>(out block))
         {
             Debug.Log("RewardPopup - Awake - Image");
         }
@@ -338,7 +338,7 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        block.gameObject.SetActive(false);
+        block.enabled = false;
     }
 
     public void InitSkillButton(int num, int skill, string name, int level)
@@ -488,7 +488,7 @@ public class MenuManager : MonoBehaviour
 
     public void SetLevelUpPopup(int playerLevel)
     {
-        block.gameObject.SetActive(true);
+        block.enabled = true;
         level.text = "Lv"+playerLevel.ToString();
         levelupPopup.SetActive(true);
         choice = 0;
@@ -581,7 +581,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            block.gameObject.SetActive(false);
+            block.enabled = false;
             Time.timeScale = 1;
             for (int i = 0; i < allSkills.Count; i++)
             {
@@ -645,7 +645,7 @@ public class MenuManager : MonoBehaviour
 
     private void PressPause()
     {
-        block.gameObject.SetActive(true);
+        block.enabled = true;
         Time.timeScale = 0f;
         pause.gameObject.SetActive(false);
         pausePopup.SetActive(true);
@@ -654,7 +654,7 @@ public class MenuManager : MonoBehaviour
 
     private void OnPlay()
     {
-        block.gameObject.SetActive(false);
+        block.enabled = false;
         Time.timeScale = 1.0f;
         current.sprite = pauseImage;
         pause.gameObject.SetActive(true);

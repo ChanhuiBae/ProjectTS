@@ -2586,9 +2586,9 @@ MonoBehaviour:
     Hit_04: 0
     Hit_05: 0
   - ID: 203
-    Hit_01: 3
-    Hit_02: 11
-    Hit_03: 5
+    Hit_01: 12
+    Hit_02: 1
+    Hit_03: 80
     Hit_04: 0
     Hit_05: 0
   - ID: 231

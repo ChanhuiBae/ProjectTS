@@ -626,7 +626,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public void ApplyHP(float value)
     {
         Debug.Log("hp" + value);
-        //currentHP -= value;
+        currentHP -= value;
         if(currentHP < 0)
         {
             currentHP = 0;
@@ -719,6 +719,11 @@ public class PlayerController : MonoBehaviour, IDamage
     public void SetAttackArea(float radius)
     {
         attackArea.Attack(Vector3.zero, radius);
+    }
+
+    public void SetAttackAreaStop()
+    {
+        attackArea.StopAttack();
     }
 
     public bool IsAttack()

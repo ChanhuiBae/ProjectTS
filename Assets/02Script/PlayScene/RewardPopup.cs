@@ -31,7 +31,7 @@ public class RewardPopup : MonoBehaviour
 
     private void Awake()
     {
-        if(!GameObject.Find("Background").TryGetComponent<Image>(out block))
+        if(!GameObject.Find("BACKGROUND").TryGetComponent<Image>(out block))
         {
             Debug.Log("RewardPopup - Awake - Image");
         }
@@ -110,7 +110,7 @@ public class RewardPopup : MonoBehaviour
     public void SetRewardPopup(int time, bool boss)
     {
         Time.timeScale = 0f;
-        block.gameObject.SetActive(true);
+        block.enabled = true;
         if(GameManager.Inst.WeaponSkillData.skill1_ID != 0)
         {
             TableEntity_Skill data;
