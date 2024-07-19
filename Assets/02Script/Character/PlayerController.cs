@@ -838,12 +838,14 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     private IEnumerator MoveAirborne(float time)
     {
+        isInvincibility = true;
         Vector3 pos = transform.position;
         LeanTween.move(gameObject, pos + (Vector3.up * 3f), time / 2).setEase(LeanTweenType.easeOutCubic);
         yield return YieldInstructionCache.WaitForSeconds(time / 2);
         LeanTween.move(gameObject, pos, time / 2).setEase(LeanTweenType.easeInSine);
         yield return YieldInstructionCache.WaitForSeconds(time / 2);
         anim.SetKnockDown(false);
+        isInvincibility = false;
         ChangeState(State.Idle);
         isControll = true;
     }
@@ -876,4 +878,5 @@ public class PlayerController : MonoBehaviour, IDamage
     {
 
     }
+
 }
