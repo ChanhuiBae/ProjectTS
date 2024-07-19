@@ -16,6 +16,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private int ID;
     private float maxHP;
     private float currentHP;
+    public float HP
+    {
+        get => currentHP/maxHP;
+    }
 
     private CretureType type;
     private int physics;

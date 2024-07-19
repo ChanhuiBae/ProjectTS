@@ -266,6 +266,13 @@ public class PlayerController : MonoBehaviour, IDamage
                 return true;
             }
         }
+        else if(state == State.Die)
+        {
+            this.state = state;
+            isControll = false;
+            StartCoroutine(Dissolve());
+            return true;
+        }
         else
         {
             return false;
