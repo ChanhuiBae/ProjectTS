@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 1926304628279694336}
   - component: {fileID: 4124841266945635529}
   - component: {fileID: 4108354989952690980}
+  - component: {fileID: 5815997313461549813}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -461,6 +462,18 @@ MonoBehaviour:
   hitFxFadeOutDuration: 0.25
   hitFxColor: {r: 1, g: 0, b: 0, a: 1}
   hitFxRadius: 0.5
+--- !u!114 &5815997313461549813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441210597352361885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f9c958eda887b419cb8858b7267d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2675550133648124963
 GameObject:
   m_ObjectHideFlags: 0

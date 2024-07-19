@@ -14719,6 +14719,16 @@ MonoBehaviour:
   - {fileID: 367483214}
   sfxList:
   - {fileID: 8300000, guid: a639cab4690d24a4792508d062ea10fe, type: 3}
+  - {fileID: 8300000, guid: df518dd031b0de040aa6aa0c66ad4afb, type: 3}
+  - {fileID: 8300000, guid: c9d09835921e72a45907f3ac64c4a869, type: 3}
+  - {fileID: 8300000, guid: a4f2691694013ab498e8969918cd58dd, type: 3}
+  - {fileID: 8300000, guid: 8de017f16170eb546bd4284bd6f99a80, type: 3}
+  - {fileID: 8300000, guid: aa49c3dbd8ccc5e438da42c6a8e1b2a9, type: 3}
+  - {fileID: 8300000, guid: eb3b7ffb06653604b86f22adc22ae753, type: 3}
+  - {fileID: 8300000, guid: 51a1c4f20c14ee04d95ea4c45f999916, type: 3}
+  - {fileID: 8300000, guid: a8e802c9f6b04084e94b9762ea099525, type: 3}
+  - {fileID: 8300000, guid: 06997c1e0b5d05746b6bea0fdff9da3e, type: 3}
+  - {fileID: 8300000, guid: 88f107caca811244f9208390852617bb, type: 3}
 --- !u!4 &1740938110
 Transform:
   m_ObjectHideFlags: 0

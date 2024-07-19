@@ -10,6 +10,16 @@ public enum BGM_Type
 public enum SFX_Type
 {
     SFX_EXP = 0,
+    SFX_Charging = 1,
+    SFX_Gordian_Swing1 = 2,
+    SFX_Gordian_Swing2 = 3,
+    SFX_Gordian_Wave = 4,
+    SFX_DragonHammer = 5,
+    SFX_Attraction_Pick = 6,
+    SFX_Attraction_Zoom = 7,
+    SFX_Attraction_Thunder = 8,
+    SFX_Samsara =9,
+    SFX_Naraka = 10,
 }
 
 public class SoundManager : MonoBehaviour

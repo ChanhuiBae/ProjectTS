@@ -126,6 +126,7 @@ public class EffectManager : MonoBehaviour
     {
         fullCharge = false;
         charge1.Play();
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Charging);
     }
 
     public void ChargeUp(int count)
@@ -134,6 +135,7 @@ public class EffectManager : MonoBehaviour
         {
             charge1.Stop();
             charge2.Play();
+            GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Charging);
         }
         if (count == 2)
             fullCharge = true;
@@ -166,6 +168,7 @@ public class EffectManager : MonoBehaviour
     {
         effect = skillManager.SpawnEffect(23);
         effect.InitFollow(EffectType.None, point.gameObject, 2f);
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_DragonHammer);
     }
 
     public void NarakaEffect()
@@ -178,6 +181,7 @@ public class EffectManager : MonoBehaviour
     public void NarakaPlayerEffect()
     {
         float time = 1.5f;
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Naraka);
         effect = skillManager.SpawnEffect(17);
         effect.InitFollow(EffectType.None, gameObject, time);
     }
@@ -186,6 +190,7 @@ public class EffectManager : MonoBehaviour
     {
         effect = skillManager.SpawnEffect(13);
         effect.Init(EffectType.None, transform.position, 1);
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Samsara);
     }
 
     public void SetSlashCycle()
@@ -193,6 +198,7 @@ public class EffectManager : MonoBehaviour
         StopCharge();
         effect = skillManager.SpawnEffect(3);
         effect.Init(EffectType.None, transform.position, 1);
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Gordian_Swing1);
     }
 
     public void SetSlashForward()
@@ -210,6 +216,7 @@ public class EffectManager : MonoBehaviour
             effect.SetRotation(transform.rotation);
             effect.Powerwave(0.5f, 8f);
             attackArea.AttackInAngle();
+            GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Gordian_Wave);
         }
     }
     public void SpawnDrone()
