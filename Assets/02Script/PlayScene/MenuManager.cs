@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    private GameObject timeBackgroun;
-    private TextMeshProUGUI countdown;
-    private int time;
+    private Image block;
+    private TimePopup timePopup;
+
     private TextMeshProUGUI killCount;
     private SkillButton basic;
     private SkillButton skill1;
@@ -73,13 +73,15 @@ public class MenuManager : MonoBehaviour
     private void Awake()
     {
         QualitySettings.shadowDistance = 55;
-        timeBackgroun = GameObject.Find("TimeBackground");
-        if (!GameObject.Find("GameTime").TryGetComponent<TextMeshProUGUI>(out countdown))
+        if (!GameObject.Find("Background").TryGetComponent<Image>(out block))
         {
-            Debug.Log("MenuManager - Awake - TextMeshProUGUI");
+            Debug.Log("RewardPopup - Awake - Image");
         }
-        time = 600;
-        
+
+        if (!GameObject.Find("TimePopup").TryGetComponent<TimePopup>(out timePopup))
+        {
+            Debug.Log("MenuManager - Awake - TimePopup");
+        }
         if (!GameObject.Find("KillCount").TryGetComponent<TextMeshProUGUI>(out killCount))
         {
             Debug.Log("MenuManager - Awake - TextMeshProUGUI");
@@ -259,6 +261,10 @@ public class MenuManager : MonoBehaviour
             {
                 Debug.Log("MenuManager - Awake - Image");
             }
+            else
+            {
+                icon1.sprite = Resources.Load<Sprite>("Image/NoneSkill");
+            }
             obj = settingPopup.transform.Find("SetSkill2").gameObject;
             if (!obj.TryGetComponent<Button>(out setSkill2))
             {
@@ -272,6 +278,10 @@ public class MenuManager : MonoBehaviour
             {
                 Debug.Log("MenuManager - Awake - Image");
             }
+            else
+            {
+                icon2.sprite = Resources.Load<Sprite>("Image/NoneSkill");
+            }
             obj = settingPopup.transform.Find("SetSkill3").gameObject;
             if (!obj.TryGetComponent<Button>(out setSkill3))
             {
@@ -284,6 +294,10 @@ public class MenuManager : MonoBehaviour
             if(!obj.TryGetComponent<Image>(out icon3))
             {
                 Debug.Log("MenuManager - Awake - Image");
+            }
+            else
+            {
+                icon3.sprite = Resources.Load<Sprite>("Image/NoneSkill");
             }
         }
         exitPopup = GameObject.Find("ExitPopup");
@@ -320,19 +334,11 @@ public class MenuManager : MonoBehaviour
         pausePopup.SetActive(false);
         settingPopup.SetActive(false);
         exitPopup.SetActive(false);
-        StartCoroutine(Timer());
     }
 
-    private IEnumerator Timer()
+    private void Start()
     {
-        while (time > 0)
-        {
-            yield return YieldInstructionCache.WaitForSeconds(1f);
-            time--;
-            countdown.text = (time / 60).ToString() + ":" + (time % 60).ToString();
-        }
-        countdown.gameObject.SetActive(false);
-        timeBackgroun.SetActive(false);
+        block.gameObject.SetActive(false);
     }
 
     public void InitSkillButton(int num, int skill, string name, int level)
@@ -482,6 +488,7 @@ public class MenuManager : MonoBehaviour
 
     public void SetLevelUpPopup(int playerLevel)
     {
+        block.gameObject.SetActive(true);
         level.text = "Lv"+playerLevel.ToString();
         levelupPopup.SetActive(true);
         choice = 0;
@@ -574,6 +581,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
+            block.gameObject.SetActive(false);
             Time.timeScale = 1;
             for (int i = 0; i < allSkills.Count; i++)
             {
@@ -637,6 +645,7 @@ public class MenuManager : MonoBehaviour
 
     private void PressPause()
     {
+        block.gameObject.SetActive(true);
         Time.timeScale = 0f;
         pause.gameObject.SetActive(false);
         pausePopup.SetActive(true);
@@ -645,6 +654,7 @@ public class MenuManager : MonoBehaviour
 
     private void OnPlay()
     {
+        block.gameObject.SetActive(false);
         Time.timeScale = 1.0f;
         current.sprite = pauseImage;
         pause.gameObject.SetActive(true);
@@ -680,13 +690,6 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1f;
         exitPopup.SetActive(false);
         player.ChangeState(State.Die);
-        StartCoroutine(Exiting());
-    }
-
-    private IEnumerator Exiting()
-    {
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        GameManager.Inst.AsyncLoadNextScene(SceneName.LobbyScene);
     }
 
     private void NotExit()
@@ -698,7 +701,7 @@ public class MenuManager : MonoBehaviour
     public void SetReward(bool boss)
     {
         rewardPopup.gameObject.SetActive(true);
-        rewardPopup.SetRewardPopup(time, boss);
+        rewardPopup.SetRewardPopup(timePopup.Time, boss);
     }
 
     private void SetVolumBGM()

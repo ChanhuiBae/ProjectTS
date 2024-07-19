@@ -96,6 +96,10 @@ public class SkillButton : MonoBehaviour
         {
             Debug.Log("SkillButton - Awake - Image");
         }
+        else
+        {
+            icon.sprite = Resources.Load<Sprite>("Image/NoneSkill");
+        }
         if (!transform.TryGetComponent<RectTransform>(out center))
         {
             Debug.Log("SkillButton - Awake - RectTransform");
