@@ -114,7 +114,7 @@ MonoBehaviour:
     Category_ID: 1
     Skill_Level_Max: 1
     Charge_Max: 0
-    Hit_Max: 2
+    Hit_Max: 4
     Skill_Name: "\uBD80\uC2A4\uD2B8 \uD574\uBA38 \uC77C\uBC18 \uACF5\uACA9"
     Skill_Name_Eng: BH_Basic
     Is_Scoping: 0
