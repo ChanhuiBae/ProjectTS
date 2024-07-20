@@ -2973,6 +2973,106 @@ MonoBehaviour:
     Trigger_Phase_02: 0
     Trigger_Phase_03: 0
     Name: SuperStamp
+  - ID: 400000
+    Creature_ID: 4000
+    Hit_Max: 2
+    Delay_Min: 8
+    Delay_Max: 12
+    Cool_Time: 20
+    Trigger_Phase_01: 1
+    Trigger_Phase_02: 0
+    Trigger_Phase_03: 0
+    Name: RightAndLeftStamp
+  - ID: 400001
+    Creature_ID: 4000
+    Hit_Max: 4
+    Delay_Min: 15
+    Delay_Max: 18
+    Cool_Time: 40
+    Trigger_Phase_01: 1
+    Trigger_Phase_02: 1
+    Trigger_Phase_03: 0
+    Name: StampAndSwing
+  - ID: 400002
+    Creature_ID: 4000
+    Hit_Max: 3
+    Delay_Min: 14
+    Delay_Max: 17
+    Cool_Time: 35
+    Trigger_Phase_01: 0
+    Trigger_Phase_02: 1
+    Trigger_Phase_03: 0
+    Name: StampAndShoot
+  - ID: 400003
+    Creature_ID: 4000
+    Hit_Max: 2
+    Delay_Min: 10
+    Delay_Max: 12
+    Cool_Time: 20
+    Trigger_Phase_01: 1
+    Trigger_Phase_02: 1
+    Trigger_Phase_03: 0
+    Name: LeftAndRightSwing
+  - ID: 400004
+    Creature_ID: 4000
+    Hit_Max: 3
+    Delay_Min: 15
+    Delay_Max: 18
+    Cool_Time: 40
+    Trigger_Phase_01: 1
+    Trigger_Phase_02: 1
+    Trigger_Phase_03: 0
+    Name: SwingAndBothStamp
+  - ID: 400005
+    Creature_ID: 4000
+    Hit_Max: 1
+    Delay_Min: 10
+    Delay_Max: 12
+    Cool_Time: 40
+    Trigger_Phase_01: 1
+    Trigger_Phase_02: 1
+    Trigger_Phase_03: 0
+    Name: HeadStamp
+  - ID: 400006
+    Creature_ID: 4000
+    Hit_Max: 1
+    Delay_Min: 6
+    Delay_Max: 9
+    Cool_Time: 20
+    Trigger_Phase_01: 1
+    Trigger_Phase_02: 1
+    Trigger_Phase_03: 0
+    Name: Clap
+  - ID: 400007
+    Creature_ID: 4000
+    Hit_Max: 1
+    Delay_Min: 13
+    Delay_Max: 16
+    Cool_Time: 60
+    Trigger_Phase_01: 0
+    Trigger_Phase_02: 1
+    Trigger_Phase_03: 0
+    Name: Breath
+  - ID: 400008
+    Creature_ID: 4000
+    Hit_Max: 1
+    Delay_Min: 9
+    Delay_Max: 11
+    Cool_Time: 50
+    Trigger_Phase_01: 1
+    Trigger_Phase_02: 1
+    Trigger_Phase_03: 0
+    Name: ThornShoot
+  - ID: 400009
+    Creature_ID: 4000
+    Hit_Max: 1
+    Delay_Min: 0
+    Delay_Max: 0
+    Cool_Time: 80
+    Trigger_Phase_01: 0
+    Trigger_Phase_02: 1
+    Trigger_Phase_03: 0
+    Name: ThornFromSky
   Pattern_Info_List:
   - ID: 1000001
     Damage_Type: Physics
@@ -3390,6 +3490,253 @@ MonoBehaviour:
     Stun_Chance: 100
     Airborne_Time: 1
     Knockback_Distance: 1.5
+  - ID: 4000001
+    Damage_Type: Physics
+    Physics_Mul: 1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000002
+    Damage_Type: Physics
+    Physics_Mul: 1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000011
+    Damage_Type: Physics
+    Physics_Mul: 1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000012
+    Damage_Type: Physics
+    Physics_Mul: 1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000013
+    Damage_Type: Physics
+    Physics_Mul: 1.2
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000014
+    Damage_Type: Physics
+    Physics_Mul: 1.2
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000021
+    Damage_Type: Physics
+    Physics_Mul: 1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000022
+    Damage_Type: Physics
+    Physics_Mul: 1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000023
+    Damage_Type: Physics
+    Physics_Mul: 1.5
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000031
+    Damage_Type: Physics
+    Physics_Mul: 1.2
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000032
+    Damage_Type: Physics
+    Physics_Mul: 1.2
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000041
+    Damage_Type: Physics
+    Physics_Mul: 1.2
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000042
+    Damage_Type: Physics
+    Physics_Mul: 1.2
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000043
+    Damage_Type: Physics
+    Physics_Mul: 1.7
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 1
+    Knockback_Distance: 1.5
+  - ID: 4000051
+    Damage_Type: Physics
+    Physics_Mul: 2
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 2
+    Knockback_Distance: 2
+  - ID: 4000061
+    Damage_Type: Physics
+    Physics_Mul: 1.5
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 1
+    Knockback_Distance: 1.5
+  - ID: 4000071
+    Damage_Type: Physics
+    Physics_Mul: 1.1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 2
+    Knockback_Distance: 2
+  - ID: 4000081
+    Damage_Type: Physics
+    Physics_Mul: 1.5
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0
+  - ID: 4000091
+    Damage_Type: Physics
+    Physics_Mul: 1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0
   Pattern_Hit_Frame:
   - ID: 100000
     Hit_01: 14
@@ -3482,6 +3829,76 @@ MonoBehaviour:
     Hit_04: 0
     Hit_05: 0
     End: 10
+  - ID: 400000
+    Hit_01: 87
+    Hit_02: 20
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0
+    End: 163
+  - ID: 400001
+    Hit_01: 88
+    Hit_02: 7
+    Hit_03: 175
+    Hit_04: 200
+    Hit_05: 0
+    End: 195
+  - ID: 400002
+    Hit_01: 88
+    Hit_02: 7
+    Hit_03: 175
+    Hit_04: 0
+    Hit_05: 0
+    End: 160
+  - ID: 400003
+    Hit_01: 85
+    Hit_02: 40
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0
+    End: 198
+  - ID: 400004
+    Hit_01: 85
+    Hit_02: 40
+    Hit_03: 198
+    Hit_04: 0
+    Hit_05: 0
+    End: 203
+  - ID: 400005
+    Hit_01: 132
+    Hit_02: 0
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0
+    End: 11
+  - ID: 400006
+    Hit_01: 100
+    Hit_02: 0
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0
+    End: 35
+  - ID: 400007
+    Hit_01: 228
+    Hit_02: 0
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0
+    End: 299
+  - ID: 400008
+    Hit_01: 1
+    Hit_02: 0
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0
+    End: 1
+  - ID: 400009
+    Hit_01: 1
+    Hit_02: 0
+    Hit_03: 0
+    Hit_04: 0
+    Hit_05: 0
+    End: 1
   Passive_Skill:
   - Weapon_Type: 2
     ID: 2000
