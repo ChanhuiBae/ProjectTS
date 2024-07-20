@@ -186,6 +186,8 @@ public class TableEntity_Pattern_Hit_Frame
     public int Hit_03;
     public int Hit_04;
     public int Hit_05;
+    public int Hit_06;
+    public int Hit_07;
     public int End;
 }
 

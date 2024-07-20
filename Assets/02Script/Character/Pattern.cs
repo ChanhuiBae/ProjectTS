@@ -137,7 +137,25 @@ public class Pattern : MonoBehaviour
             }
             HitUp();
         }
-        for(int i = 0; i < hit.End; i++)
+        if (hit.Hit_06 != 0)
+        {
+            ai.LookTarget();
+            for (int i = 0; i < hit.Hit_06; i++)
+            {
+                yield return null;
+            }
+            HitUp();
+        }
+        if (hit.Hit_07 != 0)
+        {
+            ai.LookTarget();
+            for (int i = 0; i < hit.Hit_07; i++)
+            {
+                yield return null;
+            }
+            HitUp();
+        }
+        for (int i = 0; i < hit.End; i++)
         {
             yield return null;
         }
