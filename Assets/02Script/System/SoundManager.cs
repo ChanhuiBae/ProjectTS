@@ -10,16 +10,23 @@ public enum BGM_Type
 public enum SFX_Type
 {
     SFX_EXP = 0,
-    SFX_Charging = 1,
-    SFX_Gordian_Swing1 = 2,
-    SFX_Gordian_Swing2 = 3,
-    SFX_Gordian_Wave = 4,
-    SFX_DragonHammer = 5,
-    SFX_Attraction_Pick = 6,
-    SFX_Attraction_Zoom = 7,
-    SFX_Attraction_Thunder = 8,
-    SFX_Samsara =9,
-    SFX_Naraka = 10,
+    SFX_Hit = 1,
+    SFX_LevelUp = 2,
+}
+
+public enum Skill_SFX
+{
+    Hammer_Swing = 0,
+    Charging = 1,
+    Gordian_Swing1 = 2,
+    Gordian_Swing2 = 3,
+    Gordian_Wave = 4,
+    DragonHammer = 5,
+    Attraction_Pick = 6,
+    Attraction_Zoom = 7,
+    Attraction_Thunder = 8,
+    Samsara = 9,
+    Naraka = 10,
 }
 
 public class SoundManager : MonoBehaviour
@@ -41,6 +48,11 @@ public class SoundManager : MonoBehaviour
     private List<AudioSource> sfxPlayers;
     [SerializeField]
     private List<AudioClip> sfxList;
+    private int skillCurser = 0;
+    [SerializeField]
+    private List<AudioSource> skillPlayers;
+    [SerializeField]
+    private List<AudioClip> skillSFXList;
 
     private void Start()
     {
@@ -66,10 +78,12 @@ public class SoundManager : MonoBehaviour
         if (volum < min)
         {
             masterMixer.SetFloat("SFX", -80);
+            masterMixer.SetFloat("Skill", -80);
         }
         else
         {
             masterMixer.SetFloat("SFX", volum);
+            masterMixer.SetFloat("Skill", volum);
         }
     }
 
@@ -116,6 +130,18 @@ public class SoundManager : MonoBehaviour
         if (curser > sfxPlayers.Count - 1)
         {
             curser = 0;
+        }
+    }
+
+    public void PlaySKill(Skill_SFX skill)
+    {
+        skillPlayers[skillCurser].clip = skillSFXList[(int)skill];
+        skillPlayers[skillCurser].Play();
+
+        skillCurser++;
+        if (skillCurser > skillPlayers.Count - 1)
+        {
+            skillCurser = 0;
         }
     }
 

@@ -6,7 +6,7 @@ public class PlayerSound : MonoBehaviour
 {
     public void PlayAttractionField()
     {
-        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Attraction_Pick);
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Attraction_Pick);
         StartCoroutine(PlayZoom());
     }
 
@@ -14,18 +14,23 @@ public class PlayerSound : MonoBehaviour
     {
         yield return YieldInstructionCache.WaitForSeconds(0.08f);
 
-        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Attraction_Zoom);
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Attraction_Zoom);
         StartCoroutine(PlayThunder());
     }
 
     private IEnumerator PlayThunder()
     {
         yield return YieldInstructionCache.WaitForSeconds(0.6f);
-        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Attraction_Thunder);
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Attraction_Thunder);
     }
 
     public void PlaySwing()
     {
-        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Gordian_Swing2);
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Gordian_Swing2);
+    }
+
+    public void DragonSound()
+    {
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.DragonHammer);
     }
 }
