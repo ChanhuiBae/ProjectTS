@@ -5,6 +5,7 @@ using UnityEngine.Audio;
 public enum BGM_Type
 {
     BGM_Play = 0,
+    BGM_Title = 1,
 }
 
 public enum SFX_Type
@@ -29,6 +30,11 @@ public enum Skill_SFX
     Samsara = 10,
     Naraka1 = 11,
     Naraka2 = 12,
+    Bullet = 13,
+    PG_15 = 14,
+    APHE = 15,
+    PinPointDown = 16,
+    DesignatedEliminate = 17
 }
 
 public class SoundManager : MonoBehaviour

@@ -44,4 +44,9 @@ public class PlayerSound : MonoBehaviour
         GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Hammer_Attack2);
     }
 
+    public void PG_15()
+    {
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.PG_15);
+    }
+
 }

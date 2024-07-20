@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private GameObject grenade;
 
     private SkillManager skillManager;
+    private int skillID;
     private AttackArea attackArea;
 
     private Effect stun;
@@ -148,7 +149,8 @@ public class PlayerController : MonoBehaviour, IDamage
     }
 
     public void Init(WeaponType type)
-    {   
+    {
+        skillID = 0;
         rollvalue = false;
         if (sceneNum > 2 && type != WeaponType.None)
         {
@@ -243,10 +245,7 @@ public class PlayerController : MonoBehaviour, IDamage
                         attackCount++;
                         break;
                     case State.Attack_Hammer:
-                        skillManager.UseSkill(0);
-                        weapon.OnTrail();
                         anim.Attack(true);
-                        skillManager.SetCrowdControl(CrowdControlType.Stun);
                         attackCount++;
                         break;
                     case State.Attack_Gun:
@@ -318,6 +317,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public void UseSkill(int skill_id)
     {
         anim.Skill(skill_id);
+        skillID = skill_id;
         if (skill_id == 302)
         {
             StopAllCoroutines();
@@ -327,10 +327,13 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void GetDirection()
     {
-        direction.x = Input.GetAxisRaw("Horizontal");
-        direction.z = Input.GetAxisRaw("Vertical");
-        direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
-        direction.Normalize();
+        if(state != State.Attack_Skill || skillID == 302)
+        {
+            direction.x = Input.GetAxisRaw("Horizontal");
+            direction.z = Input.GetAxisRaw("Vertical");
+            direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
+            direction.Normalize();
+        }
     }
 
 
@@ -527,10 +530,16 @@ public class PlayerController : MonoBehaviour, IDamage
         if (!anim.GetCombo() && anim.IsHammerAttack1())
         {
             anim.IsCombo(true);
+            weapon.OnTrail();
+            skillManager.SetCrowdControl(CrowdControlType.Stun);
         }
         else if (anim.GetCombo() && !anim.IsHammerAttack1())
         {
             anim.IsCombo(false);
+
+            skillManager.UseSkill(0);
+            weapon.OnTrail();
+            skillManager.SetCrowdControl(CrowdControlType.Stun);
         }
         ChangeState(State.Attack_Hammer);
     }
@@ -601,6 +610,12 @@ public class PlayerController : MonoBehaviour, IDamage
                 anim.Move(true);
             }
             else if (state == State.MoveForward && direction == Vector3.zero)
+            {
+                StopAllCoroutines();
+                ChangeState(State.Idle);
+                anim.Move(false);
+            }
+            else if(state == State.Attack_Hammer || state == State.Attack_Gun || state == State.Attack_Sword)
             {
                 StopAllCoroutines();
                 ChangeState(State.Idle);

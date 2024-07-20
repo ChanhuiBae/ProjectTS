@@ -530,6 +530,7 @@ public class MenuManager : MonoBehaviour
         SetSelection(selection2, GetIndexAtAllSkills(pick2));
         SetSelection(selection3, GetIndexAtAllSkills(pick3));
         Time.timeScale = 0;
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_LevelUp);
     }
 
     private void SetSelection(Choice selection, int pick)

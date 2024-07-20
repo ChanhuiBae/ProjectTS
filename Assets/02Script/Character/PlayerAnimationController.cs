@@ -104,6 +104,10 @@ public class PlayerAnimationController : MonoBehaviour
     public void Skill(int id)
     {
         animator.SetInteger(H_Skill, id);
+        if(id == 232)
+        {
+            GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Naraka1);
+        }
     }
 
     public void Sit()

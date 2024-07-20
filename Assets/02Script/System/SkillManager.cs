@@ -432,6 +432,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         Projectile projectile = obj.GetComponent<Projectile>();
         projectile.Init(ProjectileType.Bullet, pos, basic.GetKey());
         projectile.AttackBullet(player.transform.rotation);
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Bullet);
     }
     
     public void SpawnGrenade(Vector3 pos, Quaternion rotation)
@@ -469,6 +470,7 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 break;
         }
         projectile.AttackLaser(player.transform.rotation);
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.APHE);
     }
 
     public void SpawnSlash(Vector3 pos)
