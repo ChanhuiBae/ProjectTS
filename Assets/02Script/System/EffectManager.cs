@@ -172,6 +172,7 @@ public class EffectManager : MonoBehaviour
 
     public void NarakaEffect()
     {
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Naraka2);
         effect = skillManager.SpawnEffect(12);
         effect.Init(EffectType.None, point.position, 1);
         StartCoroutine(CameraShack());
@@ -180,7 +181,7 @@ public class EffectManager : MonoBehaviour
     public void NarakaPlayerEffect()
     {
         float time = 1.5f;
-        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Naraka);
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Naraka1);
         effect = skillManager.SpawnEffect(17);
         effect.InitFollow(EffectType.None, gameObject, time);
     }

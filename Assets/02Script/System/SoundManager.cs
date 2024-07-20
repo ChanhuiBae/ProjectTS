@@ -16,17 +16,19 @@ public enum SFX_Type
 
 public enum Skill_SFX
 {
-    Hammer_Swing = 0,
-    Charging = 1,
-    Gordian_Swing1 = 2,
-    Gordian_Swing2 = 3,
-    Gordian_Wave = 4,
-    DragonHammer = 5,
-    Attraction_Pick = 6,
-    Attraction_Zoom = 7,
-    Attraction_Thunder = 8,
-    Samsara = 9,
-    Naraka = 10,
+    Hammer_Attack1 = 0,
+    Hammer_Attack2 = 1,
+    Charging = 2,
+    Gordian_Swing1 = 3,
+    Gordian_Swing2 = 4,
+    Gordian_Wave = 5,
+    DragonHammer = 6,
+    Attraction_Pick = 7,
+    Attraction_Zoom = 8,
+    Attraction_Thunder = 9,
+    Samsara = 10,
+    Naraka1 = 11,
+    Naraka2 = 12,
 }
 
 public class SoundManager : MonoBehaviour

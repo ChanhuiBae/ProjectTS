@@ -434,6 +434,9 @@ MonoBehaviour:
   - {fileID: 1902532404}
   sfxList:
   - {fileID: 8300000, guid: a639cab4690d24a4792508d062ea10fe, type: 3}
+  skillPlayers:
+  - {fileID: 654339667}
+  skillSFXList: []
 --- !u!4 &563195713
 Transform:
   m_ObjectHideFlags: 0

@@ -33,4 +33,15 @@ public class PlayerSound : MonoBehaviour
     {
         GameManager.Inst.soundManager.PlaySKill(Skill_SFX.DragonHammer);
     }
+
+    public void HammerAttack1()
+    {
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Hammer_Attack1);
+    }
+
+    public void HammerAttack2()
+    {
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Hammer_Attack2);
+    }
+
 }

@@ -15018,7 +15018,8 @@ MonoBehaviour:
   skillPlayers:
   - {fileID: 1699362648}
   skillSFXList:
-  - {fileID: 8300000, guid: 36a09ab0f2e5cb848bc4214a7b1347ba, type: 3}
+  - {fileID: 8300000, guid: b26ddf2076fa0354ca2bfb95f27c3a87, type: 3}
+  - {fileID: 8300000, guid: 4d0b8de15f24b9c4cb971a179b521c12, type: 3}
   - {fileID: 8300000, guid: 81e2da40028ae1b4a9e777d38430d8f9, type: 3}
   - {fileID: 8300000, guid: 66b15373eced63a41a12f907bbc1cc9c, type: 3}
   - {fileID: 8300000, guid: 5d9e856155da42a4da6a216d6f36454d, type: 3}
@@ -15028,7 +15029,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6c45d13de5326d14b929beea6f351cc7, type: 3}
   - {fileID: 8300000, guid: 0108370f12aa16d4f93d1d05a1d2c93f, type: 3}
   - {fileID: 8300000, guid: 692bfe4a42c69284a88aa72dacecdb0b, type: 3}
-  - {fileID: 8300000, guid: 7840d790af49c074ab7d47eef7249181, type: 3}
+  - {fileID: 8300000, guid: 71c5eaf4b29e6f841a6ff6168f09accf, type: 3}
+  - {fileID: 8300000, guid: bb6c63d96a29fd3498142659bc2f98b5, type: 3}
 --- !u!4 &1740938110
 Transform:
   m_ObjectHideFlags: 0
