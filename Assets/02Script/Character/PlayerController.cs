@@ -453,7 +453,6 @@ public class PlayerController : MonoBehaviour, IDamage
             if (count >= hit_count)
             {
                 skillManager.SpawnBasicProjectile(weapon.transform.GetChild(0).transform.position);
-                GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Bullet);
                 skillManager.UseSkill(0);
                 count = 0;
             }
@@ -502,7 +501,6 @@ public class PlayerController : MonoBehaviour, IDamage
             if (count >= hit_count)
             {
                 skillManager.SpawnAPHEProjectile(weapon.transform.GetChild(0).transform.position);
-                GameManager.Inst.soundManager.PlaySKill(Skill_SFX.APHE);
                 count = 0;
             }
             if (total >= 300)
@@ -715,7 +713,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void AttackGrenade()
     {
-        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.PG_15);
         skillManager.SpawnGrenade(grenade.transform.position, transform.rotation);
 
         Quaternion quaternion = Quaternion.Euler(new Vector3(0, 180, 0));
