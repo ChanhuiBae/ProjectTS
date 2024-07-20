@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private GameObject grenade;
 
     private SkillManager skillManager;
+    private int skillID;
     private AttackArea attackArea;
 
     private Effect stun;
@@ -148,7 +149,8 @@ public class PlayerController : MonoBehaviour, IDamage
     }
 
     public void Init(WeaponType type)
-    {   
+    {
+        skillID = 0;
         rollvalue = false;
         if (sceneNum > 2 && type != WeaponType.None)
         {
@@ -318,6 +320,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public void UseSkill(int skill_id)
     {
         anim.Skill(skill_id);
+        skillID = skill_id;
         if (skill_id == 302)
         {
             StopAllCoroutines();
@@ -327,10 +330,13 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void GetDirection()
     {
-        direction.x = Input.GetAxisRaw("Horizontal");
-        direction.z = Input.GetAxisRaw("Vertical");
-        direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
-        direction.Normalize();
+        if(state != State.Attack_Skill || skillID == 302)
+        {
+            direction.x = Input.GetAxisRaw("Horizontal");
+            direction.z = Input.GetAxisRaw("Vertical");
+            direction += Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
+            direction.Normalize();
+        }
     }
 
 
