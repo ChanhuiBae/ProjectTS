@@ -30,6 +30,11 @@ public enum Skill_SFX
     Samsara = 10,
     Naraka1 = 11,
     Naraka2 = 12,
+    Bullet = 13,
+    PG_15 = 14,
+    APHE = 15,
+    PinPointDown = 16,
+    DesignatedEliminate = 17
 }
 
 public class SoundManager : MonoBehaviour

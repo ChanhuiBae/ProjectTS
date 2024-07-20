@@ -150,6 +150,7 @@ public class EffectManager : MonoBehaviour
     }
     public void PinPointDown(Vector3 position)
     {
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.PinPointDown);
         effect = skillManager.SpawnEffect(16);
         effect.Init(EffectType.None, point.position, 1f);
         effect.SetRotation(point.rotation);
@@ -282,6 +283,7 @@ public class EffectManager : MonoBehaviour
 
     private IEnumerator StartDrop()
     {
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.DesignatedEliminate);
         effect = skillManager.SpawnEffect(22);
         effect.Init(EffectType.None, transform.position - transform.forward * 20 + Vector3.up*2 + Vector3.back, 1f);
         effect.SetRotation(transform.rotation);
