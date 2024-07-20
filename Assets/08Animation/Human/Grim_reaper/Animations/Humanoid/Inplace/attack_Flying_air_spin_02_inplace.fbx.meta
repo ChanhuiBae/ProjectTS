@@ -60,6 +60,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.5454121
+        functionName: NarakaPlayerEffect
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.5510044
         functionName: LookAttackArea
         data: 
@@ -69,13 +76,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.5739003
         functionName: MoveAttackArea
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.60481805
-        functionName: NarakaPlayerEffect
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

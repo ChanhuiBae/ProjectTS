@@ -181,7 +181,6 @@ public class EffectManager : MonoBehaviour
     public void NarakaPlayerEffect()
     {
         float time = 1.5f;
-        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Naraka1);
         effect = skillManager.SpawnEffect(17);
         effect.InitFollow(EffectType.None, gameObject, time);
     }
