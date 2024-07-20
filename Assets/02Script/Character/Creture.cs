@@ -166,6 +166,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             if (damage > 0)
             {
                 currentHP -= damage;
+                GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Hit);
 
                 ChargeUltimate(damage);
                 CheckPhase();
@@ -193,6 +194,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             if (damage > 0)
             {
                 currentHP -= damage;
+                GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Hit);
 
                 ChargeUltimate(damage);
                 CheckPhase();
