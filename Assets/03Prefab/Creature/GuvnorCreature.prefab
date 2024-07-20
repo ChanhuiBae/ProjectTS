@@ -2257,6 +2257,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guvnor
       objectReference: {fileID: 0}
+    - target: {fileID: 2485425210768122771, guid: 65809a66c7e30014bb77bd086d44dac4,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2485425210768122771, guid: 65809a66c7e30014bb77bd086d44dac4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 406641bbe1592564d881da9e672fac5a, type: 2}
+    - target: {fileID: 2485425210768122771, guid: 65809a66c7e30014bb77bd086d44dac4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: ebca35d011dc68a418d0fb65d2805cab, type: 2}
     m_RemovedComponents:
     - {fileID: 5866666021909216657, guid: 65809a66c7e30014bb77bd086d44dac4, type: 3}
     m_RemovedGameObjects: []
