@@ -253,7 +253,6 @@ public class PlayerController : MonoBehaviour, IDamage
                         skillManager.SetCrowdControl(CrowdControlType.Stun);
                         break;
                     case State.Attack_Hammer:
-                        skillManager.UseSkill(0);
                         weapon.OnTrail();
                         anim.IsCombo(false);
                         anim.Attack(true);

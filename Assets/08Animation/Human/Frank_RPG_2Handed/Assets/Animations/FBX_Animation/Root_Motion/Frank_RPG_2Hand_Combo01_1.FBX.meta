@@ -586,6 +586,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.3712478
+        functionName: BoxCol
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 200021101
+        messageOptions: 0
       - time: 0.66254514
         functionName: SetIdle
         data: 

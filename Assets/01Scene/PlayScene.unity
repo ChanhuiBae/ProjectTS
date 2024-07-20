@@ -2333,7 +2333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 290330564}
   m_Layer: 0
-  m_Name: Dragon
+  m_Name: BoxCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10085,7 +10085,7 @@ MonoBehaviour:
     _count: 10
     _container: {fileID: 379468618}
     _nonLazy: 0
-  - _name: Dragon
+  - _name: BoxCol
     _component: {fileID: 4849411052423977127, guid: c3502a1add6cbb9449fc382009e28373,
       type: 3}
     _count: 10

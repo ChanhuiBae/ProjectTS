@@ -165,10 +165,11 @@ public class EffectManager : MonoBehaviour
         effect.InitFollow(EffectType.None, point.gameObject, 2f);
     }
 
-    public void DragonEffect()
+    public void BoxCol(int key)
     {
         effect = skillManager.SpawnEffect(23);
-        effect.InitFollow(EffectType.None, point.gameObject, 2f);
+        effect.InitFollow(EffectType.Once, point.gameObject, 0.13f);
+        effect.Key = key;
     }
 
     public void NarakaEffect()

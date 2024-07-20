@@ -217,6 +217,7 @@ public class Skill : MonoBehaviour
 
     public float GetDamageB()
     {
+        Debug.Log(GetKey());
         if (IsActive)
             return currentInfo.Damage_B;
         return 0;
