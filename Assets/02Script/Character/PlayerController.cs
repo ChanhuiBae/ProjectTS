@@ -614,6 +614,12 @@ public class PlayerController : MonoBehaviour, IDamage
                 ChangeState(State.Idle);
                 anim.Move(false);
             }
+            else if(state == State.Attack_Hammer || state == State.Attack_Gun || state == State.Attack_Sword)
+            {
+                StopAllCoroutines();
+                ChangeState(State.Idle);
+                anim.Move(false);
+            }
             rollBlock.enabled = false;
             roll.enabled = true;
         }
