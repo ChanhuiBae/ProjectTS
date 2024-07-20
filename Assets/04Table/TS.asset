@@ -3744,8 +3744,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 7
   - ID: 200000
     Hit_01: 13
@@ -3753,8 +3751,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 3
   - ID: 300000
     Hit_01: 123
@@ -3762,8 +3758,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 25
   - ID: 300001
     Hit_01: 123
@@ -3771,8 +3765,6 @@ MonoBehaviour:
     Hit_03: 178
     Hit_04: 237
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 20
   - ID: 300002
     Hit_01: 123
@@ -3780,8 +3772,6 @@ MonoBehaviour:
     Hit_03: 185
     Hit_04: 117
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 17
   - ID: 300003
     Hit_01: 202
@@ -3789,8 +3779,6 @@ MonoBehaviour:
     Hit_03: 216
     Hit_04: 99
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 13
   - ID: 300004
     Hit_01: 108
@@ -3798,8 +3786,6 @@ MonoBehaviour:
     Hit_03: 254
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 10
   - ID: 300005
     Hit_01: 135
@@ -3807,8 +3793,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 9
   - ID: 300006
     Hit_01: 241
@@ -3816,8 +3800,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 9
   - ID: 300008
     Hit_01: 255
@@ -3825,8 +3807,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 15
   - ID: 300009
     Hit_01: 215
@@ -3834,8 +3814,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 7
   - ID: 300010
     Hit_01: 1
@@ -3843,8 +3821,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 1
   - ID: 300011
     Hit_01: 345
@@ -3852,8 +3828,6 @@ MonoBehaviour:
     Hit_03: 371
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 10
   - ID: 400000
     Hit_01: 87
@@ -3861,8 +3835,6 @@ MonoBehaviour:
     Hit_03: 169
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 8
   - ID: 400001
     Hit_01: 89
@@ -3870,8 +3842,6 @@ MonoBehaviour:
     Hit_03: 167
     Hit_04: 6
     Hit_05: 166
-    Hit_06: 15
-    Hit_07: 180
     End: 18
   - ID: 400002
     Hit_01: 89
@@ -3879,8 +3849,6 @@ MonoBehaviour:
     Hit_03: 167
     Hit_04: 6
     Hit_05: 156
-    Hit_06: 0
-    Hit_07: 0
     End: 600
   - ID: 400003
     Hit_01: 89
@@ -3888,8 +3856,6 @@ MonoBehaviour:
     Hit_03: 177
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 18
   - ID: 400004
     Hit_01: 89
@@ -3897,8 +3863,6 @@ MonoBehaviour:
     Hit_03: 177
     Hit_04: 18
     Hit_05: 219
-    Hit_06: 0
-    Hit_07: 0
     End: 8
   - ID: 400005
     Hit_01: 141
@@ -3906,8 +3870,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 5
   - ID: 400006
     Hit_01: 111
@@ -3915,8 +3877,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 12
   - ID: 400007
     Hit_01: 228
@@ -3924,8 +3884,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 299
   - ID: 400008
     Hit_01: 1
@@ -3933,8 +3891,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 1000
   - ID: 400009
     Hit_01: 1
@@ -3942,8 +3898,6 @@ MonoBehaviour:
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
-    Hit_06: 0
-    Hit_07: 0
     End: 2000
   Passive_Skill:
   - Weapon_Type: 2
