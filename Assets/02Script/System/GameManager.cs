@@ -502,6 +502,21 @@ public class GameManager : Singleton<GameManager>
         SaveData();
     }
 
+    public void ReSetWSData()
+    {
+        wsData.skill1_ID = 0;
+        wsData.connected1_ID = 0;
+        wsData.skill2_ID = 0;
+        wsData.connected2_ID = 0;
+        wsData.skill3_ID = 0;
+        wsData.connected3_ID = 0;
+        wsData.ultimate_ID = 0;
+        wsData.connectedU_ID = 0;
+        wsData.passive1_ID = 0;
+        wsData.passive2_ID = 0;
+        wsData.passive3_ID = 0;
+    }
+
     public void SetSkill(int num, int id)
     {
         TableEntity_Skill skill;

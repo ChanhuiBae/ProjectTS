@@ -261,10 +261,6 @@ public class MenuManager : MonoBehaviour
             {
                 Debug.Log("MenuManager - Awake - Image");
             }
-            else
-            {
-                icon1.sprite = Resources.Load<Sprite>("Image/NoneSkill");
-            }
             obj = settingPopup.transform.Find("SetSkill2").gameObject;
             if (!obj.TryGetComponent<Button>(out setSkill2))
             {
@@ -278,10 +274,6 @@ public class MenuManager : MonoBehaviour
             {
                 Debug.Log("MenuManager - Awake - Image");
             }
-            else
-            {
-                icon2.sprite = Resources.Load<Sprite>("Image/NoneSkill");
-            }
             obj = settingPopup.transform.Find("SetSkill3").gameObject;
             if (!obj.TryGetComponent<Button>(out setSkill3))
             {
@@ -294,10 +286,6 @@ public class MenuManager : MonoBehaviour
             if(!obj.TryGetComponent<Image>(out icon3))
             {
                 Debug.Log("MenuManager - Awake - Image");
-            }
-            else
-            {
-                icon3.sprite = Resources.Load<Sprite>("Image/NoneSkill");
             }
         }
         exitPopup = GameObject.Find("ExitPopup");
@@ -350,19 +338,28 @@ public class MenuManager : MonoBehaviour
                 break;
             case 1:
                 skill1.Init(1,skill, name, level);
-                icon1.sprite = Resources.Load<Sprite>("Image/" + name);
+                if(skill == 0)
+                    icon1.sprite = Resources.Load<Sprite>("Image/SkillBack");
+                else
+                    icon1.sprite = Resources.Load<Sprite>("Image/" + name);
                 break;
             case 11:
                 break;
             case 2:
-                skill2.Init(2,skill, name, level);
-                icon2.sprite = Resources.Load<Sprite>("Image/" + name);
+                skill2.Init(2,skill, name, level); 
+                if (skill == 0)
+                    icon2.sprite = Resources.Load<Sprite>("Image/SkillBack");
+                else
+                    icon2.sprite = Resources.Load<Sprite>("Image/" + name);
                 break;
             case 21:
                 break;
             case 3:
                 skill3.Init(3,skill, name, level);
-                icon3.sprite = Resources.Load<Sprite>("Image/" + name);
+                if (skill == 0)
+                    icon3.sprite = Resources.Load<Sprite>("Image/SkillBack");
+                else
+                    icon3.sprite = Resources.Load<Sprite>("Image/" + name);
                 break;
             case 31:
                 break;

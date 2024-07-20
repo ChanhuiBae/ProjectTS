@@ -794,8 +794,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private IEnumerator StaggerTime(float time)
     {
-        // todo: stagger animation;
+        anim.SetKnockBack(true);
         yield return new WaitForSeconds(time);
+        anim.SetKnockBack(false);
         ChangeState(State.Idle); 
         isControll = true;
     }
@@ -832,12 +833,12 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             ChangeState(State.CrowdControl);
             isControll = false;
-            anim.SetKnockDown(true);
             StartCoroutine(MoveAirborne(time));
         }
     }
     private IEnumerator MoveAirborne(float time)
     {
+        anim.SetKnockDown(true);
         isInvincibility = true;
         Vector3 pos = transform.position;
         LeanTween.move(gameObject, pos + (Vector3.up * 3f), time / 2).setEase(LeanTweenType.easeOutCubic);

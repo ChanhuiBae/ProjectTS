@@ -225,6 +225,7 @@ public class RewardPopup : MonoBehaviour
     private void End()
     {
         Time.timeScale = 1;
+        GameManager.Inst.ReSetWSData();
         GameManager.Inst.AsyncLoadNextScene(SceneName.LobbyScene);
     }
 }
