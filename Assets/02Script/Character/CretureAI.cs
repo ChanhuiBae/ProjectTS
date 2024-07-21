@@ -224,7 +224,7 @@ public class CretureAI : MonoBehaviour
         while (true)
         {
             yield return null;
-
+            transform.LookAt(target.transform);
             if(type != CretureType.Guvnor && GetDistanceToTarget() > attackDistance)
             {
                 ChangeAIState(AI_State.Chase);
