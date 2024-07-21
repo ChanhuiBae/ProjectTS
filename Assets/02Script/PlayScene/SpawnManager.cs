@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour
     private int spawn;
 
     private GameObject bossHole;
-
+    private GameObject bossWall;
 
     private void Awake()
     {
@@ -52,6 +52,11 @@ public class SpawnManager : MonoBehaviour
 
         bossHole = GameObject.Find("BossHole");
         if(bossHole == null)
+        {
+            Debug.Log("SpawnManager - Awake - GameObject");
+        }
+        bossWall = GameObject.Find("BossWall");
+        if (bossWall == null)
         {
             Debug.Log("SpawnManager - Awake - GameObject");
         }
@@ -281,20 +286,33 @@ public class SpawnManager : MonoBehaviour
         yield return null;
         // yield return YieldInstructionCache.WaitForSeconds(300);
         Spawn(7, 3000, CretureType.Swarm_Boss);
-        //yield return YieldInstructionCache.WaitForSeconds(300);
-        yield return YieldInstructionCache.WaitForSeconds(11f);
+        //yield return YieldInstructionCache.WaitForSeconds(300
+        yield return YieldInstructionCache.WaitForSeconds(5f);
+        yield return YieldInstructionCache.WaitForSeconds(6f);
         GuvnorSpawn(8,4000, CretureType.Guvnor);
-        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_BossSpawn);
+        GameManager.Inst.soundManager.ChangeBGM(BGM_Type.BGM_Boss);
         StartCoroutine(SpawnBossHole());
+        StartCoroutine(SpawnBossWall());
+        yield return YieldInstructionCache.WaitForSeconds(1.6f);
     }
 
     private IEnumerator SpawnBossHole()
     {
         bossHole.transform.position = new Vector3(player.transform.position.x + player.transform.forward.x * 10f, bossHole.transform.position.y, player.transform.position.z + player.transform.forward.z * 10f);
-        for(float i = -1; i < 0; i += 0.03f)
+        for(float i = -1; i < -0.01; i += 0.01f)
         {
             yield return null;
             bossHole.transform.position = new Vector3(bossHole.transform.position.x, i, bossHole.transform.position.z);
+        }
+    }
+
+    private IEnumerator SpawnBossWall()
+    {
+        bossWall.transform.position = new Vector3(player.transform.position.x, bossWall.transform.position.y, player.transform.position.z);
+        for (float i = - 30; i < 5; i+= 0.4f)
+        {
+            yield return null;
+            bossWall.transform.position = new Vector3(bossWall.transform.position.x, i, bossWall.transform.position.z);
         }
     }
 

@@ -13,6 +13,12 @@ public class FollowCamera : MonoBehaviour
     }
     private float shackAmount;
 
+    private bool isMove;
+    public bool IsMove
+    {
+        set => isMove = value;
+    }
+
     [SerializeField]
     private Vector3 offset;
 
@@ -26,6 +32,7 @@ public class FollowCamera : MonoBehaviour
         target = GameObject.Find("Player").transform;
         shack = false;
         shackAmount = 0.1f;
+        isMove = true;
         return target != null;
     }
 
@@ -40,7 +47,7 @@ public class FollowCamera : MonoBehaviour
         {
             transform.position = ((Vector3)Random.insideUnitCircle) * shackAmount + target.position + offset;
         }
-        else
+        else if(isMove)
         {
             transform.position = target.position + offset;
         }
