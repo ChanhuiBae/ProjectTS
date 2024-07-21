@@ -299,7 +299,7 @@ public class SpawnManager : MonoBehaviour
     private IEnumerator SpawnBossHole()
     {
         bossHole.transform.position = new Vector3(player.transform.position.x + player.transform.forward.x * 8f, bossHole.transform.position.y, player.transform.position.z + player.transform.forward.z * 8f);
-        for(float i = -2; i < -0.01; i += 0.01f)
+        for(float i = -8; i < -0.01; i += 0.1f)
         {
             yield return null;
             bossHole.transform.position = new Vector3(bossHole.transform.position.x, i, bossHole.transform.position.z);
