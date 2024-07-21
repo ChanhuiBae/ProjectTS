@@ -114,7 +114,7 @@ MonoBehaviour:
     Category_ID: 1
     Skill_Level_Max: 1
     Charge_Max: 0
-    Hit_Max: 2
+    Hit_Max: 4
     Skill_Name: "\uBD80\uC2A4\uD2B8 \uD574\uBA38 \uC77C\uBC18 \uACF5\uACA9"
     Skill_Name_Eng: BH_Basic
     Is_Scoping: 0
@@ -1117,8 +1117,40 @@ MonoBehaviour:
     Skill_Level: 1
     Charge_Level: 0
     Damage_A: 0
+    Damage_B: 0
+    Stagger_Time: 0
+    Stun_Time: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 0
+    Need_Damage: 0
+    Invincible_Time: 0
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 200021103
+    Type: NULL
+    Skill_Level: 1
+    Charge_Level: 0
+    Damage_A: 0
     Damage_B: 1
     Stagger_Time: 1
+    Stun_Time: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0
+    Cool_Time: 0
+    Need_Damage: 0
+    Invincible_Time: 0
+    Buff_A: 0
+    Buff_B: 0
+    Buff_C: 0
+  - ID: 200021104
+    Type: NULL
+    Skill_Level: 1
+    Charge_Level: 0
+    Damage_A: 0
+    Damage_B: 0
+    Stagger_Time: 0
     Stun_Time: 0
     Airborne_Time: 0
     Knockback_Distance: 0
@@ -2568,10 +2600,10 @@ MonoBehaviour:
     Hit_04: 0
     Hit_05: 0
   - ID: 200
-    Hit_01: 11
-    Hit_02: 60
-    Hit_03: 0
-    Hit_04: 0
+    Hit_01: 27
+    Hit_02: 7
+    Hit_03: 37
+    Hit_04: 8
     Hit_05: 0
   - ID: 201
     Hit_01: 1

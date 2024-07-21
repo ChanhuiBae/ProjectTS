@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour, IDamage
     private State state;
     private Weapon weapon;
     private int sceneNum;
-    private int attackCount;
 
     private float currentHP;
     private float MaxHP;
@@ -186,7 +185,6 @@ public class PlayerController : MonoBehaviour, IDamage
             weapon.Init(type);
             effect.Init(weapon);
             CCType = CrowdControlType.None;
-            attackCount = 0;
             isInvincibility = false;
             MaxHPpassive = 0;
             MaxHP = GameManager.Inst.PlayerInfo.Max_HP;
@@ -220,7 +218,18 @@ public class PlayerController : MonoBehaviour, IDamage
                 this.state = state;
                 StopAllCoroutines();
                 if (sceneNum > 2)
+                {
                     skillManager.UseSkill(-1);
+                    roll.enabled = true;
+                    attackArea.StopAttack();
+                    skillManager.SetCrowdControl(CrowdControlType.None);
+                    skillManager.ClearVector();
+                    weapon.OffTrail();
+                }
+                isInvincibility = false;
+                anim.Skill(0);
+                anim.IsCombo(false);
+                anim.Move(false);
                 StartCoroutine(Idle());
                 return true;
             }
@@ -242,11 +251,13 @@ public class PlayerController : MonoBehaviour, IDamage
                         weapon.OnTrail();
                         anim.Attack(true);
                         skillManager.SetCrowdControl(CrowdControlType.Stun);
-                        attackCount++;
                         break;
                     case State.Attack_Hammer:
+                        skillManager.UseSkill(0);
+                        weapon.OnTrail();
+                        anim.IsCombo(false);
                         anim.Attack(true);
-                        attackCount++;
+                        skillManager.SetCrowdControl(CrowdControlType.Stun);
                         break;
                     case State.Attack_Gun:
                         StartCoroutine(Attack_Gun());
@@ -348,14 +359,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void SetIdle()
     {
-        isInvincibility = false;
-        roll.enabled = true;
-        anim.Skill(0);
-        anim.IsCombo(false);
-        attackArea.StopAttack();
-        skillManager.SetCrowdControl(CrowdControlType.None);
-        skillManager.ClearVector();
-        weapon.OffTrail();
         ChangeState(State.Idle);
     }
 
@@ -527,21 +530,15 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void HammerAttack()
     {
-        if (!anim.GetCombo() && anim.IsHammerAttack1())
+        if (state != State.Attack_Hammer)
+        {
+            ChangeState(State.Attack_Hammer);
+        }
+        else if (!anim.GetCombo() && anim.IsHammerAttack1())
         {
             anim.IsCombo(true);
             weapon.OnTrail();
-            skillManager.SetCrowdControl(CrowdControlType.Stun);
         }
-        else if (anim.GetCombo() && !anim.IsHammerAttack1())
-        {
-            anim.IsCombo(false);
-
-            skillManager.UseSkill(0);
-            weapon.OnTrail();
-            skillManager.SetCrowdControl(CrowdControlType.Stun);
-        }
-        ChangeState(State.Attack_Hammer);
     }
 
     public void GunAttack()

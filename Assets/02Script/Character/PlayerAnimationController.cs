@@ -22,6 +22,7 @@ public class PlayerAnimationController : MonoBehaviour
         {
             Debug.Log("PlayerAnimationController - Awake - Animator");
         }
+        IsCombo(false);
     }
 
     public void Weapon(int weapon)

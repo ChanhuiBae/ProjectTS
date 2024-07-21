@@ -517,13 +517,13 @@ public class SkillManager : MonoBehaviour, ITakeDamage
                 skillPhysics = skill3.GetDamageA() + (skill3.GetDamageB() * skill3.GetLevel());
                 break;
             case 4:
-                skillPhysics = ultimate.GetDamageA() + ultimate.GetDamageB() + ultimate.GetLevel();
+                skillPhysics = ultimate.GetDamageA() + (ultimate.GetDamageB() * ultimate.GetLevel());
                 break;
             case 41:
-                skillPhysics = connectedU.GetDamageA() + connectedU.GetDamageB() + connectedU.GetLevel();
+                skillPhysics = connectedU.GetDamageA() + (connectedU.GetDamageB() * connectedU.GetLevel());
                 break;
             default:
-                skillPhysics = basic.GetDamageA() + (basic.GetDamageB() * basic.GetLevel());
+                skillPhysics = basic.GetDamageA() + basic.GetDamageB();
                 break;
         }
         return weaponPhysics * skillPhysics;

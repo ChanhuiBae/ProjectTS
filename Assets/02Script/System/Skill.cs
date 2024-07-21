@@ -84,6 +84,7 @@ public class Skill : MonoBehaviour
 
     private void SetIdle()
     {
+        StopAllCoroutines();
         IsActive = false;
         counting = false;
         current_charge = 0;
