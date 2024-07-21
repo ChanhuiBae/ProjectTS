@@ -298,7 +298,7 @@ public class GameManager : Singleton<GameManager>
         LoadData();
 
         yield return YieldInstructionCache.WaitForSeconds(0.05f);
-        if (level > 2)
+        if (level == 3)
         {
             if (skillManager == null)
             {
@@ -319,7 +319,6 @@ public class GameManager : Singleton<GameManager>
             if (menuManager == null)
             {
                 GameObject.Find("Canvas").TryGetComponent<MenuManager>(out menuManager);
-
             }
         }
         if (level > 1)

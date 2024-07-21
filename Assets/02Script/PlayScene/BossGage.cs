@@ -17,7 +17,7 @@ public class BossGage : MonoBehaviour
 
     private void Start()
     {
-       // gameObject.SetActive(false);
+       gameObject.SetActive(false);
     }
 
     public void SetBossHP(float value)

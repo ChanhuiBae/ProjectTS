@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TimePopup : MonoBehaviour
 {
+    private MenuManager menuManager;
     private TextMeshProUGUI countdown;
     private int time;
     public int Time
@@ -14,11 +15,15 @@ public class TimePopup : MonoBehaviour
 
     private void Awake()
     {
+        if(!transform.root.TryGetComponent<MenuManager>(out menuManager))
+        {
+            Debug.Log("TimePopup - Awkae - MenuManageer");
+        }
         if (!GameObject.Find("GameTime").TryGetComponent<TextMeshProUGUI>(out countdown))
         {
             Debug.Log("MenuManager - Awake - TextMeshProUGUI");
         }
-        time = 600;
+        time = 5;
 
         StartCoroutine(Timer());
     }
@@ -31,7 +36,7 @@ public class TimePopup : MonoBehaviour
             time--;
             countdown.text = (time / 60).ToString() + ":" + (time % 60).ToString();
         }
-        countdown.gameObject.SetActive(false);
+        menuManager.Warning();
         gameObject.SetActive(false);
     }
 }

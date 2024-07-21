@@ -55,6 +55,10 @@ public class CretureAI : MonoBehaviour
     private Creture creature;
     private GameObject attackTarget;
     private PlayerController target;
+    public PlayerController Target
+    {
+        get => target;
+    }
 
     private Vector3 homePos;
     private Vector3 movePos;

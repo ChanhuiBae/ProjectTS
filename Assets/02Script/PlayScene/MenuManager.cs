@@ -68,6 +68,7 @@ public class MenuManager : MonoBehaviour
     private Button notexitButton;
 
     private RewardPopup rewardPopup;
+    private Image warning;
 
     private PlayerController player;
 
@@ -126,6 +127,10 @@ public class MenuManager : MonoBehaviour
             Debug.Log("MenuManager - Awake - Image");
         }
 
+        if (!GameObject.Find("WarningPopup").TryGetComponent<Image>(out warning))
+        {
+            Debug.Log("MenuManager - Awake - Image");
+        }
 
         if (!GameObject.Find("Level").TryGetComponent<TextMeshProUGUI>(out level))
         {
@@ -325,6 +330,7 @@ public class MenuManager : MonoBehaviour
         }
 
         select = 0;
+        warning.gameObject.SetActive(false);
         pausePopup.SetActive(false);
         settingPopup.SetActive(false);
         exitPopup.SetActive(false);
@@ -820,10 +826,43 @@ public class MenuManager : MonoBehaviour
         skill3.Passive = passive;
     }
 
-    public void BossGageActive()
+    public void Warning()
     {
-        bossHP.gameObject.SetActive(true);
+        warning.gameObject.SetActive(true);
+        StartCoroutine(StartWarning());
     }
+
+    private IEnumerator StartWarning()
+    {
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Warning);
+        for(int i = 0; i < 3; i++)
+        {
+            StartCoroutine(RedWarning());
+            yield return YieldInstructionCache.WaitForSeconds(1.42f);
+        }
+        warning.gameObject.SetActive(false);    
+        bossHP.gameObject.SetActive(true);
+        bossHP.SetBossHP(1);
+    }
+
+    private IEnumerator RedWarning()
+    {
+        Color color = warning.color;
+
+        for (float i = 0; i < 0.4f; i += 0.01f)
+        {
+            yield return YieldInstructionCache.WaitForSeconds(0.01f);
+            color.a = i;
+            warning.color = color;
+        }
+        for (float i = 0.4f; i > 0; i-= 0.01f)
+        {
+            yield return YieldInstructionCache.WaitForSeconds(0.01f);
+            color.a = i;
+            warning.color = color;
+        }
+    }
+
     public void SetBossGage(float value)
     {
         bossHP.SetBossHP(value);

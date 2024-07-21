@@ -324,6 +324,11 @@ public class PlayerController : MonoBehaviour, IDamage
         GameManager.Inst.menuManager.SetReward(false);
     }
 
+    public void SetReward()
+    {
+        GameManager.Inst.menuManager.SetReward(true);
+    }
+
     public void UseSkill(int skill_id)
     {
         anim.Skill(skill_id);

@@ -55,6 +55,8 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private float damage;
     private Vector3 postion;
     private float count;
+
+    private int endtime;
     public void Awake()
     {
         if (!TryGetComponent(out rig))
@@ -103,7 +105,6 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     public void Init(Vector3 SpawnPos, int ID, CretureType type)
     {
         postion = SpawnPos;
-        transform.position = SpawnPos;
         transform.rotation = Quaternion.Euler(0, -180, 0);
         count = -45;
         inner.innerGlow = 0;
@@ -150,6 +151,71 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         {
             ai.StopAI(1.5f);
         }
+        endtime = 0;
+    }
+    public void Init(Vector3 SpawnPos, int ID, CretureType type, int time)
+    {
+        postion = SpawnPos;
+        transform.position = SpawnPos;
+        transform.rotation = Quaternion.Euler(0, -180, 0);
+        count = -45;
+        inner.innerGlow = 0;
+        anim.Move(false);
+        anim.SetPattern(0);
+        this.ID = ID;
+        this.type = type;
+        if (type == CretureType.Guvnor)
+        {
+            HPCount = 9;
+        }
+        else
+        {
+            HPCount = 1;
+        }
+        TableEntity_Creature creature;
+        GameManager.Inst.GetCreatureData(this.ID, out creature);
+        maxHP = creature.Max_HP;
+        currentHP = maxHP;
+        maxGroggyHP = creature.Groggy_HP;
+        groggyHP = maxGroggyHP;
+        staggerMul = creature.Stagger_Mul;
+        staggerCheck = 1 / staggerMul;
+        physics = creature.Physics;
+        fire = creature.Fire;
+        water = creature.Water;
+        electric = creature.Electric;
+        ice = creature.Ice;
+        wind = creature.Wind;
+        physicsCut = creature.Physics_Cut;
+        fireCut = creature.Fire_Cut;
+        waterCut = creature.Water_Cut;
+        electricCut = creature.Electric_Cut;
+        iceCut = creature.Ice_Cut;
+        windCut = creature.Wind_Cut;
+        phase2HP = creature.Phase_2_HP;
+        phase3HP = creature.Phase_3_HP;
+        ai.InitAI(this.type, creature.Move_Speed);
+        currentPhase = 1;
+        IsDie = false;
+        stun.gameObject.SetActive(false);
+        hit.gameObject.SetActive(false);
+        if (type == CretureType.Guvnor)
+        {
+            ai.StopAI(1.5f);
+        }
+        endtime = time;
+        StartCoroutine(Despawn());
+    }
+
+    private IEnumerator Despawn()
+    {
+        yield return YieldInstructionCache.WaitForSeconds(endtime);
+        ai.StopAI(10f);
+        anim.Move(true);
+        transform.LookAt(postion);
+        transform.LeanMove(postion, 3f);
+        yield return YieldInstructionCache.WaitForSeconds(3);
+        spawnManager.ReturnCreature(poolName, this);
     }
 
     public int GetKey()
@@ -284,6 +350,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             GameManager.Inst.GetCreatureData(int.Parse(poolName), out exp);
             spawnManager.SpawnEXPItem(transform.position,exp.Drop_Exp + GameManager.Inst.EXP);
             GameManager.Inst.EXP = 0;
+            if(type == CretureType.Guvnor)
+            {
+                ai.Target.SetReward();
+            }
             spawnManager.ReturnCreature(poolName, this);
         }
     }

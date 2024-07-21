@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    private TimePopup time;
+
     private PoolManager pool;
     private PoolManager effects;
     private GameObject player;
@@ -20,9 +22,16 @@ public class SpawnManager : MonoBehaviour
     private int count;
     private int spawn;
 
+    private GameObject bossHole;
+
 
     private void Awake()
     {
+        if(!GameObject.Find("TimePopup").TryGetComponent<TimePopup>(out time))
+        {
+            Debug.Log("SpawnManager - Awake - TimePopup");
+        }
+
         if (!TryGetComponent<PoolManager>(out pool))
         {
             Debug.Log("SpawnManager - Awake - poolManager");
@@ -40,6 +49,13 @@ public class SpawnManager : MonoBehaviour
         {
             Debug.Log("SpawnManager - Awake - GameObject");
         }
+
+        bossHole = GameObject.Find("BossHole");
+        if(bossHole == null)
+        {
+            Debug.Log("SpawnManager - Awake - GameObject");
+        }
+
 
         count = 1;
         radius = Screen.width / 50;
@@ -82,28 +98,28 @@ public class SpawnManager : MonoBehaviour
         switch (spawn)
         {
             case 1:
-                creature.Init(spawn1 + player.transform.position, id, type);
+                creature.Init(spawn1 + player.transform.position, id, type, time.Time);
                 break;
             case 2:
-                creature.Init(spawn2 + player.transform.position, id, type);
+                creature.Init(spawn2 + player.transform.position, id, type, time.Time);
                 break;
             case 3:
-                creature.Init(spawn3 + player.transform.position, id, type);
+                creature.Init(spawn3 + player.transform.position, id, type, time.Time);
                 break;
             case 4:
-                creature.Init(spawn4 + player.transform.position, id, type); 
+                creature.Init(spawn4 + player.transform.position, id, type, time.Time); 
                 break;
             case 5:
-                creature.Init(spawn5 + player.transform.position, id, type);
+                creature.Init(spawn5 + player.transform.position, id, type, time.Time);
                 break;
             case 6:
-                creature.Init(spawn6 + player.transform.position, id, type);
+                creature.Init(spawn6 + player.transform.position, id, type, time.Time);
                 break;
             case 7:
-                creature.Init(spawn7 + player.transform.position, id, type);
+                creature.Init(spawn7 + player.transform.position, id, type, time.Time);
                 break;
             case 8:
-                creature.Init(spawn8 + player.transform.position, id, type);
+                creature.Init(spawn8 + player.transform.position, id, type, time.Time);
                 break;
         }
         spawn += 3;
@@ -264,12 +280,22 @@ public class SpawnManager : MonoBehaviour
     {
         yield return null;
         // yield return YieldInstructionCache.WaitForSeconds(300);
-        // Spawn(7, 3000, CretureType.Swarm_Boss);
-        // yield return YieldInstructionCache.WaitForSeconds(300);
-        //GameManager.Inst.menuManager.BossGageActive();
-        //GameManager.Inst.menuManager.SetBossGage(1);
+        Spawn(7, 3000, CretureType.Swarm_Boss);
+        //yield return YieldInstructionCache.WaitForSeconds(300);
+        yield return YieldInstructionCache.WaitForSeconds(11f);
         GuvnorSpawn(8,4000, CretureType.Guvnor);
-        //GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_BossSpawn);
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_BossSpawn);
+        StartCoroutine(SpawnBossHole());
+    }
+
+    private IEnumerator SpawnBossHole()
+    {
+        bossHole.transform.position = new Vector3(player.transform.position.x + player.transform.forward.x * 10f, bossHole.transform.position.y, player.transform.position.z + player.transform.forward.z * 10f);
+        for(float i = -1; i < 0; i += 0.03f)
+        {
+            yield return null;
+            bossHole.transform.position = new Vector3(bossHole.transform.position.x, i, bossHole.transform.position.z);
+        }
     }
 
     public void SpawnHPItem(Vector3 pos)
