@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
 {
     private Image block;
     private TimePopup timePopup;
+    private BossGage bossHP;
 
     private TextMeshProUGUI killCount;
     private SkillButton basic;
@@ -82,6 +83,11 @@ public class MenuManager : MonoBehaviour
         {
             Debug.Log("MenuManager - Awake - TimePopup");
         }
+        if(!GameObject.Find("BossGage").TryGetComponent<BossGage>(out bossHP))
+        {
+            Debug.Log("MenuManager - Awake - BossGage");
+        }
+
         if (!GameObject.Find("KillCount").TryGetComponent<TextMeshProUGUI>(out killCount))
         {
             Debug.Log("MenuManager - Awake - TextMeshProUGUI");
@@ -327,6 +333,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         block.enabled = false;
+        SetBossGage(1);
     }
 
     public void InitSkillButton(int num, int skill, string name, int level)
@@ -811,6 +818,15 @@ public class MenuManager : MonoBehaviour
         skill1.Passive = passive;
         skill2.Passive = passive;
         skill3.Passive = passive;
+    }
+
+    public void BossGageActive()
+    {
+        bossHP.gameObject.SetActive(true);
+    }
+    public void SetBossGage(float value)
+    {
+        bossHP.SetBossHP(value);
     }
 
 }

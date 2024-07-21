@@ -762,6 +762,7 @@ public class PlayerController : MonoBehaviour, IDamage
         if (!isInvincibility && !isDie)
         {
             float damage = hiter.TakeDamage(creatueKey, patternKey);
+            Debug.Log(damage);
             if(damage > 0)
             {
                 StartCoroutine(HitGlow());

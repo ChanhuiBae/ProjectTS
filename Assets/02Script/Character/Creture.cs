@@ -53,7 +53,8 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private float staggerCheck;
 
     private float damage;
-
+    private Vector3 postion;
+    private float count;
     public void Awake()
     {
         if (!TryGetComponent(out rig))
@@ -101,10 +102,13 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Init(Vector3 SpawnPos, int ID, CretureType type)
     {
+        postion = SpawnPos;
+        transform.position = SpawnPos;
+        transform.rotation = Quaternion.Euler(0, -180, 0);
+        count = -45;
         inner.innerGlow = 0;
         anim.Move(false);
         anim.SetPattern(0);
-        transform.position = SpawnPos;
         this.ID = ID;
         this.type = type;
         if(type == CretureType.Guvnor)
@@ -142,6 +146,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         IsDie = false;
         stun.gameObject.SetActive(false);
         hit.gameObject.SetActive(false);
+        if(type == CretureType.Guvnor)
+        {
+            ai.StopAI(1.5f);
+        }
     }
 
     public int GetKey()
@@ -167,7 +175,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             {
                 currentHP -= damage;
                 GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Hit);
-
+                if (type == CretureType.Guvnor)
+                {
+                    GameManager.Inst.menuManager.SetBossGage(currentHP / maxHP);
+                }
                 ChargeUltimate(damage);
                 CheckPhase();
                 DieCheck();
@@ -195,6 +206,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             {
                 currentHP -= damage;
                 GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Hit);
+                if(type == CretureType.Guvnor)
+                {
+                    GameManager.Inst.menuManager.SetBossGage(currentHP / maxHP);
+                }
 
                 ChargeUltimate(damage);
                 CheckPhase();
@@ -407,6 +422,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         if (type == CretureType.Swarm_Boss || type == CretureType.Guvnor)
         {
             CalulateGroggyDamage();
+            return;
         }
         else
         {
@@ -434,6 +450,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         if (type == CretureType.Swarm_Boss || type == CretureType.Guvnor)
         {
             CalulateGroggyDamage();
+            return;
         }
         else
         {
@@ -458,6 +475,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         if (type == CretureType.Swarm_Boss && type == CretureType.Guvnor)
         {
             CalulateGroggyDamage();
+            return;
         }
         else
         {
@@ -471,6 +489,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         if (type == CretureType.Swarm_Boss || type == CretureType.Guvnor)
         {
             CalulateGroggyDamage();
+            return;
         }
         else if (gameObject.activeSelf)
         {
@@ -491,11 +510,29 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         if (type == CretureType.Swarm_Boss || type == CretureType.Guvnor)
         {
             CalulateGroggyDamage();
+            return;
         }
         else
         {
             ai.StopAI(1f);
             LeanTween.move(gameObject, center, 0.5f).setEase(LeanTweenType.easeInElastic);
         }
+    }
+
+    private void Update()
+    {
+        if(type == CretureType.Guvnor)
+        {
+            if(count < 0)
+            {   
+                transform.position = new Vector3(postion.x, count, postion.z);
+                count += 0.5f;
+            }
+            else
+            {
+                transform.position = postion;
+            }
+        }
+        
     }
 }

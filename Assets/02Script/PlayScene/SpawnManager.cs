@@ -59,7 +59,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnLogic());
+        //StartCoroutine(SpawnLogic());
         StartCoroutine(SpawnBoss());
     }
 
@@ -112,6 +112,19 @@ public class SpawnManager : MonoBehaviour
             spawn -= 8;
         }
         spawn = Random.Range(spawn, spawn + 2);
+    }
+
+    private void GuvnorSpawn(int num, int id, CretureType type)
+    {
+        Creture creature;
+
+        creature = pool.GetFromPool<Creture>(num);
+        if (creature == null)
+        {
+            Debug.Log("Can't get Creature from Pool");
+            return;
+        }
+        creature.Init(player.transform.position + new Vector3(player.transform.forward.x * 10f, 0, player.transform.forward.z * 10f), id, type);
     }
 
     private IEnumerator SpawnLogic()
@@ -249,10 +262,14 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnBoss()
     {
-        yield return YieldInstructionCache.WaitForSeconds(300);
-        Spawn(7, 3000, CretureType.Swarm_Boss);
-        yield return YieldInstructionCache.WaitForSeconds(300);
-        Spawn(8,4000, CretureType.Guvnor);
+        yield return null;
+        // yield return YieldInstructionCache.WaitForSeconds(300);
+        // Spawn(7, 3000, CretureType.Swarm_Boss);
+        // yield return YieldInstructionCache.WaitForSeconds(300);
+        //GameManager.Inst.menuManager.BossGageActive();
+        //GameManager.Inst.menuManager.SetBossGage(1);
+        GuvnorSpawn(8,4000, CretureType.Guvnor);
+        //GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_BossSpawn);
     }
 
     public void SpawnHPItem(Vector3 pos)

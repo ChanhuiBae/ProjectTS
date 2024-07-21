@@ -13,6 +13,7 @@ public enum SFX_Type
     SFX_EXP = 0,
     SFX_Hit = 1,
     SFX_LevelUp = 2,
+    SFX_BossSpawn = 3,
 }
 
 public enum Skill_SFX
