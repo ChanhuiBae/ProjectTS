@@ -177,7 +177,7 @@ public class EffectManager : MonoBehaviour
         GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Naraka2);
         effect = skillManager.SpawnEffect(12);
         effect.Init(EffectType.None, point.position, 1);
-        StartCoroutine(CameraShack());
+        StartCoroutine(CameraShack(1));
     }
 
     public void NarakaPlayerEffect()
@@ -291,6 +291,7 @@ public class EffectManager : MonoBehaviour
         effect.MoveForward();
         yield return YieldInstructionCache.WaitForSeconds(0.2f);
 
+        StartCoroutine(CameraShack(1.5f));
         for (int i = 0; i < 5; i++)
         {
             effect = skillManager.SpawnEffect(20);
@@ -399,10 +400,10 @@ public class EffectManager : MonoBehaviour
 
     }
 
-    private IEnumerator CameraShack()
+    private IEnumerator CameraShack(float time)
     {
         cameraControl.Shack = true;
-        yield return YieldInstructionCache.WaitForSeconds(1);
+        yield return YieldInstructionCache.WaitForSeconds(time);
         cameraControl.Shack = false;
     }
 

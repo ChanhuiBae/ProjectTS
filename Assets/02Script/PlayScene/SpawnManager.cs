@@ -290,7 +290,7 @@ public class SpawnManager : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(5f);
         yield return YieldInstructionCache.WaitForSeconds(6f);
         GuvnorSpawn(8,4000, CretureType.Guvnor);
-        GameManager.Inst.soundManager.ChangeBGM(BGM_Type.BGM_Boss);
+        //GameManager.Inst.soundManager.ChangeBGM(BGM_Type.BGM_Boss);
         StartCoroutine(SpawnBossHole());
         StartCoroutine(SpawnBossWall());
         yield return YieldInstructionCache.WaitForSeconds(1.6f);
