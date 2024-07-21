@@ -530,7 +530,18 @@ public class MenuManager : MonoBehaviour
         SetSelection(selection2, GetIndexAtAllSkills(pick2));
         SetSelection(selection3, GetIndexAtAllSkills(pick3));
         Time.timeScale = 0;
+        StartCoroutine(SetScale());
+    }
+
+    private IEnumerator SetScale()
+    {
+        levelupPopup.transform.localScale = Vector3.zero;
         GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_LevelUp);
+        for (float i = 0; i <= 1; i += 0.05f)
+        {
+            yield return null;
+            levelupPopup.transform.localScale = new Vector3(i, i, i);
+        }
     }
 
     private void SetSelection(Choice selection, int pick)

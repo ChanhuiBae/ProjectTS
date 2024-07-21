@@ -575,6 +575,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (!anim.isRoll())
         {
+            GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Slide);
             rollBlock.enabled = true;
             roll.enabled = false;
             transform.LookAt(transform.position + direction);

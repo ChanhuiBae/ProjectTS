@@ -34,7 +34,8 @@ public enum Skill_SFX
     PG_15 = 14,
     APHE = 15,
     PinPointDown = 16,
-    DesignatedEliminate = 17
+    DesignatedEliminate = 17,
+    Slide = 18,
 }
 
 public class SoundManager : MonoBehaviour
