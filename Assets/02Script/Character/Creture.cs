@@ -104,7 +104,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     public void Init(Vector3 SpawnPos, int ID, CretureType type)
     {
-        transform.position = new Vector3(SpawnPos.x, -10, SpawnPos.z);
+        transform.position = new Vector3(SpawnPos.x, -20, SpawnPos.z);
         transform.rotation = Quaternion.Euler(0, -180, 0);
         postion = SpawnPos;
         count = -45;

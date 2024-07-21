@@ -82,14 +82,15 @@ public class Pattern : MonoBehaviour
         } 
         if (current_hit > 0)
         {
-           colliders[current_hit-1].enabled = false;
+           colliders[current_hit-1].enabled = false; 
         }
         current_hit++;
         if (current_hit > colliders.Count)
         {
             return;
         }
-        colliders[current_hit-1].enabled = true;
+        if(creatureKey < 4000)
+            colliders[current_hit-1].enabled = true;
     }
 
     private IEnumerator CountHit()

@@ -145,7 +145,7 @@ public class SpawnManager : MonoBehaviour
             Debug.Log("Can't get Creature from Pool");
             return;
         }
-        creature.Init(player.transform.position + new Vector3(player.transform.forward.x * 10f, 0, player.transform.forward.z * 10f), id, type);
+        creature.Init(player.transform.position + new Vector3(player.transform.forward.x * 5f, 5, player.transform.forward.z * 5f), id, type);
     }
 
     private IEnumerator SpawnLogic()
@@ -298,8 +298,8 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnBossHole()
     {
-        bossHole.transform.position = new Vector3(player.transform.position.x + player.transform.forward.x * 10f, bossHole.transform.position.y, player.transform.position.z + player.transform.forward.z * 10f);
-        for(float i = -1; i < -0.01; i += 0.01f)
+        bossHole.transform.position = new Vector3(player.transform.position.x + player.transform.forward.x * 7f, bossHole.transform.position.y, player.transform.position.z + player.transform.forward.z * 7f);
+        for(float i = -2; i < -0.01; i += 0.01f)
         {
             yield return null;
             bossHole.transform.position = new Vector3(bossHole.transform.position.x, i, bossHole.transform.position.z);
