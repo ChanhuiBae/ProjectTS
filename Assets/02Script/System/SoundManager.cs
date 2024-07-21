@@ -6,7 +6,6 @@ public enum BGM_Type
 {
     BGM_Play = 0,
     BGM_Title = 1,
-    BGM_Boss = 2,
 }
 
 public enum SFX_Type
@@ -16,7 +15,6 @@ public enum SFX_Type
     SFX_LevelUp = 2,
     SFX_BossSpawn = 3,
     SFX_Warning = 4,
-    SfX_BossScream = 5,
 }
 
 public enum Skill_SFX
