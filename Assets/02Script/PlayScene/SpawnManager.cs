@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    private TimePopup time;
+
     private PoolManager pool;
     private PoolManager effects;
     private GameObject player;
@@ -20,9 +22,16 @@ public class SpawnManager : MonoBehaviour
     private int count;
     private int spawn;
 
+    private GameObject bossHole;
+    private GameObject bossWall;
 
     private void Awake()
     {
+        if(!GameObject.Find("TimePopup").TryGetComponent<TimePopup>(out time))
+        {
+            Debug.Log("SpawnManager - Awake - TimePopup");
+        }
+
         if (!TryGetComponent<PoolManager>(out pool))
         {
             Debug.Log("SpawnManager - Awake - poolManager");
@@ -40,6 +49,18 @@ public class SpawnManager : MonoBehaviour
         {
             Debug.Log("SpawnManager - Awake - GameObject");
         }
+
+        bossHole = GameObject.Find("BossHole");
+        if(bossHole == null)
+        {
+            Debug.Log("SpawnManager - Awake - GameObject");
+        }
+        bossWall = GameObject.Find("BossWall");
+        if (bossWall == null)
+        {
+            Debug.Log("SpawnManager - Awake - GameObject");
+        }
+
 
         count = 1;
         radius = Screen.width / 50;
@@ -59,7 +80,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnLogic());
+        //StartCoroutine(SpawnLogic());
         StartCoroutine(SpawnBoss());
     }
 
@@ -82,28 +103,28 @@ public class SpawnManager : MonoBehaviour
         switch (spawn)
         {
             case 1:
-                creature.Init(spawn1 + player.transform.position, id, type);
+                creature.Init(spawn1 + player.transform.position, id, type, time.Time);
                 break;
             case 2:
-                creature.Init(spawn2 + player.transform.position, id, type);
+                creature.Init(spawn2 + player.transform.position, id, type, time.Time);
                 break;
             case 3:
-                creature.Init(spawn3 + player.transform.position, id, type);
+                creature.Init(spawn3 + player.transform.position, id, type, time.Time);
                 break;
             case 4:
-                creature.Init(spawn4 + player.transform.position, id, type); 
+                creature.Init(spawn4 + player.transform.position, id, type, time.Time); 
                 break;
             case 5:
-                creature.Init(spawn5 + player.transform.position, id, type);
+                creature.Init(spawn5 + player.transform.position, id, type, time.Time);
                 break;
             case 6:
-                creature.Init(spawn6 + player.transform.position, id, type);
+                creature.Init(spawn6 + player.transform.position, id, type, time.Time);
                 break;
             case 7:
-                creature.Init(spawn7 + player.transform.position, id, type);
+                creature.Init(spawn7 + player.transform.position, id, type, time.Time);
                 break;
             case 8:
-                creature.Init(spawn8 + player.transform.position, id, type);
+                creature.Init(spawn8 + player.transform.position, id, type, time.Time);
                 break;
         }
         spawn += 3;
@@ -112,6 +133,19 @@ public class SpawnManager : MonoBehaviour
             spawn -= 8;
         }
         spawn = Random.Range(spawn, spawn + 2);
+    }
+
+    private void GuvnorSpawn(int num, int id, CretureType type)
+    {
+        Creture creature;
+
+        creature = pool.GetFromPool<Creture>(num);
+        if (creature == null)
+        {
+            Debug.Log("Can't get Creature from Pool");
+            return;
+        }
+        creature.Init(player.transform.position + new Vector3(player.transform.forward.x * 10f, 0, player.transform.forward.z * 10f), id, type);
     }
 
     private IEnumerator SpawnLogic()
@@ -249,10 +283,37 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnBoss()
     {
-        yield return YieldInstructionCache.WaitForSeconds(300);
+        yield return null;
+        // yield return YieldInstructionCache.WaitForSeconds(300);
         Spawn(7, 3000, CretureType.Swarm_Boss);
-        yield return YieldInstructionCache.WaitForSeconds(300);
-        Spawn(8,4000, CretureType.Guvnor);
+        //yield return YieldInstructionCache.WaitForSeconds(300
+        yield return YieldInstructionCache.WaitForSeconds(5f);
+        yield return YieldInstructionCache.WaitForSeconds(6f);
+        GuvnorSpawn(8,4000, CretureType.Guvnor);
+        GameManager.Inst.soundManager.ChangeBGM(BGM_Type.BGM_Boss);
+        StartCoroutine(SpawnBossHole());
+        StartCoroutine(SpawnBossWall());
+        yield return YieldInstructionCache.WaitForSeconds(1.6f);
+    }
+
+    private IEnumerator SpawnBossHole()
+    {
+        bossHole.transform.position = new Vector3(player.transform.position.x + player.transform.forward.x * 10f, bossHole.transform.position.y, player.transform.position.z + player.transform.forward.z * 10f);
+        for(float i = -1; i < -0.01; i += 0.01f)
+        {
+            yield return null;
+            bossHole.transform.position = new Vector3(bossHole.transform.position.x, i, bossHole.transform.position.z);
+        }
+    }
+
+    private IEnumerator SpawnBossWall()
+    {
+        bossWall.transform.position = new Vector3(player.transform.position.x, bossWall.transform.position.y, player.transform.position.z);
+        for (float i = - 30; i < 5; i+= 0.4f)
+        {
+            yield return null;
+            bossWall.transform.position = new Vector3(bossWall.transform.position.x, i, bossWall.transform.position.z);
+        }
     }
 
     public void SpawnHPItem(Vector3 pos)

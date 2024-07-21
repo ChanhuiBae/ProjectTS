@@ -6,6 +6,7 @@ public class Venomidra : MonoBehaviour
 {
     private BossGage hp;
     private Creture creature;
+    private FollowCamera cam;
 
     private void Start()
     {
@@ -17,6 +18,15 @@ public class Venomidra : MonoBehaviour
         {
             Debug.Log("Venomidra - Awake - Creature");
         }
+        if(!Camera.main.TryGetComponent<FollowCamera>(out cam))
+        {
+            Debug.Log("Venomidra - Awake - FollowCamera");
+        }
+        else
+        {
+            cam.IsMove = false;
+        }
+
         hp.SetBossHP(1);
     }
 
@@ -28,5 +38,15 @@ public class Venomidra : MonoBehaviour
             hp.gameObject.SetActive(false);
             return;
         }
+    }
+
+    public void SpawnSound()
+    {
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_BossSpawn);
+    }
+
+    public void Scream()
+    {
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SfX_BossScream);
     }
 }

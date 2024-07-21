@@ -55,6 +55,10 @@ public class CretureAI : MonoBehaviour
     private Creture creature;
     private GameObject attackTarget;
     private PlayerController target;
+    public PlayerController Target
+    {
+        get => target;
+    }
 
     private Vector3 homePos;
     private Vector3 movePos;
@@ -87,7 +91,11 @@ public class CretureAI : MonoBehaviour
         isInit = true;
         attackTarget = null;
         homePos = transform.position;
-        if(type == CretureType.Swarm_Boss)
+        if(type == CretureType.Guvnor)
+        {
+            attackDistance = 500f;
+        }
+        else if(type == CretureType.Swarm_Boss)
         {
             attackDistance = 20f;
         }
@@ -216,7 +224,9 @@ public class CretureAI : MonoBehaviour
         while (true)
         {
             yield return null;
-            if (GetDistanceToTarget() > attackDistance)
+            transform.LookAt(target.transform);
+
+            if(type != CretureType.Guvnor && GetDistanceToTarget() > attackDistance)
             {
                 ChangeAIState(AI_State.Chase);
             }

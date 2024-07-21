@@ -253,7 +253,6 @@ public class PlayerController : MonoBehaviour, IDamage
                         skillManager.SetCrowdControl(CrowdControlType.Stun);
                         break;
                     case State.Attack_Hammer:
-                        skillManager.UseSkill(0);
                         weapon.OnTrail();
                         anim.IsCombo(false);
                         anim.Attack(true);
@@ -323,6 +322,11 @@ public class PlayerController : MonoBehaviour, IDamage
             yield return null;
         }
         GameManager.Inst.menuManager.SetReward(false);
+    }
+
+    public void SetReward()
+    {
+        GameManager.Inst.menuManager.SetReward(true);
     }
 
     public void UseSkill(int skill_id)
@@ -576,6 +580,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (!anim.isRoll())
         {
+            GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Slide);
             rollBlock.enabled = true;
             roll.enabled = false;
             transform.LookAt(transform.position + direction);
@@ -762,6 +767,7 @@ public class PlayerController : MonoBehaviour, IDamage
         if (!isInvincibility && !isDie)
         {
             float damage = hiter.TakeDamage(creatueKey, patternKey);
+            Debug.Log(damage);
             if(damage > 0)
             {
                 StartCoroutine(HitGlow());
