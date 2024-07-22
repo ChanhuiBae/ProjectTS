@@ -7,10 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Effect_38_Smoke_2
+  m_Name: Effect_38_Smoke 3
   m_Shader: {fileID: 4800000, guid: eee4f23a9611584428cd8df8a4792f02, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - IS_TEXTUREBLEND
   m_InvalidKeywords: []
@@ -20,7 +18,6 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -45,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4201e435f9c45dc45838db7dc9f8a4cb, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1e5f42397b77b28449b8ae31926bdc14, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
@@ -70,8 +67,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AllColorFactor: 1.5
-    - _BlendDst: 1
+    - _AllColorFactor: 1
+    - _BlendDst: 10
     - _BlendSrc: 5
     - _BumpScale: 1
     - _ColorBlueFactor: 1
@@ -101,5 +98,5 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 0.2670157, g: 3, b: 0.32138345, a: 1}
+    - _TintColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
