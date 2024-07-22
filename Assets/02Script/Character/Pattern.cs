@@ -43,6 +43,7 @@ public class Pattern : MonoBehaviour
         current_hit = 0;
         currentTime = pattern.Cool_Time;
 
+        
         foreach (BoxCollider col in colliders)
         {
            col.enabled = false;

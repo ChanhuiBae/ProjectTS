@@ -471,7 +471,6 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         if (type == CretureType.Swarm_Boss || type == CretureType.Guvnor)
         {
-            CalulateGroggyDamage();
             return;
         }
         else

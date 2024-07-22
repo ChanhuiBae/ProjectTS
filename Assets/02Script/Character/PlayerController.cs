@@ -250,13 +250,13 @@ public class PlayerController : MonoBehaviour, IDamage
                         skillManager.UseSkill(0);
                         weapon.OnTrail();
                         anim.Attack(true);
-                        skillManager.SetCrowdControl(CrowdControlType.Stun);
+                        skillManager.SetCrowdControl(CrowdControlType.Stagger);
                         break;
                     case State.Attack_Hammer:
                         weapon.OnTrail();
                         anim.IsCombo(false);
                         anim.Attack(true);
-                        skillManager.SetCrowdControl(CrowdControlType.Stun);
+                        skillManager.SetCrowdControl(CrowdControlType.Stagger);
                         break;
                     case State.Attack_Gun:
                         StartCoroutine(Attack_Gun());
