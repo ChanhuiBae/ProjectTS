@@ -12914,7 +12914,7 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 400006
+    intParameter: 4000061
     messageOptions: 0
   - time: 2.2333333
     functionName: setBothHandFalse

@@ -491,6 +491,28 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         }
         projectile.AttackSlash(player.transform.rotation);
     }
+
+    public void SpawnThorn(Vector3 pos, GameObject target, int key)
+    {
+        Projectile p1 = projectileManager.GetFromPool<Projectile>(4);
+        Projectile p2 = projectileManager.GetFromPool<Projectile>(4);
+        Projectile p3 = projectileManager.GetFromPool<Projectile>(4);
+        p1.Init(ProjectileType.Thorn, pos, key);
+        p2.Init(ProjectileType.Thorn, pos, key);
+        p3.Init(ProjectileType.Thorn, pos, key);
+        p1.transform.LookAt(target.transform);
+        p1.AttackThorn(p1.transform.rotation);
+        p2.AttackThorn(p1.transform.rotation * Quaternion.Euler(0,15,0));
+        p3.AttackThorn(p1.transform.rotation * Quaternion.Euler(0, -15, 0));
+    }
+
+    public void SpawnThornUp(Vector3 pos, GameObject target, int key)
+    {
+        Projectile p1 = projectileManager.GetFromPool<Projectile>(4);
+        p1.Init(ProjectileType.Thorn, pos, key);
+        //p1.MoveUp()
+
+    }
     
     public float TakeDamage(int creatureKey, int PatternInfoKey)
     {

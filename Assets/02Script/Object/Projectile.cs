@@ -6,7 +6,8 @@ public enum ProjectileType
 {
     Bullet,
     Grenade,
-    Laser
+    Laser,
+    Thorn,
 }
 public class Projectile : MonoBehaviour, IPoolObject
 {
@@ -17,6 +18,7 @@ public class Projectile : MonoBehaviour, IPoolObject
     private string poolName;
     private FixedJoystick dir;
     private SkillManager skillManager;
+    private PatternManager patternManager;
 
     private int key;
     public int Key
@@ -38,7 +40,10 @@ public class Projectile : MonoBehaviour, IPoolObject
         {
             Debug.Log("Projectile - Awake - SkillManager");
         }
-
+        if (!GameObject.Find("PatternManager").TryGetComponent<PatternManager>(out patternManager))
+        {
+            Debug.Log("Projectile - Awake - PatternManager");
+        }
     }
     public void Init(ProjectileType type, Vector3 pos, int key)
     {
@@ -81,6 +86,20 @@ public class Projectile : MonoBehaviour, IPoolObject
         rig.velocity = Vector3.zero;
         rig.AddForce(transform.forward * 8f, ForceMode.Impulse);
         StartCoroutine(CountDownExplosion(1f));
+    }
+
+    public void AttackThorn(Quaternion rotation)
+    {
+        transform.rotation = rotation;
+        rig.velocity = Vector3.zero;
+        rig.AddForce(transform.forward * 10f, ForceMode.Impulse);
+        StartCoroutine(TimeOut(5f));
+    }
+
+    public void MoveUp(Quaternion rotation)
+    {
+        rig.AddForce(transform.forward * 10f, ForceMode.Impulse);
+        StartCoroutine(TimeOut(1f));
     }
 
     private IEnumerator TimeOut(float time)
@@ -141,6 +160,19 @@ public class Projectile : MonoBehaviour, IPoolObject
                 if (other.tag == "Creature")
                 {
                     skillManager.TakeDamageByKey(AttackType.Projectile, key, other);
+                }
+                break;
+            case ProjectileType.Thorn:
+                {
+                    patternManager.TakeDamageOther(4000, key, other);
+                }
+                if (other.tag == "Ground")
+                {
+                    if (trail != null)
+                    {
+                        trail.enabled = false;
+                    }
+                    skillManager.TakeProjectile(poolName, this);
                 }
                 break;
         }

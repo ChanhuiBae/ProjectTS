@@ -13631,19 +13631,19 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 4000081
     messageOptions: 0
   - time: 4.15
     functionName: setThorn
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 4000081
     messageOptions: 0
   - time: 6.233333
     functionName: setThorn
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 4000081
     messageOptions: 0

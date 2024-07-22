@@ -8,6 +8,9 @@ public class Venomidra : MonoBehaviour
     private Creture creature;
     private FollowCamera cam;
 
+    private SkillManager skillManager;
+    private PlayerController player;
+
     private CapsuleCollider lHand;
     private CapsuleCollider rHand;
     private BoxCollider head;
@@ -16,8 +19,19 @@ public class Venomidra : MonoBehaviour
     private AttackPart lhandP;
     private AttackPart rhandP;
 
+    private Transform thorn;
+
     private void Start()
     {
+        if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
+        {
+            Debug.Log("Venomidra - Awake - SkillManager");
+        }
+        if(!GameObject.Find("Player").TryGetComponent<PlayerController>(out player))
+        {
+            Debug.Log("Venomidra - Awake - PlayerController");
+        }
+
         if (!GameObject.Find("BossGage").TryGetComponent<BossGage>(out hp))
         {
             Debug.Log("Venomidra - Awake - BossGage");
@@ -56,6 +70,7 @@ public class Venomidra : MonoBehaviour
             Debug.Log("Venomidra - Awake - AttackPart");
         }
 
+        thorn = GameObject.Find("Bip001 Neck").transform;
 
         if (!Camera.main.TryGetComponent<FollowCamera>(out cam))
         {
@@ -136,9 +151,9 @@ public class Venomidra : MonoBehaviour
     }
 
 
-    public void setThorn()
+    public void setThorn(int key)
     {
-
+        skillManager.SpawnThorn(thorn.position, player.gameObject, key);
     }
 
     public void setAirThorn()
