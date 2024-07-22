@@ -7,11 +7,14 @@ public class Venomidra : MonoBehaviour
     private BossGage hp;
     private Creture creature;
     private FollowCamera cam;
-    private BoxCollider lHand;
-    private BoxCollider rHand;
-    private BoxCollider head;
-    private BoxCollider body;
 
+    private CapsuleCollider lHand;
+    private CapsuleCollider rHand;
+    private BoxCollider head;
+
+    private AttackPart headP;
+    private AttackPart lhandP;
+    private AttackPart rhandP;
 
     private void Start()
     {
@@ -23,23 +26,36 @@ public class Venomidra : MonoBehaviour
         {
             Debug.Log("Venomidra - Awake - Creature");
         }
-        
-        if(!GameObject.Find("GuvnorHead").TryGetComponent<BoxCollider>(out head))
+
+        GameObject obj = GameObject.Find("GuvnorHead");
+        if (!obj.TryGetComponent<BoxCollider>(out head))
         {
             Debug.Log("Venomidra - Awake - BoxCollider");
         }
-        if (!GameObject.Find("Bip001 Spine1").TryGetComponent<BoxCollider>(out body))
+        if(!obj.TryGetComponent<AttackPart>(out headP))
+        {
+            Debug.Log("Venomidra - Awake - AttackPart");
+        }
+
+        obj = GameObject.Find("Bip001 L Hand");
+        if (!obj.TryGetComponent<CapsuleCollider>(out lHand))
         {
             Debug.Log("Venomidra - Awake - BoxCollider");
         }
-        if (!GameObject.Find("Bip001 L Hand").TryGetComponent<BoxCollider>(out lHand))
+        if (!obj.TryGetComponent<AttackPart>(out lhandP))
+        {
+            Debug.Log("Venomidra - Awake - AttackPart");
+        }
+        obj = GameObject.Find("Bip001 R Hand");
+        if (!obj.TryGetComponent<CapsuleCollider>(out rHand))
         {
             Debug.Log("Venomidra - Awake - BoxCollider");
         }
-        if (!GameObject.Find("Bip001 R Hand").TryGetComponent<BoxCollider>(out rHand))
+        if (!obj.TryGetComponent<AttackPart>(out rhandP))
         {
-            Debug.Log("Venomidra - Awake - BoxCollider");
+            Debug.Log("Venomidra - Awake - AttackPart");
         }
+
 
         if (!Camera.main.TryGetComponent<FollowCamera>(out cam))
         {
@@ -76,26 +92,62 @@ public class Venomidra : MonoBehaviour
     {
         lHand.enabled = true;
         rHand.enabled = true;
-        
+        lhandP.Key = key;
+        rhandP.Key = key;
     }
 
     public void setLeftHandTrue(int key)
     {
         lHand.enabled = true;
+        lhandP.Key= key;
     }
 
     public void setRightHandTrue(int key)
     {
         rHand.enabled = true;
+        rhandP.Key = key;
     }
 
     public void setHeadTrue(int key)
     {
         head.enabled = true;
+        headP.Key = key;
     }
 
-    public void setBody(int key)
+    public void setBothHandFalse()
     {
-        body.enabled = true;
+        lHand.enabled = false;
+        rHand.enabled = false;
+    }
+
+    public void setLeftHandFalse()
+    {
+        lHand.enabled = false;
+    }
+
+    public void setRightHandFalse()
+    {
+        rHand.enabled = false;
+    }
+
+    public void setHeadFalse()
+    {
+        head.enabled = false;
+    }
+
+
+    public void setThorn()
+    {
+
+    }
+
+    public void setAirThorn()
+    {
+
+    }
+
+    public void setBreath()
+    {
+
     }
 }

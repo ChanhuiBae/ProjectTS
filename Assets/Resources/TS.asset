@@ -3007,7 +3007,7 @@ MonoBehaviour:
     Name: SuperStamp
   - ID: 400000
     Creature_ID: 4000
-    Hit_Max: 3
+    Hit_Max: 2
     Delay_Min: 8
     Delay_Max: 12
     Cool_Time: 20
@@ -3017,7 +3017,7 @@ MonoBehaviour:
     Name: RightAndLeftStamp
   - ID: 400001
     Creature_ID: 4000
-    Hit_Max: 7
+    Hit_Max: 4
     Delay_Min: 15
     Delay_Max: 18
     Cool_Time: 40
@@ -3027,7 +3027,7 @@ MonoBehaviour:
     Name: StampAndSwing
   - ID: 400002
     Creature_ID: 4000
-    Hit_Max: 5
+    Hit_Max: 3
     Delay_Min: 14
     Delay_Max: 17
     Cool_Time: 35
@@ -3037,7 +3037,7 @@ MonoBehaviour:
     Name: StampAndShoot
   - ID: 400003
     Creature_ID: 4000
-    Hit_Max: 3
+    Hit_Max: 2
     Delay_Min: 10
     Delay_Max: 12
     Cool_Time: 20
@@ -3047,7 +3047,7 @@ MonoBehaviour:
     Name: LeftAndRightSwing
   - ID: 400004
     Creature_ID: 4000
-    Hit_Max: 5
+    Hit_Max: 3
     Delay_Min: 15
     Delay_Max: 18
     Cool_Time: 40

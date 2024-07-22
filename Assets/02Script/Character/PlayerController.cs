@@ -354,7 +354,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void Move()
     {
-        if (!rollvalue)
+        if (!rollvalue && state != State.CrowdControl)
         {
             anim.Move(true);
             rig.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
@@ -592,13 +592,13 @@ public class PlayerController : MonoBehaviour, IDamage
                 yield return null;
             }
             isInvincibility = true;
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 20; i++)
             {
                 rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.5f * Time.deltaTime);
                 yield return null;
             }
             isInvincibility = false;
-            for (int i = 0; i < 21; i++)
+            for (int i = 0; i < 16; i++)
             {
                 rig.MovePosition(transform.position + transform.forward * moveSpeed * 1.3f * Time.deltaTime);
                 yield return null;
@@ -805,17 +805,18 @@ public class PlayerController : MonoBehaviour, IDamage
         if (!isDie)
         {
             ChangeState(State.CrowdControl);
-            isControll = false;
             StartCoroutine(StaggerTime(time));
         }
     }
 
     private IEnumerator StaggerTime(float time)
     {
+        isControll = false;
         anim.SetKnockBack(true);
         yield return new WaitForSeconds(time);
         anim.SetKnockBack(false);
-        ChangeState(State.Idle); 
+        ChangeState(State.Idle);
+        anim.SetKnockBack(false);
         isControll = true;
     }
 
@@ -824,13 +825,13 @@ public class PlayerController : MonoBehaviour, IDamage
         if (!isDie)
         {
             ChangeState(State.CrowdControl);
-            isControll = false;
             StartCoroutine(StunControl(time));
         }
     }
 
     private IEnumerator StunControl(float time)
     {
+        isControll = false;
         stun.gameObject.SetActive(true);
         for (float i = 0.1f; i < time; i += 0.1f)
         {
@@ -850,12 +851,12 @@ public class PlayerController : MonoBehaviour, IDamage
         if (isDie)
         {
             ChangeState(State.CrowdControl);
-            isControll = false;
             StartCoroutine(MoveAirborne(time));
         }
     }
     private IEnumerator MoveAirborne(float time)
     {
+        isControll = false;
         anim.SetKnockDown(true);
         isInvincibility = true;
         Vector3 pos = transform.position;

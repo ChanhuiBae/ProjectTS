@@ -23,7 +23,7 @@ public class TimePopup : MonoBehaviour
         {
             Debug.Log("MenuManager - Awake - TextMeshProUGUI");
         }
-        time = 600;
+        time = 5;
 
         StartCoroutine(Timer());
     }
