@@ -158,7 +158,12 @@ public class Venomidra : MonoBehaviour
 
     public void setAirThorn()
     {
+        skillManager.SpawnThornUp(transform.position + Vector3.up * 10f);
+    }
 
+    public void setDrop(int key)
+    {
+        skillManager.StartDrop(key);
     }
 
     public void setBreath()

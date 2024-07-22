@@ -506,12 +506,33 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         p3.AttackThorn(p1.transform.rotation * Quaternion.Euler(0, -15, 0));
     }
 
-    public void SpawnThornUp(Vector3 pos, GameObject target, int key)
+    public void SpawnThornUp(Vector3 pos)
     {
         Projectile p1 = projectileManager.GetFromPool<Projectile>(4);
-        p1.Init(ProjectileType.Thorn, pos, key);
-        //p1.MoveUp()
+        p1.Init(ProjectileType.Thorn, pos, 0);
+        p1.MoveUp(Quaternion.Euler(-90, 0, 0));
+    }
 
+    public void StartDrop(int key)
+    {
+        StartCoroutine(DropThorns(key));
+    }
+
+    private IEnumerator DropThorns(int key)
+    {
+        yield return null;
+        for(int i = 0; i < 10; i++)
+        {
+            Effect effect = SpawnEffect(25);
+            effect.transform.LeanScale(new Vector3(0.2f, 0.2f, 0.2f),0);
+            Vector3 pos = player.transform.position + new Vector3(Random.Range(-3, 3), 0.01f, Random.Range(-3,3));
+            effect.Init(EffectType.None, pos, 1f);
+            yield return YieldInstructionCache.WaitForSeconds(1);
+            Projectile thorn = projectileManager.GetFromPool<Projectile>(4);
+            pos += Vector3.up * 15f;
+            thorn.Init(ProjectileType.Thorn, pos, key);
+            thorn.AttackThorn(Quaternion.Euler(90, 0, 0));
+        }
     }
     
     public float TakeDamage(int creatureKey, int PatternInfoKey)
