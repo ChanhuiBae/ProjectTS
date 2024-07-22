@@ -520,13 +520,34 @@ public class SkillManager : MonoBehaviour, ITakeDamage
             Effect effect = SpawnEffect(25);
             effect.transform.LeanScale(new Vector3(0.4f, 0.4f, 0.4f),0);
             Vector3 pos = player.transform.position + new Vector3(Random.Range(-3, 3), 0.01f, Random.Range(-3,3));
-            effect.Init(EffectType.None, pos, 1f);
-            yield return YieldInstructionCache.WaitForSeconds(3);
+            effect.Init(EffectType.None, pos, 3f);
+            yield return YieldInstructionCache.WaitForSeconds(1);
             Projectile thorn = projectileManager.GetFromPool<Projectile>(4);
             pos = new Vector3(pos.x, 15f, pos.z);
             thorn.Init(ProjectileType.Thorn, pos, key);
             thorn.AttackThorn(Quaternion.Euler(90, 0, 0));
         }
+    }
+
+    public void StartTailAttack(int key)
+    {
+        StartCoroutine(UpTail(key, player.transform.position));
+    }
+
+    private IEnumerator UpTail(int key, Vector3 pos)
+    {
+        Effect effect = SpawnEffect(25);
+        effect.transform.LeanScale(new Vector3(0.4f, 0.4f, 0.4f),0);
+        effect.Init(EffectType.None, pos + new Vector3(0,0.1f,0), 1f);
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        pos += new Vector3(0, -20, -3);
+        effect = SpawnEffect(28);
+        effect.Init(EffectType.Once, pos, key);
+        effect.transform.LeanMove(effect.transform.position + Vector3.up * 20f, 0.5f);
+        yield return YieldInstructionCache.WaitForSeconds(2f);
+        effect.transform.LeanMove(effect.transform.position + Vector3.down * 20f, 0.5f);
+        yield return YieldInstructionCache.WaitForSeconds(2f);
+        effect.ReturenEffect();
     }
     
     public float TakeDamage(int creatureKey, int PatternInfoKey)

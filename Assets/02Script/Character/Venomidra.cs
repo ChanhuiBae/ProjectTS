@@ -23,6 +23,8 @@ public class Venomidra : MonoBehaviour
 
     private SkinnedMeshRenderer renderer;
     private Material phase2;
+    private int phase;
+
 
     private void Start()
     {
@@ -90,7 +92,7 @@ public class Venomidra : MonoBehaviour
         }
 
         phase2 = Resources.Load<Material>("Venomidra2Phase");
-
+        phase = 1;
         hp.SetBossHP(1);
     }
 
@@ -183,5 +185,14 @@ public class Venomidra : MonoBehaviour
     public void SetPhase2()
     {
         renderer.material = phase2;
+        phase = 2;
+    }
+
+    public void setTail(int key)
+    {
+        if(phase == 2)
+        {
+            skillManager.StartTailAttack(key);
+        }
     }
 }
