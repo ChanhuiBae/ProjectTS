@@ -15,6 +15,7 @@ public class Effect : MonoBehaviour, IPoolObject
     [SerializeField]
     private string poolName;
     private SkillManager skillManager;
+    private PatternManager patternManager;
     private EffectType type;  
     private int key;
     private bool hit;
@@ -30,6 +31,10 @@ public class Effect : MonoBehaviour, IPoolObject
         if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("Effect - Awake - SkillManager");
+        }
+        if (!GameObject.Find("PatternManager").TryGetComponent<PatternManager>(out patternManager))
+        {
+            Debug.Log("Effect - Awake - PatternManager");
         }
     }
     public void Init(EffectType type, Vector3 pos, float lifeTime)
@@ -175,6 +180,13 @@ public class Effect : MonoBehaviour, IPoolObject
             if (type == EffectType.Multiple)
             {
                 skillManager.TakeDamageByKey(AttackType.Effect, key, other);
+            }
+        }
+        else if(other.tag == "Player")
+        {
+            if(type == EffectType.Multiple)
+            {
+                patternManager.TakeDamageOther(4000,key, other);
             }
         }
     }

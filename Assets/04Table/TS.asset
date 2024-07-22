@@ -2691,7 +2691,7 @@ MonoBehaviour:
     Is_Slash: 0
     Is_Strike: 1
     Is_Explosion: 0
-    Physics: 150
+    Physics: 9000
     Fire: 0
     Water: 0
     Electric: 0
@@ -3105,6 +3105,36 @@ MonoBehaviour:
     Trigger_Phase_02: 1
     Trigger_Phase_03: 0
     Name: ThornFromSky
+  - ID: 400010
+    Creature_ID: 4000
+    Hit_Max: 2
+    Delay_Min: 10
+    Delay_Max: 12
+    Cool_Time: 40
+    Trigger_Phase_01: 0
+    Trigger_Phase_02: 1
+    Trigger_Phase_03: 0
+    Name: HeadStampAndTail
+  - ID: 400011
+    Creature_ID: 4000
+    Hit_Max: 3
+    Delay_Min: 8
+    Delay_Max: 12
+    Cool_Time: 20
+    Trigger_Phase_01: 0
+    Trigger_Phase_02: 1
+    Trigger_Phase_03: 0
+    Name: StampAndTail
+  - ID: 400012
+    Creature_ID: 4000
+    Hit_Max: 4
+    Delay_Min: 15
+    Delay_Max: 18
+    Cool_Time: 40
+    Trigger_Phase_01: 0
+    Trigger_Phase_02: 1
+    Trigger_Phase_03: 0
+    Name: SwingAndStampAndTail
   Pattern_Info_List:
   - ID: 1000001
     Damage_Type: Physics
@@ -3769,6 +3799,123 @@ MonoBehaviour:
     Stun_Chance: 0
     Airborne_Time: 0
     Knockback_Distance: 0
+  - ID: 4000101
+    Damage_Type: Physics
+    Physics_Mul: 2
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 2
+    Knockback_Distance: 2
+  - ID: 4000102
+    Damage_Type: Physics
+    Physics_Mul: 1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000111
+    Damage_Type: Physics
+    Physics_Mul: 1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000112
+    Damage_Type: Physics
+    Physics_Mul: 1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000113
+    Damage_Type: Physics
+    Physics_Mul: 1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000121
+    Damage_Type: Physics
+    Physics_Mul: 1.2
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000122
+    Damage_Type: Physics
+    Physics_Mul: 1.2
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
+  - ID: 4000123
+    Damage_Type: Physics
+    Physics_Mul: 1.7
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 1
+    Knockback_Distance: 1.5
+  - ID: 4000124
+    Damage_Type: Physics
+    Physics_Mul: 1
+    Fire_Mul: 0
+    Water_Mul: 0
+    Electric_Mul: 0
+    Ice_Mul: 0
+    Wind_Mul: 0
+    Stagger_Time: 0.5
+    Stun_Time: 0
+    Stun_Chance: 0
+    Airborne_Time: 0
+    Knockback_Distance: 0.5
   Pattern_Hit_Frame:
   - ID: 100000
     Hit_01: 14

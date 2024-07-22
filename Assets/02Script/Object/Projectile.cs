@@ -166,14 +166,6 @@ public class Projectile : MonoBehaviour, IPoolObject
                 {
                     patternManager.TakeDamageOther(4000, key, other);
                 }
-                if (other.tag == "Ground")
-                {
-                    if (trail != null)
-                    {
-                        trail.enabled = false;
-                    }
-                    skillManager.TakeProjectile(poolName, this);
-                }
                 break;
         }
 

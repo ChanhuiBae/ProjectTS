@@ -812,11 +812,9 @@ public class PlayerController : MonoBehaviour, IDamage
     private IEnumerator StaggerTime(float time)
     {
         isControll = false;
-        anim.SetKnockBack(true);
+        anim.SetKnockBack();
         yield return new WaitForSeconds(time);
-        anim.SetKnockBack(false);
         ChangeState(State.Idle);
-        anim.SetKnockBack(false);
         isControll = true;
     }
 
@@ -876,7 +874,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             ChangeState(State.CrowdControl);
             isControll = false;
-            anim.SetKnockBack(true);
+            anim.SetKnockBack();
             StartCoroutine(MoveKnockback(distance));
         }
     }
@@ -885,7 +883,6 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance, distance * 0.01f).setEase(LeanTweenType.easeOutQuart);
         yield return YieldInstructionCache.WaitForSeconds(distance * 0.01f);
-        anim.SetKnockBack(false);
         ChangeState(State.Idle);
     }
 

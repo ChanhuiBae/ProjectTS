@@ -67,9 +67,9 @@ public class PlayerAnimationController : MonoBehaviour
         return animator.GetBool(H_Combo);
     }
 
-    public void SetKnockBack(bool use)
+    public void SetKnockBack()
     {
-        animator.SetBool(H_KnockBack, use);
+        animator.SetTrigger(H_KnockBack);
     }
 
     public void SetKnockDown(bool use)

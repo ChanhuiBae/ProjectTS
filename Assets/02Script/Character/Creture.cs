@@ -305,6 +305,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     {
         if (phase2HP != 0 && currentHP <= phase2HP && currentPhase == 1)
         {
+            anim.ChangePhase();
             currentPhase = 2;
             ai.SetPhase(currentPhase);
         }
@@ -484,7 +485,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
     private IEnumerator StaggerTime(float time)
     {
         anim.SetStagger(true);
-        yield return new WaitForSeconds(time);
+        yield return YieldInstructionCache.WaitForSeconds(time);
         anim.SetStagger(false);
     }
     public void Stun(float time)

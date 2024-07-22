@@ -21,6 +21,9 @@ public class Venomidra : MonoBehaviour
 
     private Transform thorn;
 
+    private SkinnedMeshRenderer renderer;
+    private Material phase2;
+
     private void Start()
     {
         if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
@@ -80,6 +83,13 @@ public class Venomidra : MonoBehaviour
         {
             cam.IsMove = false;
         }
+
+        if(!GameObject.Find("GuvnorRenderder").TryGetComponent<SkinnedMeshRenderer>(out renderer))
+        {
+            Debug.Log("Venomidra - Awake - SkinnedMeshRenderer");
+        }
+
+        phase2 = Resources.Load<Material>("Venomidra2Phase");
 
         hp.SetBossHP(1);
     }
@@ -156,18 +166,22 @@ public class Venomidra : MonoBehaviour
         skillManager.SpawnThorn(thorn.position, player.gameObject, key);
     }
 
-    public void setAirThorn()
-    {
-        skillManager.SpawnThornUp(transform.position + Vector3.up * 10f);
-    }
-
     public void setDrop(int key)
     {
         skillManager.StartDrop(key);
     }
 
-    public void setBreath()
+    public void setBreath(int key)
     {
+        Effect effect = skillManager.SpawnEffect(27);
+        effect.Init(EffectType.Multiple, transform.forward * 3f + Vector3.up * 5f,6.5f);
+        effect.Key = key;
+        effect.transform.LookAt(-player.transform.position);
+    }
 
+
+    public void SetPhase2()
+    {
+        renderer.material = phase2;
     }
 }

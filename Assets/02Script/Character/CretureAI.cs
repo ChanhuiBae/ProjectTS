@@ -257,15 +257,23 @@ public class CretureAI : MonoBehaviour
             {
                 if (!usePattern)
                 {
+                    int use = UnityEngine.Random.Range(0, currentPatterns.Count);
+                    int i = 0;
                     foreach (KeyValuePair<Pattern, bool> items in currentPatterns)
                     {
-                        if (items.Value == true)
+                        if (i == use)
                         {
-                            anim.SetPattern(items.Key.GetPatternKey());
-                            SetPatternDisable(items.Key);
-                            usePattern = true;
-                            break;
+                            if (items.Value == true)
+                            {
+                                anim.SetPattern(items.Key.GetPatternKey());
+                                Debug.Log(items.Key.GetPatternKey());
+                                items.Key.StartPattern();
+                                SetPatternDisable(items.Key);
+                                usePattern = true;
+                                break;
+                            }
                         }
+                        i++;
                     }
                 }
             }
@@ -273,15 +281,23 @@ public class CretureAI : MonoBehaviour
             {
                 if(!usePattern)
                 {
+                    int use = UnityEngine.Random.Range(0, currentPatterns.Count);
+                    int i = 0;
                     foreach (KeyValuePair<Pattern, bool> items in currentPatterns)
                     {
-                        if (items.Value == true)
+                        if (i == use)
                         {
-                            anim.SetPattern(items.Key.GetPatternKey());
-                            SetPatternDisable(items.Key);
-                            usePattern = true;
-                            break;
+                            if (items.Value == true)
+                            {
+                                anim.SetPattern(items.Key.GetPatternKey());
+                                Debug.Log(items.Key.GetPatternKey());
+                                items.Key.StartPattern();
+                                SetPatternDisable(items.Key);
+                                usePattern = true;
+                                break;
+                            }
                         }
+                        i++;
                     }
                 }
             }
@@ -371,6 +387,9 @@ public class CretureAI : MonoBehaviour
                         currentPatterns.Add(patterns[i], true);
                     }
                 }
+                usePattern = false;
+                StopAllCoroutines();
+                StartCoroutine(Attack());
                 break;
             case 3:
                 this.phase = Phase.Three;
@@ -383,6 +402,9 @@ public class CretureAI : MonoBehaviour
                         currentPatterns.Add(patterns[i], true);
                     }
                 }
+                usePattern = false;
+                StopAllCoroutines();
+                StartCoroutine(Attack());
                 break;
         }
     }

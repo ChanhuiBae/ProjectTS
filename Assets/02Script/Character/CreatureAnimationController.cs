@@ -10,6 +10,7 @@ public class CreatureAnimationController : MonoBehaviour
     private int H_Pattern = Animator.StringToHash("Pattern");
     private int H_Groggy = Animator.StringToHash("Groggy");
     private int H_Struge = Animator.StringToHash("Struge");
+    private int H_ChangePhase = Animator.StringToHash("ChangePhase");
 
 
     private void Awake()
@@ -45,5 +46,8 @@ public class CreatureAnimationController : MonoBehaviour
         animator.SetTrigger(H_Struge);
     }
 
-
+    public void ChangePhase()
+    {
+        animator.SetTrigger(H_ChangePhase);
+    }
 }
