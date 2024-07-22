@@ -80,7 +80,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        //StartCoroutine(SpawnLogic());
+        StartCoroutine(SpawnLogic());
         StartCoroutine(SpawnBoss());
     }
 
@@ -145,7 +145,7 @@ public class SpawnManager : MonoBehaviour
             Debug.Log("Can't get Creature from Pool");
             return;
         }
-        creature.Init(player.transform.position + new Vector3(player.transform.forward.x * 7f, 0, player.transform.forward.z * 7f), id, type);
+        creature.Init(player.transform.position + new Vector3(0, 0, 5), id, type);
     }
 
     private IEnumerator SpawnLogic()
@@ -283,22 +283,19 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnBoss()
     {
-        yield return null;
-        // yield return YieldInstructionCache.WaitForSeconds(300);
+        yield return YieldInstructionCache.WaitForSeconds(300);
         Spawn(7, 3000, CretureType.Swarm_Boss);
-        //yield return YieldInstructionCache.WaitForSeconds(300
-        yield return YieldInstructionCache.WaitForSeconds(5f);
+        yield return YieldInstructionCache.WaitForSeconds(300);
         yield return YieldInstructionCache.WaitForSeconds(6f);
         GuvnorSpawn(8,4000, CretureType.Guvnor);
-        //GameManager.Inst.soundManager.ChangeBGM(BGM_Type.BGM_Boss);
+        GameManager.Inst.soundManager.ChangeBGM(BGM_Type.BGM_Boss);
         StartCoroutine(SpawnBossHole());
         StartCoroutine(SpawnBossWall());
-        yield return YieldInstructionCache.WaitForSeconds(1.6f);
     }
 
     private IEnumerator SpawnBossHole()
     {
-        bossHole.transform.position = new Vector3(player.transform.position.x + player.transform.forward.x * 8f, bossHole.transform.position.y, player.transform.position.z + player.transform.forward.z * 8f);
+        bossHole.transform.position = new Vector3(player.transform.position.x, bossHole.transform.position.y, player.transform.position.z + 4f);
         for(float i = -8; i < -0.01; i += 0.1f)
         {
             yield return null;
@@ -308,7 +305,7 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnBossWall()
     {
-        bossWall.transform.position = new Vector3(player.transform.position.x, bossWall.transform.position.y, player.transform.position.z);
+        bossWall.transform.position = new Vector3(player.transform.position.x, bossWall.transform.position.y, player.transform.position.z + 2f);
         for (float i = - 30; i < -2; i+= 0.4f)
         {
             yield return null;

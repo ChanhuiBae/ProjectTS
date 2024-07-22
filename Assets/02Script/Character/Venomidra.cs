@@ -72,65 +72,30 @@ public class Venomidra : MonoBehaviour
     {
         GameManager.Inst.soundManager.PlaySFX(SFX_Type.SfX_BossScream);
     }
-    public void setBothHand(int value)
+    public void setBothHandTrue(int key)
     {
-        if (value > 0)
-        {
-            lHand.enabled = true;
-            rHand.enabled = true;
-        }
-        else
-        {
-            lHand.enabled = false;
-            rHand.enabled= false;
-        }
+        lHand.enabled = true;
+        rHand.enabled = true;
+        
     }
 
-    public void setLeftHand(int value)
+    public void setLeftHandTrue(int key)
     {
-        if(value > 0) 
-        {
-            lHand.enabled = true;
-        }
-        else
-        {
-            lHand.enabled =false;
-        }
+        lHand.enabled = true;
     }
 
-    public void setRightHand(int value)
+    public void setRightHandTrue(int key)
     {
-        if (value > 0)
-        {
-            rHand.enabled = true;
-        }
-        else
-        {
-            rHand.enabled = false;
-        }
+        rHand.enabled = true;
     }
 
-    public void setHead(int value)
+    public void setHeadTrue(int key)
     {
-        if (value > 0)
-        {
-            head.enabled = true;
-        }
-        else
-        {
-            head.enabled = false;
-        }
+        head.enabled = true;
     }
 
-    public void setBody(int value)
+    public void setBody(int key)
     {
-        if (value > 0)
-        {
-            body.enabled = true;
-        }
-        else
-        {
-            body.enabled = false;
-        }
+        body.enabled = true;
     }
 }

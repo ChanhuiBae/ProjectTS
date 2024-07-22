@@ -12,11 +12,15 @@ public enum BGM_Type
 public enum SFX_Type
 {
     SFX_EXP = 0,
-    SFX_Hit = 1,
-    SFX_LevelUp = 2,
-    SFX_BossSpawn = 3,
-    SFX_Warning = 4,
-    SfX_BossScream = 5,
+    SFX_LevelUp = 1,
+    SFX_BossSpawn = 2,
+    SFX_Warning = 3,
+    SfX_BossScream = 4,
+}
+
+public enum SFX_Hit
+{
+    BaseHit = 0,
 }
 
 public enum Skill_SFX
@@ -61,6 +65,11 @@ public class SoundManager : MonoBehaviour
     private List<AudioSource> sfxPlayers;
     [SerializeField]
     private List<AudioClip> sfxList;
+    private int hitCurser = 0;
+    [SerializeField]
+    private List<AudioSource> hitPlayers;
+    [SerializeField]
+    private List<AudioClip> hitList;
     private int skillCurser = 0;
     [SerializeField]
     private List<AudioSource> skillPlayers;
@@ -92,11 +101,13 @@ public class SoundManager : MonoBehaviour
         {
             masterMixer.SetFloat("SFX", -80);
             masterMixer.SetFloat("Skill", -80);
+            masterMixer.SetFloat("Hit", -80);
         }
         else
         {
             masterMixer.SetFloat("SFX", volum);
             masterMixer.SetFloat("Skill", volum);
+            masterMixer.SetFloat("Hit", volum);
         }
     }
 
@@ -143,6 +154,19 @@ public class SoundManager : MonoBehaviour
         if (curser > sfxPlayers.Count - 1)
         {
             curser = 0;
+        }
+    }
+
+
+    public void PlayHIt(SFX_Hit hit)
+    {
+        hitPlayers[hitCurser].clip = hitList[(int)hit];
+        hitPlayers[hitCurser].Play();
+
+        hitCurser++;
+        if (hitCurser > hitPlayers.Count - 1)
+        {
+            hitCurser = 0;
         }
     }
 

@@ -436,6 +436,8 @@ MonoBehaviour:
   - {fileID: 1902532404}
   sfxList:
   - {fileID: 8300000, guid: a639cab4690d24a4792508d062ea10fe, type: 3}
+  hitPlayers: []
+  hitList: []
   skillPlayers: []
   skillSFXList: []
 --- !u!4 &563195713
@@ -5556,7 +5558,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1204391273779593063, guid: 9c2b9540862487943b72d86ec2f81da4,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e9a3f15ef27ad0841870f176d8bbcefd, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

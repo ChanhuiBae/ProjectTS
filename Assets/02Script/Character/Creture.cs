@@ -241,7 +241,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             if (damage > 0)
             {
                 currentHP -= damage;
-                GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Hit);
+                GameManager.Inst.soundManager.PlayHIt(SFX_Hit.BaseHit);
                 if (type == CretureType.Guvnor)
                 {
                     GameManager.Inst.menuManager.SetBossGage(currentHP / maxHP);
@@ -272,8 +272,8 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
             if (damage > 0)
             {
                 currentHP -= damage;
-                GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Hit);
-                if(type == CretureType.Guvnor)
+                GameManager.Inst.soundManager.PlayHIt(SFX_Hit.BaseHit);
+                if (type == CretureType.Guvnor)
                 {
                     GameManager.Inst.menuManager.SetBossGage(currentHP / maxHP);
                 }
