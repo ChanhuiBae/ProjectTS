@@ -542,11 +542,12 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         yield return YieldInstructionCache.WaitForSeconds(1f);
         pos += new Vector3(0, -20, -3);
         effect = SpawnEffect(28);
-        effect.Init(EffectType.Once, pos, key);
+        effect.Init(EffectType.Once, pos, 1f);
+        effect.Key = key;
         effect.transform.LeanMove(effect.transform.position + Vector3.up * 20f, 0.5f);
-        yield return YieldInstructionCache.WaitForSeconds(2f);
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
         effect.transform.LeanMove(effect.transform.position + Vector3.down * 20f, 0.5f);
-        yield return YieldInstructionCache.WaitForSeconds(2f);
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
         effect.ReturenEffect();
     }
     

@@ -29,6 +29,7 @@ public class PatternManager : MonoBehaviour, ITakeDamage
     public float TakeDamage(int creatureKey, int PatternInfoKey)
     {
         TableEntity_Creature creature;
+        Debug.Log(creatureKey);
         GameManager.Inst.GetCreatureData(creatureKey, out creature);
         TableEntity_Pattern_Info pattern;
         GameManager.Inst.GetPatternInfoData(PatternInfoKey, out pattern);

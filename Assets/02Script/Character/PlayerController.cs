@@ -822,9 +822,9 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         isControll = false;
         anim.SetKnockBack();
-        yield return new WaitForSeconds(time);
-        ChangeState(State.Idle);
+        yield return YieldInstructionCache.WaitForSeconds(time);
         isControll = true;
+        ChangeState(State.Idle);
     }
 
     public void Stun(float time)
