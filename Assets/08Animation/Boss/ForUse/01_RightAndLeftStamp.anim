@@ -14724,6 +14724,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 1.7166667
+    functionName: SpawnRock
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
   - time: 2.2666667
     functionName: Setlook
     data: 
@@ -14758,6 +14765,13 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 4000113
+    messageOptions: 0
+  - time: 4.1833334
+    functionName: SpawnRock
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
     messageOptions: 0
   - time: 5.483333
     functionName: Setlook
