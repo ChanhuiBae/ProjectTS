@@ -306,7 +306,7 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnBossWall()
     {
-        bossWall.transform.position = new Vector3(player.transform.position.x, bossWall.transform.position.y, player.transform.position.z + 2f);
+        bossWall.transform.position = new Vector3(player.transform.position.x, bossWall.transform.position.y, player.transform.position.z + 4f);
         for (float i = - 30; i < -4; i+= 0.4f)
         {
             yield return null;
