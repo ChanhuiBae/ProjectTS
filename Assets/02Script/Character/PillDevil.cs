@@ -11,6 +11,7 @@ public class PillDevil : MonoBehaviour
     private SpawnManager spawnManager;
     private Effect effect;
 
+
     private void Awake()
     {
         if(!TryGetComponent<CreatureAnimationController>(out anim))
@@ -33,7 +34,6 @@ public class PillDevil : MonoBehaviour
         {
             Debug.Log("");
         }
-
     }
 
     public void SuperStamp()
@@ -65,6 +65,7 @@ public class PillDevil : MonoBehaviour
     }
     private IEnumerator RushTime()
     {
+        
         transform.position = Vector3.zero;
         transform.rotation = Quaternion.identity;
         transform.position = spawnManager.RushInit();

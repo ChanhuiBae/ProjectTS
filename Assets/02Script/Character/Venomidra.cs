@@ -28,6 +28,8 @@ public class Venomidra : MonoBehaviour
     private Vector3 postion;
     private bool look;
 
+    private Transform L;
+    private Transform R;
 
     private void Start()
     {
@@ -93,6 +95,15 @@ public class Venomidra : MonoBehaviour
         if(!GameObject.Find("GuvnorRenderder").TryGetComponent<SkinnedMeshRenderer>(out renderer))
         {
             Debug.Log("Venomidra - Awake - SkinnedMeshRenderer");
+        }
+
+        if (!GameObject.Find("L").TryGetComponent<Transform>(out L))
+        {
+            Debug.Log("");
+        }
+        if (!GameObject.Find("R").TryGetComponent<Transform>(out R))
+        {
+            Debug.Log("");
         }
 
         phase2 = Resources.Load<Material>("Venomidra2Phase");
@@ -225,6 +236,20 @@ public class Venomidra : MonoBehaviour
         if(phase == 2)
         {
             skillManager.StartTailAttack(key);
+        }
+    }
+
+    public void SpawnRock(int value)
+    {
+        if(value > 0)
+        {
+            Effect effect = skillManager.SpawnEffect(29);
+            effect.Init(EffectType.None, R.position, 2f);
+        }
+        else
+        {
+            Effect effect = skillManager.SpawnEffect(29);
+            effect.Init(EffectType.None, L.position, 2f);
         }
     }
 }
