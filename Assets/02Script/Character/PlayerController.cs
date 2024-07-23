@@ -282,7 +282,7 @@ public class PlayerController : MonoBehaviour, IDamage
             StartCoroutine(Dissolve());
             return true;
         }
-        else if(state == State.CrowdControl)
+        else if(state == State.CrowdControl && !isInvincibility)
         {
             this.state = state;
             return true;
