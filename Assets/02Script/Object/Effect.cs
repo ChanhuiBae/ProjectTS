@@ -168,7 +168,6 @@ public class Effect : MonoBehaviour, IPoolObject
             }
             else if (type == EffectType.Multiple && hit)
             {
-                Debug.Log(key);
                 skillManager.TakeDamageByKey(AttackType.Effect, key, other);
             }
         }
@@ -176,6 +175,7 @@ public class Effect : MonoBehaviour, IPoolObject
         {
             if (type == EffectType.Once)
             {
+                Debug.Log(key);
                 patternManager.TakeDamageOther(4000, key, other);
             }
         }
