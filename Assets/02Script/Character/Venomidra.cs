@@ -25,9 +25,13 @@ public class Venomidra : MonoBehaviour
     private Material phase2;
     private int phase;
 
+    private Vector3 postion;
+    private bool look;
+
 
     private void Start()
     {
+        postion = Vector3.zero;
         if(!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
         {
             Debug.Log("Venomidra - Awake - SkillManager");
@@ -94,15 +98,43 @@ public class Venomidra : MonoBehaviour
         phase2 = Resources.Load<Material>("Venomidra2Phase");
         phase = 1;
         hp.SetBossHP(1);
+        look = true;
+        StartCoroutine(UpdatePosition());
+    }
+
+    private IEnumerator UpdatePosition()
+    {
+        yield return YieldInstructionCache.WaitForSeconds(2f);
+        postion = transform.position;
     }
 
     private void Update()
     {
+        if(postion != Vector3.zero)
+        {
+            if (look)
+            {
+                transform.LookAt(player.transform);
+            }
+            transform.position = postion;
+        }
         hp.SetBossHP(creature.HP);
         if(creature.HP <= 0)
         {
             hp.gameObject.SetActive(false);
             return;
+        }
+    }
+
+    public void Setlook(int value)
+    {
+        if(value > 0)
+        {
+            look = true;
+        }
+        else
+        {
+            look = false;
         }
     }
 

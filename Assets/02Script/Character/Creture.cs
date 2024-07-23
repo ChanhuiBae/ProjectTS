@@ -151,6 +151,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         if(type == CretureType.Guvnor)
         {
             ai.StopAI(1.5f);
+            StartCoroutine(Sanjou());
         }
         endtime = 0;
     }
@@ -590,21 +591,21 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         }
     }
 
-    private void Update()
+    private IEnumerator Sanjou()
     {
-        if(type == CretureType.Guvnor)
+        while (true)
         {
-            if(count < 0)
-            {   
+            if (count < 0)
+            {
                 transform.position = new Vector3(postion.x, count, postion.z);
                 count += 0.5f;
             }
             else
             {
-                transform.position = postion;
+                break;
             }
+            yield return null;
         }
-        
     }
 
     public void InitUsePattern()
