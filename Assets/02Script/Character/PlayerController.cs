@@ -811,9 +811,10 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Stagger(float time)
     {
-        if (!isDie)
+        ChangeState(State.CrowdControl);
+        if (!isDie && state == State.CrowdControl)
         {
-            ChangeState(State.CrowdControl);
+            
             StartCoroutine(StaggerTime(time));
         }
     }
@@ -829,9 +830,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Stun(float time)
     {
-        if (!isDie)
+        ChangeState(State.CrowdControl);
+        if (!isDie && state == State.CrowdControl)
         {
-            ChangeState(State.CrowdControl);
             StartCoroutine(StunControl(time));
         }
     }
@@ -855,9 +856,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Airborne(float time)
     {
-        if (isDie)
+        ChangeState(State.CrowdControl);
+        if (isDie && state == State.CrowdControl)
         {
-            ChangeState(State.CrowdControl);
             StartCoroutine(MoveAirborne(time));
         }
     }
@@ -879,9 +880,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Knockback(float distance)
     {
-        if (isDie)
+        ChangeState(State.CrowdControl);
+        if (isDie && state == State.CrowdControl)
         {
-            ChangeState(State.CrowdControl);
             isControll = false;
             anim.SetKnockBack();
             StartCoroutine(MoveKnockback(distance));
