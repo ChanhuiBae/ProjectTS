@@ -17154,6 +17154,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 1.0333333
+    functionName: Setlook
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.2833333
     functionName: setLeftHandTrue
     data: 
@@ -17168,6 +17175,20 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 2.3666666
+    functionName: Setlook
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
+  - time: 3.1833334
+    functionName: Setlook
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 3.6666667
     functionName: setRightHandTrue
     data: 
@@ -17177,6 +17198,20 @@ AnimationClip:
     messageOptions: 0
   - time: 4.5
     functionName: setRightHandFalse
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 4.733333
+    functionName: Setlook
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
+  - time: 6.8333335
+    functionName: Setlook
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -17202,4 +17237,11 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 4000124
+    messageOptions: 0
+  - time: 7.85
+    functionName: Setlook
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
     messageOptions: 0

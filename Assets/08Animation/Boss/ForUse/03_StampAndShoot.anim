@@ -18018,6 +18018,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 1.0333333
+    functionName: Setlook
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.45
     functionName: setLeftHandTrue
     data: 
@@ -18027,6 +18034,20 @@ AnimationClip:
     messageOptions: 0
   - time: 1.5833334
     functionName: setLeftHandFalse
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.7
+    functionName: Setlook
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
+  - time: 3.0833333
+    functionName: Setlook
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -18045,6 +18066,13 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
+    messageOptions: 0
+  - time: 4.0833335
+    functionName: Setlook
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
     messageOptions: 0
   - time: 6.383333
     functionName: setThorn
