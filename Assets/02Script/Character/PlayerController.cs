@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             Debug.Log("PlayerController - Awake - PlayerAnimationController");
         }
+        currentHP = GameManager.Inst.PlayerInfo.Max_HP;
     }
 
     public void Init(WeaponType type)
@@ -209,40 +210,55 @@ public class PlayerController : MonoBehaviour, IDamage
         StartCoroutine(Idle());
     }
 
+    public void InitIdle()
+    {
+        state = State.Idle;
+        StopAllCoroutines();
+        if (sceneNum > 2)
+        {
+            skillManager.UseSkill(-1);
+            roll.enabled = true;
+            attackArea.StopAttack();
+            skillManager.SetCrowdControl(CrowdControlType.None);
+            skillManager.ClearVector();
+            weapon.OffTrail();
+        }
+        isInvincibility = false;
+        anim.Skill(0);
+        anim.IsCombo(false);
+        anim.Move(false);
+        StartCoroutine(Idle());
+    }
+
     public bool ChangeState(State state)
     {
-        if(this.state != state && this.state != State.Die && !rollvalue)
+        if(this.state != state && this.state != State.Die)
         {
-            if(state == State.Idle)
+            if (state == State.Die)
             {
                 this.state = state;
-                StopAllCoroutines();
-                if (sceneNum > 2)
-                {
-                    skillManager.UseSkill(-1);
-                    roll.enabled = true;
-                    attackArea.StopAttack();
-                    skillManager.SetCrowdControl(CrowdControlType.None);
-                    skillManager.ClearVector();
-                    weapon.OffTrail();
-                }
-                isInvincibility = false;
-                anim.Skill(0);
-                anim.IsCombo(false);
-                anim.Move(false);
-                StartCoroutine(Idle());
+                isControll = false;
+                StartCoroutine(Dissolve());
                 return true;
             }
-            else if(this.state == State.CrowdControl)
+            if(this.state == State.CrowdControl && state == State.Idle)
             {
-                return false;
+                InitIdle();
+                return true;
             }
-            else
+            if(state == State.CrowdControl && !isInvincibility)
+            {
+                return true;
+            }
+            if (!rollvalue)
             {
                 this.state = state;
                 StopAllCoroutines();
                 switch (this.state)
                 {
+                    case State.Idle:
+                        InitIdle(); 
+                        break;
                     case State.MoveForward:
                         StartCoroutine(MoveForward());
                         break;
@@ -265,32 +281,11 @@ public class PlayerController : MonoBehaviour, IDamage
                         roll.enabled = false;
                         weapon.OnTrail();
                         break;
-                    case State.CrowdControl:
-                        break;
-                    case State.Die:
-                        isControll = false;
-                        StartCoroutine(Dissolve());
-                        break;
                 }
                 return true;
             }
         }
-        else if(state == State.Die)
-        {
-            this.state = state;
-            isControll = false;
-            StartCoroutine(Dissolve());
-            return true;
-        }
-        else if(state == State.CrowdControl && !isInvincibility)
-        {
-            this.state = state;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     private void SetMaxEXP()
@@ -373,6 +368,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private IEnumerator Idle()
     {
+        CheckDie();
         anim.Move(false);
         while (true)
         {
@@ -761,6 +757,15 @@ public class PlayerController : MonoBehaviour, IDamage
         return false;
     }
 
+    private void CheckDie()
+    {
+        if (currentHP <= 0)
+        {
+            isDie = true;
+            ChangeState(State.Die);
+        }
+    }
+
     public bool CalculateDamage(AttackType attack, ITakeDamage hiter)
     {
         return false;
@@ -776,16 +781,11 @@ public class PlayerController : MonoBehaviour, IDamage
         if (!isInvincibility && !isDie)
         {
             float damage = hiter.TakeDamage(creatueKey, patternKey);
-            Debug.Log(damage);
             if(damage > 0)
             {
                 StartCoroutine(HitGlow());
                 ApplyHP(damage);
-                if (currentHP <= 0)
-                {
-                    isDie = true;
-                    ChangeState(State.Die);
-                }
+                CheckDie();
                 return true;
             }
         }
@@ -811,8 +811,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Stagger(float time)
     {
-        ChangeState(State.CrowdControl);
-        if (!isDie && state == State.CrowdControl)
+        if (!isDie && ChangeState(State.CrowdControl))
         {
             
             StartCoroutine(StaggerTime(time));
@@ -830,8 +829,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Stun(float time)
     {
-        ChangeState(State.CrowdControl);
-        if (!isDie && state == State.CrowdControl)
+        if (!isDie && ChangeState(State.CrowdControl))
         {
             StartCoroutine(StunControl(time));
         }
@@ -849,15 +847,14 @@ public class PlayerController : MonoBehaviour, IDamage
             yield return YieldInstructionCache.WaitForSeconds(0.1f);
         }
         stun.gameObject.SetActive(false);
-        ChangeState(State.Idle);
         isControll = true;
+        ChangeState(State.Idle);
         
     }
 
     public void Airborne(float time)
     {
-        ChangeState(State.CrowdControl);
-        if (isDie && state == State.CrowdControl)
+        if (!isDie && ChangeState(State.CrowdControl))
         {
             StartCoroutine(MoveAirborne(time));
         }
@@ -865,34 +862,34 @@ public class PlayerController : MonoBehaviour, IDamage
     private IEnumerator MoveAirborne(float time)
     {
         isControll = false;
-        anim.SetKnockDown(true);
+        anim.SetKnockDown();
         isInvincibility = true;
         Vector3 pos = transform.position;
         LeanTween.move(gameObject, pos + (Vector3.up * 3f), time / 2).setEase(LeanTweenType.easeOutCubic);
         yield return YieldInstructionCache.WaitForSeconds(time / 2);
         LeanTween.move(gameObject, pos, time / 2).setEase(LeanTweenType.easeInSine);
         yield return YieldInstructionCache.WaitForSeconds(time / 2);
-        anim.SetKnockDown(false);
         isInvincibility = false;
-        ChangeState(State.Idle);
         isControll = true;
+        ChangeState(State.Idle);
     }
 
     public void Knockback(float distance)
     {
-        ChangeState(State.CrowdControl);
-        if (isDie && state == State.CrowdControl)
+        
+        if (!isDie && ChangeState(State.CrowdControl))
         {
-            isControll = false;
-            anim.SetKnockBack();
             StartCoroutine(MoveKnockback(distance));
         }
     }
 
     private IEnumerator MoveKnockback(float distance)
     {
+        isControll = false;
+        anim.SetKnockBack();
         LeanTween.move(gameObject, transform.position + Vector3.up - transform.forward * distance, distance * 0.01f).setEase(LeanTweenType.easeOutQuart);
         yield return YieldInstructionCache.WaitForSeconds(distance * 0.01f);
+        isControll = true;
         ChangeState(State.Idle);
     }
 

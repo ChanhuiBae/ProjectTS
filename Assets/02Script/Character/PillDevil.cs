@@ -10,7 +10,6 @@ public class PillDevil : MonoBehaviour
     private SkillManager skillManager;
     private SpawnManager spawnManager;
     private Effect effect;
-    private int rushCount;
 
     private void Awake()
     {
@@ -40,7 +39,6 @@ public class PillDevil : MonoBehaviour
     public void SuperStamp()
     {
         ai.StopAI(8);
-        transform.LeanMove(transform.position + new Vector3(0, 20, 0), 0.5f);
         StartCoroutine(SetDownPosition());
     }
 
@@ -55,56 +53,73 @@ public class PillDevil : MonoBehaviour
         anim.Struge();
     }
 
+    public void Dig()
+    {
+        transform.LeanMove(transform.position + new Vector3(0, -20, 0), 0.5f);
+    }
+
     public void Rush()
     {
-        rushCount = 0;
         ai.StopAI(7.5f);
         StartCoroutine(RushTime());
     }
     private IEnumerator RushTime()
     {
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
         transform.position = spawnManager.RushInit();
+        transform.rotation = Quaternion.identity;
         transform.LookAt(player.transform.position);
+        yield return null;
         transform.position -= new Vector3(0, 5f, 0);
         effect = skillManager.SpawnEffect(26);
-        effect.Init(EffectType.None, player.transform.position + new Vector3(0, 0.01f, 0), 1f);
+        effect.Init(EffectType.None, new Vector3(player.transform.position.x, 0.01f, player.transform.position.z), 1f);
         effect.SetRotation(transform.rotation);
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        transform.LeanMove(transform.position + (transform.forward * 40f), 0.5f);
-        yield return YieldInstructionCache.WaitForSeconds(0.5f);
-
-        transform.position = spawnManager.RushInit();
-        transform.LookAt(player.transform.position);
-        transform.position -= new Vector3(0, 5f, 0);
-        effect = skillManager.SpawnEffect(26);
-        effect.Init(EffectType.None, player.transform.position + new Vector3(0, 0.01f, 0), 1f);
-        effect.SetRotation(transform.rotation);
-        yield return YieldInstructionCache.WaitForSeconds(1f);
-        transform.LeanMove(transform.position + (transform.forward * 40f), 0.5f);
+        transform.LeanMove(transform.position + (transform.forward * 60f), 0.5f);
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
 
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
         transform.position = spawnManager.RushInit();
+        transform.rotation = Quaternion.identity;
         transform.LookAt(player.transform.position);
         transform.position -= new Vector3(0, 5f, 0);
         effect = skillManager.SpawnEffect(26);
-        effect.Init(EffectType.None, player.transform.position + new Vector3(0, 0.01f, 0), 1f);
+        effect.Init(EffectType.None,new Vector3(player.transform.position.x, 0.01f, player.transform.position.z), 1f);
         effect.SetRotation(transform.rotation);
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        transform.LeanMove(transform.position + (transform.forward * 40f), 0.5f);
+        transform.LeanMove(transform.position + (transform.forward * 60f), 0.5f);
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
+
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
         transform.position = spawnManager.RushInit();
+        transform.rotation = Quaternion.identity;
         transform.LookAt(player.transform.position);
         transform.position -= new Vector3(0, 5f, 0);
         effect = skillManager.SpawnEffect(26);
-        effect.Init(EffectType.None, player.transform.position + new Vector3(0, 0.01f, 0), 1f);
+        effect.Init(EffectType.None, new Vector3(player.transform.position.x, 0.01f, player.transform.position.z), 1f);
         effect.SetRotation(transform.rotation);
         yield return YieldInstructionCache.WaitForSeconds(1f);
-        transform.LeanMove(transform.position + (transform.forward * 40f), 0.5f);
+        transform.LeanMove(transform.position + (transform.forward * 60f), 0.5f);
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
-        rushCount++;
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+        transform.position = spawnManager.RushInit();
+        transform.rotation = Quaternion.identity;
+        transform.LookAt(player.transform.position);
+        transform.position -= new Vector3(0, 5f, 0);
+        effect = skillManager.SpawnEffect(26);
+        effect.Init(EffectType.None, new Vector3(player.transform.position.x, 0.01f, player.transform.position.z), 1f);
+        effect.SetRotation(transform.rotation);
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        transform.LeanMove(transform.position + (transform.forward * 60f), 0.5f);
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
+
         SuperStamp();
     }
 

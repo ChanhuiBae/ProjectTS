@@ -2691,7 +2691,7 @@ MonoBehaviour:
     Is_Slash: 0
     Is_Strike: 1
     Is_Explosion: 0
-    Physics: 10000
+    Physics: 150
     Fire: 0
     Water: 0
     Electric: 0
@@ -2709,7 +2709,7 @@ MonoBehaviour:
     Is_Slash: 0
     Is_Strike: 0
     Is_Explosion: 0
-    Physics: 70
+    Physics: 120
     Fire: 0
     Water: 0
     Electric: 0
@@ -3723,7 +3723,7 @@ MonoBehaviour:
     Knockback_Distance: 0.5
   - ID: 4000043
     Damage_Type: Physics
-    Physics_Mul: 1.7
+    Physics_Mul: 0.85
     Fire_Mul: 0
     Water_Mul: 0
     Electric_Mul: 0
@@ -3749,7 +3749,7 @@ MonoBehaviour:
     Knockback_Distance: 2
   - ID: 4000061
     Damage_Type: Physics
-    Physics_Mul: 1.5
+    Physics_Mul: 0.75
     Fire_Mul: 0
     Water_Mul: 0
     Electric_Mul: 0
@@ -3892,7 +3892,7 @@ MonoBehaviour:
     Knockback_Distance: 0.5
   - ID: 4000123
     Damage_Type: Physics
-    Physics_Mul: 1.7
+    Physics_Mul: 0.85
     Fire_Mul: 0
     Water_Mul: 0
     Electric_Mul: 0
@@ -3936,8 +3936,8 @@ MonoBehaviour:
     Hit_07: 0
     End: 3
   - ID: 300000
-    Hit_01: 123
-    Hit_02: 117
+    Hit_01: 74
+    Hit_02: 140
     Hit_03: 0
     Hit_04: 0
     Hit_05: 0
@@ -4017,14 +4017,14 @@ MonoBehaviour:
     Hit_07: 0
     End: 7
   - ID: 300010
-    Hit_01: 1
-    Hit_02: 0
-    Hit_03: 0
-    Hit_04: 0
-    Hit_05: 0
+    Hit_01: 170
+    Hit_02: 90
+    Hit_03: 90
+    Hit_04: 90
+    Hit_05: 90
     Hit_06: 0
     Hit_07: 0
-    End: 1
+    End: 180
   - ID: 300011
     Hit_01: 345
     Hit_02: 251

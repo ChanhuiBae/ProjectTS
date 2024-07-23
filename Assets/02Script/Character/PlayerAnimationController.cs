@@ -72,9 +72,9 @@ public class PlayerAnimationController : MonoBehaviour
         animator.SetTrigger(H_KnockBack);
     }
 
-    public void SetKnockDown(bool use)
+    public void SetKnockDown()
     {
-        animator.SetBool(H_KnockDown, use);
+        animator.SetTrigger(H_KnockDown);
     }
 
     public bool IsHammerAttack1()

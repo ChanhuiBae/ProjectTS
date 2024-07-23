@@ -606,4 +606,9 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         }
         
     }
+
+    public void InitUsePattern()
+    {
+        ai.UsePattern = false;
+    }
 }

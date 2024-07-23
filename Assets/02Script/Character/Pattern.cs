@@ -96,8 +96,8 @@ public class Pattern : MonoBehaviour
 
     private IEnumerator CountHit()
     {
+        StartCoolTime();
         current_hit = 0;
-        ai.LookTarget();
         for (int i = 0; i < hit.Hit_01; i++)
         {
             yield return null;
@@ -114,7 +114,6 @@ public class Pattern : MonoBehaviour
         }
         if (hit.Hit_03 != 0)
         {
-            ai.LookTarget();
             for (int i = 0; i < hit.Hit_03; i++)
             {
                 yield return null;
@@ -123,7 +122,6 @@ public class Pattern : MonoBehaviour
         }
         if (hit.Hit_04 != 0)
         {
-            ai.LookTarget();
             for (int i = 0; i < hit.Hit_04; i++)
             {
                 yield return null;
@@ -132,7 +130,6 @@ public class Pattern : MonoBehaviour
         }
         if (hit.Hit_05 != 0)
         {
-            ai.LookTarget();
             for (int i = 0; i < hit.Hit_05; i++)
             {
                 yield return null;
@@ -141,7 +138,6 @@ public class Pattern : MonoBehaviour
         }
         if (hit.Hit_06 != 0)
         {
-            ai.LookTarget();
             for (int i = 0; i < hit.Hit_06; i++)
             {
                 yield return null;
@@ -150,7 +146,6 @@ public class Pattern : MonoBehaviour
         }
         if (hit.Hit_07 != 0)
         {
-            ai.LookTarget();
             for (int i = 0; i < hit.Hit_07; i++)
             {
                 yield return null;
@@ -162,8 +157,6 @@ public class Pattern : MonoBehaviour
             yield return null;
         }
         colliders[colliders.Count-1].enabled = false;
-        ai.UsePattern = false;
-        StartCoolTime();
     }
 
     public void StartPattern()
