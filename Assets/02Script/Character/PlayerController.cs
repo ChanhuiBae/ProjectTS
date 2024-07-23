@@ -282,6 +282,11 @@ public class PlayerController : MonoBehaviour, IDamage
             StartCoroutine(Dissolve());
             return true;
         }
+        else if(state == State.CrowdControl)
+        {
+            this.state = state;
+            return true;
+        }
         else
         {
             return false;
@@ -621,6 +626,10 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 StopAllCoroutines();
                 ChangeState(State.Idle);
+                anim.Move(false);
+            }
+            else if(state == State.CrowdControl)
+            {
                 anim.Move(false);
             }
             rollBlock.enabled = false;
