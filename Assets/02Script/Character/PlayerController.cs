@@ -1,6 +1,5 @@
 using HighlightPlus;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -296,7 +295,7 @@ public class PlayerController : MonoBehaviour, IDamage
         }
         else
         {
-            maxEXP = 150 + 100 * (level - 7);
+            maxEXP = 82 + 21 * (level - 7);
         }
     }
 

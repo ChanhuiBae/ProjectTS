@@ -12,9 +12,6 @@ public class ArmoryPopup : MonoBehaviour
 
     private Image weaponImage;
     private Button weapon;
-    private Button armor;
-    private Button create;
-    private Button enforce;
     private Sprite nonChoice;
     private Sprite choice;
 
@@ -22,20 +19,17 @@ public class ArmoryPopup : MonoBehaviour
 
     private GameObject weaponPopup;
 
-    private Button hammer;
-    private Button rifle;
     private Image hammerImage;
     private Image rifleImage;
-    private Sprite dontUse;
-    private Sprite use;
 
-    private Button weaponBtn;
-    private List<Image> weaponsIcon;
-    private List<Image> outlines;
+    private Button hammer;
+    private Button rifle;
+
+    private Image BH_line;
+    private Image PR_line;
     private Sprite thinOutline;
     private Sprite choiceOutline;
 
-    private Image icon;
     private TextMeshProUGUI weaponName;
     private TextMeshProUGUI attack;
     private TextMeshProUGUI critical;
@@ -66,30 +60,7 @@ public class ArmoryPopup : MonoBehaviour
         {
             weapon.onClick.AddListener(WeaponChoice);
         }
-        if (!GameObject.Find("Armor").TryGetComponent<Button>(out armor))
-        {
-            Debug.Log("ArmoryPopup - Awake - Button");
-        }
-        else
-        {
-            armor.onClick.AddListener(EnableChoice);
-        }
-        if (!GameObject.Find("Create").TryGetComponent< Button>(out create))
-        {
-            Debug.Log("ArmoryPopup - Awake - Button");
-        }
-        else
-        {
-            armor.onClick.AddListener(EnableChoice);
-        }
-        if (!GameObject.Find("Enforce").TryGetComponent<Button>(out enforce))
-        {
-            Debug.Log("ArmoryPopup - Awake - Button");
-        }
-        else
-        {
-            armor.onClick.AddListener(EnableChoice);
-        }
+
 
         nonChoice = weaponImage.sprite;
         choice = Resources.Load<Sprite>("Image/Choice");
@@ -106,30 +77,12 @@ public class ArmoryPopup : MonoBehaviour
 
         weaponPopup = GameObject.Find("WeaponPopup");
 
-        weaponsIcon = new List<Image>();
-        outlines = new List<Image>();
-        GameObject content  = GameObject.Find("WContent");
-        if (content != null)
-        {
-            foreach (Transform t in content.transform)
-            {
-                outlines.Add(t.Find("outline").GetComponent<Image>());
-                weaponsIcon.Add(t.Find("Weapon").GetComponent<Image>());
-            }
-        }
+
         thinOutline = Resources.Load<Sprite>("Image/thinOutline");
         choiceOutline = Resources.Load<Sprite>("Image/Outline");
-        if (!content.transform.GetChild(0).TryGetComponent<Button>(out weaponBtn))
-        {
-            Debug.Log("ArmoryPopup - Awake - Button");
-        }
-        else
-        {
-            weaponBtn.onClick.AddListener(ClickWeaponIcon);
-        }
 
 
-        if (!GameObject.Find("Hammer").TryGetComponent<Button>(out hammer))
+        if (!GameObject.Find("WeaponIcon1").TryGetComponent<Button>(out hammer))
         {
             Debug.Log("ArmoryPopup - Awake - Button");
         }
@@ -137,7 +90,11 @@ public class ArmoryPopup : MonoBehaviour
         {
             hammer.onClick.AddListener(SelectHammer);
         }
-        if (!GameObject.Find("Rifle").TryGetComponent<Button>(out rifle))
+        if(!hammer.transform.Find("outline").TryGetComponent<Image>(out BH_line))
+        {
+            Debug.Log("ArmoryPopup - Awake - Image");
+        }
+        if (!GameObject.Find("WeaponIcon2").TryGetComponent<Button>(out rifle))
         {
             Debug.Log("ArmoryPopup - Awake - Button");
         }
@@ -145,22 +102,20 @@ public class ArmoryPopup : MonoBehaviour
         {
             rifle.onClick.AddListener(SelectRifle);
         }
-        if (!GameObject.Find("Hammer").TryGetComponent<Image>(out hammerImage))
+        if (!rifle.transform.Find("outline").TryGetComponent<Image>(out PR_line))
         {
             Debug.Log("ArmoryPopup - Awake - Image");
         }
-        if (!GameObject.Find("Rifle").TryGetComponent<Image>(out rifleImage))
+        if (!GameObject.Find("SelectIcon").TryGetComponent<Image>(out hammerImage))
         {
             Debug.Log("ArmoryPopup - Awake - Image");
         }
-        use = hammerImage.sprite;
-        dontUse = rifleImage.sprite;
+        if (!GameObject.Find("UnSelectedIcon").TryGetComponent<Image>(out rifleImage))
+        {
+            Debug.Log("ArmoryPopup - Awake - Image");
+        }
 
 
-        if (!GameObject.Find("SelectIcon").TryGetComponent<Image>(out icon))
-        {
-            Debug.Log("ArmoryPopup - Awake - Image");
-        }
         if (!GameObject.Find("Name").TryGetComponent<TextMeshProUGUI>(out weaponName))
         {
             Debug.Log("ArmoryPopup - Awake - TextMeshProUGUI");
@@ -224,24 +179,15 @@ public class ArmoryPopup : MonoBehaviour
         OpenWeaponPopup();
     }
 
-    private void EnableChoice()
-    {
-        weaponPopup.gameObject.SetActive(false);
-        weaponImage.sprite = nonChoice;
-        outBtn.gameObject.SetActive(true);
-    }
-
     private void OpenWeaponPopup()
     {
         outBtn.enabled = false;
         int data = GameManager.Inst.PlayerInfo.WeaponID;
         if(data >= 3000)
         {
-            rifleImage.sprite = use;
-            hammerImage.sprite = dontUse;
-            weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/PR");
+            rifleImage.enabled = true;
+            hammerImage.enabled = false;
 
-            icon.sprite = Resources.Load<Sprite>("Image/PR_Basic_Image");
             TableEntity_Weapon weapon;
             GameManager.Inst.GetRifle(data, out weapon);
             weaponName.text = weapon.Name.ToString();
@@ -252,14 +198,14 @@ public class ArmoryPopup : MonoBehaviour
             thunder.text = weapon.Electric.ToString();
             ice.text = weapon.Ice.ToString();
             wind.text = weapon.Wind.ToString();
-            outlines[0].sprite = choiceOutline;
+            BH_line.sprite = thinOutline; 
+            PR_line.sprite = choiceOutline;
         }
         else if(data >= 2000)
         {
-            rifleImage.sprite = dontUse;
-            hammerImage.sprite = use;
-            weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/BH");
-            icon.sprite = Resources.Load<Sprite>("Image/BH_Basic_Image");
+            rifleImage.enabled = false;
+            hammerImage.enabled = true;
+
             TableEntity_Weapon weapon;
             GameManager.Inst.GetHammer(data, out weapon);
             weaponName.text = weapon.Name.ToString();
@@ -270,60 +216,52 @@ public class ArmoryPopup : MonoBehaviour
             thunder.text = weapon.Electric.ToString();
             ice.text = weapon.Ice.ToString();
             wind.text = weapon.Wind.ToString();
-            outlines[0].sprite = choiceOutline;
-        }
-        else
-        {
-            rifleImage.sprite = dontUse;
-            hammerImage.sprite = use;
-            outlines[0].sprite = thinOutline;
+            BH_line.sprite = choiceOutline;
+            PR_line.sprite = thinOutline;
         }
     }
 
     private void SelectHammer()
     {
-        rifleImage.sprite = dontUse;
-        hammerImage.sprite = use;
-        weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/BH");
+        GameManager.Inst.SetHammer();
+        rifleImage.enabled = false;
+        hammerImage.enabled = true;
+
+        TableEntity_Weapon weapon;
         int data = GameManager.Inst.PlayerInfo.WeaponID;
-        if (data >= 3000)
-        {
-            outlines[0].sprite = thinOutline;
-        }
-        else if (data >= 2000)
-        {
-            outlines[0].sprite = choiceOutline;
-        }
+        GameManager.Inst.GetHammer(data, out weapon);
+        weaponName.text = weapon.Name.ToString();
+        attack.text = weapon.Physics_Type + "\n" + weapon.Physics;
+        critical.text = weapon.Critical_Chance + "%\n" + weapon.Critical_Mag + "%";
+        fire.text = weapon.Fire.ToString();
+        water.text = weapon.Water.ToString();
+        thunder.text = weapon.Electric.ToString();
+        ice.text = weapon.Ice.ToString();
+        wind.text = weapon.Wind.ToString();
+        BH_line.sprite = choiceOutline;
+        PR_line.sprite = thinOutline;
+
     }
 
     private void SelectRifle()
     {
-        rifleImage.sprite = use;
-        hammerImage.sprite = dontUse;
-        weaponsIcon[0].sprite = Resources.Load<Sprite>("Image/PR");
-        int data = GameManager.Inst.PlayerInfo.WeaponID;
-        if (data>= 3000)
-        {
-            outlines[0].sprite = choiceOutline;
-        }
-        else if (data >= 2000)
-        {
-            outlines[0].sprite = thinOutline;
-        }
-    }
+        GameManager.Inst.SetGun();
+        rifleImage.enabled = true;
+        hammerImage.enabled = false;
 
-    public void ClickWeaponIcon()
-    {
-        outlines[0].sprite = choiceOutline;
-        if (weaponsIcon[0].sprite == Resources.Load<Sprite>("Image/PR"))
-        {
-            GameManager.Inst.SetGun();
-        }
-        else
-        {
-            GameManager.Inst.SetHammer();
-        }
-        OpenWeaponPopup();
+        TableEntity_Weapon weapon;
+        int data = GameManager.Inst.PlayerInfo.WeaponID;
+        GameManager.Inst.GetRifle(data, out weapon);
+        weaponName.text = weapon.Name.ToString();
+        attack.text = weapon.Physics_Type + "\n" + weapon.Physics;
+        critical.text = weapon.Critical_Chance + "%\n" + weapon.Critical_Mag + "%";
+        fire.text = weapon.Fire.ToString();
+        water.text = weapon.Water.ToString();
+        thunder.text = weapon.Electric.ToString();
+        ice.text = weapon.Ice.ToString();
+        wind.text = weapon.Wind.ToString();
+        BH_line.sprite = thinOutline;
+        PR_line.sprite = choiceOutline;
     }
 
     private void Back()
