@@ -171,6 +171,13 @@ public class Effect : MonoBehaviour, IPoolObject
                 skillManager.TakeDamageByKey(AttackType.Effect, key, other);
             }
         }
+        else if (other.tag == "Player")
+        {
+            if (type == EffectType.Once)
+            {
+                patternManager.TakeDamageOther(4000, key, other);
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)

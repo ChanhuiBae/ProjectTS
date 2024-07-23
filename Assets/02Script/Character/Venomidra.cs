@@ -176,7 +176,7 @@ public class Venomidra : MonoBehaviour
     public void setBreath(int key)
     {
         Effect effect = skillManager.SpawnEffect(27);
-        effect.Init(EffectType.Multiple, transform.position + new Vector3(0,2,0) + transform.forward * 8,6.5f);
+        effect.Init(EffectType.Once, transform.position + new Vector3(0,2,0) + transform.forward * 8,6.5f);
         effect.Key = key;
         effect.transform.rotation = transform.rotation;
     }
