@@ -1165,7 +1165,7 @@ MonoBehaviour:
     Skill_Level: 1
     Charge_Level: 0
     Damage_A: 0.5
-    Damage_B: 1
+    Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
     Airborne_Time: 0
@@ -1197,7 +1197,7 @@ MonoBehaviour:
     Skill_Level: 2
     Charge_Level: 0
     Damage_A: 0.5
-    Damage_B: 1
+    Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
     Airborne_Time: 0
@@ -1229,7 +1229,7 @@ MonoBehaviour:
     Skill_Level: 3
     Charge_Level: 0
     Damage_A: 0.5
-    Damage_B: 1
+    Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
     Airborne_Time: 0
@@ -1261,7 +1261,7 @@ MonoBehaviour:
     Skill_Level: 4
     Charge_Level: 0
     Damage_A: 0.5
-    Damage_B: 1
+    Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
     Airborne_Time: 0
@@ -1293,7 +1293,7 @@ MonoBehaviour:
     Skill_Level: 5
     Charge_Level: 0
     Damage_A: 0.5
-    Damage_B: 1
+    Damage_B: 0.1
     Stagger_Time: 1
     Stun_Time: 0
     Airborne_Time: 0
