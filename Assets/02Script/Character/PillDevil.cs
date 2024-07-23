@@ -11,6 +11,8 @@ public class PillDevil : MonoBehaviour
     private SpawnManager spawnManager;
     private Effect effect;
 
+    private Transform rock;
+
 
     private void Awake()
     {
@@ -31,6 +33,10 @@ public class PillDevil : MonoBehaviour
             Debug.Log("");
         }
         if(!GameObject.Find("PoolManager").TryGetComponent<SpawnManager>(out spawnManager))
+        {
+            Debug.Log("");
+        }
+        if(!GameObject.Find("RockPoint").TryGetComponent<Transform>(out rock))
         {
             Debug.Log("");
         }
@@ -65,7 +71,9 @@ public class PillDevil : MonoBehaviour
     }
     private IEnumerator RushTime()
     {
-        
+        Effect effect = skillManager.SpawnEffect(30);
+        effect.InitFollow(EffectType.None, rock.gameObject, 6f);
+
         transform.position = Vector3.zero;
         transform.rotation = Quaternion.identity;
         transform.position = spawnManager.RushInit();

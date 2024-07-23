@@ -82,7 +82,7 @@ public class SpawnManager : MonoBehaviour
     {
         GameManager.Inst.KillCount = 0;
         GameManager.Inst.CurrentCreatrue = 0;
-        StartCoroutine(SpawnLogic());
+        //StartCoroutine(SpawnLogic());
         StartCoroutine(SpawnBoss());
     }
 
@@ -296,7 +296,7 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnBoss()
     {
-        yield return YieldInstructionCache.WaitForSeconds(300);
+        //yield return YieldInstructionCache.WaitForSeconds(300);
         Spawn(7, 3000, CretureType.Swarm_Boss);
         yield return YieldInstructionCache.WaitForSeconds(300);
         yield return YieldInstructionCache.WaitForSeconds(6f);
