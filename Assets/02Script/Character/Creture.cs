@@ -402,6 +402,7 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
         }
         if (ai.GetState() == AI_State.Idle)
         {
+            GameManager.Inst.CurrentCreatrue--;
             spawnManager.ReturnCreature(poolName, this);
         }
     }

@@ -500,6 +500,10 @@ public class MenuManager : MonoBehaviour
     {
         block.enabled = true;
         level.text = "Lv"+playerLevel.ToString();
+        if(playerLevel > 34)
+        {
+            return;
+        }
         levelupPopup.SetActive(true);
         choice = 0;
         list.Clear();
