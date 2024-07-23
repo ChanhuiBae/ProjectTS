@@ -175,6 +175,7 @@ public class Effect : MonoBehaviour, IPoolObject
         {
             if (type == EffectType.Once)
             {
+                Debug.Log(key);
                 patternManager.TakeDamageOther(4000, key, other);
             }
         }
