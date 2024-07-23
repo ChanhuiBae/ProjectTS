@@ -199,6 +199,17 @@ public class GameManager : Singleton<GameManager>
    
 
     private int killCount;
+    public int KillCount
+    {
+        get => killCount;
+        set => killCount = value;
+    }
+    private int currentCreatrue;
+    public int CurrentCreatrue
+    {
+        get => currentCreatrue;
+        set => currentCreatrue = value;
+    }
     private float exp;
     public float EXP
     {
@@ -298,7 +309,7 @@ public class GameManager : Singleton<GameManager>
         LoadData();
 
         yield return YieldInstructionCache.WaitForSeconds(0.05f);
-        if (level == 3)
+        if (level > 2)
         {
             if (skillManager == null)
             {
@@ -380,6 +391,7 @@ public class GameManager : Singleton<GameManager>
                 menuManager.InitSkillButton(4, wsData.ultimate_ID, "None", 1);
                 menuManager.InitSkillButton(41, wsData.connectedU_ID, "None", 1);
                 killCount = 0;
+                currentCreatrue = 0;
             }
             return true;
         }

@@ -80,6 +80,8 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Inst.KillCount = 0;
+        GameManager.Inst.CurrentCreatrue = 0;
         StartCoroutine(SpawnLogic());
         StartCoroutine(SpawnBoss());
     }
@@ -91,6 +93,11 @@ public class SpawnManager : MonoBehaviour
 
     private void Spawn(int num, int id, CretureType type)
     {
+        GameManager.Inst.CurrentCreatrue++;
+        if(GameManager.Inst.CurrentCreatrue - GameManager.Inst.KillCount > 120)
+        {
+            GameManager.Inst.menuManager.SetReward(false);
+        }
         Creture creature;
 
         creature = pool.GetFromPool<Creture>(num);
