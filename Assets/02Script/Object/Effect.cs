@@ -184,10 +184,10 @@ public class Effect : MonoBehaviour, IPoolObject
         }
         else if(other.tag == "Player")
         {
-            if(type == EffectType.Multiple)
+            if(type == EffectType.Multiple && Time.time % 0.5f == 0)
             {
                 patternManager.TakeDamageOther(4000,key, other);
             }
-        }
+        } 
     }
 }
