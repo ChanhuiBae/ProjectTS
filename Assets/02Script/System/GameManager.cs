@@ -679,6 +679,7 @@ public class GameManager : Singleton<GameManager>
             TableEntity_Skill skill;
             GameManager.Inst.GetSkillData(skill_ID, out skill);
             menuManager.InitSkillButton(num, skill_ID, skill.Skill_Name_Eng, level);
+            menuManager.InitSkillButton(num, skill_ID, skill.Skill_Name_Eng, level);
             skillManager.LevelUpSkill(num, skill_ID);
         }
     }

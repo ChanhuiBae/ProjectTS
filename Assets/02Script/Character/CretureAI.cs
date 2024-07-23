@@ -242,7 +242,6 @@ public class CretureAI : MonoBehaviour
                             if (items.Value == true)
                             {
                                 anim.SetPattern(items.Key.GetPatternKey());
-                                Debug.Log(items.Key.GetPatternKey());
                                 items.Key.StartPattern();
                                 SetPatternDisable(items.Key);
                                 usePattern = true;
@@ -266,7 +265,6 @@ public class CretureAI : MonoBehaviour
                             if (items.Value == true)
                             {
                                 anim.SetPattern(items.Key.GetPatternKey());
-                                Debug.Log(items.Key.GetPatternKey());
                                 items.Key.StartPattern();
                                 SetPatternDisable(items.Key);
                                 usePattern = true;
@@ -290,7 +288,6 @@ public class CretureAI : MonoBehaviour
                             if (items.Value == true)
                             {
                                 anim.SetPattern(items.Key.GetPatternKey());
-                                Debug.Log(items.Key.GetPatternKey());
                                 items.Key.StartPattern();
                                 SetPatternDisable(items.Key);
                                 usePattern = true;

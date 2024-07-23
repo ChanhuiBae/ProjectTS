@@ -32,14 +32,18 @@ public class PatternManager : MonoBehaviour, ITakeDamage
         GameManager.Inst.GetCreatureData(creatureKey, out creature);
         TableEntity_Pattern_Info pattern;
         GameManager.Inst.GetPatternInfoData(PatternInfoKey, out pattern);
-        float Physics = creature.Physics * (1 - playerArmor.Physics_Cut) * pattern.Physics_Mul;
-        float Fire = creature.Fire * (1- playerArmor.Fire_Cut) * pattern.Fire_Mul;
-        float Water = creature.Water * (1- playerArmor.Water_Cut) * pattern.Water_Mul;
-        float Electric = creature.Electric * (1 - playerArmor.Electric_Cut) * pattern.Electric_Mul;
-        float Ice = creature.Ice * (1 - playerArmor.Ice_Cut) * pattern.Ice_Mul;
-        float Wind = creature.Wind_Cut * (1 - playerArmor.Wind_Cut) * pattern.Wind_Mul;
-        float damage = Physics + Fire + Water + Electric + Ice + Wind;
-        return damage;
+        if(pattern != null)
+        {
+            float Physics = creature.Physics * (1 - playerArmor.Physics_Cut) * pattern.Physics_Mul;
+            float Fire = creature.Fire * (1 - playerArmor.Fire_Cut) * pattern.Fire_Mul;
+            float Water = creature.Water * (1 - playerArmor.Water_Cut) * pattern.Water_Mul;
+            float Electric = creature.Electric * (1 - playerArmor.Electric_Cut) * pattern.Electric_Mul;
+            float Ice = creature.Ice * (1 - playerArmor.Ice_Cut) * pattern.Ice_Mul;
+            float Wind = creature.Wind_Cut * (1 - playerArmor.Wind_Cut) * pattern.Wind_Mul;
+            float damage = Physics + Fire + Water + Electric + Ice + Wind;
+            return damage;
+        }
+        return 0;
     }
 
 
