@@ -218,6 +218,7 @@ public class Venomidra : MonoBehaviour
 
     public void setBreath(int key)
     {
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_BossBreath);
         Effect effect = skillManager.SpawnEffect(27);
         effect.Init(EffectType.Once, transform.position + new Vector3(0,2,0) + transform.forward * 8,6.5f);
         effect.Key = key;
@@ -241,7 +242,8 @@ public class Venomidra : MonoBehaviour
 
     public void SpawnRock(int value)
     {
-        if(value > 0)
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Earth);
+        if (value > 0)
         {
             Effect effect = skillManager.SpawnEffect(29);
             effect.Init(EffectType.None, R.position, 2f);
@@ -250,6 +252,22 @@ public class Venomidra : MonoBehaviour
         {
             Effect effect = skillManager.SpawnEffect(29);
             effect.Init(EffectType.None, L.position, 2f);
+        }
+    }
+
+    public void PlaySound(int value)
+    {
+        switch(value)
+        {
+            case 4:
+                GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_BossSwing);
+                break;
+            case 5:
+                GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_BossStagger);
+                break;
+            case 6:
+                GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_BossGroggy);
+                break;
         }
     }
 }

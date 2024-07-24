@@ -57,6 +57,10 @@ public class PillDevil : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(1f);
         transform.LeanMove(transform.position + new Vector3(0, -20, 0), 0.5f);
         anim.Struge();
+        yield return YieldInstructionCache.WaitForSeconds(0.4f);
+        Effect effect2 = skillManager.SpawnEffect(29);
+        effect2.Init(EffectType.None, rock.position, 2);
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Earth);
     }
 
     public void Dig()
@@ -71,8 +75,6 @@ public class PillDevil : MonoBehaviour
     }
     private IEnumerator RushTime()
     {
-        Effect effect = skillManager.SpawnEffect(30);
-        effect.InitFollow(EffectType.None, rock.gameObject, 6f);
 
         transform.position = Vector3.zero;
         transform.rotation = Quaternion.identity;

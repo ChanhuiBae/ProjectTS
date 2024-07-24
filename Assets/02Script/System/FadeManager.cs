@@ -6,11 +6,6 @@ public class FadeManager : MonoBehaviour
 {
     [SerializeField]
     private Image fadeImg;
-    
-    public void FadeInOut(float time)
-    {
-        StartCoroutine(Fading(time));
-    }
 
     public void FadeOut(float time)
     {

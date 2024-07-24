@@ -21,14 +21,12 @@ public class WeaponToMain : MonoBehaviour
     }
     private IEnumerator Move()
     {
-        GameManager.Inst.fadeManager.FadeInOut(1f);
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
         player.transform.position = new Vector3(-6, 0.5f, 0);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        fadeManager.FadeInOut(0.5f);
         StartCoroutine(Move());
     }
 }

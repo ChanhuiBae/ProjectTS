@@ -1812,7 +1812,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1.6698608}
+  m_AnchoredPosition: {x: 0, y: 1.6699219}
   m_SizeDelta: {x: 0, y: 503.61975}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &218168551
@@ -11228,11 +11228,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1204391273779593063, guid: 9c2b9540862487943b72d86ec2f81da4,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: e80aef50568be674fa43645d4ed07b04, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 81f180fc1d00c9f4f996030611b7e65f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -17712,7 +17712,7 @@ MonoBehaviour:
   masterMixer: {fileID: 24100000, guid: 9c2b9540862487943b72d86ec2f81da4, type: 2}
   bgmAudio: {fileID: 1115805211}
   bgmList:
-  - {fileID: 8300000, guid: e80aef50568be674fa43645d4ed07b04, type: 3}
+  - {fileID: 8300000, guid: 81f180fc1d00c9f4f996030611b7e65f, type: 3}
   - {fileID: 8300000, guid: e9a3f15ef27ad0841870f176d8bbcefd, type: 3}
   - {fileID: 8300000, guid: c2fea06f61289e149ae966b81bcd007b, type: 3}
   sfxPlayers:
@@ -17721,12 +17721,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a639cab4690d24a4792508d062ea10fe, type: 3}
   - {fileID: 8300000, guid: 36a09ab0f2e5cb848bc4214a7b1347ba, type: 3}
   - {fileID: 8300000, guid: 7f91489ea618edd47bc78b3670f45edd, type: 3}
-  - {fileID: 8300000, guid: 14d42d11fd0c0dd48b73613719b53c43, type: 3}
   - {fileID: 8300000, guid: 25462fe0ce8479b419acbb097c7e6b8b, type: 3}
+  - {fileID: 8300000, guid: 529669a41e9fc5a479e74f1ff74b80c4, type: 3}
+  - {fileID: 8300000, guid: 672011ee3cc082d40bab08fd67e10616, type: 3}
+  - {fileID: 8300000, guid: 83f02a355c11652479fcbc43b981b7bf, type: 3}
+  - {fileID: 8300000, guid: 979dd132bd075e740aacbb386ec4ce37, type: 3}
+  - {fileID: 8300000, guid: 719121cc96ee7d84abb21df1f137a646, type: 3}
+  - {fileID: 8300000, guid: 0e1b8d8295a752a4dbf0aaf8470da1cf, type: 3}
+  - {fileID: 8300000, guid: 39e3fbe62f1223146929994bb8f4631e, type: 3}
   hitPlayers:
   - {fileID: 1189022703}
   hitList:
   - {fileID: 8300000, guid: 90d100b756c3f354cb1696b0d427bcd8, type: 3}
+  - {fileID: 8300000, guid: af0c73d1dba8b3d4586678372e94eff3, type: 3}
+  - {fileID: 8300000, guid: 53a5fe029ede0354891ba29a3e743f79, type: 3}
   skillPlayers:
   - {fileID: 1699362648}
   skillSFXList:
@@ -17749,6 +17757,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b515ff5838930184896b73ed2cd0ce87, type: 3}
   - {fileID: 8300000, guid: 6b1c75bec9387ed408995fb0d90f3631, type: 3}
   - {fileID: 8300000, guid: 488bb8c42fa10dc45b04dbdb834d7073, type: 3}
+  - {fileID: 8300000, guid: 14d42d11fd0c0dd48b73613719b53c43, type: 3}
 --- !u!4 &1740938110
 Transform:
   m_ObjectHideFlags: 0
@@ -21320,6 +21329,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Muzzle
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029429826862981080, guid: 2853982ef550d7e41a30ce2ecee3ca52,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

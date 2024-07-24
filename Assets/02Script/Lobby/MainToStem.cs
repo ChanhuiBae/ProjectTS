@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MainToStem : MonoBehaviour
@@ -21,14 +20,12 @@ public class MainToStem : MonoBehaviour
     }
     private IEnumerator Move()
     {
-        GameManager.Inst.fadeManager.FadeInOut(1f);
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
         player.transform.position = new Vector3(100, 1, -10);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        fadeManager.FadeInOut(0.5f);
         StartCoroutine(Move());
     }
 }

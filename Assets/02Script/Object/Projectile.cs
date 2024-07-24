@@ -90,6 +90,7 @@ public class Projectile : MonoBehaviour, IPoolObject
 
     public void AttackThorn(Quaternion rotation)
     {
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Thorn);
         transform.rotation = rotation;
         rig.velocity = Vector3.zero;
         rig.AddForce(transform.forward * 10f, ForceMode.Impulse);

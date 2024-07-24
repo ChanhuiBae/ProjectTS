@@ -838,7 +838,7 @@ public class MenuManager : MonoBehaviour
 
     private IEnumerator StartWarning()
     {
-        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_Warning);
+        GameManager.Inst.soundManager.PlaySKill(Skill_SFX.Warring);
         for(int i = 0; i < 3; i++)
         {
             StartCoroutine(RedWarning());

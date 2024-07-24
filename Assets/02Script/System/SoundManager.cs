@@ -14,13 +14,21 @@ public enum SFX_Type
     SFX_EXP = 0,
     SFX_LevelUp = 1,
     SFX_BossSpawn = 2,
-    SFX_Warning = 3,
-    SfX_BossScream = 4,
+    SfX_BossScream = 3,
+    SFX_BossSwing = 4,
+    SFX_BossStagger = 5,
+    SFX_BossGroggy = 6,
+    SFX_BossImpact = 7,
+    SFX_Earth = 8,
+    SFX_Thorn = 9,
+    SFX_BossBreath = 10,
 }
 
 public enum SFX_Hit
 {
     BaseHit = 0,
+    Touch1 = 1,
+    Touch2 = 2,
 }
 
 public enum Skill_SFX
@@ -44,6 +52,7 @@ public enum Skill_SFX
     PinPointDown = 16,
     DesignatedEliminate = 17,
     Slide = 18,
+    Warring = 19,
 }
 
 public class SoundManager : MonoBehaviour

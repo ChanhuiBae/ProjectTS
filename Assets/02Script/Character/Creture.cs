@@ -419,6 +419,10 @@ public class Creture : MonoBehaviour, IDamage, IPoolObject
 
     private void CalulateGroggyDamage()
     {
+        if(type != CretureType.Guvnor)
+        {
+            return;
+        }
         float groggyD = damage;
         if (GameManager.Inst.PlayerInfo.physics == Physics_Type.Strike)
         {

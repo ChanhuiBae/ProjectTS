@@ -544,6 +544,9 @@ public class SkillManager : MonoBehaviour, ITakeDamage
         effect = SpawnEffect(28);
         effect.Init(EffectType.Once, pos, 1.5f);
         effect.Key = key;
+        pos += new Vector3(0, 20, 3);
+        Effect effect2 = SpawnEffect(29);
+        effect2.Init(EffectType.None, pos, 2f);
         effect.transform.LeanMove(effect.transform.position + Vector3.up * 20f, 0.5f);
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
         effect.transform.LeanMove(effect.transform.position + Vector3.down * 20f, 0.5f);
