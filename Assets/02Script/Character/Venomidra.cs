@@ -127,7 +127,7 @@ public class Venomidra : MonoBehaviour
             {
                 transform.LookAt(player.transform);
             }
-            transform.position = postion;
+            //transform.position = postion;
         }
         if(creature != null && hp != null)
         {
