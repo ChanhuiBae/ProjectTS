@@ -140,7 +140,7 @@ public class Skill : MonoBehaviour
         current_charge = 0;
         for (int i = 0; i < max_charge; i++)
         {
-            for (chargeCount = 0; chargeCount < 30; chargeCount++)
+            for (chargeCount = 0; chargeCount < 51; chargeCount++)
             {
                 yield return null;
             }

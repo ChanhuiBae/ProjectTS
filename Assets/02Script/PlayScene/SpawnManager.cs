@@ -226,14 +226,16 @@ public class SpawnManager : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i < 132; i++)
         {
-            Spawn(4, 1001, CretureType.Normal);
+            //Spawn(4, 1001, CretureType.Normal);
+            Spawn(3, 1000, CretureType.Normal);
             yield return YieldInstructionCache.WaitForSeconds(0.33f);
         }
         //5분 44초
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i < 132; i++)
         {
-            Spawn(4, 1001, CretureType.Normal);
+            //Spawn(4, 1001, CretureType.Normal);
+            Spawn(3, 1000, CretureType.Normal);
             if (i % 13 == 0)
             {
                 Spawn(6, 2001, CretureType.Noble);
@@ -246,7 +248,8 @@ public class SpawnManager : MonoBehaviour
         {
             if (i % 5 == 0)
             {
-                Spawn(4, 1001, CretureType.Normal);
+                //Spawn(4, 1001, CretureType.Normal);
+                Spawn(3, 1000, CretureType.Normal);
             }
             if (i % 10 == 0)
             {
@@ -258,7 +261,8 @@ public class SpawnManager : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(1f);
         for (int i = 0; i < 236; i++)
         {
-            Spawn(4, 1001, CretureType.Normal);
+            //Spawn(4, 1001, CretureType.Normal);
+            Spawn(3, 1000, CretureType.Normal);
             yield return YieldInstructionCache.WaitForSeconds(0.25f);
         }
         //7분 59초
@@ -267,7 +271,8 @@ public class SpawnManager : MonoBehaviour
         {
             if (i % 3 == 0)
             {
-                Spawn(4, 1001, CretureType.Normal);
+                //Spawn(4, 1001, CretureType.Normal);
+                Spawn(3, 1000, CretureType.Normal);
             }
             if(i % 40 == 0)
             {
@@ -282,7 +287,8 @@ public class SpawnManager : MonoBehaviour
             if (i % 3 == 0)
             {
                 Spawn(3, 1000, CretureType.Normal);
-                Spawn(4, 1001, CretureType.Normal);
+                //Spawn(4, 1001, CretureType.Normal);
+                Spawn(3, 1000, CretureType.Normal);
             }
             if (i % 20 == 0)
             {

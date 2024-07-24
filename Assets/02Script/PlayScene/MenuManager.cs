@@ -498,12 +498,13 @@ public class MenuManager : MonoBehaviour
 
     public void SetLevelUpPopup(int playerLevel)
     {
-        block.enabled = true;
         level.text = "Lv"+playerLevel.ToString();
         if(playerLevel > 34)
         {
             return;
         }
+
+        block.enabled = true;
         levelupPopup.SetActive(true);
         choice = 0;
         list.Clear();

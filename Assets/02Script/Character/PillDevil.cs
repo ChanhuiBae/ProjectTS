@@ -87,6 +87,7 @@ public class PillDevil : MonoBehaviour
         effect.Init(EffectType.None, new Vector3(player.transform.position.x, 0.01f, player.transform.position.z), 1f);
         effect.SetRotation(transform.rotation);
         yield return YieldInstructionCache.WaitForSeconds(1f);
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_SwarmDash);
         transform.LeanMove(transform.position + (transform.forward * 60f), 0.5f);
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
@@ -101,6 +102,7 @@ public class PillDevil : MonoBehaviour
         effect.Init(EffectType.None,new Vector3(player.transform.position.x, 0.01f, player.transform.position.z), 1f);
         effect.SetRotation(transform.rotation);
         yield return YieldInstructionCache.WaitForSeconds(1f);
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_SwarmDash);
         transform.LeanMove(transform.position + (transform.forward * 60f), 0.5f);
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
@@ -115,6 +117,7 @@ public class PillDevil : MonoBehaviour
         effect.Init(EffectType.None, new Vector3(player.transform.position.x, 0.01f, player.transform.position.z), 1f);
         effect.SetRotation(transform.rotation);
         yield return YieldInstructionCache.WaitForSeconds(1f);
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_SwarmDash);
         transform.LeanMove(transform.position + (transform.forward * 60f), 0.5f);
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
@@ -128,6 +131,7 @@ public class PillDevil : MonoBehaviour
         effect.Init(EffectType.None, new Vector3(player.transform.position.x, 0.01f, player.transform.position.z), 1f);
         effect.SetRotation(transform.rotation);
         yield return YieldInstructionCache.WaitForSeconds(1f);
+        GameManager.Inst.soundManager.PlaySFX(SFX_Type.SFX_SwarmDash);
         transform.LeanMove(transform.position + (transform.forward * 60f), 0.5f);
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
 

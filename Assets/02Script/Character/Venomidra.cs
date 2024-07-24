@@ -129,7 +129,10 @@ public class Venomidra : MonoBehaviour
             }
             transform.position = postion;
         }
-        hp.SetBossHP(creature.HP);
+        if(creature != null && hp != null)
+        {
+            hp.SetBossHP(creature.HP);
+        }
         if(creature.HP <= 0)
         {
             hp.gameObject.SetActive(false);

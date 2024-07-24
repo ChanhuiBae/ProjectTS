@@ -22,6 +22,7 @@ public enum SFX_Type
     SFX_Earth = 8,
     SFX_Thorn = 9,
     SFX_BossBreath = 10,
+    SFX_SwarmDash = 11,
 }
 
 public enum SFX_Hit
