@@ -93,7 +93,10 @@ public class SpawnManager : MonoBehaviour
 
     private void Spawn(int num, int id, CretureType type)
     {
-        GameManager.Inst.CurrentCreatrue++;
+        if(time.Time > 0)
+        {
+            GameManager.Inst.CurrentCreatrue++;
+        }
         if(GameManager.Inst.CurrentCreatrue - GameManager.Inst.KillCount > 120)
         {
             GameManager.Inst.menuManager.SetReward(false);
