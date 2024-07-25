@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
-using UnityEngine.UI;
-using Image = UnityEngine.UI.Image;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
-using Unity.VisualScripting;
 
 public class EffectManager : MonoBehaviour
 {
@@ -27,18 +22,11 @@ public class EffectManager : MonoBehaviour
     private ParticleSystem chargeLight;
     private bool fullCharge;
 
-    private Image fadeImg;
-    private bool Dimension_Distortion_Trigger;
-    private int frame;
-
-
     private Effect effect;
     List<Effect> effects = new List<Effect>();
 
     private void Awake()
     {
-        Dimension_Distortion_Trigger = false;
-        frame = 0;
         if (SceneManager.GetActiveScene().buildIndex > 2)
         {
             if (!GameObject.Find("SkillManager").TryGetComponent<SkillManager>(out skillManager))
@@ -56,14 +44,6 @@ public class EffectManager : MonoBehaviour
             if (!Camera.main.TryGetComponent<FollowCamera>(out cameraControl))
             {
                 Debug.Log("EffectManager - Awake - FollowCamera");
-            }
-            if(!GameObject.Find("White").TryGetComponent<Image>(out fadeImg))
-            {
-                Debug.Log("EffectManager - Awake - Image");
-            }
-            else
-            {
-                fadeImg.enabled = false;
             }
             player = transform.GetComponent<PlayerController>();
         }
@@ -310,70 +290,7 @@ public class EffectManager : MonoBehaviour
         
         player.SetIdle();
     }
-    /*
-    private void Update()
-    {
-        if (Dimension_Distortion_Trigger)
-        {
-            if(frame == 0)
-            {
-                GameManager.Inst.PlayerIsController(false);
-                RedTrail();
-                Time.timeScale = 0f;
-            }
-            else if(frame == 30)
-            {
-                fadeImg.enabled = true;
-                SetGray(false);
-
-                fadeImg.raycastTarget = true;
-            }
-            else if(frame >= 31 && frame <= 60)
-            {
-                Color alpha = fadeImg.color;
-                alpha.a = Mathf.Lerp(0, 1, (frame-31)/30);
-                fadeImg.color = alpha;
-            }
-            else if (frame >= 61 && frame <= 90)
-            {
-                Color alpha = fadeImg.color;
-                alpha.a = Mathf.Lerp(1, 0, (frame - 60) / 30);
-                fadeImg.color = alpha;
-            }
-            else if(frame == 91)
-            {
-                fadeImg.raycastTarget = false; // 다른 UI 활성화
-                Time.timeScale = 1;
-
-                effect = skillManager.SpawnEffect(24);
-                effect.Key = skillManager.GetCurrentKey();
-                effect.Key = (effect.Key / 10) * 10 + 1;
-                skillManager.SetCrowdControl(CrowdControlType.Stun);
-                effect.Init(EffectType.Once, transform.position, 1f);
-            }
-            else if(frame == 92)
-            {
-                player.SetIdle();
-                GameManager.Inst.PlayerIsController(true);
-                Dimension_Distortion_Trigger = false;
-            }
-            frame++;
-        }
-    }
-    */
-    public void WhiteTrail()
-    {
-        SetColorInversion(0);
-        SetGray(true);
-        frame = 0;
-        Dimension_Distortion_Trigger = true;
-    }
-
-    public void RedTrail()
-    {
-
-    }
-
+  
     public void SetColorInversion(int use)
     {
         if (use > 0)
@@ -385,19 +302,6 @@ public class EffectManager : MonoBehaviour
         {
             postColor.gradingMode.Override(GradingMode.HighDefinitionRange);
         }
-    }
-
-    private void SetGray(bool gray)
-    {
-        if (gray)
-        {
-            postColor.saturation.value = -100f;
-        }
-        else
-        {
-            postColor.saturation.value = 0f;
-        }
-
     }
 
     private IEnumerator CameraShack(float time)

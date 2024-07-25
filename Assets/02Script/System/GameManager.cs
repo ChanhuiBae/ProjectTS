@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
-using TMPro;
-using Unity.VisualScripting;
 
 [System.Serializable]
 public class PlayerData

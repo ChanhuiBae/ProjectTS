@@ -531,7 +531,6 @@ public class MenuManager : MonoBehaviour
         if (list.Count > 0)
         {
             pick1 = PickSkill();
-            Debug.Log(pick1);
             list.Remove(pick1);
         }
         if (list.Count > 0)

@@ -408,12 +408,10 @@ public class CretureAI : MonoBehaviour
     public void SetPatternEnable(Pattern pattern)
     {
         currentPatterns[pattern] = true;
-       // Debug.Log("enable"+pattern.GetKey());
     }
 
     public void SetPatternDisable(Pattern pattern)
     {
-        //Debug.Log("disable"+pattern.GetKey());
         currentPatterns[pattern] = false;
     }
 }
