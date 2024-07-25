@@ -196,7 +196,8 @@ public class SpawnManager : MonoBehaviour
             Spawn(3, 1000, CretureType.Normal);
             if (i % 2 == 0)
             {
-                Spawn(4, 1001, CretureType.Normal);
+                //Spawn(4, 1001, CretureType.Normal);
+                Spawn(3, 1000, CretureType.Normal);
             }
             if (i % 20 == 0)
             {
